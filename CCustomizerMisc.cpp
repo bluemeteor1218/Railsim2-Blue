@@ -1,11 +1,11 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCustomizerMisc.h"
 #include "CNamedObject.h"
 #include "CEnvPlugin.h"
 #include "CConfigMode.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CModelChanger::CModelChanger(){
 	m_AltModel = NULL;
@@ -13,10 +13,10 @@ CModelChanger::CModelChanger(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CModelChanger::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	m_AltModel = NULL;
@@ -30,20 +30,20 @@ char *CModelChanger::Read(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CModelChanger::LoadDataCustomizer(
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	m_AltModel = g_MeshList.Get(FALSE, m_AltModelName.c_str(), 0, !g_NamedObjectMipMap);
 	mpi->ChDir();
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 CMesh *CModelChanger::GetMeshCustomizer(
-	float *asc	//	ƒXƒP[ƒ‹Ši”[æ
+	float *asc	//	ã‚¹ã‚±ãƒ¼ãƒ«æ ¼ç´å…ˆ
 ){
 	*asc = m_AltModelScale;
 	return m_AltModel;
@@ -53,10 +53,10 @@ CMesh *CModelChanger::GetMeshCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CShadowInhibitor::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	int id;
@@ -89,10 +89,10 @@ char *CShadowInhibitor::Read(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CShadowInhibitor::ApplyCustomizer(
-	CMesh *mesh	//	ƒƒbƒVƒ…
+	CMesh *mesh	//	ãƒ¡ãƒƒã‚·ãƒ¥
 ){
 	int i, mn = m_MaterialID.size();
 	switch(CNamedObject::GetAfterRender()){
@@ -135,10 +135,10 @@ void CShadowInhibitor::ApplyCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CEnvMapper::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	int id;
@@ -156,10 +156,10 @@ char *CEnvMapper::Read(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CEnvMapper::ApplyCustomizer(
-	CMesh *mesh	//	ƒƒbƒVƒ…
+	CMesh *mesh	//	ãƒ¡ãƒƒã‚·ãƒ¥
 ){
 	if(!g_ConfigMode->GetEnvMap()) return;
 	int i, mn = m_MaterialID.size();
@@ -174,10 +174,10 @@ void CEnvMapper::ApplyCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CAlphaTester::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	int id;
@@ -195,10 +195,10 @@ char *CAlphaTester::Read(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CAlphaTester::ApplyCustomizer(
-	CMesh *mesh	//	ƒƒbƒVƒ…
+	CMesh *mesh	//	ãƒ¡ãƒƒã‚·ãƒ¥
 ){
 	int i, mn = m_MaterialID.size();
 	for(i = 0; i<mn; i++){
@@ -212,10 +212,10 @@ void CAlphaTester::ApplyCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CTextureChanger::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	m_AltTexture = NULL;
@@ -228,19 +228,19 @@ char *CTextureChanger::Read(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CTextureChanger::LoadDataCustomizer(
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	m_AltTexture = g_TexList.Get(FALSE, m_AltTextureName.c_str(), 0, !g_NamedObjectMipMap);
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CTextureChanger::ApplyCustomizer(
-	CMesh *mesh	//	ƒƒbƒVƒ…
+	CMesh *mesh	//	ãƒ¡ãƒƒã‚·ãƒ¥
 ){
 	if(!mesh->CheckMatNum(m_MaterialID)) return;
 	mesh->SetCustomTexture(m_MaterialID, m_AltTexture);
@@ -250,11 +250,11 @@ void CTextureChanger::ApplyCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CTextureTransformer::Read(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	bool matid	//	ƒ}ƒeƒŠƒAƒ‹”Ô†“Çƒtƒ‰ƒO
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	bool matid	//	ãƒãƒ†ãƒªã‚¢ãƒ«ç•ªå·èª­è¾¼ãƒ•ãƒ©ã‚°
 ){
 	char *tmp, *eee;
 	int i, num, type;
@@ -286,11 +286,11 @@ char *CTextureTransformer::Read(
 }
 
 /*
- *	•ÏŠ·s—ñƒZƒbƒgƒAƒbƒv
+ *	å¤‰æ›è¡Œåˆ—ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
  */
 void CTextureTransformer::SetUpMatrix(
-	int type,	//	ƒ^ƒCƒv
-	float *a	//	ƒpƒ‰ƒƒ^”z—ñ
+	int type,	//	ã‚¿ã‚¤ãƒ—
+	float *a	//	ãƒ‘ãƒ©ãƒ¡ã‚¿é…åˆ—
 ){
 	int i;
 	switch(m_TransformType = type){
@@ -305,10 +305,10 @@ void CTextureTransformer::SetUpMatrix(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CTextureTransformer::ApplyCustomizer(
-	CMesh *mesh	//	ƒƒbƒVƒ…
+	CMesh *mesh	//	ãƒ¡ãƒƒã‚·ãƒ¥
 ){
 	if(!mesh->CheckMatNum(m_MaterialID)) return;
 	mesh->SetTexTrans(m_MaterialID, m_Matrix);
@@ -319,11 +319,11 @@ void CTextureTransformer::ApplyCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CAnimationApplier::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	char *eee;
 	string name;
@@ -339,10 +339,10 @@ char *CAnimationApplier::Read(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CAnimationApplier::ApplyCustomizer(
-	CMesh *mesh	//	ƒƒbƒVƒ…
+	CMesh *mesh	//	ãƒ¡ãƒƒã‚·ãƒ¥
 ){
 	if(!mesh->CheckMatNum(m_MaterialID)) return;
 	m_Animation->Apply(mesh, m_MaterialID);
@@ -352,10 +352,10 @@ void CAnimationApplier::ApplyCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CAlphaChanger::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	string special;
@@ -378,10 +378,10 @@ char *CAlphaChanger::Read(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CAlphaChanger::ApplyCustomizer(
-	CMesh *mesh	//	ƒƒbƒVƒ…
+	CMesh *mesh	//	ãƒ¡ãƒƒã‚·ãƒ¥
 ){
 	if(!mesh->CheckMatNum(m_MaterialID)) return;
 	float altalpha = m_AltAlpha;
@@ -396,10 +396,10 @@ void CAlphaChanger::ApplyCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CMaterialChanger::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	string special;
@@ -433,10 +433,10 @@ char *CMaterialChanger::Read(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CMaterialChanger::ApplyCustomizer(
-	CMesh *mesh	//	ƒƒbƒVƒ…
+	CMesh *mesh	//	ãƒ¡ãƒƒã‚·ãƒ¥
 ){
 	int i, mn = m_MaterialID.size();
 	for(i = 0; i<mn; i++){

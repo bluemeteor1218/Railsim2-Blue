@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -6,15 +6,15 @@
 #include "vertex.h"
 #include "draw.h"
 
-//	¦ŽÀs‘O‚Éƒ‰ƒCƒeƒBƒ“ƒO‚ðOFF‚É‚µAs—ñ‚âƒ}ƒeƒŠƒAƒ‹‚ðƒŠƒZƒbƒg‚·‚é‚±‚ÆB
+//	â€»å®Ÿè¡Œå‰ã«ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’OFFã«ã—ã€è¡Œåˆ—ã‚„ãƒžãƒ†ãƒªã‚¢ãƒ«ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹ã“ã¨ã€‚
 
 /*
- *	2D’¼ü‚ð•`‰æ
+ *	2Dç›´ç·šã‚’æç”»
  *
- *	x1, y1	: Žn“_À•W
- *	x2, y2	: I“_À•W
- *	c1		: Žn“_F
- *	c2		: I“_F
+ *	x1, y1	: å§‹ç‚¹åº§æ¨™
+ *	x2, y2	: çµ‚ç‚¹åº§æ¨™
+ *	c1		: å§‹ç‚¹è‰²
+ *	c2		: çµ‚ç‚¹è‰²
  */
 void Draw2DLine(int x1, int y1, int x2, int y2, D3DCOLOR c1, D3DCOLOR c2){
 	if(c2==0) c2 = c1;
@@ -27,12 +27,12 @@ void Draw2DLine(int x1, int y1, int x2, int y2, D3DCOLOR c1, D3DCOLOR c2){
 }
 
 /*
- *	3D’¼ü‚ð•`‰æ
+ *	3Dç›´ç·šã‚’æç”»
  *
- *	x1, y1	: Žn“_À•W
- *	x2, y2	: I“_À•W
- *	c1		: Žn“_F
- *	c2		: I“_F
+ *	x1, y1	: å§‹ç‚¹åº§æ¨™
+ *	x2, y2	: çµ‚ç‚¹åº§æ¨™
+ *	c1		: å§‹ç‚¹è‰²
+ *	c2		: çµ‚ç‚¹è‰²
  */
 void Draw3DLine(VEC3 p1, VEC3 p2, D3DCOLOR c1, D3DCOLOR c2){
 	if(c2==0) c2 = c1;
@@ -45,11 +45,11 @@ void Draw3DLine(VEC3 p1, VEC3 p2, D3DCOLOR c1, D3DCOLOR c2){
 }
 
 /*
- *	2D‹éŒ`‚ð•`‰æ
+ *	2DçŸ©å½¢ã‚’æç”»
  *
- *	x1, y1	: ¶ãÀ•W
- *	x2, y2	: ‰E‰ºÀ•W
- *	c		: F
+ *	x1, y1	: å·¦ä¸Šåº§æ¨™
+ *	x2, y2	: å³ä¸‹åº§æ¨™
+ *	c		: è‰²
  */
 void Draw2DRect(int x1, int y1, int x2, int y2, D3DCOLOR c){
 	VTX_TL vt[] = {
@@ -64,7 +64,7 @@ void Draw2DRect(int x1, int y1, int x2, int y2, D3DCOLOR c){
 	sv3.pDev->SetVertexShader(FVF_TL);
 	sv3.pDev->DrawPrimitiveUP(D3DPT_LINESTRIP, 4, vt, sizeof(VTX_TL));
 }
-//	“h‚è‚Â‚Ô‚µ
+//	å¡—ã‚Šã¤ã¶ã—
 void Fill2DRect(int x1, int y1, int x2, int y2, D3DCOLOR c){
 	VTX_TL vt[] = {
 		x1-0.5f, y2-0.5f, 0.0f, 1.0f, c,
@@ -77,7 +77,7 @@ void Fill2DRect(int x1, int y1, int x2, int y2, D3DCOLOR c){
 	sv3.pDev->SetVertexShader(FVF_TL);
 	sv3.pDev->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, vt, sizeof(VTX_TL));
 }
-//	“h‚è‚Â‚Ô‚µ
+//	å¡—ã‚Šã¤ã¶ã—
 void Grad2DRect(int x1, int y1, int x2, int y2, D3DCOLOR *c){
 #if 1
 	VTX_TLX vt[] = {
@@ -100,7 +100,7 @@ void Grad2DRect(int x1, int y1, int x2, int y2, D3DCOLOR *c){
 	sv3.pDev->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, vt, sizeof(VTX_TL));
 #endif
 }
-//	ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒO
+//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒžãƒƒãƒ”ãƒ³ã‚°
 void TexMap2DRect(int x1, int y1, int x2, int y2, D3DCOLOR c){
 	VTX_TLX vt[] = {
 		x1-0.5f, y1-0.5f, 0.0f, 1.0f, c, sv3.u[0], sv3.v[0],
@@ -113,7 +113,7 @@ void TexMap2DRect(int x1, int y1, int x2, int y2, D3DCOLOR c){
 	sv3.pDev->SetVertexShader(FVF_TLX);
 	sv3.pDev->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, vt, sizeof(VTX_TLX));
 }
-//	ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒO (‰E 90‹‰ñ“])
+//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒžãƒƒãƒ”ãƒ³ã‚° (å³ 90Â°å›žè»¢)
 void TexMap2DRect90(int x1, int y1, int x2, int y2, D3DCOLOR c){
 	VTX_TLX vt[] = {
 		x1-0.5f, y1-0.5f, 0.0f, 1.0f, c, sv3.u[0], sv3.v[1],
@@ -128,12 +128,12 @@ void TexMap2DRect90(int x1, int y1, int x2, int y2, D3DCOLOR c){
 }
 
 /*
- *	3D‹éŒ`‚ð•`‰æ
+ *	3DçŸ©å½¢ã‚’æç”»
  *
- *	c	: ’†S
- *	w	: ‰¡•
- *	h	: c•
- *	c	: F
+ *	c	: ä¸­å¿ƒ
+ *	w	: æ¨ªå¹…
+ *	h	: ç¸¦å¹…
+ *	c	: è‰²
  */
 void Draw3DRect(VEC3 p1, VEC3 p2, VEC3 p3, VEC3 p4, D3DCOLOR c){
 	VTX_L vt[] = {
@@ -148,7 +148,7 @@ void Draw3DRect(VEC3 p1, VEC3 p2, VEC3 p3, VEC3 p4, D3DCOLOR c){
 	sv3.pDev->SetVertexShader(FVF_L);
 	sv3.pDev->DrawPrimitiveUP(D3DPT_LINESTRIP, 4, vt, sizeof(VTX_L));
 }
-//	“h‚è‚Â‚Ô‚µ
+//	å¡—ã‚Šã¤ã¶ã—
 void Fill3DRect(VEC3 p1, VEC3 p2, VEC3 p3, VEC3 p4, D3DCOLOR c){
 	VTX_L vt[] = {
 		p1.x, p1.y, p1.z, c,
@@ -161,7 +161,7 @@ void Fill3DRect(VEC3 p1, VEC3 p2, VEC3 p3, VEC3 p4, D3DCOLOR c){
 	sv3.pDev->SetVertexShader(FVF_L);
 	sv3.pDev->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, vt, sizeof(VTX_L));
 }
-//	ƒeƒNƒXƒ`ƒƒ[ƒ}ƒbƒsƒ“ƒO
+//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ãƒžãƒƒãƒ”ãƒ³ã‚°
 void TexMap3DRect(VEC3 p1, VEC3 p2, VEC3 p3, VEC3 p4, D3DCOLOR c){
 	VTX_LX vt[] = {
 		p1.x, p1.y, p1.z, c, sv3.u[0], sv3.v[0],
@@ -174,7 +174,7 @@ void TexMap3DRect(VEC3 p1, VEC3 p2, VEC3 p3, VEC3 p4, D3DCOLOR c){
 	sv3.pDev->SetVertexShader(FVF_LX);
 	sv3.pDev->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, vt, sizeof(VTX_LX));
 }
-//	ƒeƒNƒXƒ`ƒƒ[ƒ}ƒbƒsƒ“ƒO~2 (XY•½–Ê)
+//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ãƒžãƒƒãƒ”ãƒ³ã‚°Ã—2 (XYå¹³é¢)
 void Tex2Map3DRect(VEC3 p1, VEC3 p2, VEC3 p3, VEC3 p4, D3DCOLOR c){
 	VTX_LX2 vt[] = {
 		p1.x, p1.y, p1.z, c, sv3.u[0], sv3.v[0], 0.0f, 0.0f,
@@ -189,13 +189,13 @@ void Tex2Map3DRect(VEC3 p1, VEC3 p2, VEC3 p3, VEC3 p4, D3DCOLOR c){
 }
 
 /*
- *	6ŠpŒ`‚ð•`‰æ(XY•½–Ê)
+ *	6è§’å½¢ã‚’æç”»(XYå¹³é¢)
  *
- *	pos	: ’†S
- *	r	: ”¼Œa
- *	c	: F
+ *	pos	: ä¸­å¿ƒ
+ *	r	: åŠå¾„
+ *	c	: è‰²
  */
-//	“h‚è‚Â‚Ô‚µ
+//	å¡—ã‚Šã¤ã¶ã—
 void Fill3DHex(VEC3 pos, float r, D3DCOLOR cc, D3DCOLOR ca){
 	VTX_L vt[6+2];
 	float dr = D3DX_PI/3;
@@ -218,11 +218,11 @@ void Fill3DHex(VEC3 pos, float r, D3DCOLOR cc, D3DCOLOR ca){
 }
 
 /*
- *	‰~‚ð•`‰æ(XY•½–Ê)
+ *	å††ã‚’æç”»(XYå¹³é¢)
  *
- *	pos	: ’†S
- *	r	: ”¼Œa
- *	c	: F
+ *	pos	: ä¸­å¿ƒ
+ *	r	: åŠå¾„
+ *	c	: è‰²
  */
 void Draw3DCircle(VEC3 pos, float r, D3DCOLOR c){
 	VTX_L vt[36+1];
@@ -240,7 +240,7 @@ void Draw3DCircle(VEC3 pos, float r, D3DCOLOR c){
 	sv3.pDev->SetVertexShader(FVF_L);
 	sv3.pDev->DrawPrimitiveUP(D3DPT_LINESTRIP, 36, vt, sizeof(VTX_L));
 }
-//	“h‚è‚Â‚Ô‚µ
+//	å¡—ã‚Šã¤ã¶ã—
 void Fill3DCircle(VEC3 pos, float r, D3DCOLOR cc, D3DCOLOR ca){
 	VTX_L vt[36+2];
 	float dr = D3DX_PI/18;
@@ -263,9 +263,9 @@ void Fill3DCircle(VEC3 pos, float r, D3DCOLOR cc, D3DCOLOR ca){
 }
 
 /*
- *	˜Z–Ê‘Ì‚Ì•`‰æ
+ *	å…­é¢ä½“ã®æç”»
  *
- *	¦‹«ŠEƒ{ƒbƒNƒX•\Ž¦—p(ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€‚ÌƒŠƒZƒbƒg–Y‚ê‚¸‚É)
+ *	â€»å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹è¡¨ç¤ºç”¨(ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã®ãƒªã‚»ãƒƒãƒˆå¿˜ã‚Œãšã«)
  */
 void DrawBox(BOX8 *pB, D3DCOLOR c){
 	VTX_L vt[10] = {

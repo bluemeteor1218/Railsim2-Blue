@@ -1,16 +1,16 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCamera.h"
 #include "CSurfacePlugin.h"
 #include "CConfigMode.h"
 #include "CSceneEditMode.h"
 #include "CSaveFile.h"
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CObject CSurfacePlugin::ms_PreviewObject;
 
 /*
  *	[static]
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CSurfacePlugin::RenderPreview(){
 	CNamedObjectAfterRenderer::SetCurrentInst(NULL);
@@ -23,16 +23,16 @@ void CSurfacePlugin::RenderPreview(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSurfacePlugin::~CSurfacePlugin(){
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 char *CSurfacePlugin::LoadStructBefore(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	g_NamedObjectMipMap = g_SurfaceMipMap;
 	CNamedObject::SetCastShadowDefault(false);
@@ -45,7 +45,7 @@ char *CSurfacePlugin::LoadStructBefore(
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CSurfacePlugin::LoadOldForm(){
 	if(!ChDir()) return false;
@@ -66,7 +66,7 @@ bool CSurfacePlugin::LoadOldForm(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[İ’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CSurfacePlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -78,21 +78,21 @@ void CSurfacePlugin::SetPreview(){
 }
 
 /*
- *	ƒTƒEƒ“ƒh—LŒø‚©‚Ç‚¤‚©
+ *	ã‚µã‚¦ãƒ³ãƒ‰æœ‰åŠ¹ã‹ã©ã†ã‹
  */
 bool CSurfacePlugin::IsSoundEnabled(){
 	return !!g_ConfigMode->GetSurfaceSound();
 }
 
 /*
- *	’nŒ`ƒsƒbƒN
+ *	åœ°å½¢ãƒ”ãƒƒã‚¯
  */
 bool CSurfacePlugin::PickSurface(
-	VEC3 pos,	//	À•W
-	VEC3 dir,	//	•ûŒü
-	VEC3 *hit,	//	ƒqƒbƒgÀ•WŠi”[æ
-	VEC3 *tri,	//	OŠpŒ`’¸“_Ši”[æ
-	int inv		//	— –Êƒtƒ‰ƒO
+	VEC3 pos,	//	åº§æ¨™
+	VEC3 dir,	//	æ–¹å‘
+	VEC3 *hit,	//	ãƒ’ãƒƒãƒˆåº§æ¨™æ ¼ç´å…ˆ
+	VEC3 *tri,	//	ä¸‰è§’å½¢é ‚ç‚¹æ ¼ç´å…ˆ
+	int inv		//	è£é¢ãƒ•ãƒ©ã‚°
 ){
 	VEC3 hit2, tri2[3];
 	IFreeObjectContainer ifo = m_FreeObject.begin();
@@ -118,10 +118,10 @@ bool CSurfacePlugin::PickSurface(
 }
 
 /*
- *	‹éŒ`”ÍˆÍ‚Éû‚ß‚é
+ *	çŸ©å½¢ç¯„å›²ã«åã‚ã‚‹
  */
 bool CSurfacePlugin::ClipRect(
-	VEC3 *pos	//	‘ÎÛÀ•W
+	VEC3 *pos	//	å¯¾è±¡åº§æ¨™
 ){
 	float hsx = 0.5f*m_SizeX, hsz = 0.5f*m_SizeZ;
 	bool ret = true;

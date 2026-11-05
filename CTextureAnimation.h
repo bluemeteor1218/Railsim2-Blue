@@ -1,19 +1,19 @@
-#ifndef CTEXTUREANIMATION_H_INCLUDED
+ï»¿#ifndef CTEXTUREANIMATION_H_INCLUDED
 #define CTEXTUREANIMATION_H_INCLUDED
 
 class CModelPlugin;
 class CTextureTransformer;
 
 /*
- *	ƒAƒjƒ[ƒVƒ‡ƒ“ƒtƒŒ[ƒ€
+ *	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ•ãƒ¬ãƒ¼ãƒ 
  */
 class CTexAnimFrame{
 	friend class CTextureAnimation;
 private:
-	int m_FrameLength;					//	ƒtƒŒ[ƒ€‚Ì’·‚³
-	string m_TextureFileName;			//	ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
-	LPTEX8 m_FrameTexture;				//	ƒtƒŒ[ƒ€ƒeƒNƒXƒ`ƒƒ
-	CTextureTransformer *m_TexTrans;	//	UV •ÏŠ·
+	int m_FrameLength;					//	ãƒ•ãƒ¬ãƒ¼ãƒ ã®é•·ã•
+	string m_TextureFileName;			//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
+	LPTEX8 m_FrameTexture;				//	ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	CTextureTransformer *m_TexTrans;	//	UV å¤‰æ›
 public:
 	CTexAnimFrame();
 	CTexAnimFrame(const CTexAnimFrame &);
@@ -25,13 +25,13 @@ public:
 };
 
 /*
- *	ƒeƒNƒXƒ`ƒƒƒAƒjƒ[ƒVƒ‡ƒ“ó‘Ô
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çŠ¶æ…‹
  */
 class CTexAnimState{
 	friend class CTextureAnimation;
 private:
-	int m_Frame;	//	ƒtƒŒ[ƒ€
-	int m_Count;	//	ƒJƒEƒ“ƒg
+	int m_Frame;	//	ãƒ•ãƒ¬ãƒ¼ãƒ 
+	int m_Count;	//	ã‚«ã‚¦ãƒ³ãƒˆ
 public:
 	CTexAnimState(){ Reset(); }
 	void Reset(){ m_Frame = m_Count = 0; }
@@ -40,18 +40,18 @@ public:
 	void Save(FILE *, char *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CTexAnimState>::iterator ITexAnimState;
 
 /*
- *	ƒeƒNƒXƒ`ƒƒƒAƒjƒ[ƒVƒ‡ƒ“
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
  */
 class CTextureAnimation{
 private:
-	int m_CurrentFrame;					//	Œ»İ‚ÌƒtƒŒ[ƒ€
-	CTexAnimState m_PreviewState;		//	ƒvƒŒƒrƒ…[—pó‘Ô•Ï”
-	string m_AnimationName;				//	ƒAƒjƒ[ƒVƒ‡ƒ“–¼
-	vector<CTexAnimFrame> m_FrameList;	//	ƒtƒŒ[ƒ€ƒŠƒXƒg
+	int m_CurrentFrame;					//	ç¾åœ¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ 
+	CTexAnimState m_PreviewState;		//	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ç”¨çŠ¶æ…‹å¤‰æ•°
+	string m_AnimationName;				//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å
+	vector<CTexAnimFrame> m_FrameList;	//	ãƒ•ãƒ¬ãƒ¼ãƒ ãƒªã‚¹ãƒˆ
 public:
 	char *Read(char *, CModelPlugin *);
 	void LoadData();
@@ -65,7 +65,7 @@ public:
 	}
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CTextureAnimation>::iterator ITextureAnimation;
 
 #endif

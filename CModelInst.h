@@ -1,4 +1,4 @@
-#ifndef CMODELINST_H_INCLUDED
+ï»¿#ifndef CMODELINST_H_INCLUDED
 #define CMODELINST_H_INCLUDED
 
 #include "CModelPlugin.h"
@@ -8,7 +8,7 @@ class CTrainGroup;
 class CCursorSceneryMode;
 
 /*
- *	ŒŸoî•ñ
+ *	æ¤œå‡ºæƒ…å ±
  */
 class CDetectInfo{
 private:
@@ -28,30 +28,30 @@ public:
 };
 
 /*
- *	ƒ‚ƒfƒ‹ƒCƒ“ƒXƒ^ƒ“ƒX
+ *	ãƒ¢ãƒ‡ãƒ«ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CModelInst{
 	friend class CModelPlugin;
 protected:
-	static int ms_DetectMode;				//	ŒŸoƒ‚[ƒh
+	static int ms_DetectMode;				//	æ¤œå‡ºãƒ¢ãƒ¼ãƒ‰
 	static int ms_DetectTemp;
-	static float ms_MinDist;				//	Å¬ŒŸo‹——£
-	static VEC3 ms_DetectRect1;				//	—Ìˆæn“_
-	static VEC3 ms_DetectRect2;				//	—ÌˆæI“_
-	static BOX8 ms_FocusBox;				//	ƒtƒH[ƒJƒXƒ{ƒbƒNƒX
-	static CModelInst *ms_CurrentInst;		//	‘ÎÛƒCƒ“ƒXƒ^ƒ“ƒX
-	static CDetectInfo ms_DetectInfo;		//	ŒŸoî•ñ
-	vector<int> m_StaticSwitchID;			//	“¯Šú—pƒXƒCƒbƒ` ID ƒŠƒXƒg
-	vector<int> m_SwitchOption;				//	ƒXƒCƒbƒ`İ’è’l
-	int m_Selected;							//	‘I‘ğƒtƒ‰ƒO
-	VEC3 m_Pos;								//	’†SÀ•W
-	VEC3 m_Right, m_Up, m_Dir;				//	p¨
-	list<CPartsInst> m_PartsInst;			//	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒX
-	list<CTexAnimState> m_AnimationState;	//	ƒAƒjƒ[ƒVƒ‡ƒ“ó‘Ô
-	list<CMoverState> m_MoverState;			//	ƒ€[ƒo[ó‘Ô
-	list<CParticleState> m_ParticleState;	//	ƒp[ƒeƒBƒNƒ‹ƒGƒ~ƒbƒ^ó‘Ô
-	list<CSoundState> m_SoundState;			//	ƒTƒEƒ“ƒhó‘Ô
-	CModelPlugin *m_ModelPlugin;			//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	static float ms_MinDist;				//	æœ€å°æ¤œå‡ºè·é›¢
+	static VEC3 ms_DetectRect1;				//	é ˜åŸŸå§‹ç‚¹
+	static VEC3 ms_DetectRect2;				//	é ˜åŸŸçµ‚ç‚¹
+	static BOX8 ms_FocusBox;				//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ãƒœãƒƒã‚¯ã‚¹
+	static CModelInst *ms_CurrentInst;		//	å¯¾è±¡ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+	static CDetectInfo ms_DetectInfo;		//	æ¤œå‡ºæƒ…å ±
+	vector<int> m_StaticSwitchID;			//	åŒæœŸç”¨ã‚¹ã‚¤ãƒƒãƒ ID ãƒªã‚¹ãƒˆ
+	vector<int> m_SwitchOption;				//	ã‚¹ã‚¤ãƒƒãƒè¨­å®šå€¤
+	int m_Selected;							//	é¸æŠãƒ•ãƒ©ã‚°
+	VEC3 m_Pos;								//	ä¸­å¿ƒåº§æ¨™
+	VEC3 m_Right, m_Up, m_Dir;				//	å§¿å‹¢
+	list<CPartsInst> m_PartsInst;			//	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+	list<CTexAnimState> m_AnimationState;	//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çŠ¶æ…‹
+	list<CMoverState> m_MoverState;			//	ãƒ ãƒ¼ãƒãƒ¼çŠ¶æ…‹
+	list<CParticleState> m_ParticleState;	//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚¨ãƒŸãƒƒã‚¿çŠ¶æ…‹
+	list<CSoundState> m_SoundState;			//	ã‚µã‚¦ãƒ³ãƒ‰çŠ¶æ…‹
+	CModelPlugin *m_ModelPlugin;			//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 public:
 	static void ResetDetect(int, VEC3, VEC3);
 	static void CheckDetect(CNamedObject *, CPartsInst *);

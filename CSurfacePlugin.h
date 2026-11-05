@@ -1,15 +1,15 @@
-#ifndef CSURFACEPLUGIN_H_INCLUDED
+ï»¿#ifndef CSURFACEPLUGIN_H_INCLUDED
 #define CSURFACEPLUGIN_H_INCLUDED
 
 #include "CStructPlugin.h"
 
 /*
- *	’nŒ`ƒvƒ‰ƒOƒCƒ“
+ *	åœ°å½¢ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CSurfacePlugin: public CStructPlugin{
 private:
-	static CObject ms_PreviewObject;	//	ƒvƒŒƒrƒ…[—pƒIƒuƒWƒFƒNƒg
-	float m_SizeX, m_SizeZ;				//	‹éŒ`ƒTƒCƒY
+	static CObject ms_PreviewObject;	//	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	float m_SizeX, m_SizeZ;				//	çŸ©å½¢ã‚µã‚¤ã‚º
 public:
 	static void RenderPreview();
 	CSurfacePlugin(char *id): CStructPlugin(id){}
@@ -29,7 +29,7 @@ public:
 };
 
 /*
- *	’nŒ`ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	åœ°å½¢ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CSurfacePluginList: public CStructPluginList{
 private:
@@ -42,7 +42,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CSurfacePlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CSurfacePlugin *g_Surface;
 extern CSurfacePlugin *g_DefaultSurface;
 extern CSurfacePluginList *g_SurfacePluginList;

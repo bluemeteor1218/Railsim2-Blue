@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCamera.h"
 #include "CShadowVolume.h"
 #include "CScene.h"
@@ -7,37 +7,37 @@
 #include "CSceneryMode.h"
 #include "CConfigMode.h"
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const float CLIP_PLANE_NEAR;
 
-//	“à•”’è”
-const int GRID_SIZE = 32;		//	ƒOƒŠƒbƒhƒTƒCƒY
-const float GRID_ZOOM = 2.0f;	//	ƒOƒŠƒbƒhŠg‘å—¦
-const float TANGENT_LEN = 4.0f;	//	Úü•\¦’·‚³
+//	å†…éƒ¨å®šæ•°
+const int GRID_SIZE = 32;		//	ã‚°ãƒªãƒƒãƒ‰ã‚µã‚¤ã‚º
+const float GRID_ZOOM = 2.0f;	//	ã‚°ãƒªãƒƒãƒ‰æ‹¡å¤§ç‡
+const float TANGENT_LEN = 4.0f;	//	æ¥ç·šè¡¨ç¤ºé•·ã•
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_StencilEnabled;
 
-//	“à•”ƒOƒ[ƒoƒ‹
-bool g_ShadowNeeded;				//	‰e‚ª•K—v‚©‚Ç‚¤‚©
-CVertex g_DetailGridVertex;			//	ƒOƒŠƒbƒh’¸“_ƒoƒbƒtƒ@
-CShadowVolume g_ShadowVolume;		//	ƒVƒƒƒhƒEƒ{ƒŠƒ…[ƒ€
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+bool g_ShadowNeeded;				//	å½±ãŒå¿…è¦ã‹ã©ã†ã‹
+CVertex g_DetailGridVertex;			//	ã‚°ãƒªãƒƒãƒ‰é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+CShadowVolume g_ShadowVolume;		//	ã‚·ãƒ£ãƒ‰ã‚¦ãƒœãƒªãƒ¥ãƒ¼ãƒ 
 
 /*
- *	’¼ü‚Æ 1 “_‚Ì‹——£‚ğ‹‚ß‚é
+ *	ç›´ç·šã¨ 1 ç‚¹ã®è·é›¢ã‚’æ±‚ã‚ã‚‹
  *
- *	–ß‚è’l: ‹——£
+ *	æˆ»ã‚Šå€¤: è·é›¢
  */
 float LinePointDistance(
-	VEC3 *p1,	//	’¼ü‚ª’Ê‚é 1 “_
-	VEC3 *n1,	//	’¼ü‚Ì•ûŒüƒxƒNƒgƒ‹
-	VEC3 *p2	//	“_
+	VEC3 *p1,	//	ç›´ç·šãŒé€šã‚‹ 1 ç‚¹
+	VEC3 *n1,	//	ç›´ç·šã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
+	VEC3 *p2	//	ç‚¹
 ){
 	return V3Len(&(*p2-(*p1+*n1*V3Dot(n1, &(*p2-*p1)))));
 }
 
 /*
- *	s—ñ³‹K‰»
+ *	è¡Œåˆ—æ­£è¦åŒ–
  */
 void NormalizeMatrix(MTX4 *mtx){
 	V3Norm((VEC3 *)&mtx->_11, (VEC3 *)&mtx->_11);
@@ -46,17 +46,17 @@ void NormalizeMatrix(MTX4 *mtx){
 }
 
 /*
- *	2 ’¼ü‚ÌÅ‹ß“_‚ğ‹‚ß‚é
+ *	2 ç›´ç·šã®æœ€è¿‘ç‚¹ã‚’æ±‚ã‚ã‚‹
  *
- *	–ß‚è’l: •½s‚È‚ç true ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: å¹³è¡Œãªã‚‰ true ã‚’è¿”ã™
  */
 bool LineLineNearest(
-	VEC3 *m1,	//	’¼ü 1 ã‚ÌÅ‹ß“_
-	VEC3 *m2,	//	’¼ü 2 ã‚ÌÅ‹ß“_
-	VEC3 *p1,	//	’¼ü 1 ‚ğ’Ê‚é 1 “_
-	VEC3 *n1,	//	’¼ü 1 ‚Ì•ûŒüƒxƒNƒgƒ‹
-	VEC3 *p2,	//	’¼ü 2 ‚ğ’Ê‚é 1 “_
-	VEC3 *n2	//	’¼ü 2 ‚Ì•ûŒüƒxƒNƒgƒ‹
+	VEC3 *m1,	//	ç›´ç·š 1 ä¸Šã®æœ€è¿‘ç‚¹
+	VEC3 *m2,	//	ç›´ç·š 2 ä¸Šã®æœ€è¿‘ç‚¹
+	VEC3 *p1,	//	ç›´ç·š 1 ã‚’é€šã‚‹ 1 ç‚¹
+	VEC3 *n1,	//	ç›´ç·š 1 ã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
+	VEC3 *p2,	//	ç›´ç·š 2 ã‚’é€šã‚‹ 1 ç‚¹
+	VEC3 *n2	//	ç›´ç·š 2 ã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
 ){
 	VEC3 r = *p2-*p1;
 	float d = V3Len(&r);
@@ -69,15 +69,15 @@ bool LineLineNearest(
 }
 
 /*
- *	2 ’¼ü‚Ì‹——£‚ğ‹‚ß‚é
+ *	2 ç›´ç·šã®è·é›¢ã‚’æ±‚ã‚ã‚‹
  *
- *	–ß‚è’l: ‹——£
+ *	æˆ»ã‚Šå€¤: è·é›¢
  */
 float LineLineDistance(
-	VEC3 *p1,	//	’¼ü 1 ‚ğ’Ê‚é 1 “_
-	VEC3 *n1,	//	’¼ü 1 ‚Ì•ûŒüƒxƒNƒgƒ‹
-	VEC3 *p2,	//	’¼ü 2 ‚ğ’Ê‚é 1 “_
-	VEC3 *n2	//	’¼ü 2 ‚Ì•ûŒüƒxƒNƒgƒ‹
+	VEC3 *p1,	//	ç›´ç·š 1 ã‚’é€šã‚‹ 1 ç‚¹
+	VEC3 *n1,	//	ç›´ç·š 1 ã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
+	VEC3 *p2,	//	ç›´ç·š 2 ã‚’é€šã‚‹ 1 ç‚¹
+	VEC3 *n2	//	ç›´ç·š 2 ã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
 ){
 	VEC3 m1, m2;
 	return LineLineNearest(&m1, &m2, p1, n1, p2, n2)
@@ -85,15 +85,15 @@ float LineLineDistance(
 }
 
 /*
- *	‚ ‚é“_‚©‚çˆê’è‹——£‚É‚ ‚é’¼üã‚Ì“_ (2 ŒÂ) ‚ğ‹‚ß‚é
+ *	ã‚ã‚‹ç‚¹ã‹ã‚‰ä¸€å®šè·é›¢ã«ã‚ã‚‹ç›´ç·šä¸Šã®ç‚¹ (2 å€‹) ã‚’æ±‚ã‚ã‚‹
  */
 void LinePointPosition(
-	VEC3 *d1,	//	Œ‹‰Ê 1
-	VEC3 *d2,	//	Œ‹‰Ê 2
-	VEC3 *p1,	//	’¼ü‚ª’Ê‚é 1 “_
-	VEC3 *n1,	//	’¼ü‚Ì•ûŒüƒxƒNƒgƒ‹
-	VEC3 *p2,	//	“_
-	float x		//	‹——£
+	VEC3 *d1,	//	çµæœ 1
+	VEC3 *d2,	//	çµæœ 2
+	VEC3 *p1,	//	ç›´ç·šãŒé€šã‚‹ 1 ç‚¹
+	VEC3 *n1,	//	ç›´ç·šã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
+	VEC3 *p2,	//	ç‚¹
+	float x		//	è·é›¢
 ){
 	float r, beta, gamma, tx = p1->x-p2->x, ty = p1->y-p2->y, tz = p1->z-p2->z;
 	beta = n1->x*tx+n1->y*ty+n1->z*tz;
@@ -104,11 +104,11 @@ void LinePointPosition(
 }
 
 /*
- *	ƒOƒŠƒbƒhì¬
+ *	ã‚°ãƒªãƒƒãƒ‰ä½œæˆ
  */
 void InitGrid(){
 	int i, cnt = 0;
-	VTX_L grid[(GRID_SIZE-1)*16];	//	—¼’[E—¼‘¤E}EXZE
+	VTX_L grid[(GRID_SIZE-1)*16];	//	ä¸¡ç«¯ãƒ»ä¸¡å´ãƒ»Â±ãƒ»XZãƒ»
 	for(i = -GRID_SIZE/2+1; i<GRID_SIZE/2; i++){
 		D3DCOLOR color = i%5 ? 0x00c0c0ff : 0x000000ff;
 		D3DCOLOR alpha = (255*(GRID_SIZE/2-1-abs(i))/(GRID_SIZE/2-1))<<24;
@@ -133,10 +133,10 @@ void InitGrid(){
 }
 
 /*
- *	ƒOƒŠƒbƒh•`‰æ
+ *	ã‚°ãƒªãƒƒãƒ‰æç”»
  */
 void DrawGrid(
-	VEC3 pos	//	’†SÀ•W
+	VEC3 pos	//	ä¸­å¿ƒåº§æ¨™
 ){
 	int i;
 	float cdist = CCamera::GetCurrentCamera()->GetDist(), gscale;
@@ -196,13 +196,13 @@ void DrawGrid(
 }
 
 /*
- *	XZ Úü•`‰æ
+ *	XZ æ¥ç·šæç”»
  */
 void DrawTangent(
-	VEC3 pos,			//	’†SÀ•W
-	VEC3 norm,			//	–@ü
-	D3DCOLOR col,		//	F
-	CLineDumpL *dump	//	ƒ_ƒ“ƒp
+	VEC3 pos,			//	ä¸­å¿ƒåº§æ¨™
+	VEC3 norm,			//	æ³•ç·š
+	D3DCOLOR col,		//	è‰²
+	CLineDumpL *dump	//	ãƒ€ãƒ³ãƒ‘
 ){
 	VEC3 xn(norm.y, -norm.x, 0.0f), zn(0.0f, -norm.z, norm.y);
 	D3DCOLOR col2 = col&0x00ffffff;
@@ -223,10 +223,10 @@ void DrawTangent(
 }
 
 /*
- *	ƒtƒH[ƒJƒX•`‰æ
+ *	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹æç”»
  */
 void DrawFocus(
-	VEC3 pos	//	’†SÀ•W
+	VEC3 pos	//	ä¸­å¿ƒåº§æ¨™
 ){
 	devResetMatrix();
 	devSetTexture(0, NULL);
@@ -241,11 +241,11 @@ void DrawFocus(
 }
 
 /*
- *	‰e•t‚« 3D ’¼ü‚ğ•`‰æ
+ *	å½±ä»˜ã 3D ç›´ç·šã‚’æç”»
  */
 void Draw3DLineWithShadow(
-	VEC3 pos1, VEC3 pos2,		//	À•W
-	D3DCOLOR c1, D3DCOLOR c2	//	F
+	VEC3 pos1, VEC3 pos2,		//	åº§æ¨™
+	D3DCOLOR c1, D3DCOLOR c2	//	è‰²
 ){
 	VEC3 p1 = WorldToScreen(pos1), p2 = WorldToScreen(pos2);
 	if(p1.z<0.0f && p2.z<0.0f) return;
@@ -264,12 +264,12 @@ void Draw3DLineWithShadow(
 }
 
 /*
- *	3D “_‚ğ 2D ‹éŒ`‚Å•`‰æ
+ *	3D ç‚¹ã‚’ 2D çŸ©å½¢ã§æç”»
  */
 void Draw3DPointAs2DRect(
-	VEC3 pos,		//	À•W
-	D3DCOLOR color,	//	F
-	int r			//	”¼Œa
+	VEC3 pos,		//	åº§æ¨™
+	D3DCOLOR color,	//	è‰²
+	int r			//	åŠå¾„
 ){
 	VEC3 p = WorldToScreen(pos);
 	if(p.z<0.0f) return;
@@ -279,7 +279,7 @@ void Draw3DPointAs2DRect(
 }
 
 /*
- *	‰e‚ğ‰Šú‰»
+ *	å½±ã‚’åˆæœŸåŒ–
  */
 void InitShadow(){
 	CEnvPlugin *env = g_RSPV ? g_Env : g_Scene->GetEnv();
@@ -293,17 +293,17 @@ void InitShadow(){
 }
 
 /*
- *	‰e‚ğ—‚Æ‚·
+ *	å½±ã‚’è½ã¨ã™
  */
 void CastShadow(
-	CObject *obj	//	ƒIƒuƒWƒFƒNƒg
+	CObject *obj	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 ){
 	if(!g_ShadowNeeded || g_RenderBlink) return;
 	g_ShadowVolume.BuildFromMesh(obj, VEC3(svl.dir.Direction));
 }
 
 /*
- *	‰e‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	å½±ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void RenderShadow(){
 	if(!g_ShadowNeeded) return;

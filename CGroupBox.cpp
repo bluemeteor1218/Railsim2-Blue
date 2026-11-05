@@ -1,12 +1,12 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CGroupBox.h"
 #include "CSkinPlugin.h"
 
-//	“à•”’è”
-const int GB_FONT_MARGIN = 4;	//	˜g‚Æ•¶š‚Ì—]”’
+//	å†…éƒ¨å®šæ•°
+const int GB_FONT_MARGIN = 4;	//	æ ã¨æ–‡å­—ã®ä½™ç™½
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CGroupBox::ScanInput(){
 	if(!m_Visible) return ScanInputBrother();
@@ -14,7 +14,7 @@ bool CGroupBox::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CGroupBox::Render(){
 	CInterface::RenderBrother();

@@ -1,31 +1,31 @@
-#ifndef CPIER_H_INCLUDED
+ï»¿#ifndef CPIER_H_INCLUDED
 #define CPIER_H_INCLUDED
 
 class CPierPlugin;
 
 /*
- *	‹´‹rƒCƒ“ƒXƒ^ƒ“ƒX
+ *	æ©‹è„šã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CPier{
 private:
-	static CPier **ms_Root;		//	Ú‘±ƒ‹[ƒg
-	static float ms_MinDist;	//	Å¬ŒŸo‹——£
-	static CPier *ms_Detect;	//	ŒŸoî•ñ
-	int m_Selected;				//	‘I‘ğƒtƒ‰ƒO
-	bool m_Valid;				//	Œšİ—LŒøƒtƒ‰ƒO
-	float m_SurfaceAlt;			//	’nŒ`ŒŸo‚“x
-	float m_PierArea;			//	‹´‹r•”’·‚³
-	VEC3 m_SurfaceHit;			//	’n•\“Š‰eÀ•W
-	CObject m_JointObject;		//	ƒWƒ‡ƒCƒ“ƒg•”ƒIƒuƒWƒFƒNƒg
-	CObject m_HeadObject;		//	ƒwƒbƒh•”ƒIƒuƒWƒFƒNƒg
-	CObject m_BaseObject;		//	Šî‘b•”ƒIƒuƒWƒFƒNƒg
-	VEC3 m_PierBegin;			//	‹´‹r•”ŠJnÀ•W
-	VEC3 m_PierEnd;				//	‹´‹r•”I—¹À•W
-	VEC3 m_PierRight;			//	‹´‹r•” right
-	VEC3 m_PierUp;				//	‹´‹r•” up
-	VEC3 m_PierDir;				//	‹´‹r•” dir
-	CPierPlugin *m_PierPlugin;	//	‹´‹rƒvƒ‰ƒOƒCƒ“
-	CPier *m_Next;				//	ƒŠƒXƒgŸ
+	static CPier **ms_Root;		//	æ¥ç¶šãƒ«ãƒ¼ãƒˆ
+	static float ms_MinDist;	//	æœ€å°æ¤œå‡ºè·é›¢
+	static CPier *ms_Detect;	//	æ¤œå‡ºæƒ…å ±
+	int m_Selected;				//	é¸æŠãƒ•ãƒ©ã‚°
+	bool m_Valid;				//	å»ºè¨­æœ‰åŠ¹ãƒ•ãƒ©ã‚°
+	float m_SurfaceAlt;			//	åœ°å½¢æ¤œå‡ºé«˜åº¦
+	float m_PierArea;			//	æ©‹è„šéƒ¨é•·ã•
+	VEC3 m_SurfaceHit;			//	åœ°è¡¨æŠ•å½±åº§æ¨™
+	CObject m_JointObject;		//	ã‚¸ãƒ§ã‚¤ãƒ³ãƒˆéƒ¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CObject m_HeadObject;		//	ãƒ˜ãƒƒãƒ‰éƒ¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CObject m_BaseObject;		//	åŸºç¤éƒ¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	VEC3 m_PierBegin;			//	æ©‹è„šéƒ¨é–‹å§‹åº§æ¨™
+	VEC3 m_PierEnd;				//	æ©‹è„šéƒ¨çµ‚äº†åº§æ¨™
+	VEC3 m_PierRight;			//	æ©‹è„šéƒ¨ right
+	VEC3 m_PierUp;				//	æ©‹è„šéƒ¨ up
+	VEC3 m_PierDir;				//	æ©‹è„šéƒ¨ dir
+	CPierPlugin *m_PierPlugin;	//	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPier *m_Next;				//	ãƒªã‚¹ãƒˆæ¬¡
 public:
 	static void SetRoot(CPier **r){ ms_Root = r; }
 	static void ResetDetect(){ ms_MinDist = -1.0f; }

@@ -1,4 +1,4 @@
-#ifndef CNEUTRALMODE_H_INCLUDED
+ï»¿#ifndef CNEUTRALMODE_H_INCLUDED
 #define CNEUTRALMODE_H_INCLUDED
 
 #include "CSceneryMode.h"
@@ -6,15 +6,15 @@
 #include "CListView.h"
 
 /*
- *	ƒjƒ…[ƒgƒ‰ƒ‹ƒ‚[ƒh
+ *	ãƒ‹ãƒ¥ãƒ¼ãƒˆãƒ©ãƒ«ãƒ¢ãƒ¼ãƒ‰
  */
 class CNeutralMode: public CCursorSceneryMode, public CMenuCommander, public CWindowResizer{
 private:
-	bool m_PointMode;			//	ƒ|ƒCƒ“ƒg§Œäƒ‚[ƒh
-	CDetectInfo m_FocusInfo;	//	ƒtƒH[ƒJƒXî•ñ
-	CWindowCtrl m_SwitchWindow;	//	ƒXƒCƒbƒ`‘‹
-	CListView m_SwitchListView;	//	ƒXƒCƒbƒ`ƒŠƒXƒg
-	CListView m_OptionListView;	//	ƒIƒvƒVƒ‡ƒ“ƒŠƒXƒg
+	bool m_PointMode;			//	ãƒã‚¤ãƒ³ãƒˆåˆ¶å¾¡ãƒ¢ãƒ¼ãƒ‰
+	CDetectInfo m_FocusInfo;	//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹æƒ…å ±
+	CWindowCtrl m_SwitchWindow;	//	ã‚¹ã‚¤ãƒƒãƒçª“
+	CListView m_SwitchListView;	//	ã‚¹ã‚¤ãƒƒãƒãƒªã‚¹ãƒˆ
+	CListView m_OptionListView;	//	ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒªã‚¹ãƒˆ
 public:
 	CNeutralMode();
 	~CNeutralMode(){}
@@ -32,7 +32,7 @@ public:
 	bool IsWindowDivisible(){ return true; }
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CNeutralMode *g_NeutralMode;
 
 #endif

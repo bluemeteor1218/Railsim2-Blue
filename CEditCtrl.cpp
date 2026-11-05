@@ -1,16 +1,16 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CEditCtrl.h"
 #include "CSkinPlugin.h"
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CEditCtrl::Init(
-	int x, int y,	//	À•W
-	int w, int h,	//	ƒTƒCƒY
-	char *t,		//	ƒeƒLƒXƒg
-	CInterface *p,	//	e
-	int smax		//	Å‘å•¶š”
+	int x, int y,	//	åº§æ¨™
+	int w, int h,	//	ã‚µã‚¤ã‚º
+	char *t,		//	ãƒ†ã‚­ã‚¹ãƒˆ
+	CInterface *p,	//	è¦ª
+	int smax		//	æœ€å¤§æ–‡å­—æ•°
 ){
 	CInterface::Init(x, y, w, h, t, p);
 	m_State = 0;
@@ -21,10 +21,10 @@ void CEditCtrl::Init(
 }
 
 /*
- *	ƒtƒH[ƒJƒX•t—^
+ *	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ä»˜ä¸
  */
 void CEditCtrl::GiveFocus(
-	bool snd	//	‰¹Ä¶ƒtƒ‰ƒO
+	bool snd	//	éŸ³å†ç”Ÿãƒ•ãƒ©ã‚°
 ){
 	if(m_State) return;
 	m_State = 1;
@@ -33,7 +33,7 @@ void CEditCtrl::GiveFocus(
 }
 
 /*
- *	“ü—ÍI—¹
+ *	å…¥åŠ›çµ‚äº†
  */
 void CEditCtrl::FinishInput(){
 	if(m_State){
@@ -45,7 +45,7 @@ void CEditCtrl::FinishInput(){
 }
 
 /*
- *	ƒŠƒAƒ‹ƒ^ƒCƒ€‚ÉƒeƒLƒXƒgæ“¾
+ *	ãƒªã‚¢ãƒ«ã‚¿ã‚¤ãƒ ã«ãƒ†ã‚­ã‚¹ãƒˆå–å¾—
  */
 string CEditCtrl::GetRealtimeText(){
 	if(m_State){
@@ -58,7 +58,7 @@ string CEditCtrl::GetRealtimeText(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CEditCtrl::ScanInput(){
 	POINT pos = g_Cursor.GetPos();
@@ -75,7 +75,7 @@ bool CEditCtrl::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CEditCtrl::Render(){
 	CInterface::RenderBrother();

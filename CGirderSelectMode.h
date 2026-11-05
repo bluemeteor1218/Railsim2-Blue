@@ -1,11 +1,11 @@
-#ifndef CGIRDERSELECTMODE_H_INCLUDED
+ï»¿#ifndef CGIRDERSELECTMODE_H_INCLUDED
 #define CGIRDERSELECTMODE_H_INCLUDED
 
 #include "C3DPluginMode.h"
 #include "CRailwayMode.h"
 
 /*
- *	‹´Œ…‘I‘ğƒ‚[ƒh
+ *	æ©‹æ¡é¸æŠãƒ¢ãƒ¼ãƒ‰
  */
 class CGirderSelectMode: public C3DPluginMode, public CRailwayMode{
 private:
@@ -21,7 +21,7 @@ public:
 	void Render3DPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CGirderSelectMode *g_GirderSelectMode;
 
 #endif

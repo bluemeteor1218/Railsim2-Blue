@@ -1,7 +1,7 @@
-//	Copyright (c) 2002 Midikyou
+Ôªø//	Copyright (c) 2002 Midikyou
 
 struct SYSVALUE_L{
-	D3DLIGHT8	dir;	//	ïΩçsåıåπ
+	D3DLIGHT8	dir;	//	Âπ≥Ë°åÂÖâÊ∫ê
 	BOOL		fDir;	//	ON/OFF
 };
 extern SYSVALUE_L svl;

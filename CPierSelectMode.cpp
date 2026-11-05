@@ -1,37 +1,37 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailPlugin.h"
 #include "CPierPlugin.h"
 #include "CLinePlugin.h"
 #include "CPierSelectMode.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPierSelectMode::CPierSelectMode():
-	C3DPluginMode(lang(PierPlugin))	//	Šî–{ƒNƒ‰ƒX
+	C3DPluginMode(lang(PierPlugin))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_Camera = &ms_RailwayModeCamera;
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CPierSelectMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	return CPluginMode::Dispatch(type, data);
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆå–å¾—
  */
 CPluginList *CPierSelectMode::GetPluginList(){
 	return g_PierPluginList;
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CPierSelectMode::Enter3DPlugin(){
 	ms_ModeLabel = lang(SelectPier);
@@ -41,7 +41,7 @@ void CPierSelectMode::Enter3DPlugin(){
 }
 
 /*
- *	ƒ‚[ƒ_ƒ‹ˆ—
+ *	ãƒ¢ãƒ¼ãƒ€ãƒ«å‡¦ç†
  */
 void CPierSelectMode::ModalFunc3DPlugin(){
 	void ModalFuncRailwayPluginSet();
@@ -49,14 +49,14 @@ void CPierSelectMode::ModalFunc3DPlugin(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CPierSelectMode::ScanInput3DPlugin(){
 	ScanInputRailway();
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CPierSelectMode::Render3DPlugin(){
 	CRailPlugin::RenderPreview();

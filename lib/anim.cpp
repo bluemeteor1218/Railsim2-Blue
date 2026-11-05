@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -9,7 +9,7 @@
 #include "anim.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CAnim::CAnim(){
 	m_nMeshes = 0;
@@ -21,14 +21,14 @@ CAnim::CAnim(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CAnim::~CAnim(){
 	Free();
 }
 
 /*
- *	ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ‰ğ•ú
+ *	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’è§£æ”¾
  */
 void CAnim::Free(){
 	if(m_pMeshList){
@@ -45,9 +45,9 @@ void CAnim::Free(){
 }
 
 /*
- *	ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ“Ç‚İ‚İ
+ *	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’èª­ã¿è¾¼ã¿
  *
- *	strFile	: ƒtƒ@ƒCƒ‹–¼
+ *	strFile	: ãƒ•ã‚¡ã‚¤ãƒ«å
  */
 BOOL CAnim::Load(LPCSTR strFile){
 	Free();
@@ -59,7 +59,7 @@ BOOL CAnim::Load(LPCSTR strFile){
 	}
 	int f, i;
 
-	fscanf(fp, "%d", &m_nMeshes);	//	ƒƒbƒVƒ…”
+	fscanf(fp, "%d", &m_nMeshes);	//	ãƒ¡ãƒƒã‚·ãƒ¥æ•°
 	m_pMeshList = new CMesh[m_nMeshes];
 
 	char buf[256];
@@ -71,7 +71,7 @@ BOOL CAnim::Load(LPCSTR strFile){
 	VEC3 pos;
 	QUAT qua;
 
-	fscanf(fp, "%d", &m_nFrames);	//	ƒtƒŒ[ƒ€”
+	fscanf(fp, "%d", &m_nFrames);	//	ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
 	m_pStateTable = new ANIM_STATE[m_nFrames*m_nMeshes];
 
 	for(f = 0; f<m_nFrames; f++){
@@ -89,12 +89,12 @@ BOOL CAnim::Load(LPCSTR strFile){
 }
 
 /*
- *	ƒL[ƒtƒŒ[ƒ€‚ÌƒNƒH[ƒ^ƒjƒIƒ“‚©‚çƒ}ƒgƒŠƒNƒX‚ğŒvZ
+ *	ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã®ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‹ã‚‰ãƒãƒˆãƒªã‚¯ã‚¹ã‚’è¨ˆç®—
  *
- *	pMtx		: ƒ}ƒgƒŠƒNƒXŠi”[æ
- *	s1		: Œ»İƒtƒŒ[ƒ€‚ÌƒNƒH[ƒ^ƒjƒIƒ“‚ÌƒCƒ“ƒfƒbƒNƒXiƒƒbƒVƒ…•Êj
- *	s2		: Ÿ‚ÌƒtƒŒ[ƒ€‚ÌƒNƒH[ƒ^ƒjƒIƒ“‚ÌƒCƒ“ƒfƒbƒNƒXiƒƒbƒVƒ…•Êj
- *	rate		: ƒL[ƒtƒŒ[ƒ€ŠÔ‚Ì”ä—¦
+ *	pMtx		: ãƒãƒˆãƒªã‚¯ã‚¹æ ¼ç´å…ˆ
+ *	s1		: ç¾åœ¨ãƒ•ãƒ¬ãƒ¼ãƒ ã®ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ï¼ˆãƒ¡ãƒƒã‚·ãƒ¥åˆ¥ï¼‰
+ *	s2		: æ¬¡ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã®ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ï¼ˆãƒ¡ãƒƒã‚·ãƒ¥åˆ¥ï¼‰
+ *	rate		: ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ é–“ã®æ¯”ç‡
  */
 void CAnim::ComputeMatrix(MTX4 *pMtx, int s1, int s2, float rate){
 	QUAT qua;
@@ -117,9 +117,9 @@ void CAnim::ComputeMatrix(MTX4 *pMtx, int s1, int s2, float rate){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	fLoop		: ƒ‹[ƒv‚ÌON/OFF
+ *	fLoop		: ãƒ«ãƒ¼ãƒ—ã®ON/OFF
  */
 BOOL CAnim::Render(BOOL fLoop){
 	static int f1, f2;
@@ -138,7 +138,7 @@ BOOL CAnim::Render(BOOL fLoop){
 
 		rate = 1.0f-(m_playFrame-f1);
 	}
-	//	else f1, f2, rate‚Í‘O‰ñ‚Ì‚Ü‚Ü
+	//	else f1, f2, rateã¯å‰å›ã®ã¾ã¾
 
 	CObject obj;
 	MTX4 mtx;

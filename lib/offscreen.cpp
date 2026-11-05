@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -7,7 +7,7 @@
 #include "offscreen.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 COffScreen::COffScreen(){
 	m_pTex = NULL;
@@ -17,19 +17,19 @@ COffScreen::COffScreen(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 COffScreen::~COffScreen(){
 	Free();
 }
 
 /*
- *	ƒT[ƒtƒFƒCƒX‚Ìì¬
+ *	ã‚µãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ä½œæˆ
  *
- *	w, h	: ƒTƒCƒY@¦2‚Ìæ”‚Ì‚Ý
+ *	w, h	: ã‚µã‚¤ã‚ºã€€â€»2ã®ä¹—æ•°ã®ã¿
  */
 BOOL COffScreen::Create(int w, int h){
-	Free();	//	Šù‘¶‚È‚ç‰ð•ú
+	Free();	//	æ—¢å­˜ãªã‚‰è§£æ”¾
 
 	HRESULT hr;
 
@@ -39,7 +39,7 @@ BOOL COffScreen::Create(int w, int h){
 		D3DPOOL_DEFAULT, &m_pTex);
 	if(FAILED(hr)) return FALSE;
 
-	//	‰½ŒÌ‚©D3DUSAGE_DEPTHSTENCIL‚ÅƒeƒNƒXƒ`ƒƒ‚ªì¬‚Å‚«‚È‚¢‚Ì‚ÅEEE
+	//	ä½•æ•…ã‹D3DUSAGE_DEPTHSTENCILã§ãƒ†ã‚¯ã‚¹ãƒãƒ£ãŒä½œæˆã§ããªã„ã®ã§ãƒ»ãƒ»ãƒ»
 	hr = sv3.pDev->CreateDepthStencilSurface(
 		w, h,
 		sv3.d3dpp.AutoDepthStencilFormat,
@@ -53,7 +53,7 @@ BOOL COffScreen::Create(int w, int h){
 }
 
 /*
- *	ƒT[ƒtƒFƒCƒX‚Ì‰ð•ú
+ *	ã‚µãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®è§£æ”¾
  */
 void COffScreen::Free(){
 	m_fRender = FALSE;
@@ -63,33 +63,33 @@ void COffScreen::Free(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒOŠJŽn
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°é–‹å§‹
  */
 BOOL COffScreen::Begin(D3DCOLOR c){
 	if(!m_fRender) return FALSE;
 
-	//	Œ»Ý‚ÌƒXƒNƒŠ[ƒ“Ý’è‚ð‘Þ”ð
+	//	ç¾åœ¨ã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³è¨­å®šã‚’é€€é¿
 	sv3.pDev->GetRenderTarget(&m_pOldRT);
 	sv3.pDev->GetDepthStencilSurface(&m_pOldZB);
 
-	//	V‚µ‚¢ƒXƒNƒŠ[ƒ“Ý’è‚ðƒZƒbƒg
+	//	æ–°ã—ã„ã‚¹ã‚¯ãƒªãƒ¼ãƒ³è¨­å®šã‚’ã‚»ãƒƒãƒˆ
 	m_pTex->GetSurfaceLevel(0, &m_pRT);
 
 	if(FAILED(sv3.pDev->SetRenderTarget(m_pRT, m_pZB)))
 		return FALSE;
 
-	//	ƒV[ƒ“‚ÌŠJŽn
+	//	ã‚·ãƒ¼ãƒ³ã®é–‹å§‹
 	if(!BeginScene(c)) return FALSE;
 	return TRUE;
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°çµ‚äº†
  */
 void COffScreen::End(){
 	if(!m_fRender) return;
 
-	//	ƒV[ƒ“‚ÌI—¹AƒXƒNƒŠ[ƒ“Ý’è‚Ì•œŒ³
+	//	ã‚·ãƒ¼ãƒ³ã®çµ‚äº†ã€ã‚¹ã‚¯ãƒªãƒ¼ãƒ³è¨­å®šã®å¾©å…ƒ
 	sv3.pDev->EndScene();
 	RELEASE(m_pRT);
 

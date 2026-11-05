@@ -1,87 +1,87 @@
-#ifndef VALUEAREA_H_INCLUDED
+ï»¿#ifndef VALUEAREA_H_INCLUDED
 #define VALUEAREA_H_INCLUDED
 
 /*
- *	•Ï”‚Ì’l‚ğˆê’è‚Ì”ÍˆÍ‚ÉŠÛ‚ß‚é (int)
+ *	å¤‰æ•°ã®å€¤ã‚’ä¸€å®šã®ç¯„å›²ã«ä¸¸ã‚ã‚‹ (int)
  */
 inline void ValueArea(
-	int *dest,	//	‘ÎÛ’l
-	int min,	//	Å¬’l
-	int max		//	Å‘å’l
+	int *dest,	//	å¯¾è±¡å€¤
+	int min,	//	æœ€å°å€¤
+	int max		//	æœ€å¤§å€¤
 ){
 	if(*dest<min) *dest = min;
 	if(*dest>max) *dest = max;
 }
 
 /*
- *	•Ï”‚Ì’l‚ğˆê’è‚Ì”ÍˆÍ‚ÉŠÛ‚ß‚é (float)
+ *	å¤‰æ•°ã®å€¤ã‚’ä¸€å®šã®ç¯„å›²ã«ä¸¸ã‚ã‚‹ (float)
  */
 inline void ValueArea(
-	float *dest,	//	‘ÎÛ’l
-	float min,		//	Å¬’l
-	float max		//	Å‘å’l
+	float *dest,	//	å¯¾è±¡å€¤
+	float min,		//	æœ€å°å€¤
+	float max		//	æœ€å¤§å€¤
 ){
 	if(*dest<min) *dest = min;
 	if(*dest>max) *dest = max;
 }
 
 /*
- *	•Ï”‚Ì’l‚ğˆê’è‚Ì”ÍˆÍ‚Åƒ‹[ƒv‚³‚¹‚é (char)
+ *	å¤‰æ•°ã®å€¤ã‚’ä¸€å®šã®ç¯„å›²ã§ãƒ«ãƒ¼ãƒ—ã•ã›ã‚‹ (char)
  */
 inline void ValueCircular(
-	char *dest,	//	‘ÎÛ’l
-	char min,	//	Å¬’l
-	char max		//	Å‘å’l
+	char *dest,	//	å¯¾è±¡å€¤
+	char min,	//	æœ€å°å€¤
+	char max		//	æœ€å¤§å€¤
 ){
 	char area = max-min+1;
 	*dest = (*dest+area)%area;
 }
 
 /*
- *	•Ï”‚Ì’l‚ğˆê’è‚Ì”ÍˆÍ‚Åƒ‹[ƒv‚³‚¹‚é (int)
+ *	å¤‰æ•°ã®å€¤ã‚’ä¸€å®šã®ç¯„å›²ã§ãƒ«ãƒ¼ãƒ—ã•ã›ã‚‹ (int)
  */
 inline void ValueCircular(
-	int *dest,	//	‘ÎÛ’l
-	int min,	//	Å¬’l
-	int max		//	Å‘å’l
+	int *dest,	//	å¯¾è±¡å€¤
+	int min,	//	æœ€å°å€¤
+	int max		//	æœ€å¤§å€¤
 ){
 	int area = max-min+1;
 	*dest = (*dest+area)%area;
 }
 
 /*
- *	•Ï”‚Ì’l‚ğˆê’è‚Ì”ÍˆÍ‚Åƒ‹[ƒv‚³‚¹‚é (float)
+ *	å¤‰æ•°ã®å€¤ã‚’ä¸€å®šã®ç¯„å›²ã§ãƒ«ãƒ¼ãƒ—ã•ã›ã‚‹ (float)
  */
 inline void ValueCircular(
-	float *dest,	//	‘ÎÛ’l
-	float min,		//	Å¬’l
-	float max		//	Å‘å’l
+	float *dest,	//	å¯¾è±¡å€¤
+	float min,		//	æœ€å°å€¤
+	float max		//	æœ€å¤§å€¤
 ){
 	float area = max-min, tmp = *dest-min;
 	*dest = tmp-area*(int)(tmp/area)+min;
 }
 
 /*
- *	•Ï”‚Ì’l‚ªˆê’è‚Ì”ÍˆÍ“à‚©’²‚×‚é (int)
+ *	å¤‰æ•°ã®å€¤ãŒä¸€å®šã®ç¯„å›²å†…ã‹èª¿ã¹ã‚‹ (int)
  */
 inline bool CheckValueArea(
-	int target,	//	‘ÎÛ’l
-	int min,	//	Å¬’l
-	int max		//	Å‘å’l
+	int target,	//	å¯¾è±¡å€¤
+	int min,	//	æœ€å°å€¤
+	int max		//	æœ€å¤§å€¤
 ){
 	return (target>=min) && (target<=max);
 }
 
 /*
- *	À•W‚ªˆê’è‹éŒ`“à‚É‚ ‚é‚©’²‚×‚é
+ *	åº§æ¨™ãŒä¸€å®šçŸ©å½¢å†…ã«ã‚ã‚‹ã‹èª¿ã¹ã‚‹
  */
 inline bool CheckRect(
-	int tx,	//	‘ÎÛ¶ã x
-	int ty,	//	‘ÎÛ¶ã y
-	int x,	//	‹éŒ`¶ã x
-	int y,	//	‹éŒ`¶ã y
-	int w,	//	‹éŒ`•
-	int h	//	‹éŒ`‚‚³
+	int tx,	//	å¯¾è±¡å·¦ä¸Š x
+	int ty,	//	å¯¾è±¡å·¦ä¸Š y
+	int x,	//	çŸ©å½¢å·¦ä¸Š x
+	int y,	//	çŸ©å½¢å·¦ä¸Š y
+	int w,	//	çŸ©å½¢å¹…
+	int h	//	çŸ©å½¢é«˜ã•
 ){
 	tx -= x;
 	ty -= y;

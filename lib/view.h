@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 void RotVX(float v);
 void RotVY(float v);
@@ -14,7 +14,7 @@ VEC3 WorldToScreen(VEC3 pos);
 VEC3 ScreenToWorld(VEC3 pos);
 
 /*
- *	ƒrƒ…[•ÏŠ·s—ñ‚Ì—v‘f
+ *	ãƒ“ãƒ¥ãƒ¼å¤‰æ›è¡Œåˆ—ã®è¦ç´ 
  */
 #define VMTX_11 sv3.mtxView._11
 #define VMTX_12 sv3.mtxView._12
@@ -34,7 +34,7 @@ VEC3 ScreenToWorld(VEC3 pos);
 #define VMTX_44 sv3.mtxView._44
 
 /*
- *	ƒrƒ…[‚Ì‰ñ“]
+ *	ãƒ“ãƒ¥ãƒ¼ã®å›è»¢
  */
 #define VMTX_ROT(func, v) { \
 	sv3.mtxOld = sv3.mtxView; \
@@ -43,7 +43,7 @@ VEC3 ScreenToWorld(VEC3 pos);
 }
 
 /*
- *	ƒrƒ…[‚Ì‰ñ“]i”CˆÓ‚Ì²j
+ *	ãƒ“ãƒ¥ãƒ¼ã®å›è»¢ï¼ˆä»»æ„ã®è»¸ï¼‰
  */
 #define VMTX_ROTA(axis, v) { \
 	sv3.mtxOld = sv3.mtxView; \
@@ -52,7 +52,7 @@ VEC3 ScreenToWorld(VEC3 pos);
 }
 
 /*
- *	ƒrƒ…[‚ÌˆÚ“®
+ *	ãƒ“ãƒ¥ãƒ¼ã®ç§»å‹•
  */
 #define VMTX_MOVE(func, v) { \
 	sv3.mtxOld = sv3.mtxView; \
@@ -61,7 +61,7 @@ VEC3 ScreenToWorld(VEC3 pos);
 }
 
 /*
- *	ƒrƒ…[‚ÌˆÚ“®iƒ[ƒ‹ƒhÀ•Wj
+ *	ãƒ“ãƒ¥ãƒ¼ã®ç§»å‹•ï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ï¼‰
  */
 #define VMTX_MOVEW(func, v) { \
 	func(&sv3.mtxTmp, (v).x, (v).y, (v).z); \
@@ -69,7 +69,7 @@ VEC3 ScreenToWorld(VEC3 pos);
 }
 
 /*
- *	ˆÊ’uæ“¾
+ *	ä½ç½®å–å¾—
  */
 inline VEC3 GetVPos(){
 	return -VEC3(
@@ -79,53 +79,53 @@ inline VEC3 GetVPos(){
 }
 
 /*
- *	RightƒxƒNƒgƒ‹‚Ìæ“¾
+ *	Rightãƒ™ã‚¯ãƒˆãƒ«ã®å–å¾—
  */
 inline VEC3 GetVRight(){
 	return VEC3(VMTX_11, VMTX_21, VMTX_31);
 }
 
 /*
- *	UpƒxƒNƒgƒ‹‚Ìæ“¾
+ *	Upãƒ™ã‚¯ãƒˆãƒ«ã®å–å¾—
  */
 inline VEC3 GetVUp(){
 	return VEC3(VMTX_12, VMTX_22, VMTX_32);
 }
 
 /*
- *	DirƒxƒNƒgƒ‹‚Ìæ“¾
+ *	Dirãƒ™ã‚¯ãƒˆãƒ«ã®å–å¾—
  */
 inline VEC3 GetVDir(){
 	return VEC3(VMTX_13, VMTX_23, VMTX_33);
 }
 
 /*
- *	ƒrƒ…[•ÏŠ·s—ñ‚Ìw’è
+ *	ãƒ“ãƒ¥ãƒ¼å¤‰æ›è¡Œåˆ—ã®æŒ‡å®š
  *
- *	¦‹ts—ñ‚ÍXV‚µ‚Ü‚¹‚ñB
+ *	â€»é€†è¡Œåˆ—ã¯æ›´æ–°ã—ã¾ã›ã‚“ã€‚
  */
 inline void SetVMatrix(MTX4 *pMtx){
 	sv3.mtxView = *pMtx;
 }
 
 /*
- *	ƒrƒ…[•ÏŠ·s—ñ‚Ìæ“¾
+ *	ãƒ“ãƒ¥ãƒ¼å¤‰æ›è¡Œåˆ—ã®å–å¾—
  */
 inline MTX4 GetVMatrix(){
 	return sv3.mtxView;
 }
 
 /*
- *	ƒrƒ…[‹t•ÏŠ·s—ñ‚Ìæ“¾
+ *	ãƒ“ãƒ¥ãƒ¼é€†å¤‰æ›è¡Œåˆ—ã®å–å¾—
  *
- *	¦BeginScene()‚ÅXV‚³‚ê‚Ü‚·B
+ *	â€»BeginScene()ã§æ›´æ–°ã•ã‚Œã¾ã™ã€‚
  */
 inline MTX4 GetVInvMatrix(){
 	return sv3.mtxViewInv;
 }
 
 /*
- *	–Ê–@ü‚ÌŒvZ
+ *	é¢æ³•ç·šã®è¨ˆç®—
  */
 inline VEC3 CalcPlaneNormal(VEC3 v0, VEC3 v1, VEC3 v2){
 	VEC3 v3, v4, tmp, n;

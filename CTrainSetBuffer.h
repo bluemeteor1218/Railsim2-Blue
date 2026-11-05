@@ -1,26 +1,26 @@
-#ifndef CTRAINSETBUFFER_H_INCLUDED
+ï»¿#ifndef CTRAINSETBUFFER_H_INCLUDED
 #define CTRAINSETBUFFER_H_INCLUDED
 
 class CRailWay;
 class CAxleObject;
 
 /*
- *	Ô²p¨ƒoƒbƒtƒ@
+ *	è»Šè»¸å§¿å‹¢ãƒãƒƒãƒ•ã‚¡
  */
 class CAxlePosture{
 	friend class CTrain;
 	friend class CTrainGroup;
 private:
-	float m_Rotation;		//	‰ñ“]—Ê
-	float m_Distance;		//	‘–s‹——£
-	bool m_Terminate;		//	’[ƒtƒ‰ƒO
-	VEC3 m_Pos;				//	À•W
+	float m_Rotation;		//	å›è»¢é‡
+	float m_Distance;		//	èµ°è¡Œè·é›¢
+	bool m_Terminate;		//	ç«¯ãƒ•ãƒ©ã‚°
+	VEC3 m_Pos;				//	åº§æ¨™
 	VEC3 m_Right;			//	right
 	VEC3 m_Up;				//	up
 	VEC3 m_Dir;				//	dir
-	CRailWay *m_Rail;		//	ƒŒ[ƒ‹
-	CAxleObject *m_Axle;	//	Ô²
-	CTrain *m_Train;		//	Ôçq
+	CRailWay *m_Rail;		//	ãƒ¬ãƒ¼ãƒ«
+	CAxleObject *m_Axle;	//	è»Šè»¸
+	CTrain *m_Train;		//	è»Šè¼Œ
 public:
 	CAxlePosture(CAxleObject *, CTrain *, bool);
 	void SetPosture(VEC3, VEC3, VEC3, CRailWay *);
@@ -29,20 +29,20 @@ public:
 	void Rotate(float, bool);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CAxlePosture>::iterator IAxlePosture;
 
 /*
- *	Ôçq”z’uƒoƒbƒtƒ@
+ *	è»Šè¼Œé…ç½®ãƒãƒƒãƒ•ã‚¡
  */
 class CTrainSetBuffer{
 	friend class CRailWay;
 	friend class CTrainSetCurve;
 	friend class CTrainGroup;
 private:
-	float m_SumLen;				//	ÏZ‹——£
-	bool m_Reverse;				//	”½“]ƒtƒ‰ƒO
-	CAxlePosture *m_Posture;	//	p¨ƒoƒbƒtƒ@
+	float m_SumLen;				//	ç©ç®—è·é›¢
+	bool m_Reverse;				//	åè»¢ãƒ•ãƒ©ã‚°
+	CAxlePosture *m_Posture;	//	å§¿å‹¢ãƒãƒƒãƒ•ã‚¡
 public:
 	CTrainSetBuffer(float, bool, CAxlePosture *);
 	bool operator<(const CTrainSetBuffer &rhs) const{ return m_SumLen<rhs.m_SumLen; }
@@ -54,19 +54,19 @@ public:
 	}
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CTrainSetBuffer>::iterator ITrainSetBuffer;
 
 /*
- *	•Ò¬I’[î•ñ
+ *	ç·¨æˆçµ‚ç«¯æƒ…å ±
  */
 class CGroupEndLocator{
 public:
-	int m_Side;				//	ƒTƒCƒh
-	int m_Type;				//	ƒ^ƒCƒv (0: front, 1: tail, 2: seeker)
-	float m_Offset;			//	ƒIƒtƒZƒbƒg
-	CRailWay *m_SetRail;	//	İ’uƒŒ[ƒ‹
-	CTrainGroup *m_Group;	//	•Ò¬
+	int m_Side;				//	ã‚µã‚¤ãƒ‰
+	int m_Type;				//	ã‚¿ã‚¤ãƒ— (0: front, 1: tail, 2: seeker)
+	float m_Offset;			//	ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	CRailWay *m_SetRail;	//	è¨­ç½®ãƒ¬ãƒ¼ãƒ«
+	CTrainGroup *m_Group;	//	ç·¨æˆ
 public:
 	CGroupEndLocator();
 	CGroupEndLocator(int, float, CRailWay *, CTrainGroup *);
@@ -78,7 +78,7 @@ public:
 	void Save(FILE *, char *, char *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CGroupEndLocator *>::iterator IPGroupEndLocator;
 
 #endif

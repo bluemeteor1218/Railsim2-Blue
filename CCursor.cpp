@@ -1,17 +1,17 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCursor.h"
 #include "CSkinPlugin.h"
 
-//	“à•”’è”
-extern const int CSR_MOVE_TSD = 3;		//	ƒJ[ƒ\ƒ‹ˆÚ“®”»’èè‡’l
-const float CURSOR_HIDE_RATIO = 0.3f;	//	ƒJ[ƒ\ƒ‹Á‹‘¬“x
+//	å†…éƒ¨å®šæ•°
+extern const int CSR_MOVE_TSD = 3;		//	ã‚«ãƒ¼ã‚½ãƒ«ç§»å‹•åˆ¤å®šé–¾å€¤
+const float CURSOR_HIDE_RATIO = 0.3f;	//	ã‚«ãƒ¼ã‚½ãƒ«æ¶ˆå»é€Ÿåº¦
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CSkinPlugin::_CURSORDATA::Read(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *name	//	ƒJ[ƒ\ƒ‹–¼
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *name	//	ã‚«ãƒ¼ã‚½ãƒ«å
 ){
 	char *tmp, *eee;
 	int i;
@@ -35,18 +35,18 @@ char *CSkinPlugin::_CURSORDATA::Read(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CSkinPlugin::_CURSORDATA::LoadData(){
 	m_CursorTexture = g_TexList.Get(FALSE, m_TexFileName.c_str(), 0, 1);
 }
 
 /*
- *	•`‰æ
+ *	æç”»
  */
 void CSkinPlugin::_CURSORDATA::Render(
-	POINT pos,	//	À•W
-	float alpha	//	ƒ¿’l
+	POINT pos,	//	åº§æ¨™
+	float alpha	//	Î±å€¤
 ){
 	int tw = m_ImageSize[0], th = m_ImageSize[1];
 	int cw = m_Cursor2DSize[0], ch = m_Cursor2DSize[1];
@@ -69,7 +69,7 @@ void CSkinPlugin::_CURSORDATA::Render(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CCursor::Init(){
 	m_Alpha = 1.0f;
@@ -82,7 +82,7 @@ void CCursor::Init(){
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒE“à‚ÉƒNƒŠƒbƒv
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å†…ã«ã‚¯ãƒªãƒƒãƒ—
  */
 void CCursor::Clip(){
 	POINT wp = {0, 0};
@@ -92,14 +92,14 @@ void CCursor::Clip(){
 }
 
 /*
- *	ƒJ[ƒ\ƒ‹‚ğ’†‰›‚Ö
+ *	ã‚«ãƒ¼ã‚½ãƒ«ã‚’ä¸­å¤®ã¸
  */
 void CCursor::Center(){
 	SetCursor(m_Pos.x = g_DispWidth/2, m_Pos.y = g_DispHeight/2);
 }
 
 /*
- *	•`‰æ
+ *	æç”»
  */
 void CCursor::Render(){
 	if(m_State) m_Alpha = m_Alpha*CURSOR_HIDE_RATIO;
@@ -110,10 +110,10 @@ void CCursor::Render(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CCursor::ScanInput(
-	bool forcelock	//	‹­§ƒƒbƒN
+	bool forcelock	//	å¼·åˆ¶ãƒ­ãƒƒã‚¯
 ){
 	ScanInputDevice();
 	g_Cursor.FixCursor();
@@ -131,7 +131,7 @@ void CCursor::ScanInput(
 }
 
 /*
- *	ƒJ[ƒ\ƒ‹ŒÅ’è
+ *	ã‚«ãƒ¼ã‚½ãƒ«å›ºå®š
  */
 void CCursor::FixCursor(){
 	int cx = g_DispWidth/2, cy = g_DispHeight/2;
@@ -139,14 +139,14 @@ void CCursor::FixCursor(){
 }
 
 /*
- *	ƒhƒ‰ƒbƒOŠJn”»’è
+ *	ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹åˆ¤å®š
  */
 bool CCursor::CheckDrag(){
 	return abs(m_Delta.x)>=CSR_MOVE_TSD || abs(m_Delta.y)>=CSR_MOVE_TSD;
 }
 
 /*
- *	ƒƒbƒN
+ *	ãƒ­ãƒƒã‚¯
  */
 void CCursor::Lock(){
 	m_State = 1;
@@ -155,7 +155,7 @@ void CCursor::Lock(){
 }
 
 /*
- *	‰ğ•ú
+ *	è§£æ”¾
  */
 void CCursor::Release(){
 	m_State = 0;

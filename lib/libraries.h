@@ -1,9 +1,9 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #ifndef LIBLARIES_H
 #define LIBLARIES_H
 
-//	BC++—pi“®ì–¢•ÛØj
+//	BC++ç”¨ï¼ˆå‹•ä½œæœªä¿è¨¼ï¼‰
 #if defined(__BORLANDC__) && defined (__WIN32__)
 	#pragma link "dxguid.lib"
 	#pragma link "d3d8.lib"
@@ -13,22 +13,19 @@
 	#pragma link "c_dinput.lib"
 	#pragma link "dsound.lib"
 	//#pragma link "strmiids.lib"
-	//#pragma link "winmm.lib"	//	•s—v
+	//#pragma link "winmm.lib"	//	ä¸è¦
 	#pragma link "imm32.lib"
 
 	int _matherr(struct _exception *e){e; return 1;}
 
-//	VC++—p
+//	VC++ç”¨
 #else
 	#pragma comment(lib, "dxguid.lib")
-	#pragma comment(lib, "d3d8.lib")
-	#pragma comment(lib, "d3dx8.lib")
-	#pragma comment(lib, "d3dxof.lib")
 	#pragma comment(lib, "dinput8.lib")
 	#pragma comment(lib, "dsound.lib")
 	//#pragma comment(lib, "strmiids.lib")
 	#pragma comment(lib, "winmm.lib")
-	#pragma comment(lib, "imm32.lib")	//	IMEŠÖŒW
+	#pragma comment(lib, "imm32.lib")	//	IMEé–¢ä¿‚
 #endif
 
 #endif LIBLARIES_H

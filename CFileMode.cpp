@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "md5.h"
 #include "Script.h"
 #include "Network.h"
@@ -9,19 +9,19 @@
 #include "CFileMode.h"
 #include "CConfigMode.h"
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const int RSN_SCRNAME_MAX;
 extern const int RSN_SYNC_INTERVAL_MIN;
 extern const int RSN_SYNC_INTERVAL_MAX;
 
-//	“à•”’è”
-const int WW = 512, WH = 384;	//	‘‹ƒTƒCƒY
-const int NWW = 384, NWH = 256;	//	ƒlƒbƒgƒ[ƒN‘‹ƒTƒCƒY
-const int UNDO_MAX = 32;		//	ƒAƒ“ƒhƒD‰ñ”
+//	å†…éƒ¨å®šæ•°
+const int WW = 512, WH = 384;	//	çª“ã‚µã‚¤ã‚º
+const int NWW = 384, NWH = 256;	//	ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯çª“ã‚µã‚¤ã‚º
+const int UNDO_MAX = 32;		//	ã‚¢ãƒ³ãƒ‰ã‚¥å›æ•°
 extern const char *LAYOUT_DIRNAME = "Layout";
 extern const char *UNDO_DIRNAME = "Undo";
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern float g_SkinFileIconRect[4];
 
 extern int g_LastJoinedHostIP[];
@@ -30,15 +30,15 @@ extern int g_LastJoinedLocalPort;
 extern int g_LastCreatedHostPort;
 extern string g_LastScreenName;
 
-//	“à•”ƒOƒ[ƒoƒ‹
-list<CLayoutInfo> g_LayoutInfoList;	//	ƒZ[ƒuƒtƒ@ƒCƒ‹ƒŠƒXƒg
-CInputDialog *g_NetworkConnectionInputDialog = NULL;	//	“ü—Íƒ_ƒCƒAƒƒO
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+list<CLayoutInfo> g_LayoutInfoList;	//	ã‚»ãƒ¼ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆ
+CInputDialog *g_NetworkConnectionInputDialog = NULL;	//	å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 /*
- *	ƒwƒbƒ_“Ç
+ *	ãƒ˜ãƒƒãƒ€èª­è¾¼
  */
 bool CLayoutInfo::PreLoadSF(
-	FILE *file	//	ƒtƒ@ƒCƒ‹
+	FILE *file	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	char *buf = LoadBinaryText(file, 1024), *str = buf, *eee;
 	try{
@@ -69,11 +69,11 @@ bool CLayoutInfo::PreLoadSF(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒŠƒl[ƒ€Šm”F
+ *	ãƒªãƒãƒ¼ãƒ ç¢ºèª
  */
 bool CFileListView::ConfirmRename(
-	CListElement *item,	//	ƒAƒCƒeƒ€
-	string &newname		//	V‹K–¼
+	CListElement *item,	//	ã‚¢ã‚¤ãƒ†ãƒ 
+	string &newname		//	æ–°è¦å
 ){
 	char *oldname = item->GetString(0);
 	newname = FixFileExt((char *)newname.c_str(), "rs2");
@@ -97,16 +97,16 @@ bool CFileListView::ConfirmRename(
 }
 
 /*
- *	ƒŠƒl[ƒ€I—¹ˆ—
+ *	ãƒªãƒãƒ¼ãƒ çµ‚äº†å‡¦ç†
  */
 void CFileListView::EndRename(
-	CListElement *item	//	ƒAƒCƒeƒ€
+	CListElement *item	//	ã‚¢ã‚¤ãƒ†ãƒ 
 ){
 	g_FileMode->ListFile();
 }
 
 /*
- *	ƒ_ƒuƒ‹ƒNƒŠƒbƒN
+ *	ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯
  */
 void CFileListView::DoubleClick(){
 	if(g_NetworkInitialized){
@@ -121,7 +121,7 @@ void CFileListView::DoubleClick(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CFileMode::CFileMode(){
 	int wide = WW-TILE_UNIT*2, win = wide-TILE_UNIT*2;
@@ -186,18 +186,18 @@ CFileMode::CFileMode(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CFileMode::~CFileMode(){
 	DELETE_V(m_FileMenu);
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CFileMode::WindowResized(
-	int w, int h,		//	V‹KƒTƒCƒY
-	CWindowCtrl *wnd	//	ƒEƒBƒhƒEƒRƒ“ƒgƒ[ƒ‹
+	int w, int h,		//	æ–°è¦ã‚µã‚¤ã‚º
+	CWindowCtrl *wnd	//	ã‚¦ã‚£ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	if(wnd==&m_FileWindow){
 		m_FileLabel.SetSize(w-TILE_UNIT*2, TILE_UNIT);
@@ -212,16 +212,16 @@ void CFileMode::WindowResized(
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CFileMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	if(type==CMD_FILE){
 		class CFileOpener: public CMenuCommand{
 		private:
-			string m_FileName;	//	ƒtƒ@ƒCƒ‹–¼
+			string m_FileName;	//	ãƒ•ã‚¡ã‚¤ãƒ«å
 		public:
 			CFileOpener(char *fname){ m_FileName = fname; }
 			void Exec(){
@@ -230,7 +230,7 @@ CPopMenu *CFileMode::Dispatch(
 		};
 		class CFileSaver: public CMenuCommand{
 		private:
-			string m_FileName;	//	ƒtƒ@ƒCƒ‹–¼
+			string m_FileName;	//	ãƒ•ã‚¡ã‚¤ãƒ«å
 		public:
 			CFileSaver(char *fname){ m_FileName = fname; }
 			void Exec(){
@@ -239,8 +239,8 @@ CPopMenu *CFileMode::Dispatch(
 		};
 		class CFileDeleter: public CMenuCommand{
 		private:
-			bool m_Confirm;		//	Šm”F
-			string m_FileName;	//	ƒtƒ@ƒCƒ‹–¼
+			bool m_Confirm;		//	ç¢ºèª
+			string m_FileName;	//	ãƒ•ã‚¡ã‚¤ãƒ«å
 		public:
 			CFileDeleter(bool c, char *fname){ m_Confirm = c; m_FileName = fname; }
 			void Exec(){
@@ -263,14 +263,14 @@ CPopMenu *CFileMode::Dispatch(
 		};
 		class CFileRenamer: public CMenuCommand{
 		private:
-			CListElement *m_ListElement;	//	ƒŠƒXƒg—v‘f
+			CListElement *m_ListElement;	//	ãƒªã‚¹ãƒˆè¦ç´ 
 		public:
 			CFileRenamer(CListElement *le){ m_ListElement = le; }
 			void Exec(){ m_ListElement->BeginRename(); }
 		};
 		class CNetworkStarter: public CMenuCommand{
 		private:
-			string m_FileName;	//	ƒtƒ@ƒCƒ‹–¼
+			string m_FileName;	//	ãƒ•ã‚¡ã‚¤ãƒ«å
 		public:
 			CNetworkStarter(char *fname){ m_FileName = fname; }
 			void Exec(){
@@ -283,7 +283,7 @@ CPopMenu *CFileMode::Dispatch(
 		};
 		class CNetworkConnector: public CMenuCommand{
 		private:
-			string m_FileName;	//	ƒtƒ@ƒCƒ‹–¼
+			string m_FileName;	//	ãƒ•ã‚¡ã‚¤ãƒ«å
 		public:
 			CNetworkConnector(char *fname){ m_FileName = fname; }
 			void Exec(){
@@ -311,10 +311,10 @@ CPopMenu *CFileMode::Dispatch(
 }
 
 /*
- *	İ’è“Ç
+ *	è¨­å®šèª­è¾¼
  */
 char *CFileMode::LoadInterfaceSetting(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	bool autoload = true;
@@ -356,10 +356,10 @@ char *CFileMode::LoadInterfaceSetting(
 }
 
 /*
- *	İ’è•Û‘¶
+ *	è¨­å®šä¿å­˜
  */
 void CFileMode::SaveInterfaceSetting(
-	FILE *file	//	ƒtƒ@ƒCƒ‹
+	FILE *file	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(file, "FileMode{\n");
 	fprintf(file, "\tAutoLoad = %s;\n", YESNO[m_AutoLoadCheck.GetCheck()]);
@@ -375,7 +375,7 @@ void CFileMode::SaveInterfaceSetting(
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CFileMode::EnterInterface(){
 	ms_ModeLabel = lang(File);
@@ -387,7 +387,7 @@ void CFileMode::EnterInterface(){
 }
 
 /*
- *	ƒ‚[ƒ_ƒ‹ˆ—
+ *	ãƒ¢ãƒ¼ãƒ€ãƒ«å‡¦ç†
  */
 void CFileMode::ModalFuncInterface(){
 	int i;
@@ -563,7 +563,7 @@ void CFileMode::ModalFuncInterface(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CFileMode::ScanInputInterface(){
 	m_Interface.ScanInput();
@@ -654,7 +654,7 @@ SAVEAS:
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹ƒŠƒXƒgì¬
+ *	ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆä½œæˆ
  */
 void CFileMode::ListFile(){
 	long filelist;
@@ -703,7 +703,7 @@ void CFileMode::ListFile(){
 }
 
 /*
- *	ƒzƒXƒg‚É‚È‚é
+ *	ãƒ›ã‚¹ãƒˆã«ãªã‚‹
  */
 void CFileMode::BeginNetworkHost(char *fname){
 	char *labels[] = {lang(HostPort),
@@ -719,7 +719,7 @@ void CFileMode::BeginNetworkHost(char *fname){
 }
 
 /*
- *	Q‰Á‚·‚é
+ *	å‚åŠ ã™ã‚‹
  */
 void CFileMode::BeginNetworkJoin(char *fname){
 	char *labels[] = {
@@ -741,7 +741,7 @@ void CFileMode::BeginNetworkJoin(char *fname){
 }
 
 /*
- *	ƒlƒbƒgƒ[ƒN—LŒø‰»E–³Œø‰»
+ *	ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯æœ‰åŠ¹åŒ–ãƒ»ç„¡åŠ¹åŒ–
  */
 void CFileMode::SwitchNetwork(bool enabled, bool host)
 {
@@ -756,10 +756,10 @@ void CFileMode::SwitchNetwork(bool enabled, bool host)
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹‚ğŠJ‚­
+ *	ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
  */
 void CFileMode::OpenFile(
-	char *fname	//	ƒtƒ@ƒCƒ‹–¼
+	char *fname	//	ãƒ•ã‚¡ã‚¤ãƒ«å
 ){
 	m_NewFileName = fname;
 	m_ModalState = 20;
@@ -768,10 +768,10 @@ void CFileMode::OpenFile(
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹‚É•Û‘¶
+ *	ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜
  */
 void CFileMode::SaveFile(
-	char *fname	//	ƒtƒ@ƒCƒ‹–¼
+	char *fname	//	ãƒ•ã‚¡ã‚¤ãƒ«å
 ){
 	switch(g_SaveFile->Save(fname, LAYOUT_DIRNAME, false, true)){
 	case 0:
@@ -787,7 +787,7 @@ void CFileMode::SaveFile(
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹–¼XV
+ *	ãƒ•ã‚¡ã‚¤ãƒ«åæ›´æ–°
  */
 void CFileMode::UpdateFileName(){
 	m_FileLabel.SetText(g_SaveFile->m_FileName.size()
@@ -796,21 +796,21 @@ void CFileMode::UpdateFileName(){
 }
 
 /*
- *	”õlXV
+ *	å‚™è€ƒæ›´æ–°
  */
 void CFileMode::UpdateFileNote(){
 	m_NoteEdit.SetText((char *)g_SaveFile->m_FileNote.c_str());
 }
 
 /*
- *	ƒAƒ“ƒhƒD—š—ğ‚ğÁ‹
+ *	ã‚¢ãƒ³ãƒ‰ã‚¥å±¥æ­´ã‚’æ¶ˆå»
  */
 void CFileMode::ResetUndo(){
 	m_RedoNum = m_UndoNum = m_UndoPos = 0;
 }
 
 /*
- *	ƒAƒ“ƒhƒD—š—ğ‚ğ‘Ş”ğ
+ *	ã‚¢ãƒ³ãƒ‰ã‚¥å±¥æ­´ã‚’é€€é¿
  */
 void CFileMode::PushUndo(){
 	if(g_NetworkInitialized) return;
@@ -823,7 +823,7 @@ void CFileMode::PushUndo(){
 }
 
 /*
- *	ƒAƒ“ƒhƒD—š—ğ‚ğ“Ç
+ *	ã‚¢ãƒ³ãƒ‰ã‚¥å±¥æ­´ã‚’èª­è¾¼
  */
 void CFileMode::LoadUndo(){
 	if(g_NetworkInitialized) return;
@@ -848,7 +848,7 @@ void CFileMode::LoadUndo(){
 }
 
 /*
- *	ƒŠƒhƒD—š—ğ‚ğ“Ç
+ *	ãƒªãƒ‰ã‚¥å±¥æ­´ã‚’èª­è¾¼
  */
 void CFileMode::LoadRedo(){
 	if(g_NetworkInitialized) return;
@@ -874,7 +874,7 @@ void CFileMode::LoadRedo(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒAƒ“ƒhƒD‚ğÏ‚Ş
+ *	ã‚¢ãƒ³ãƒ‰ã‚¥ã‚’ç©ã‚€
  */
 void PushUndoStack(){
 	if(g_NetworkInitialized) return;

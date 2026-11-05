@@ -1,19 +1,19 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CExitMode.h"
 #include "CSimpleDialog.h"
 
-//	“à•”’è”
-const int WW = 256, WH = TILE_UNIT*6;	//	‘‹ƒTƒCƒY
+//	å†…éƒ¨å®šæ•°
+const int WW = 256, WH = TILE_UNIT*6;	//	çª“ã‚µã‚¤ã‚º
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CExitMode::CExitMode(){
 	m_Dialog = NULL;
 }
 
 /*
- *	ƒ‚[ƒh‚ð—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CExitMode::EnterInterface(){
 	ms_ModeLabel = lang(Quit);
@@ -22,7 +22,7 @@ void CExitMode::EnterInterface(){
 }
 
 /*
- *	ƒ‚[ƒ_ƒ‹ˆ—
+ *	ãƒ¢ãƒ¼ãƒ€ãƒ«å‡¦ç†
  */
 void CExitMode::ModalFuncInterface(){
 	if(m_Dialog->CheckYes()){

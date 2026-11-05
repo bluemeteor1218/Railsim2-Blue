@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #if 0
 
@@ -11,7 +11,7 @@
 #include "particle.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CParticle::CParticle(){
 	m_vt = NULL;
@@ -25,21 +25,21 @@ CParticle::CParticle(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CParticle::~CParticle(){
 	Delete();
 }
 
 /*
- *	ƒp[ƒeƒBƒNƒ‹‚Ì¶¬
+ *	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®ç”Ÿæˆ
  *
- *	num	: —±q”
- *	pos	: ”­¶ˆÊ’u
- *	pp	: ƒpƒ‰ƒ[ƒ^
+ *	num	: ç²’å­æ•°
+ *	pos	: ç™ºç”Ÿä½ç½®
+ *	pp	: ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
  */
 void CParticle::Generate(int num, VEC3 pos, PARTICLE_PARAM *pp){
-	Delete();	//	Šù‘¶‚È‚çÁ‹
+	Delete();	//	æ—¢å­˜ãªã‚‰æ¶ˆå»
 
 	m_num = num;
 	m_pos = pos;
@@ -47,7 +47,7 @@ void CParticle::Generate(int num, VEC3 pos, PARTICLE_PARAM *pp){
 	m_vt = new VTX_LX[m_num*6];
 	m_pb = new PARTICLE[m_num];
 
-	//	Še—±q‚Ìƒpƒ‰ƒ[ƒ^‚ğİ’è
+	//	å„ç²’å­ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’è¨­å®š
 	for(int i = 0; i<m_num; i++){
 		m_pb[i].lifeTime = FRand2(pp->minLife, pp->maxLife);
 		m_pb[i].age = 0;
@@ -68,15 +68,15 @@ void CParticle::Generate(int num, VEC3 pos, PARTICLE_PARAM *pp){
 }
 
 /*
- *	ƒp[ƒeƒBƒNƒ‹‚ÌÄ¶¬
+ *	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®å†ç”Ÿæˆ
  *
- *	pp	: ƒpƒ‰ƒ[ƒ^
+ *	pp	: ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
  */
 void CParticle::Regenerate(PARTICLE_PARAM *pp){
 	if(!m_pb) return;
 
 	for(int i = 0; i<m_num; i++){
-		//	ŠúŒÀØ‚ê‚Ì—±q‚ğ•œŠˆ‚³‚¹‚é
+		//	æœŸé™åˆ‡ã‚Œã®ç²’å­ã‚’å¾©æ´»ã•ã›ã‚‹
 		if(m_pb[i].age<m_pb[i].lifeTime) continue;
 
 		m_pb[i].lifeTime = FRand2(pp->minLife, pp->maxLife);
@@ -98,7 +98,7 @@ void CParticle::Regenerate(PARTICLE_PARAM *pp){
 }
 
 /*
- *	‹­§“I‚ÈÁ–Å
+ *	å¼·åˆ¶çš„ãªæ¶ˆæ»…
  */
 void CParticle::Delete(){
 	if(m_vt) delete [] m_vt;
@@ -107,10 +107,10 @@ void CParticle::Delete(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^	: ƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒX
- *	¦–‘O‚ÉƒeƒNƒXƒ`ƒƒ‚ªw’è‚³‚ê‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·B
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿	: ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªã‚¯ã‚¹
+ *	â€»äº‹å‰ã«ãƒ†ã‚¯ã‚¹ãƒãƒ£ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
  */
 BOOL CParticle::Render(){
 	if(!m_pb) return FALSE;
@@ -121,15 +121,15 @@ BOOL CParticle::Render(){
 	float sec, age;
 	int j = 0;
 
-	//	‘OƒtƒŒ[ƒ€‚©‚ç‚ÌŒo‰ßŠÔ‚ÌŒvZ
+	//	å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‚‰ã®çµŒéæ™‚é–“ã®è¨ˆç®—
 	sec = 1.0f/GetFPS();
 
-	//	‘S—±q‚É‚Â‚¢‚Ä
+	//	å…¨ç²’å­ã«ã¤ã„ã¦
 	for(int i = 0; i<m_num; i++){
-		//	ŠúŒÀØ‚ê‚Ì—±q‚ÍƒXƒLƒbƒv
+		//	æœŸé™åˆ‡ã‚Œã®ç²’å­ã¯ã‚¹ã‚­ãƒƒãƒ—
 		if(m_pb[i].age>=m_pb[i].lifeTime) continue;
 
-		//	³•ûŒ`‚ğì¬
+		//	æ­£æ–¹å½¢ã‚’ä½œæˆ
 		r = m_pb[i].size;
 		x1 = m_pb[i].pos.x-r;
 		x2 = m_pb[i].pos.x+r;
@@ -146,7 +146,7 @@ BOOL CParticle::Render(){
 		SetVTX_LX(&m_vt[j+5], x1, y2, z, c, 0, 0);
 		j += 6;
 
-		//	ŠÔ‚ÌŒo‰ß‚É”º‚¤ƒpƒ‰ƒ[ƒ^‚ÌXV
+		//	æ™‚é–“ã®çµŒéã«ä¼´ã†ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®æ›´æ–°
 		m_pb[i].age		+= sec;
 		m_pb[i].alpha	+= m_pb[i].aplus*sec;
 		m_pb[i].size	+= m_pb[i].splus*sec;
@@ -158,16 +158,16 @@ BOOL CParticle::Render(){
 
 		m_pb[i].pos = m_pb[i].vec*age+m_gravity*age*age;
 	}
-	//	—±q‚ª1‚Â‚Å‚à¶‚«c‚Á‚Ä‚¢‚é
+	//	ç²’å­ãŒ1ã¤ã§ã‚‚ç”Ÿãæ®‹ã£ã¦ã„ã‚‹
 	if(j!=0){
-		//	í‚ÉƒJƒƒ‰‚Ì•û‚ğŒü‚©‚¹‚é
+		//	å¸¸ã«ã‚«ãƒ¡ãƒ©ã®æ–¹ã‚’å‘ã‹ã›ã‚‹
 		MTX4 mtx = sv3.mtxViewInv;
 		mtx._41 = m_pos.x;
 		mtx._42 = m_pos.y;
 		mtx._43 = m_pos.z;
 		devTransform(&mtx);
 
-		//	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+		//	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 		v.Create(m_vt, FVF_LX, sizeof(VTX_LX)*j);
 		v.RenderTL();
 		return FALSE;

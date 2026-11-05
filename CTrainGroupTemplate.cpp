@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSimpleDialog.h"
 #include "CSkinPlugin.h"
 #include "CTrainPlugin.h"
@@ -6,26 +6,26 @@
 #include "CTrainGroup.h"
 #include "CTrainEditMode.h"
 
-//	“à•”’è”
+//	å†…éƒ¨å®šæ•°
 const char *TGT_DIRNAME = "TrainGroupTemplate";
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 CTrainGroupTemplate *g_TrainGroupTemplate = NULL;
 list<CTrainGroupTemplate> g_TrainGroupTemplateList;
 
-int g_TGTModalState;					//	ƒ‚[ƒ_ƒ‹ó‘Ô
-string g_TGTTempString;					//	ƒeƒ“ƒ|ƒ‰ƒŠ•¶š—ñ
-ITrainGroupTemplate g_TGTTarget;		//	ˆ—‘ÎÛ
-ITrainGroupTemplate g_TGTErasing;		//	íœ‘ÎÛ
-CYesNoDialog *g_TGTYesNoDialog = NULL;	//	–â‡‚¹ƒ_ƒCƒAƒƒO
+int g_TGTModalState;					//	ãƒ¢ãƒ¼ãƒ€ãƒ«çŠ¶æ…‹
+string g_TGTTempString;					//	ãƒ†ãƒ³ãƒãƒ©ãƒªæ–‡å­—åˆ—
+ITrainGroupTemplate g_TGTTarget;		//	å‡¦ç†å¯¾è±¡
+ITrainGroupTemplate g_TGTErasing;		//	å‰Šé™¤å¯¾è±¡
+CYesNoDialog *g_TGTYesNoDialog = NULL;	//	å•åˆã›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CTrainTemplate::Init(
-	CTrainPlugin *tpi,	//	Ôçqƒvƒ‰ƒOƒCƒ“
-	bool turn,			//	”½“]ƒtƒ‰ƒO
-	vector<int> &sopt	//	ƒXƒCƒbƒ`İ’è’l
+	CTrainPlugin *tpi,	//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	bool turn,			//	åè»¢ãƒ•ãƒ©ã‚°
+	vector<int> &sopt	//	ã‚¹ã‚¤ãƒƒãƒè¨­å®šå€¤
 ){
 	m_Reverse = turn;
 	if(m_TrainPlugin = tpi) m_TrainID = m_TrainPlugin->GetID();
@@ -33,10 +33,10 @@ void CTrainTemplate::Init(
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CTrainTemplate::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(eee = str, "TrainTemplate"))) return NULL;
@@ -56,10 +56,10 @@ char *CTrainTemplate::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CTrainTemplate::Save(
-	FILE *file	//	İ’èƒtƒ@ƒCƒ‹
+	FILE *file	//	è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	int i;
 	fprintf(file, "\tTrainTemplate{\n");
@@ -75,17 +75,17 @@ void CTrainTemplate::Save(
 }
 
 /*
- *	Ôçqƒvƒ‰ƒOƒCƒ““Ç
+ *	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³èª­è¾¼
  */
 void CTrainTemplate::LoadTrainPlugin(){
 	m_TrainPlugin = g_TrainPluginList->FindPlugin(m_TrainID.c_str());
 }
 
 /*
- *	•Ò¬‚É’Ç‰Á
+ *	ç·¨æˆã«è¿½åŠ 
  */
 void CTrainTemplate::AddToGroup(
-	CTrainGroup *group	//	•Ò¬
+	CTrainGroup *group	//	ç·¨æˆ
 ){
 	if(m_TrainPlugin){
 		m_TrainPlugin->SetSwitch(m_SwitchOption);
@@ -97,12 +97,12 @@ void CTrainTemplate::AddToGroup(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainGroupTemplate::CTrainGroupTemplate(
-	char *name	//	İ’è–¼
+	char *name	//	è¨­å®šå
 ):
-	CPlugin(lang(ConsistTemplate))	//	Šî–{ƒNƒ‰ƒX
+	CPlugin(lang(ConsistTemplate))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_Name = name;
 	m_Author = "RailSim II";
@@ -112,10 +112,10 @@ CTrainGroupTemplate::CTrainGroupTemplate(
 }
 
 /*
- *	’è‹`ƒtƒ@ƒCƒ‹ƒAƒ^ƒbƒ`
+ *	å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«ã‚¢ã‚¿ãƒƒãƒ
  */
 bool CTrainGroupTemplate::PreLoadTGT(
-	FILE *file	//	ƒtƒ@ƒCƒ‹
+	FILE *file	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	char *str = m_Buffer = LoadBinaryText(file), *eee;
 	try{
@@ -138,7 +138,7 @@ bool CTrainGroupTemplate::PreLoadTGT(
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 bool CTrainGroupTemplate::Load(){
 	char *str = m_Script, *tmp, *eee;
@@ -168,10 +168,10 @@ bool CTrainGroupTemplate::Load(){
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CTrainGroupTemplate::Save(
-	FILE *file	//	İ’èƒtƒ@ƒCƒ‹
+	FILE *file	//	è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(file, "DatafileHeader{\n");
 	fprintf(file, "\tRailSimVersion = %.2f;\n", RAILSIM_VERSION);
@@ -184,20 +184,20 @@ void CTrainGroupTemplate::Save(
 }
 
 /*
- *	ƒcƒŠ[—v‘fİ’è
+ *	ãƒ„ãƒªãƒ¼è¦ç´ è¨­å®š
  */
 void CTrainGroupTemplate::SetTreeElement(
-	CTreeFileElement *fe	//	—v‘f
+	CTreeFileElement *fe	//	è¦ç´ 
 ){
 	m_TreeElement = fe;
 	m_TreeElement->SetCommandType(CMD_GROUPTMP);
 }
 
 /*
- *	ƒŠƒl[ƒ€Šm”F
+ *	ãƒªãƒãƒ¼ãƒ ç¢ºèª
  */
 bool CTrainGroupTemplate::ConfirmRename(
-	string &newname	//	V‹K–¼
+	string &newname	//	æ–°è¦å
 ){
 	if(m_Name==newname) return false;
 	g_TGTTarget = FindTrainGroupTemplate(this);
@@ -216,7 +216,7 @@ bool CTrainGroupTemplate::ConfirmRename(
 }
 
 /*
- *	ƒfƒŠ[ƒg‰Â”\‚©
+ *	ãƒ‡ãƒªãƒ¼ãƒˆå¯èƒ½ã‹
  */
 bool CTrainGroupTemplate::IsDeletable(){
 	g_TGTModalState = 21;
@@ -228,7 +228,7 @@ bool CTrainGroupTemplate::IsDeletable(){
 }
 
 /*
- *	ƒcƒŠ[—v‘fíœ
+ *	ãƒ„ãƒªãƒ¼è¦ç´ å‰Šé™¤
  */
 void CTrainGroupTemplate::DeleteFromTree(){
 	if(!m_TreeElement) return;
@@ -237,7 +237,7 @@ void CTrainGroupTemplate::DeleteFromTree(){
 }
 
 /*
- *	ƒf[ƒ^ƒtƒ@ƒCƒ‹íœ
+ *	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤
  */
 bool CTrainGroupTemplate::DeleteFromDisk(){
 	if(chdir(g_BaseDir) || chdir(DirName()) || remove(TextName2())){
@@ -250,10 +250,10 @@ bool CTrainGroupTemplate::DeleteFromDisk(){
 }
 
 /*
- *	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼•ÏX
+ *	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«åå¤‰æ›´
  */
 bool CTrainGroupTemplate::Rename(
-	string &newname	//	V‹K–¼
+	string &newname	//	æ–°è¦å
 ){
 	string fname2 = FlashIn("%s.txt", newname.c_str());
 	if(CheckSlash(fname2.c_str()) || chdir(g_BaseDir) || chdir(DirName()) ||
@@ -270,17 +270,17 @@ bool CTrainGroupTemplate::Rename(
 }
 
 /*
- *	•Ò¬‚É’Ç‰Á
+ *	ç·¨æˆã«è¿½åŠ 
  */
 void CTrainGroupTemplate::AddToGroup(
-	CTrainGroup *group	//	•Ò¬
+	CTrainGroup *group	//	ç·¨æˆ
 ){
 	ITrainTemplate itt = m_TrainList.begin();
 	for(; itt!=m_TrainList.end(); itt++) itt->AddToGroup(group);
 }
 
 /*
- *	ƒvƒŒƒrƒ…[İ’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CTrainGroupTemplate::SetPreview(){
 	g_Train = NULL;
@@ -301,7 +301,7 @@ void CTrainGroupTemplate::SetPreview(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒeƒ“ƒvƒŒ[ƒgƒŠƒXƒg“Ç
+ *	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒªã‚¹ãƒˆèª­è¾¼
  */
 void LoadTrainGroupTemplateList(){
 	long filelist;
@@ -330,10 +330,10 @@ void LoadTrainGroupTemplateList(){
 }
 
 /*
- *	ƒeƒ“ƒvƒŒ[ƒgŒŸõ
+ *	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆæ¤œç´¢
  */
 ITrainGroupTemplate FindTrainGroupTemplate(
-	CTrainGroupTemplate *tgt	//	ƒeƒ“ƒvƒŒ[ƒg
+	CTrainGroupTemplate *tgt	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 ){
 	ITrainGroupTemplate itgt = g_TrainGroupTemplateList.begin();
 	for(; itgt!=g_TrainGroupTemplateList.end(); itgt++) if(tgt==&*itgt) return itgt;
@@ -341,10 +341,10 @@ ITrainGroupTemplate FindTrainGroupTemplate(
 }
 
 /*
- *	ƒeƒ“ƒvƒŒ[ƒgŒŸõ
+ *	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆæ¤œç´¢
  */
 ITrainGroupTemplate FindTrainGroupTemplate(
-	string name	//	ƒeƒ“ƒvƒŒ[ƒg–¼
+	string name	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆå
 ){
 	ITrainGroupTemplate itgt = g_TrainGroupTemplateList.begin();
 	for(; itgt!=g_TrainGroupTemplateList.end(); itgt++)
@@ -353,17 +353,17 @@ ITrainGroupTemplate FindTrainGroupTemplate(
 }
 
 /*
- *	ƒeƒ“ƒvƒŒ[ƒgƒƒjƒ…[ƒRƒ}ƒ“ƒhİ’è
+ *	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚³ãƒãƒ³ãƒ‰è¨­å®š
  */
 void SetTemplateMenu(
-	CPopMenu *menu,				//	ƒƒjƒ…[
-	CTrainGroupTemplate *tmp,	//	ƒeƒ“ƒvƒŒ[ƒg
-	CListElement *renametarget	//	ƒŠƒl[ƒ€‘ÎÛ (ListView)
+	CPopMenu *menu,				//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	CTrainGroupTemplate *tmp,	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
+	CListElement *renametarget	//	ãƒªãƒãƒ¼ãƒ å¯¾è±¡ (ListView)
 ){
 	class CTemplateNewer: public CMenuCommand{
 	private:
-		CTrainEditMode *m_Owner;			//	”­sŒ³
-		CTrainGroupTemplate *m_Template;	//	ƒeƒ“ƒvƒŒ[ƒg
+		CTrainEditMode *m_Owner;			//	ç™ºè¡Œå…ƒ
+		CTrainGroupTemplate *m_Template;	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 	public:
 		CTemplateNewer(CTrainEditMode *o, CTrainGroupTemplate *t){
 			m_Owner = o; m_Template = t;
@@ -372,8 +372,8 @@ void SetTemplateMenu(
 	};
 	class CTemplateAdder: public CMenuCommand{
 	private:
-		CTrainEditMode *m_Owner;			//	”­sŒ³
-		CTrainGroupTemplate *m_Template;	//	ƒeƒ“ƒvƒŒ[ƒg
+		CTrainEditMode *m_Owner;			//	ç™ºè¡Œå…ƒ
+		CTrainGroupTemplate *m_Template;	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 	public:
 		CTemplateAdder(CTrainEditMode *o, CTrainGroupTemplate *t){
 			m_Owner = o; m_Template = t;
@@ -382,7 +382,7 @@ void SetTemplateMenu(
 	};
 	class CTemplateDeleter: public CMenuCommand{
 	private:
-		CTrainGroupTemplate *m_Template;	//	ƒeƒ“ƒvƒŒ[ƒg
+		CTrainGroupTemplate *m_Template;	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 	public:
 		CTemplateDeleter(CTrainGroupTemplate *t){ m_Template = t; }
 		void Exec(){
@@ -395,8 +395,8 @@ void SetTemplateMenu(
 	};
 	class CTemplateRenamer: public CMenuCommand{
 	private:
-		CTrainGroupTemplate *m_Template;	//	ƒeƒ“ƒvƒŒ[ƒg
-		CListElement *m_ListElement;		//	ƒŠƒXƒg—v‘f
+		CTrainGroupTemplate *m_Template;	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
+		CListElement *m_ListElement;		//	ãƒªã‚¹ãƒˆè¦ç´ 
 	public:
 		CTemplateRenamer(CTrainGroupTemplate *t, CListElement *le){
 			m_Template = t; m_ListElement = le;
@@ -419,10 +419,10 @@ void SetTemplateMenu(
 }
 
 /*
- *	•Ò¬ƒZ[ƒuƒRƒ}ƒ“ƒh”­s
+ *	ç·¨æˆã‚»ãƒ¼ãƒ–ã‚³ãƒãƒ³ãƒ‰ç™ºè¡Œ
  */
 CMenuCommand *MakeGroupSaver(
-	CTrainGroup *group	//	•Ò¬
+	CTrainGroup *group	//	ç·¨æˆ
 ){
 	class CGroupSaver: public CMenuCommand{
 	public:
@@ -432,7 +432,7 @@ CMenuCommand *MakeGroupSaver(
 }
 
 /*
- *	ƒeƒ“ƒvƒŒ[ƒg’Ç‰Á
+ *	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆè¿½åŠ 
  */
 void AddTrainGroupTemplate(){
 	FILE *file;
@@ -463,7 +463,7 @@ void AddTrainGroupTemplate(){
 }
 
 /*
- *	ƒeƒ“ƒvƒŒ[ƒgƒŠƒXƒgƒAƒbƒv
+ *	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒªã‚¹ãƒˆã‚¢ãƒƒãƒ—
  */
 void ListTrainGroupTemplate(){
 	CPluginTree *tree = g_TrainEditMode->GetTree();
@@ -479,7 +479,7 @@ void ListTrainGroupTemplate(){
 }
 
 /*
- *	ƒ‚[ƒ_ƒ‹ˆ—
+ *	ãƒ¢ãƒ¼ãƒ€ãƒ«å‡¦ç†
  */
 void ModalFuncTrainGroupTemplate(){
 	CPluginTree *tree = g_TrainEditMode->GetTree();

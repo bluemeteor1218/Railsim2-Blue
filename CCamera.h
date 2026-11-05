@@ -1,40 +1,40 @@
-#ifndef CCAMERA_H_INCLUDED
+ï»¿#ifndef CCAMERA_H_INCLUDED
 #define CCAMERA_H_INCLUDED
 
 #include "CModelInst.h"
 
 /*
- *	ƒJƒƒ‰
+ *	ã‚«ãƒ¡ãƒ©
  */
 class CCamera{
 private:
-	static CCamera *ms_CurrentCamera;	//	Œ»İ‚ÌƒJƒƒ‰
-	int m_LeftState;					//	¶ƒ{ƒ^ƒ“ó‘Ô
-	int m_MiddleState;					//	’†ƒ{ƒ^ƒ“ó‘Ô
-	int m_RightState;					//	‰Eƒ{ƒ^ƒ“ó‘Ô
-	int m_PrintInfoTime;				//	î•ñ•\¦ŠÔ
-	float m_Head, m_Pitch;				//	Šp“x
-//	float m_Bank;						//	ƒoƒ“ƒN–¢g—p
-	float m_Dist;						//	‹——£
-	float m_Wheel;						//	ƒzƒC[ƒ‹
-	float m_UpDown;						//	ã‰ºˆÚ“®
-	float m_DefDist;					//	Šù’è‹——£
-	float m_MinDist, m_MaxDist;			//	Å¬EÅ‘å‹——£
-	float m_FieldOfView;				//	‹–ìŠp
-	float m_FieldOfViewEffect;			//	ÀŒø‹–ìŠp
-	float m_AutoZoomBaseDist;			//	©“®ƒY[ƒ€Šî€‹——£
-	float m_FocusSpeed;					//	ƒtƒH[ƒJƒX•ß‘¨‘¬“x
-	bool m_LightSwitch;					//	Æ–¾ ON/OFF
-	bool m_LinkLight;					//	Æ–¾˜A“®
-	bool m_ClipRect;					//	ƒNƒŠƒbƒvİ’è
-	bool m_LockPos;						//	ˆÊ’uŒÅ’è
-	bool m_AutoZoom;					//	©“®ƒY[ƒ€
-	int m_LocalFocus;					//	ƒ[ƒJƒ‹§Œä
-	VEC3 m_Focus;						//	’‹“_
-	VEC3 m_FocusTarget;					//	ƒtƒH[ƒJƒXˆÚ“®æ
-	VEC3 m_CameraPos;					//	ƒJƒƒ‰À•W
-	VEC3 m_LightDir;					//	Æ–¾Šp“x
-	CDetectInfo m_FocusInfo;			//	’–Úî•ñ
+	static CCamera *ms_CurrentCamera;	//	ç¾åœ¨ã®ã‚«ãƒ¡ãƒ©
+	int m_LeftState;					//	å·¦ãƒœã‚¿ãƒ³çŠ¶æ…‹
+	int m_MiddleState;					//	ä¸­ãƒœã‚¿ãƒ³çŠ¶æ…‹
+	int m_RightState;					//	å³ãƒœã‚¿ãƒ³çŠ¶æ…‹
+	int m_PrintInfoTime;				//	æƒ…å ±è¡¨ç¤ºæ™‚é–“
+	float m_Head, m_Pitch;				//	è§’åº¦
+//	float m_Bank;						//	ãƒãƒ³ã‚¯æœªä½¿ç”¨
+	float m_Dist;						//	è·é›¢
+	float m_Wheel;						//	ãƒ›ã‚¤ãƒ¼ãƒ«
+	float m_UpDown;						//	ä¸Šä¸‹ç§»å‹•
+	float m_DefDist;					//	æ—¢å®šè·é›¢
+	float m_MinDist, m_MaxDist;			//	æœ€å°ãƒ»æœ€å¤§è·é›¢
+	float m_FieldOfView;				//	è¦–é‡è§’
+	float m_FieldOfViewEffect;			//	å®ŸåŠ¹è¦–é‡è§’
+	float m_AutoZoomBaseDist;			//	è‡ªå‹•ã‚ºãƒ¼ãƒ åŸºæº–è·é›¢
+	float m_FocusSpeed;					//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹æ•æ‰é€Ÿåº¦
+	bool m_LightSwitch;					//	ç…§æ˜ ON/OFF
+	bool m_LinkLight;					//	ç…§æ˜é€£å‹•
+	bool m_ClipRect;					//	ã‚¯ãƒªãƒƒãƒ—è¨­å®š
+	bool m_LockPos;						//	ä½ç½®å›ºå®š
+	bool m_AutoZoom;					//	è‡ªå‹•ã‚ºãƒ¼ãƒ 
+	int m_LocalFocus;					//	ãƒ­ãƒ¼ã‚«ãƒ«åˆ¶å¾¡
+	VEC3 m_Focus;						//	æ³¨è¦–ç‚¹
+	VEC3 m_FocusTarget;					//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ç§»å‹•å…ˆ
+	VEC3 m_CameraPos;					//	ã‚«ãƒ¡ãƒ©åº§æ¨™
+	VEC3 m_LightDir;					//	ç…§æ˜è§’åº¦
+	CDetectInfo m_FocusInfo;			//	æ³¨ç›®æƒ…å ±
 public:
 	static CCamera *GetCurrentCamera(){ return ms_CurrentCamera; }
 	void Init(float, float, float, bool);
@@ -74,7 +74,7 @@ public:
 	void Save(FILE *, string indent = "\t\t");
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern float g_FovRatio;
 
 #endif

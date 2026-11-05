@@ -1,20 +1,20 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CModelPlugin.h"
 #include "CConfigMode.h"
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSoundState::~CSoundState(){
 	CSoundEffector::DeleteSound(this);
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CSoundState::Confirm(
-	CSoundEffector *eff,	//	ƒGƒtƒFƒNƒ^
-	bool enabled			//	Ä¶—LŒøƒtƒ‰ƒO
+	CSoundEffector *eff,	//	ã‚¨ãƒ•ã‚§ã‚¯ã‚¿
+	bool enabled			//	å†ç”Ÿæœ‰åŠ¹ãƒ•ãƒ©ã‚°
 ){
 	if(m_ApplyFlag && enabled){
 		eff->SetPos(this);
@@ -34,12 +34,12 @@ void CSoundState::Confirm(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 set<CSoundState *> CSoundEffector::ms_PlayList;
 
 /*
  *	[static]
- *	ƒŠƒXƒg‰Šú‰»
+ *	ãƒªã‚¹ãƒˆåˆæœŸåŒ–
  */
 void CSoundEffector::InitPlayList(){
 	ISPSoundState isps = ms_PlayList.begin();
@@ -51,11 +51,11 @@ void CSoundEffector::InitPlayList(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CSoundEffector::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	Ôçqƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp, *eee;
 	string obj;
@@ -76,19 +76,19 @@ char *CSoundEffector::Read(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CSoundEffector::LoadData(
-	CSoundState *ss	//	ƒXƒe[ƒg
+	CSoundState *ss	//	ã‚¹ãƒ†ãƒ¼ãƒˆ
 ){
 	ss->m_Wave.Load((char *)m_WaveFileName.c_str());
 }
 
 /*
- *	’èˆÊİ’è
+ *	å®šä½è¨­å®š
  */
 void CSoundEffector::SetPos(
-	CSoundState *ss	//	ƒXƒe[ƒg
+	CSoundState *ss	//	ã‚¹ãƒ†ãƒ¼ãƒˆ
 ){
 	CObject *obj = m_Link->GetObject();
 	VEC3 oright = obj->GetRight(), oup = obj->GetUp(), odir = obj->GetDir();
@@ -99,10 +99,10 @@ void CSoundEffector::SetPos(
 }
 
 /*
- *	ƒoƒbƒtƒ@Ä¶
+ *	ãƒãƒƒãƒ•ã‚¡å†ç”Ÿ
  */
 void CSoundEffector::PlayWave(
-	CSoundState *ss	//	ƒXƒe[ƒg
+	CSoundState *ss	//	ã‚¹ãƒ†ãƒ¼ãƒˆ
 ){
 	ss->m_Wave.SetVolume(m_Volume);
 	ss->m_Wave.Play(m_Loop ? -1 : 0);
@@ -110,20 +110,20 @@ void CSoundEffector::PlayWave(
 }
 
 /*
- *	ó‘Ô•Ï”‚ğƒAƒ^ƒbƒ`
+ *	çŠ¶æ…‹å¤‰æ•°ã‚’ã‚¢ã‚¿ãƒƒãƒ
  */
 void CSoundEffector::Link(
-	CSoundState *stt	//	ó‘Ô•Ï”
+	CSoundState *stt	//	çŠ¶æ…‹å¤‰æ•°
 ){
 	m_LinkState = stt;
 	m_LinkState->m_ApplyFlag = false;
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒŠƒXƒg‚É“o˜^
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒªã‚¹ãƒˆã«ç™»éŒ²
  */
 void CSoundEffector::Register(
-	CScene *scene	//	ƒV[ƒ“
+	CScene *scene	//	ã‚·ãƒ¼ãƒ³
 ){
 	if(!m_LinkState || !scene) return;
 	m_LinkState->m_ApplyFlag = true;

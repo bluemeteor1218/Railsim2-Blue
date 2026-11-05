@@ -1,4 +1,4 @@
-#ifndef CLISTVIEW_H_INCLUDED
+ï»¿#ifndef CLISTVIEW_H_INCLUDED
 #define CLISTVIEW_H_INCLUDED
 
 #include "CInterface.h"
@@ -8,17 +8,17 @@
 #include "CPopMenu.h"
 
 /*
- *	ƒŠƒXƒg—v‘f
+ *	ãƒªã‚¹ãƒˆè¦ç´ 
  */
 class CListElement{
 	friend class CListView;
 protected:
-	bool m_Selected;			//	‘I‘ğƒtƒ‰ƒO
-	DWORD m_Data;				//	ŠÖ˜Aƒf[ƒ^
-	vector<string> m_String;	//	•¶š—ñ
-	CListElement *m_Next;		//	Ÿ
-	CListView *m_Owner;			//	ƒŠƒXƒgƒrƒ…[
-	CEditBox *m_EditBox;		//	–¼Ì•ÏX—pƒGƒfƒBƒbƒgƒ{ƒbƒNƒX
+	bool m_Selected;			//	é¸æŠãƒ•ãƒ©ã‚°
+	DWORD m_Data;				//	é–¢é€£ãƒ‡ãƒ¼ã‚¿
+	vector<string> m_String;	//	æ–‡å­—åˆ—
+	CListElement *m_Next;		//	æ¬¡
+	CListView *m_Owner;			//	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	CEditBox *m_EditBox;		//	åç§°å¤‰æ›´ç”¨ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹
 public:
 	CListElement(int, char *, CListView *);
 	virtual ~CListElement(){}
@@ -34,12 +34,12 @@ public:
 };
 
 /*
- *	ƒAƒCƒRƒ“•tƒŠƒXƒg—v‘f
+ *	ã‚¢ã‚¤ã‚³ãƒ³ä»˜ãƒªã‚¹ãƒˆè¦ç´ 
  */
 class CIconListElement: public CListElement{
 private:
-	LPTEX8 m_IconTex;		//	ƒAƒCƒRƒ“ƒeƒNƒXƒ`ƒƒ
-	float m_IconRect[4];	//	ƒAƒCƒRƒ“ˆÊ’u
+	LPTEX8 m_IconTex;		//	ã‚¢ã‚¤ã‚³ãƒ³ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	float m_IconRect[4];	//	ã‚¢ã‚¤ã‚³ãƒ³ä½ç½®
 public:
 	CIconListElement(int, char *, CListView *, LPTEX8, float *);
 	void RenderDragItem(int, int, bool);
@@ -49,46 +49,46 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	ƒIƒvƒVƒ‡ƒ“ƒtƒ‰ƒO
+//	ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒ•ãƒ©ã‚°
 const int LISTVIEW_MULTISELECTABLE = 1;
 const int LISTVIEW_INSERTABLE = 2;
 const int LISTVIEW_RENAMABLE = 4;
 const int LISTVIEW_SORTABLE = 8;
 
 /*
- *	ƒŠƒXƒgƒrƒ…[
+ *	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
  */
 class CListView: public CInterface, public CDragInterface{
 	friend class CListElement;
 	friend class CIconListElement;
 protected:
-	int m_State;					//	ó‘Ô
-	int m_Cols;						//	—ñ”
-	int m_Rows;						//	•\¦‰Â”\s”
-	int m_RowHeight;				//	—ñ‚
-	int m_ColResize;				//	ƒŠƒTƒCƒY—ñ
-	int m_ColOldSize;				//	‹ŒƒTƒCƒY
-	int m_GrabPosX;					//	‚Â‚©‚İˆÊ’u
-	int m_FocusIndex;				//	ƒtƒH[ƒJƒXˆÊ’u
-	int m_LastSel;					//	ÅŒã‚É‘I‘ğ‚µ‚½ƒAƒCƒeƒ€
-	int m_ItemNum;					//	ƒf[ƒ^”
-	int m_InsertRow;				//	‘}“üˆÊ’u
-	int m_DownScrollV;				//	ƒNƒŠƒbƒNƒXƒNƒ[ƒ‹ˆÊ’u
-	DRAGTYPE m_DragType;			//	ƒhƒ‰ƒbƒO‰Â”\ /*CP932‘Î‰*/
-	bool m_MultiSelect;				//	•¡”‘I‘ğ‰Â”\ /*CP932‘Î‰*/
-	bool m_Insertable;				//	‘}“ü‰Â”\ /*CP932‘Î‰*/
-	bool m_Renamable;				//	ƒŠƒl[ƒ€‰Â”\ /*CP932‘Î‰*/
-	bool m_RenameWait;				//	ƒŠƒl[ƒ€‘Ò‚¿
-	bool m_Sortable;				//	—ñƒ\[ƒg‰Â”\ /*CP932‘Î‰*/
-	DWORD m_ClickTime;				//	ƒNƒŠƒbƒN
-	POINT m_DownPos;				//	ƒNƒŠƒbƒNÀ•W
-	CListElement *m_FocusItem;		//	ƒtƒH[ƒJƒXƒAƒCƒeƒ€
-	CListElement *m_DropItem;		//	ƒhƒƒbƒvæƒAƒCƒeƒ€
-	CListElement *m_Data;			//	ƒf[ƒ^
-	CPushButton *m_ColHeader;		//	—ñƒwƒbƒ_
-	CScrollBarV m_ScrollV;			//	ƒXƒNƒ[ƒ‹ƒo[
-	CMenuCommander *m_Commander;	//	ƒRƒ}ƒ“ƒ_
-	CMDTYPE m_CmdType;				//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
+	int m_State;					//	çŠ¶æ…‹
+	int m_Cols;						//	åˆ—æ•°
+	int m_Rows;						//	è¡¨ç¤ºå¯èƒ½è¡Œæ•°
+	int m_RowHeight;				//	åˆ—é«˜
+	int m_ColResize;				//	ãƒªã‚µã‚¤ã‚ºåˆ—
+	int m_ColOldSize;				//	æ—§ã‚µã‚¤ã‚º
+	int m_GrabPosX;					//	ã¤ã‹ã¿ä½ç½®
+	int m_FocusIndex;				//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ä½ç½®
+	int m_LastSel;					//	æœ€å¾Œã«é¸æŠã—ãŸã‚¢ã‚¤ãƒ†ãƒ 
+	int m_ItemNum;					//	ãƒ‡ãƒ¼ã‚¿æ•°
+	int m_InsertRow;				//	æŒ¿å…¥ä½ç½®
+	int m_DownScrollV;				//	ã‚¯ãƒªãƒƒã‚¯æ™‚ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ä½ç½®
+	DRAGTYPE m_DragType;			//	ãƒ‰ãƒ©ãƒƒã‚°å¯èƒ½ /*CP932å¯¾å¿œ*/
+	bool m_MultiSelect;				//	è¤‡æ•°é¸æŠå¯èƒ½ /*CP932å¯¾å¿œ*/
+	bool m_Insertable;				//	æŒ¿å…¥å¯èƒ½ /*CP932å¯¾å¿œ*/
+	bool m_Renamable;				//	ãƒªãƒãƒ¼ãƒ å¯èƒ½ /*CP932å¯¾å¿œ*/
+	bool m_RenameWait;				//	ãƒªãƒãƒ¼ãƒ å¾…ã¡
+	bool m_Sortable;				//	åˆ—ã‚½ãƒ¼ãƒˆå¯èƒ½ /*CP932å¯¾å¿œ*/
+	DWORD m_ClickTime;				//	ã‚¯ãƒªãƒƒã‚¯æ™‚åˆ»
+	POINT m_DownPos;				//	ã‚¯ãƒªãƒƒã‚¯åº§æ¨™
+	CListElement *m_FocusItem;		//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚¢ã‚¤ãƒ†ãƒ 
+	CListElement *m_DropItem;		//	ãƒ‰ãƒ­ãƒƒãƒ—å…ˆã‚¢ã‚¤ãƒ†ãƒ 
+	CListElement *m_Data;			//	ãƒ‡ãƒ¼ã‚¿
+	CPushButton *m_ColHeader;		//	åˆ—ãƒ˜ãƒƒãƒ€
+	CScrollBarV m_ScrollV;			//	ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼
+	CMenuCommander *m_Commander;	//	ã‚³ãƒãƒ³ãƒ€
+	CMDTYPE m_CmdType;				//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
 public:
 	CListView();
 	virtual ~CListView();
@@ -126,7 +126,7 @@ public:
 };
 
 /*
- *	ƒAƒCƒRƒ“•tƒŠƒXƒgƒrƒ…[
+ *	ã‚¢ã‚¤ã‚³ãƒ³ä»˜ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
  */
 class CIconListView: public CListView{
 protected:

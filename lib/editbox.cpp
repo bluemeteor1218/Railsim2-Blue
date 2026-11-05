@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -19,18 +19,18 @@
 #include "..\SystemCover.h"
 #include "..\CSkinPlugin.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 string EliminateTabAndCRLF(string);
 
-//	“à•”’è”
-const int BLINK_FRAME = MAXFPS/2;	//	“_–ÅŠÔŠu
-const int BASE_MARGINX = 1;			//	•ÒW—Ìˆæ—]”’
+//	å†…éƒ¨å®šæ•°
+const int BLINK_FRAME = MAXFPS/2;	//	ç‚¹æ»…é–“éš”
+const int BASE_MARGINX = 1;			//	ç·¨é›†é ˜åŸŸä½™ç™½
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 bool CEditBox::ms_Active = false;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CEditBox::CEditBox(){
 	m_hImc = NULL;
@@ -43,19 +43,19 @@ CEditBox::CEditBox(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CEditBox::~CEditBox(){
 	Release();
 }
 
 /*
- *	ƒGƒfƒBƒbƒgƒ{ƒbƒNƒXì¬
+ *	ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹ä½œæˆ
  *
- *	x	: •\¦ŠJn X À•W
- *	y	: •\¦ŠJn Y À•W
- *	max	: Å‘å•¶š”
- *	imm : 0:•s•Ï, 1:ON, -1:OFF
+ *	x	: è¡¨ç¤ºé–‹å§‹ X åº§æ¨™
+ *	y	: è¡¨ç¤ºé–‹å§‹ Y åº§æ¨™
+ *	max	: æœ€å¤§æ–‡å­—æ•°
+ *	imm : 0:ä¸å¤‰, 1:ON, -1:OFF
  */
 void CEditBox::Create(int x, int y, int w, int max, string pre, int imm){
 	Release(imm);
@@ -78,7 +78,7 @@ void CEditBox::Create(int x, int y, int w, int max, string pre, int imm){
 }
 
 /*
- *	ƒGƒfƒBƒbƒgƒ{ƒbƒNƒX‰ğ•ú
+ *	ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹è§£æ”¾
  */
 void CEditBox::Release(int imm){
 	ms_Active = false;
@@ -90,10 +90,10 @@ void CEditBox::Release(int imm){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 int CEditBox::ScanInput(){
-	//	ƒL[‚ª‰½‚à‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢‚È‚çƒXƒLƒbƒv
+	//	ã‚­ãƒ¼ãŒä½•ã‚‚æŠ¼ã•ã‚Œã¦ã„ãªã„ãªã‚‰ã‚¹ã‚­ãƒƒãƒ—
 	if(CheckKeyDown()<0) return EDIT_PROC;
 
 	BOOL is_comp = FALSE;
@@ -104,24 +104,24 @@ int CEditBox::ScanInput(){
 	}
 	BOOL comp_end = m_old_iscomp && !is_comp;
 	m_old_iscomp = is_comp;
-	//	ƒGƒ“ƒ^[ƒL[
+	//	ã‚¨ãƒ³ã‚¿ãƒ¼ã‚­ãƒ¼
 	bool enter = (GetKey(DIK_RETURN)|GetKey(DIK_NUMPADENTER))==S_PUSH;
 	if(enter || comp_end){
 		PeekAllMessage();
-		//	•ÏŠ·Œã‚ÌŠm’è‚Å–³‚¢ê‡‚Í“ü—ÍI—¹‚ÆŒ©‚È‚·
+		//	å¤‰æ›å¾Œã®ç¢ºå®šã§ç„¡ã„å ´åˆã¯å…¥åŠ›çµ‚äº†ã¨è¦‹ãªã™
 		if(!IsComp()) return EDIT_OK;
 
-		//	Šm’è‚µ‚½•¶š—ñ‚ğ˜AŒ‹
+		//	ç¢ºå®šã—ãŸæ–‡å­—åˆ—ã‚’é€£çµ
 		CompEnd(enter);
 		return EDIT_PROC;
 	}
-	//	ƒGƒXƒP[ƒvƒL[
+	//	ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ã‚­ãƒ¼
 	if(GetKey(DIK_ESCAPE)==S_PUSH){
-		//	•ÏŠ·Œã‚Ìæ‚èÁ‚µ‚Å–³‚¢ê‡‚Í“ü—ÍI—¹‚ÆŒ©‚È‚·
+		//	å¤‰æ›å¾Œã®å–ã‚Šæ¶ˆã—ã§ç„¡ã„å ´åˆã¯å…¥åŠ›çµ‚äº†ã¨è¦‹ãªã™
 		if(!IsComp()) return EDIT_CANCEL;
 		else return EDIT_PROC;
 	}
-	//	FEP‚ª‹N“®’†‚È‚ç•ÏŠ·’†‚Ì•¶š—ñ‚ğæ“¾
+	//	FEPãŒèµ·å‹•ä¸­ãªã‚‰å¤‰æ›ä¸­ã®æ–‡å­—åˆ—ã‚’å–å¾—
 	int oldsize = m_oldsize;
 	if(IsFEPOpen()){
 		GetCompStr(m_comp);
@@ -131,10 +131,10 @@ int CEditBox::ScanInput(){
 	}
 	static int rep;
 	if(IsComp()){
-		//	•ÏŠ·’†‚È‚ç
+		//	å¤‰æ›ä¸­ãªã‚‰
 		rep = 0;
 	}else if(m_oldsize==oldsize){
-		//	•ÏŠ·’†‚Å‚È‚¢‚È‚ç (FEP‚Ì‹N“®‚Ì—L–³‚É‚©‚©‚í‚ç‚¸)
+		//	å¤‰æ›ä¸­ã§ãªã„ãªã‚‰ (FEPã®èµ·å‹•ã®æœ‰ç„¡ã«ã‹ã‹ã‚ã‚‰ãš)
 		int s;
 		if((s = GetKey(DIK_BACK))>=S_PUSH){
 			if(PickRepeat(&rep, s)) BackSpace();
@@ -145,7 +145,7 @@ int CEditBox::ScanInput(){
 		}else if((s = GetKey(DIK_RIGHT))>=S_PUSH){
 			if(PickRepeat(&rep, s)) MoveRight();
 		}else if(IsFEPOpen() && (s = GetKey(DIK_SPACE))>=S_PUSH){
-			if(PickRepeat(&rep, s)) AddString("@");
+			if(PickRepeat(&rep, s)) AddString("ã€€");
 		}else if(GetKey(DIK_HOME)==S_PUSH){
 			MoveHead();
 		}else if(GetKey(DIK_END)==S_PUSH){
@@ -170,7 +170,7 @@ int CEditBox::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CEditBox::Render(){
 	devSetTexture(0, NULL);
@@ -180,7 +180,7 @@ void CEditBox::Render(){
 	else{ sel1 = m_selpos; sel2 = m_pos; }
 	m_show = m_str;
 	if(IsComp()){
-		//	•ÏŠ·’†‚È‚ç
+		//	å¤‰æ›ä¸­ãªã‚‰
 		int size = ImmGetCompositionString(m_hImc, GCS_COMPCLAUSE, NULL, 0);
 		int n = size/sizeof(int), *pClause = new int[n];
 		ImmGetCompositionString(m_hImc, GCS_COMPCLAUSE, pClause, size);
@@ -216,7 +216,7 @@ void CEditBox::Render(){
 		delete [] pClause;
 		delete [] pAttr;
 	}else{
-		//	•¶š—ñ‚ğ•\¦
+		//	æ–‡å­—åˆ—ã‚’è¡¨ç¤º
 		int tbw = (m_show.size()+1)*svf.size/2;
 		if(tbw<m_width) tbw = m_width;
 		Grad2DRect(m_x-BASE_MARGINX, m_y, m_x+tbw+BASE_MARGINX, m_y+svf.size,
@@ -224,13 +224,13 @@ void CEditBox::Render(){
 		if(sel1!=sel2) Grad2DRect(m_x+sel1*svf.size/2, m_y,
 			m_x+sel2*svf.size/2, m_y+svf.size, g_Skin->m_EditCtrlData.m_SelectedBaseColor);
 		Text(m_x, m_y, g_Skin->m_EditCtrlData.m_EditFontColor, m_show.c_str());
-		//	ƒLƒƒƒŒƒbƒg‚ğ•\¦
+		//	ã‚­ãƒ£ãƒ¬ãƒƒãƒˆã‚’è¡¨ç¤º
 		DrawCaret();
 	}
 }
 
 /*
- *	ƒLƒƒƒŒƒbƒg•\¦
+ *	ã‚­ãƒ£ãƒ¬ãƒƒãƒˆè¡¨ç¤º
  */
 void CEditBox::DrawCaret(){
 	m_frame = (m_frame+1)%BLINK_FRAME;
@@ -242,11 +242,11 @@ void CEditBox::DrawCaret(){
 }
 
 /*
- *	ƒLƒƒƒŒƒbƒgˆÊ’u‚©‚ç1•¶š‘O‚ğÁ‚·
+ *	ã‚­ãƒ£ãƒ¬ãƒƒãƒˆä½ç½®ã‹ã‚‰1æ–‡å­—å‰ã‚’æ¶ˆã™
  */
 void CEditBox::BackSpace(){
 	if(!DeleteSelected()){
-		//	Œ»İˆÊ’u‚ª 2 •¶š–ÚˆÈ~
+		//	ç¾åœ¨ä½ç½®ãŒ 2 æ–‡å­—ç›®ä»¥é™
 		if(m_pos>0){
 			char *s = (char *)m_str.c_str();
 			int j = CharPrev(s, s+m_pos)-s;
@@ -261,7 +261,7 @@ void CEditBox::BackSpace(){
 }
 
 /*
- *	ƒLƒƒƒŒƒbƒgˆÊ’u‚Ì•¶š‚ğÁ‚·
+ *	ã‚­ãƒ£ãƒ¬ãƒƒãƒˆä½ç½®ã®æ–‡å­—ã‚’æ¶ˆã™
  */
 void CEditBox::DeleteChar(){
 	if(!DeleteSelected()){
@@ -276,7 +276,7 @@ void CEditBox::DeleteChar(){
 }
 
 /*
- *	‘I‘ğ‚³‚ê‚½•¶š—ñ‚ğÁ‚·
+ *	é¸æŠã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’æ¶ˆã™
  */
 bool CEditBox::DeleteSelected(){
 	if(m_pos<m_selpos){
@@ -292,7 +292,7 @@ bool CEditBox::DeleteSelected(){
 }
 
 /*
- *	‘I‘ğ‚³‚ê‚½•¶š—ñ‚ğæ“¾
+ *	é¸æŠã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’å–å¾—
  */
 string CEditBox::GetSelected(){
 	const char *s = m_str.c_str();
@@ -302,9 +302,9 @@ string CEditBox::GetSelected(){
 }
 
 /*
- *	ƒLƒƒƒŒƒbƒgˆÊ’u‚É•¶š‚ğ’Ç‰Á
+ *	ã‚­ãƒ£ãƒ¬ãƒƒãƒˆä½ç½®ã«æ–‡å­—ã‚’è¿½åŠ 
  *
- *	c		: •¶š
+ *	c		: æ–‡å­—
  */
 void CEditBox::AddChar(char c){
 	DeleteSelected();
@@ -315,9 +315,9 @@ void CEditBox::AddChar(char c){
 }
 
 /*
- *	ƒLƒƒƒŒƒbƒgˆÊ’u‚É•¶š—ñ‚ğ’Ç‰Á
+ *	ã‚­ãƒ£ãƒ¬ãƒƒãƒˆä½ç½®ã«æ–‡å­—åˆ—ã‚’è¿½åŠ 
  *
- *	s		: •¶š—ñ
+ *	s		: æ–‡å­—åˆ—
  */
 void CEditBox::AddString(string s){
 	DeleteSelected();
@@ -330,7 +330,7 @@ void CEditBox::AddString(string s){
 }
 
 /*
- *	ƒNƒŠƒbƒvƒ{[ƒh‚ÉØ‚èæ‚è
+ *	ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«åˆ‡ã‚Šå–ã‚Š
  */
 void CEditBox::ClipCut(){
 	if(m_selpos==m_pos) return;
@@ -341,7 +341,7 @@ void CEditBox::ClipCut(){
 }
 
 /*
- *	ƒNƒŠƒbƒvƒ{[ƒh‚ÉƒRƒs[
+ *	ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«ã‚³ãƒ”ãƒ¼
  */
 void CEditBox::ClipCopy(){
 	if(m_selpos==m_pos) return;
@@ -357,7 +357,7 @@ void CEditBox::ClipCopy(){
 }
 
 /*
- *	ƒNƒŠƒbƒvƒ{[ƒh‚©‚ç“\‚è•t‚¯
+ *	ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã‹ã‚‰è²¼ã‚Šä»˜ã‘
  */
 void CEditBox::ClipPaste(){
 	OpenClipboard(svw.hWnd);
@@ -376,7 +376,7 @@ void CEditBox::ClipPaste(){
 }
 
 /*
- *	ƒLƒƒƒŒƒbƒg‚ğ¶‚ÉˆÚ“®
+ *	ã‚­ãƒ£ãƒ¬ãƒƒãƒˆã‚’å·¦ã«ç§»å‹•
  */
 void CEditBox::MoveLeft(){
 	char *s = (char *)m_str.c_str();
@@ -386,7 +386,7 @@ void CEditBox::MoveLeft(){
 }
 
 /*
- *	ƒLƒƒƒŒƒbƒg‚ğ‰E‚ÉˆÚ“®
+ *	ã‚­ãƒ£ãƒ¬ãƒƒãƒˆã‚’å³ã«ç§»å‹•
  */
 void CEditBox::MoveRight(){
 	char *s = (char *)m_str.c_str();
@@ -396,7 +396,7 @@ void CEditBox::MoveRight(){
 }
 
 /*
- *	ƒLƒƒƒŒƒbƒg‚ğæ“ª‚ÉˆÚ“®
+ *	ã‚­ãƒ£ãƒ¬ãƒƒãƒˆã‚’å…ˆé ­ã«ç§»å‹•
  */
 void CEditBox::MoveHead(){
 	m_pos = 0;
@@ -405,7 +405,7 @@ void CEditBox::MoveHead(){
 }
 
 /*
- *	ƒLƒƒƒŒƒbƒg‚ğÅŒã”ö‚ÉˆÚ“®
+ *	ã‚­ãƒ£ãƒ¬ãƒƒãƒˆã‚’æœ€å¾Œå°¾ã«ç§»å‹•
  */
 void CEditBox::MoveLast(){
 	m_pos = m_str.size();
@@ -414,7 +414,7 @@ void CEditBox::MoveLast(){
 }
 
 /*
- *	‘S‚Ä‘I‘ğ
+ *	å…¨ã¦é¸æŠ
  */
 void CEditBox::SelectAll(){
 	m_selpos = 0;
@@ -423,28 +423,28 @@ void CEditBox::SelectAll(){
 }
 
 /*
- *	•ÏŠ·Šm’è
+ *	å¤‰æ›ç¢ºå®š
  */
 void CEditBox::CompEnd(bool get_result){
 	DeleteSelected();
 	if(get_result) GetResultStr(m_comp);
 	m_str = m_str.insert(m_pos, m_comp);
 	m_selpos = m_pos += m_comp.size();
-	Clip();			//	Å‘å•¶š”‚ÅƒNƒŠƒbƒv
-	m_show = m_str;	//	•\¦•¶š—ñ‚ğXV
-	m_comp = "";	//	•ÏŠ·’†•¶š—ñ‚ÌƒNƒŠƒA
+	Clip();			//	æœ€å¤§æ–‡å­—æ•°ã§ã‚¯ãƒªãƒƒãƒ—
+	m_show = m_str;	//	è¡¨ç¤ºæ–‡å­—åˆ—ã‚’æ›´æ–°
+	m_comp = "";	//	å¤‰æ›ä¸­æ–‡å­—åˆ—ã®ã‚¯ãƒªã‚¢
 	ClearCharQueue();
 }
 
 /*
- *	•¶š”§ŒÀ
+ *	æ–‡å­—æ•°åˆ¶é™
  */
 void CEditBox::Clip(){
 	int size = m_str.size(), i;
 	if(size<=m_max) return;
 	char *s = (char *)m_str.c_str();
 
-	//	‘SŠp•¶š‚Ì®‡«‚ğƒ`ƒFƒbƒN‚µ‚È‚ª‚çÁ‚µ‚Ä‚¢‚­
+	//	å…¨è§’æ–‡å­—ã®æ•´åˆæ€§ã‚’ãƒã‚§ãƒƒã‚¯ã—ãªãŒã‚‰æ¶ˆã—ã¦ã„ã
 	for(i = size; i>m_max;){
 		int j = CharPrev(s, s+i)-s;
 		m_str.erase(j, i-j);
@@ -455,9 +455,9 @@ void CEditBox::Clip(){
 }
 
 /*
- *	•ÏŠ·’†‚Ì•¶š—ñ‚ğæ“¾
+ *	å¤‰æ›ä¸­ã®æ–‡å­—åˆ—ã‚’å–å¾—
  *
- *	str	: •¶š—ñ‚ÌŠi”[æ
+ *	str	: æ–‡å­—åˆ—ã®æ ¼ç´å…ˆ
  */
 void CEditBox::GetCompStr(string &str){
 	LONG size = ImmGetCompositionString(m_hImc, GCS_COMPSTR, NULL, 0);
@@ -469,9 +469,9 @@ void CEditBox::GetCompStr(string &str){
 }
 
 /*
- *	•ÏŠ·‚ªŠm’è‚µ‚½•¶š—ñ‚ğæ“¾
+ *	å¤‰æ›ãŒç¢ºå®šã—ãŸæ–‡å­—åˆ—ã‚’å–å¾—
  *
- *	str	: •¶š—ñ‚ÌŠi”[æ
+ *	str	: æ–‡å­—åˆ—ã®æ ¼ç´å…ˆ
  */
 void CEditBox::GetResultStr(string &str){
 	LONG size = ImmGetCompositionString(m_hImc, GCS_RESULTSTR, NULL, 0);
@@ -486,7 +486,7 @@ void CEditBox::GetResultStr(string &str){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒ^ƒu‚Æ‰üs‚ğíœ
+ *	ã‚¿ãƒ–ã¨æ”¹è¡Œã‚’å‰Šé™¤
  */
 string EliminateTabAndCRLF(string s){
 	char *ptr = (char *)s.c_str();
@@ -498,15 +498,15 @@ string EliminateTabAndCRLF(string s){
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹‘I‘ğƒ_ƒCƒAƒƒO
+ *	ãƒ•ã‚¡ã‚¤ãƒ«é¸æŠãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  *
- *	file	: ƒtƒ@ƒCƒ‹–¼Ši”[æ
- *	len		: ƒtƒ@ƒCƒ‹–¼‚ÌÅ‘å•¶š”
- *	def		: ’è‹`("text file" “™A”CˆÓj
- *	ext		: Šg’£q
- *	flag	: TRUE = ‘‚İAFALSE = “Ç‚İ
+ *	file	: ãƒ•ã‚¡ã‚¤ãƒ«åæ ¼ç´å…ˆ
+ *	len		: ãƒ•ã‚¡ã‚¤ãƒ«åã®æœ€å¤§æ–‡å­—æ•°
+ *	def		: å®šç¾©("text file" ç­‰ã€ä»»æ„ï¼‰
+ *	ext		: æ‹¡å¼µå­
+ *	flag	: TRUE = æ›¸è¾¼ã¿ã€FALSE = èª­è¾¼ã¿
  *
- *	–ß‚è’l: TRUE = ‘I‘ğ¬Œ÷, FALSE = ƒLƒƒƒ“ƒZƒ‹A¸”s
+ *	æˆ»ã‚Šå€¤: TRUE = é¸æŠæˆåŠŸ, FALSE = ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã€å¤±æ•—
  */
 BOOL SelectFile(char *file, int len, const char *def, const char *ext, int flag){
 	OPENFILENAME ofn;

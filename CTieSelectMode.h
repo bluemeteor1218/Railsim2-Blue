@@ -1,11 +1,11 @@
-#ifndef CTIESELECTMODE_H_INCLUDED
+ï»¿#ifndef CTIESELECTMODE_H_INCLUDED
 #define CTIESELECTMODE_H_INCLUDED
 
 #include "C3DPluginMode.h"
 #include "CRailwayMode.h"
 
 /*
- *	––Ø‘I‘ğƒ‚[ƒh
+ *	æ•æœ¨é¸æŠãƒ¢ãƒ¼ãƒ‰
  */
 class CTieSelectMode: public C3DPluginMode, public CRailwayMode{
 private:
@@ -21,7 +21,7 @@ public:
 	void Render3DPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CTieSelectMode *g_TieSelectMode;
 
 #endif

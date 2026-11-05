@@ -1,27 +1,27 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CScene.h"
 #include "CStationEditMode.h"
 
 /*
- *	ƒ‚[ƒh‚ð—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CStationEditMode::EnterStructEdit(){
 	ms_ModeLabel = lang(EditStation);
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CStationEditMode::ScanInputStructEdit(
-	int mode,	//	ƒ‚[ƒh
-	VEC3 rect1,	//	—ÌˆæŽn“_
-	VEC3 rect2	//	—ÌˆæI“_
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2	//	é ˜åŸŸçµ‚ç‚¹
 ){
 	g_Scene->ScanInputStation(mode, rect1, rect2, true);
 }
 
 /*
- *	“P‹Ž
+ *	æ’¤åŽ»
  */
 void CStationEditMode::Delete(){
 	g_Scene->DeleteStation(NULL);

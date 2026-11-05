@@ -1,21 +1,21 @@
-#ifndef CEDITCTRL_H_INCLUDED
+ï»¿#ifndef CEDITCTRL_H_INCLUDED
 #define CEDITCTRL_H_INCLUDED
 
 #include "CInterface.h"
 
-//	“à•”’è”
-const int EB_OFSX = 3;	//	•ÒWˆÊ’u
+//	å†…éƒ¨å®šæ•°
+const int EB_OFSX = 3;	//	ç·¨é›†ä½ç½®
 
 /*
- *	ƒGƒfƒBƒbƒgƒRƒ“ƒgƒ[ƒ‹
+ *	ã‚¨ãƒ‡ã‚£ãƒƒãƒˆã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
  */
 class CEditCtrl: public CInterface{
 private:
-	int m_State;		//	ó‘Ô
-	int m_StrMax;		//	Å‘å•¶š”
-	bool m_KeepImm;		//	IMM ó‘Ô•Û
-	bool m_CompDelay;	//	•ÏŠ·ƒfƒBƒŒƒC
-	CEditBox m_EditBox;	//	ƒGƒfƒBƒbƒgƒ{ƒbƒNƒX
+	int m_State;		//	çŠ¶æ…‹
+	int m_StrMax;		//	æœ€å¤§æ–‡å­—æ•°
+	bool m_KeepImm;		//	IMM çŠ¶æ…‹ä¿æŒ
+	bool m_CompDelay;	//	å¤‰æ›ãƒ‡ã‚£ãƒ¬ã‚¤
+	CEditBox m_EditBox;	//	ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹
 public:
 	void Init(int, int, int, int, char *, CInterface *, int);
 	void GiveFocus(bool snd = true);

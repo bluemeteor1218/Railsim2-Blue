@@ -1,17 +1,17 @@
-#ifndef CTRAINSETMODE_H_INCLUDED
+ï»¿#ifndef CTRAINSETMODE_H_INCLUDED
 #define CTRAINSETMODE_H_INCLUDED
 
 #include "CTrainListView.h"
 #include "CSceneryMode.h"
 
 /*
- *	ƒjƒ…[ƒgƒ‰ƒ‹ƒ‚[ƒh
+ *	ãƒ‹ãƒ¥ãƒ¼ãƒˆãƒ©ãƒ«ãƒ¢ãƒ¼ãƒ‰
  */
 class CTrainSetMode: public CCursorSceneryMode, public CWindowResizer, public CMenuCommander{
 private:
-	CWindowCtrl m_GroupWindow;		//	•Ò¬‘‹
-	CGroupListView m_GroupListView;	//	•Ò¬ƒŠƒXƒg
-	CPopMenu *m_GroupMenu;			//	•Ò¬ƒƒjƒ…[
+	CWindowCtrl m_GroupWindow;		//	ç·¨æˆçª“
+	CGroupListView m_GroupListView;	//	ç·¨æˆãƒªã‚¹ãƒˆ
+	CPopMenu *m_GroupMenu;			//	ç·¨æˆãƒ¡ãƒ‹ãƒ¥ãƒ¼
 public:
 	CTrainSetMode();
 	~CTrainSetMode();
@@ -23,7 +23,7 @@ public:
 	//bool IsWindowDivisible(){ return true; }
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CTrainSetMode *g_TrainSetMode;
 
 #endif

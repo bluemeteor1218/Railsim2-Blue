@@ -1,15 +1,15 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CPluginTree.h"
 #include "CSkinPlugin.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern set<string> g_LackPlugin;
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 bool CPlugin::ms_PreviewState = false;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPlugin::CPlugin(
 	char *id	//	ID
@@ -25,17 +25,17 @@ CPlugin::CPlugin(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPlugin::~CPlugin(){
 	DELETE_A(m_Buffer);
 }
 
 /*
- *	ƒ\[ƒg—p”äŠrŠÖ”
+ *	ã‚½ãƒ¼ãƒˆç”¨æ¯”è¼ƒé–¢æ•°
  */
 int CPlugin::Compare(
-	CPlugin *rhs	//	‰E•Ó
+	CPlugin *rhs	//	å³è¾º
 ){
 	int ret = _mbsicmp((PUCHAR)m_Name.c_str(), (PUCHAR)rhs->m_Name.c_str());
 	if(!ret) ret = _mbsicmp((PUCHAR)m_ID.c_str(), (PUCHAR)rhs->m_ID.c_str());
@@ -44,27 +44,27 @@ int CPlugin::Compare(
 }
 
 /*
- *	ƒfƒBƒŒƒNƒgƒŠˆÚ“®
+ *	ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªç§»å‹•
  */
 bool CPlugin::ChDir(){
 	return !chdir(g_BaseDir) && !chdir(DirName()) && !chdir(m_ID.c_str());
 }
 
 /*
- *	ƒGƒ‰[‚ğƒnƒ“ƒhƒ‹
+ *	ã‚¨ãƒ©ãƒ¼ã‚’ãƒãƒ³ãƒ‰ãƒ«
  */
 void CPlugin::HandleError(
-	CSynErr *err	//	ƒGƒ‰[ƒnƒ“ƒhƒ‰
+	CSynErr *err	//	ã‚¨ãƒ©ãƒ¼ãƒãƒ³ãƒ‰ãƒ©
 ){
 	err->Handle(FlashIn("%s <%s>", DirName(), m_ID.c_str()), m_Buffer);
 	DELETE_A(m_Buffer);
 }
 
 /*
- *	’è‹`ƒtƒ@ƒCƒ‹ƒwƒbƒ_‚Ìƒ[ƒh
+ *	å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«ãƒ˜ãƒƒãƒ€ã®ãƒ­ãƒ¼ãƒ‰
  */
 char *CPlugin::LoadHeader(
-	char *str	//	’è‹`ƒtƒ@ƒCƒ‹
+	char *str	//	å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	char *tmp, *eee;
 	string type;
@@ -91,10 +91,10 @@ char *CPlugin::LoadHeader(
 }
 
 /*
- *	—\”õƒ[ƒh
+ *	äºˆå‚™ãƒ­ãƒ¼ãƒ‰
  */
 bool CPlugin::PreLoad(
-	FILE *file	//	ƒtƒ@ƒCƒ‹
+	FILE *file	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	char *str = m_Buffer = LoadBinaryText(file);
 	try{
@@ -109,10 +109,10 @@ bool CPlugin::PreLoad(
 }
 
 /*
- *	—\”õƒ[ƒh
+ *	äºˆå‚™ãƒ­ãƒ¼ãƒ‰
  */
 bool CPlugin::PreLoadOldForm(
-	FILE *file	//	ƒtƒ@ƒCƒ‹
+	FILE *file	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	try{
 		char *name = FlashOut(0), *auth = FlashOut(1);
@@ -131,36 +131,36 @@ bool CPlugin::PreLoadOldForm(
 }
 
 /*
- *	Šî–{î•ñƒeƒLƒXƒg‚ğæ“¾
+ *	åŸºæœ¬æƒ…å ±ãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—
  */
 string CPlugin::GetBasicInfo(){
 	return "ID: "+m_ID+"\n"+lang(Name)+": "+m_Name+"\n"+lang(Author)+": "+m_Author;
 }
 
 /*
- *	•K—v‚È‚çƒ[ƒh
+ *	å¿…è¦ãªã‚‰ãƒ­ãƒ¼ãƒ‰
  */
 CPlugin *CPlugin::LoadAndGet(){
 	switch(m_State){
-	case 1:	//	—\”õƒ[ƒhÏ‚İ
+	case 1:	//	äºˆå‚™ãƒ­ãƒ¼ãƒ‰æ¸ˆã¿
 		if(m_Version<2.0f){
 			if(!LoadOldForm()) break;
 		}else{
 			if(!Load()) break;
 		}
 		m_State = 2;
-	case 2:	//	ƒ[ƒhÏ‚İ
+	case 2:	//	ãƒ­ãƒ¼ãƒ‰æ¸ˆã¿
 		return this;
 	}
 	return NULL;
 }
 
 /*
- *	ƒcƒŠ[ƒAƒCƒeƒ€‘}“ü
+ *	ãƒ„ãƒªãƒ¼ã‚¢ã‚¤ãƒ†ãƒ æŒ¿å…¥
  */
 CTreeFileElement *CPlugin::InsertItem(
-	CTreeDirElement *p,	//	‘}“üæ
-	CPluginTree *o		//	ƒcƒŠ[ƒrƒ…[
+	CTreeDirElement *p,	//	æŒ¿å…¥å…ˆ
+	CPluginTree *o		//	ãƒ„ãƒªãƒ¼ãƒ“ãƒ¥ãƒ¼
 ){
 	CTreeFileElement *fe = new CTreeFileElement((char *)m_Name.c_str(), p, o, this);
 	p->InsertItem(fe);
@@ -170,7 +170,7 @@ CTreeFileElement *CPlugin::InsertItem(
 }
 
 /*
- *	ƒAƒCƒRƒ“ƒeƒNƒXƒ`ƒƒİ’è
+ *	ã‚¢ã‚¤ã‚³ãƒ³ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®š
  */
 void CPlugin::SetIconTexture(){
 	if(m_IconFileName.size()){
@@ -192,7 +192,7 @@ void CPlugin::SetIconTexture(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPluginList::CPluginList(){
 	m_List = NULL;
@@ -200,7 +200,7 @@ CPluginList::CPluginList(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPluginList::~CPluginList(){
 	CPlugin *ptr = m_List;
@@ -213,7 +213,7 @@ CPluginList::~CPluginList(){
 }
 
 /*
- *	’è‹`ƒtƒ@ƒCƒ‹‚Ìƒ[ƒh
+ *	å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ­ãƒ¼ãƒ‰
  */
 bool CPluginList::List(){
 	long filelist;
@@ -251,11 +251,11 @@ bool CPluginList::List(){
 }
 
 /*
- *	’è‹`ƒtƒ@ƒCƒ‹‚Ìƒ[ƒh
+ *	å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ­ãƒ¼ãƒ‰
  */
 bool CPluginList::LoadOne(
-	char *defpath,	//	’è‹`ƒtƒ@ƒCƒ‹ƒpƒX
-	char *piid,		//	ƒvƒ‰ƒOƒCƒ“ ID
+	char *defpath,	//	å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+	char *piid,		//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ ID
 	bool oldform	//	RS1PI
 ){
 	CPlugin **adr = &m_List;
@@ -286,11 +286,11 @@ bool CPluginList::LoadOne(
 }
 
 /*
- *	ID ‚©‚çƒvƒ‰ƒOƒCƒ“‚ğ’T‚·
+ *	ID ã‹ã‚‰ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’æ¢ã™
  */
 CPlugin *CPluginList::FindPlugin(
 	const char *id,	//	ID
-	bool load		//	“Çƒtƒ‰ƒO
+	bool load		//	èª­è¾¼ãƒ•ãƒ©ã‚°
 ){
 	if(!*id) return NULL;
 	CPlugin *ptr = m_List;
@@ -306,7 +306,7 @@ CPlugin *CPluginList::FindPlugin(
 }
 
 /*
- *	—˜—p‰Â”\‚Èƒvƒ‰ƒOƒCƒ“‚ğ’T‚·
+ *	åˆ©ç”¨å¯èƒ½ãªãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’æ¢ã™
  */
 CPlugin *CPluginList::FindAvailable(){
 	CPlugin *ptr = m_List;
@@ -318,10 +318,10 @@ CPlugin *CPluginList::FindAvailable(){
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒcƒŠ[\’z
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ„ãƒªãƒ¼æ§‹ç¯‰
  */
 void CPluginList::BuildTree(
-	CPluginTree *tree	//	ƒcƒŠ[ƒrƒ…[
+	CPluginTree *tree	//	ãƒ„ãƒªãƒ¼ãƒ“ãƒ¥ãƒ¼
 ){
 	CPlugin *ptr = m_List;
 	CTreeDirElement *root = tree->GetRoot();
@@ -336,11 +336,11 @@ void CPluginList::BuildTree(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒeƒLƒXƒgƒtƒ@ƒCƒ‹‚ğƒoƒCƒiƒŠ‚Åƒ[ƒh
+ *	ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒã‚¤ãƒŠãƒªã§ãƒ­ãƒ¼ãƒ‰
  */
 char *LoadBinaryText(
-	FILE *file,	//	ƒtƒ@ƒCƒ‹
-	int maxbyte	//	“ÇÅ‘åƒTƒCƒY
+	FILE *file,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	int maxbyte	//	èª­è¾¼æœ€å¤§ã‚µã‚¤ã‚º
 ){
 	if(!file) return NULL;
 	fseek(file, 0, SEEK_END);
@@ -359,11 +359,11 @@ char *LoadBinaryText(
 }
 
 /*
- *	ƒeƒLƒXƒgƒtƒ@ƒCƒ‹‚ğƒoƒCƒiƒŠ‚Åƒ[ƒh
+ *	ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒã‚¤ãƒŠãƒªã§ãƒ­ãƒ¼ãƒ‰
  */
 char *LoadBinaryText(
-	char *fname,	//	ƒtƒ@ƒCƒ‹–¼
-	int maxbyte		//	“ÇÅ‘åƒTƒCƒY
+	char *fname,	//	ãƒ•ã‚¡ã‚¤ãƒ«å
+	int maxbyte		//	èª­è¾¼æœ€å¤§ã‚µã‚¤ã‚º
 ){
 	return LoadBinaryText(fopen(fname, "rb"), maxbyte);
 }

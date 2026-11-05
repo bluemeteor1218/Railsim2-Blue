@@ -1,10 +1,10 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 D3DCOLOR GetPixelColor(int x, int y);
 void RenderLensFlare(VEC3 pos, float size, BOOL fWhite);
 
 /*
- *	ƒrƒ‹ƒ{[ƒh•ÏŠ·
+ *	ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰å¤‰æ›
  */
 inline void devTransBillboard(VEC3 pos){
 	MTX4 mtx = sv3.mtxViewInv;

@@ -1,17 +1,17 @@
-#ifndef CRAILEDITMODE_H_INCLUDED
+ï»¿#ifndef CRAILEDITMODE_H_INCLUDED
 #define CRAILEDITMODE_H_INCLUDED
 
 #include "CRailWay.h"
 #include "CSceneryMode.h"
 
-const int RAIL_EDIT_MODES = 11;	//	ƒ‚[ƒh”
+const int RAIL_EDIT_MODES = 11;	//	ãƒ¢ãƒ¼ãƒ‰æ•°
 
 /*
- *	ƒŒ[ƒ‹•ÒWƒ‚[ƒh
+ *	ãƒ¬ãƒ¼ãƒ«ç·¨é›†ãƒ¢ãƒ¼ãƒ‰
  */
 class CRailEditMode: public CCursorSceneryMode{
 private:
-	int m_DragState;				//	”ÍˆÍ‘I‘ğó‘Ô
+	int m_DragState;				//	ç¯„å›²é¸æŠçŠ¶æ…‹
 	enum EditMode{
 		EM_EDIT_RAIL,
 		EM_ADD_PIER,
@@ -25,16 +25,16 @@ private:
 		EM_EDIT_RAIL_BLOCK,
 		EM_EDIT_SPEED_LIMIT,
 	};
-	EditMode m_EditMode;			//	•ÒWƒ‚[ƒh
-	CPopMenu *m_RailBlockMenu;		//	•ÂÇ‹æŠÔƒƒjƒ…[
-	CPopMenu *m_SpeedLimitMenu;		//	§ŒÀ‘¬“xƒƒjƒ…[
-	VEC3 m_DragBegin;				//	”ÍˆÍ‘I‘ğŠJnÀ•W
-	VEC3 m_DragEnd;					//	”ÍˆÍ‘I‘ğI—¹À•W
-	CPoleLink m_LineLinkFrom;		//	‰ËüÚ‘±Œ³
-	CRailLinkTemp m_WarpLinkFrom;	//	ƒ[ƒvÚ‘±Œ³
-	CWindowCtrl m_EditWindow;		//	•ÒWİ’è‘‹
-	CStaticCtrl m_ModeLabel;		//	ƒ‚[ƒhƒ‰ƒxƒ‹
-	CRadioButton m_Mode[RAIL_EDIT_MODES];	//	ƒ‚[ƒhƒ‰ƒWƒI
+	EditMode m_EditMode;			//	ç·¨é›†ãƒ¢ãƒ¼ãƒ‰
+	CPopMenu *m_RailBlockMenu;		//	é–‰å¡åŒºé–“ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	CPopMenu *m_SpeedLimitMenu;		//	åˆ¶é™é€Ÿåº¦ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	VEC3 m_DragBegin;				//	ç¯„å›²é¸æŠé–‹å§‹åº§æ¨™
+	VEC3 m_DragEnd;					//	ç¯„å›²é¸æŠçµ‚äº†åº§æ¨™
+	CPoleLink m_LineLinkFrom;		//	æ¶ç·šæ¥ç¶šå…ƒ
+	CRailLinkTemp m_WarpLinkFrom;	//	ãƒ¯ãƒ¼ãƒ—æ¥ç¶šå…ƒ
+	CWindowCtrl m_EditWindow;		//	ç·¨é›†è¨­å®šçª“
+	CStaticCtrl m_ModeLabel;		//	ãƒ¢ãƒ¼ãƒ‰ãƒ©ãƒ™ãƒ«
+	CRadioButton m_Mode[RAIL_EDIT_MODES];	//	ãƒ¢ãƒ¼ãƒ‰ãƒ©ã‚¸ã‚ª
 public:
 	CRailEditMode();
 	~CRailEditMode();
@@ -44,7 +44,7 @@ public:
 	void RenderCursorScenery();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CRailEditMode *g_RailEditMode;
 
 #endif

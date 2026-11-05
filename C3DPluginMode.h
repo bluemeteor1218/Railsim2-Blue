@@ -1,4 +1,4 @@
-#ifndef C3DPLUGINMODE_H_INCLUDED
+ï»¿#ifndef C3DPLUGINMODE_H_INCLUDED
 #define C3DPLUGINMODE_H_INCLUDED
 
 #include "CInterfaceMode.h"
@@ -6,7 +6,7 @@
 class CModelPlugin;
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒvƒ‰ƒOƒCƒ“ƒ‚[ƒh
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ¢ãƒ¼ãƒ‰
  */
 class C3DPluginMode: public CPluginMode{
 protected:
@@ -35,15 +35,15 @@ public:
 };
 
 /*
- *	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“ƒ‚[ƒh
+ *	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ¢ãƒ¼ãƒ‰
  */
 class CModelPluginMode: public C3DPluginMode{
 protected:
-	CCamera m_MyCamera;				//	ƒJƒƒ‰
-	CWindowCtrl m_SwitchWindow;		//	ƒXƒCƒbƒ`‘‹
-	CListView m_SwitchListView;		//	ƒXƒCƒbƒ`ƒŠƒXƒg
-	CListView m_OptionListView;		//	ƒIƒvƒVƒ‡ƒ“ƒŠƒXƒg
-	CModelPlugin *m_PreviewModel;	//	•\¦’†ƒvƒ‰ƒOƒCƒ“
+	CCamera m_MyCamera;				//	ã‚«ãƒ¡ãƒ©
+	CWindowCtrl m_SwitchWindow;		//	ã‚¹ã‚¤ãƒƒãƒçª“
+	CListView m_SwitchListView;		//	ã‚¹ã‚¤ãƒƒãƒãƒªã‚¹ãƒˆ
+	CListView m_OptionListView;		//	ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒªã‚¹ãƒˆ
+	CModelPlugin *m_PreviewModel;	//	è¡¨ç¤ºä¸­ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 public:
 	CModelPluginMode(char *);
 	virtual ~CModelPluginMode(){}

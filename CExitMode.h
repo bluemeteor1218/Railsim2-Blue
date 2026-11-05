@@ -1,4 +1,4 @@
-#ifndef CEXITMODE_H_INCLUDED
+Ôªø#ifndef CEXITMODE_H_INCLUDED
 #define CEXITMODE_H_INCLUDED
 
 #include "CInterfaceMode.h"
@@ -6,11 +6,11 @@
 class CYesNoDialog;
 
 /*
- *	èIóπÉÇÅ[Éh
+ *	ÁµÇ‰∫Ü„É¢„Éº„Éâ
  */
 class CExitMode: public CInterfaceMode{
 private:
-	CYesNoDialog *m_Dialog;	//	É_ÉCÉAÉçÉO
+	CYesNoDialog *m_Dialog;	//	„ÉÄ„Ç§„Ç¢„É≠„Ç∞
 public:
 	CExitMode();
 	~CExitMode(){}
@@ -19,7 +19,7 @@ public:
 	void ScanInputInterface(){}
 };
 
-//	äOïîÉOÉçÅ[ÉoÉã
+//	Â§ñÈÉ®„Ç∞„É≠„Éº„Éê„É´
 extern CExitMode *g_ExitMode;
 
 #endif

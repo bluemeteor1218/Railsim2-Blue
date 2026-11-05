@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+﻿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -15,9 +15,9 @@
 #include "view_ctrl.h"
 
 /*
- *	�J�����i�r���[�j���L�[�{�[�h�݂̂ő��삷��
+ *	カメラ（ビュー）をキーボードのみで操作する
  *
- *	r		: ���x
+ *	r		: 感度
  */
 void KeyLook(float r){
 	float t = r/10*(float)MAXFPS/GetFPS();
@@ -28,13 +28,13 @@ void KeyLook(float r){
 
 	VEC3 v(0, 0, 0);
 
-	//	[W]�F�O�i�A[S]�F��ށA[D]�F�E�ړ��A[A]�F���ړ�
+	//	[W]：前進、[S]：後退、[D]：右移動、[A]：左移動
 	if(GetKey(DIK_W)>=S_PUSH) v.z = r;
 	if(GetKey(DIK_S)>=S_PUSH) v.z = -r;
 	if(GetKey(DIK_D)>=S_PUSH) v.x = r;
 	if(GetKey(DIK_A)>=S_PUSH) v.x = -r;
 
-	//	�΂߈ړ��̑��x����
+	//	斜め移動の速度調節
 	if(v.z!=0 && v.x!=0)
 		v.z /= SQRT2, v.x /= SQRT2;
 
@@ -43,12 +43,12 @@ void KeyLook(float r){
 }
 
 /*
- *	�J�����i�r���[�j���}�E�X�ƃL�[�{�[�h�ő��삷��
+ *	カメラ（ビュー）をマウスとキーボードで操作する
  *
- *	r		:���x
+ *	r		:感度
  */
 void MouseLook(float r){
-	//	�J�[�\���ʒu�̕ω���������]
+	//	カーソル位置の変化分だけ回転
 	static POINT p, op = {svw.winW/2, svw.winH/2};
 	static float dx = svw.winW/(D3DX_PI/3);
 	static float dy = svw.winH/(D3DX_PI/2);
@@ -57,7 +57,7 @@ void MouseLook(float r){
 	RotVUp((op.x-p.x)/dx);
 	RotVX((p.y-op.y)/dy);
 
-	//	�J�[�\�������ʒu�����l�ɒB����ƒ����Ƀ��Z�b�g�i360�x�ȏ�̉�]���\�ɂ���j
+	//	カーソル水平位置が一定値に達すると中央にリセット（360度以上の回転を可能にする）
 	if(p.x<svw.winW*0.25 || p.x>svw.winW*0.75){
 		p.x = svw.winW/2;
 		SetCursor(p.x, p.y);
@@ -66,13 +66,13 @@ void MouseLook(float r){
 
 	VEC3 v(0, 0, 0);
 
-	//	[W]�F�O�i�A[S]�F��ށA[D]�F�E�ړ��A[A]�F���ړ�
+	//	[W]：前進、[S]：後退、[D]：右移動、[A]：左移動
 	if(GetKey(DIK_W)>=S_PUSH) v.z = r;
 	if(GetKey(DIK_S)>=S_PUSH) v.z = -r;
 	if(GetKey(DIK_D)>=S_PUSH) v.x = r;
 	if(GetKey(DIK_A)>=S_PUSH) v.x = -r;
 
-	//	�΂߈ړ��̑��x����
+	//	斜め移動の速度調節
 	if(v.z!=0 && v.x!=0)
 		v.z /= SQRT2, v.x /= SQRT2;
 
@@ -81,9 +81,9 @@ void MouseLook(float r){
 }
 
 /*
- *	FPS��\������
+ *	FPSを表示する
  *
- *	x, y	: �ʒu
+ *	x, y	: 位置
  */
 void ShowFPS(int x, int y){
 	char msg[80];
@@ -93,9 +93,9 @@ void ShowFPS(int x, int y){
 }
 
 /*
- *	FPS�⎋�_�A�����_��\������
+ *	FPSや視点、注視点を表示する
  *
- *	x, y	: �ʒu
+ *	x, y	: 位置
  */
 void ShowCameraInfo(int x, int y){
 	char msg[80];
@@ -110,9 +110,9 @@ void ShowCameraInfo(int x, int y){
 }
 
 /*
- *	�L�[�{�[�h����\��
+ *	キーボード情報を表示
  *
- *	x, y	: �ʒu
+ *	x, y	: 位置
  */
 void ShowKeyboardInfo(int x, int y){
 	char msg[256];
@@ -125,9 +125,9 @@ void ShowKeyboardInfo(int x, int y){
 }
 
 /*
- *	�}�E�X����\��
+ *	マウス情報を表示
  *
- *	x, y	: �ʒu
+ *	x, y	: 位置
  */
 void ShowMouseInfo(int x, int y){
 	char msg[256];
@@ -141,9 +141,9 @@ void ShowMouseInfo(int x, int y){
 }
 
 /*
- *	�W���C�X�e�B�b�N����\��
+ *	ジョイスティック情報を表示
  *
- *	x, y	: �ʒu
+ *	x, y	: 位置
  */
 void ShowJoyStickInfo(int x, int y){
 	char msg[256];

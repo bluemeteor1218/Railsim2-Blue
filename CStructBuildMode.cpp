@@ -1,15 +1,15 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CScene.h"
 #include "CStruct.h"
 #include "CStructPlugin.h"
 #include "CSurfacePlugin.h"
 #include "CStructBuildMode.h"
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const float CORNER_MIN_DIST;
 extern const int ARROW_INTERFACE_HEIGHT;
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CWindowCtrl CStructBuildMode::ms_StructWindow;
 CStaticCtrl CStructBuildMode::ms_DirLabel;
 CRadioButton CStructBuildMode::ms_Dir[4];
@@ -17,7 +17,7 @@ CCheckBox CStructBuildMode::ms_FitNormal;
 
 /*
  *	[static]
- *	‹¤’ÊƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ì‰Šú‰»
+ *	å…±é€šã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®åˆæœŸåŒ–
  */
 void CStructBuildMode::InitInterface(){
 	CInterface::ResetTabHead();
@@ -38,7 +38,7 @@ void CStructBuildMode::InitInterface(){
 
 /*
  *	[static]
- *	Šp“x•ªŠ„”æ“¾
+ *	è§’åº¦åˆ†å‰²æ•°å–å¾—
  */
 int CStructBuildMode::GetAngleSplit(){
 	static int anglesplit[4] = {32, 72, 256, 360};
@@ -46,7 +46,7 @@ int CStructBuildMode::GetAngleSplit(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStructBuildMode::CStructBuildMode(){
 	m_HitFlag = false;
@@ -54,16 +54,16 @@ CStructBuildMode::CStructBuildMode(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStructBuildMode::~CStructBuildMode(){
 }
 
 /*
- *	İ’u•ûŒüƒxƒNƒgƒ‹ŒvZ
+ *	è¨­ç½®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«è¨ˆç®—
  */
 void CStructBuildMode::GetBuildDir(
-	VEC3 *dir, VEC3 *up	//	Ši”[æ
+	VEC3 *dir, VEC3 *up	//	æ ¼ç´å…ˆ
 ){
 	float theta = 2.0f*D3DX_PI*m_BuildAngle/GetAngleSplit();
 	*dir = VEC3(sinf(theta), 0.0f, cosf(theta));
@@ -77,7 +77,7 @@ void CStructBuildMode::GetBuildDir(
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CStructBuildMode::EnterArrowScenery(){
 	ms_ModeLabel = lang(BuildStruct);
@@ -87,14 +87,14 @@ void CStructBuildMode::EnterArrowScenery(){
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CStructBuildMode::EnterStructBuild(){
 	if(g_Struct) g_Struct->SetPreview();
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CStructBuildMode::ScanInputArrowScenery(){
 	static int rep;
@@ -155,7 +155,7 @@ BUILD:
 }
 
 /*
- *	Œšİ
+ *	å»ºè¨­
  */
 void CStructBuildMode::Build(){
 	if(g_Struct){
@@ -167,7 +167,7 @@ void CStructBuildMode::Build(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CStructBuildMode::RenderArrowScenery(){
 	ms_StructWindow.SetColor(m_ArrowMode ? 0x80ffffff : 0xffffffff);
@@ -196,7 +196,7 @@ void CStructBuildMode::RenderArrowScenery(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CStructBuildMode::RenderStructBuild(){
 	if(ms_PhotoMode) return;

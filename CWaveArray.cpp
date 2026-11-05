@@ -1,27 +1,27 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CWaveArray.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CWaveArray::CWaveArray(){
 	m_Wave = NULL;
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CWaveArray::~CWaveArray(){
 	Free();
 }
 
 /*
- *	ƒTƒEƒ“ƒh‚Ìƒ[ƒh
+ *	ã‚µã‚¦ãƒ³ãƒ‰ã®ãƒ­ãƒ¼ãƒ‰
  */
 void CWaveArray::Load(
-	char *f,	//	ƒtƒ@ƒCƒ‹–¼
-	int n,		//	“¯Ä¶Å‘å”
-	bool f3d	//	3D ƒtƒ‰ƒO
+	char *f,	//	ãƒ•ã‚¡ã‚¤ãƒ«å
+	int n,		//	åŒæ™‚å†ç”Ÿæœ€å¤§æ•°
+	bool f3d	//	3D ãƒ•ãƒ©ã‚°
 ){
 	int i;
 	BOOL f3dold = svs.f3D;
@@ -37,12 +37,12 @@ void CWaveArray::Load(
 }
 
 /*
- *	Ä¶
+ *	å†ç”Ÿ
  */
 void CWaveArray::Add(
-	VEC3 p,	//	‰¹Œ¹‚ÌÀ•W
-	int v,	//	‰¹—Ê
-	int ms	//	Ä¶ŠJnˆÊ’u
+	VEC3 p,	//	éŸ³æºã®åº§æ¨™
+	int v,	//	éŸ³é‡
+	int ms	//	å†ç”Ÿé–‹å§‹ä½ç½®
 ){
 	int i;
 	for(i = 0; i<m_Number; i++){

@@ -1,19 +1,19 @@
-#ifndef CRAILDETECTCURVE_H_INCLUDED
+ï»¿#ifndef CRAILDETECTCURVE_H_INCLUDED
 #define CRAILDETECTCURVE_H_INCLUDED
 
 #include "CRailWay.h"
 #include "CRailTraceCurve.h"
 
 /*
- *	ƒŒ[ƒ‹ŒŸoƒJ[ƒu (2D)
+ *	ãƒ¬ãƒ¼ãƒ«æ¤œå‡ºã‚«ãƒ¼ãƒ– (2D)
  */
 class CRailDetectCurve2D: public CRailTraceCurve{
 private:
-	static float ms_MinDist;		//	Å¬ŒŸo‹——£
-	static CRailLinkTemp ms_Detect;	//	ŒŸoî•ñ
-	int m_DetectMode;				//	ŒŸoƒ‚[ƒh
-	VEC3 m_CursorPos1;				//	ƒJ[ƒ\ƒ‹À•W 1
-	VEC3 m_CursorPos2;				//	ƒJ[ƒ\ƒ‹À•W 2
+	static float ms_MinDist;		//	æœ€å°æ¤œå‡ºè·é›¢
+	static CRailLinkTemp ms_Detect;	//	æ¤œå‡ºæƒ…å ±
+	int m_DetectMode;				//	æ¤œå‡ºãƒ¢ãƒ¼ãƒ‰
+	VEC3 m_CursorPos1;				//	ã‚«ãƒ¼ã‚½ãƒ«åº§æ¨™ 1
+	VEC3 m_CursorPos2;				//	ã‚«ãƒ¼ã‚½ãƒ«åº§æ¨™ 2
 public:
 	static void ResetDetect(){ ms_MinDist = -1.0f; }
 	static bool RenderLink();
@@ -27,13 +27,13 @@ public:
 };
 
 /*
- *	ƒŒ[ƒ‹ŒŸoƒJ[ƒu (3D)
+ *	ãƒ¬ãƒ¼ãƒ«æ¤œå‡ºã‚«ãƒ¼ãƒ– (3D)
  */
 class CRailDetectCurve3D: public CRailTraceCurve{
 private:
-	static float ms_MinDist;		//	Å¬ŒŸo‹——£
-	static CRailLinkTemp ms_Detect;	//	ŒŸoî•ñ
-	VEC3 m_ArrowPos;				//	–îˆóÀ•W
+	static float ms_MinDist;		//	æœ€å°æ¤œå‡ºè·é›¢
+	static CRailLinkTemp ms_Detect;	//	æ¤œå‡ºæƒ…å ±
+	VEC3 m_ArrowPos;				//	çŸ¢å°åº§æ¨™
 public:
 	static void ResetDetect(){ ms_MinDist = -1.0f; }
 	static bool RenderLink();

@@ -1,18 +1,18 @@
-#ifndef CRAILCURVE_H_INCLUDED
+ï»¿#ifndef CRAILCURVE_H_INCLUDED
 #define CRAILCURVE_H_INCLUDED
 
 class CAxleObject;
 
 /*
- *	ƒŒ[ƒ‹ƒJ[ƒu
+ *	ãƒ¬ãƒ¼ãƒ«ã‚«ãƒ¼ãƒ–
  */
 class CRailCurve{
 protected:
-	float m_Radius;		//	‹È—¦”¼Œa
-	float m_SegLen;		//	ƒZƒOƒƒ“ƒg’·
-	bool m_CompSplit;	//	•âŠ®§Œä“_
-	VEC3 m_SplitPos;	//	’†ŠÔ“_À•W
-	VEC3 m_SplitDir;	//	’†ŠÔ“_Úü (³‹K‰»Ï)
+	float m_Radius;		//	æ›²ç‡åŠå¾„
+	float m_SegLen;		//	ã‚»ã‚°ãƒ¡ãƒ³ãƒˆé•·
+	bool m_CompSplit;	//	è£œå®Œåˆ¶å¾¡ç‚¹
+	VEC3 m_SplitPos;	//	ä¸­é–“ç‚¹åº§æ¨™
+	VEC3 m_SplitDir;	//	ä¸­é–“ç‚¹æ¥ç·š (æ­£è¦åŒ–æ¸ˆ)
 public:
 	virtual void Curve(VEC3 &, VEC3 &, VEC3 &, VEC3 &, bool, bool){}
 	virtual void ShowCompSplit(VEC3 &, VEC3 &){}
@@ -21,7 +21,7 @@ public:
 	float CalcLength(VEC3 &, VEC3 &, VEC3 &, VEC3 &, float sum = 0.0f);
 };
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void CalcCantAxis(VEC3 *, VEC3 *, VEC3 *, float);
 
 #endif

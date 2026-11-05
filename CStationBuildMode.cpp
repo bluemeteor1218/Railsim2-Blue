@@ -1,10 +1,10 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CStation.h"
 #include "CStationPlugin.h"
 #include "CStationBuildMode.h"
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CStationBuildMode::EnterStructBuild(){
 	ms_ModeLabel = lang(BuildStation);
@@ -12,7 +12,7 @@ void CStationBuildMode::EnterStructBuild(){
 }
 
 /*
- *	Œšİ
+ *	å»ºè¨­
  */
 void CStationBuildMode::Build(){
 	if(g_Station){
@@ -24,7 +24,7 @@ void CStationBuildMode::Build(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CStationBuildMode::RenderStructBuild(){
 	VEC3 tdir, tup;

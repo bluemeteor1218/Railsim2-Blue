@@ -1,10 +1,10 @@
-#ifndef CSTATIONEDITMODE_H_INCLUDED
+ï»¿#ifndef CSTATIONEDITMODE_H_INCLUDED
 #define CSTATIONEDITMODE_H_INCLUDED
 
 #include "CStructEditMode.h"
 
 /*
- *	‰wÉ•ÒWƒ‚[ƒh
+ *	é§…èˆç·¨é›†ãƒ¢ãƒ¼ãƒ‰
  */
 class CStationEditMode: public CStructEditMode{
 private:
@@ -16,7 +16,7 @@ public:
 	void Delete();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CStationEditMode *g_StationEditMode;
 
 #endif

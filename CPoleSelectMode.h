@@ -1,11 +1,11 @@
-#ifndef CPOLESELECTMODE_H_INCLUDED
+ï»¿#ifndef CPOLESELECTMODE_H_INCLUDED
 #define CPOLESELECTMODE_H_INCLUDED
 
 #include "C3DPluginMode.h"
 #include "CRailwayMode.h"
 
 /*
- *	‰Ëü’Œ‘I‘ğƒ‚[ƒh
+ *	æ¶ç·šæŸ±é¸æŠãƒ¢ãƒ¼ãƒ‰
  */
 class CPoleSelectMode: public C3DPluginMode, public CRailwayMode{
 private:
@@ -21,7 +21,7 @@ public:
 	void Render3DPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CPoleSelectMode *g_PoleSelectMode;
 
 #endif

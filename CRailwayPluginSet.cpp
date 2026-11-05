@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSimpleDialog.h"
 #include "CPopMenu.h"
 #include "CRailPlugin.h"
@@ -11,28 +11,28 @@
 #include "CSkinPlugin.h"
 #include "CRailBuildMode.h"
 
-//	“à•”’è”
+//	å†…éƒ¨å®šæ•°
 const char *RPS_DIRNAME = "RailwayPluginSet";
 
-//	“à•”ƒOƒ[ƒoƒ‹
-CPopMenu *g_RailwayPluginSetMenu = NULL;		//	ƒvƒ‰ƒOƒCƒ“ƒZƒbƒgƒƒjƒ…[
-list<CRailwayPluginSet> g_RailwayPluginSetList;	//	ƒvƒ‰ƒOƒCƒ“ƒZƒbƒgƒŠƒXƒg
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+CPopMenu *g_RailwayPluginSetMenu = NULL;		//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚»ãƒƒãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼
+list<CRailwayPluginSet> g_RailwayPluginSetList;	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚»ãƒƒãƒˆãƒªã‚¹ãƒˆ
 
-int g_RPSModalState;					//	ƒ‚[ƒ_ƒ‹ó‘Ô
-string g_RPSTempString;					//	ƒeƒ“ƒ|ƒ‰ƒŠ•¶š—ñ
-IRailwayPluginSet g_RPSTarget;			//	ˆ—‘ÎÛ
-IRailwayPluginSet g_RPSErasing;			//	íœ‘ÎÛ
-CYesNoDialog *g_RPSYesNoDialog = NULL;	//	–â‡‚¹ƒ_ƒCƒAƒƒO
-CInputDialog *g_RPSInputDialog = NULL;	//	“ü—Íƒ_ƒCƒAƒƒO
+int g_RPSModalState;					//	ãƒ¢ãƒ¼ãƒ€ãƒ«çŠ¶æ…‹
+string g_RPSTempString;					//	ãƒ†ãƒ³ãƒãƒ©ãƒªæ–‡å­—åˆ—
+IRailwayPluginSet g_RPSTarget;			//	å‡¦ç†å¯¾è±¡
+IRailwayPluginSet g_RPSErasing;			//	å‰Šé™¤å¯¾è±¡
+CYesNoDialog *g_RPSYesNoDialog = NULL;	//	å•åˆã›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
+CInputDialog *g_RPSInputDialog = NULL;	//	å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailwayPluginSet::CRailwayPluginSet(
-	char *name,	//	İ’è–¼
-	bool create	//	Œ»İ‚Ìİ’è‚©‚çì¬
+	char *name,	//	è¨­å®šå
+	bool create	//	ç¾åœ¨ã®è¨­å®šã‹ã‚‰ä½œæˆ
 ):
-	CPlugin(lang(RailwayTemplate))	//	Šî–{ƒNƒ‰ƒX
+	CPlugin(lang(RailwayTemplate))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_Name = name;
 	m_Author = "RailSim II";
@@ -63,17 +63,17 @@ CRailwayPluginSet::CRailwayPluginSet(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailwayPluginSet::~CRailwayPluginSet(){
 	DELETE_A(m_Buffer);
 }
 
 /*
- *	’è‹`ƒtƒ@ƒCƒ‹ƒAƒ^ƒbƒ`
+ *	å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«ã‚¢ã‚¿ãƒƒãƒ
  */
 bool CRailwayPluginSet::PreLoadRPS(
-	FILE *file	//	ƒtƒ@ƒCƒ‹
+	FILE *file	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	char *str = m_Buffer = LoadBinaryText(file), *eee;
 	try{
@@ -96,7 +96,7 @@ bool CRailwayPluginSet::PreLoadRPS(
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 bool CRailwayPluginSet::Load(){
 	char *str = m_Script, *eee;
@@ -144,10 +144,10 @@ bool CRailwayPluginSet::Load(){
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CRailwayPluginSet::Save(
-	FILE *file	//	İ’èƒtƒ@ƒCƒ‹
+	FILE *file	//	è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(file, "DatafileHeader{\n");
 	fprintf(file, "\tRailSimVersion = %.2f;\n", RAILSIM_VERSION);
@@ -176,7 +176,7 @@ void CRailwayPluginSet::Save(
 }
 
 /*
- *	ƒf[ƒ^ƒtƒ@ƒCƒ‹íœ
+ *	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤
  */
 bool CRailwayPluginSet::DeleteFromDisk(){
 	if(chdir(g_BaseDir) || chdir(DirName()) || remove(TextName2())){
@@ -189,10 +189,10 @@ bool CRailwayPluginSet::DeleteFromDisk(){
 }
 
 /*
- *	ƒf[ƒ^ƒtƒ@ƒCƒ‹–¼•ÏX
+ *	ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«åå¤‰æ›´
  */
 bool CRailwayPluginSet::Rename(
-	string &newname	//	V‹K–¼
+	string &newname	//	æ–°è¦å
 ){
 	string fname2 = FlashIn("%s.txt", newname.c_str());
 	if(CheckSlash(fname2.c_str()) || chdir(g_BaseDir) || chdir(DirName()) ||
@@ -207,7 +207,7 @@ bool CRailwayPluginSet::Rename(
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒZƒbƒg“K—p
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚»ãƒƒãƒˆé©ç”¨
  */
 void CRailwayPluginSet::Apply(){
 	LoadAndGet();
@@ -226,7 +226,7 @@ void CRailwayPluginSet::Apply(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	İ’èƒŠƒXƒg“Ç
+ *	è¨­å®šãƒªã‚¹ãƒˆèª­è¾¼
  */
 void LoadRailwayPluginSetList(){
 	long filelist;
@@ -256,10 +256,10 @@ void LoadRailwayPluginSetList(){
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒZƒbƒgŒŸõ
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚»ãƒƒãƒˆæ¤œç´¢
  */
 IRailwayPluginSet FindRailwayPluginSet(
-	string name	//	İ’è–¼
+	string name	//	è¨­å®šå
 ){
 	IRailwayPluginSet irps = g_RailwayPluginSetList.begin();
 	for(; irps!=g_RailwayPluginSetList.end(); irps++)
@@ -268,11 +268,11 @@ IRailwayPluginSet FindRailwayPluginSet(
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒZƒbƒg’Ç‰Á
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚»ãƒƒãƒˆè¿½åŠ 
  */
 void AddRailwayPluginSet(
-	string name,	//	İ’è–¼
-	bool over		//	ã‘‚«
+	string name,	//	è¨­å®šå
+	bool over		//	ä¸Šæ›¸ã
 ){
 	if(!name.size()) return;
 	IRailwayPluginSet irps = FindRailwayPluginSet(name);
@@ -304,7 +304,7 @@ void AddRailwayPluginSet(
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒZƒbƒgƒŠƒXƒgƒAƒbƒv
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚»ãƒƒãƒˆãƒªã‚¹ãƒˆã‚¢ãƒƒãƒ—
  */
 void ListRailwayPluginSet(){
 	class CSettingAdder: public CMenuCommand{
@@ -317,14 +317,14 @@ void ListRailwayPluginSet(){
 	};
 	class CSettingApplier: public CMenuCommand{
 	private:
-		IRailwayPluginSet m_PluginSet;	//	ƒvƒ‰ƒOƒCƒ“ƒZƒbƒg
+		IRailwayPluginSet m_PluginSet;	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚»ãƒƒãƒˆ
 	public:
 		CSettingApplier(IRailwayPluginSet s){ m_PluginSet = s; }
 		void Exec(){ m_PluginSet->Apply(); }
 	};
 	class CSettingDeleter: public CMenuCommand{
 	private:
-		IRailwayPluginSet m_PluginSet;	//	ƒvƒ‰ƒOƒCƒ“ƒZƒbƒg
+		IRailwayPluginSet m_PluginSet;	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚»ãƒƒãƒˆ
 	public:
 		CSettingDeleter(IRailwayPluginSet s){ m_PluginSet = s; }
 		void Exec(){
@@ -337,7 +337,7 @@ void ListRailwayPluginSet(){
 	};
 	class CSettingRenamer: public CMenuCommand{
 	private:
-		IRailwayPluginSet m_PluginSet;	//	ƒvƒ‰ƒOƒCƒ“ƒZƒbƒg
+		IRailwayPluginSet m_PluginSet;	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚»ãƒƒãƒˆ
 	public:
 		CSettingRenamer(IRailwayPluginSet s){ m_PluginSet = s; }
 		void Exec(){
@@ -361,7 +361,7 @@ void ListRailwayPluginSet(){
 }
 
 /*
- *	ƒ‚[ƒ_ƒ‹ˆ—
+ *	ãƒ¢ãƒ¼ãƒ€ãƒ«å‡¦ç†
  */
 void ModalFuncRailwayPluginSet(){
 	if(g_RPSInputDialog){

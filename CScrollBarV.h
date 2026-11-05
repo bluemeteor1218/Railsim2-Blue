@@ -1,25 +1,25 @@
-#ifndef CSCROLLBARV_H_INCLUDED
+ï»¿#ifndef CSCROLLBARV_H_INCLUDED
 #define CSCROLLBARV_H_INCLUDED
 
 #include "CMiniButton.h"
 
-const int SLIDER_MIN = 4;			//	ƒXƒ‰ƒCƒ_Å¬•
-const int SLIDER_DRAG_DIST = 100;	//	ƒhƒ‰ƒbƒOÅ‘å‹——£
+const int SLIDER_MIN = 4;			//	ã‚¹ãƒ©ã‚¤ãƒ€æœ€å°å¹…
+const int SLIDER_DRAG_DIST = 100;	//	ãƒ‰ãƒ©ãƒƒã‚°æœ€å¤§è·é›¢
 
 /*
- *	‚’¼ƒXƒNƒ[ƒ‹ƒo[
+ *	å‚ç›´ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼
  */
 class CScrollBarV: public CInterface{
 private:
-	int m_State;				//	ó‘Ô
-	int m_Repeat;				//	’·‰ŸƒJƒEƒ“ƒ^
-	int m_Scroll;				//	ƒXƒNƒ[ƒ‹ˆÊ’u
-	int m_Page;					//	ƒXƒ‰ƒCƒ_•
-	int m_Range;				//	‘S”ÍˆÍ
-	int m_OldS;					//	ˆÚ“®‘OÀ•W
-	int m_DragS;				//	ƒ^ƒCƒgƒ‹ƒo[ƒhƒ‰ƒbƒOÀ•W
-	CMiniButton m_UpButton;		//	ãƒ{ƒ^ƒ“
-	CMiniButton m_DownButton;	//	‰ºƒ{ƒ^ƒ“
+	int m_State;				//	çŠ¶æ…‹
+	int m_Repeat;				//	é•·æŠ¼ã‚«ã‚¦ãƒ³ã‚¿
+	int m_Scroll;				//	ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ä½ç½®
+	int m_Page;					//	ã‚¹ãƒ©ã‚¤ãƒ€å¹…
+	int m_Range;				//	å…¨ç¯„å›²
+	int m_OldS;					//	ç§»å‹•å‰åº§æ¨™
+	int m_DragS;				//	ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ãƒ‰ãƒ©ãƒƒã‚°åº§æ¨™
+	CMiniButton m_UpButton;		//	ä¸Šãƒœã‚¿ãƒ³
+	CMiniButton m_DownButton;	//	ä¸‹ãƒœã‚¿ãƒ³
 public:
 	void Init(int, int, int, int, CInterface *);
 	void SetSize(int, int);

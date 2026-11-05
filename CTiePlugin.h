@@ -1,18 +1,18 @@
-#ifndef CTIEPLUGIN_H_INCLUDED
+ï»¿#ifndef CTIEPLUGIN_H_INCLUDED
 #define CTIEPLUGIN_H_INCLUDED
 
 #include "CProfilePlugin.h"
 
 /*
- *	––Øƒvƒ‰ƒOƒCƒ“
+ *	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CTiePlugin: public CProfilePlugin{
 	friend class CRailBuilder;
 	friend class CLineBuildCurve;
 	friend class CPierPlugin;
 private:
-	float m_Height;		//	‚‚³
-	bool m_FlattenCant;	//	ƒJƒ“ƒg–³Œø‰»
+	float m_Height;		//	é«˜ã•
+	bool m_FlattenCant;	//	ã‚«ãƒ³ãƒˆç„¡åŠ¹åŒ–
 public:
 	CTiePlugin(char *id): CProfilePlugin(id){}
 	char *DirName(){ return "Tie"; }
@@ -25,7 +25,7 @@ public:
 };
 
 /*
- *	––Øƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CTiePluginList: public CProfilePluginList{
 private:
@@ -37,7 +37,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CTiePlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CTiePlugin *g_Tie;
 extern CTiePluginList *g_TiePluginList;
 

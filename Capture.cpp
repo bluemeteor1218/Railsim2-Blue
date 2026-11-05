@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CPixelbit.h"
 #include "Capture.h"
 #include "CCamera.h"
@@ -11,33 +11,33 @@
 #include <vfw.h>
 #pragma comment ( lib, "vfw32.lib" )
 
-//	“à•”ƒOƒ[ƒoƒ‹
-int g_VideoState = 0;				//	B‰eó‘Ô
-int g_VideoFrame = 0;				//	˜A”ÔBMPƒtƒŒ[ƒ€”Ô†
-int g_VideoCount = 0;				//	AVIƒtƒ@ƒCƒ‹ƒJƒEƒ“ƒg
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+int g_VideoState = 0;				//	æ’®å½±çŠ¶æ…‹
+int g_VideoFrame = 0;				//	é€£ç•ªBMPãƒ•ãƒ¬ãƒ¼ãƒ ç•ªå·
+int g_VideoCount = 0;				//	AVIãƒ•ã‚¡ã‚¤ãƒ«ã‚«ã‚¦ãƒ³ãƒˆ
 int g_VideoAVIFrame = 0;
-int g_PictureCount = 0;				//	ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgƒJƒEƒ“ƒg
-CPixelbit g_ScreenShot;				//	ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgƒoƒbƒtƒ@
-CPixelbit g_SmallVideo;				//	ƒ_ƒEƒ“ƒTƒ“ƒvƒ‹ƒoƒbƒtƒ@
-CPixelbit g_Video24bit;				//	24bppƒoƒbƒtƒ@
-COffScreen g_HidefCapture;			//	‚‰ğ‘œ“xB‰e—pƒoƒbƒtƒ@
-bool g_HidefCaptureFlag = false;	//	‚‰ğ‘œ“xB‰eƒtƒ‰ƒO
-int g_HidefBufferSize = 512;		//	ƒoƒbƒtƒ@ƒTƒCƒY
-int g_HidefQuality = 4;				//	Šg‘å”{—¦
-float g_HidefLeft, g_HidefRight;	//	…•½ƒNƒŠƒbƒv
-float g_HidefBottom, g_HidefTop;	//	‚’¼ƒNƒŠƒbƒv
-int g_DownsampleMode = 0;			//	ƒ_ƒEƒ“ƒTƒ“ƒvƒ‹ƒ‚[ƒh
-int g_DownsampleWidth = 0;			//	ƒrƒfƒI•
-int g_DownsampleHeight = 0;			//	ƒrƒfƒI‚‚³
-int g_VideoFormat = 0;				//	ƒrƒfƒIƒtƒH[ƒ}ƒbƒg
-bool g_VideoSound = true;			//	˜^‰¹
+int g_PictureCount = 0;				//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã‚«ã‚¦ãƒ³ãƒˆ
+CPixelbit g_ScreenShot;				//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆãƒãƒƒãƒ•ã‚¡
+CPixelbit g_SmallVideo;				//	ãƒ€ã‚¦ãƒ³ã‚µãƒ³ãƒ—ãƒ«ãƒãƒƒãƒ•ã‚¡
+CPixelbit g_Video24bit;				//	24bppãƒãƒƒãƒ•ã‚¡
+COffScreen g_HidefCapture;			//	é«˜è§£åƒåº¦æ’®å½±ç”¨ãƒãƒƒãƒ•ã‚¡
+bool g_HidefCaptureFlag = false;	//	é«˜è§£åƒåº¦æ’®å½±ãƒ•ãƒ©ã‚°
+int g_HidefBufferSize = 512;		//	ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º
+int g_HidefQuality = 4;				//	æ‹¡å¤§å€ç‡
+float g_HidefLeft, g_HidefRight;	//	æ°´å¹³ã‚¯ãƒªãƒƒãƒ—
+float g_HidefBottom, g_HidefTop;	//	å‚ç›´ã‚¯ãƒªãƒƒãƒ—
+int g_DownsampleMode = 0;			//	ãƒ€ã‚¦ãƒ³ã‚µãƒ³ãƒ—ãƒ«ãƒ¢ãƒ¼ãƒ‰
+int g_DownsampleWidth = 0;			//	ãƒ“ãƒ‡ã‚ªå¹…
+int g_DownsampleHeight = 0;			//	ãƒ“ãƒ‡ã‚ªé«˜ã•
+int g_VideoFormat = 0;				//	ãƒ“ãƒ‡ã‚ªãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+bool g_VideoSound = true;			//	éŒ²éŸ³
 
 PAVIFILE g_AVI;
 PAVISTREAM g_VideoStream;
 PAVISTREAM g_AudioStream;
 
 /*
- *	B‰e‰Šú‰»
+ *	æ’®å½±åˆæœŸåŒ–
  */
 void InitCapture(){
 	AVIFileInit();
@@ -57,14 +57,14 @@ void InitCapture(){
 	chdir(g_BaseDir);
 }
 /*
- *	B‰e‰ğ•ú
+ *	æ’®å½±è§£æ”¾
  */
 void ReleaseCaptureRS(){
 	AVIFileExit( );
 }
 
 /*
- *	‚‰æ¿B‰e
+ *	é«˜ç”»è³ªæ’®å½±
  */
 void HidefCapture(CSceneryMode *scenerymode){
 	LPTEX8 tex;
@@ -162,12 +162,12 @@ void HidefCapture(CSceneryMode *scenerymode){
 }
 
 /*
- *	‚‘¬k¬ˆ—1
+ *	é«˜é€Ÿç¸®å°å‡¦ç†1
  */
 bool FastDownSample(
-	CPixelbit* dst,	//	Ši”[æ
-	CPixelbit* src,	//	k¬Œ³
-	int shift		//	ƒVƒtƒg’l (1=>1/2, 2=>1/4)
+	CPixelbit* dst,	//	æ ¼ç´å…ˆ
+	CPixelbit* src,	//	ç¸®å°å…ƒ
+	int shift		//	ã‚·ãƒ•ãƒˆå€¤ (1=>1/2, 2=>1/4)
 ){
 	if(shift<=0) return false;
 	const int sw = src->GetWidth(), sh = src->GetHeight();
@@ -218,11 +218,11 @@ bool FastDownSample(
 }
 
 /*
- *	ƒrƒfƒI‚ÌB‰e
+ *	ãƒ“ãƒ‡ã‚ªã®æ’®å½±
  */
 void VideoCapture(
-	int video,	//	ƒrƒfƒIB‰eƒ‚[ƒh (1: record, 2: paused, 4: photo mode)
-	CSceneryMode *scenerymode	//	ƒV[ƒiƒŠƒ‚[ƒh
+	int video,	//	ãƒ“ãƒ‡ã‚ªæ’®å½±ãƒ¢ãƒ¼ãƒ‰ (1: record, 2: paused, 4: photo mode)
+	CSceneryMode *scenerymode	//	ã‚·ãƒ¼ãƒŠãƒªãƒ¢ãƒ¼ãƒ‰
 ){
 	if(GetKey(DIK_F12)==S_PUSH){
 		if(g_RSPV || !CheckCtrl()){
@@ -283,7 +283,7 @@ void VideoCapture(
 }
 
 /*
- *	ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‚ÌŠù‘¶ƒtƒ@ƒCƒ‹‚ÌƒJƒEƒ“ƒg
+ *	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã®æ—¢å­˜ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚«ã‚¦ãƒ³ãƒˆ
  */
 void CountPicture(){
 	FILE *file;
@@ -300,7 +300,7 @@ void CountPicture(){
 }
 
 /*
- *	ƒrƒfƒIBMP‚ÌŠù‘¶ƒtƒ@ƒCƒ‹‚ÌƒJƒEƒ“ƒg
+ *	ãƒ“ãƒ‡ã‚ªBMPã®æ—¢å­˜ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚«ã‚¦ãƒ³ãƒˆ
  */
 void CountVideoBMP(){
 	FILE *file;
@@ -317,7 +317,7 @@ void CountVideoBMP(){
 }
 
 /*
- *	ƒrƒfƒIAVI‚ÌŠù‘¶ƒtƒ@ƒCƒ‹‚ÌƒJƒEƒ“ƒg
+ *	ãƒ“ãƒ‡ã‚ªAVIã®æ—¢å­˜ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚«ã‚¦ãƒ³ãƒˆ
  */
 void CountVideoAVI(){
 	FILE *file;
@@ -334,7 +334,7 @@ void CountVideoAVI(){
 }
 
 /*
- *	ƒrƒfƒIB‰eŠJn
+ *	ãƒ“ãƒ‡ã‚ªæ’®å½±é–‹å§‹
  */
 void StartVideoCapture(){
 	if(g_VideoState) return;
@@ -457,7 +457,7 @@ void StartVideoCapture(){
 }
 
 /*
- *	ƒrƒfƒIB‰e’â~
+ *	ãƒ“ãƒ‡ã‚ªæ’®å½±åœæ­¢
  */
 void StopVideoCapture(){
 	if(!g_VideoState) return;

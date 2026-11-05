@@ -1,22 +1,22 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CLine.h"
 #include "CScene.h"
 #include "CLinePlugin.h"
 #include "CPolePlugin.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_ShowPoleSelect;
 extern bool g_ShowLineSelect;
 extern MAT8 g_MatSelect[];
 extern MAT8 g_MatSelectA[];
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPoleLink::CPoleLink(
-	int side,	//	ƒTƒCƒh
-	int track,	//	‹O“¹”Ô†
-	CPole *pole	//	Ú‘±‰Ëü’Œ
+	int side,	//	ã‚µã‚¤ãƒ‰
+	int track,	//	è»Œé“ç•ªå·
+	CPole *pole	//	æ¥ç¶šæ¶ç·šæŸ±
 ){
 	m_Side = side;
 	m_Track = track;
@@ -24,27 +24,27 @@ CPoleLink::CPoleLink(
 }
 
 /*
- *	Ú‘±“_•`‰æ
+ *	æ¥ç¶šç‚¹æç”»
  */
 void CPoleLink::Render(
-	D3DCOLOR color	//	üF
+	D3DCOLOR color	//	ç·šè‰²
 ){
 	Draw3DPointAs2DRect(GetPos(), color, 5);
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CPoleLink::RestoreAddress(){
 	m_Link = (CPole *)ReplaceAdr(m_Link);
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CPoleLink::Read(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *pref	//	ƒvƒŒƒtƒBƒbƒNƒX
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *pref	//	ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹
 ){
 	char *eee;
 	if(!(str = Assignment(eee = str, pref))) throw CSynErr(eee);
@@ -58,11 +58,11 @@ char *CPoleLink::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CPoleLink::Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *pref	//	ƒvƒŒƒtƒBƒbƒNƒX
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *pref	//	ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹
 ){
 	fprintf(df, "%s%d, %d, %p;\n", pref, m_Side, m_Track, m_Link);
 }
@@ -70,14 +70,14 @@ void CPoleLink::Save(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CPole **CPole::ms_Root = NULL;
 float CPole::ms_MinDist;
 CPoleLink CPole::ms_Detect;
 
 /*
  *	[static]
- *	Ú‘±“_‚ğ•\¦
+ *	æ¥ç¶šç‚¹ã‚’è¡¨ç¤º
  */
 bool CPole::RenderLink(){
 	if(ms_MinDist<0.0f) return false;
@@ -89,7 +89,7 @@ bool CPole::RenderLink(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (“Ç—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (èª­è¾¼ç”¨)
  */
 CPole::CPole(){
 	m_Selected = 0;
@@ -98,12 +98,12 @@ CPole::CPole(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPole::CPole(
-	const VEC3 &pos,		//	À•W
-	const VEC3 &dir,		//	•ûŒü
-	CPolePlugin *pp	//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
+	const VEC3 &pos,		//	åº§æ¨™
+	const VEC3 &dir,		//	æ–¹å‘
+	CPolePlugin *pp	//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	m_Selected = 0;
 	m_Pos = pos;
@@ -123,17 +123,17 @@ CPole::CPole(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPole::~CPole(){
 	DELETE_V(m_Next);
 }
 
 /*
- *	ƒŠƒXƒg‚©‚çíœ
+ *	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
  */
 void CPole::Delete(
-	CScene *scene	//	ƒV[ƒ“
+	CScene *scene	//	ã‚·ãƒ¼ãƒ³
 ){
 	while(m_LineList.size()) scene->DeleteLine(*m_LineList.begin());
 	g_Scene->DeletePoleLink(this);
@@ -142,22 +142,22 @@ void CPole::Delete(
 }
 
 /*
- *	x“_À•Wæ“¾
+ *	æ”¯æŒç‚¹åº§æ¨™å–å¾—
  */
 VEC3 CPole::GetJointPos(
-	int track	//	‹O“¹”Ô†
+	int track	//	è»Œé“ç•ªå·
 ){
 	return m_PolePlugin ? m_Pos+m_Right*(m_PolePlugin->m_TrackInterval
 		*(track-0.5f*(m_PolePlugin->m_TrackNum-1))) : m_Pos;
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CPole::ScanInput(
-	int mode,		//	ƒ‚[ƒh
-	VEC3 &rect1,	//	—Ìˆæn“_
-	VEC3 &rect2		//	—ÌˆæI“_
+	int mode,		//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 &rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 &rect2		//	é ˜åŸŸçµ‚ç‚¹
 ){
 	if(mode==1){	//	scan pole joint link
 		int i, n = m_PolePlugin ? m_PolePlugin->GetTrackNum() : 1;
@@ -204,7 +204,7 @@ void CPole::ScanInput(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 void CPole::Render(){
 	if(!m_PolePlugin) return;
@@ -215,7 +215,7 @@ void CPole::Render(){
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CPole::RestoreAddress(){
 	IPLine ipl = m_LineList.begin();
@@ -223,10 +223,10 @@ void CPole::RestoreAddress(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CPole::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee, *tmp;
 	if(!(str = BeginBlock(str, "Pole"))){
@@ -268,10 +268,10 @@ char *CPole::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CPole::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\t\t\tPole{\n");
 	fprintf(df, "\t\t\t\tAddress = %p;\n", this);
@@ -291,13 +291,13 @@ void CPole::Save(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CLine **CLine::ms_Root = NULL;
 float CLine::ms_MinDist;
 CLine *CLine::ms_Detect;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (“Ç—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (èª­è¾¼ç”¨)
  */
 CLine::CLine(){
 	m_Selected = 0;
@@ -306,12 +306,12 @@ CLine::CLine(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLine::CLine(
-	CPoleLink link1,	//	n“_
-	CPoleLink link2,	//	I“_
-	CLinePlugin *lp		//	‰Ëüƒvƒ‰ƒOƒCƒ“
+	CPoleLink link1,	//	å§‹ç‚¹
+	CPoleLink link2,	//	çµ‚ç‚¹
+	CLinePlugin *lp		//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	m_Selected = 0;
 	m_Link[0] = link1;
@@ -333,14 +333,14 @@ CLine::CLine(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLine::~CLine(){
 	DELETE_V(m_Next);
 }
 
 /*
- *	ƒŠƒXƒg‚©‚çíœ
+ *	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
  */
 void CLine::Delete(){
 	m_Link[0].Disconnect(this);
@@ -350,12 +350,12 @@ void CLine::Delete(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CLine::ScanInput(
-	int mode,		//	ƒ‚[ƒh
-	VEC3 &rect1,	//	—Ìˆæn“_
-	VEC3 &rect2		//	—ÌˆæI“_
+	int mode,		//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 &rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 &rect2		//	é ˜åŸŸçµ‚ç‚¹
 ){
 	VEC3 center = 0.5f*(m_Link[0].GetPos()+m_Link[1].GetPos());
 	VEC3 sc = WorldToScreen(center);
@@ -390,7 +390,7 @@ void CLine::ScanInput(
 }
 
 /*
- *	’f–Ê‚ğƒ_ƒ“ƒv
+ *	æ–­é¢ã‚’ãƒ€ãƒ³ãƒ—
  */
 void CLine::Dump(){
 	if(!m_LinePlugin) return;
@@ -405,7 +405,7 @@ void CLine::Dump(){
 }
 
 /*	
- *	“™ŠÔŠuƒIƒuƒWƒFƒNƒg‚ğƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ç­‰é–“éš”ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CLine::Render(){
 	if(!g_ShadowNeeded && !g_ShowLineSelect
@@ -428,7 +428,7 @@ void CLine::Render(){
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CLine::RestoreAddress(){
 	m_Link[0].RestoreAddress();
@@ -436,10 +436,10 @@ void CLine::RestoreAddress(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CLine::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "Line"))){
@@ -464,10 +464,10 @@ char *CLine::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CLine::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\t\t\tLine{\n");
 	fprintf(df, "\t\t\t\tAddress = %p;\n", this);

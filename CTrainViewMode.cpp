@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSimpleDialog.h"
 #include "CScene.h"
 #include "CSaveFile.h"
@@ -7,11 +7,11 @@
 #include "CTrainViewMode.h"
 #include "CSkinPlugin.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_UpdateTrainGroupList;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainViewMode::CTrainViewMode(){
 	int ww = TILE_UNIT*16, wh = TILE_UNIT*10;
@@ -28,18 +28,18 @@ CTrainViewMode::CTrainViewMode(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainViewMode::~CTrainViewMode(){
 	DELETE_V(m_GroupMenu);
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CTrainViewMode::WindowResized(
-	int w, int h,		//	V‹KƒTƒCƒY
-	CWindowCtrl *wnd	//	ƒEƒBƒhƒEƒRƒ“ƒgƒ[ƒ‹
+	int w, int h,		//	æ–°è¦ã‚µã‚¤ã‚º
+	CWindowCtrl *wnd	//	ã‚¦ã‚£ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	if(wnd==&m_GroupWindow){
 		m_GroupListView.SetSize(w-TILE_UNIT, h-TILE_UNIT*2);
@@ -47,11 +47,11 @@ void CTrainViewMode::WindowResized(
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CTrainViewMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒžãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	switch(type){
 	case CMD_GROUP: {
@@ -68,7 +68,7 @@ CPopMenu *CTrainViewMode::Dispatch(
 }
 
 /*
- *	ƒ‚[ƒh‚ð—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CTrainViewMode::EnterCursorScenery(){
 	ms_ModeLabel = lang(TrainView);
@@ -78,7 +78,7 @@ void CTrainViewMode::EnterCursorScenery(){
 }
 
 /*
- *	ƒJƒƒ‰“K—p
+ *	ã‚«ãƒ¡ãƒ©é©ç”¨
  */
 void CTrainViewMode::ApplyCamera(){
 	if(g_TrainGroup && g_TrainGroup->IsSet()){
@@ -96,7 +96,7 @@ void CTrainViewMode::ApplyCamera(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CTrainViewMode::ScanInputCursorScenery(){
 	if(g_UpdateTrainGroupList){
@@ -146,7 +146,7 @@ void CTrainViewMode::ScanInputCursorScenery(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CTrainViewMode::RenderCursorScenery(){
 	if(g_TrainGroup) g_TrainGroup->PrintInfo();

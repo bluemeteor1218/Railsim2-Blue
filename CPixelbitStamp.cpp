@@ -1,12 +1,12 @@
-#include "CPixelbit.h"
+ï»¿#include "CPixelbit.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void Dialog(char *, ...);
 
 #ifdef ENABLE_RECT_BOUNDARY
 
 /*
- *	•`‰æ§ŒÀ—Ìˆæ‚Ì‰Šú‰»
+ *	æç”»åˆ¶é™é ˜åŸŸã®åˆæœŸåŒ–
  */
 void CPixelbit::ResetBoundary(){
 	m_BoundLeft = m_BoundTop = 0;
@@ -15,11 +15,11 @@ void CPixelbit::ResetBoundary(){
 }
 
 /*
- *	•`‰æ§ŒÀ—Ìˆæ‚Ìİ’è
+ *	æç”»åˆ¶é™é ˜åŸŸã®è¨­å®š
  */
 void CPixelbit::SetBoundary(
-	int x, int y,	//	À•W
-	int w, int h	//	ƒTƒCƒY
+	int x, int y,	//	åº§æ¨™
+	int w, int h	//	ã‚µã‚¤ã‚º
 ){
 	m_BoundLeft = x;
 	m_BoundTop = y;
@@ -34,10 +34,10 @@ void CPixelbit::SetBoundary(
 #endif	//	ENABLE_RECT_BOUNDARY
 
 /*
- *	ƒAƒ‹ƒtƒ@ƒ`ƒƒƒlƒ‹‚ğw’è’l‚ÅƒŠƒZƒbƒg
+ *	ã‚¢ãƒ«ãƒ•ã‚¡ãƒãƒ£ãƒãƒ«ã‚’æŒ‡å®šå€¤ã§ãƒªã‚»ãƒƒãƒˆ
  */
 void CPixelbit::ResetAlphaChannel(
-	BYTE alpha	//	ƒAƒ‹ƒtƒ@’l
+	BYTE alpha	//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤
 ){
 	int i;
 	for(i = 0; i<m_Height; i++){
@@ -47,15 +47,15 @@ void CPixelbit::ResetAlphaChannel(
 }
 
 /*
- *	ƒRƒs[‚Ì‹éŒ`”ÍˆÍ‚ğ‰æ‘œ“à‚É•â³
+ *	ã‚³ãƒ”ãƒ¼æ™‚ã®çŸ©å½¢ç¯„å›²ã‚’ç”»åƒå†…ã«è£œæ­£
  *
- *	–ß‚è’l: ƒRƒs[”ÍˆÍ‚ª‚ ‚ê‚Î TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: ã‚³ãƒ”ãƒ¼ç¯„å›²ãŒã‚ã‚Œã° TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::FixLocation(
-	CPixelbit *dest,	//	ƒRƒs[æ‰æ‘œ
-	int *dx, int *dy,	//	ƒRƒs[æÀ•W
-	int *sx, int *sy,	//	ƒRƒs[Œ³À•W
-	int *w, int *h		//	ƒRƒs[ƒTƒCƒY
+	CPixelbit *dest,	//	ã‚³ãƒ”ãƒ¼å…ˆç”»åƒ
+	int *dx, int *dy,	//	ã‚³ãƒ”ãƒ¼å…ˆåº§æ¨™
+	int *sx, int *sy,	//	ã‚³ãƒ”ãƒ¼å…ƒåº§æ¨™
+	int *w, int *h		//	ã‚³ãƒ”ãƒ¼ã‚µã‚¤ã‚º
 ){
 #ifdef ENABLE_RECT_BOUNDARY
 #define BOUNDLEFT	dest->m_BoundLeft
@@ -81,15 +81,15 @@ BOOL CPixelbit::FixLocation(
 }
 
 /*
- *	w’èƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg‚É•`‰æ
+ *	æŒ‡å®šãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã«æç”»
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚ç TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::WindowStamp(
-	HDC hdc,		//	ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg
-	int dx, int dy,	//	ƒRƒs[æÀ•W
-	int sx, int sy,	//	ƒRƒs[Œ³À•W
-	int w, int h	//	ƒRƒs[ƒTƒCƒY
+	HDC hdc,		//	ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
+	int dx, int dy,	//	ã‚³ãƒ”ãƒ¼å…ˆåº§æ¨™
+	int sx, int sy,	//	ã‚³ãƒ”ãƒ¼å…ƒåº§æ¨™
+	int w, int h	//	ã‚³ãƒ”ãƒ¼ã‚µã‚¤ã‚º
 ){
 	return m_ColorKey==0xffffffff ? SetDIBitsToDevice(hdc, dx, dy, w, h,
 		sx, m_Height-sy-h, 0, m_Height, m_PixelAdr, &m_BmpInfo, DIB_RGB_COLORS)
@@ -97,15 +97,15 @@ BOOL CPixelbit::WindowStamp(
 }
 
 /*
- *	‹éŒ`”ÍˆÍ‚ÌƒRƒs[
+ *	çŸ©å½¢ç¯„å›²ã®ã‚³ãƒ”ãƒ¼
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚ç TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::PlainStamp(
-	CPixelbit *dest,	//	ƒRƒs[æ‰æ‘œ
-	int dx, int dy,		//	ƒRƒs[æÀ•W
-	int sx, int sy,		//	ƒRƒs[Œ³À•W
-	int w, int h		//	ƒRƒs[ƒTƒCƒY
+	CPixelbit *dest,	//	ã‚³ãƒ”ãƒ¼å…ˆç”»åƒ
+	int dx, int dy,		//	ã‚³ãƒ”ãƒ¼å…ˆåº§æ¨™
+	int sx, int sy,		//	ã‚³ãƒ”ãƒ¼å…ƒåº§æ¨™
+	int w, int h		//	ã‚³ãƒ”ãƒ¼ã‚µã‚¤ã‚º
 ){
 	if(!FixLocation(dest, &dx, &dy, &sx, &sy, &w, &h)) return FALSE;
 	return m_ColorKey==0xffffffff ? SetDIBitsToDevice(dest->m_BmpHdc, dx, dy, w, h,
@@ -114,15 +114,15 @@ BOOL CPixelbit::PlainStamp(
 }
 
 /*
- *	‹éŒ`”ÍˆÍ‚ÌƒRƒs[
+ *	çŸ©å½¢ç¯„å›²ã®ã‚³ãƒ”ãƒ¼
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚ç TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::PlainStamp32(
-	CPixelbit *dest,	//	ƒRƒs[æ‰æ‘œ
-	int dx, int dy,		//	ƒRƒs[æÀ•W
-	int sx, int sy,		//	ƒRƒs[Œ³À•W
-	int w, int h		//	ƒRƒs[ƒTƒCƒY
+	CPixelbit *dest,	//	ã‚³ãƒ”ãƒ¼å…ˆç”»åƒ
+	int dx, int dy,		//	ã‚³ãƒ”ãƒ¼å…ˆåº§æ¨™
+	int sx, int sy,		//	ã‚³ãƒ”ãƒ¼å…ƒåº§æ¨™
+	int w, int h		//	ã‚³ãƒ”ãƒ¼ã‚µã‚¤ã‚º
 ){
 	int i;
 	if(!FixLocation(dest, &dx, &dy, &sx, &sy, &w, &h)) return FALSE;
@@ -135,15 +135,15 @@ BOOL CPixelbit::PlainStamp32(
 }
 
 /*
- *	ƒAƒ‹ƒtƒ@ƒuƒŒƒ“ƒhƒRƒs[
+ *	ã‚¢ãƒ«ãƒ•ã‚¡ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚³ãƒ”ãƒ¼
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚ç TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::AlphaBlendStamp(
-	CPixelbit *dest,	//	ƒRƒs[æ‰æ‘œ
-	int dx, int dy,		//	ƒRƒs[æÀ•W
-	int sx, int sy,		//	ƒRƒs[Œ³À•W
-	int w, int h		//	ƒRƒs[ƒTƒCƒY
+	CPixelbit *dest,	//	ã‚³ãƒ”ãƒ¼å…ˆç”»åƒ
+	int dx, int dy,		//	ã‚³ãƒ”ãƒ¼å…ˆåº§æ¨™
+	int sx, int sy,		//	ã‚³ãƒ”ãƒ¼å…ƒåº§æ¨™
+	int w, int h		//	ã‚³ãƒ”ãƒ¼ã‚µã‚¤ã‚º
 ){
 	int i;
 	if(!FixLocation(dest, &dx, &dy, &sx, &sy, &w, &h)) return FALSE;
@@ -166,33 +166,33 @@ BOOL CPixelbit::AlphaBlendStamp(
 }
 
 /*
- *	LkƒRƒs[
+ *	ä¼¸ç¸®ã‚³ãƒ”ãƒ¼
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚ç TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::StretchStamp(
-	CPixelbit *dest,	//	ƒRƒs[æ‰æ‘œ
-	int dx, int dy,		//	ƒRƒs[æÀ•W
-	int dw, int dh,		//	ƒRƒs[æƒTƒCƒY
-	int sx, int sy,		//	ƒRƒs[Œ³À•W
-	int sw, int sh,		//	ƒRƒs[Œ³ƒTƒCƒY
-	int halftone		//	Lkƒ‚[ƒh
+	CPixelbit *dest,	//	ã‚³ãƒ”ãƒ¼å…ˆç”»åƒ
+	int dx, int dy,		//	ã‚³ãƒ”ãƒ¼å…ˆåº§æ¨™
+	int dw, int dh,		//	ã‚³ãƒ”ãƒ¼å…ˆã‚µã‚¤ã‚º
+	int sx, int sy,		//	ã‚³ãƒ”ãƒ¼å…ƒåº§æ¨™
+	int sw, int sh,		//	ã‚³ãƒ”ãƒ¼å…ƒã‚µã‚¤ã‚º
+	int halftone		//	ä¼¸ç¸®ãƒ¢ãƒ¼ãƒ‰
 ){
 	SetStretchBltMode(dest->m_BmpHdc, halftone ? HALFTONE : COLORONCOLOR);
 	return StretchBlt(dest->m_BmpHdc, dx, dy, dw, dh, m_BmpHdc, sx, sy, sw, sh, SRCCOPY);
 }
 
 /*
- *	ƒoƒCƒŠƒjƒALkƒRƒs[ (”ÍˆÍƒ`ƒFƒbƒN‚È‚µ)
+ *	ãƒã‚¤ãƒªãƒ‹ã‚¢ä¼¸ç¸®ã‚³ãƒ”ãƒ¼ (ç¯„å›²ãƒã‚§ãƒƒã‚¯ãªã—)
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚ç TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::BilinearStamp(
-	CPixelbit *dest,	//	ƒRƒs[æ‰æ‘œ
-	int dx, int dy,		//	ƒRƒs[æÀ•W
-	int dw, int dh,		//	ƒRƒs[æƒTƒCƒY
-	int sx, int sy,		//	ƒRƒs[Œ³À•W
-	int sw, int sh		//	ƒRƒs[Œ³ƒTƒCƒY
+	CPixelbit *dest,	//	ã‚³ãƒ”ãƒ¼å…ˆç”»åƒ
+	int dx, int dy,		//	ã‚³ãƒ”ãƒ¼å…ˆåº§æ¨™
+	int dw, int dh,		//	ã‚³ãƒ”ãƒ¼å…ˆã‚µã‚¤ã‚º
+	int sx, int sy,		//	ã‚³ãƒ”ãƒ¼å…ƒåº§æ¨™
+	int sw, int sh		//	ã‚³ãƒ”ãƒ¼å…ƒã‚µã‚¤ã‚º
 ){
 	if(dw==sw && dh==sh) return PlainStamp(dest, dx, dy, sx, sy, sw, sh);
 	bool first = true;
@@ -360,16 +360,16 @@ VERTICAL:
 }
 
 /*
- *	Å‹ß“_LkƒRƒs[ (”ÍˆÍƒ`ƒFƒbƒN‚È‚µ)
+ *	æœ€è¿‘ç‚¹ä¼¸ç¸®ã‚³ãƒ”ãƒ¼ (ç¯„å›²ãƒã‚§ãƒƒã‚¯ãªã—)
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚ç TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::NearestStamp(
-	CPixelbit *dest,	//	ƒRƒs[æ‰æ‘œ
-	int dx, int dy,		//	ƒRƒs[æÀ•W
-	int dw, int dh,		//	ƒRƒs[æƒTƒCƒY
-	int sx, int sy,		//	ƒRƒs[Œ³À•W
-	int sw, int sh		//	ƒRƒs[Œ³ƒTƒCƒY
+	CPixelbit *dest,	//	ã‚³ãƒ”ãƒ¼å…ˆç”»åƒ
+	int dx, int dy,		//	ã‚³ãƒ”ãƒ¼å…ˆåº§æ¨™
+	int dw, int dh,		//	ã‚³ãƒ”ãƒ¼å…ˆã‚µã‚¤ã‚º
+	int sx, int sy,		//	ã‚³ãƒ”ãƒ¼å…ƒåº§æ¨™
+	int sw, int sh		//	ã‚³ãƒ”ãƒ¼å…ƒã‚µã‚¤ã‚º
 ){
 	if(dw==sw && dh==sh) return PlainStamp(dest, dx, dy, sx, sy, sw, sh);
 	int wdiv = sw/dw, wmod = sw%dw, wrm = (sw/2)%dw;

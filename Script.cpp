@@ -1,22 +1,22 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSynErr::CSynErr(
-	char *pos	//	ƒGƒ‰[”­¶‰ÓŠ
+	char *pos	//	ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿç®‡æ‰€
 ){
 	m_Message = lang(SyntaxError);
 	m_ErrorPos = pos;
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSynErr::CSynErr(
-	char *pos,			//	ƒGƒ‰[”­¶‰ÓŠ
-	const char *format,	//	‘®
-	...					//	”CˆÓƒpƒ‰ƒƒ^
+	char *pos,			//	ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿç®‡æ‰€
+	const char *format,	//	æ›¸å¼
+	...					//	ä»»æ„ãƒ‘ãƒ©ãƒ¡ã‚¿
 ){
 	char *buf = FlashIn("");
 	va_list	vl;
@@ -28,11 +28,11 @@ CSynErr::CSynErr(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 void CSynErr::Handle(
-	string head,	//	ƒƒbƒZ[ƒWƒwƒbƒ_
-	char *buf		//	ƒXƒNƒŠƒvƒgƒoƒbƒtƒ@
+	string head,	//	ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ˜ãƒƒãƒ€
+	char *buf		//	ã‚¹ã‚¯ãƒªãƒ—ãƒˆãƒãƒƒãƒ•ã‚¡
 ){
 	if(!buf || !m_ErrorPos || m_ErrorPos<buf){
 		ErrorDialog("%s\n%s", head.c_str(), m_Message.c_str());
@@ -72,10 +72,10 @@ void CSynErr::Handle(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒAƒ‹ƒtƒ@ƒxƒbƒg + ƒAƒ“ƒ_[ƒXƒRƒA
+ *	ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆ + ã‚¢ãƒ³ãƒ€ãƒ¼ã‚¹ã‚³ã‚¢
  */
 inline char *Nondigit(
-	char *str	//	”®•¶š—ñ
+	char *str	//	æ•°å¼æ–‡å­—åˆ—
 ){
 	if('A'<=*str && *str<='Z' || 'a'<=*str && *str<='z'
  		|| *str=='_') return str+1;
@@ -83,20 +83,20 @@ inline char *Nondigit(
 }
 
 /*
- *	”š
+ *	æ•°å­—
  */
 inline char *Digit(
-	char *str	//	”®•¶š—ñ
+	char *str	//	æ•°å¼æ–‡å­—åˆ—
 ){
 	if('0'<=*str && *str<='9') return str+1;
 	return NULL;
 }
 
 /*
- *	”š
+ *	æ•°å­—
  */
 inline char *Hexadecimal(
-	char *str	//	”®•¶š—ñ
+	char *str	//	æ•°å¼æ–‡å­—åˆ—
 ){
 	if('A'<=*str && *str<='F' || 'a'<=*str && *str<='f'
 		|| '0'<=*str && *str<='9') return str+1;
@@ -104,10 +104,10 @@ inline char *Hexadecimal(
 }
 
 /*
- *	‹ó”’‚¨‚æ‚ÑƒRƒƒ“ƒg
+ *	ç©ºç™½ãŠã‚ˆã³ã‚³ãƒ¡ãƒ³ãƒˆ
  */
 char *Space(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	while(str && *str){
 		char *tmp, *eee;
@@ -119,7 +119,7 @@ char *Space(
 			str = tmp;
 		}else if(tmp = Character(str, '\n')){
 			str = tmp;
-		}else if(tmp = String(str, "@")){
+		}else if(tmp = String(str, "ã€€")){
 			str = tmp;
 		}else if(tmp = String(str, "//")){
 			str = tmp;
@@ -150,12 +150,12 @@ char *Space(
 }
 
 /*
- *	’è”’l
+ *	å®šæ•°å€¤
  */
 char *ConstValue(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	int *reti,	//	“Çæ (int)
-	float *retf	//	“Çæ (float)
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	int *reti,	//	èª­è¾¼å…ˆ (int)
+	float *retf	//	èª­è¾¼å…ˆ (float)
 ){
 	char *tmp;
 	bool minus = false;
@@ -216,11 +216,11 @@ UNDERDECIMAL:
 }
 
 /*
- *	®”’l
+ *	æ•´æ•°å€¤
  */
 char *ConstInteger(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	int *ret	//	“Çæ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	int *ret	//	èª­è¾¼å…ˆ
 ){
 	float dummy;
 	if(str = ConstValue(str, ret, &dummy)) return str;
@@ -228,11 +228,11 @@ char *ConstInteger(
 }
 
 /*
- *	À”’l
+ *	å®Ÿæ•°å€¤
  */
 char *ConstFloat(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	float *ret	//	“Çæ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	float *ret	//	èª­è¾¼å…ˆ
 ){
 	int dummy;
 	if(str = ConstValue(str, &dummy, ret)) return str;
@@ -240,11 +240,11 @@ char *ConstFloat(
 }
 
 /*
- *	F’l
+ *	è‰²å€¤
  */
 char *ColorValue(
-	char *str,		//	‘ÎÛ•¶š—ñ
-	D3DCOLOR *ret	//	“Çæ
+	char *str,		//	å¯¾è±¡æ–‡å­—åˆ—
+	D3DCOLOR *ret	//	èª­è¾¼å…ˆ
 ){
 	char *tmp;
 	if(tmp = Character(str, '#')){
@@ -268,11 +268,11 @@ char *ColorValue(
 }
 
 /*
- *	ƒ|ƒCƒ“ƒ^
+ *	ãƒã‚¤ãƒ³ã‚¿
  */
 char *HexPointer(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	void **ret	//	“Çæ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	void **ret	//	èª­è¾¼å…ˆ
 ){
 	char *tmp;
 	if(tmp = Hexadecimal(str)){
@@ -295,11 +295,11 @@ char *HexPointer(
 }
 
 /*
- *	2D ƒxƒNƒgƒ‹
+ *	2D ãƒ™ã‚¯ãƒˆãƒ«
  */
 char *Vector2D(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	VEC2 *ret	//	“Çæ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	VEC2 *ret	//	èª­è¾¼å…ˆ
 ){
 	if(!(str = Character2(str, '('))) return NULL;
 	if(!(str = ConstFloat(str, &ret->x))) return NULL;
@@ -310,11 +310,11 @@ char *Vector2D(
 }
 
 /*
- *	3D ƒxƒNƒgƒ‹
+ *	3D ãƒ™ã‚¯ãƒˆãƒ«
  */
 char *Vector3D(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	VEC3 *ret	//	“Çæ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	VEC3 *ret	//	èª­è¾¼å…ˆ
 ){
 	if(!(str = Character2(str, '('))) return NULL;
 	if(!(str = ConstFloat(str, &ret->x))) return NULL;
@@ -327,11 +327,11 @@ char *Vector3D(
 }
 
 /*
- *	¯•Êq
+ *	è­˜åˆ¥å­
  */
 char *Identifier(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	string *ret	//	“Çæ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	string *ret	//	èª­è¾¼å…ˆ
 ){
 	char *tmp;
 	if(!(tmp = Nondigit(str))) return NULL;
@@ -353,11 +353,11 @@ char *Identifier(
 }
 
 /*
- *	ƒŠƒeƒ‰ƒ‹•¶š—ñ
+ *	ãƒªãƒ†ãƒ©ãƒ«æ–‡å­—åˆ—
  */
 char *StringLiteral(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	string *ret	//	“Çæ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	string *ret	//	èª­è¾¼å…ˆ
 ){
 	char *tmp, *eee;
 	if(tmp = Character(eee = str, '\"')){
@@ -389,8 +389,8 @@ char *StringLiteral(
  *	yes / no
  */
 char *BoolYesNo(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	bool *ret	//	“Çæ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	bool *ret	//	èª­è¾¼å…ˆ
 ){
 	string yesno;
 	if(!(str = Identifier(str, &yesno))) return NULL;
@@ -399,11 +399,11 @@ char *BoolYesNo(
 }
 
 /*
- *	¯•Êq + ”äŠr
+ *	è­˜åˆ¥å­ + æ¯”è¼ƒ
  */
 char *Identifier2(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *read	//	¯•Êq
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read	//	è­˜åˆ¥å­
 ){
 	string tmp;
 	if(!(str = Identifier(str, &tmp))) return NULL;
@@ -411,25 +411,25 @@ char *Identifier2(
 }
 
 /*
- *	‘ã“ü•¶
+ *	ä»£å…¥æ–‡
  */
 char *Assignment(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *read	//	¯•Êq
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read	//	è­˜åˆ¥å­
 ){
 	if(!(str = Identifier2(str, read))) return NULL;
 	return Character2(str, '=');
 }
 
 /*
- *	®”‘ã“ü
+ *	æ•´æ•°ä»£å…¥
  */
 char *AsgnInteger(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *read,	//	¯•Êq
-	int *ret,	//	“Çæ
-	int n,		//	“ÇŒÂ”
-	bool fill	//	•s‘«©“®•âŠ®
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read,	//	è­˜åˆ¥å­
+	int *ret,	//	èª­è¾¼å…ˆ
+	int n,		//	èª­è¾¼å€‹æ•°
+	bool fill	//	ä¸è¶³è‡ªå‹•è£œå®Œ
 ){
 	if(!(str = Assignment(str, read))) return NULL;
 	if(!(str = ConstInteger(str, ret++))) return NULL;
@@ -447,14 +447,14 @@ char *AsgnInteger(
 }
 
 /*
- *	À”‘ã“ü
+ *	å®Ÿæ•°ä»£å…¥
  */
 char *AsgnFloat(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *read,	//	¯•Êq
-	float *ret,	//	“Çæ
-	int n,		//	“ÇŒÂ”
-	bool fill	//	•s‘«©“®•âŠ®
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read,	//	è­˜åˆ¥å­
+	float *ret,	//	èª­è¾¼å…ˆ
+	int n,		//	èª­è¾¼å€‹æ•°
+	bool fill	//	ä¸è¶³è‡ªå‹•è£œå®Œ
 ){
 	if(!(str = Assignment(str, read))) return NULL;
 	if(!(str = ConstFloat(str, ret++))) return NULL;
@@ -472,14 +472,14 @@ char *AsgnFloat(
 }
 
 /*
- *	F’l‘ã“ü
+ *	è‰²å€¤ä»£å…¥
  */
 char *AsgnColor(
-	char *str,		//	‘ÎÛ•¶š—ñ
-	char *read,		//	¯•Êq
-	D3DCOLOR *ret,	//	“Çæ
-	int n,			//	“ÇŒÂ”
-	bool fill		//	•s‘«©“®•âŠ®
+	char *str,		//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read,		//	è­˜åˆ¥å­
+	D3DCOLOR *ret,	//	èª­è¾¼å…ˆ
+	int n,			//	èª­è¾¼å€‹æ•°
+	bool fill		//	ä¸è¶³è‡ªå‹•è£œå®Œ
 ){
 	if(!(str = Assignment(str, read))) return NULL;
 	if(!(str = ColorValue(str, ret++))) return NULL;
@@ -497,14 +497,14 @@ char *AsgnColor(
 }
 
 /*
- *	F’l‘ã“ü
+ *	è‰²å€¤ä»£å…¥
  */
 char *AsgnPointer(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *read,	//	¯•Êq
-	void **ret,	//	“Çæ
-	int n,		//	“ÇŒÂ”
-	bool fill	//	•s‘«©“®•âŠ®
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read,	//	è­˜åˆ¥å­
+	void **ret,	//	èª­è¾¼å…ˆ
+	int n,		//	èª­è¾¼å€‹æ•°
+	bool fill	//	ä¸è¶³è‡ªå‹•è£œå®Œ
 ){
 	if(!(str = Assignment(str, read))) return NULL;
 	if(!(str = HexPointer(str, ret++))) return NULL;
@@ -522,14 +522,14 @@ char *AsgnPointer(
 }
 
 /*
- *	2D ƒxƒNƒgƒ‹‘ã“ü
+ *	2D ãƒ™ã‚¯ãƒˆãƒ«ä»£å…¥
  */
 char *AsgnVector2D(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *read,	//	¯•Êq
-	VEC2 *ret,	//	“Çæ
-	int n,		//	“ÇŒÂ”
-	bool fill	//	•s‘«©“®•âŠ®
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read,	//	è­˜åˆ¥å­
+	VEC2 *ret,	//	èª­è¾¼å…ˆ
+	int n,		//	èª­è¾¼å€‹æ•°
+	bool fill	//	ä¸è¶³è‡ªå‹•è£œå®Œ
 ){
 	if(!(str = Assignment(str, read))) return NULL;
 	if(!(str = Vector2D(str, ret++))) return NULL;
@@ -547,14 +547,14 @@ char *AsgnVector2D(
 }
 
 /*
- *	3D ƒxƒNƒgƒ‹‘ã“ü
+ *	3D ãƒ™ã‚¯ãƒˆãƒ«ä»£å…¥
  */
 char *AsgnVector3D(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *read,	//	¯•Êq
-	VEC3 *ret,	//	“Çæ
-	int n,		//	“ÇŒÂ”
-	bool fill	//	•s‘«©“®•âŠ®
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read,	//	è­˜åˆ¥å­
+	VEC3 *ret,	//	èª­è¾¼å…ˆ
+	int n,		//	èª­è¾¼å€‹æ•°
+	bool fill	//	ä¸è¶³è‡ªå‹•è£œå®Œ
 ){
 	if(!(str = Assignment(str, read))) return NULL;
 	if(!(str = Vector3D(str, ret++))) return NULL;
@@ -572,14 +572,14 @@ char *AsgnVector3D(
 }
 
 /*
- *	¯•Êq‘ã“ü
+ *	è­˜åˆ¥å­ä»£å…¥
  */
 char *AsgnIdentifier(
-	char *str,		//	‘ÎÛ•¶š—ñ
-	char *read,		//	¯•Êq
-	string *ret,	//	“Çæ
-	int n,			//	“ÇŒÂ”
-	bool fill		//	•s‘«©“®•âŠ®
+	char *str,		//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read,		//	è­˜åˆ¥å­
+	string *ret,	//	èª­è¾¼å…ˆ
+	int n,			//	èª­è¾¼å€‹æ•°
+	bool fill		//	ä¸è¶³è‡ªå‹•è£œå®Œ
 ){
 	if(!(str = Assignment(str, read))) return NULL;
 	if(!(str = Identifier(str, ret++))) return NULL;
@@ -597,14 +597,14 @@ char *AsgnIdentifier(
 }
 
 /*
- *	•¶š—ñ‘ã“ü
+ *	æ–‡å­—åˆ—ä»£å…¥
  */
 char *AsgnString(
-	char *str,		//	‘ÎÛ•¶š—ñ
-	char *read,		//	¯•Êq
-	string *ret,	//	“Çæ
-	int n,			//	“ÇŒÂ”
-	bool fill		//	•s‘«©“®•âŠ®
+	char *str,		//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read,		//	è­˜åˆ¥å­
+	string *ret,	//	èª­è¾¼å…ˆ
+	int n,			//	èª­è¾¼å€‹æ•°
+	bool fill		//	ä¸è¶³è‡ªå‹•è£œå®Œ
 ){
 	if(!(str = Assignment(str, read))) return NULL;
 	if(!(str = StringLiteral(str, ret++))) return NULL;
@@ -622,14 +622,14 @@ char *AsgnString(
 }
 
 /*
- *	yes / no ‘ã“ü (yes: 1, no: 0)
+ *	yes / no ä»£å…¥ (yes: 1, no: 0)
  */
 char *AsgnYesNo(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *read,	//	¯•Êq
-	bool *ret,	//	“Çæ
-	int n,		//	“ÇŒÂ”
-	bool fill	//	•s‘«©“®•âŠ®
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read,	//	è­˜åˆ¥å­
+	bool *ret,	//	èª­è¾¼å…ˆ
+	int n,		//	èª­è¾¼å€‹æ•°
+	bool fill	//	ä¸è¶³è‡ªå‹•è£œå®Œ
 ){
 	string yesno;
 	if(!(str = Assignment(str, read))) return NULL;
@@ -650,23 +650,23 @@ char *AsgnYesNo(
 }
 
 /*
- *	ƒuƒƒbƒNŠJn
+ *	ãƒ–ãƒ­ãƒƒã‚¯é–‹å§‹
  */
 char *BeginBlock(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *read	//	¯•Êq
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read	//	è­˜åˆ¥å­
 ){
 	if(!(str = Identifier2(str, read))) return NULL;
 	return Character2(str, '{');
 }
 
 /*
- *	–¼‘O•t‚«ƒuƒƒbƒNŠJn
+ *	åå‰ä»˜ããƒ–ãƒ­ãƒƒã‚¯é–‹å§‹
  */
 char *BeginNamedBlock(
-	char *str,		//	‘ÎÛ•¶š—ñ
-	char *read,		//	¯•Êq
-	string *name	//	–¼‘O‘ã“üæ
+	char *str,		//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read,		//	è­˜åˆ¥å­
+	string *name	//	åå‰ä»£å…¥å…ˆ
 ){
 	if(!(str = Identifier2(str, read))) return NULL;
 	if(!(str = StringLiteral(str, name))) return NULL;
@@ -674,10 +674,10 @@ char *BeginNamedBlock(
 }
 
 /*
- *	ƒuƒƒbƒNI—¹
+ *	ãƒ–ãƒ­ãƒƒã‚¯çµ‚äº†
  */
 char *EndBlock(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	return Character2(str, '}');
 }

@@ -1,20 +1,20 @@
-#ifndef CGIRDERPLUGIN_H_INCLUDED
+ï»¿#ifndef CGIRDERPLUGIN_H_INCLUDED
 #define CGIRDERPLUGIN_H_INCLUDED
 
 #include "CProfilePlugin.h"
 
 /*
- *	‹´Œ…ƒvƒ‰ƒOƒCƒ“
+ *	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CGirderPlugin: public CProfilePlugin{
 	friend class CRailBuilder;
 	friend class CLineBuildCurve;
 	friend class CPierPlugin;
 private:
-	float m_Height;			//	‚‚³
-	int m_TrackNum;			//	‹O“¹”
-	float m_TrackInterval;	//	‹O“¹ŠÔŠu
-	bool m_FlattenCant;		//	ƒJƒ“ƒg–³Œø‰»
+	float m_Height;			//	é«˜ã•
+	int m_TrackNum;			//	è»Œé“æ•°
+	float m_TrackInterval;	//	è»Œé“é–“éš”
+	bool m_FlattenCant;		//	ã‚«ãƒ³ãƒˆç„¡åŠ¹åŒ–
 public:
 	CGirderPlugin(char *id): CProfilePlugin(id){}
 	char *DirName(){ return "Girder"; }
@@ -31,7 +31,7 @@ public:
 };
 
 /*
- *	‹´Œ…ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CGirderPluginList: public CProfilePluginList{
 private:
@@ -43,7 +43,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CGirderPlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CGirderPlugin *g_Girder;
 extern CGirderPluginList *g_GirderPluginList;
 

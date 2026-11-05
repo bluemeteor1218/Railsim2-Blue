@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCamera.h"
 #include "CTrainPlugin.h"
 #include "CTrainGroupTemplate.h"
@@ -8,18 +8,18 @@
 #include "CConfigMode.h"
 #include "CSaveFile.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_MoverEnabled;
 
-//	“à•”ƒOƒ[ƒoƒ‹
-CTrainPlugin *g_Train = NULL;		//	ŽÔçqƒvƒ‰ƒOƒCƒ“
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+CTrainPlugin *g_Train = NULL;		//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CObjectJointZY::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *eee;
 	string obj;
@@ -36,11 +36,11 @@ char *CObjectJointZY::Read(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CObjectJointZYX::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp, *eee;
 	string obj;
@@ -59,11 +59,11 @@ char *CObjectJointZYX::Read(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CAxleObject::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp, *eee;
 	if(!(str = BeginNamedBlock(eee = str, "Axle", &m_ObjectName))) return NULL;
@@ -82,10 +82,10 @@ char *CAxleObject::Read(
 }
 
 /*
- *	ƒvƒŒƒrƒ…[—pŽp¨Ý’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ç”¨å§¿å‹¢è¨­å®š
  */
 float CAxleObject::CalcRotation(
-	float dist	//	is‹——£
+	float dist	//	é€²è¡Œè·é›¢
 ){
 	if(!m_Diameter) return 0.0f;
 	float tmp = m_MaxRotation*(1.0f-expf(-fabsf(dist)/(m_MaxRotation*m_Diameter*D3DX_PI)));
@@ -93,11 +93,11 @@ float CAxleObject::CalcRotation(
 }
 
 /*
- *	ƒvƒŒƒrƒ…[—pŽp¨Ý’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ç”¨å§¿å‹¢è¨­å®š
  */
 void CAxleObject::SetPreview(
-	float offset,	//	ƒIƒtƒZƒbƒg
-	bool reverse	//	”½“]
+	float offset,	//	ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	bool reverse	//	åè»¢
 ){
 	SetMesh(m_LastObject = &m_PreviewObject);
 	m_PreviewObject.SetPos(VEC3(0.0f, m_Coord.y, offset+(reverse ? -m_Coord.x : m_Coord.x)));
@@ -105,13 +105,13 @@ void CAxleObject::SetPreview(
 }
 
 /*
- *	Žp¨Ý’è
+ *	å§¿å‹¢è¨­å®š
  */
 void CAxleObject::SetPosture(
-	VEC3 pos,	//	À•W
+	VEC3 pos,	//	åº§æ¨™
 	VEC3 dir,	//	dir
 	VEC3 up,	//	up
-	float rot	//	‰ñ“]—Ê
+	float rot	//	å›žè»¢é‡
 ){
 	CObject *obj = GetPartsObject();
 	SetMesh(obj);
@@ -123,15 +123,15 @@ void CAxleObject::SetPosture(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 VEC3 CBodyObject::ms_TiltDir;
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CBodyObject::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp, *eee;
 	if(!(str = BeginNamedBlock(eee = str, "Body", &m_ObjectName))) return NULL;
@@ -157,7 +157,7 @@ char *CBodyObject::Read(
 }
 
 /*
- *	Žp¨Ý’è
+ *	å§¿å‹¢è¨­å®š
  */
 void CBodyObject::SetPosture(){
 	CObject *obj = GetPartsObject();
@@ -193,23 +193,23 @@ void CBodyObject::SetPosture(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CFreeObjectContainer::CFreeObjectContainer(){
 	m_FreeObject = NULL;
 }
 
 /*
- *	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CFreeObjectContainer::CFreeObjectContainer(
-	const CFreeObjectContainer &src	//	ƒRƒs[Œ³
+	const CFreeObjectContainer &src	//	ã‚³ãƒ”ãƒ¼å…ƒ
 ){
 	m_FreeObject = src.m_FreeObject->Duplicate();
 }
 
 /*
- *	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CFreeObjectContainer::CFreeObjectContainer(
 	CFreeObject3D *obj3d	//	obj
@@ -218,18 +218,18 @@ CFreeObjectContainer::CFreeObjectContainer(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CFreeObjectContainer::~CFreeObjectContainer(){
 	DELETE_V(m_FreeObject);
 }
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CFreeObjectContainer::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp;
 	DELETE_V(m_FreeObject);
@@ -263,11 +263,11 @@ char *CFreeObjectContainer::Read(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CFreeObjectZY::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp, *eee;
 	if(!(str = BeginNamedBlock(eee = str, "ObjectZY", &m_ObjectName))) return NULL;
@@ -285,7 +285,7 @@ char *CFreeObjectZY::Read(
 }
 
 /*
- *	Žp¨Ý’è
+ *	å§¿å‹¢è¨­å®š
  */
 void CFreeObjectZY::SetPostureFreeObject(){
 	CObject *obj = GetPartsObject();
@@ -313,11 +313,11 @@ void CFreeObjectZY::SetPostureFreeObject(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CTriangleLinkZY::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *eee;
 	if(!(str = BeginNamedBlock(eee = str, "Link", &m_ObjectName))) return NULL;
@@ -333,11 +333,11 @@ char *CTriangleLinkZY::Read(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CFreeTriangleZY::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "TriangleZY"))) return NULL;
@@ -351,7 +351,7 @@ char *CFreeTriangleZY::Read(
 }
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 void CFreeTriangleZY::SetPostureFreeObject(){
 	CObject *obj1 = m_Link1.GetPartsObject();
@@ -390,11 +390,11 @@ void CFreeTriangleZY::SetPostureFreeObject(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CCrankSlideZY::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *eee;
 	if(!(str = BeginNamedBlock(eee = str, "Slide", &m_ObjectName))) return NULL;
@@ -410,11 +410,11 @@ char *CCrankSlideZY::Read(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CFreeCrankZY::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "CrankZY"))) return NULL;
@@ -428,7 +428,7 @@ char *CFreeCrankZY::Read(
 }
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 void CFreeCrankZY::SetPostureFreeObject(){
 	CObject *obj1 = m_Link.GetPartsObject();
@@ -466,11 +466,11 @@ void CFreeCrankZY::SetPostureFreeObject(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CFreePistonZY::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "PistonZY"))) return NULL;
@@ -484,7 +484,7 @@ char *CFreePistonZY::Read(
 }
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 void CFreePistonZY::SetPostureFreeObject(){
 	CObject *obj1 = m_Link1.GetPartsObject();
@@ -522,7 +522,7 @@ void CFreePistonZY::SetPostureFreeObject(){
 
 /*
  *	[static]
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CTrainPlugin::RenderPreview(){
 	CNamedObjectAfterRenderer::SetCurrentInst(NULL);
@@ -531,13 +531,13 @@ void CTrainPlugin::RenderPreview(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainPlugin::~CTrainPlugin(){
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CTrainPlugin::Load(){
 	char *str = m_Script, *tmp, *eee;
@@ -616,7 +616,7 @@ bool CTrainPlugin::Load(){
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CTrainPlugin::LoadOldForm(){
 	if(!ChDir()) return false;
@@ -686,7 +686,7 @@ bool CTrainPlugin::LoadOldForm(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[Ý’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CTrainPlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -700,11 +700,11 @@ void CTrainPlugin::SetPreview(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CTrainPlugin::Preview(
-	float offset,	//	ƒIƒtƒZƒbƒg
-	bool reverse	//	”½“]
+	float offset,	//	ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	bool reverse	//	åè»¢
 ){
 	CBodyObject::SetTiltDir(R2L(V3ZERO));
 	SetPartsInst(NULL);
@@ -716,10 +716,10 @@ void CTrainPlugin::Preview(
 }
 
 /*
- *	ƒIƒuƒWƒFƒNƒgŒŸõ
+ *	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæ¤œç´¢
  */
 CNamedObject *CTrainPlugin::FindObject(
-	const string &name	//	ƒIƒuƒWƒFƒNƒg–¼
+	const string &name	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
 ){
 	CNamedObject *ret;
 	IAxleObject iao = m_AxleObject.begin();
@@ -732,17 +732,17 @@ CNamedObject *CTrainPlugin::FindObject(
 }
 
 /*
- *	ƒTƒEƒ“ƒh—LŒø‚©‚Ç‚¤‚©
+ *	ã‚µã‚¦ãƒ³ãƒ‰æœ‰åŠ¹ã‹ã©ã†ã‹
  */
 bool CTrainPlugin::IsSoundEnabled(){
 	return !!g_ConfigMode->GetTrainSound();
 }
 
 /*
- *	ŽÔŽ²ƒŠƒXƒgÝ’è
+ *	è»Šè»¸ãƒªã‚¹ãƒˆè¨­å®š
  */
 void CTrainPlugin::SetAxleList(
-	CTrain *train	//	ŽÔçq
+	CTrain *train	//	è»Šè¼Œ
 ){
 	int i = 0;
 	IAxleObject ia = m_AxleObject.begin();
@@ -751,7 +751,7 @@ void CTrainPlugin::SetAxleList(
 }
 
 /*
- *	Žp¨Ý’è
+ *	å§¿å‹¢è¨­å®š
  */
 void CTrainPlugin::SetPosture(){
 	IBodyObject ibo = m_BodyObject.begin();
@@ -761,7 +761,7 @@ void CTrainPlugin::SetPosture(){
 }
 
 /*
- *	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒX‚ÌƒAƒ^ƒbƒ`
+ *	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ã‚¢ã‚¿ãƒƒãƒ
  */
 void CTrainPlugin::AttachPartsObject(){
 	IAxleObject iao = m_AxleObject.begin();
@@ -773,10 +773,10 @@ void CTrainPlugin::AttachPartsObject(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CTrainPlugin::ScanInput(
-	CTrain *train	//	ŽÔçqƒCƒ“ƒXƒ^ƒ“ƒX
+	CTrain *train	//	è»Šè¼Œã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	train->SetLocalAxis();
 	SetCamDistSwitch(train->GetPos());
@@ -790,10 +790,10 @@ void CTrainPlugin::ScanInput(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CTrainPlugin::Render(
-	CTrain *train	//	ŽÔçqƒCƒ“ƒXƒ^ƒ“ƒX
+	CTrain *train	//	è»Šè¼Œã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	SetAnimation(train);
 	if(train){
@@ -826,10 +826,10 @@ void CTrainPlugin::Render(
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“is
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€²è¡Œ
  */
 void CTrainPlugin::Simulate(
-	CTrain *train	//	ŽÔçqƒCƒ“ƒXƒ^ƒ“ƒX
+	CTrain *train	//	è»Šè¼Œã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	SetMoverState(train);
 	train->SetLocalAxis();

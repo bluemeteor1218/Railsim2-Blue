@@ -1,4 +1,4 @@
-#ifndef CSTRUCT_H_INCLUDED
+ï»¿#ifndef CSTRUCT_H_INCLUDED
 #define CSTRUCT_H_INCLUDED
 
 class CListElement;
@@ -8,15 +8,15 @@ class CScene;
 #include "CModelInst.h"
 
 /*
- *	{İƒCƒ“ƒXƒ^ƒ“ƒX
+ *	æ–½è¨­ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CStruct: public CModelInst{
 	friend class CStructGroup;
 protected:
-	static CStruct **ms_Root;		//	Ú‘±ƒ‹[ƒg
-	CScene *m_Scene;				//	ƒV[ƒ“
-	CStructPlugin *m_StructPlugin;	//	{İƒvƒ‰ƒOƒCƒ“
-	CStruct *m_Next;				//	Ÿ
+	static CStruct **ms_Root;		//	æ¥ç¶šãƒ«ãƒ¼ãƒˆ
+	CScene *m_Scene;				//	ã‚·ãƒ¼ãƒ³
+	CStructPlugin *m_StructPlugin;	//	æ–½è¨­ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CStruct *m_Next;				//	æ¬¡
 public:
 	static void SetRoot(CStruct **r){ ms_Root = r; }
 	CStruct();

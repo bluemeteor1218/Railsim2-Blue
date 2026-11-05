@@ -1,4 +1,4 @@
-#ifndef CPLUGINTREE_H_INCLUDED
+ï»¿#ifndef CPLUGINTREE_H_INCLUDED
 #define CPLUGINTREE_H_INCLUDED
 
 #include "CInterface.h"
@@ -11,23 +11,23 @@
 class CPluginMode;
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒcƒŠ[
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ„ãƒªãƒ¼
  */
 class CPluginTree: public CInterface, public CDragInterface{
 	friend class CTreeElement;
 	friend class CTreeFileElement;
 	friend class CTreeDirElement;
 private:
-	int m_State;					//	ó‘Ô
-	int m_Rows;						//	Å‘å•\¦”
-	bool m_Focused;					//	ƒtƒH[ƒJƒX’Ç‰Áƒtƒ‰ƒO
-	CTreeElement *m_PushedItem;		//	‰Ÿ‚³‚ê‚½ƒAƒCƒeƒ€
-	CTreeElement *m_FocusItem;		//	ƒtƒH[ƒJƒX
-	CTreeDirElement *m_DropItem;	//	ƒtƒH[ƒJƒX
-	CTreeDirElement *m_Root;		//	ƒf[ƒ^ƒ‹[ƒg
-	CScrollBarV m_ScrollV;			//	ƒXƒNƒ[ƒ‹ƒo[
-	CPluginListView *m_SyncList;	//	•½tƒŠƒXƒgƒrƒ…[
-	CMenuCommander *m_Commander;	//	ƒRƒ}ƒ“ƒ_
+	int m_State;					//	çŠ¶æ…‹
+	int m_Rows;						//	æœ€å¤§è¡¨ç¤ºæ•°
+	bool m_Focused;					//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹è¿½åŠ ãƒ•ãƒ©ã‚°
+	CTreeElement *m_PushedItem;		//	æŠ¼ã•ã‚ŒãŸã‚¢ã‚¤ãƒ†ãƒ 
+	CTreeElement *m_FocusItem;		//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
+	CTreeDirElement *m_DropItem;	//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
+	CTreeDirElement *m_Root;		//	ãƒ‡ãƒ¼ã‚¿ãƒ«ãƒ¼ãƒˆ
+	CScrollBarV m_ScrollV;			//	ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼
+	CPluginListView *m_SyncList;	//	å¹³è¡¡ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	CMenuCommander *m_Commander;	//	ã‚³ãƒãƒ³ãƒ€
 public:
 	CPluginTree();
 	~CPluginTree();

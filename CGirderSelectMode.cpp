@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailPlugin.h"
 #include "CPierPlugin.h"
 #include "CGirderPlugin.h"
@@ -6,33 +6,33 @@
 #include "CGirderSelectMode.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CGirderSelectMode::CGirderSelectMode():
-	C3DPluginMode(lang(GirderPlugin))	//	Šî–{ƒNƒ‰ƒX
+	C3DPluginMode(lang(GirderPlugin))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_Camera = &ms_RailwayModeCamera;
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CGirderSelectMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	return CPluginMode::Dispatch(type, data);
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆå–å¾—
  */
 CPluginList *CGirderSelectMode::GetPluginList(){
 	return g_GirderPluginList;
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CGirderSelectMode::Enter3DPlugin(){
 	ms_ModeLabel = lang(SelectGirder);
@@ -42,7 +42,7 @@ void CGirderSelectMode::Enter3DPlugin(){
 }
 
 /*
- *	ƒ‚[ƒ_ƒ‹ˆ—
+ *	ãƒ¢ãƒ¼ãƒ€ãƒ«å‡¦ç†
  */
 void CGirderSelectMode::ModalFunc3DPlugin(){
 	void ModalFuncRailwayPluginSet();
@@ -50,14 +50,14 @@ void CGirderSelectMode::ModalFunc3DPlugin(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CGirderSelectMode::ScanInput3DPlugin(){
 	ScanInputRailway();
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CGirderSelectMode::Render3DPlugin(){
 	CRailPlugin::RenderPreview();

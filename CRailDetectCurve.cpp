@@ -1,25 +1,25 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CScene.h"
 #include "CRailDetectCurve.h"
 #include "CRailPlugin.h"
 #include "CSkinPlugin.h"
 
-//	“à•”’è”
-const float DETECT_3D_MAX = 4.0f;	//	3D ŒŸoÅ‘å‹——£
+//	å†…éƒ¨å®šæ•°
+const float DETECT_3D_MAX = 4.0f;	//	3D æ¤œå‡ºæœ€å¤§è·é›¢
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern float g_FovRatio;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 bool g_SelectMultiTrackDummy = true;
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 float CRailDetectCurve2D::ms_MinDist;
 CRailLinkTemp CRailDetectCurve2D::ms_Detect;
 
 /*
  *	[static]
- *	Ú‘±“_‚ğ•\¦
+ *	æ¥ç¶šç‚¹ã‚’è¡¨ç¤º
  */
 bool CRailDetectCurve2D::RenderLink(){
 	if(ms_MinDist<0.0f || ms_Detect.m_Link->GetScene()!=g_Scene) return false;
@@ -30,18 +30,18 @@ bool CRailDetectCurve2D::RenderLink(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailDetectCurve2D::CRailDetectCurve2D(
-	CRailWay *way,		//	ì‹ÆƒŒ[ƒ‹
-	CRailPlugin *rpi,	//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *tpi,	//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *gpi,	//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
-	int mode,			//	ŒŸoƒ‚[ƒh
-	VEC3 &cursor1,		//	ƒJ[ƒ\ƒ‹À•W 1
-	VEC3 &cursor2		//	ƒJ[ƒ\ƒ‹À•W 2
+	CRailWay *way,		//	ä½œæ¥­ãƒ¬ãƒ¼ãƒ«
+	CRailPlugin *rpi,	//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *tpi,	//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *gpi,	//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	int mode,			//	æ¤œå‡ºãƒ¢ãƒ¼ãƒ‰
+	VEC3 &cursor1,		//	ã‚«ãƒ¼ã‚½ãƒ«åº§æ¨™ 1
+	VEC3 &cursor2		//	ã‚«ãƒ¼ã‚½ãƒ«åº§æ¨™ 2
 ):
-	CRailTraceCurve(rpi, tpi, gpi, way)	//	Šî–{ƒNƒ‰ƒX
+	CRailTraceCurve(rpi, tpi, gpi, way)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_DetectMode = mode;
 	m_CursorPos1 = cursor1;
@@ -49,13 +49,13 @@ CRailDetectCurve2D::CRailDetectCurve2D(
 }
 
 /*
- *	ƒgƒŒ[ƒXŠ®—¹
+ *	ãƒˆãƒ¬ãƒ¼ã‚¹å®Œäº†
  */
 void CRailDetectCurve2D::FinishTrace(
-	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	n“_
-	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	I“_
-	float sumlen, float seglen,	//	ÏZ‹——£EƒZƒOƒƒ“ƒg‹——£
-	CRailSplitter &splitter		//	•ªŠ„q
+	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	å§‹ç‚¹
+	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	çµ‚ç‚¹
+	float sumlen, float seglen,	//	ç©ç®—è·é›¢ãƒ»ã‚»ã‚°ãƒ¡ãƒ³ãƒˆè·é›¢
+	CRailSplitter &splitter		//	åˆ†å‰²å­
 ){
 	int flag;
 	bool select_master = g_SelectMultiTrackDummy || !m_RailWay->IsMultiTrackDummy();
@@ -125,13 +125,13 @@ void CRailDetectCurve2D::FinishTrace(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 float CRailDetectCurve3D::ms_MinDist;
 CRailLinkTemp CRailDetectCurve3D::ms_Detect;
 
 /*
  *	[static]
- *	Ú‘±“_‚ğ•\¦
+ *	æ¥ç¶šç‚¹ã‚’è¡¨ç¤º
  */
 bool CRailDetectCurve3D::RenderLink(){
 	if(ms_MinDist<0.0f) return false;
@@ -142,28 +142,28 @@ bool CRailDetectCurve3D::RenderLink(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailDetectCurve3D::CRailDetectCurve3D(
-	CRailWay *way,		//	ì‹ÆƒŒ[ƒ‹
-	CRailPlugin *rpi,	//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *tpi,	//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *gpi,	//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
-	VEC3 &arrow			//	–îˆóÀ•W
+	CRailWay *way,		//	ä½œæ¥­ãƒ¬ãƒ¼ãƒ«
+	CRailPlugin *rpi,	//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *tpi,	//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *gpi,	//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	VEC3 &arrow			//	çŸ¢å°åº§æ¨™
 ):
-	CRailTraceCurve(rpi, tpi, gpi, way)	//	Šî–{ƒNƒ‰ƒX
+	CRailTraceCurve(rpi, tpi, gpi, way)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_ArrowPos = arrow;
 }
 
 /*
- *	ƒgƒŒ[ƒXŠ®—¹
+ *	ãƒˆãƒ¬ãƒ¼ã‚¹å®Œäº†
  */
 void CRailDetectCurve3D::FinishTrace(
-	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	n“_
-	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	I“_
-	float sumlen, float seglen,	//	ÏZ‹——£EƒZƒOƒƒ“ƒg‹——£
-	CRailSplitter &splitter		//	•ªŠ„q
+	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	å§‹ç‚¹
+	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	çµ‚ç‚¹
+	float sumlen, float seglen,	//	ç©ç®—è·é›¢ãƒ»ã‚»ã‚°ãƒ¡ãƒ³ãƒˆè·é›¢
+	CRailSplitter &splitter		//	åˆ†å‰²å­
 ){
 	float dist[2] = {V3Len(&(pos1+0.1f*dir1-m_ArrowPos)),
 		V3Len(&(pos2-0.1f*dir2-m_ArrowPos))};

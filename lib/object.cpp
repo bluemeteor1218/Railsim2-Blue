@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 //#include "headers.h"
 //#include "debug.h"
@@ -9,15 +9,15 @@
 //#include "object.h"
 #include "../stdafx.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern int g_DispWidth;
 extern int g_DispHeight;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 MAT8 CObject::matShadow = {{0, 0, 0, 0.5f}};
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CObject::CObject(){
 	m_pMesh = NULL;
@@ -27,17 +27,17 @@ CObject::CObject(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CObject::~CObject(){
 }
 
 /*
- *	ƒƒbƒVƒ…‚ÌƒAƒ^ƒbƒ`
+ *	ãƒ¡ãƒƒã‚·ãƒ¥ã®ã‚¢ã‚¿ãƒƒãƒ
  *
- *	pM	: ƒƒbƒVƒ…
- *	p	: ˆÊ’u
- *	s	: ƒXƒP[ƒ‹
+ *	pM	: ãƒ¡ãƒƒã‚·ãƒ¥
+ *	p	: ä½ç½®
+ *	s	: ã‚¹ã‚±ãƒ¼ãƒ«
  */
 void CObject::SetMesh(CMesh *pM, VEC3 p, float s){
 	m_pMesh = pM;
@@ -48,16 +48,16 @@ void CObject::SetMesh(CMesh *pM, VEC3 p, float s){
 }
 
 /*
- *	‰e‚ÌFİ’èi‘SƒIƒuƒWƒFƒNƒg‹¤’Êj
+ *	å½±ã®è‰²è¨­å®šï¼ˆå…¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå…±é€šï¼‰
  *
- *	cv	: F
+ *	cv	: è‰²
  */
 void CObject::SetShadowColor(D3DCOLORVALUE cv){
 	matShadow.Diffuse = cv;
 }
 
 /*
- *	ƒXƒP[ƒ‹‚Ìİ’èiâ‘Îj
+ *	ã‚¹ã‚±ãƒ¼ãƒ«ã®è¨­å®šï¼ˆçµ¶å¯¾ï¼‰
  */
 void CObject::SetScale(float s){
 	float sr = s/m_scale;
@@ -69,7 +69,7 @@ void CObject::SetScale(float s){
 }
 
 /*
- *	ƒXƒP[ƒ‹‚Ìİ’èiâ‘Îj
+ *	ã‚¹ã‚±ãƒ¼ãƒ«ã®è¨­å®šï¼ˆçµ¶å¯¾ï¼‰
  */
 void CObject::SetScale(float sx, float sy, float sz){
 	MTX4 mtxold = m_mtx, mtxtmp;
@@ -79,7 +79,7 @@ void CObject::SetScale(float sx, float sy, float sz){
 }
 
 /*
- *	ƒXƒP[ƒ‹‚Ìİ’èi‘Š‘Îj
+ *	ã‚¹ã‚±ãƒ¼ãƒ«ã®è¨­å®šï¼ˆç›¸å¯¾ï¼‰
  */
 void CObject::Scale(float s){
 	MTX4 mtxold = m_mtx, mtxtmp;
@@ -89,9 +89,9 @@ void CObject::Scale(float s){
 }
 
 /*
- *	ˆÊ’uw’èieƒXƒP[ƒ‹‚ğ–³‹j
+ *	ä½ç½®æŒ‡å®šï¼ˆè¦ªã‚¹ã‚±ãƒ¼ãƒ«ã‚’ç„¡è¦–ï¼‰
  *
- *	v		: 3DÀ•W
+ *	v		: 3Dåº§æ¨™
  */
 void CObject::SetPosS(VEC3 v){
 	if(m_pParent) v /= m_pParent->GetWScale();
@@ -99,20 +99,20 @@ void CObject::SetPosS(VEC3 v){
 }
 
 /*
- *	ˆÚ“®
+ *	ç§»å‹•
  *
- *	v		: ˆÚ“®—Ê
+ *	v		: ç§»å‹•é‡
  */
 void CObject::Move(VEC3 v){
-	v /= m_scale;	//	ƒXƒP[ƒŠƒ“ƒO‚Ì‰e‹¿‚ğ‰ñ”ğ
+	v /= m_scale;	//	ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ã®å½±éŸ¿ã‚’å›é¿
 
 	MTX4 mtxold = m_mtx, mtxtmp;
 	D3DXMatrixTranslation(&mtxtmp, v.x, v.y, v.z);
 	m_mtx = mtxtmp*mtxold;
 }
-//	Œ´“_’†S
+//	åŸç‚¹ä¸­å¿ƒ
 void CObject::Move2(VEC3 v){
-	v /= m_scale;	//	ƒXƒP[ƒŠƒ“ƒO‚Ì‰e‹¿‚ğ‰ñ”ğ
+	v /= m_scale;	//	ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ã®å½±éŸ¿ã‚’å›é¿
 
 	MTX4 mtxold = m_mtx, mtxtmp;
 	D3DXMatrixTranslation(&mtxtmp, v.x, v.y, v.z);
@@ -120,12 +120,12 @@ void CObject::Move2(VEC3 v){
 }
 
 /*
- *	ˆÚ“®ieƒXƒP[ƒ‹‚ğ–³‹j
+ *	ç§»å‹•ï¼ˆè¦ªã‚¹ã‚±ãƒ¼ãƒ«ã‚’ç„¡è¦–ï¼‰
  *
- *	v		: ˆÚ“®—Ê
+ *	v		: ç§»å‹•é‡
  */
 void CObject::MoveS(VEC3 v){
-	v /= GetWScale();	//	ƒXƒP[ƒŠƒ“ƒO‚Ì‰e‹¿‚ğ‰ñ”ğ
+	v /= GetWScale();	//	ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ã®å½±éŸ¿ã‚’å›é¿
 
 	MTX4 mtxold = m_mtx, mtxtmp;
 	D3DXMatrixTranslation(&mtxtmp, v.x, v.y, v.z);
@@ -133,18 +133,18 @@ void CObject::MoveS(VEC3 v){
 }
 
 /*
- *	X²ü‚è‚Ì‰ñ“]
+ *	Xè»¸å‘¨ã‚Šã®å›è»¢
  *
- *	v		: ‰ñ“]Špiradj
+ *	v		: å›è»¢è§’ï¼ˆradï¼‰
  *
- *	¦‰ñ“]‚Ì•ûŒü²‚Ì{•ûŒü‚É¶èew‚ğŒü‚¯‚½‚Ìl·‚µw‚Ì•ûŒü
+ *	â€»å›è»¢ã®æ–¹å‘ï¼è»¸ã®ï¼‹æ–¹å‘ã«å·¦æ‰‹è¦ªæŒ‡ã‚’å‘ã‘ãŸæ™‚ã®äººå·®ã—æŒ‡ã®æ–¹å‘
  */
 void CObject::RotX(float v){
 	MTX4 mtxold = m_mtx, mtxtmp;
 	D3DXMatrixRotationX(&mtxtmp, v);
 	m_mtx = mtxtmp*mtxold;
 }
-//	Œ´“_’†S
+//	åŸç‚¹ä¸­å¿ƒ
 void CObject::RotX2(float v){
 	MTX4 mtxold = m_mtx, mtxtmp;
 	D3DXMatrixRotationX(&mtxtmp, v);
@@ -152,16 +152,16 @@ void CObject::RotX2(float v){
 }
 
 /*
- *	Y²ü‚è‚Ì‰ñ“]
+ *	Yè»¸å‘¨ã‚Šã®å›è»¢
  *
- *	v		: ‰ñ“]Špiradj
+ *	v		: å›è»¢è§’ï¼ˆradï¼‰
  */
 void CObject::RotY(float v){
 	MTX4 mtxold = m_mtx, mtxtmp;
 	D3DXMatrixRotationY(&mtxtmp, v);
 	m_mtx = mtxtmp*mtxold;
 }
-//	Œ´“_’†S
+//	åŸç‚¹ä¸­å¿ƒ
 void CObject::RotY2(float v){
 	MTX4 mtxold = m_mtx, mtxtmp;
 	D3DXMatrixRotationY(&mtxtmp, v);
@@ -169,16 +169,16 @@ void CObject::RotY2(float v){
 }
 
 /*
- *	Z²ü‚è‚Ì‰ñ“]
+ *	Zè»¸å‘¨ã‚Šã®å›è»¢
  *
- *	v		: ‰ñ“]Špiradj
+ *	v		: å›è»¢è§’ï¼ˆradï¼‰
  */
 void CObject::RotZ(float v){
 	MTX4 mtxold = m_mtx, mtxtmp;
 	D3DXMatrixRotationZ(&mtxtmp, v);
 	m_mtx = mtxtmp*mtxold;
 }
-//	Œ´“_’†S
+//	åŸç‚¹ä¸­å¿ƒ
 void CObject::RotZ2(float v){
 	MTX4 mtxold = m_mtx, mtxtmp;
 	D3DXMatrixRotationZ(&mtxtmp, v);
@@ -186,10 +186,10 @@ void CObject::RotZ2(float v){
 }
 
 /*
- *	”CˆÓ²ü‚è‚Ì‰ñ“]
+ *	ä»»æ„è»¸å‘¨ã‚Šã®å›è»¢
  *
- *	ax	: ²ƒxƒNƒgƒ‹
- *	v		: ‰ñ“]Špiradj
+ *	ax	: è»¸ãƒ™ã‚¯ãƒˆãƒ«
+ *	v		: å›è»¢è§’ï¼ˆradï¼‰
  */
 void CObject::RotAxis(VEC3 ax, float v){
 	MTX4 mtxold = m_mtx, mtxtmp;
@@ -198,15 +198,15 @@ void CObject::RotAxis(VEC3 ax, float v){
 }
 
 /*
- *	ƒrƒ‹ƒ{[ƒh‰ñ“]iX, Z²‰ñ“]‚ğŒÅ’èj
+ *	ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰å›è»¢ï¼ˆX, Zè»¸å›è»¢ã‚’å›ºå®šï¼‰
  */
 void CObject::Billboard(){
-	//	ƒIƒuƒWƒFƒNƒg‚©‚çƒJƒƒ‰‚Ö‚ÌƒxƒNƒgƒ‹‚ğ“¾‚é
+	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ã‚«ãƒ¡ãƒ©ã¸ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’å¾—ã‚‹
 	VEC3 v = GetVPos()-GetWPos();
 
 	MTX4 mtxold = m_mtx;
 
-	//	‰ñ“]s—ñ‚ğ“¾‚é
+	//	å›è»¢è¡Œåˆ—ã‚’å¾—ã‚‹
 	if(v.x>0.0f)
 		D3DXMatrixRotationY(&m_mtx, -atanf(v.z/v.x)+D3DX_PI/2);
 	else
@@ -222,15 +222,15 @@ void CObject::Billboard(){
 }
 
 /*
- *	ƒrƒ‹ƒ{[ƒh‰ñ“]iX, Y²‰ñ“]‚ğŒÅ’èj
+ *	ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰å›è»¢ï¼ˆX, Yè»¸å›è»¢ã‚’å›ºå®šï¼‰
  */
 void CObject::Billboard2(){
-	//	ƒIƒuƒWƒFƒNƒg‚©‚çƒJƒƒ‰‚Ö‚ÌƒxƒNƒgƒ‹‚ğ“¾‚é
+	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ã‚«ãƒ¡ãƒ©ã¸ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’å¾—ã‚‹
 	VEC3 v = GetVPos()-GetWPos();
 
 	MTX4 mtxold = m_mtx;
 
-	//	‰ñ“]s—ñ‚ğ“¾‚é
+	//	å›è»¢è¡Œåˆ—ã‚’å¾—ã‚‹
 	if(v.x>0.0f)
 		D3DXMatrixRotationZ(&m_mtx, atanf(v.y/v.x)-D3DX_PI/2);
 	else
@@ -246,9 +246,9 @@ void CObject::Billboard2(){
 }
 
 /*
- *	w’è“_‚Ì•û‚ğŒü‚­
+ *	æŒ‡å®šç‚¹ã®æ–¹ã‚’å‘ã
  *
- *	at	: ˆÊ’u
+ *	at	: ä½ç½®
  */
 void CObject::LookAt(VEC3 at){
 	VEC3 dir, up(0, 1, 0), right;
@@ -270,22 +270,22 @@ void CObject::LookAt(VEC3 at){
 }
 
 /*
- *	w’è“_‚Ì•û‚ğŒü‚­iX, Z²‰ñ“]‚ğŒÅ’èj
+ *	æŒ‡å®šç‚¹ã®æ–¹ã‚’å‘ãï¼ˆX, Zè»¸å›è»¢ã‚’å›ºå®šï¼‰
  *
- *	at	: ˆÊ’u
+ *	at	: ä½ç½®
  */
 void CObject::LookAt2(VEC3 at){
-	//	ƒIƒuƒWƒFƒNƒg‚©‚çw’è“_‚Ö‚ÌƒxƒNƒgƒ‹‚ğ“¾‚é
+	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰æŒ‡å®šç‚¹ã¸ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’å¾—ã‚‹
 	VEC3 v = at-GetWPos();
 	float rx = 0, ry, rz = 0;
 
-	//	‰ñ“]Šp‚ğ“¾‚é
+	//	å›è»¢è§’ã‚’å¾—ã‚‹
 	if	(v.x> 0.0f)	ry = -atanf(v.z/v.x)+D3DX_PI/2;
 	else if(v.x< 0.0f)	ry = -atanf(v.z/v.x)-D3DX_PI/2;
 	else if(v.z>=0.0f)	ry = 0;
 	else if(v.z< 0.0f)	ry = -D3DX_PI;
 
-	//	‰ñ“]s—ñ‚ğŒvZ
+	//	å›è»¢è¡Œåˆ—ã‚’è¨ˆç®—
 	MTX4 mtxold = m_mtx;
 
 	D3DXMatrixRotationYawPitchRoll(&m_mtx, ry, rx, rz);
@@ -300,9 +300,9 @@ void CObject::LookAt2(VEC3 at){
 }
 
 /*
- *	Œü‚«‚ğw’è
+ *	å‘ãã‚’æŒ‡å®š
  *
- *	dir	: Œü‚«
+ *	dir	: å‘ã
  */
 void CObject::SetDir(VEC3 dir, VEC3 up){
 	VEC3 right;
@@ -323,7 +323,7 @@ void CObject::SetDir(VEC3 dir, VEC3 up){
 }
 
 /*
- *	ˆÊ’uæ“¾(eƒXƒP[ƒ‹‚ğl—¶‚·‚é)
+ *	ä½ç½®å–å¾—(è¦ªã‚¹ã‚±ãƒ¼ãƒ«ã‚’è€ƒæ…®ã™ã‚‹)
  */
 VEC3 CObject::GetPosS(){
 	if(m_pParent)
@@ -333,7 +333,7 @@ VEC3 CObject::GetPosS(){
 }
 
 /*
- *	ˆÊ’uæ“¾(ƒ[ƒ‹ƒhÀ•WŒn)
+ *	ä½ç½®å–å¾—(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»)
  */
 VEC3 CObject::GetWPos(){
 	if(m_pParent){
@@ -344,7 +344,7 @@ VEC3 CObject::GetWPos(){
 }
 
 /*
- *	RightƒxƒNƒgƒ‹æ“¾(ƒ[ƒ‹ƒhÀ•WŒn)
+ *	Rightãƒ™ã‚¯ãƒˆãƒ«å–å¾—(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»)
  */
 VEC3 CObject::GetWRight(){
 	if(m_pParent){
@@ -355,7 +355,7 @@ VEC3 CObject::GetWRight(){
 }
 
 /*
- *	UpƒxƒNƒgƒ‹æ“¾(ƒ[ƒ‹ƒhÀ•WŒn)
+ *	Upãƒ™ã‚¯ãƒˆãƒ«å–å¾—(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»)
  */
 VEC3 CObject::GetWUp(){
 	if(m_pParent){
@@ -366,7 +366,7 @@ VEC3 CObject::GetWUp(){
 }
 
 /*
- *	DirƒxƒNƒgƒ‹æ“¾(ƒ[ƒ‹ƒhÀ•WŒn)
+ *	Dirãƒ™ã‚¯ãƒˆãƒ«å–å¾—(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»)
  */
 VEC3 CObject::GetWDir(){
 	if(m_pParent){
@@ -377,7 +377,7 @@ VEC3 CObject::GetWDir(){
 }
 
 /*
- *	•ÏŠ·s—ñ‚Ìæ“¾(ƒ[ƒ‹ƒhÀ•WŒn)
+ *	å¤‰æ›è¡Œåˆ—ã®å–å¾—(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»)
  */
 MTX4 CObject::GetWMatrix(){
 	if(m_pParent)
@@ -387,16 +387,16 @@ MTX4 CObject::GetWMatrix(){
 }
 
 /*
- *	ƒXƒP[ƒ‹‚Ìæ“¾(eƒXƒP[ƒ‹l—¶Aƒ[ƒ‹ƒhÀ•WŒn‚ÌƒXƒP[ƒ‹‚Æ‚àl‚¦‚ç‚ê‚é)
+ *	ã‚¹ã‚±ãƒ¼ãƒ«ã®å–å¾—(è¦ªã‚¹ã‚±ãƒ¼ãƒ«è€ƒæ…®ã€ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»ã®ã‚¹ã‚±ãƒ¼ãƒ«ã¨ã‚‚è€ƒãˆã‚‰ã‚Œã‚‹)
  */
 float CObject::GetWScale(){
 	return m_pParent ? m_scale*m_pParent->GetWScale() : m_scale;
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^	: ƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒXAƒ}ƒeƒŠƒAƒ‹AƒeƒNƒXƒ`ƒƒ
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿	: ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªã‚¯ã‚¹ã€ãƒãƒ†ãƒªã‚¢ãƒ«ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 void CObject::RenderCustom(CNamedObject *nobj){
 	if(m_pMesh){
@@ -406,9 +406,9 @@ void CObject::RenderCustom(CNamedObject *nobj){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^	: ƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒXAƒ}ƒeƒŠƒAƒ‹AƒeƒNƒXƒ`ƒƒ
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿	: ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªã‚¯ã‚¹ã€ãƒãƒ†ãƒªã‚¢ãƒ«ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 void CObject::Render(){
 	if(m_pMesh){
@@ -418,7 +418,7 @@ void CObject::Render(){
 }
 
 /*
- *	ƒAƒ“ƒrƒGƒ“ƒg‚Ì‚İ‚ÅƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆã®ã¿ã§ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CObject::RenderAmb(){
 	if(m_pMesh){
@@ -428,9 +428,9 @@ void CObject::RenderAmb(){
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒw’èƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£æŒ‡å®šãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^	: ƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒXAƒ}ƒeƒŠƒAƒ‹AƒeƒNƒXƒ`ƒƒ
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿	: ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªã‚¯ã‚¹ã€ãƒãƒ†ãƒªã‚¢ãƒ«ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 void CObject::RenderT(LPTEX8 texalt){
 	if(m_pMesh){
@@ -440,9 +440,9 @@ void CObject::RenderT(LPTEX8 texalt){
 }
 
 /*
- *	ƒ¿’lw’èƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	Î±å€¤æŒ‡å®šãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^	: ƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒXAƒ}ƒeƒŠƒAƒ‹AƒeƒNƒXƒ`ƒƒ
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿	: ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªã‚¯ã‚¹ã€ãƒãƒ†ãƒªã‚¢ãƒ«ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 void CObject::RenderA(float alphaalt){
 	if(m_pMesh){
@@ -452,9 +452,9 @@ void CObject::RenderA(float alphaalt){
 }
 
 /*
- *	ƒ¿‰ÁZƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	Î±åŠ ç®—ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^	: ƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒXAƒ}ƒeƒŠƒAƒ‹AƒeƒNƒXƒ`ƒƒ
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿	: ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªã‚¯ã‚¹ã€ãƒãƒ†ãƒªã‚¢ãƒ«ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 void CObject::RenderAP(float alphaplus){
 	if(m_pMesh){
@@ -464,11 +464,11 @@ void CObject::RenderAP(float alphaplus){
 }
 
 /*
- *	ƒ}ƒeƒŠƒAƒ‹w’èƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒãƒ†ãƒªã‚¢ãƒ«æŒ‡å®šãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	pMat	: ‘ã‘Öƒ}ƒeƒŠƒAƒ‹
+ *	pMat	: ä»£æ›¿ãƒãƒ†ãƒªã‚¢ãƒ«
  *
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^	: ƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒXAƒ}ƒeƒŠƒAƒ‹AƒeƒNƒXƒ`ƒƒ
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿	: ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªã‚¯ã‚¹ã€ãƒãƒ†ãƒªã‚¢ãƒ«ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 void CObject::RenderSC(MAT8 *pMat){
 	if(m_pMesh){
@@ -478,11 +478,11 @@ void CObject::RenderSC(MAT8 *pMat){
 }
 
 /*
- *	‰e‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	å½±ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	pMtx	: “Š‰es—ñiGetShadowMtx()‚Åæ“¾j
+ *	pMtx	: æŠ•å½±è¡Œåˆ—ï¼ˆGetShadowMtx()ã§å–å¾—ï¼‰
  *
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^	: ƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒXAƒ}ƒeƒŠƒAƒ‹AƒeƒNƒXƒ`ƒƒ
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿	: ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªã‚¯ã‚¹ã€ãƒãƒ†ãƒªã‚¢ãƒ«ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 void CObject::RenderShadow(MTX4 *pMtx){
 	if(m_pMesh){
@@ -492,14 +492,14 @@ void CObject::RenderShadow(MTX4 *pMtx){
 }
 
 /*
- *	‹«ŠEƒ{ƒbƒNƒX‚Ìæ“¾
+ *	å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹ã®å–å¾—
  */
 float CObject::GetRadius(){
 	return m_pMesh ? m_pMesh->m_radius*GetWScale() : 0.0f;
 }
 
 /*
- *	‹«ŠEƒ{ƒbƒNƒX‚Ìæ“¾
+ *	å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹ã®å–å¾—
  */
 VEC3 CObject::GetCenter(){
 	if(!m_pMesh) return GetPos();
@@ -511,7 +511,7 @@ VEC3 CObject::GetCenter(){
 }
 
 /*
- *	‹«ŠEƒ{ƒbƒNƒX‚Ìæ“¾
+ *	å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹ã®å–å¾—
  */
 BOX8 CObject::GetBox(){
 	MTX4 mtxtmp = m_pParent ? GetWMatrix() : m_mtx;
@@ -527,10 +527,10 @@ BOX8 CObject::GetBox(){
 }
 
 /*
- *	‹«ŠE‹…‚Ìæ“¾
+ *	å¢ƒç•Œçƒã®å–å¾—
  *
- *	c		: ’†S
- *	r		: ”¼Œa
+ *	c		: ä¸­å¿ƒ
+ *	r		: åŠå¾„
  */
 void CObject::GetSphere(VEC3 *c, float *r){
 	*c = m_pMesh->m_center+GetWPos();
@@ -538,18 +538,18 @@ void CObject::GetSphere(VEC3 *c, float *r){
 }
 
 /*
- *	ü•ªŒğ·”»’èi‹«ŠEƒ{ƒbƒNƒX‚Æj
+ *	ç·šåˆ†äº¤å·®åˆ¤å®šï¼ˆå¢ƒç•Œãƒœãƒƒã‚¯ã‚¹ã¨ï¼‰
  *
- *	pos	: ü•ª‚Ìn“_
- *	dir	: ü•ª‚Ì•ûŒü
+ *	pos	: ç·šåˆ†ã®å§‹ç‚¹
+ *	dir	: ç·šåˆ†ã®æ–¹å‘
  *
- *	¦ŠJ”­’†
+ *	â€»é–‹ç™ºä¸­
  */
 BOOL CObject::IntersectB(VEC3 pos, VEC3 dir){
 	VEC3 min = m_pMesh->m_min*m_scale;
 	VEC3 max = m_pMesh->m_max*m_scale;
 
-	//	{ ü•ª‚ÌÀ•WŒn‚ğƒIƒuƒWƒFƒNƒg‚É‡‚í‚¹‚é
+	//	{ ç·šåˆ†ã®åº§æ¨™ç³»ã‚’ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«åˆã‚ã›ã‚‹
 	pos -= GetWPos();
 	dir -= GetWPos();
 
@@ -573,10 +573,10 @@ BOOL CObject::IntersectB(VEC3 pos, VEC3 dir){
 }
 
 /*
- *	ü•ªŒğ·”»’èi‹«ŠE‹…‚Æj
+ *	ç·šåˆ†äº¤å·®åˆ¤å®šï¼ˆå¢ƒç•Œçƒã¨ï¼‰
  *
- *	pos	: ü•ª‚Ìn“_
- *	dir	: ü•ª‚Ì•ûŒü
+ *	pos	: ç·šåˆ†ã®å§‹ç‚¹
+ *	dir	: ç·šåˆ†ã®æ–¹å‘
  */
 BOOL CObject::IntersectS(VEC3 pos, VEC3 dir){
 	VEC3 center = m_pMesh->m_center+GetWPos();
@@ -589,20 +589,20 @@ BOOL CObject::IntersectS(VEC3 pos, VEC3 dir){
 }
 
 /*
- *	ü•ªŒğ·”»’èiƒƒbƒVƒ…‚Æ‚ÌÚ×‚È”»’èj
+ *	ç·šåˆ†äº¤å·®åˆ¤å®šï¼ˆãƒ¡ãƒƒã‚·ãƒ¥ã¨ã®è©³ç´°ãªåˆ¤å®šï¼‰
  *
- *	pos	: ü•ª‚Ìn“_
- *	dir	: ü•ª‚Ì•ûŒü
- *	hit	: Å‰‚ÌŒğ·“_
- *	tri	: Œğ·‚µ‚½OŠpŒ`(ƒ[ƒJƒ‹À•WŒn)‚Ì’¸“_‚ÌŠi”[æ
- *	inv	: — •\ŒŸoƒtƒ‰ƒO 1: front, 2: back
+ *	pos	: ç·šåˆ†ã®å§‹ç‚¹
+ *	dir	: ç·šåˆ†ã®æ–¹å‘
+ *	hit	: æœ€åˆã®äº¤å·®ç‚¹
+ *	tri	: äº¤å·®ã—ãŸä¸‰è§’å½¢(ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ç³»)ã®é ‚ç‚¹ã®æ ¼ç´å…ˆ
+ *	inv	: è£è¡¨æ¤œå‡ºãƒ•ãƒ©ã‚° 1: front, 2: back
  *
- *	¦‘òR‚Ì•¨‘Ì‚ğ”»’è‚·‚éê‡‚Í‚Ü‚¸ IntersectS() ‚Å‘e‚­”»’è‚·‚é•û‚ª—Ç‚¢‚Å‚·B
+ *	â€»æ²¢å±±ã®ç‰©ä½“ã‚’åˆ¤å®šã™ã‚‹å ´åˆã¯ã¾ãš IntersectS() ã§ç²—ãåˆ¤å®šã™ã‚‹æ–¹ãŒè‰¯ã„ã§ã™ã€‚
  */
 BOOL CObject::Pick(VEC3 pos, VEC3 dir, VEC3 *hit, VEC3 tri[3], int inv){
 	if(!m_pMesh) return FALSE;
 
-	//	pos, dir‚ğƒ[ƒJƒ‹À•WŒn‚É•ÏŠ·
+	//	pos, dirã‚’ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ç³»ã«å¤‰æ›
 	MTX4 mw, mi;
 	VEC3 lpos, pos2, dir2;
 
@@ -614,7 +614,7 @@ BOOL CObject::Pick(VEC3 pos, VEC3 dir, VEC3 *hit, VEC3 tri[3], int inv){
 	D3DXVec3TransformNormal(&pos, &lpos, &mi);
 	pos2 -= pos;
 
-	//	ƒƒbƒVƒ…‚ğƒƒbƒN‚µ‚Äƒ|ƒŠƒSƒ“’PˆÊ‚Å”»’è
+	//	ãƒ¡ãƒƒã‚·ãƒ¥ã‚’ãƒ­ãƒƒã‚¯ã—ã¦ãƒãƒªã‚´ãƒ³å˜ä½ã§åˆ¤å®š
 	LPD3DXMESH pMesh = m_pMesh->GetObject();
 
 	LPDIRECT3DVERTEXBUFFER8 pVB;
@@ -648,7 +648,7 @@ BOOL CObject::Pick(VEC3 pos, VEC3 dir, VEC3 *hit, VEC3 tri[3], int inv){
 				if((inv&1) && IntersectTriangle(pos2, dir2, v0, v1, v2, &t, &u, &v) \
 					|| (inv&2) && IntersectTriangle(pos2, dir2, v0, v2, v1, &t, &v, &u)){ \
 					tmp = (v1-v0)*u+(v2-v0)*v+v0; \
-					/* is•ûŒü‚ÌÅ‹ß“_‚ğ‘I‘ğ */ \
+					/* é€²è¡Œæ–¹å‘ã®æœ€è¿‘ç‚¹ã‚’é¸æŠ */ \
 					if(D3DXVec3Dot(&dir2, &(tmp-pos2))>=0.0f && (!dwCount || \
 						D3DXVec3Length(&(tmp-pos2))<D3DXVec3Length(&(*hit-pos2)))){ \
 						*hit = tmp; \
@@ -693,23 +693,23 @@ BOOL CObject::Pick(VEC3 pos, VEC3 dir, VEC3 *hit, VEC3 tri[3], int inv){
 }
 
 /*
- *	‰Â‹”»’è
+ *	å¯è¦–åˆ¤å®š
  *
- *	–ß‚è’l	: TRUE = ‰Â‹AFALSE = •s‰Â‹
+ *	æˆ»ã‚Šå€¤	: TRUE = å¯è¦–ã€FALSE = ä¸å¯è¦–
  *
- *	¦•s‰Â‹ƒ|ƒŠƒSƒ“‚ÌƒNƒŠƒbƒv‚ÍDirect3D‚ªŸè‚É‚â‚Á‚Ä‚­‚ê‚éİ’è‚É‚µ‚Ä‚ ‚é‚Ì‚ÅA
- *	‚ ‚Ü‚èo”Ô‚Í‚È‚¢‚©‚àEEE
- *	(‚»‚ê‚Å‚à•s‰Â‹‚É•`‰æƒXƒLƒbƒv‚·‚é‚ÆáŠ±‚ÌƒpƒtƒH[ƒ}ƒ“ƒXƒAƒbƒv‚ ‚è)
+ *	â€»ä¸å¯è¦–ãƒãƒªã‚´ãƒ³ã®ã‚¯ãƒªãƒƒãƒ—ã¯Direct3DãŒå‹æ‰‹ã«ã‚„ã£ã¦ãã‚Œã‚‹è¨­å®šã«ã—ã¦ã‚ã‚‹ã®ã§ã€
+ *	ã‚ã¾ã‚Šå‡ºç•ªã¯ãªã„ã‹ã‚‚ãƒ»ãƒ»ãƒ»
+ *	(ãã‚Œã§ã‚‚ä¸å¯è¦–æ™‚ã«æç”»ã‚¹ã‚­ãƒƒãƒ—ã™ã‚‹ã¨è‹¥å¹²ã®ãƒ‘ãƒ•ã‚©ãƒ¼ãƒãƒ³ã‚¹ã‚¢ãƒƒãƒ—ã‚ã‚Š)
  */
 BOOL CObject::IsVisible(){
-	//	’†SÀ•W‚©‚ç”»’f
+	//	ä¸­å¿ƒåº§æ¨™ã‹ã‚‰åˆ¤æ–­
 	VEC3 pos = WorldToScreen(GetWPos());
 
 	if(pos.z>=0
 		&& 0<=pos.y && pos.y<=g_DispHeight
 		&& 0<=pos.x && pos.x<=g_DispWidth) return TRUE;
 
-	//	‹«ŠEƒ{ƒbƒNƒX‚©‚ç”»’f
+	//	å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹ã‹ã‚‰åˆ¤æ–­
 	BOX8 box = GetBox();
 
 	for(int i = 0; i<8; i++){
@@ -723,16 +723,16 @@ BOOL CObject::IsVisible(){
 }
 
 /*
- *	‹«ŠEƒ{ƒbƒNƒXƒeƒXƒg
+ *	å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹ãƒ†ã‚¹ãƒˆ
  *
- *	pDst	: ‹«ŠEƒ{ƒbƒNƒXA
- *	pSrc	: ‹«ŠEƒ{ƒbƒNƒXB
+ *	pDst	: å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹A
+ *	pSrc	: å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹B
  *
- *	¦SphereTest‚æ‚è‚à”»’è‚ÍŒµ–§‚Å‚·‚ªA‘¬“x‚ªáŠ±—‚¿‚Ü‚·B
- *	¦•Ó‚Æ•Ó‚¾‚¯‚ÅÚG‚µ‚Ä‚¢‚éê‡‚ÍŒŸo‚Å‚«‚Ü‚¹‚ñB
+ *	â€»SphereTestã‚ˆã‚Šã‚‚åˆ¤å®šã¯å³å¯†ã§ã™ãŒã€é€Ÿåº¦ãŒè‹¥å¹²è½ã¡ã¾ã™ã€‚
+ *	â€»è¾ºã¨è¾ºã ã‘ã§æ¥è§¦ã—ã¦ã„ã‚‹å ´åˆã¯æ¤œå‡ºã§ãã¾ã›ã‚“ã€‚
  */
 BOOL BoxTest(BOX8 *pDst, BOX8 *pSrc){
-	//	A‚ÌŠe–Ê‚ğì¬
+	//	Aã®å„é¢ã‚’ä½œæˆ
 	D3DXPLANE p[6];
 
 	D3DXPlaneFromPoints(&p[0], &pDst->v[0], &pDst->v[1], &pDst->v[2]);	//	right
@@ -742,13 +742,13 @@ BOOL BoxTest(BOX8 *pDst, BOX8 *pSrc){
 	D3DXPlaneFromPoints(&p[4], &pDst->v[0], &pDst->v[2], &pDst->v[6]);	//	back
 	D3DXPlaneFromPoints(&p[5], &pDst->v[1], &pDst->v[5], &pDst->v[7]);	//	front
 
-	//	B‚Ì’¸“_‚ª‚P‚Â‚Å‚à
+	//	Bã®é ‚ç‚¹ãŒï¼‘ã¤ã§ã‚‚
 	for(int j = 0; j<8; j++){
 		BOOL f = TRUE;
 
-		//	A‚Ì‘S‚Ä‚Ì–Ê‚Ì“à‘¤‚É‚ ‚é‚©H
+		//	Aã®å…¨ã¦ã®é¢ã®å†…å´ã«ã‚ã‚‹ã‹ï¼Ÿ
 		for(int i = 0; i<6; i++){
-			//	ŠO‘¤‚É‚ ‚Á‚½‚ç•Ê‚Ì’¸“_‚ğ’²‚×‚é
+			//	å¤–å´ã«ã‚ã£ãŸã‚‰åˆ¥ã®é ‚ç‚¹ã‚’èª¿ã¹ã‚‹
 			if(D3DXPlaneDotCoord(&p[i], &pSrc->v[j])<0){
 				f = FALSE;
 				break;
@@ -760,13 +760,13 @@ BOOL BoxTest(BOX8 *pDst, BOX8 *pSrc){
 }
 
 /*
- *	OŠpŒ`‚Æü•ª‚ÌŒğ·”»’è
+ *	ä¸‰è§’å½¢ã¨ç·šåˆ†ã®äº¤å·®åˆ¤å®š
  */
 BOOL IntersectTriangle(
 	const VEC3& orig, const VEC3& dir,
 	VEC3& v0, VEC3& v1, VEC3& v2,
 	FLOAT *t, FLOAT *u, FLOAT *v){
-	//	¦SDKƒTƒ“ƒvƒ‹‚»‚Ì‚Ü‚Ü(^^;
+	//	â€»SDKã‚µãƒ³ãƒ—ãƒ«ãã®ã¾ã¾(^^;
 
 	//	 Find vectors for two edges sharing vert0
 	D3DXVECTOR3 edge1 = v1-v0;

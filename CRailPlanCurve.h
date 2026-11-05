@@ -1,4 +1,4 @@
-#ifndef CRAILPLANCURVE_H_INCLUDED
+ï»¿#ifndef CRAILPLANCURVE_H_INCLUDED
 #define CRAILPLANCURVE_H_INCLUDED
 
 #include "CRailLink.h"
@@ -9,12 +9,12 @@ class CTiePlugin;
 class CGirderPlugin;
 
 /*
- *	ƒŒ[ƒ‹Œv‰æƒJ[ƒu
+ *	ãƒ¬ãƒ¼ãƒ«è¨ˆç”»ã‚«ãƒ¼ãƒ–
  */
 class CRailPlanCurve: public CRailCurve{
 private:
-	static float ms_RadiusDrawPos;	//	”¼Œa•\¦ˆÊ’u
-	CLineDumpL *m_Dump;	//	ƒ_ƒ“ƒp
+	static float ms_RadiusDrawPos;	//	åŠå¾„è¡¨ç¤ºä½ç½®
+	CLineDumpL *m_Dump;	//	ãƒ€ãƒ³ãƒ‘
 public:
 	static void SetRadiusDrawPos(float p){ ms_RadiusDrawPos = p; }
 	CRailPlanCurve(CLineDumpL *dump){ m_Dump = dump; }
@@ -22,15 +22,15 @@ public:
 };
 
 /*
- *	ƒŒ[ƒ‹İ’uƒJ[ƒu
+ *	ãƒ¬ãƒ¼ãƒ«è¨­ç½®ã‚«ãƒ¼ãƒ–
  */
 class CRailBuildCurve: public CRailCurve{
 private:
-	CRailConnectorLink m_BeginLink;	//	ŠJnƒŠƒ“ƒN
-	CRailConnectorLink m_EndLink;	//	I—¹ƒŠƒ“ƒN
-	CRailPlugin *m_RailPlugin;		//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *m_TiePlugin;		//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *m_GirderPlugin;	//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
+	CRailConnectorLink m_BeginLink;	//	é–‹å§‹ãƒªãƒ³ã‚¯
+	CRailConnectorLink m_EndLink;	//	çµ‚äº†ãƒªãƒ³ã‚¯
+	CRailPlugin *m_RailPlugin;		//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *m_TiePlugin;		//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *m_GirderPlugin;	//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 public:
 	CRailBuildCurve(CRailConnectorLink &, CRailConnectorLink &,
 		CRailPlugin *, CTiePlugin *, CGirderPlugin *);

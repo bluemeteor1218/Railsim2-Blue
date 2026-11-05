@@ -1,16 +1,16 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailPlugin.h"
 #include "CLinePlugin.h"
 #include "CPolePlugin.h"
 #include "CLineSelectMode.h"
 #include "CRailBuildMode.h"
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const float RAIL_PREV_LEN;
 
 /*
  *	[static]
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CLinePlugin::RenderPreview(){
 	if(!ms_PreviewState || (!g_Line && !g_Pole)) return;
@@ -57,7 +57,7 @@ void CLinePlugin::RenderPreview(){
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CLinePlugin::Load(){
 	char *str = m_Script, *tmp, *eee;
@@ -86,7 +86,7 @@ bool CLinePlugin::Load(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[İ’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CLinePlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -97,10 +97,10 @@ void CLinePlugin::SetPreview(){
 }
 
 /*
- *	‰Ëü’Œ‹——£‰ÁZ
+ *	æ¶ç·šæŸ±è·é›¢åŠ ç®—
  */
 void CLinePlugin::AddPolePos(
-	float len	//	‹——£
+	float len	//	è·é›¢
 ){
 	m_PolePos -= len;
 	while(m_PolePos<=0.0f) m_PolePos += m_MaxInterval;

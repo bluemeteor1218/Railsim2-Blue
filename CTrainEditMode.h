@@ -1,4 +1,4 @@
-#ifndef CTRAINEDITMODE_H_INCLUDED
+ï»¿#ifndef CTRAINEDITMODE_H_INCLUDED
 #define CTRAINEDITMODE_H_INCLUDED
 
 #include "CTrainListView.h"
@@ -9,21 +9,21 @@ class CTrainPlugin;
 class CTrainGroupTemplate;
 
 /*
- *	Ôçq•Ò¬ƒ‚[ƒh
+ *	è»Šè¼Œç·¨æˆãƒ¢ãƒ¼ãƒ‰
  */
 class CTrainEditMode: public CModelPluginMode{
 private:
-	bool m_GroupPreview;			//	•Ò¬ƒvƒŒƒrƒ…[
-	CPushButton m_AddButton;		//	Ôçq’Ç‰Áƒ{ƒ^ƒ“
-	CWindowCtrl m_TemplateWindow;	//	ƒeƒ“ƒvƒŒ[ƒgƒvƒŒƒrƒ…[‘‹
-	CListView m_TemplateListView;	//	ƒeƒ“ƒvƒŒ[ƒgƒŠƒXƒgƒrƒ…[
-	CWindowCtrl m_GroupWindow;		//	•Ò¬‘‹
-	CGroupListView m_GroupListView;	//	•Ò¬ƒŠƒXƒg
-	CWindowCtrl m_TrainWindow;		//	Ôçq‘‹
-	CTrainListView m_TrainListView;	//	ÔçqƒŠƒXƒg
-	CPopMenu *m_GroupMenu;			//	•Ò¬ƒƒjƒ…[
-	CPopMenu *m_TrainMenu;			//	Ôçqƒƒjƒ…[
-	CPopMenu *m_TemplateMenu;		//	•Ò¬ƒeƒ“ƒvƒŒ[ƒgƒƒjƒ…[
+	bool m_GroupPreview;			//	ç·¨æˆãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
+	CPushButton m_AddButton;		//	è»Šè¼Œè¿½åŠ ãƒœã‚¿ãƒ³
+	CWindowCtrl m_TemplateWindow;	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼çª“
+	CListView m_TemplateListView;	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	CWindowCtrl m_GroupWindow;		//	ç·¨æˆçª“
+	CGroupListView m_GroupListView;	//	ç·¨æˆãƒªã‚¹ãƒˆ
+	CWindowCtrl m_TrainWindow;		//	è»Šè¼Œçª“
+	CTrainListView m_TrainListView;	//	è»Šè¼Œãƒªã‚¹ãƒˆ
+	CPopMenu *m_GroupMenu;			//	ç·¨æˆãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	CPopMenu *m_TrainMenu;			//	è»Šè¼Œãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	CPopMenu *m_TemplateMenu;		//	ç·¨æˆãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼
 public:
 	CTrainEditMode();
 	~CTrainEditMode();
@@ -49,7 +49,7 @@ public:
 	void RenderModelPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CTrainEditMode *g_TrainEditMode;
 
 #endif

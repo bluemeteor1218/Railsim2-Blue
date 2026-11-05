@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailPlugin.h"
 #include "CPierPlugin.h"
 #include "CTiePlugin.h"
@@ -6,33 +6,33 @@
 #include "CTieSelectMode.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTieSelectMode::CTieSelectMode():
-	C3DPluginMode(lang(TiePlugin))	//	Šî–{ƒNƒ‰ƒX
+	C3DPluginMode(lang(TiePlugin))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_Camera = &ms_RailwayModeCamera;
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CTieSelectMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	return CPluginMode::Dispatch(type, data);
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆå–å¾—
  */
 CPluginList *CTieSelectMode::GetPluginList(){
 	return g_TiePluginList;
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CTieSelectMode::Enter3DPlugin(){
 	ms_ModeLabel = lang(SelectTie);
@@ -42,7 +42,7 @@ void CTieSelectMode::Enter3DPlugin(){
 }
 
 /*
- *	ƒ‚[ƒ_ƒ‹ˆ—
+ *	ãƒ¢ãƒ¼ãƒ€ãƒ«å‡¦ç†
  */
 void CTieSelectMode::ModalFunc3DPlugin(){
 	void ModalFuncRailwayPluginSet();
@@ -50,14 +50,14 @@ void CTieSelectMode::ModalFunc3DPlugin(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CTieSelectMode::ScanInput3DPlugin(){
 	ScanInputRailway();
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CTieSelectMode::Render3DPlugin(){
 	CRailPlugin::RenderPreview();

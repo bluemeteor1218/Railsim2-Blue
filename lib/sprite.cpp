@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -7,21 +7,21 @@
 #include "sprite.h"
 
 /*
- *	ƒXƒvƒ‰ƒCƒg‚Ìg—pŠJn
+ *	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ä½¿ç”¨é–‹å§‹
  */
 void BeginSprite(){
 	sv3.pSpr->Begin();
 }
 
 /*
- *	ƒXƒvƒ‰ƒCƒg‚Ìg—pI—¹
+ *	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ä½¿ç”¨çµ‚äº†
  */
 void EndSprite(){
 	sv3.pSpr->End();
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSprite::CSprite(){
 	m_pTex = NULL;
@@ -37,22 +37,22 @@ CSprite::CSprite(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSprite::~CSprite(){
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ[‚ğŠÖ˜A•t‚¯
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚’é–¢é€£ä»˜ã‘
  *
- *	pTex	: ƒeƒNƒXƒ`ƒƒ
+ *	pTex	: ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 void CSprite::SetTexture(CTexture *pTex){
 	int w, h;
 
 	m_pTex = pTex;
 
-	//	ƒeƒNƒXƒ`ƒƒ[ƒTƒCƒY‚ğæ“¾i2‚Ìæ”‚É‚È‚éj
+	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚µã‚¤ã‚ºã‚’å–å¾—ï¼ˆ2ã®ä¹—æ•°ã«ãªã‚‹ï¼‰
 	m_pTex->GetSize(&w, &h);
 	SetRect(0, 0, w, h);
 	SetTestRect(0, 0, w, h);
@@ -63,7 +63,7 @@ void CSprite::SetTexture(CTexture *pTex){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CSprite::Render(){
 	if(!m_pTex || !m_fRender) return;
@@ -75,11 +75,11 @@ void CSprite::Render(){
 }
 
 /*
- *	•¶š—ñ‚ğ•`‰æ
+ *	æ–‡å­—åˆ—ã‚’æç”»
  *
- *	str	: •¶š—ñ
+ *	str	: æ–‡å­—åˆ—
  *
- *	¦ƒeƒNƒXƒ`ƒƒ[‚ª128x128‚ÅAASCIIƒR[ƒh‡‚ÉƒtƒHƒ“ƒg‚ªŠi”[‚³‚ê‚Ä‚¢‚é‚±‚ÆB
+ *	â€»ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ãŒ128x128ã§ã€ASCIIã‚³ãƒ¼ãƒ‰é †ã«ãƒ•ã‚©ãƒ³ãƒˆãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹ã“ã¨ã€‚
  */
 void CSprite::DrawString(const char *str){
 	int i = 0;
@@ -108,9 +108,9 @@ void CSprite::DrawString(const char *str){
 }
 
 /*
- *	“–‚è”»’è
+ *	å½“ã‚Šåˆ¤å®š
  *
- *	¦‰ñ“]‚Íl—¶‚µ‚Ä‚¢‚È‚¢B
+ *	â€»å›è»¢ã¯è€ƒæ…®ã—ã¦ã„ãªã„ã€‚
  */
 BOOL CSprite::CollisionTest(CSprite *pSpr){
 	if(!m_pTex || !m_fTest) return FALSE;

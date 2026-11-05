@@ -1,10 +1,10 @@
-#ifndef CRAILDUMPCURVE_H_INCLUDED
+ï»¿#ifndef CRAILDUMPCURVE_H_INCLUDED
 #define CRAILDUMPCURVE_H_INCLUDED
 
 #include "CRailTraceCurve.h"
 
 /*
- *	ƒŒ[ƒ‹ƒ_ƒ“ƒvƒJ[ƒu
+ *	ãƒ¬ãƒ¼ãƒ«ãƒ€ãƒ³ãƒ—ã‚«ãƒ¼ãƒ–
  */
 class CRailDumpCurve: public CRailTraceCurve{
 public:
@@ -16,7 +16,7 @@ public:
 };
 
 /*
- *	ƒŒ[ƒ‹ƒŒƒ“ƒ_ƒŠƒ“ƒOƒJ[ƒu
+ *	ãƒ¬ãƒ¼ãƒ«ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚«ãƒ¼ãƒ–
  */
 class CRailRenderCurve: public CRailTraceCurve{
 public:
@@ -27,7 +27,7 @@ public:
 		float, float, CRailSplitter &);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 //extern bool g_ShowRailSelect;
 
 #endif

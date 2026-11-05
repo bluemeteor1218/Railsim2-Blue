@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -6,14 +6,14 @@
 #include "sound.h"
 
 /*
- *	DirectSound‚Ì‰Šú‰»
+ *	DirectSoundã®åˆæœŸåŒ–
  */
 BOOL InitDirectSound(){
 	DebugHL();
 	Debug("InitDirectSound\n");
 
 //	FAILED_ASSERT(
-//		"DirectSound‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½.",
+//		"DirectSoundã®åˆæœŸåŒ–ã«å¤±æ•—ã—ã¾ã—ãŸ.",
 //		DirectSoundCreate8(NULL, &svs.pDS, NULL));
 	if(FAILED(DirectSoundCreate8(NULL, &svs.pDS, NULL))){
 		svs.pDS = NULL;
@@ -21,33 +21,33 @@ BOOL InitDirectSound(){
 	}
 
 	FAILED_ASSERT(
-		"ƒTƒEƒ“ƒh‚Ì‹¦’²ƒŒƒxƒ‹‚ªİ’è‚Å‚«‚Ü‚¹‚ñ.",
+		"ã‚µã‚¦ãƒ³ãƒ‰ã®å”èª¿ãƒ¬ãƒ™ãƒ«ãŒè¨­å®šã§ãã¾ã›ã‚“.",
 		svs.pDS->SetCooperativeLevel(svw.hWnd, DSSCL_PRIORITY));
 
-	//	ƒvƒ‰ƒCƒ}ƒŠƒoƒbƒtƒ@‚Ìì¬
+	//	ãƒ—ãƒ©ã‚¤ãƒãƒªãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	return CreatePrimaryBuffer();
 }
 
 /*
- *	DirectSound‚Ì‰ğ•ú
+ *	DirectSoundã®è§£æ”¾
  */
 void FreeDirectSound(){
 	if(!svs.pDS || !svs.pPB) return;
 	DebugHL();
 	Debug("FreeDirectSound\n");
 
-	SetMasterVolume();	//	‰Šúƒ{ƒŠƒ…[ƒ€‚É–ß‚·
+	SetMasterVolume();	//	åˆæœŸãƒœãƒªãƒ¥ãƒ¼ãƒ ã«æˆ»ã™
 	RELEASE(svs.pListener);
 	RELEASE(svs.pPB);
 	RELEASE(svs.pDS);
 }
 
 /*
- *	ƒvƒ‰ƒCƒ}ƒŠƒoƒbƒtƒ@‚Ìì¬
+ *	ãƒ—ãƒ©ã‚¤ãƒãƒªãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
  */
 BOOL CreatePrimaryBuffer(){
-	//	3DƒTƒEƒ“ƒh‚ğg—p‚·‚é‚©‚Ç‚¤‚©H
-	Debug("3DƒTƒEƒ“ƒh = ");
+	//	3Dã‚µã‚¦ãƒ³ãƒ‰ã‚’ä½¿ç”¨ã™ã‚‹ã‹ã©ã†ã‹ï¼Ÿ
+	Debug("3Dã‚µã‚¦ãƒ³ãƒ‰ = ");
 
 	if(CheckArguments("/3ds")){
 		svs.f3D = FALSE;
@@ -56,8 +56,8 @@ BOOL CreatePrimaryBuffer(){
 		svs.f3D = TRUE;
 		Debug("ON\n");
 	}
-	//	FX‚ğg—p‚·‚é‚©‚Ç‚¤‚©H
-	Debug("ƒGƒtƒFƒNƒg = ");
+	//	FXã‚’ä½¿ç”¨ã™ã‚‹ã‹ã©ã†ã‹ï¼Ÿ
+	Debug("ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ = ");
 
 	if(CheckArguments("/fx")){
 		svs.fFX = FALSE;
@@ -75,22 +75,22 @@ BOOL CreatePrimaryBuffer(){
 
 	if(svs.f3D) desc.dwFlags |= DSBCAPS_CTRL3D;
 
-	FAILED_ASSERT(//	¦ƒvƒ‰ƒCƒ}ƒŠƒoƒbƒtƒ@‚É‚ÍIDirectSoundBuffer8‚ğg—p‚Å‚«‚È‚¢
-		"ƒvƒ‰ƒCƒ}ƒŠEƒTƒEƒ“ƒhƒoƒbƒtƒ@‚ªì¬‚Å‚«‚Ü‚¹‚ñ.",
+	FAILED_ASSERT(//	â€»ãƒ—ãƒ©ã‚¤ãƒãƒªãƒãƒƒãƒ•ã‚¡ã«ã¯IDirectSoundBuffer8ã‚’ä½¿ç”¨ã§ããªã„
+		"ãƒ—ãƒ©ã‚¤ãƒãƒªãƒ»ã‚µã‚¦ãƒ³ãƒ‰ãƒãƒƒãƒ•ã‚¡ãŒä½œæˆã§ãã¾ã›ã‚“.",
 		svs.pDS->CreateSoundBuffer(&desc, &svs.pPB, NULL));
-	//	ƒEƒF[ƒuƒtƒH[ƒ}ƒbƒg‚Ìİ’è
+	//	ã‚¦ã‚§ãƒ¼ãƒ–ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®è¨­å®š
 	WAVEFORMATEX wfmt = GetWaveFormat(44100, 16, 2);
 
 	FAILED_ASSERT(
-		"ƒTƒEƒ“ƒhƒtƒH[ƒ}ƒbƒg‚ªw’è‚Å‚«‚Ü‚¹‚ñ.",
+		"ã‚µã‚¦ãƒ³ãƒ‰ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãŒæŒ‡å®šã§ãã¾ã›ã‚“.",
 		svs.pPB->SetFormat(&wfmt));
-	//	‰Šúƒ{ƒŠƒ…[ƒ€‚Ìæ“¾
+	//	åˆæœŸãƒœãƒªãƒ¥ãƒ¼ãƒ ã®å–å¾—
 	svs.pPB->GetVolume(&svs.initVolume);
 
 	if(svs.f3D){
-		//	ƒŠƒXƒi[‚Ìì¬
+		//	ãƒªã‚¹ãƒŠãƒ¼ã®ä½œæˆ
 		FAILED_ASSERT(
-			"3DƒŠƒXƒi[‚ªì¬‚Å‚«‚Ü‚¹‚ñ.",
+			"3Dãƒªã‚¹ãƒŠãƒ¼ãŒä½œæˆã§ãã¾ã›ã‚“.",
 			svs.pPB->QueryInterface(IID_IDirectSound3DListener, (void **)&svs.pListener));
 
 		SetListenerSens(1.0f);
@@ -101,7 +101,7 @@ BOOL CreatePrimaryBuffer(){
 }
 
 /*
- *	ƒvƒ‰ƒCƒ}ƒŠƒoƒbƒtƒ@‚ÌŒŸØ
+ *	ãƒ—ãƒ©ã‚¤ãƒãƒªãƒãƒƒãƒ•ã‚¡ã®æ¤œè¨¼
  */
 void PrimaryBufferVerify(){
 	if(!svs.pPB) return;
@@ -109,7 +109,7 @@ void PrimaryBufferVerify(){
 
 	svs.pPB->GetStatus(&dw);
 
-	//	ƒƒXƒg‚Í•œŒ³
+	//	ãƒ­ã‚¹ãƒˆæ™‚ã¯å¾©å…ƒ
 	if(dw&DSBSTATUS_BUFFERLOST){
 		Debug("PB:DSBSTATUS_BUFFERLOST");
 		svs.pPB->Restore();
@@ -117,11 +117,11 @@ void PrimaryBufferVerify(){
 }
 
 /*
- *	ƒ}ƒXƒ^[ƒ{ƒŠƒ…[ƒ€‚Ìİ’è
+ *	ãƒã‚¹ã‚¿ãƒ¼ãƒœãƒªãƒ¥ãƒ¼ãƒ ã®è¨­å®š
  *
- *	dB	: DSBVOLUME_MIN-DSBVOLUME_MAX(1/100dB’PˆÊ)
+ *	dB	: DSBVOLUME_MIN-DSBVOLUME_MAX(1/100dBå˜ä½)
  *
- *	¦DirectMusic‚Æ˜A“®‚·‚éB
+ *	â€»DirectMusicã¨é€£å‹•ã™ã‚‹ã€‚
  */
 void SetMasterVolume(LONG dB){
 	if(!svs.pPB) return;
@@ -129,7 +129,7 @@ void SetMasterVolume(LONG dB){
 }
 
 /*
- *	ƒŠƒXƒi[‚ÌŠ´“x‚ğİ’è
+ *	ãƒªã‚¹ãƒŠãƒ¼ã®æ„Ÿåº¦ã‚’è¨­å®š
  */
 void SetListenerSens(float f){
 	if(svs.f3D)
@@ -137,7 +137,7 @@ void SetListenerSens(float f){
 }
 
 /*
- *	ƒŠƒXƒi[‚ÌˆÊ’u‚ğİ’è
+ *	ãƒªã‚¹ãƒŠãƒ¼ã®ä½ç½®ã‚’è¨­å®š
  */
 void SetListenerPos(VEC3 v){
 	if(svs.f3D)
@@ -145,10 +145,10 @@ void SetListenerPos(VEC3 v){
 }
 
 /*
- *	ƒŠƒXƒi[‚Ì•ûŒü‚ğİ’è
+ *	ãƒªã‚¹ãƒŠãƒ¼ã®æ–¹å‘ã‚’è¨­å®š
  *
- *	d		: Z²
- *	u		: Y²
+ *	d		: Zè»¸
+ *	u		: Yè»¸
  */
 void SetListenerDir(VEC3 d, VEC3 u){
 	if(svs.f3D)

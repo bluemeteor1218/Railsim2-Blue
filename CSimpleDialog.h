@@ -1,4 +1,4 @@
-#ifndef CYESNODIALOG_H_INCLUDED
+ï»¿#ifndef CYESNODIALOG_H_INCLUDED
 #define CYESNODIALOG_H_INCLUDED
 
 #include "CWindowCtrl.h"
@@ -9,11 +9,11 @@
 class CMenuCommand;
 
 /*
- *	ƒVƒ“ƒvƒ‹ƒ_ƒCƒAƒƒO
+ *	ã‚·ãƒ³ãƒ—ãƒ«ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  */
 class CSimpleDialog: public CWindowCtrl{
 private:
-	CStaticCtrl m_Label;	//	ƒ‰ƒxƒ‹
+	CStaticCtrl m_Label;	//	ãƒ©ãƒ™ãƒ«
 	CPushButton m_OKButton;	//	OK
 public:
 	CSimpleDialog(char *, char *);
@@ -22,15 +22,15 @@ public:
 };
 
 /*
- *	Yes / No ƒ_ƒCƒAƒƒO
+ *	Yes / No ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  */
 class CYesNoDialog: public CWindowCtrl{
 private:
-	CStaticCtrl m_Label;		//	ƒ‰ƒxƒ‹
-	CPushButton m_YesButton;	//	‚Í‚¢
-	CPushButton m_NoButton;		//	‚¢‚¢‚¦
-	CMenuCommand *m_YesCommand;	//	u‚Í‚¢v‘I‘ğ‚ÌƒRƒ}ƒ“ƒh
-	CMenuCommand *m_NoCommand;	//	u‚¢‚¢‚¦v‘I‘ğ‚ÌƒRƒ}ƒ“ƒh
+	CStaticCtrl m_Label;		//	ãƒ©ãƒ™ãƒ«
+	CPushButton m_YesButton;	//	ã¯ã„
+	CPushButton m_NoButton;		//	ã„ã„ãˆ
+	CMenuCommand *m_YesCommand;	//	ã€Œã¯ã„ã€é¸æŠæ™‚ã®ã‚³ãƒãƒ³ãƒ‰
+	CMenuCommand *m_NoCommand;	//	ã€Œã„ã„ãˆã€é¸æŠæ™‚ã®ã‚³ãƒãƒ³ãƒ‰
 public:
 	CYesNoDialog(char *, char *, bool);
 	~CYesNoDialog();
@@ -43,14 +43,14 @@ public:
 };
 
 /*
- *	“ü—Íƒ_ƒCƒAƒƒO
+ *	å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  */
 class CInputDialog: public CWindowCtrl{
 private:
-	CStaticCtrl m_Label;		//	ƒ‰ƒxƒ‹
-	CEditCtrl m_Edit;			//	ƒGƒfƒBƒbƒgƒ{ƒbƒNƒX
-	CPushButton m_OKButton;		//	‚Í‚¢
-	CPushButton m_CancelButton;	//	‚¢‚¢‚¦
+	CStaticCtrl m_Label;		//	ãƒ©ãƒ™ãƒ«
+	CEditCtrl m_Edit;			//	ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹
+	CPushButton m_OKButton;		//	ã¯ã„
+	CPushButton m_CancelButton;	//	ã„ã„ãˆ
 public:
 	CInputDialog(char *, char *, char *, int);
 	char *GetInputText(){ m_Edit.FinishInput(); return m_Edit.GetText(); }
@@ -61,15 +61,15 @@ public:
 };
 
 /*
- *	•¡”€–Ú“ü—Íƒ_ƒCƒAƒƒO
+ *	è¤‡æ•°é …ç›®å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  */
 class CMultiInputDialog: public CWindowCtrl{
 private:
-	int m_ItemNumber;			//	ƒAƒCƒeƒ€”
-	CStaticCtrl *m_Label;		//	ƒ‰ƒxƒ‹
-	CEditCtrl *m_Edit;			//	ƒGƒfƒBƒbƒgƒ{ƒbƒNƒX
-	CPushButton m_OKButton;		//	‚Í‚¢
-	CPushButton m_CancelButton;	//	‚¢‚¢‚¦
+	int m_ItemNumber;			//	ã‚¢ã‚¤ãƒ†ãƒ æ•°
+	CStaticCtrl *m_Label;		//	ãƒ©ãƒ™ãƒ«
+	CEditCtrl *m_Edit;			//	ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹
+	CPushButton m_OKButton;		//	ã¯ã„
+	CPushButton m_CancelButton;	//	ã„ã„ãˆ
 public:
 	CMultiInputDialog(char *, int, char **, char **, int *);
 	~CMultiInputDialog();
@@ -81,11 +81,11 @@ public:
 	bool ScanInputWindow();
 };
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void EnqueueCommonDialog(CWindowCtrl *);
 void ProcessCommonDialog();
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern list<CWindowCtrl *> g_DialogQueue;
 
 #endif

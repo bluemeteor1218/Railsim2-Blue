@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CLineBuildCurve.h"
 #include "CRailBuilder.h"
 #include "CRailWay.h"
@@ -11,23 +11,23 @@
 #include "CLinePlugin.h"
 #include "CPolePlugin.h"
 
-//	“à•”ƒOƒ[ƒoƒ‹
-vector<CPoleLink> g_LastPole;	//	ÅI‰Ëü’Œ
-vector<CPoleLink> g_FinishPole;	//	ÅI‰Ëü’Œ
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+vector<CPoleLink> g_LastPole;	//	æœ€çµ‚æ¶ç·šæŸ±
+vector<CPoleLink> g_FinishPole;	//	æœ€çµ‚æ¶ç·šæŸ±
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLineBuildCurve::CLineBuildCurve(
-	CRailWay *way,		//	ì‹ÆƒŒ[ƒ‹
-	CRailPlugin *rpi,	//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *tpi,	//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *gpi,	//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
-	CPierPlugin *ipi,	//	‹´‹rƒvƒ‰ƒOƒCƒ“
-	CLinePlugin *lpi,	//	‰Ëüƒvƒ‰ƒOƒCƒ“
-	CPolePlugin *ppi	//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
+	CRailWay *way,		//	ä½œæ¥­ãƒ¬ãƒ¼ãƒ«
+	CRailPlugin *rpi,	//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *tpi,	//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *gpi,	//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPierPlugin *ipi,	//	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CLinePlugin *lpi,	//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPolePlugin *ppi	//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ):
-	CRailTraceCurve(rpi, tpi, gpi, way)	//	Šî–{ƒNƒ‰ƒX
+	CRailTraceCurve(rpi, tpi, gpi, way)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_PierPlugin = ipi;
 	m_LinePlugin = lpi;
@@ -35,13 +35,13 @@ CLineBuildCurve::CLineBuildCurve(
 }
 
 /*
- *	ƒgƒŒ[ƒXŠ®—¹
+ *	ãƒˆãƒ¬ãƒ¼ã‚¹å®Œäº†
  */
 void CLineBuildCurve::FinishTrace(
-	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	n“_
-	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	I“_
-	float sumlen, float seglen,	//	ÏZ‹——£EƒZƒOƒƒ“ƒg‹——£
-	CRailSplitter &splitter		//	•ªŠ„q
+	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	å§‹ç‚¹
+	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	çµ‚ç‚¹
+	float sumlen, float seglen,	//	ç©ç®—è·é›¢ãƒ»ã‚»ã‚°ãƒ¡ãƒ³ãƒˆè·é›¢
+	CRailSplitter &splitter		//	åˆ†å‰²å­
 ){
 	VEC3 cpos1 = pos1, cpos2 = pos2;
 	if(m_RailPlugin) m_RailPlugin->BeforeDump(cpos1, right1, up1, cpos2, right2, up2);

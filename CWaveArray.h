@@ -1,15 +1,15 @@
-#ifndef CWAVEARRAY_H_INCLUDED
+ï»¿#ifndef CWAVEARRAY_H_INCLUDED
 #define CWAVEARRAY_H_INCLUDED
 
 /*
- *	ƒTƒEƒ“ƒh“¯Ä¶ŠÇ—ƒNƒ‰ƒX
+ *	ã‚µã‚¦ãƒ³ãƒ‰åŒæ™‚å†ç”Ÿç®¡ç†ã‚¯ãƒ©ã‚¹
  *
- *	“¯Ä¶‚·‚éƒTƒEƒ“ƒh‚ğŠÇ—‚·‚é
+ *	åŒæ™‚å†ç”Ÿã™ã‚‹ã‚µã‚¦ãƒ³ãƒ‰ã‚’ç®¡ç†ã™ã‚‹
  */
 class CWaveArray{
 private:
-	int m_Number;	//	“¯Ä¶Å‘å”
-	CWave *m_Wave;	//	ŒÂ•Ê‚ÌƒTƒEƒ“ƒh
+	int m_Number;	//	åŒæ™‚å†ç”Ÿæœ€å¤§æ•°
+	CWave *m_Wave;	//	å€‹åˆ¥ã®ã‚µã‚¦ãƒ³ãƒ‰
 public:
 	CWaveArray();
 	~CWaveArray();

@@ -1,11 +1,11 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 struct SYSVALUE_V{
-	IGraphBuilder*	pGraph;	//	ƒtƒBƒ‹ƒ^ƒOƒ‰ƒtEƒIƒuƒWƒFƒNƒg
-	IMediaControl*	pMCtrl;	//	ƒƒfƒBƒAƒRƒ“ƒgƒ[ƒ‹EƒIƒuƒWƒFƒNƒg
-	IVideoWindow*	pVWin;	//	ƒrƒfƒIƒEƒCƒ“ƒhƒEEƒIƒuƒWƒFƒNƒg
-	IMediaEventEx*	pEvent;	//	ƒCƒxƒ“ƒgEƒIƒuƒWƒFƒNƒg
-	BOOL fPlay;				//	Ä¶ó‘Ôƒtƒ‰ƒO
+	IGraphBuilder*	pGraph;	//	ãƒ•ã‚£ãƒ«ã‚¿ã‚°ãƒ©ãƒ•ãƒ»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	IMediaControl*	pMCtrl;	//	ãƒ¡ãƒ‡ã‚£ã‚¢ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãƒ»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	IVideoWindow*	pVWin;	//	ãƒ“ãƒ‡ã‚ªã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	IMediaEventEx*	pEvent;	//	ã‚¤ãƒ™ãƒ³ãƒˆãƒ»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	BOOL fPlay;				//	å†ç”ŸçŠ¶æ…‹ãƒ•ãƒ©ã‚°
 };
 extern SYSVALUE_V svv;
 

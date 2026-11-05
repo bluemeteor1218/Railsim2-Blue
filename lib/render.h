@@ -1,19 +1,19 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒOEƒXƒe[ƒg‚Ìİ’è
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ»ã‚¹ãƒ†ãƒ¼ãƒˆã®è¨­å®š
  *
- *	pram	: ƒpƒ‰ƒ[ƒ^
- *	state	: ó‘Ô
+ *	pram	: ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
+ *	state	: çŠ¶æ…‹
  */
 inline void devSetState(D3DRENDERSTATETYPE pram, DWORD state){
 	sv3.pDev->SetRenderState(pram, state);
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒOEƒXƒe[ƒg‚Ìæ“¾
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ»ã‚¹ãƒ†ãƒ¼ãƒˆã®å–å¾—
  *
- *	pram	: ƒpƒ‰ƒ[ƒ^
+ *	pram	: ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
  */
 inline DWORD devGetState(D3DRENDERSTATETYPE pram){
 	DWORD state;
@@ -22,16 +22,16 @@ inline DWORD devGetState(D3DRENDERSTATETYPE pram){
 }
 
 /*
- *	•ÏŠ·s—ñƒŠƒZƒbƒg
+ *	å¤‰æ›è¡Œåˆ—ãƒªã‚»ãƒƒãƒˆ
  */
 inline void devResetMatrix(){
 	devTransform(&sv3.mtxFront);
 }
 
 /*
- *	ƒ‰ƒCƒg‚Ìg—p
+ *	ãƒ©ã‚¤ãƒˆã®ä½¿ç”¨
  *
- *	f	: TRUEƒ‰ƒCƒeƒBƒ“ƒO‚ğ—LŒøAFALSE–³Œø
+ *	f	: TRUEï¼ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’æœ‰åŠ¹ã€FALSEï¼ç„¡åŠ¹
  */
 inline void devSetLighting(BOOL f){
 	devSetState(D3DRS_LIGHTING, f);
@@ -41,24 +41,24 @@ inline BOOL devGetLighting(){
 }
 
 /*
- *	ƒ‰ƒCƒgiŒÂ•Êj‚Ì‚n‚m^‚n‚e‚e
+ *	ãƒ©ã‚¤ãƒˆï¼ˆå€‹åˆ¥ï¼‰ã®ï¼¯ï¼®ï¼ï¼¯ï¼¦ï¼¦
  *
- *	n	: ƒCƒ“ƒfƒbƒNƒX
- *	f	: ^—’l
+ *	n	: ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+ *	f	: çœŸç†å€¤
  */
 inline void devSetLight(int n, BOOL f){
 	sv3.pDev->LightEnable(n, f);
 }
 
 /*
- *	ƒAƒ“ƒrƒGƒ“ƒgƒJƒ‰[
+ *	ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆã‚«ãƒ©ãƒ¼
  */
 inline void devSetAmbient(D3DCOLOR c){
 	devSetState(D3DRS_AMBIENT, c);
 }
 
 /*
- *	ƒ}ƒeƒŠƒAƒ‹‚Ìİ’è
+ *	ãƒãƒ†ãƒªã‚¢ãƒ«ã®è¨­å®š
  */
 inline void devSetMaterial(MAT8 *pMat){
 	sv3.pDev->SetMaterial(pMat);
@@ -68,25 +68,25 @@ void devResetMaterial();
 void devSetLineMaterial();
 
 /*
- *	ƒXƒyƒLƒ…ƒ‰[ƒnƒCƒ‰ƒCƒg‚Ìg—p
+ *	ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒ¼ãƒã‚¤ãƒ©ã‚¤ãƒˆã®ä½¿ç”¨
  *
- *	f	: ^—’l
+ *	f	: çœŸç†å€¤
  */
 inline void devSetSpecular(BOOL f){
 	devSetState(D3DRS_SPECULARENABLE, f);
 }
 
 /*
- *	ƒJƒŠƒ“ƒO‚Ìg—p
+ *	ã‚«ãƒªãƒ³ã‚°ã®ä½¿ç”¨
  *
- *	f	: ^—’l
+ *	f	: çœŸç†å€¤
  */
 inline void devSetCulling(BOOL f){
 	devSetState(D3DRS_CULLMODE, f ? D3DCULL_CCW : D3DCULL_NONE);
 }
 
 /*
- *	ƒVƒF[ƒfƒBƒ“ƒO•û–@
+ *	ã‚·ã‚§ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°æ–¹æ³•
  *
  *	m	: D3DSHADE_GOURAUD, D3DSHADE_FLAT
  */
@@ -95,25 +95,25 @@ inline void devSetShading(DWORD m){
 }
 
 /*
- *	–@ü‚Ì©“®³‹K‰»iƒXƒP[ƒŠƒ“ƒO‚É‚æ‚éƒVƒF[ƒfƒBƒ“ƒO‚ÌŒ¸Š‚ğ‰ñ”ğj
+ *	æ³•ç·šã®è‡ªå‹•æ­£è¦åŒ–ï¼ˆã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ã«ã‚ˆã‚‹ã‚·ã‚§ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã®æ¸›è¡°ã‚’å›é¿ï¼‰
  *
- *	f	: ^—’l
+ *	f	: çœŸç†å€¤
  */
 inline void devSetNormalize(BOOL f){
 	devSetState(D3DRS_NORMALIZENORMALS, f);
 }
 
 /*
- *	Zƒoƒbƒtƒ@‚ÌƒNƒŠƒA
+ *	Zãƒãƒƒãƒ•ã‚¡ã®ã‚¯ãƒªã‚¢
  */
 inline void devClearZ(){
 	sv3.pDev->Clear(0, NULL, D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
 }
 
 /*
- *	Zƒoƒbƒtƒ@‚ÌQÆ
+ *	Zãƒãƒƒãƒ•ã‚¡ã®å‚ç…§
  *
- *	f	: TRUE“Ç‚İ—LŒøAFALSE–³Œø
+ *	f	: TRUEï¼èª­è¾¼ã¿æœ‰åŠ¹ã€FALSEï¼ç„¡åŠ¹
  */
 inline void devSetZRead(BOOL f){
 	devSetState(D3DRS_ZENABLE, f);
@@ -123,11 +123,11 @@ inline BOOL devGetZRead(){
 }
 
 /*
- *	Zƒoƒbƒtƒ@‚Ì‘‚İ
+ *	Zãƒãƒƒãƒ•ã‚¡ã®æ›¸è¾¼ã¿
  *
- *	f	: TRUE‘‚İ—LŒøAFALSE–³Œø
+ *	f	: TRUEï¼æ›¸è¾¼ã¿æœ‰åŠ¹ã€FALSEï¼ç„¡åŠ¹
  *
- *	¦”¼“§–¾•¨‘Ì‚ğƒŒƒ“ƒ_ƒŠƒ“ƒO‚·‚é‚Æ‚«‚ÍOFF‚É‚µ‚Ä‚¨‚­
+ *	â€»åŠé€æ˜ç‰©ä½“ã‚’ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã™ã‚‹ã¨ãã¯OFFã«ã—ã¦ãŠã
  */
 inline void devSetZWrite(BOOL f){
 	devSetState(D3DRS_ZWRITEENABLE, f);
@@ -137,10 +137,10 @@ inline BOOL devGetZWrite(){
 }
 
 /*
- *	ƒAƒ‹ƒtƒ@ƒeƒXƒg‚Ìİ’è
+ *	ã‚¢ãƒ«ãƒ•ã‚¡ãƒ†ã‚¹ãƒˆã®è¨­å®š
  *
- *	f	: ^—’l
- *	ref	: Šî€‚Æ‚·‚éƒ¿’l
+ *	f	: çœŸç†å€¤
+ *	ref	: åŸºæº–ã¨ã™ã‚‹Î±å€¤
  */
 inline void devSetAlphaTest(BOOL f, D3DCMPFUNC func, DWORD ref){
 	devSetState(D3DRS_ALPHATESTENABLE, f);
@@ -154,14 +154,14 @@ inline void devSetAlphaTest(BOOL f, D3DCMPFUNC func, DWORD ref){
 #define devALPHA_PASS()	devSetAlphaTest(FALSE, D3DCMP_ALWAYS, 0)
 #define devALPHA_GREAT(ref) devSetAlphaTest(TRUE, D3DCMP_GREATEREQUAL, ref)
 /*
- *	ƒuƒŒƒ“ƒfƒBƒ“ƒOƒtƒ@ƒNƒ^[‚Ìİ’è
+ *	ãƒ–ãƒ¬ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ãƒ•ã‚¡ã‚¯ã‚¿ãƒ¼ã®è¨­å®š
  *
- *	flag	: ^—’l
- *	src		: ƒ\[ƒX’l
- *	dst		: ƒfƒXƒeƒBƒl[ƒVƒ‡ƒ“’l
+ *	flag	: çœŸç†å€¤
+ *	src		: ã‚½ãƒ¼ã‚¹å€¤
+ *	dst		: ãƒ‡ã‚¹ãƒ†ã‚£ãƒãƒ¼ã‚·ãƒ§ãƒ³å€¤
  *
- *	D3DBLEND_SRCALPHA, D3DBLEND_INVSRCALPHA	: ƒ¿ƒuƒŒƒ“ƒh
- *	D3DBLEND_ONE, D3DBLEND_ONE				: ‰ÁZƒuƒŒƒ“ƒh
+ *	D3DBLEND_SRCALPHA, D3DBLEND_INVSRCALPHA	: Î±ãƒ–ãƒ¬ãƒ³ãƒ‰
+ *	D3DBLEND_ONE, D3DBLEND_ONE				: åŠ ç®—ãƒ–ãƒ¬ãƒ³ãƒ‰
  */
 inline void devSetBlend(BOOL flag, DWORD src, DWORD dst){
 	devSetState(D3DRS_ALPHABLENDENABLE, flag);
@@ -172,25 +172,25 @@ inline void devSetBlend(BOOL flag, DWORD src, DWORD dst){
 	}
 }
 
-//	‡¬‚È‚µ
+//	åˆæˆãªã—
 #define devBLEND_NONE() devSetBlend(FALSE, 0, 0)
-//	ƒ¿ƒuƒŒƒ“ƒhi•W€‚Ì”¼“§–¾‡¬j
+//	Î±ãƒ–ãƒ¬ãƒ³ãƒ‰ï¼ˆæ¨™æº–ã®åŠé€æ˜åˆæˆï¼‰
 #define devBLEND_ALPHA() devSetBlend(TRUE, D3DBLEND_SRCALPHA, D3DBLEND_INVSRCALPHA)
-//	–¾“xƒuƒŒƒ“ƒhiƒ\[ƒX‚ÌF‚ª–¾‚é‚¢‚Ù‚Ç“§–¾j
+//	æ˜åº¦ãƒ–ãƒ¬ãƒ³ãƒ‰ï¼ˆã‚½ãƒ¼ã‚¹ã®è‰²ãŒæ˜ã‚‹ã„ã»ã©é€æ˜ï¼‰
 #define devBLEND_RGB() devSetBlend(TRUE, D3DBLEND_SRCCOLOR, D3DBLEND_INVSRCCOLOR)
-//	‰ÁZƒuƒŒƒ“ƒhi—¼Ò‚ÌF‚Ì‘«‚µZj
+//	åŠ ç®—ãƒ–ãƒ¬ãƒ³ãƒ‰ï¼ˆä¸¡è€…ã®è‰²ã®è¶³ã—ç®—ï¼‰
 #define devBLEND_ADD() devSetBlend(TRUE, D3DBLEND_ONE, D3DBLEND_ONE)
-//	ƒ¿‰ÁZƒuƒŒƒ“ƒhiƒ\[ƒX‚Ìƒ¿’l‚ª‚‚¢‚Ù‚Ç‰ÁZ‚³‚ê‚éj
+//	Î±åŠ ç®—ãƒ–ãƒ¬ãƒ³ãƒ‰ï¼ˆã‚½ãƒ¼ã‚¹ã®Î±å€¤ãŒé«˜ã„ã»ã©åŠ ç®—ã•ã‚Œã‚‹ï¼‰
 #define devBLEND_ADD2() devSetBlend(TRUE, D3DBLEND_SRCALPHA, D3DBLEND_ONE)
-//	æZƒuƒŒƒ“ƒhiƒ}ƒ‹ƒ`ƒpƒXEƒ‰ƒCƒgƒ}ƒbƒv‚È‚Ç‚Ég—pj
+//	ä¹—ç®—ãƒ–ãƒ¬ãƒ³ãƒ‰ï¼ˆãƒãƒ«ãƒãƒ‘ã‚¹ãƒ»ãƒ©ã‚¤ãƒˆãƒãƒƒãƒ—ãªã©ã«ä½¿ç”¨ï¼‰
 #define devBLEND_MOD() devSetBlend(TRUE, D3DBLEND_DESTCOLOR, D3DBLEND_ZERO)
 /*
- *	ƒtƒHƒO‚Ìİ’è
+ *	ãƒ•ã‚©ã‚°ã®è¨­å®š
  *
- *	flag	: ^—’l
- *	c		: F
- *	start	: ‰Â‹‹——£
- *	end	: –O˜a‹——£
+ *	flag	: çœŸç†å€¤
+ *	c		: è‰²
+ *	start	: å¯è¦–è·é›¢
+ *	end	: é£½å’Œè·é›¢
  */
 inline void devSetFog(BOOL flag, DWORD c, float start, float end){
 	devSetState(D3DRS_FOGENABLE, flag);
@@ -204,12 +204,12 @@ inline void devSetFog(BOOL flag, DWORD c, float start, float end){
 }
 
 /*
- *	ƒsƒNƒZƒ‹ƒtƒHƒO‚Ìİ’è
+ *	ãƒ”ã‚¯ã‚»ãƒ«ãƒ•ã‚©ã‚°ã®è¨­å®š
  *
- *	flag	: ^—’l
- *	c		: F
- *	start	: ‰Â‹‹——£
- *	end	: –O˜a‹——£
+ *	flag	: çœŸç†å€¤
+ *	c		: è‰²
+ *	start	: å¯è¦–è·é›¢
+ *	end	: é£½å’Œè·é›¢
  */
 inline void devSetPixelFog(BOOL flag, DWORD c, float start, float end){
 	devSetState(D3DRS_FOGENABLE, flag);

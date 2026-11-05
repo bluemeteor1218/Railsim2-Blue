@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CStruct.h"
 #include "CSaveFile.h"
 #include "CStructPlugin.h"
@@ -6,12 +6,12 @@
 #include "CStructSelectMode.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStructSelectMode::CStructSelectMode(
-	char *type	//	ƒ^ƒCƒv–¼
+	char *type	//	ã‚¿ã‚¤ãƒ—å
 ):
-	CModelPluginMode(type ? type : lang(StructPlugin))	//	Šî–{ƒNƒ‰ƒX
+	CModelPluginMode(type ? type : lang(StructPlugin))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_MyCamera.Init(80.0f, 2.0f, 2000.0f, false);
 	InitSwitchWindow();
@@ -19,31 +19,31 @@ CStructSelectMode::CStructSelectMode(
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CStructSelectMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	return CPluginMode::Dispatch(type, data);
 }
 
 /*
- *	Œ»İ‚Ìƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“‚ğæ“¾
+ *	ç¾åœ¨ã®ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’å–å¾—
  */
 CModelPlugin *CStructSelectMode::GetModelPlugin(){
 	return g_Struct;
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆå–å¾—
  */
 CPluginList *CStructSelectMode::GetPluginList(){
 	return g_StructPluginList;
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CStructSelectMode::EnterModelPlugin(){
 	ms_ModeLabel = lang(SelectStruct);
@@ -51,14 +51,14 @@ void CStructSelectMode::EnterModelPlugin(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 CModelInst *CStructSelectMode::ScanInputModelPlugin(){
 	return NULL;
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CStructSelectMode::RenderModelPlugin(){
 	CStructPlugin::RenderPreview(V3ZERO, V3DIR, V3UP);

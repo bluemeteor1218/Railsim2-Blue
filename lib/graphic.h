@@ -1,64 +1,64 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
-#define SQRT2	1.41421356f	//	ã2
-//	ƒÎ‚ÍD3DX_PI‚ðŽg—p‚·‚é
+#define SQRT2	1.41421356f	//	âˆš2
+//	Ï€ã¯D3DX_PIã‚’ä½¿ç”¨ã™ã‚‹
 
 /*
- *	éŒ¾
+ *	å®£è¨€
  */
 
-//	‚U–Ê‘Ì‚Ì’¸“_•ÛŽ—p
+//	ï¼–é¢ä½“ã®é ‚ç‚¹ä¿æŒç”¨
 struct BOX8{
 	VEC3 v[8];
 };
 
 struct SYSVALUE_3D{
-	LPDIRECT3D8				pD3D;	//	Direct3D–{‘Ì
-	LPDIRECT3DDEVICE8		pDev;	//	3DƒfƒoƒCƒX
-	D3DPRESENT_PARAMETERS	d3dpp;	//	ƒXƒNƒŠ[ƒ“‚ÌƒtƒH[ƒ}ƒbƒg
-	LPD3DXSPRITE			pSpr;	//	ƒXƒvƒ‰ƒCƒg‘€ì—p
+	LPDIRECT3D8				pD3D;	//	Direct3Dæœ¬ä½“
+	LPDIRECT3DDEVICE8		pDev;	//	3Dãƒ‡ãƒã‚¤ã‚¹
+	D3DPRESENT_PARAMETERS	d3dpp;	//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
+	LPD3DXSPRITE			pSpr;	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæ“ä½œç”¨
 
-	MTX4 mtxWorld;	//	ƒ[ƒ‹ƒh•ÏŠ·ƒ}ƒgƒŠƒNƒX
-	MTX4 mtxView;	//	ƒrƒ…[•ÏŠ·ƒ}ƒgƒŠƒNƒX
-	MTX4 mtxViewInv;//	ã‹L‚Ì‹ts—ñ
-	MTX4 mtxProj;	//	ƒvƒƒWƒFƒNƒVƒ‡ƒ“•ÏŠ·ƒ}ƒgƒŠƒNƒX
-	MTX4 mtxVPort;	//	ƒrƒ…[ƒ|[ƒgƒ}ƒgƒŠƒNƒX
-	MTX4 mtxWtoS;	//	ƒ[ƒ‹ƒh¨ƒXƒNƒŠ[ƒ“•ÏŠ·—p
-	MTX4 mtxStoW;	//	ƒXƒNƒŠ[ƒ“¨ƒ[ƒ‹ƒh•ÏŠ·—p
+	MTX4 mtxWorld;	//	ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›ãƒžãƒˆãƒªã‚¯ã‚¹
+	MTX4 mtxView;	//	ãƒ“ãƒ¥ãƒ¼å¤‰æ›ãƒžãƒˆãƒªã‚¯ã‚¹
+	MTX4 mtxViewInv;//	ä¸Šè¨˜ã®é€†è¡Œåˆ—
+	MTX4 mtxProj;	//	ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³å¤‰æ›ãƒžãƒˆãƒªã‚¯ã‚¹
+	MTX4 mtxVPort;	//	ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆãƒžãƒˆãƒªã‚¯ã‚¹
+	MTX4 mtxWtoS;	//	ãƒ¯ãƒ¼ãƒ«ãƒ‰â†’ã‚¹ã‚¯ãƒªãƒ¼ãƒ³å¤‰æ›ç”¨
+	MTX4 mtxStoW;	//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³â†’ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›ç”¨
 
-	MTX4 mtxFront;	//	Œü‚«ƒ}ƒgƒŠƒNƒX
+	MTX4 mtxFront;	//	å‘ããƒžãƒˆãƒªã‚¯ã‚¹
 	MTX4 mtxRear;	//	
 	MTX4 mtxLeft;	//	
 	MTX4 mtxRight;	//	
 	MTX4 mtxTop;	//	
 	MTX4 mtxBottom;	//	
 
-	MTX4 mtxOld;	//	ƒ}ƒgƒŠƒNƒX•Û‘¶—p
-	MTX4 mtxTmp;	//	ì‹Æ—pƒ}ƒgƒŠƒNƒX
-	VEC3 vecTmp;	//	ì‹Æ—pƒxƒNƒgƒ‹
+	MTX4 mtxOld;	//	ãƒžãƒˆãƒªã‚¯ã‚¹ä¿å­˜ç”¨
+	MTX4 mtxTmp;	//	ä½œæ¥­ç”¨ãƒžãƒˆãƒªã‚¯ã‚¹
+	VEC3 vecTmp;	//	ä½œæ¥­ç”¨ãƒ™ã‚¯ãƒˆãƒ«
 
-	float u[2];		//	UVÀ•W
+	float u[2];		//	UVåº§æ¨™
 	float v[2];
 
-	UINT iAdapter;	//	ƒAƒ_ƒvƒ^[ID
-	BOOL fWindowed;	//	ƒXƒNƒŠ[ƒ“ƒ‚[ƒh
-	char type[8];	//	3DƒfƒoƒCƒX‚Ìƒ^ƒCƒv
-	int width;		//	ƒXƒNƒŠ[ƒ“‚Ì‰¡•ig_winW‚Æ‚Í•K‚¸‚µ‚àˆê’v‚µ‚È‚¢j
-	int height;	//	ƒXƒNƒŠ[ƒ“‚Ìc•ig_winH‚Æ‚Í•K‚¸‚µ‚àˆê’v‚µ‚È‚¢j
-	D3DFORMAT format;	//	ƒXƒNƒŠ[ƒ“‚ÌƒtƒH[ƒ}ƒbƒg
+	UINT iAdapter;	//	ã‚¢ãƒ€ãƒ—ã‚¿ãƒ¼ID
+	BOOL fWindowed;	//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰
+	char type[8];	//	3Dãƒ‡ãƒã‚¤ã‚¹ã®ã‚¿ã‚¤ãƒ—
+	int width;		//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®æ¨ªå¹…ï¼ˆg_winWã¨ã¯å¿…ãšã—ã‚‚ä¸€è‡´ã—ãªã„ï¼‰
+	int height;	//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®ç¸¦å¹…ï¼ˆg_winHã¨ã¯å¿…ãšã—ã‚‚ä¸€è‡´ã—ãªã„ï¼‰
+	D3DFORMAT format;	//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
 
-	DWORD capsMaxPrim;	//	“¯Žž‚ÉƒŒƒ“ƒ_ƒŠƒ“ƒO‚Å‚«‚éƒvƒŠƒ~ƒeƒBƒu”i’¸“_^ŽOŠpHj
-	DWORD capsMaxLight;	//	“¯Žž‚ÉƒAƒNƒeƒBƒu‚É‚Å‚«‚éƒ‰ƒCƒg”
-	DWORD capsFogVertex;//	’¸“_ƒtƒHƒO‚ÌƒTƒ|[ƒg
-	DWORD capsFogPixel;	//	ƒe[ƒuƒ‹iƒsƒNƒZƒ‹jƒtƒHƒO‚ÌƒTƒ|[ƒg
-	DWORD capsFogRange;	//	”ÍˆÍƒtƒHƒO‚ÌƒTƒ|[ƒg
-	DWORD capsTexMem;	//	ƒeƒNƒXƒ`ƒƒ[ƒƒ‚ƒŠ[„’è’l(KB)
-	DWORD capsTexWidth;	//	—˜—p‰Â”\‚ÈƒeƒNƒXƒ`ƒƒƒTƒCƒY
+	DWORD capsMaxPrim;	//	åŒæ™‚ã«ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã§ãã‚‹ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–æ•°ï¼ˆé ‚ç‚¹ï¼ä¸‰è§’ï¼Ÿï¼‰
+	DWORD capsMaxLight;	//	åŒæ™‚ã«ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã§ãã‚‹ãƒ©ã‚¤ãƒˆæ•°
+	DWORD capsFogVertex;//	é ‚ç‚¹ãƒ•ã‚©ã‚°ã®ã‚µãƒãƒ¼ãƒˆ
+	DWORD capsFogPixel;	//	ãƒ†ãƒ¼ãƒ–ãƒ«ï¼ˆãƒ”ã‚¯ã‚»ãƒ«ï¼‰ãƒ•ã‚©ã‚°ã®ã‚µãƒãƒ¼ãƒˆ
+	DWORD capsFogRange;	//	ç¯„å›²ãƒ•ã‚©ã‚°ã®ã‚µãƒãƒ¼ãƒˆ
+	DWORD capsTexMem;	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ãƒ¡ãƒ¢ãƒªãƒ¼æŽ¨å®šå€¤(KB)
+	DWORD capsTexWidth;	//	åˆ©ç”¨å¯èƒ½ãªãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µã‚¤ã‚º
 	DWORD capsTexHeight;//	
-	DWORD capsTexStage;	//	ƒoƒCƒ“ƒh‰Â”\‚ÈƒeƒNƒXƒ`ƒƒ[ƒXƒe[ƒW”
-	BOOL capsTexAlpha;	//	ƒAƒ‹ƒtƒ@‚ÌƒTƒ|[ƒg
-	BOOL capsTexMipMap;//	ƒ~ƒbƒvƒ}ƒbƒv‚ÌƒTƒ|[ƒg
-	BOOL capsTexBump;	//	ƒoƒ“ƒvƒ}ƒbƒv‚ÌƒTƒ|[ƒg
+	DWORD capsTexStage;	//	ãƒã‚¤ãƒ³ãƒ‰å¯èƒ½ãªãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¸æ•°
+	BOOL capsTexAlpha;	//	ã‚¢ãƒ«ãƒ•ã‚¡ã®ã‚µãƒãƒ¼ãƒˆ
+	BOOL capsTexMipMap;//	ãƒŸãƒƒãƒ—ãƒžãƒƒãƒ—ã®ã‚µãƒãƒ¼ãƒˆ
+	BOOL capsTexBump;	//	ãƒãƒ³ãƒ—ãƒžãƒƒãƒ—ã®ã‚µãƒãƒ¼ãƒˆ
 };
 extern SYSVALUE_3D sv3;
 
@@ -80,17 +80,17 @@ void EndScene();
 D3DCOLOR GetXRGB32(DWORD d, D3DFORMAT fmt);
 
 /*
- *	D3DCOLOR‚Ìì¬
+ *	D3DCOLORã®ä½œæˆ
  */
-#define MAKE_AC D3DCOLOR_ARGB	//	ƒAƒ‹ƒtƒ@Žw’è
-#define MAKE_XC D3DCOLOR_XRGB	//	ƒAƒ‹ƒtƒ@MAX‚ÅŒÅ’è
+#define MAKE_AC D3DCOLOR_ARGB	//	ã‚¢ãƒ«ãƒ•ã‚¡æŒ‡å®š
+#define MAKE_XC D3DCOLOR_XRGB	//	ã‚¢ãƒ«ãƒ•ã‚¡MAXã§å›ºå®š
 /*
- *	D3DCOLORVALUE‚Ìì¬
+ *	D3DCOLORVALUEã®ä½œæˆ
  *
- *	r		: R’l
- *	g		: G’l
- *	b		: B’l
- *	a		: Alpha’l
+ *	r		: Rå€¤
+ *	g		: Gå€¤
+ *	b		: Bå€¤
+ *	a		: Alphaå€¤
  */
 inline D3DCOLORVALUE MAKE_CV(float r, float g, float b, float a){
 	D3DCOLORVALUE cv;
@@ -99,22 +99,22 @@ inline D3DCOLORVALUE MAKE_CV(float r, float g, float b, float a){
 }
 
 /*
- *	À•WŽw’èƒ}ƒgƒŠƒNƒX‚ðì¬
+ *	åº§æ¨™æŒ‡å®šãƒžãƒˆãƒªã‚¯ã‚¹ã‚’ä½œæˆ
  *
- *	x		: XÀ•W
- *	y		: YÀ•W
- *	z		: ZÀ•W
+ *	x		: Xåº§æ¨™
+ *	y		: Yåº§æ¨™
+ *	z		: Zåº§æ¨™
  */
 inline MTX4 MAKE_MTX_XYZ(float x, float y, float z){
 	return MTX4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1);
 }
-//	v		:À•W
+//	v		:åº§æ¨™
 inline MTX4 MAKE_MTX_VEC3(VEC3 v){
 	return MTX4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, v.x, v.y, v.z, 1);
 }
 
 /*
- *	Œü‚«Žw’èƒ}ƒgƒŠƒNƒX
+ *	å‘ãæŒ‡å®šãƒžãƒˆãƒªã‚¯ã‚¹
  */
 #define MTX_FRONT		sv3.mtxFront
 #define MTX_REAR		sv3.mtxRear
@@ -125,7 +125,7 @@ inline MTX4 MAKE_MTX_VEC3(VEC3 v){
 #define MTX_VIEW_INV	sv3.mtxViewInv
 
 /*
- *	s—ñ•ÏŠ·‚ÌŽÀs
+ *	è¡Œåˆ—å¤‰æ›ã®å®Ÿè¡Œ
  */
 inline void devTransform(MTX4 *pMtx){
 	sv3.pDev->SetTransform(D3DTS_WORLD, pMtx);

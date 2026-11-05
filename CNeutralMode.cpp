@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailConnector.h"
 #include "CRailWay.h"
 #include "CScene.h"
@@ -6,11 +6,11 @@
 #include "CModelInst.h"
 #include "CNeutralMode.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CScene *g_Scene;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CNeutralMode::CNeutralMode(){
 	int ww = TILE_UNIT*16, wh = TILE_UNIT*10;
@@ -28,11 +28,11 @@ CNeutralMode::CNeutralMode(){
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CNeutralMode::WindowResized(
-	int w, int h,		//	V‹KƒTƒCƒY
-	CWindowCtrl *wnd	//	ƒEƒBƒhƒEƒRƒ“ƒgƒ[ƒ‹
+	int w, int h,		//	æ–°è¦ã‚µã‚¤ã‚º
+	CWindowCtrl *wnd	//	ã‚¦ã‚£ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	if(wnd==&m_SwitchWindow){
 		int h0 = h-TILE_UNIT*5/2, h1 = h0/2;
@@ -43,10 +43,10 @@ void CNeutralMode::WindowResized(
 }
 
 /*
- *	ƒCƒ“ƒXƒ^ƒ“ƒXíœ‚ÌŠm”F
+ *	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å‰Šé™¤ã®ç¢ºèª
  */
 void CNeutralMode::DeleteModelInst(
-	CModelInst *minst	//	ƒCƒ“ƒXƒ^ƒ“ƒX
+	CModelInst *minst	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	if(GetCamera() && (!minst || minst==GetCamera()->GetFocusInst()))
 		GetCamera()->SetFocusInfo(R2L(CDetectInfo()));
@@ -58,7 +58,7 @@ void CNeutralMode::DeleteModelInst(
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CNeutralMode::EnterCursorScenery(){
 	if(IsModeActive()) DeleteModelInst(NULL);
@@ -69,7 +69,7 @@ void CNeutralMode::EnterCursorScenery(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CNeutralMode::ScanInputCursorScenery(){
 	m_PointMode = false;
@@ -135,7 +135,7 @@ void CNeutralMode::ScanInputCursorScenery(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CNeutralMode::RenderCursorScenery(){
 	if(ms_PhotoMode<2){
@@ -155,7 +155,7 @@ void CNeutralMode::RenderCursorScenery(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO (‰æ–Ê•ªŠ„–³‹)
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚° (ç”»é¢åˆ†å‰²ç„¡è¦–)
  */
 void CNeutralMode::RenderCursorSceneryFull(){
 	if(ms_PhotoMode<2){

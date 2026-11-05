@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CListView.h"
 #include "CSimpleDialog.h"
 #include "CScene.h"
@@ -6,15 +6,15 @@
 #include "CSkinPlugin.h"
 #include "CStructEditMode.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern MAT8 *g_AltMaterial;
 extern MAT8 g_MatSelect[];
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CStruct **CStruct::ms_Root = NULL;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (“Ç—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (èª­è¾¼ç”¨)
  */
 CStruct::CStruct(){
 	m_StructPlugin = NULL;
@@ -24,12 +24,12 @@ CStruct::CStruct(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (’nŒ`—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (åœ°å½¢ç”¨)
  */
 CStruct::CStruct(
-	CStructPlugin *bpi	//	{İƒvƒ‰ƒOƒCƒ“
+	CStructPlugin *bpi	//	æ–½è¨­ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ):
-	CModelInst(bpi)	//	Šî–{ƒNƒ‰ƒX
+	CModelInst(bpi)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_StructPlugin = bpi;
 	FixPosture(V3ZERO, V3DIR, V3UP);
@@ -38,16 +38,16 @@ CStruct::CStruct(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStruct::CStruct(
-	CStructPlugin *bpi,	//	{İƒvƒ‰ƒOƒCƒ“
-	VEC3 pos,			//	ˆÊ’u
+	CStructPlugin *bpi,	//	æ–½è¨­ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	VEC3 pos,			//	ä½ç½®
 	VEC3 dir,			//	dir
 	VEC3 up,			//	up
-	bool link			//	ƒŠƒXƒg˜AŒ‹ƒtƒ‰ƒO
+	bool link			//	ãƒªã‚¹ãƒˆé€£çµãƒ•ãƒ©ã‚°
 ):
-	CModelInst(bpi)	//	Šî–{ƒNƒ‰ƒX
+	CModelInst(bpi)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_StructPlugin = bpi;
 	FixPosture(pos, dir, up);
@@ -65,21 +65,21 @@ CStruct::CStruct(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStruct::~CStruct(){
 	DELETE_V(m_Next);
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“‘I‘ğƒ‚[ƒhæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³é¸æŠãƒ¢ãƒ¼ãƒ‰å–å¾—
  */
 bool CStruct::IsSelectVisible(){
 	return g_StructEditMode->IsModeActive();
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“‘I‘ğƒ‚[ƒhæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³é¸æŠãƒ¢ãƒ¼ãƒ‰å–å¾—
  */
 CPartsInst *CStruct::FindParts(CNamedObject *nobj){
 	list<CFreeObjectContainer>::iterator n_itr = m_StructPlugin->m_FreeObject.begin();
@@ -98,14 +98,14 @@ CPartsInst *CStruct::FindParts(CNamedObject *nobj){
 }
 
 /*
- *	“P‹
+ *	æ’¤å»
  */
 void CStruct::Remove(){
 	m_Scene->DeleteStruct(this);
 }
 
 /*
- *	ƒŠƒXƒg‚©‚çíœ
+ *	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
  */
 void CStruct::Delete(){
 	m_Next = NULL;
@@ -113,20 +113,20 @@ void CStruct::Delete(){
 }
 
 /*
- *	‘¬“xî•ñ•\¦
+ *	é€Ÿåº¦æƒ…å ±è¡¨ç¤º
  */
 void CStruct::PrintInfo(){
 }
 
 /*
- *	‘€ì
+ *	æ“ä½œ
  */
 CModelInst *CStruct::Control(){
 	if(CEditBox::IsActive()) return this;
 	if(GetKey(DIK_DELETE)==S_PUSH){
 		class CStructDeleter: public CMenuCommand{
 		private:
-			CStruct *m_Struct;	//	{İ
+			CStruct *m_Struct;	//	æ–½è¨­
 		public:
 			CStructDeleter(CStruct *s){ m_Struct = s; }
 			void Exec(){
@@ -144,12 +144,12 @@ CModelInst *CStruct::Control(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CStruct::ScanInput(
-	int mode,		//	ƒ‚[ƒh (0: link)
-	VEC3 &rect1,	//	—Ìˆæn“_
-	VEC3 &rect2		//	—ÌˆæI“_
+	int mode,		//	ãƒ¢ãƒ¼ãƒ‰ (0: link)
+	VEC3 &rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 &rect2		//	é ˜åŸŸçµ‚ç‚¹
 ){
 	ms_CurrentInst = this;
 	ms_DetectTemp = 0;
@@ -184,7 +184,7 @@ void CStruct::ScanInput(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CStruct::Render(){
 	if(m_Selected && IsSelectVisible()) g_AltMaterial = &g_MatSelect[m_Selected];
@@ -196,7 +196,7 @@ void CStruct::Render(){
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒgis
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ãƒˆé€²è¡Œ
  */
 void CStruct::SimulateModelInst(){
 	SetSwitchStruct();
@@ -207,10 +207,10 @@ void CStruct::SimulateModelInst(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CStruct::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "Struct"))){
@@ -231,10 +231,10 @@ char *CStruct::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CStruct::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\t\t\tStruct{\n");
 	fprintf(df, "\t\t\t\tAddress = %p;\n", this);

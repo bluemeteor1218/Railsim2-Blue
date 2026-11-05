@@ -1,16 +1,16 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 
-//	“à•”ƒOƒ[ƒoƒ‹
-int g_StrTexRadius;		//	ƒeƒNƒXƒ`ƒƒƒTƒCƒY
-int g_StrTexColWidth;	//	—ñ•
-int g_StrTexCols;		//	—ñ”
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+int g_StrTexRadius;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µã‚¤ã‚º
+int g_StrTexColWidth;	//	åˆ—å¹…
+int g_StrTexCols;		//	åˆ—æ•°
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CStringDrawer::Init(
-	int x, int y,	//	ˆÊ’u
-	CTexture *tex	//	ƒeƒNƒXƒ`ƒƒ
+	int x, int y,	//	ä½ç½®
+	CTexture *tex	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£
 ){
 	m_PosX = x; m_PosY = y;
 	m_Cols = 0;
@@ -20,10 +20,10 @@ void CStringDrawer::Init(
 }
 
 /*
- *	ƒŠƒZƒbƒg
+ *	ãƒªã‚»ãƒƒãƒˆ
  */
 void CStringDrawer::Reset(
-	CStringDrawer *key	//	ƒL[
+	CStringDrawer *key	//	ã‚­ãƒ¼
 ){
 	m_String = "";
 	m_Cols = 0;
@@ -32,14 +32,14 @@ void CStringDrawer::Reset(
 }
 
 /*
- *	—LŒø‚É‚·‚é
+ *	æœ‰åŠ¹ã«ã™ã‚‹
  */
 void CStringDrawer::Enable(
-	const char *str,	//	•¶š—ñ
-	int w, int h,		//	ƒTƒCƒY
-	int cols,			//	—ñ”
-	HFONT font,			//	ƒtƒHƒ“ƒg
-	D3DCOLOR sdw		//	‰A‰eF
+	const char *str,	//	æ–‡å­—åˆ—
+	int w, int h,		//	ã‚µã‚¤ã‚º
+	int cols,			//	åˆ—æ•°
+	HFONT font,			//	ãƒ•ã‚©ãƒ³ãƒˆ
+	D3DCOLOR sdw		//	é™°å½±è‰²
 ){
 	CStringDrawer *tmp = m_Key ? m_Key : this;
 	int n = tmp->m_Cols, i, j = 0;
@@ -63,11 +63,11 @@ void CStringDrawer::Enable(
 }
 
 /*
- *	•¶š—ñÆ‡
+ *	æ–‡å­—åˆ—ç…§åˆ
  */
 bool CStringDrawer::Check(
-	const char *str,	//	•¶š—ñ
-	D3DCOLOR sdw		//	‰A‰eF
+	const char *str,	//	æ–‡å­—åˆ—
+	D3DCOLOR sdw		//	é™°å½±è‰²
 ){
 	if(!m_Key && m_Date && m_ShadowColor==sdw && m_String==str){
 		int i;
@@ -78,10 +78,10 @@ bool CStringDrawer::Check(
 }
 
 /*
- *	ü•Ó‚ÅÅV‚Ì‚à‚Ì‚ğ•Ô‚·
+ *	å‘¨è¾ºã§æœ€æ–°ã®ã‚‚ã®ã‚’è¿”ã™
  */
 DWORD CStringDrawer::FindNewest(
-	int cw	//	—ñ•
+	int cw	//	åˆ—å¹…
 ){
 	int i, date = m_Date;
 	for(i = 1; i<=cw; i++){
@@ -92,12 +92,12 @@ DWORD CStringDrawer::FindNewest(
 }
 
 /*
- *	¶‘µ‚¦‚Å•`‰æ
+ *	å·¦æƒãˆã§æç”»
  */
 void CStringDrawer::RenderLeft(
-	int x, int y,	//	¶ãÀ•W
-	D3DCOLOR c,		//	F
-	int mw, int mh	//	ƒTƒCƒY§ŒÀ
+	int x, int y,	//	å·¦ä¸Šåº§æ¨™
+	D3DCOLOR c,		//	è‰²
+	int mw, int mh	//	ã‚µã‚¤ã‚ºåˆ¶é™
 ){
 	if(mw<0 || mw>m_Width) mw = m_Width;
 	if(mh<0 || mh>m_Height) mh = m_Height;
@@ -110,12 +110,12 @@ void CStringDrawer::RenderLeft(
 }
 
 /*
- *	’†‰›‘µ‚¦‚Å•`‰æ
+ *	ä¸­å¤®æƒãˆã§æç”»
  */
 void CStringDrawer::RenderCenter(
-	int x, int y,	//	ã•Ó’†‰›À•W
-	D3DCOLOR c,		//	F
-	int mw, int mh	//	ƒTƒCƒY§ŒÀ
+	int x, int y,	//	ä¸Šè¾ºä¸­å¤®åº§æ¨™
+	D3DCOLOR c,		//	è‰²
+	int mw, int mh	//	ã‚µã‚¤ã‚ºåˆ¶é™
 ){
 	if(mw<0 || mw>m_Width) mw = m_Width;
 	if(mh<0 || mh>m_Height) mh = m_Height;
@@ -129,12 +129,12 @@ void CStringDrawer::RenderCenter(
 }
 
 /*
- *	‰E‘µ‚¦‚Å•`‰æ
+ *	å³æƒãˆã§æç”»
  */
 void CStringDrawer::RenderRight(
-	int x, int y,	//	‰EãÀ•W
-	D3DCOLOR c,		//	F
-	int mw, int mh	//	ƒTƒCƒY§ŒÀ
+	int x, int y,	//	å³ä¸Šåº§æ¨™
+	D3DCOLOR c,		//	è‰²
+	int mw, int mh	//	ã‚µã‚¤ã‚ºåˆ¶é™
 ){
 	if(mw<0 || mw>m_Width) mw = m_Width;
 	if(mh<0 || mh>m_Height) mh = m_Height;
@@ -147,12 +147,12 @@ void CStringDrawer::RenderRight(
 }
 
 /*
- *	¶‘µ‚¦‚Å•`‰æ (c)
+ *	å·¦æƒãˆã§æç”» (ç¸¦)
  */
 void CStringDrawer::RenderLeftV(
-	int x, int y,	//	¶ãÀ•W (‰ñ“]‘O)
-	D3DCOLOR c,		//	F
-	int mw, int mh	//	ƒTƒCƒY§ŒÀ (‰ñ“]‘O)
+	int x, int y,	//	å·¦ä¸Šåº§æ¨™ (å›è»¢å‰)
+	D3DCOLOR c,		//	è‰²
+	int mw, int mh	//	ã‚µã‚¤ã‚ºåˆ¶é™ (å›è»¢å‰)
 ){
 	if(mw<0 || mw>m_Width) mw = m_Width;
 	if(mh<0 || mh>m_Height) mh = m_Height;
@@ -165,12 +165,12 @@ void CStringDrawer::RenderLeftV(
 }
 
 /*
- *	’†‰›‘µ‚¦‚Å•`‰æ (c)
+ *	ä¸­å¤®æƒãˆã§æç”» (ç¸¦)
  */
 void CStringDrawer::RenderCenterV(
-	int x, int y,	//	ã•Ó’†‰›À•W (‰ñ“]‘O)
-	D3DCOLOR c,		//	F
-	int mw, int mh	//	ƒTƒCƒY§ŒÀ (‰ñ“]‘O)
+	int x, int y,	//	ä¸Šè¾ºä¸­å¤®åº§æ¨™ (å›è»¢å‰)
+	D3DCOLOR c,		//	è‰²
+	int mw, int mh	//	ã‚µã‚¤ã‚ºåˆ¶é™ (å›è»¢å‰)
 ){
 	if(mw<0 || mw>m_Width) mw = m_Width;
 	if(mh<0 || mh>m_Height) mh = m_Height;
@@ -184,12 +184,12 @@ void CStringDrawer::RenderCenterV(
 }
 
 /*
- *	‰E‘µ‚¦‚Å•`‰æ (c)
+ *	å³æƒãˆã§æç”» (ç¸¦)
  */
 void CStringDrawer::RenderRightV(
-	int x, int y,	//	‰EãÀ•W (‰ñ“]‘O)
-	D3DCOLOR c,		//	F
-	int mw, int mh	//	ƒTƒCƒY§ŒÀ (‰ñ“]‘O)
+	int x, int y,	//	å³ä¸Šåº§æ¨™ (å›è»¢å‰)
+	D3DCOLOR c,		//	è‰²
+	int mw, int mh	//	ã‚µã‚¤ã‚ºåˆ¶é™ (å›è»¢å‰)
 ){
 	if(mw<0 || mw>m_Width) mw = m_Width;
 	if(mh<0 || mh>m_Height) mh = m_Height;
@@ -202,14 +202,14 @@ void CStringDrawer::RenderRightV(
 }
 
 /*
- *	¶‘µ‚¦‚Å•`‰æ (3D)
+ *	å·¦æƒãˆã§æç”» (3D)
  */
 void CStringDrawer::RenderLeft3D(
-	VEC3 pos,		//	¶•Ó’†‰›À•W
-	VEC3 right,		//	‰EƒxƒNƒgƒ‹
-	VEC3 up,		//	ãƒxƒNƒgƒ‹
-	D3DCOLOR c,		//	F
-	float scale		//	ƒXƒP[ƒ‹ [m/px]
+	VEC3 pos,		//	å·¦è¾ºä¸­å¤®åº§æ¨™
+	VEC3 right,		//	å³ãƒ™ã‚¯ãƒˆãƒ«
+	VEC3 up,		//	ä¸Šãƒ™ã‚¯ãƒˆãƒ«
+	D3DCOLOR c,		//	è‰²
+	float scale		//	ã‚¹ã‚±ãƒ¼ãƒ« [m/px]
 ){
 	float tw = m_Width*scale, th = m_Height*scale;
 	devSetTexture(0, m_Texture->GetObject());
@@ -222,14 +222,14 @@ void CStringDrawer::RenderLeft3D(
 }
 
 /*
- *	’†‰›‘µ‚¦‚Å•`‰æ (3D)
+ *	ä¸­å¤®æƒãˆã§æç”» (3D)
  */
 void CStringDrawer::RenderCenter3D(
-	VEC3 pos,		//	c‰¡’†‰›À•W
-	VEC3 right,		//	‰EƒxƒNƒgƒ‹
-	VEC3 up,		//	ãƒxƒNƒgƒ‹
-	D3DCOLOR c,		//	F
-	float scale		//	ƒXƒP[ƒ‹ [m/px]
+	VEC3 pos,		//	ç¸¦æ¨ªä¸­å¤®åº§æ¨™
+	VEC3 right,		//	å³ãƒ™ã‚¯ãƒˆãƒ«
+	VEC3 up,		//	ä¸Šãƒ™ã‚¯ãƒˆãƒ«
+	D3DCOLOR c,		//	è‰²
+	float scale		//	ã‚¹ã‚±ãƒ¼ãƒ« [m/px]
 ){
 	float tw = m_Width*scale, th = m_Height*scale;
 	devSetTexture(0, m_Texture->GetObject());
@@ -242,14 +242,14 @@ void CStringDrawer::RenderCenter3D(
 }
 
 /*
- *	‰E‘µ‚¦‚Å•`‰æ (3D)
+ *	å³æƒãˆã§æç”» (3D)
  */
 void CStringDrawer::RenderRight3D(
-	VEC3 pos,		//	‰E•Ó’†‰›À•W
-	VEC3 right,		//	‰EƒxƒNƒgƒ‹
-	VEC3 up,		//	ãƒxƒNƒgƒ‹
-	D3DCOLOR c,		//	F
-	float scale		//	ƒXƒP[ƒ‹ [m/px]
+	VEC3 pos,		//	å³è¾ºä¸­å¤®åº§æ¨™
+	VEC3 right,		//	å³ãƒ™ã‚¯ãƒˆãƒ«
+	VEC3 up,		//	ä¸Šãƒ™ã‚¯ãƒˆãƒ«
+	D3DCOLOR c,		//	è‰²
+	float scale		//	ã‚¹ã‚±ãƒ¼ãƒ« [m/px]
 ){
 	float tw = m_Width*scale, th = m_Height*scale;
 	devSetTexture(0, m_Texture->GetObject());
@@ -265,11 +265,11 @@ void CStringDrawer::RenderRight3D(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStringTexture::CStringTexture(
-	int font,	//	ƒtƒHƒ“ƒg‚
-	int page	//	ƒy[ƒW”
+	int font,	//	ãƒ•ã‚©ãƒ³ãƒˆé«˜
+	int page	//	ãƒšãƒ¼ã‚¸æ•°
 ){
 	int i, j, p;
 	g_StrTexRadius = CheckArguments("-voodoo") ? 256 : 512;
@@ -291,7 +291,7 @@ CStringTexture::CStringTexture(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStringTexture::~CStringTexture(){
 	DELETE_A(m_Texture);
@@ -299,11 +299,11 @@ CStringTexture::~CStringTexture(){
 }
 
 /*
- *	•¶š—ñ•`‰æ
+ *	æ–‡å­—åˆ—æç”»
  */
 CStringDrawer *CStringTexture::DrawString(
-	const char *str,	//	•¶š—ñ
-	D3DCOLOR sdw		//	‰eF
+	const char *str,	//	æ–‡å­—åˆ—
+	D3DCOLOR sdw		//	å½±è‰²
 ){
 	int i, j, p;
 	DWORD oldtime[512/64];
@@ -337,11 +337,11 @@ CStringDrawer *CStringTexture::DrawString(
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ‘S•`‰æ
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£å…¨æç”»
  */
 void CStringTexture::RenderAll(
-	int x, int y,	//	À•W
-	int p			//	ƒy[ƒW
+	int x, int y,	//	åº§æ¨™
+	int p			//	ãƒšãƒ¼ã‚¸
 ){
 	devSetTexture(0, m_Texture[p].GetObject());
 	SetUVMap(0.0f, 0.0f, 1.0f, 1.0f);

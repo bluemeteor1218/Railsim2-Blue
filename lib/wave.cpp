@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -7,9 +7,9 @@
 #include "wave.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  *
- *	¦ƒvƒƒOƒ‰ƒ€I—¹‚Ü‚Å‚ÉFree()‚Ü‚½‚Ídelete(new‚ÅŠm•Û‚µ‚½ê‡)‚µ‚Ä‰º‚³‚¢B
+ *	â€»ãƒ—ãƒ­ã‚°ãƒ©ãƒ çµ‚äº†ã¾ã§ã«Free()ã¾ãŸã¯delete(newã§ç¢ºä¿ã—ãŸå ´åˆ)ã—ã¦ä¸‹ã•ã„ã€‚
  */
 CWave::CWave(){
 	m_pSB = NULL;
@@ -18,19 +18,19 @@ CWave::CWave(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CWave::~CWave(){
 	Free();
 }
 
 /*
- *	‰¹ºƒf[ƒ^‚Ì“Ç‚İ
+ *	éŸ³å£°ãƒ‡ãƒ¼ã‚¿ã®èª­è¾¼ã¿
  *
- *	strFile	: ƒtƒ@ƒCƒ‹–¼
+ *	strFile	: ãƒ•ã‚¡ã‚¤ãƒ«å
  */
 BOOL CWave::Load(char *strFile){
-	//	Šù‘¶‚È‚ç‰ğ•ú
+	//	æ—¢å­˜ãªã‚‰è§£æ”¾
 	if(m_pSB) Free();
 
 	Debug("load(%s) ... ", strFile);
@@ -51,30 +51,30 @@ BOOL CWave::Load(char *strFile){
 	parent.dwFlags = 0;
 	child = parent;
 
-	//	ƒI[ƒvƒ“
+	//	ã‚ªãƒ¼ãƒ—ãƒ³
 	hMMI = mmioOpen(strFile, NULL, MMIO_READ|MMIO_ALLOCBUF);
 
 	if(!hMMI){
 		Debug("open error.\n");
 		return FALSE;
 	}
-	//	RIFFƒ`ƒƒƒ“ƒN‚Ì“Ç‚İ‚İ•ƒ`ƒFƒbƒN
+	//	RIFFãƒãƒ£ãƒ³ã‚¯ã®èª­ã¿è¾¼ã¿ï¼†ãƒã‚§ãƒƒã‚¯
 	parent.fccType = mmioFOURCC('W', 'A', 'V', 'E');
 
 	if(mmioDescend(hMMI, &parent, NULL, MMIO_FINDRIFF)!=0){
 		Debug("RIFF is not found.\n"); goto error;
 	}
-	//	fmtƒ`ƒƒƒ“ƒN‚Ì“Ç‚İ‚İ•ƒ`ƒFƒbƒN
+	//	fmtãƒãƒ£ãƒ³ã‚¯ã®èª­ã¿è¾¼ã¿ï¼†ãƒã‚§ãƒƒã‚¯
 	child.ckid = mmioFOURCC('f', 'm', 't', ' ');
 
 	if(mmioDescend(hMMI, &child, &parent, 0)!=0){
 		Debug("fmt is not found.\n"); goto error;
 	}
-	//	ƒtƒH[ƒ}ƒbƒg‚Ìæ“¾
+	//	ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®å–å¾—
 	mmioRead(hMMI, (char *)&wfmtx, sizeof(wfmtx));
 	m_BytesPerSec = wfmtx.nAvgBytesPerSec;
 
-	//	PCMƒtƒH[ƒ}ƒbƒg‚©H
+	//	PCMãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‹ï¼Ÿ
 	if(wfmtx.wFormatTag!=WAVE_FORMAT_PCM){
 		Debug("is not PCM format.\n"); goto error;
 	}
@@ -82,19 +82,19 @@ BOOL CWave::Load(char *strFile){
 	if(mmioAscend(hMMI, &child, 0)!=0){
 		Debug("ascend error.\n"); goto error;
 	}
-	//	dataƒ`ƒƒƒ“ƒN‚Ì“Ç‚İ‚İ•ƒ`ƒFƒbƒN
+	//	dataãƒãƒ£ãƒ³ã‚¯ã®èª­ã¿è¾¼ã¿ï¼†ãƒã‚§ãƒƒã‚¯
 	child.ckid = mmioFOURCC('d', 'a', 't', 'a');
 
 	if(mmioDescend(hMMI, &child, &parent, MMIO_FINDCHUNK)!=0){
 		Debug("chunk is not found.\n"); goto error;
 	}
-	//	dataƒ`ƒƒƒ“ƒN’·‚ğæ“¾
+	//	dataãƒãƒ£ãƒ³ã‚¯é•·ã‚’å–å¾—
 	len = child.cksize;
 
-	//	ƒoƒbƒtƒ@‚ğì¬Aƒ[ƒh
+	//	ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã€ãƒ­ãƒ¼ãƒ‰
 	if(!CreateBuffer(hMMI, &wfmtx, len)) goto error;
 
-	//	ƒNƒ[ƒY
+	//	ã‚¯ãƒ­ãƒ¼ã‚º
 	mmioClose(hMMI, 0);
 	Debug("ok.\n");
 	return TRUE;
@@ -105,30 +105,30 @@ error:
 }
 
 /*
- *	•Ê‚ÌCWaveƒIƒuƒWƒFƒNƒg‚©‚çƒf[ƒ^‚ğ•¡»‚·‚é
+ *	åˆ¥ã®CWaveã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’è¤‡è£½ã™ã‚‹
  *
- *	pWav	: ƒRƒs[Œ³‚ÌƒIƒuƒWƒFƒNƒg
+ *	pWav	: ã‚³ãƒ”ãƒ¼å…ƒã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
  */
 BOOL CWave::Duplicate(CWave *pWav){
 	if(!svs.pDS || m_pSB) Free();
 
 	int err;
-	//	ƒoƒbƒtƒ@‚Ì•¡»
+	//	ãƒãƒƒãƒ•ã‚¡ã®è¤‡è£½
 	if(FAILED(err = svs.pDS->DuplicateSoundBuffer(pWav->m_pSB, &m_pSB))) return FALSE;
 
 	return Query();
 }
 
 /*
- *	ƒTƒEƒ“ƒhƒoƒbƒtƒ@‚Ìì¬
+ *	ã‚µã‚¦ãƒ³ãƒ‰ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
  *
- *	hMMMI	: ƒtƒ@ƒCƒ‹ƒnƒ“ƒhƒ‰
- *	pFmt	: ƒEƒG[ƒuƒtƒH[ƒ}ƒbƒg
- *	len	: ƒEƒG[ƒuƒTƒCƒY
+ *	hMMMI	: ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ³ãƒ‰ãƒ©
+ *	pFmt	: ã‚¦ã‚¨ãƒ¼ãƒ–ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+ *	len	: ã‚¦ã‚¨ãƒ¼ãƒ–ã‚µã‚¤ã‚º
  */
 BOOL CWave::CreateBuffer(HMMIO hMMI, LPWAVEFORMATEX pFmt, DWORD len){
 	if(!svs.pDS) return FALSE;
-	//	ƒoƒbƒtƒ@‚Ìì¬
+	//	ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	DSBUFFERDESC desc;
 
 	memset(&desc, 0, sizeof(DSBUFFERDESC));
@@ -144,11 +144,11 @@ BOOL CWave::CreateBuffer(HMMIO hMMI, LPWAVEFORMATEX pFmt, DWORD len){
 
 	if(FAILED(hr)){
 		if(hr==DSERR_BUFFERTOOSMALL){
-			//	ƒf[ƒ^‚ª’Z‚­‚ÄƒGƒtƒFƒNƒg‚ğg—p‚Å‚«‚È‚¢
+			//	ãƒ‡ãƒ¼ã‚¿ãŒçŸ­ãã¦ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’ä½¿ç”¨ã§ããªã„
 			Debug("data is too small.\n");
 			return TRUE;
 		}else if(hr = DSERR_OUTOFMEMORY){
-			//	ƒƒ‚ƒŠ•s‘«iƒTƒEƒ“ƒhƒJ[ƒh“à‚ÌHj
+			//	ãƒ¡ãƒ¢ãƒªä¸è¶³ï¼ˆã‚µã‚¦ãƒ³ãƒ‰ã‚«ãƒ¼ãƒ‰å†…ã®ï¼Ÿï¼‰
 			Debug("out of memory.\n");
 			return FALSE;
 		}else{
@@ -156,18 +156,18 @@ BOOL CWave::CreateBuffer(HMMIO hMMI, LPWAVEFORMATEX pFmt, DWORD len){
 			return FALSE;
 		}
 	}
-	//	ƒoƒbƒtƒ@‚ÌƒƒbƒN
+	//	ãƒãƒƒãƒ•ã‚¡ã®ãƒ­ãƒƒã‚¯
 	LPVOID write1, write2;
 	DWORD length1, length2;
 
 	if(m_pSB->Lock(0, len, &write1, &length1, &write2, &length2, 0)==DSERR_BUFFERLOST){
 		m_pSB->Restore(); return FALSE;
 	}
-	//	dataƒ`ƒƒƒ“ƒN‚ğƒoƒbƒtƒ@‚Éƒ[ƒh
+	//	dataãƒãƒ£ãƒ³ã‚¯ã‚’ãƒãƒƒãƒ•ã‚¡ã«ãƒ­ãƒ¼ãƒ‰
 	if((DWORD)mmioRead(hMMI, (char *)write1, length1)==length1){
 		if(length2!=0) mmioRead(hMMI, (char *)write2, length2);
 	}
-	//	ƒoƒbƒtƒ@‚ÌƒAƒ“ƒƒbƒN
+	//	ãƒãƒƒãƒ•ã‚¡ã®ã‚¢ãƒ³ãƒ­ãƒƒã‚¯
 	if(m_pSB->Unlock(write1, length1, write2, length2)!=DS_OK)
 		return FALSE;
 
@@ -175,17 +175,17 @@ BOOL CWave::CreateBuffer(HMMIO hMMI, LPWAVEFORMATEX pFmt, DWORD len){
 }
 
 /*
- *	ƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìæ“¾
+ *	ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
  */
 BOOL CWave::Query(){
-	//	FXƒoƒbƒtƒ@‚Ìæ“¾
+	//	FXãƒãƒƒãƒ•ã‚¡ã®å–å¾—
 	if(svs.fFX){
 		if(FAILED(m_pSB->QueryInterface(IID_IDirectSoundBuffer8, (void **)&m_pFX))){
 			Debug("DirectSoundBuffer8\n");
 			return FALSE;
 		}
 	}
-	//	3Dƒoƒbƒtƒ@‚Ìæ“¾
+	//	3Dãƒãƒƒãƒ•ã‚¡ã®å–å¾—
 	if(svs.f3D){
 		if(FAILED(m_pSB->QueryInterface(IID_IDirectSound3DBuffer, (void **)&m_p3D))){
 			Debug("DirectSound3DBuffer\n");
@@ -196,7 +196,7 @@ BOOL CWave::Query(){
 }
 
 /*
- *	ƒoƒbƒtƒ@‚Ì‰ğ•ú
+ *	ãƒãƒƒãƒ•ã‚¡ã®è§£æ”¾
  */
 void CWave::Free(){
 	if(m_strName!=""){
@@ -210,9 +210,9 @@ void CWave::Free(){
 }
 
 /*
- *	Ä¶
+ *	å†ç”Ÿ
  *
- *	ms	: Ä¶ŠJnˆÊ’u [ms] (<0 ‚Åƒ‹[ƒv)
+ *	ms	: å†ç”Ÿé–‹å§‹ä½ç½® [ms] (<0 ã§ãƒ«ãƒ¼ãƒ—)
  */
 void CWave::Play(int ms){
 	if(!m_pSB) return;
@@ -220,18 +220,18 @@ void CWave::Play(int ms){
 	m_pSB->Stop();
 	m_pSB->SetCurrentPosition(ms<0 ? 0 : m_BytesPerSec*ms/1000);
 	HRESULT hr = m_pSB->Play(0, 0, ms<0 ? DSBPLAY_LOOPING : 0);
-	//	ƒŠƒ[ƒhˆ—
+	//	ãƒªãƒ­ãƒ¼ãƒ‰å‡¦ç†
 	if(hr==DSERR_BUFFERLOST){
 		Debug("DSERR_BUFFERLOST:%s", m_strName.c_str());
 
-		PrimaryBufferVerify();	//	æ‚Éƒvƒ‰ƒCƒ}ƒŠƒoƒbƒtƒ@‚ğŒŸØ‚·‚é
-		m_pSB->Restore();	//	‚Ç‚Ì“¹Free()‚·‚é‚ª”O‚Ì‚½‚ß
+		PrimaryBufferVerify();	//	å…ˆã«ãƒ—ãƒ©ã‚¤ãƒãƒªãƒãƒƒãƒ•ã‚¡ã‚’æ¤œè¨¼ã™ã‚‹
+		m_pSB->Restore();	//	ã©ã®é“Free()ã™ã‚‹ãŒå¿µã®ãŸã‚
 		Load((char *)m_strName.c_str());
 	}
 }
 
 /*
- *	Ä¶ó‘Ô‚Ìæ“¾
+ *	å†ç”ŸçŠ¶æ…‹ã®å–å¾—
  */
 BOOL CWave::GetStatus(){
 	if(!m_pSB) return FALSE;
@@ -244,16 +244,16 @@ BOOL CWave::GetStatus(){
 }
 
 /*
- *	ƒGƒtƒFƒNƒg‚Ìİ’è
+ *	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®è¨­å®š
  *
- *	fx	: ƒGƒtƒFƒNƒgƒ^ƒCƒviFX_`j
+ *	fx	: ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚¿ã‚¤ãƒ—ï¼ˆFX_ï½ï¼‰
  *
- *	¦16bitˆÈŠO‚ÌWAVEƒtƒ@ƒCƒ‹‚ÍƒGƒtƒFƒNƒg‚ª³í‚É‚©‚©‚ç‚È‚¢ê‡‚ª‚ ‚éB
+ *	â€»16bitä»¥å¤–ã®WAVEãƒ•ã‚¡ã‚¤ãƒ«ã¯ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãŒæ­£å¸¸ã«ã‹ã‹ã‚‰ãªã„å ´åˆãŒã‚ã‚‹ã€‚
  */
 void CWave::SetFX(int fx){
 	if(!svs.fFX || !m_pFX) return;
 
-	//	ƒGƒtƒFƒNƒg‚ÌƒŠƒZƒbƒg
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ãƒªã‚»ãƒƒãƒˆ
 	if(fx==FX_DRY){
 		m_pFX->SetFX(0, NULL, NULL);
 		return;

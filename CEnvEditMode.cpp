@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CScene.h"
 #include "CSaveFile.h"
 #include "CEnvPlugin.h"
@@ -7,46 +7,46 @@
 #include "CConfigMode.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CEnvEditMode::CEnvEditMode():
-	C3DPluginMode(lang(EnvPlugin))	//	Šî–{ƒNƒ‰ƒX
+	C3DPluginMode(lang(EnvPlugin))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_MyCamera.Init(2000.0f, 2000.0f, 2000.0f, false);
 	m_Camera = &m_MyCamera;
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CEnvEditMode::WindowResized(
-	int w, int h,		//	V‹KƒTƒCƒY
-	CWindowCtrl *wnd	//	ƒEƒBƒhƒEƒRƒ“ƒgƒ[ƒ‹
+	int w, int h,		//	æ–°è¦ã‚µã‚¤ã‚º
+	CWindowCtrl *wnd	//	ã‚¦ã‚£ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	C3DPluginMode::WindowResized(w, h, wnd);
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CEnvEditMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	return CPluginMode::Dispatch(type, data);
 }
 
 /*
- *	ƒ_ƒuƒ‹ƒNƒŠƒbƒNˆ—
+ *	ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯å‡¦ç†
  */
 void CEnvEditMode::DoubleClick(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 }
 
 /*
- *	”wŒi‚ğ•`‰æ
+ *	èƒŒæ™¯ã‚’æç”»
  */
 bool CEnvEditMode::DrawBackground(){
 	if(!g_Env) return NULL;
@@ -56,14 +56,14 @@ bool CEnvEditMode::DrawBackground(){
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆå–å¾—
  */
 CPluginList *CEnvEditMode::GetPluginList(){
 	return g_EnvPluginList;
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CEnvEditMode::Enter3DPlugin(){
 	ms_ModeLabel = lang(SelectEnv);
@@ -71,13 +71,13 @@ void CEnvEditMode::Enter3DPlugin(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CEnvEditMode::ScanInput3DPlugin(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CEnvEditMode::Render3DPlugin(){
 	if(CPlugin::IsPreview()){

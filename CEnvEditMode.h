@@ -1,14 +1,14 @@
-#ifndef CENVEDITMODE_H_INCLUDED
+ï»¿#ifndef CENVEDITMODE_H_INCLUDED
 #define CENVEDITMODE_H_INCLUDED
 
 #include "C3DPluginMode.h"
 
 /*
- *	ƒV[ƒ“•ÒWƒ‚[ƒh
+ *	ã‚·ãƒ¼ãƒ³ç·¨é›†ãƒ¢ãƒ¼ãƒ‰
  */
 class CEnvEditMode: public C3DPluginMode{
 private:
-	CCamera m_MyCamera;	//	ƒJƒƒ‰
+	CCamera m_MyCamera;	//	ã‚«ãƒ¡ãƒ©
 public:
 	CEnvEditMode();
 	~CEnvEditMode(){}
@@ -23,7 +23,7 @@ public:
 	void Render3DPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CEnvEditMode *g_EnvEditMode;
 
 #endif

@@ -1,27 +1,27 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCursor.h"
 #include "CSkinPlugin.h"
 #include "CSkinSelectMode.h"
 #include "CConfigMode.h"
 
-//	“à•”’è”
-const int INTERFACE_SOUND_VOLUME = -1500;	//	‘€ì‰¹—Ê
+//	å†…éƒ¨å®šæ•°
+const int INTERFACE_SOUND_VOLUME = -1500;	//	æ“ä½œéŸ³é‡
 
-//	“à•”ƒOƒ[ƒoƒ‹
-CObject g_ArrowObject;		//	–îˆóƒIƒuƒWƒFƒNƒg
-CObject g_LinkObject;		//	–îˆóƒIƒuƒWƒFƒNƒg
-CObject g_SegmentObject;	//	ƒZƒOƒƒ“ƒgƒIƒuƒWƒFƒNƒg
-CObject g_CompassObject[2];	//	ƒRƒ“ƒpƒXƒIƒuƒWƒFƒNƒg
-CObject g_WindDirObject;	//	•—•ûŒüƒIƒuƒWƒFƒNƒg
-CSkinPlugin *g_Skin = NULL;	//	ƒJƒŒƒ“ƒgƒXƒLƒ“
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+CObject g_ArrowObject;		//	çŸ¢å°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+CObject g_LinkObject;		//	çŸ¢å°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+CObject g_SegmentObject;	//	ã‚»ã‚°ãƒ¡ãƒ³ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+CObject g_CompassObject[2];	//	ã‚³ãƒ³ãƒ‘ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+CObject g_WindDirObject;	//	é¢¨æ–¹å‘ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+CSkinPlugin *g_Skin = NULL;	//	ã‚«ãƒ¬ãƒ³ãƒˆã‚¹ã‚­ãƒ³
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSkinPlugin::CSkinPlugin(
 	char *id	//	ID
 ):
-	CPlugin(id)	//	Šî–{ƒNƒ‰ƒX
+	CPlugin(id)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_NormalCursorData.m_Cursor2DAnimFrame = NULL;
 	m_InterfaceData.m_hFont = NULL;
@@ -30,7 +30,7 @@ CSkinPlugin::CSkinPlugin(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSkinPlugin::~CSkinPlugin(){
 	DELETE_A(m_NormalCursorData.m_Cursor2DAnimFrame);
@@ -40,7 +40,7 @@ CSkinPlugin::~CSkinPlugin(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 bool CSkinPlugin::Load(){
 	char *str = m_Script, *eee;
@@ -235,7 +235,7 @@ LOADED:
 }
 
 /*
- *	ƒvƒŒƒrƒ…[İ’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CSkinPlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -257,52 +257,52 @@ void CSkinPlugin::SetPreview(){
 }
 
 /*
- *	ƒ}ƒEƒX PUSH ‰¹
+ *	ãƒã‚¦ã‚¹ PUSH éŸ³
  */
 void CSkinPlugin::MouseDown(){
 	if(g_ConfigMode->GetInterfaceSound()) m_MouseDown.Add(V3ZERO, INTERFACE_SOUND_VOLUME);
 }
 
 /*
- *	ƒ}ƒEƒX PULL ‰¹
+ *	ãƒã‚¦ã‚¹ PULL éŸ³
  */
 void CSkinPlugin::MouseUp(){
 	if(g_ConfigMode->GetInterfaceSound()) m_MouseUp.Add(V3ZERO, INTERFACE_SOUND_VOLUME);
 }
 
 /*
- *	ƒGƒ‰[‰¹
+ *	ã‚¨ãƒ©ãƒ¼éŸ³
  */
 void CSkinPlugin::Error(){
 	if(g_ConfigMode->GetInterfaceSound()) m_Error.Add(V3ZERO, INTERFACE_SOUND_VOLUME);
 }
 
 /*
- *	ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgB‰e‰¹
+ *	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆæ’®å½±éŸ³
  */
 void CSkinPlugin::ScreenShot(){
 	if(g_ConfigMode->GetInterfaceSound()) m_ScreenShot.Add(V3ZERO, INTERFACE_SOUND_VOLUME);
 }
 
 /*
- *	ƒrƒfƒIB‰eŠJn‰¹
+ *	ãƒ“ãƒ‡ã‚ªæ’®å½±é–‹å§‹éŸ³
  */
 void CSkinPlugin::VideoStart(){
 	if(g_ConfigMode->GetInterfaceSound()) m_VideoStart.Add(V3ZERO, INTERFACE_SOUND_VOLUME);
 }
 
 /*
- *	ƒrƒfƒIB‰e’â~‰¹
+ *	ãƒ“ãƒ‡ã‚ªæ’®å½±åœæ­¢éŸ³
  */
 void CSkinPlugin::VideoStop(){
 	if(g_ConfigMode->GetInterfaceSound()) m_VideoStop.Add(V3ZERO, INTERFACE_SOUND_VOLUME);
 }
 
 /*
- *	”wŒi•`‰æ
+ *	èƒŒæ™¯æç”»
  */
 void CSkinPlugin::DrawBackground(
-	bool light	//	”wŒiƒ‰ƒCƒg
+	bool light	//	èƒŒæ™¯ãƒ©ã‚¤ãƒˆ
 ){
 	D3DCOLOR lc = light ? 0xffffffff : 0xff202020;
 	D3DCOLOR bg = MultiplyColor(m_BackgroundData.m_BackgroundColor, lc);
@@ -318,10 +318,10 @@ void CSkinPlugin::DrawBackground(
 }
 
 /*
- *	ƒRƒ“ƒpƒXƒXƒP[ƒ‹İ’è
+ *	ã‚³ãƒ³ãƒ‘ã‚¹ã‚¹ã‚±ãƒ¼ãƒ«è¨­å®š
  */
 void CSkinPlugin::ScaleCompass(
-	float scale	//	ƒXƒP[ƒ‹
+	float scale	//	ã‚¹ã‚±ãƒ¼ãƒ«
 ){
 	int i;
 	for(i = 0; i<2; i++) g_CompassObject[i].SetMesh(

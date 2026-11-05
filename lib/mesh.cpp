@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "..\stdafx.h"
 
@@ -13,25 +13,24 @@
 #define UDX_MESH_TIMER_RAII(name)
 #endif
 
-#include <rmxfguid.h>
-#include <rmxftmpl.h>
+#include <dxfile.h>
 
 #include "..\CModelPlugin.h"
 #include "..\CEnvPlugin.h"
 #include "..\CConfigMode.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CTexList g_TexList;
 extern float g_BlinkAlpha;
 extern CEnvPlugin *g_Env;
 
-//	“à•”ƒOƒ[ƒoƒ‹
-int g_AncientNightFlag;		//	‹Œƒo[ƒWƒ‡ƒ“‘Î‰—pE–éŠÔ”­Œõƒtƒ‰ƒO
-CMeshList g_MeshList;		//	ƒeƒNƒXƒ`ƒƒƒŠƒXƒg
-MAT8 *g_AltMaterial = NULL;	//	‘ã‘Öƒ}ƒeƒŠƒAƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+int g_AncientNightFlag;		//	æ—§ãƒãƒ¼ã‚¸ãƒ§ãƒ³å¯¾å¿œç”¨ãƒ»å¤œé–“ç™ºå…‰ãƒ•ãƒ©ã‚°
+CMeshList g_MeshList;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚¹ãƒˆ
+MAT8 *g_AltMaterial = NULL;	//	ä»£æ›¿ãƒãƒ†ãƒªã‚¢ãƒ«
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CXFile::CXFile(){
 	m_pXF = NULL;
@@ -39,14 +38,14 @@ CXFile::CXFile(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CXFile::~CXFile(){
 	Close();
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹^ƒŠƒ\[ƒX‚ÌƒI[ƒvƒ“
+ *	ãƒ•ã‚¡ã‚¤ãƒ«ï¼ãƒªã‚½ãƒ¼ã‚¹ã®ã‚ªãƒ¼ãƒ—ãƒ³
  */
 BOOL CXFile::Open(LPCSTR strSrc, BOOL fRes){
 	HRESULT hr;
@@ -71,7 +70,7 @@ BOOL CXFile::Open(LPCSTR strSrc, BOOL fRes){
 }
 
 /*
- *	Ÿ‚Ìƒf[ƒ^‚ğæ“¾
+ *	æ¬¡ã®ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
  */
 BOOL CXFile::GetNextData(LPDIRECTXFILEDATA *ppDat){
 	HRESULT hr;
@@ -82,7 +81,7 @@ BOOL CXFile::GetNextData(LPDIRECTXFILEDATA *ppDat){
 }
 
 /*
- *	ÅãŠK‘w‚ÌƒƒbƒVƒ…‚ğæ“¾
+ *	æœ€ä¸Šéšå±¤ã®ãƒ¡ãƒƒã‚·ãƒ¥ã‚’å–å¾—
  */
 BOOL CXFile::GetTopMesh(LPDIRECTXFILEDATA *ppDat){
 	const GUID *type;
@@ -93,13 +92,13 @@ BOOL CXFile::GetTopMesh(LPDIRECTXFILEDATA *ppDat){
 		(*ppDat)->GetType(&type);
 
 		if(*type==TID_D3DRMMesh) break;
-		else RELEASE(*ppDat);	//	ƒƒbƒVƒ…ˆÈŠO‚Í‰ğ•ú
+		else RELEASE(*ppDat);	//	ãƒ¡ãƒƒã‚·ãƒ¥ä»¥å¤–ã¯è§£æ”¾
 	}
 	return TRUE;
 }
 
 /*
- *	ƒNƒ[ƒY
+ *	ã‚¯ãƒ­ãƒ¼ã‚º
  */
 void CXFile::Close(){
 	RELEASE(m_pPtr);
@@ -110,7 +109,7 @@ void CXFile::Close(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CMesh::CMesh(){
 	m_pMesh = NULL;
@@ -124,22 +123,22 @@ CMesh::CMesh(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CMesh::~CMesh(){
 	Free();
 }
 
 /*
- *	X ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ
+ *	X ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­è¾¼ã¿
  */
 BOOL CMesh::Load(
-	BOOL fRes,			//	ƒŠƒ\[ƒX‚©H
-	char *strName,		//	ƒtƒ@ƒCƒ‹EƒŠƒ\[ƒX–¼
-	D3DCOLOR cTrans,	//	ƒeƒNƒXƒ`ƒƒ[‚Ì“§‰ßF
-	int nMipLv			//	ƒ~ƒbƒvƒ}ƒbƒv LV
+	BOOL fRes,			//	ãƒªã‚½ãƒ¼ã‚¹ã‹ï¼Ÿ
+	char *strName,		//	ãƒ•ã‚¡ã‚¤ãƒ«ãƒ»ãƒªã‚½ãƒ¼ã‚¹å
+	D3DCOLOR cTrans,	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã®é€éè‰²
+	int nMipLv			//	ãƒŸãƒƒãƒ—ãƒãƒƒãƒ— LV
 ){
-	//	Šù‘¶‚È‚ç‰ğ•ú
+	//	æ—¢å­˜ãªã‚‰è§£æ”¾
 	if(m_pMesh) Free();
 
 	Debug("load(%s) ... ", strName);
@@ -150,7 +149,7 @@ BOOL CMesh::Load(
 	HRESULT hr;
 
 	if(fRes){
-		//	ƒŠƒ\[ƒX“Ç‚İ
+		//	ãƒªã‚½ãƒ¼ã‚¹èª­è¾¼ã¿
 		CXFile xfile;
 		if(!xfile.Open(strName, TRUE)){
 			Debug("open failed.\n");
@@ -166,9 +165,9 @@ BOOL CMesh::Load(
 		RELEASE(pDat);
 		xfile.Close();
 	}else{
-		//	ƒtƒ@ƒCƒ‹“Ç‚İ
+		//	ãƒ•ã‚¡ã‚¤ãƒ«èª­è¾¼ã¿
 		hr = D3DXLoadMeshFromX(
-			strName, D3DXMESH_SYSTEMMEM/*Lock“™‚ğl‚¦‚é‚Æ‚±‚ê‚ªƒxƒXƒg*/,
+			strName, D3DXMESH_SYSTEMMEM/*Lockç­‰ã‚’è€ƒãˆã‚‹ã¨ã“ã‚ŒãŒãƒ™ã‚¹ãƒˆ*/,
 			sv3.pDev, &pAdj, &pBuf, &m_dwNumMat, &m_pMesh);
 	}
 
@@ -178,7 +177,7 @@ BOOL CMesh::Load(
 	}
 	Debug("ok.\n");
 
-	//	ƒ}ƒeƒŠƒAƒ‹‚Ìæ“¾AƒeƒNƒXƒ`ƒƒ[‚Ìƒ[ƒh
+	//	ãƒãƒ†ãƒªã‚¢ãƒ«ã®å–å¾—ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã®ãƒ­ãƒ¼ãƒ‰
 	D3DXMATERIAL *pMat = (D3DXMATERIAL *)pBuf->GetBufferPointer();
 
 	m_pMatFlag = new DWORD[m_dwNumMat];
@@ -196,7 +195,7 @@ BOOL CMesh::Load(
 
 		if(!pMat[i].pTextureFilename) continue;
 
-		//	ƒŠƒXƒg‚É‚ ‚ê‚ÎQÆA‚È‚¯‚ê‚Îƒ[ƒh‚µ‚Ä’Ç‰Á
+		//	ãƒªã‚¹ãƒˆã«ã‚ã‚Œã°å‚ç…§ã€ãªã‘ã‚Œã°ãƒ­ãƒ¼ãƒ‰ã—ã¦è¿½åŠ 
 		m_pTex[i] = g_TexList.Get(fRes, pMat[i].pTextureFilename, cTrans, nMipLv);
 	}
 	RELEASE(pBuf);
@@ -214,10 +213,10 @@ BOOL CMesh::Load(
 		}
 	}
 
-	//	‹«ŠE‚ÌŒvZ
+	//	å¢ƒç•Œã®è¨ˆç®—
 	ComputeBoundary();
 
-	//	ƒƒbƒVƒ…‚ÌÅ“K‰»
+	//	ãƒ¡ãƒƒã‚·ãƒ¥ã®æœ€é©åŒ–
 	LPD3DXMESH pMeshOpt = NULL;
 	DWORD *pAdjBuf = (DWORD *)pAdj->GetBufferPointer();
 	hr = m_pMesh->Optimize(
@@ -234,14 +233,14 @@ BOOL CMesh::Load(
 }
 
 /*
- *	‹…‚Ìì¬
+ *	çƒã®ä½œæˆ
  *
- *	sl	: ƒXƒ‰ƒCƒX”
- *	st	: ƒXƒ^ƒbƒN”
- *	cv	: F
+ *	sl	: ã‚¹ãƒ©ã‚¤ã‚¹æ•°
+ *	st	: ã‚¹ã‚¿ãƒƒã‚¯æ•°
+ *	cv	: è‰²
  */
 BOOL CMesh::CreateSphere(float r, UINT sl, UINT st, D3DCOLORVALUE cv){
-	//	Šù‘¶‚È‚ç‰ğ•ú
+	//	æ—¢å­˜ãªã‚‰è§£æ”¾
 	if(m_pMesh) Free();
 
 	if(FAILED(D3DXCreateSphere(sv3.pDev, r, sl, st, &m_pMesh, NULL))){
@@ -268,15 +267,15 @@ BOOL CMesh::CreateSphere(float r, UINT sl, UINT st, D3DCOLORVALUE cv){
 }
 
 /*
- *	’¼•û‘Ì‚Ìì¬
+ *	ç›´æ–¹ä½“ã®ä½œæˆ
  *
- *	x		: XƒTƒCƒY
- *	y		: YƒTƒCƒY
- *	z		: ZƒTƒCƒY
- *	cv	: F
+ *	x		: Xã‚µã‚¤ã‚º
+ *	y		: Yã‚µã‚¤ã‚º
+ *	z		: Zã‚µã‚¤ã‚º
+ *	cv	: è‰²
  */
 BOOL CMesh::CreateBox(float x, float y, float z, D3DCOLORVALUE cv){
-	//	Šù‘¶‚È‚ç‰ğ•ú
+	//	æ—¢å­˜ãªã‚‰è§£æ”¾
 	if(m_pMesh) Free();
 
 	if(FAILED(D3DXCreateBox(sv3.pDev, x, y, z, &m_pMesh, NULL))){
@@ -303,15 +302,15 @@ BOOL CMesh::CreateBox(float x, float y, float z, D3DCOLORVALUE cv){
 }
 
 /*
- *	’¼•û‘Ì‚Ìì¬
+ *	ç›´æ–¹ä½“ã®ä½œæˆ
  *
- *	x		: XƒTƒCƒY
- *	y		: YƒTƒCƒY
- *	z		: ZƒTƒCƒY
- *	cv	: F
+ *	x		: Xã‚µã‚¤ã‚º
+ *	y		: Yã‚µã‚¤ã‚º
+ *	z		: Zã‚µã‚¤ã‚º
+ *	cv	: è‰²
  */
 BOOL CMesh::CreateTeapot(D3DCOLORVALUE cv){
-	//	Šù‘¶‚È‚ç‰ğ•ú
+	//	æ—¢å­˜ãªã‚‰è§£æ”¾
 	if(m_pMesh) Free();
 
 	if(FAILED(D3DXCreateTeapot(sv3.pDev, &m_pMesh, NULL))){
@@ -338,7 +337,7 @@ BOOL CMesh::CreateTeapot(D3DCOLORVALUE cv){
 }
 
 /*
- *	ƒƒbƒVƒ…‚Ì‰ğ•ú
+ *	ãƒ¡ãƒƒã‚·ãƒ¥ã®è§£æ”¾
  */
 void CMesh::Free(){
 	if(m_strName!=""){
@@ -358,7 +357,7 @@ void CMesh::Free(){
 }
 
 /*
- *	‹«ŠEƒ{ƒbƒNƒX^‹…‚ÌŒvZ
+ *	å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹ï¼çƒã®è¨ˆç®—
  */
 void CMesh::ComputeBoundary(){
 	LPBYTE	pVertex;
@@ -376,29 +375,29 @@ void CMesh::ComputeBoundary(){
 }
 
 /*
- *	ƒ}ƒeƒŠƒAƒ‹ƒtƒ‰ƒO‚ÌƒŠƒZƒbƒg
+ *	ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ãƒ©ã‚°ã®ãƒªã‚»ãƒƒãƒˆ
  */
 void CMesh::ResetMatFlag(
-	DWORD def	//	ƒfƒtƒHƒ‹ƒg’l
+	DWORD def	//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤
 ){
 	for(DWORD i = 0; i<m_dwNumMat; i++) m_pMatFlag[i] = def;
 }
 
 /*
- *	ƒ}ƒeƒŠƒAƒ‹ƒtƒ‰ƒO‚ğƒ}ƒXƒN
+ *	ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ãƒ©ã‚°ã‚’ãƒã‚¹ã‚¯
  */
 void CMesh::MaskMatFlag(
-	DWORD mask	//	ƒ}ƒXƒN’l
+	DWORD mask	//	ãƒã‚¹ã‚¯å€¤
 ){
 	for(DWORD i = 0; i<m_dwNumMat; i++) m_pMatFlag[i] &= mask;
 }
 
 /*
- *	ƒJƒXƒ^ƒ€ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ã‚«ã‚¹ã‚¿ãƒ ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	pMtx	: À•W•ÏŠ·s—ñ
+ *	pMtx	: åº§æ¨™å¤‰æ›è¡Œåˆ—
  *
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^	: ƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒXAƒ}ƒeƒŠƒAƒ‹AƒeƒNƒXƒ`ƒƒ
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿	: ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªã‚¯ã‚¹ã€ãƒãƒ†ãƒªã‚¢ãƒ«ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 void CMesh::RenderCustom(MTX4 *pMtx, CNamedObject *nobj){
 	if(!m_pMesh) return;
@@ -472,11 +471,11 @@ void CMesh::RenderCustom(MTX4 *pMtx, CNamedObject *nobj){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	pMtx	: À•W•ÏŠ·s—ñ
+ *	pMtx	: åº§æ¨™å¤‰æ›è¡Œåˆ—
  *
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^	: ƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒXAƒ}ƒeƒŠƒAƒ‹AƒeƒNƒXƒ`ƒƒ
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿	: ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒãƒˆãƒªã‚¯ã‚¹ã€ãƒãƒ†ãƒªã‚¢ãƒ«ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 void CMesh::Render(MTX4 *pMtx){
 	if(!m_pMesh) return;
@@ -529,9 +528,9 @@ void CMesh::Render(MTX4 *pMtx){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO (ƒAƒ“ƒrƒGƒ“ƒg‚Ì‚İ)
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚° (ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆã®ã¿)
  *
- *	pMtx	: À•W•ÏŠ·s—ñ
+ *	pMtx	: åº§æ¨™å¤‰æ›è¡Œåˆ—
  */
 void CMesh::RenderAmb(MTX4 *pMtx){
 	if(!m_pMesh) return;
@@ -554,10 +553,10 @@ void CMesh::RenderAmb(MTX4 *pMtx){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO (ƒeƒNƒXƒ`ƒƒw’è)
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚° (ãƒ†ã‚¯ã‚¹ãƒãƒ£æŒ‡å®š)
  *
- *	pMtx	: À•W•ÏŠ·s—ñ
- *	pTex	: ƒeƒNƒXƒ`ƒƒ
+ *	pMtx	: åº§æ¨™å¤‰æ›è¡Œåˆ—
+ *	pTex	: ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 void CMesh::RenderT(MTX4 *pMtx, LPTEX8 pTex){
 	if(!m_pMesh) return;
@@ -577,10 +576,10 @@ void CMesh::RenderT(MTX4 *pMtx, LPTEX8 pTex){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO (ƒAƒ‹ƒtƒ@’lw’è)
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚° (ã‚¢ãƒ«ãƒ•ã‚¡å€¤æŒ‡å®š)
  *
- *	pMtx	: À•W•ÏŠ·s—ñ
- *	alpha : ƒAƒ‹ƒtƒ@’l
+ *	pMtx	: åº§æ¨™å¤‰æ›è¡Œåˆ—
+ *	alpha : ã‚¢ãƒ«ãƒ•ã‚¡å€¤
  */
 void CMesh::RenderA(MTX4 *pMtx, float altalpha){
 	if(!m_pMesh) return;
@@ -624,10 +623,10 @@ void CMesh::RenderA(MTX4 *pMtx, float altalpha){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO (ƒ¿‰ÁZ)
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚° (Î±åŠ ç®—)
  *
- *	pMtx	: À•W•ÏŠ·s—ñ
- *	aplus	: ƒ¿‰ÁZ’l
+ *	pMtx	: åº§æ¨™å¤‰æ›è¡Œåˆ—
+ *	aplus	: Î±åŠ ç®—å€¤
  */
 void CMesh::RenderAP(MTX4 *pMtx, float aplus){
 	if(!m_pMesh) return;
@@ -639,7 +638,7 @@ void CMesh::RenderAP(MTX4 *pMtx, float aplus){
 
 	for(DWORD i = 0;i<m_dwNumMat;i++){
 		DWORD order = m_pMatOrder[i];
-		//	ƒ¿’l‚ğ•ÏX
+		//	Î±å€¤ã‚’å¤‰æ›´
 		c2 = c1 = m_pMat[0].Ambient;	//	= m_pMat[0].Diffuse
 		c2.a = max(-1.0f, min(1.0f, c2.a*aplus));
 		m_pMat[order].Diffuse = m_pMat[order].Ambient = c2;
@@ -651,16 +650,16 @@ void CMesh::RenderAP(MTX4 *pMtx, float aplus){
 			m_pMesh->DrawSubset(order);
 		}
 
-		//	ƒ¿’l‚ğ•œŒ³
+		//	Î±å€¤ã‚’å¾©å…ƒ
 		m_pMat[order].Diffuse = m_pMat[order].Ambient = c1;
 	}
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO (ƒ}ƒeƒŠƒAƒ‹w’èA‰e‚È‚Ç‚Åg—p)
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚° (ãƒãƒ†ãƒªã‚¢ãƒ«æŒ‡å®šã€å½±ãªã©ã§ä½¿ç”¨)
  *
- *	pMtx	: À•W•ÏŠ·s—ñ
- *	mat	: ƒ}ƒeƒŠƒAƒ‹
+ *	pMtx	: åº§æ¨™å¤‰æ›è¡Œåˆ—
+ *	mat	: ãƒãƒ†ãƒªã‚¢ãƒ«
  */
 void CMesh::RenderSC(MTX4 *pMtx, MAT8 *pMat){
 	if(!m_pMesh) return;
@@ -683,29 +682,29 @@ void CMesh::RenderSC(MTX4 *pMtx, MAT8 *pMat){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CMeshList::CMeshList(){
 	m_pList = NULL;
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CMeshList::~CMeshList(){
 	while(m_pList) Release(&m_pList->m_Mesh);
 }
 
 /*
- *	ƒƒbƒVƒ…‚ğƒŠƒXƒg‚©‚çŒŸõ‚µA‚È‚¯‚ê‚Îƒ[ƒh
+ *	ãƒ¡ãƒƒã‚·ãƒ¥ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰æ¤œç´¢ã—ã€ãªã‘ã‚Œã°ãƒ­ãƒ¼ãƒ‰
  */
 CMesh *CMeshList::Get(BOOL fRes, LPCSTR strName, D3DCOLOR cTrans, int nMipLv){
 	if(!strName || !*strName) return NULL;
 
-	//	ƒŠƒXƒg‚©‚çƒeƒNƒXƒ`ƒƒ[‚ğŒŸõ
+	//	ãƒªã‚¹ãƒˆã‹ã‚‰ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚’æ¤œç´¢
 	MESHINFO *p = m_pList;
 
-	//	ƒtƒ@ƒCƒ‹‚È‚çƒtƒ‹ƒpƒX‚É•ÏŠ·
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ãªã‚‰ãƒ•ãƒ«ãƒ‘ã‚¹ã«å¤‰æ›
 	char full[_MAX_PATH];
 	if(!fRes){
 		_fullpath(full, strName, _MAX_PATH);
@@ -715,16 +714,16 @@ CMesh *CMeshList::Get(BOOL fRes, LPCSTR strName, D3DCOLOR cTrans, int nMipLv){
 	}
 
 	while(p){
-		//	Œ©‚Â‚©‚ê‚ÎQÆƒJƒEƒ“ƒ^‚ğ‘‚â‚µAƒƒbƒVƒ…‚ğ•Ô‚·
+		//	è¦‹ã¤ã‹ã‚Œã°å‚ç…§ã‚«ã‚¦ãƒ³ã‚¿ã‚’å¢—ã‚„ã—ã€ãƒ¡ãƒƒã‚·ãƒ¥ã‚’è¿”ã™
 		if(!_mbsicmp((PUCHAR)p->strName.c_str(), (PUCHAR)strName)
 			&& p->cTrans==cTrans && p->nMipLv==nMipLv){
-			//	Debug("[%s] is in mesh-list.\n", strName); /*ƒfƒoƒbƒO*/
+			//	Debug("[%s] is in mesh-list.\n", strName); /*ãƒ‡ãƒãƒƒã‚°*/
 			p->nRef++;
 			return &p->m_Mesh;
 		}
 		p = p->pNext;
 	}
-	//	Œ©‚Â‚©‚ç‚È‚¯‚ê‚Îƒ[ƒh
+	//	è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°ãƒ­ãƒ¼ãƒ‰
 	Debug("load(%s) ... ", strName);
 
 	p = new MESHINFO;
@@ -735,7 +734,7 @@ CMesh *CMeshList::Get(BOOL fRes, LPCSTR strName, D3DCOLOR cTrans, int nMipLv){
 	}
 	Debug("ok.\n");
 
-	//	ƒŠƒXƒg‚Ìæ“ª‚É’Ç‰ÁAQÆƒJƒEƒ“ƒ^‚ğİ’è‚·‚é
+	//	ãƒªã‚¹ãƒˆã®å…ˆé ­ã«è¿½åŠ ã€å‚ç…§ã‚«ã‚¦ãƒ³ã‚¿ã‚’è¨­å®šã™ã‚‹
 	MESHINFO *q = m_pList;
 	m_pList = p;
 	p->pNext = q;
@@ -747,29 +746,29 @@ CMesh *CMeshList::Get(BOOL fRes, LPCSTR strName, D3DCOLOR cTrans, int nMipLv){
 }
 
 /*
- *	‰Â”\‚È‚çƒƒbƒVƒ…‚ğ‰ğ•ú‚·‚é
+ *	å¯èƒ½ãªã‚‰ãƒ¡ãƒƒã‚·ãƒ¥ã‚’è§£æ”¾ã™ã‚‹
  */
 void CMeshList::Release(CMesh *pMesh){
-	//	ƒƒbƒVƒ…‚ğŒŸõ
+	//	ãƒ¡ãƒƒã‚·ãƒ¥ã‚’æ¤œç´¢
 	MESHINFO *p = m_pList;
 	MESHINFO *q = NULL;
 
 	while(p){
-		//	Œ©‚Â‚©‚ê‚ÎQÆƒJƒEƒ“ƒ^‚ğŒ¸‚ç‚·
+		//	è¦‹ã¤ã‹ã‚Œã°å‚ç…§ã‚«ã‚¦ãƒ³ã‚¿ã‚’æ¸›ã‚‰ã™
 		if(&p->m_Mesh==pMesh){
 			p->nRef--;
 
-			//	QÆ‚ª‚È‚­‚È‚ê‚ÎƒƒbƒVƒ…‚ğ‰ğ•úAƒŠƒXƒg‚©‚çŠO‚·
+			//	å‚ç…§ãŒãªããªã‚Œã°ãƒ¡ãƒƒã‚·ãƒ¥ã‚’è§£æ”¾ã€ãƒªã‚¹ãƒˆã‹ã‚‰å¤–ã™
 			if(p->nRef==0){
 				Debug("release(%s)\n", p->strName.c_str());
 				p->m_Mesh.Free();
 
 				if(p==m_pList){
-					//	ƒŠƒXƒg‚Ìæ“ª
+					//	ãƒªã‚¹ãƒˆã®å…ˆé ­
 					m_pList = p->pNext;
 					delete p;
 				}else{
-					//	“r’†
+					//	é€”ä¸­
 					q->pNext = p->pNext;
 					delete p;
 				}

@@ -1,19 +1,19 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CExpression.h"
 #include "CModelPlugin.h"
 
-//	“à•”ƒOƒ[ƒoƒ‹
-CModelPlugin *g_SwitchOwner = NULL;	//	ƒXƒCƒbƒ`Š—LÒ
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+CModelPlugin *g_SwitchOwner = NULL;	//	ã‚¹ã‚¤ãƒƒãƒæ‰€æœ‰è€…
 
 /*
- *	®•]‰¿
+ *	å¼è©•ä¾¡
  */
 int CVariableReference::CalcInt(){
 	return m_Link->GetValue();
 }
 
 /*
- *	®•]‰¿
+ *	å¼è©•ä¾¡
  */
 int CConstInteger::CalcInt(){
 	return m_Constant;
@@ -23,17 +23,17 @@ int CConstInteger::CalcInt(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CMonomialOperator::~CMonomialOperator(){
 	DELETE_V(m_Child);
 }
 
 /*
- *	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 void CMonomialOperator::CopyOperand(
-	const CMonomialOperator *src	//	ƒRƒs[Œ³
+	const CMonomialOperator *src	//	ã‚³ãƒ”ãƒ¼å…ƒ
 ){
 	m_Child = src->m_Child->Duplicate();
 }
@@ -41,7 +41,7 @@ void CMonomialOperator::CopyOperand(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	ƒNƒ‰ƒX’è‹`ƒ}ƒNƒ
+//	ã‚¯ãƒ©ã‚¹å®šç¾©ãƒã‚¯ãƒ­
 #define CMONOMIALOPERATOR_DEFINECLASS(type) \
 	class type: public CMonomialOperator{ \
 	public: \
@@ -57,7 +57,7 @@ CMONOMIALOPERATOR_DEFINECLASS(COpr1Not);
 CMONOMIALOPERATOR_DEFINECLASS(COpr1Negative);
 
 /*
- *	®•]‰¿
+ *	å¼è©•ä¾¡
  */
 int COpr1Plus::CalcInt(){
 	return m_Child->CalcInt();
@@ -76,7 +76,7 @@ int COpr1Negative::CalcInt(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CBinomialOperator::~CBinomialOperator(){
 	DELETE_V(m_Left);
@@ -84,10 +84,10 @@ CBinomialOperator::~CBinomialOperator(){
 }
 
 /*
- *	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 void CBinomialOperator::CopyOperand(
-	const CBinomialOperator *src	//	ƒRƒs[Œ³
+	const CBinomialOperator *src	//	ã‚³ãƒ”ãƒ¼å…ƒ
 ){
 	m_Left = src->m_Left->Duplicate();
 	m_Right = src->m_Right->Duplicate();
@@ -96,7 +96,7 @@ void CBinomialOperator::CopyOperand(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	ƒNƒ‰ƒX’è‹`ƒ}ƒNƒ
+//	ã‚¯ãƒ©ã‚¹å®šç¾©ãƒã‚¯ãƒ­
 #define CBINOMIALOPERATOR_DEFINECLASS(type) \
 	class type: public CBinomialOperator{ \
 	public: \
@@ -127,7 +127,7 @@ CBINOMIALOPERATOR_DEFINECLASS(COpr2LogicalAnd);
 CBINOMIALOPERATOR_DEFINECLASS(COpr2LogicalOr);
 
 /*
- *	®•]‰¿
+ *	å¼è©•ä¾¡
  */
 int COpr2Multiply::CalcInt(){
 	return m_Left->CalcInt()*m_Right->CalcInt();
@@ -190,7 +190,7 @@ int COpr2LogicalOr::CalcInt(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrinomialOperator::~CTrinomialOperator(){
 	DELETE_V(m_Condition);
@@ -199,10 +199,10 @@ CTrinomialOperator::~CTrinomialOperator(){
 }
 
 /*
- *	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 void CTrinomialOperator::CopyOperand(
-	const CTrinomialOperator *src	//	ƒRƒs[Œ³
+	const CTrinomialOperator *src	//	ã‚³ãƒ”ãƒ¼å…ƒ
 ){
 	m_Condition = src->m_Condition->Duplicate();
 	m_TrueExpr = src->m_TrueExpr->Duplicate();
@@ -210,7 +210,7 @@ void CTrinomialOperator::CopyOperand(
 }
 
 /*
- *	®•]‰¿
+ *	å¼è©•ä¾¡
  */
 int CTrinomialOperator::CalcInt(){
 	return m_Condition->CalcInt() ? m_TrueExpr->CalcInt() : m_FalseExpr->CalcInt();
@@ -220,11 +220,11 @@ int CTrinomialOperator::CalcInt(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *VariableReference(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee;
 	string sw;
@@ -240,11 +240,11 @@ char *VariableReference(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *ConstantExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	int val;
 	if(!(str = ConstInteger(str, &val))) return NULL;
@@ -253,11 +253,11 @@ char *ConstantExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *PrimaryExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(tmp = VariableReference(str, ret)){
@@ -274,11 +274,11 @@ char *PrimaryExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *UnaryExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(tmp = Character2(eee = str, '+')){
@@ -300,11 +300,11 @@ char *UnaryExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *MultiplicativeExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = UnaryExpression(str, ret))) return NULL;
@@ -327,11 +327,11 @@ char *MultiplicativeExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *AdditiveExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = MultiplicativeExpression(str, ret))) return NULL;
@@ -351,11 +351,11 @@ char *AdditiveExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *ShiftExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = AdditiveExpression(str, ret))) return NULL;
@@ -375,11 +375,11 @@ char *ShiftExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *RelationalExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = ShiftExpression(str, ret))) return NULL;
@@ -405,11 +405,11 @@ char *RelationalExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *EqualityExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = RelationalExpression(str, ret))) return NULL;
@@ -429,11 +429,11 @@ char *EqualityExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *AndExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = EqualityExpression(str, ret))) return NULL;
@@ -450,11 +450,11 @@ char *AndExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *XorExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = AndExpression(str, ret))) return NULL;
@@ -471,11 +471,11 @@ char *XorExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *OrExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = XorExpression(str, ret))) return NULL;
@@ -492,11 +492,11 @@ char *OrExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *LogicalAndExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = OrExpression(str, ret))) return NULL;
@@ -513,11 +513,11 @@ char *LogicalAndExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *LogicalOrExpression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = LogicalAndExpression(str, ret))) return NULL;
@@ -534,11 +534,11 @@ char *LogicalOrExpression(
 }
 
 /*
- *	”®
+ *	æ•°å¼
  */
 char *Expression(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CExpression **ret	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CExpression **ret	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = LogicalOrExpression(str, ret))) return NULL;

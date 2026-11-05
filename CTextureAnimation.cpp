@@ -1,13 +1,13 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCustomizerMisc.h"
 #include "CModelPlugin.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_NamedObjectMipMap;
 extern bool g_PreviewAnimation;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTexAnimFrame::CTexAnimFrame(){
 	m_FrameTexture = NULL;
@@ -15,10 +15,10 @@ CTexAnimFrame::CTexAnimFrame(){
 }
 
 /*
- *	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTexAnimFrame::CTexAnimFrame(
-	const CTexAnimFrame &src	//	ƒRƒs[Œ³
+	const CTexAnimFrame &src	//	ã‚³ãƒ”ãƒ¼å…ƒ
 ){
 	m_FrameLength = src.m_FrameLength;
 	m_TextureFileName = src.m_TextureFileName;
@@ -27,11 +27,11 @@ CTexAnimFrame::CTexAnimFrame(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTexAnimFrame::CTexAnimFrame(
-	string tex,	//	ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
-	int len		//	ƒtƒŒ[ƒ€’·
+	string tex,	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
+	int len		//	ãƒ•ãƒ¬ãƒ¼ãƒ é•·
 ){
 	m_FrameLength = len;
 	m_TextureFileName = tex;
@@ -40,17 +40,17 @@ CTexAnimFrame::CTexAnimFrame(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTexAnimFrame::~CTexAnimFrame(){
 	DELETE_V(m_TexTrans);
 }
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CTexAnimFrame::Read(
-	char *str	//	‘ÎÛ•¶Žš—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	if(!(str = Assignment(str, "Frame"))) return NULL;
@@ -68,18 +68,18 @@ char *CTexAnimFrame::Read(
 }
 
 /*
- *	ƒf[ƒ^“Çž
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CTexAnimFrame::LoadData(){
 	m_FrameTexture = g_TexList.Get(FALSE, m_TextureFileName.c_str(), 0, !g_NamedObjectMipMap);
 }
 
 /*
- *	ƒAƒjƒ[ƒVƒ‡ƒ““K—p
+ *	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é©ç”¨
  */
 void CTexAnimFrame::Apply(
-	CMesh *mesh,	//	ƒƒbƒVƒ…
-	int matid		//	ƒ}ƒeƒŠƒAƒ‹ ID
+	CMesh *mesh,	//	ãƒ¡ãƒƒã‚·ãƒ¥
+	int matid		//	ãƒžãƒ†ãƒªã‚¢ãƒ« ID
 ){
 	mesh->SetCustomTexture(matid, m_FrameTexture);
 	if(m_TexTrans){
@@ -92,10 +92,10 @@ void CTexAnimFrame::Apply(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CTexAnimState::Read(
-	char *str	//	‘ÎÛ•¶Žš—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = Assignment(eee = str, "TexAnimState"))) return NULL;
@@ -107,11 +107,11 @@ char *CTexAnimState::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CTexAnimState::Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *ind	//	ƒCƒ“ƒfƒ“ƒg
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *ind	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
 ){
 	fprintf(df, "%sTexAnimState = %d, %d;\n", ind, m_Frame, m_Count);
 }
@@ -120,11 +120,11 @@ void CTexAnimState::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CTextureAnimation::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp, *eee;
 	if(!(str = BeginNamedBlock(eee = str, "DefineAnimation", &m_AnimationName))) return NULL;
@@ -237,7 +237,7 @@ char *CTextureAnimation::Read(
 }
 
 /*
- *	ƒf[ƒ^“Çž
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CTextureAnimation::LoadData(){
 	int i, fn = m_FrameList.size();
@@ -245,10 +245,10 @@ void CTextureAnimation::LoadData(){
 }
 
 /*
- *	ó‘ÔƒZƒbƒg
+ *	çŠ¶æ…‹ã‚»ãƒƒãƒˆ
  */
 void CTextureAnimation::SetState(
-	CTexAnimState *state	//	ó‘Ô•Ï”
+	CTexAnimState *state	//	çŠ¶æ…‹å¤‰æ•°
 ){
 	if(!state){
 		state = &m_PreviewState;
@@ -264,11 +264,11 @@ void CTextureAnimation::SetState(
 }
 
 /*
- *	ƒAƒjƒ[ƒVƒ‡ƒ““K—p
+ *	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é©ç”¨
  */
 void CTextureAnimation::Apply(
-	CMesh *mesh,	//	ƒƒbƒVƒ…
-	int matid		//	ƒ}ƒeƒŠƒAƒ‹ ID
+	CMesh *mesh,	//	ãƒ¡ãƒƒã‚·ãƒ¥
+	int matid		//	ãƒžãƒ†ãƒªã‚¢ãƒ« ID
 ){
 	if(m_FrameList.size()) m_FrameList[m_CurrentFrame].Apply(mesh, matid);
 	else mesh->SetCustomTexture(matid, NULL);

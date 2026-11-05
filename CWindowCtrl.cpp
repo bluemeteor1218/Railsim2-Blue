@@ -1,34 +1,34 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CWindowCtrl.h"
 #include "CSkinPlugin.h"
 #include "CConfigMode.h"
 
-//	“à•”’è”
-const int WND_RESIZE_GRAB = 4;	//	‘‹ƒŠƒTƒCƒY‚Â‚Ü‚İ•
+//	å†…éƒ¨å®šæ•°
+const int WND_RESIZE_GRAB = 4;	//	çª“ãƒªã‚µã‚¤ã‚ºã¤ã¾ã¿å¹…
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CWindowCtrl::CWindowCtrl(){
 	m_CloseButton = NULL;
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CWindowCtrl::~CWindowCtrl(){
 	DELETE_V(m_CloseButton);
 }
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CWindowCtrl::Init(
-	int x, int y,	//	À•W
-	int w, int h,	//	ƒTƒCƒY
-	char *t,		//	ƒeƒLƒXƒg
-	CInterface *p,	//	e
-	bool close		//	ƒNƒ[ƒY—LŒø
+	int x, int y,	//	åº§æ¨™
+	int w, int h,	//	ã‚µã‚¤ã‚º
+	char *t,		//	ãƒ†ã‚­ã‚¹ãƒˆ
+	CInterface *p,	//	è¦ª
+	bool close		//	ã‚¯ãƒ­ãƒ¼ã‚ºæœ‰åŠ¹
 ){
 	CInterface::Init(x, y, w, h, t, p);
 	m_State = 0;
@@ -42,10 +42,10 @@ void CWindowCtrl::Init(
 }
 
 /*
- *	ƒTƒCƒYİ’è
+ *	ã‚µã‚¤ã‚ºè¨­å®š
  */
 void CWindowCtrl::SetSize(
-	int w, int h	//	ƒTƒCƒY
+	int w, int h	//	ã‚µã‚¤ã‚º
 ){
 	m_Width = w;
 	m_Height = h;
@@ -54,12 +54,12 @@ void CWindowCtrl::SetSize(
 }
 
 /*
- *	ƒŠƒTƒCƒYİ’è
+ *	ãƒªã‚µã‚¤ã‚ºè¨­å®š
  */
 void CWindowCtrl::SetResize(
-	int minw, int minh,	//	Å¬ƒTƒCƒY
-	int maxw, int maxh,	//	Å‘åƒTƒCƒY
-	CWindowResizer *res	//	ƒŠƒTƒCƒU
+	int minw, int minh,	//	æœ€å°ã‚µã‚¤ã‚º
+	int maxw, int maxh,	//	æœ€å¤§ã‚µã‚¤ã‚º
+	CWindowResizer *res	//	ãƒªã‚µã‚¤ã‚¶
 ){
 	m_MinWidth = minw; m_MinHeight = minh;
 	m_MaxWidth = maxw; m_MaxHeight = maxh;
@@ -67,7 +67,7 @@ void CWindowCtrl::SetResize(
 }
 
 /*
- *	ƒJ[ƒ\ƒ‹‚ªƒEƒBƒ“ƒhƒEŠO‚È‚ç©“®“I‚É•s“§–¾‚É‚·‚é
+ *	ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å¤–ãªã‚‰è‡ªå‹•çš„ã«ä¸é€æ˜ã«ã™ã‚‹
  */
 void CWindowCtrl::SetAutoTransparent(){
 	POINT pos = g_Cursor.GetPos();
@@ -75,10 +75,10 @@ void CWindowCtrl::SetAutoTransparent(){
 }
 
 /*
- *	w’èÀ•W‚ªƒ^ƒCƒgƒ‹ƒo[“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼å†…ã‹èª¿ã¹ã‚‹
  */
 bool CWindowCtrl::IsInsideTitleBar(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	int px, py;
 	GetAbsPos(&px, &py);
@@ -86,10 +86,10 @@ bool CWindowCtrl::IsInsideTitleBar(
 }
 
 /*
- *	w’èÀ•W‚ª¶ƒŠƒTƒCƒY‚Â‚Ü‚İ“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒå·¦ãƒªã‚µã‚¤ã‚ºã¤ã¾ã¿å†…ã‹èª¿ã¹ã‚‹
  */
 bool CWindowCtrl::IsInsideLeftGrab(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	int px, py;
 	GetAbsPos(&px, &py);
@@ -97,10 +97,10 @@ bool CWindowCtrl::IsInsideLeftGrab(
 }
 
 /*
- *	w’èÀ•W‚ªãƒŠƒTƒCƒY‚Â‚Ü‚İ“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒä¸Šãƒªã‚µã‚¤ã‚ºã¤ã¾ã¿å†…ã‹èª¿ã¹ã‚‹
  */
 bool CWindowCtrl::IsInsideTopGrab(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	int px, py;
 	GetAbsPos(&px, &py);
@@ -108,10 +108,10 @@ bool CWindowCtrl::IsInsideTopGrab(
 }
 
 /*
- *	w’èÀ•W‚ª‰EƒŠƒTƒCƒY‚Â‚Ü‚İ“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒå³ãƒªã‚µã‚¤ã‚ºã¤ã¾ã¿å†…ã‹èª¿ã¹ã‚‹
  */
 bool CWindowCtrl::IsInsideRightGrab(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	int px, py;
 	GetAbsPos(&px, &py);
@@ -119,10 +119,10 @@ bool CWindowCtrl::IsInsideRightGrab(
 }
 
 /*
- *	w’èÀ•W‚ª‰ºƒŠƒTƒCƒY‚Â‚Ü‚İ“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒä¸‹ãƒªã‚µã‚¤ã‚ºã¤ã¾ã¿å†…ã‹èª¿ã¹ã‚‹
  */
 bool CWindowCtrl::IsInsideBottomGrab(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	int px, py;
 	GetAbsPos(&px, &py);
@@ -130,11 +130,11 @@ bool CWindowCtrl::IsInsideBottomGrab(
 }
 
 /*
- *	ƒhƒ‰ƒbƒOŠJn
+ *	ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹
  */
 void CWindowCtrl::BeginDrag(
-	int state,		//	ó‘Ô
-	int ox, int oy	//	‹Œ”’l
+	int state,		//	çŠ¶æ…‹
+	int ox, int oy	//	æ—§æ•°å€¤
 ){
 	POINT pos = g_Cursor.GetPos();
 	m_State = state;
@@ -145,7 +145,7 @@ void CWindowCtrl::BeginDrag(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CWindowCtrl::ScanInput(){
 	if(!m_Visible){
@@ -276,7 +276,7 @@ CLICKFOCUS:
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CWindowCtrl::Render(){
 	CInterface::RenderBrother();

@@ -1,19 +1,19 @@
-#ifndef CTRAINSETCURVE_H_INCLUDED
+ï»¿#ifndef CTRAINSETCURVE_H_INCLUDED
 #define CTRAINSETCURVE_H_INCLUDED
 
 #include "CRailTraceCurve.h"
 #include "CTrainSetBuffer.h"
 
 /*
- *	Ôçq”z’uƒJ[ƒu
+ *	è»Šè¼Œé…ç½®ã‚«ãƒ¼ãƒ–
  */
 class CTrainSetCurve: public CRailTraceCurve{
 private:
-	bool m_Reverse;					//	Œã‘Şƒtƒ‰ƒO
-	CGroupEndLocator m_Location;	//	İ’uˆÊ’u
-	CGroupEndLocator *m_Tail;		//	I’[Ši”[æ
-	ITrainSetBuffer *m_Current;		//	Œ»İˆÊ’u
-	ITrainSetBuffer *m_End;			//	I—¹ˆÊ’u
+	bool m_Reverse;					//	å¾Œé€€ãƒ•ãƒ©ã‚°
+	CGroupEndLocator m_Location;	//	è¨­ç½®ä½ç½®
+	CGroupEndLocator *m_Tail;		//	çµ‚ç«¯æ ¼ç´å…ˆ
+	ITrainSetBuffer *m_Current;		//	ç¾åœ¨ä½ç½®
+	ITrainSetBuffer *m_End;			//	çµ‚äº†ä½ç½®
 public:
 	CTrainSetCurve(CRailPlugin *, CTiePlugin *, CGirderPlugin *,
 		bool, CGroupEndLocator, CGroupEndLocator *, ITrainSetBuffer *, ITrainSetBuffer *);

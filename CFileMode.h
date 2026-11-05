@@ -1,4 +1,4 @@
-#ifndef CFILEMODE_H_INCLUDED
+ï»¿#ifndef CFILEMODE_H_INCLUDED
 #define CFILEMODE_H_INCLUDED
 
 #include "CStaticCtrl.h"
@@ -13,26 +13,26 @@ class CInputDialog;
 class CMultiInputDialog;
 
 /*
- *	ƒZ[ƒuƒtƒ@ƒCƒ‹ƒŠƒXƒg—v‘f
+ *	ã‚»ãƒ¼ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆè¦ç´ 
  */
 class CLayoutInfo{
 	friend class CFileMode;
 private:
-	float m_Version;	//	‘Î‰ƒo[ƒWƒ‡ƒ“
-	string m_FileName;	//	ƒtƒ@ƒCƒ‹–¼
-	string m_FileDate;	//	XV“ú
-	string m_FileNote;	//	”õl
+	float m_Version;	//	å¯¾å¿œãƒãƒ¼ã‚¸ãƒ§ãƒ³
+	string m_FileName;	//	ãƒ•ã‚¡ã‚¤ãƒ«å
+	string m_FileDate;	//	æ›´æ–°æ—¥æ™‚
+	string m_FileNote;	//	å‚™è€ƒ
 public:
 	CLayoutInfo(char *fname){ m_FileName = fname; }
 	bool PreLoadSF(FILE *file);
 	bool operator<(const CLayoutInfo &rhs){ return m_FileName<rhs.m_FileName; }
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CLayoutInfo>::iterator ILayoutInfo;
 
 /*
- *	ƒtƒ@ƒCƒ‹ƒŠƒXƒgƒrƒ…[
+ *	ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
  */
 class CFileListView: public CIconListView{
 public:
@@ -45,40 +45,40 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒtƒ@ƒCƒ‹ƒ‚[ƒh
+ *	ãƒ•ã‚¡ã‚¤ãƒ«ãƒ¢ãƒ¼ãƒ‰
  */
 class CFileMode: public CInterfaceMode, public CWindowResizer, public CMenuCommander{
 private:
-	int m_ModalState;						//	ƒ‚[ƒ_ƒ‹ó‘Ô
-	int m_RedoNum;							//	ƒŠƒhƒD”
-	int m_UndoNum;							//	ƒAƒ“ƒhƒD”
-	int m_UndoPos;							//	ƒAƒ“ƒhƒDˆÊ’u
-	bool m_NetworkMode;						//	ƒlƒbƒgƒ[ƒNƒ‚[ƒh
-	DPNID m_DeletingMemberID;				//	íœ‘ÎÛƒƒ“ƒo[ID
-	string m_NewFileName;					//	V‹Kƒtƒ@ƒCƒ‹–¼
-	string m_NetworkFileName;				//	ƒlƒbƒgƒ‚[ƒh‚Åg—p‚·‚éƒtƒ@ƒCƒ‹–¼
-	CYesNoDialog *m_YesNoDialog;			//	yes/no ƒ_ƒCƒAƒƒO
-	CInputDialog *m_InputDialog;			//	“ü—Íƒ_ƒCƒAƒƒO
-	CMultiInputDialog *m_MultiInputDialog;	//	•¡”€–Ú“ü—Íƒ_ƒCƒAƒƒO
-	CPopMenu *m_FileMenu;					//	ƒtƒ@ƒCƒ‹ƒƒjƒ…[
-	list<CLayoutInfo> m_LayoutInfoList;		//	ƒtƒ@ƒCƒ‹ƒŠƒXƒg
-	CWindowCtrl m_FileWindow;				//	‘‹
-	CStaticCtrl m_FileLabel;				//	ƒtƒ@ƒCƒ‹–¼ƒ‰ƒxƒ‹
-	CStaticCtrl m_NoteLabel;				//	”õlƒ‰ƒxƒ‹
-	CEditCtrl m_NoteEdit;					//	”õlƒGƒfƒBƒbƒg
-	CPushButton m_NewButton;				//	V‹Kì¬
-	CPushButton m_OpenButton;				//	ŠJ‚­
-	CPushButton m_SaveButton;				//	ã‘‚«•Û‘¶
-	CPushButton m_SaveAsButton;				//	•Ê–¼‚Å•Û‘¶
-	CPushButton m_NetworkButton;			//	ƒlƒbƒgƒ[ƒN
-	CFileListView m_FileListView;			//	ƒtƒ@ƒCƒ‹ƒŠƒXƒgƒrƒ…[
-	CCheckBox m_AutoLoadCheck;				//	©“®“Ç
-	CWindowCtrl m_NetworkWindow;			//	‘‹
-	CStaticCtrl m_NetworkLabel;				//	ƒtƒ@ƒCƒ‹–¼ƒ‰ƒxƒ‹
-	CPushButton m_CloseEntryButton;			//	ó•tI—¹ƒ{ƒ^ƒ“
-	CPushButton m_DeleteMemberButton;		//	ƒƒ“ƒoíœƒ{ƒ^ƒ“
-	CPushButton m_DisconnectButton;			//	V‹Kì¬
-	CListView m_NetworkListView;			//	ƒƒ“ƒoƒŠƒXƒgƒrƒ…[
+	int m_ModalState;						//	ãƒ¢ãƒ¼ãƒ€ãƒ«çŠ¶æ…‹
+	int m_RedoNum;							//	ãƒªãƒ‰ã‚¥æ•°
+	int m_UndoNum;							//	ã‚¢ãƒ³ãƒ‰ã‚¥æ•°
+	int m_UndoPos;							//	ã‚¢ãƒ³ãƒ‰ã‚¥ä½ç½®
+	bool m_NetworkMode;						//	ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒ¢ãƒ¼ãƒ‰
+	DPNID m_DeletingMemberID;				//	å‰Šé™¤å¯¾è±¡ãƒ¡ãƒ³ãƒãƒ¼ID
+	string m_NewFileName;					//	æ–°è¦ãƒ•ã‚¡ã‚¤ãƒ«å
+	string m_NetworkFileName;				//	ãƒãƒƒãƒˆãƒ¢ãƒ¼ãƒ‰ã§ä½¿ç”¨ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«å
+	CYesNoDialog *m_YesNoDialog;			//	yes/no ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
+	CInputDialog *m_InputDialog;			//	å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
+	CMultiInputDialog *m_MultiInputDialog;	//	è¤‡æ•°é …ç›®å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
+	CPopMenu *m_FileMenu;					//	ãƒ•ã‚¡ã‚¤ãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	list<CLayoutInfo> m_LayoutInfoList;		//	ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆ
+	CWindowCtrl m_FileWindow;				//	çª“
+	CStaticCtrl m_FileLabel;				//	ãƒ•ã‚¡ã‚¤ãƒ«åãƒ©ãƒ™ãƒ«
+	CStaticCtrl m_NoteLabel;				//	å‚™è€ƒãƒ©ãƒ™ãƒ«
+	CEditCtrl m_NoteEdit;					//	å‚™è€ƒã‚¨ãƒ‡ã‚£ãƒƒãƒˆ
+	CPushButton m_NewButton;				//	æ–°è¦ä½œæˆ
+	CPushButton m_OpenButton;				//	é–‹ã
+	CPushButton m_SaveButton;				//	ä¸Šæ›¸ãä¿å­˜
+	CPushButton m_SaveAsButton;				//	åˆ¥åã§ä¿å­˜
+	CPushButton m_NetworkButton;			//	ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯
+	CFileListView m_FileListView;			//	ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	CCheckBox m_AutoLoadCheck;				//	è‡ªå‹•èª­è¾¼
+	CWindowCtrl m_NetworkWindow;			//	çª“
+	CStaticCtrl m_NetworkLabel;				//	ãƒ•ã‚¡ã‚¤ãƒ«åãƒ©ãƒ™ãƒ«
+	CPushButton m_CloseEntryButton;			//	å—ä»˜çµ‚äº†ãƒœã‚¿ãƒ³
+	CPushButton m_DeleteMemberButton;		//	ãƒ¡ãƒ³ãƒå‰Šé™¤ãƒœã‚¿ãƒ³
+	CPushButton m_DisconnectButton;			//	æ–°è¦ä½œæˆ
+	CListView m_NetworkListView;			//	ãƒ¡ãƒ³ãƒãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
 public:
 	CFileMode();
 	~CFileMode();
@@ -103,7 +103,7 @@ public:
 	void LoadRedo();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CFileMode *g_FileMode;
 
 #endif

@@ -1,10 +1,10 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailPlugin.h"
 #include "CTiePlugin.h"
 #include "CTieSelectMode.h"
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CTiePlugin::Load(){
 	char *str = m_Script, *tmp, *eee;
@@ -30,7 +30,7 @@ bool CTiePlugin::Load(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[Ý’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CTiePlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -41,13 +41,13 @@ void CTiePlugin::SetPreview(){
 }
 
 /*
- *	ƒ_ƒ“ƒvŒãˆ—
+ *	ãƒ€ãƒ³ãƒ—å¾Œå‡¦ç†
  */
 void CTiePlugin::AfterDump(
-	VEC3 &p1, VEC3 &u1,		//	Žn“_ (³‹K‰»Ï)
-	VEC3 &ip1, VEC3 &iu1,	//	”ñƒJƒ“ƒgŽn“_ (³‹K‰»Ï)
-	VEC3 &p2, VEC3 &u2,		//	I“_ (³‹K‰»Ï)
-	VEC3 &ip2, VEC3 &iu2	//	”ñƒJƒ“ƒgI“_ (³‹K‰»Ï)
+	VEC3 &p1, VEC3 &u1,		//	å§‹ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &ip1, VEC3 &iu1,	//	éžã‚«ãƒ³ãƒˆå§‹ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &p2, VEC3 &u2,		//	çµ‚ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &ip2, VEC3 &iu2	//	éžã‚«ãƒ³ãƒˆçµ‚ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
 ){
 	ip1 -= m_Height*iu1;
 	ip2 -= m_Height*iu2;
@@ -61,13 +61,13 @@ void CTiePlugin::AfterDump(
 }
 
 /*
- *	‹´‹rÝ’uˆÊ’uŒvŽZ
+ *	æ©‹è„šè¨­ç½®ä½ç½®è¨ˆç®—
  */
 void CTiePlugin::CalcPierPos(
-	VEC3 *pos,		//	ˆÊ’u
-	VEC3 *right,	//	right (³‹K‰»Ï)
-	VEC3 *up,		//	up (³‹K‰»Ï)
-	VEC3 *dir		//	dir (³‹K‰»Ï)
+	VEC3 *pos,		//	ä½ç½®
+	VEC3 *right,	//	right (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 *up,		//	up (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 *dir		//	dir (æ­£è¦åŒ–æ¸ˆ)
 ){
 	if(m_FlattenCant){
 		right->y = 0.0f;

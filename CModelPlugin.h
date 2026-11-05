@@ -1,4 +1,4 @@
-#ifndef CMODELPLUGIN_H_INCLUDED
+ï»¿#ifndef CMODELPLUGIN_H_INCLUDED
 #define CMODELPLUGIN_H_INCLUDED
 
 #include "CLensFlare.h"
@@ -12,22 +12,22 @@
 class CMoverState;
 
 /*
- *	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+ *	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CModelPlugin: public CPlugin{
 protected:
-	vector<int> m_TempSwitch;				//	ˆêƒXƒCƒbƒ`ƒoƒbƒtƒ@
-	int m_SelectSwitchID;					//	‘I‘ğ‚³‚ê‚Ä‚¢‚éƒXƒCƒbƒ`”Ô†
-	int m_PartsNum;							//	ƒp[ƒc”
-	CModelSwitch *m_SelectSwitch;			//	‘I‘ğ‚³‚ê‚Ä‚¢‚éƒXƒCƒbƒ`
-	CModelInst *m_LinkInst;					//	ƒŠƒ“ƒNƒCƒ“ƒXƒ^ƒ“ƒX
-	list<CModelSwitch> m_ModelSwitch;		//	ƒ‚ƒfƒ‹ƒXƒCƒbƒ`
-	list<CTextureAnimation> m_Animation;	//	ƒeƒNƒXƒ`ƒƒƒAƒjƒ[ƒVƒ‡ƒ“
-	list<CMoverState *> m_MoverState;		//	ƒ€[ƒo[ó‘Ô
-	list<CHeadlight> m_Headlight;			//	ƒwƒbƒhƒ‰ƒCƒg
-	list<CParticle> m_Particle;				//	ƒp[ƒeƒBƒNƒ‹
-	list<CSoundEffector> m_SoundEffector;	//	ƒTƒEƒ“ƒhƒGƒtƒFƒNƒ^
-	CEffectorSwitchEntry m_Effector;		//	ƒGƒtƒFƒNƒ^
+	vector<int> m_TempSwitch;				//	ä¸€æ™‚ã‚¹ã‚¤ãƒƒãƒãƒãƒƒãƒ•ã‚¡
+	int m_SelectSwitchID;					//	é¸æŠã•ã‚Œã¦ã„ã‚‹ã‚¹ã‚¤ãƒƒãƒç•ªå·
+	int m_PartsNum;							//	ãƒ‘ãƒ¼ãƒ„æ•°
+	CModelSwitch *m_SelectSwitch;			//	é¸æŠã•ã‚Œã¦ã„ã‚‹ã‚¹ã‚¤ãƒƒãƒ
+	CModelInst *m_LinkInst;					//	ãƒªãƒ³ã‚¯ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+	list<CModelSwitch> m_ModelSwitch;		//	ãƒ¢ãƒ‡ãƒ«ã‚¹ã‚¤ãƒƒãƒ
+	list<CTextureAnimation> m_Animation;	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+	list<CMoverState *> m_MoverState;		//	ãƒ ãƒ¼ãƒãƒ¼çŠ¶æ…‹
+	list<CHeadlight> m_Headlight;			//	ãƒ˜ãƒƒãƒ‰ãƒ©ã‚¤ãƒˆ
+	list<CParticle> m_Particle;				//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«
+	list<CSoundEffector> m_SoundEffector;	//	ã‚µã‚¦ãƒ³ãƒ‰ã‚¨ãƒ•ã‚§ã‚¯ã‚¿
+	CEffectorSwitchEntry m_Effector;		//	ã‚¨ãƒ•ã‚§ã‚¯ã‚¿
 public:
 	CModelPlugin(char *);
 	virtual ~CModelPlugin(){}
@@ -85,7 +85,7 @@ public:
 };
 
 /*
- *	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CModelPluginList: public CPluginList{
 protected:

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailWay.h"
 #include "CTrain.h"
 #include "CTrainGroup.h"
@@ -6,20 +6,20 @@
 #include "CRailPlugin.h"
 #include "CTrainPlugin.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void *ReplaceAdr(void *);
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CScene *g_Scene;
 extern map<void *, void *> g_AddressMap;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CAxlePosture::CAxlePosture(
-	CAxleObject *axle,	//	Ô²
-	CTrain *train,		//	Ôçq
-	bool term			//	’[ƒtƒ‰ƒO
+	CAxleObject *axle,	//	è»Šè»¸
+	CTrain *train,		//	è»Šè¼Œ
+	bool term			//	ç«¯ãƒ•ãƒ©ã‚°
 ){
 	m_Axle = axle;
 	m_Train = train;
@@ -29,13 +29,13 @@ CAxlePosture::CAxlePosture(
 }
 
 /*
- *	p¨İ’è
+ *	å§¿å‹¢è¨­å®š
  */
 void CAxlePosture::SetPosture(
-	VEC3 pos,		//	À•W
+	VEC3 pos,		//	åº§æ¨™
 	VEC3 dir,		//	dir
 	VEC3 up,		//	up
-	CRailWay *way	//	ƒŒ[ƒ‹
+	CRailWay *way	//	ãƒ¬ãƒ¼ãƒ«
 ){
 	m_Pos = pos;
 	m_Dir = dir;
@@ -46,25 +46,25 @@ void CAxlePosture::SetPosture(
 }
 
 /*
- *	‘OŒãˆÊ’uæ“¾
+ *	å‰å¾Œä½ç½®å–å¾—
  */
 float CAxlePosture::GetZPos(){
 	return m_Axle->m_Coord.x;
 }
 
 /*
- *	p¨“K—p
+ *	å§¿å‹¢é©ç”¨
  */
 void CAxlePosture::Apply(){
 	m_Axle->SetPosture(m_Pos, m_Dir, m_Up, m_Rotation);
 }
 
 /*
- *	Ô²‰ñ“]
+ *	è»Šè»¸å›è»¢
  */
 void CAxlePosture::Rotate(
-	float dist,	//	‰ñ“]”
-	bool rev	//	‹t“]ƒtƒ‰ƒO
+	float dist,	//	å›è»¢æ•°
+	bool rev	//	é€†è»¢ãƒ•ãƒ©ã‚°
 ){
 	m_Rotation += m_Axle->CalcRotation(rev ? -dist : dist);
 	m_Rotation -= floor(m_Rotation);
@@ -80,12 +80,12 @@ void CAxlePosture::Rotate(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainSetBuffer::CTrainSetBuffer(
-	float sumlen,		//	ÏZ‹——£
-	bool rev,			//	”½“]ƒtƒ‰ƒO
-	CAxlePosture *ap	//	p¨ƒoƒbƒtƒ@
+	float sumlen,		//	ç©ç®—è·é›¢
+	bool rev,			//	åè»¢ãƒ•ãƒ©ã‚°
+	CAxlePosture *ap	//	å§¿å‹¢ãƒãƒƒãƒ•ã‚¡
 ){
 	m_SumLen = sumlen;
 	m_Reverse = rev;
@@ -96,7 +96,7 @@ CTrainSetBuffer::CTrainSetBuffer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CGroupEndLocator::CGroupEndLocator(){
 	m_Side = 0;
@@ -107,13 +107,13 @@ CGroupEndLocator::CGroupEndLocator(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CGroupEndLocator::CGroupEndLocator(
-	int side,			//	ƒTƒCƒh
-	float ofs,			//	ƒIƒtƒZƒbƒg
-	CRailWay *way,		//	İ’uƒŒ[ƒ‹
-	CTrainGroup *group	//	•Ò¬
+	int side,			//	ã‚µã‚¤ãƒ‰
+	float ofs,			//	ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	CRailWay *way,		//	è¨­ç½®ãƒ¬ãƒ¼ãƒ«
+	CTrainGroup *group	//	ç·¨æˆ
 ){
 	m_Side = side;
 	m_Type = 0;
@@ -123,10 +123,10 @@ CGroupEndLocator::CGroupEndLocator(
 }
 
 /*
- *	ƒŒ[ƒ‹‚ÉƒZƒbƒg
+ *	ãƒ¬ãƒ¼ãƒ«ã«ã‚»ãƒƒãƒˆ
  */
 void CGroupEndLocator::Attach(
-	int type	//	’Tõqƒtƒ‰ƒO
+	int type	//	æ¢ç´¢å­ãƒ•ãƒ©ã‚°
 ){
 	m_Type = type;
 	if(m_SetRail) m_SetRail->m_GroupEnd.push_back(this);
@@ -134,7 +134,7 @@ void CGroupEndLocator::Attach(
 }
 
 /*
- *	ƒŒ[ƒ‹‚©‚ç‰ğœ
+ *	ãƒ¬ãƒ¼ãƒ«ã‹ã‚‰è§£é™¤
  */
 void CGroupEndLocator::Detach(){
 	if(m_SetRail){
@@ -146,7 +146,7 @@ void CGroupEndLocator::Detach(){
 }
 
 /*
- *	is•ûŒüæ“¾ (m_Side || !m_Side)
+ *	é€²è¡Œæ–¹å‘å–å¾— (m_Side || !m_Side)
  */
 int CGroupEndLocator::GetDirection(){
 	switch(m_Type){
@@ -158,18 +158,18 @@ int CGroupEndLocator::GetDirection(){
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CGroupEndLocator::RestoreAddress(){
 	m_SetRail = (CRailWay *)ReplaceAdr(m_SetRail);
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CGroupEndLocator::Read(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *pref	//	ƒvƒŒƒtƒBƒbƒNƒX
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *pref	//	ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, pref))) return NULL;
@@ -188,12 +188,12 @@ char *CGroupEndLocator::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CGroupEndLocator::Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *ind,	//	ƒCƒ“ƒfƒ“ƒg
-	char *pref	//	ƒvƒŒƒtƒBƒbƒNƒX
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *ind,	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
+	char *pref	//	ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹
 ){
 	fprintf(df, "%s%s{\n", ind, pref);
 	fprintf(df, "%s\tAddress = %p;\n", ind, this);
@@ -205,19 +205,19 @@ void CGroupEndLocator::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainSetCurve::CTrainSetCurve(
-	CRailPlugin *rpi,		//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *tpi,		//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *gpi,		//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
-	bool rev,				//	‹t•ûŒüƒtƒ‰ƒO
-	CGroupEndLocator loc,	//	İ’uˆÊ’u
-	CGroupEndLocator *tail,	//	I’[Ši”[æ
-	ITrainSetBuffer *icur,	//	Œ»İˆÊ’u
-	ITrainSetBuffer *iend	//	I—¹ˆÊ’u
+	CRailPlugin *rpi,		//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *tpi,		//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *gpi,		//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	bool rev,				//	é€†æ–¹å‘ãƒ•ãƒ©ã‚°
+	CGroupEndLocator loc,	//	è¨­ç½®ä½ç½®
+	CGroupEndLocator *tail,	//	çµ‚ç«¯æ ¼ç´å…ˆ
+	ITrainSetBuffer *icur,	//	ç¾åœ¨ä½ç½®
+	ITrainSetBuffer *iend	//	çµ‚äº†ä½ç½®
 ):
-	CRailTraceCurve(rpi, tpi, gpi, NULL)	//	Šî–{ƒNƒ‰ƒX
+	CRailTraceCurve(rpi, tpi, gpi, NULL)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_Reverse = rev;
 	m_Location = loc;
@@ -227,13 +227,13 @@ CTrainSetCurve::CTrainSetCurve(
 }
 
 /*
- *	ƒgƒŒ[ƒXŠ®—¹
+ *	ãƒˆãƒ¬ãƒ¼ã‚¹å®Œäº†
  */
 void CTrainSetCurve::FinishTrace(
-	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	n“_
-	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	I“_
-	float sumlen, float seglen,	//	ÏZ‹——£EƒZƒOƒƒ“ƒg‹——£
-	CRailSplitter &splitter		//	•ªŠ„q
+	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	å§‹ç‚¹
+	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	çµ‚ç‚¹
+	float sumlen, float seglen,	//	ç©ç®—è·é›¢ãƒ»ã‚»ã‚°ãƒ¡ãƒ³ãƒˆè·é›¢
+	CRailSplitter &splitter		//	åˆ†å‰²å­
 ){
 	ITrainSetBuffer &cur = *m_Current;
 	if(cur==*m_End) return;

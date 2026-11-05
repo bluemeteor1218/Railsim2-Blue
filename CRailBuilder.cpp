@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "RailMap.h"
 #include "CInterface.h"
 #include "CScene.h"
@@ -12,16 +12,16 @@
 #include "CGirderPlugin.h"
 #include "CSkinPlugin.h"
 
-//	“à•”’è”
-extern const float CORNER_MIN_DIST = 4.5f;	//	§Œä“_ŠÔÅ¬‹——£
+//	å†…éƒ¨å®šæ•°
+extern const float CORNER_MIN_DIST = 4.5f;	//	åˆ¶å¾¡ç‚¹é–“æœ€å°è·é›¢
 
-//	“à•”ƒOƒ[ƒoƒ‹
-CPlatformInst *g_PlatformInst = NULL;					//	ƒJƒŒƒ“ƒgƒvƒ‰ƒbƒgƒtƒH[ƒ€
-list<list<list<CRailWay *> > > g_MultiTrackRailList;	//	•¡üƒŒ[ƒ‹ƒŠƒXƒg
-ILLPRailWay g_MultiTrackSegment;						//	ƒJƒŒƒ“ƒg•¡üƒZƒOƒƒ“ƒg
-ILPRailWay g_SingleTrackSegment;						//	ƒJƒŒƒ“ƒg’PüƒZƒOƒƒ“ƒg
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+CPlatformInst *g_PlatformInst = NULL;					//	ã‚«ãƒ¬ãƒ³ãƒˆãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ 
+list<list<list<CRailWay *> > > g_MultiTrackRailList;	//	è¤‡ç·šãƒ¬ãƒ¼ãƒ«ãƒªã‚¹ãƒˆ
+ILLPRailWay g_MultiTrackSegment;						//	ã‚«ãƒ¬ãƒ³ãƒˆè¤‡ç·šã‚»ã‚°ãƒ¡ãƒ³ãƒˆ
+ILPRailWay g_SingleTrackSegment;						//	ã‚«ãƒ¬ãƒ³ãƒˆå˜ç·šã‚»ã‚°ãƒ¡ãƒ³ãƒˆ
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 int CRailBuilder::ms_CurrentTrack;
 int CRailBuilder::ms_TrackNum;
 float CRailBuilder::ms_TrackInterval;
@@ -34,7 +34,7 @@ VEC3 CRailBuilder::ms_EndDirSum;
 
 /*
  *	[static]
- *	ƒxƒNƒgƒ‹‘˜aƒŠƒZƒbƒg
+ *	ãƒ™ã‚¯ãƒˆãƒ«ç·å’Œãƒªã‚»ãƒƒãƒˆ
  */
 void CRailBuilder::ResetDirSum(){
 	ms_BeginPosSum = ms_EndPosSum = V3ZERO;
@@ -44,13 +44,13 @@ void CRailBuilder::ResetDirSum(){
 
 /*
  *	[static]
- *	ƒgƒ‰ƒbƒNî•ñİ’è
+ *	ãƒˆãƒ©ãƒƒã‚¯æƒ…å ±è¨­å®š
  */
 void CRailBuilder::SetTrack(
-	int cur,	//	Œ»İ‚Ìƒgƒ‰ƒbƒN
-	int tnum,	//	ü”
-	float tint,	//	üŠÔŠu
-	bool lift	//	ƒŒ[ƒ‹‚¿ã‚°
+	int cur,	//	ç¾åœ¨ã®ãƒˆãƒ©ãƒƒã‚¯
+	int tnum,	//	ç·šæ•°
+	float tint,	//	ç·šé–“éš”
+	bool lift	//	ãƒ¬ãƒ¼ãƒ«æŒã¡ä¸Šã’
 ){
 	ms_CurrentTrack = cur;
 	ms_TrackNum = tnum;
@@ -63,11 +63,11 @@ void CRailBuilder::SetTrack(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailBuilder::CRailBuilder(
-	VEC3 pos,			//	À•W
-	CRailBuilder *prev	//	‘O
+	VEC3 pos,			//	åº§æ¨™
+	CRailBuilder *prev	//	å‰
 ){
 	m_Pos = pos;
 	m_HitFlag = false;
@@ -76,14 +76,14 @@ CRailBuilder::CRailBuilder(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailBuilder::~CRailBuilder(){
 	DELETE_V(m_Next);
 }
 
 /*
- *	§Œä“_íœ
+ *	åˆ¶å¾¡ç‚¹å‰Šé™¤
  */
 CRailBuilder *CRailBuilder::Pop(){
 	if(!IsLinkEmpty()){
@@ -107,11 +107,11 @@ POP:
 }
 
 /*
- *	À•Wİ’è
+ *	åº§æ¨™è¨­å®š
  */
 VEC3 CRailBuilder::SetPos(
-	VEC3 p,		//	À•W
-	int clip	//	ƒNƒŠƒbƒvƒ‚[ƒh (1: ’n‰º, 2: ‚‰Ë)
+	VEC3 p,		//	åº§æ¨™
+	int clip	//	ã‚¯ãƒªãƒƒãƒ—ãƒ¢ãƒ¼ãƒ‰ (1: åœ°ä¸‹, 2: é«˜æ¶)
 ){
 	m_Pos = p;
 	m_HitFlag = g_Scene->ClipAlt(&m_Pos, &m_HitPos, &m_HitNorm, clip);
@@ -119,10 +119,10 @@ VEC3 CRailBuilder::SetPos(
 }
 
 /*
- *	ƒŠƒ“ƒNİ’è
+ *	ãƒªãƒ³ã‚¯è¨­å®š
  */
 bool CRailBuilder::SetLink(
-	CRailLinkTemp &link	//	ƒŠƒ“ƒN
+	CRailLinkTemp &link	//	ãƒªãƒ³ã‚¯
 ){
 	if(m_Link.size()) m_Link.rbegin()->m_Link = NULL;
 	else PushLink();
@@ -153,7 +153,7 @@ bool CRailBuilder::SetLink(
 }
 
 /*
- *	ÅI“_‚©’²‚×‚é
+ *	æœ€çµ‚ç‚¹ã‹èª¿ã¹ã‚‹
  */
 bool CRailBuilder::IsLast(){
 	return !m_Next || m_Prev && m_Link.size()==ms_TrackNum && m_Link[ms_TrackNum-1].m_Link
@@ -161,18 +161,18 @@ bool CRailBuilder::IsLast(){
 }
 
 /*
- *	right ƒxƒNƒgƒ‹ŒvZ
+ *	right ãƒ™ã‚¯ãƒˆãƒ«è¨ˆç®—
  */
 void CRailBuilder::CalcRight(
-	VEC3 *r1, VEC3 *d1,	//	“_ 1
-	VEC3 *r2, VEC3 *d2	//	“_ 2
+	VEC3 *r1, VEC3 *d1,	//	ç‚¹ 1
+	VEC3 *r2, VEC3 *d2	//	ç‚¹ 2
 ){
 	V3Norm(r1, &VEC3(-d1->z, 0.0f, d1->x));
 	V3Norm(r2, &VEC3(-d2->z, 0.0f, d2->x));
 }
 
 /*
- *	•ªŠ„À•WŒvZ
+ *	åˆ†å‰²åº§æ¨™è¨ˆç®—
  */
 VEC3 CRailBuilder::CalcSplitPos(){
 	if(m_Next){
@@ -194,22 +194,22 @@ VEC3 CRailBuilder::CalcSplitPos(){
 }
 
 /*
- *	ƒgƒ‰ƒbƒNÀ•WŒvZ
+ *	ãƒˆãƒ©ãƒƒã‚¯åº§æ¨™è¨ˆç®—
  */
 VEC3 CRailBuilder::CalcTrackPos(
-	VEC3 *right	//	‰EƒxƒNƒgƒ‹
+	VEC3 *right	//	å³ãƒ™ã‚¯ãƒˆãƒ«
 ){
 	return *right*ms_TrackShift;
 }
 
 /*
- *	‹ÈüŒvZ
+ *	æ›²ç·šè¨ˆç®—
  */
 bool CRailBuilder::Curve(
-	CRailCurve *curve,	//	‹ÈüƒIƒuƒWƒFƒNƒg
-	CRailPlugin *rpi,	//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *tpi,	//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *gpi	//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
+	CRailCurve *curve,	//	æ›²ç·šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CRailPlugin *rpi,	//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *tpi,	//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *gpi	//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	VEC3 hfix = V3ZERO;
 	if(ms_LiftRailSurface) hfix.y = rpi ? rpi->m_SurfaceAlt :
@@ -321,14 +321,14 @@ bool CRailBuilder::Curve(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CRailBuilder::Render(
-	CLineDumpL *dump,	//	ƒ_ƒ“ƒp
-	CRailPlugin *rpi,	//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *tpi,	//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *gpi,	//	––Øƒvƒ‰ƒOƒCƒ“
-	bool draw			//	•`‰æƒtƒ‰ƒO
+	CLineDumpL *dump,	//	ãƒ€ãƒ³ãƒ‘
+	CRailPlugin *rpi,	//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *tpi,	//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *gpi,	//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	bool draw			//	æç”»ãƒ•ãƒ©ã‚°
 ){
 	VEC3 hfix = V3ZERO;
 	if(ms_LiftRailSurface) hfix.y = rpi ? rpi->m_SurfaceAlt :
@@ -403,14 +403,14 @@ void CRailBuilder::Render(
 }
 
 /*
- *	Œšİ
+ *	å»ºè¨­
  */
 void CRailBuilder::BuildRail(
-	CRailConnectorLink &begin,	//	ŠJnƒŠƒ“ƒN
-	CRailConnectorLink &end,	//	I—¹ƒŠƒ“ƒN
-	CRailPlugin *rpi,			//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *tpi,			//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *gpi			//	––Øƒvƒ‰ƒOƒCƒ“
+	CRailConnectorLink &begin,	//	é–‹å§‹ãƒªãƒ³ã‚¯
+	CRailConnectorLink &end,	//	çµ‚äº†ãƒªãƒ³ã‚¯
+	CRailPlugin *rpi,			//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *tpi,			//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *gpi			//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	if(!ms_CurrentTrack){
 		g_MultiTrackRailList.push_back(list<list<CRailWay *> >());
@@ -433,17 +433,17 @@ void CRailBuilder::BuildRail(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailLinkTemp::CRailLinkTemp(
-	int side,			//	ƒTƒCƒh
-	float sumlen,		//	ÏZ‹——£
-	VEC3 &pos,			//	À•W
+	int side,			//	ã‚µã‚¤ãƒ‰
+	float sumlen,		//	ç©ç®—è·é›¢
+	VEC3 &pos,			//	åº§æ¨™
 	VEC3 &right,		//	right
 	VEC3 &up,			//	up
 	VEC3 &dir,			//	dir
-	CRailWay *link,		//	Ú‘±ƒŒ[ƒ‹
-	IRailSplitter sit	//	splice ˆÊ’u
+	CRailWay *link,		//	æ¥ç¶šãƒ¬ãƒ¼ãƒ«
+	IRailSplitter sit	//	splice ä½ç½®
 ){
 	m_Side = side;
 	m_SumLen = sumlen;

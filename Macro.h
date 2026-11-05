@@ -1,19 +1,19 @@
-#ifndef MACRO_H_INCLUDED
+ï»¿#ifndef MACRO_H_INCLUDED
 #define MACRO_H_INCLUDED
 
-#define DELETE_V(p) do{ if(p){ delete    p; p = NULL; } } while(false)	//	NULL Šm”F•t‚«•Ï”ŠJ•ú
-#define DELETE_A(p) do{ if(p){ delete [] p; p = NULL; } } while(false)	//	NULL Šm”F•t‚«”z—ñŠJ•ú
+#define DELETE_V(p) do{ if(p){ delete    p; p = NULL; } } while(false)	//	NULL ç¢ºèªä»˜ãå¤‰æ•°é–‹æ”¾
+#define DELETE_A(p) do{ if(p){ delete [] p; p = NULL; } } while(false)	//	NULL ç¢ºèªä»˜ãé…åˆ—é–‹æ”¾
 
-#define V2Norm D3DXVec2Normalize	//	ƒxƒNƒgƒ‹³‹K‰»
-#define V2Len D3DXVec2Length		//	ƒxƒNƒgƒ‹â‘Î’l
-#define V2Dot D3DXVec2Dot			//	ƒxƒNƒgƒ‹“àÏ
+#define V2Norm D3DXVec2Normalize	//	ãƒ™ã‚¯ãƒˆãƒ«æ­£è¦åŒ–
+#define V2Len D3DXVec2Length		//	ãƒ™ã‚¯ãƒˆãƒ«çµ¶å¯¾å€¤
+#define V2Dot D3DXVec2Dot			//	ãƒ™ã‚¯ãƒˆãƒ«å†…ç©
 
-#define V3Norm D3DXVec3Normalize	//	ƒxƒNƒgƒ‹³‹K‰»
-#define V3Len D3DXVec3Length		//	ƒxƒNƒgƒ‹â‘Î’l
-#define V3Dot D3DXVec3Dot			//	ƒxƒNƒgƒ‹“àÏ
-#define V3Cross D3DXVec3Cross		//	ƒxƒNƒgƒ‹ŠOÏ
+#define V3Norm D3DXVec3Normalize	//	ãƒ™ã‚¯ãƒˆãƒ«æ­£è¦åŒ–
+#define V3Len D3DXVec3Length		//	ãƒ™ã‚¯ãƒˆãƒ«çµ¶å¯¾å€¤
+#define V3Dot D3DXVec3Dot			//	ãƒ™ã‚¯ãƒˆãƒ«å†…ç©
+#define V3Cross D3DXVec3Cross		//	ãƒ™ã‚¯ãƒˆãƒ«å¤–ç©
 
-// ‰E•Ó’l‚ğ¶•Ó’l‚É•ÏŠ·‚·‚é (gcc‘Î‰)
+// å³è¾ºå€¤ã‚’å·¦è¾ºå€¤ã«å¤‰æ›ã™ã‚‹ (gccå¯¾å¿œ)
 template< class TYPE > inline TYPE& R2L( const TYPE& _Value )
 {
 	return const_cast< TYPE& >( _Value );

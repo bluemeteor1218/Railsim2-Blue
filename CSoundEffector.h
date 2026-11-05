@@ -1,4 +1,4 @@
-#ifndef CSOUNDEFFECTOR_H_INCLUDED
+ï»¿#ifndef CSOUNDEFFECTOR_H_INCLUDED
 #define CSOUNDEFFECTOR_H_INCLUDED
 
 class CNamedObject;
@@ -7,14 +7,14 @@ class CSoundEffector;
 class CScene;
 
 /*
- *	ƒTƒEƒ“ƒhƒGƒtƒFƒNƒ^ó‘Ô
+ *	ã‚µã‚¦ãƒ³ãƒ‰ã‚¨ãƒ•ã‚§ã‚¯ã‚¿çŠ¶æ…‹
  */
 class CSoundState{
 	friend class CSoundEffector;
 private:
-	int m_State;		//	ó‘Ô
-	bool m_ApplyFlag;	//	“K—pƒtƒ‰ƒO
-	CWave m_Wave;		//	ƒTƒEƒ“ƒhƒf[ƒ^
+	int m_State;		//	çŠ¶æ…‹
+	bool m_ApplyFlag;	//	é©ç”¨ãƒ•ãƒ©ã‚°
+	CWave m_Wave;		//	ã‚µã‚¦ãƒ³ãƒ‰ãƒ‡ãƒ¼ã‚¿
 public:
 	CSoundState(){ Reset(); }
 	~CSoundState();
@@ -22,22 +22,22 @@ public:
 	void Confirm(CSoundEffector *, bool);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CSoundState>::iterator ISoundState;
 typedef set<CSoundState *>::iterator ISPSoundState;
 
 /*
- *	ƒTƒEƒ“ƒhƒGƒtƒFƒNƒ^
+ *	ã‚µã‚¦ãƒ³ãƒ‰ã‚¨ãƒ•ã‚§ã‚¯ã‚¿
  */
 class CSoundEffector{
 private:
-	static set<CSoundState *> ms_PlayList;	//	ƒvƒŒƒCƒŠƒXƒg
-	string m_WaveFileName;		//	wave ƒtƒ@ƒCƒ‹–¼
-	CNamedObject *m_Link;		//	Ú‘±æƒIƒuƒWƒFƒNƒg
-	VEC3 m_SourceCoord;			//	ˆÊ’u
-	int m_Volume;				//	‰¹—Ê
-	bool m_Loop;				//	ƒ‹[ƒv
-	CSoundState *m_LinkState;	//	ó‘Ô•Ï”
+	static set<CSoundState *> ms_PlayList;	//	ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ
+	string m_WaveFileName;		//	wave ãƒ•ã‚¡ã‚¤ãƒ«å
+	CNamedObject *m_Link;		//	æ¥ç¶šå…ˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	VEC3 m_SourceCoord;			//	ä½ç½®
+	int m_Volume;				//	éŸ³é‡
+	bool m_Loop;				//	ãƒ«ãƒ¼ãƒ—
+	CSoundState *m_LinkState;	//	çŠ¶æ…‹å¤‰æ•°
 public:
 	static void InitPlayList();
 	static void DeleteSound(CSoundState *ss){ ms_PlayList.erase(ss); }
@@ -49,7 +49,7 @@ public:
 	void Register(CScene *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CSoundEffector>::iterator ISoundEffector;
 
 #endif

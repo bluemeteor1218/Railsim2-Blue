@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCamera.h"
 #include "CRailPlugin.h"
 #include "CTiePlugin.h"
@@ -17,14 +17,14 @@
 #include "CStationSelectMode.h"
 #include "CConfigMode.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_EnableCant;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 CStationPlugin *g_Station = NULL;
 CDetectInfo g_StationPlatformParentDetectInfo;
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CRailPlugin *CPlatform::ms_PlatformRail = NULL;
 CTiePlugin *CPlatform::ms_PlatformTie = NULL;
 CGirderPlugin *CPlatform::ms_PlatformGirder = NULL;
@@ -34,7 +34,7 @@ CPolePlugin *CPlatform::ms_PlatformPole = NULL;
 
 /*
  *	[static]
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€—pƒvƒ‰ƒOƒCƒ“‚ğƒŠƒZƒbƒg
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ç”¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’ãƒªã‚»ãƒƒãƒˆ
  */
 void CPlatform::ResetPlatformPlugin(){
 	CRailwayMode::GetPlugin(&ms_PlatformRail, &ms_PlatformTie,
@@ -42,7 +42,7 @@ void CPlatform::ResetPlatformPlugin(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPlatform::CPlatform(){
 	m_TrackNum = 1;
@@ -63,10 +63,10 @@ CPlatform::CPlatform(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CPlatform::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	string id;
@@ -126,7 +126,7 @@ char *CPlatform::Read(
 }
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€eƒIƒuƒWƒFƒNƒgİ’è
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè¨­å®š
  */
 void CPlatform::SetPlatformParent(CStationPlugin *spi){
 	if(!m_ParentObjectName.size()) return;
@@ -136,7 +136,7 @@ void CPlatform::SetPlatformParent(CStationPlugin *spi){
 }
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€—pƒvƒ‰ƒOƒCƒ“‚ğƒZƒbƒg
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ç”¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’ã‚»ãƒƒãƒˆ
  */
 void CPlatform::SetPlatformPlugin(){
 	if(m_RailPluginValid) ms_PlatformRail = m_RailPlugin;
@@ -148,10 +148,10 @@ void CPlatform::SetPlatformPlugin(){
 }
 
 /*
- *	ƒz[ƒ€‚ÌƒvƒŒƒrƒ…[
+ *	ãƒ›ãƒ¼ãƒ ã®ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 CRailBuilder *CPlatform::SetBuilder(
-	MTX4 *mtx	//	ƒ[ƒJƒ‹À•WŒn
+	MTX4 *mtx	//	ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ç³»
 ){
 	SetPlatformPlugin();
 	list<VEC3>::iterator iv = m_CoordList.begin();
@@ -168,11 +168,11 @@ CRailBuilder *CPlatform::SetBuilder(
 }
 
 /*
- *	ƒz[ƒ€‚ÌƒvƒŒƒrƒ…[
+ *	ãƒ›ãƒ¼ãƒ ã®ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CPlatform::Preview(
-	MTX4 *mtx,			//	ƒ[ƒJƒ‹À•WŒn
-	CLineDumpL *dump	//	ƒ‰ƒCƒ“ƒ_ƒ“ƒp
+	MTX4 *mtx,			//	ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ç³»
+	CLineDumpL *dump	//	ãƒ©ã‚¤ãƒ³ãƒ€ãƒ³ãƒ‘
 ){
 	CRailBuilder *builder = SetBuilder(mtx);
 	int i;
@@ -185,11 +185,11 @@ void CPlatform::Preview(
 }
 
 /*
- *	ƒz[ƒ€‚Ìİ’u
+ *	ãƒ›ãƒ¼ãƒ ã®è¨­ç½®
  */
 void CPlatform::Build(
-	MTX4 *mtx,			//	ƒ[ƒJƒ‹À•WŒn
-	CStation *station	//	eƒXƒe[ƒVƒ‡ƒ“
+	MTX4 *mtx,			//	ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ç³»
+	CStation *station	//	è¦ªã‚¹ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 ){
 	CRailBuilder *builder = SetBuilder(mtx);
 	CRailBuilder::ResetDirSum();
@@ -239,10 +239,10 @@ void CPlatform::Build(
 
 /*
  *	[static]
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CStationPlugin::RenderPreview(
-	VEC3 pos,	//	ˆÊ’u
+	VEC3 pos,	//	ä½ç½®
 	VEC3 dir,	//	dir
 	VEC3 up		//	up
 ){
@@ -256,16 +256,16 @@ void CStationPlugin::RenderPreview(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStationPlugin::~CStationPlugin(){
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 char *CStationPlugin::LoadStructBefore(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(eee = str, "StationInfo"))) throw CSynErr(eee);
@@ -280,10 +280,10 @@ char *CStationPlugin::LoadStructBefore(
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 char *CStationPlugin::LoadStructAfter(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	IPlatform ip = m_Platform.begin();
 	for(; ip!=m_Platform.end(); ip++) ip->SetPlatformParent(this);
@@ -291,7 +291,7 @@ char *CStationPlugin::LoadStructAfter(
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CStationPlugin::LoadOldForm(){
 	if(!ChDir()) return false;
@@ -331,7 +331,7 @@ bool CStationPlugin::LoadOldForm(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[İ’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CStationPlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -343,7 +343,7 @@ void CStationPlugin::SetPreview(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CStationPlugin::PreviewStruct(){
 	devSetZRead(FALSE);
@@ -366,10 +366,10 @@ void CStationPlugin::PreviewStruct(){
 }
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€Œšİ
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ å»ºè¨­
  */
 void CStationPlugin::BuildPlatform(
-	CStation *station	//	‰w
+	CStation *station	//	é§…
 ){
 	MTX4 mtx = g_SystemObject[SYS_OBJ_LOCAL].GetPreviewObject()->GetMatrix();
 	CPlatform::ResetPlatformPlugin();

@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -11,24 +11,24 @@
 #include "draw.h"
 #include "effect.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern int g_DispWidth;
 extern int g_DispHeight;
 
 /*
- *	ƒoƒbƒNƒoƒbƒtƒ@ã‚ÌƒsƒNƒZƒ‹F‚ðŽæ“¾
+ *	ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ä¸Šã®ãƒ”ã‚¯ã‚»ãƒ«è‰²ã‚’å–å¾—
  *
- *	x, y	: ƒsƒNƒZƒ‹ˆÊ’u
- *	–ß‚è’l: X8R8G8B8ƒtƒH[ƒ}ƒbƒg‚ÌF
+ *	x, y	: ãƒ”ã‚¯ã‚»ãƒ«ä½ç½®
+ *	æˆ»ã‚Šå€¤: X8R8G8B8ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆã®è‰²
  *
- *	¦•‰‰×‚ª‚‚¢‚½‚ß•p”É‚ÉŽg—p‚µ‚È‚¢Ž–
+ *	â€»è² è·ãŒé«˜ã„ãŸã‚é »ç¹ã«ä½¿ç”¨ã—ãªã„äº‹
  */
 D3DCOLOR GetPixelColor(int x, int y){
-	//	‰æ–ÊŠO
+	//	ç”»é¢å¤–
 	if(x<0 || x>=sv3.width || y<0 || y>=sv3.height)
 		return 0;
 
-	//	ƒoƒbƒNƒoƒbƒtƒ@‚ðƒT[ƒtƒFƒCƒX‚ÌƒRƒs[
+	//	ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‚’ã‚µãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®ã‚³ãƒ”ãƒ¼
 	LPSURF8		pSrc, pDst;
 	D3DFORMAT	fmt = sv3.d3dpp.BackBufferFormat;
 	RECT		rect = {x, y, x+3, y+3};
@@ -38,14 +38,14 @@ D3DCOLOR GetPixelColor(int x, int y){
 	sv3.pDev->CreateImageSurface(4, 4, fmt, &pDst);
 	sv3.pDev->CopyRects(pSrc, &rect, 1, pDst, &point);
 
-	//	ƒT[ƒtƒFƒCƒX‚ðƒƒbƒN
+	//	ã‚µãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã‚’ãƒ­ãƒƒã‚¯
 	D3DLOCKED_RECT	lrect;
 	DWORD			pixel;
 	D3DCOLOR		c;
 
 	pDst->LockRect(&lrect, NULL, D3DLOCK_READONLY);
-	pixel = *((DWORD *)lrect.pBits);	//	Å‰‚ÌƒsƒNƒZƒ‹‚ðŽæ“¾
-	c = GetXRGB32(pixel, fmt);	//	X8R8G8B8‚ÉƒtƒH[ƒ}ƒbƒg•ÏŠ·
+	pixel = *((DWORD *)lrect.pBits);	//	æœ€åˆã®ãƒ”ã‚¯ã‚»ãƒ«ã‚’å–å¾—
+	c = GetXRGB32(pixel, fmt);	//	X8R8G8B8ã«ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆå¤‰æ›
 	pDst->UnlockRect();
 
 	RELEASE(pSrc);
@@ -54,33 +54,33 @@ D3DCOLOR GetPixelColor(int x, int y){
 }
 
 /*
- *	ƒŒƒ“ƒYƒtƒŒƒA‚ð•`‰æ
+ *	ãƒ¬ãƒ³ã‚ºãƒ•ãƒ¬ã‚¢ã‚’æç”»
  *
- *	pos	: ŒõŒ¹‚ÌˆÊ’u
- *	size	: ƒtƒŒƒAƒTƒCƒY
- *	fWhite: ƒzƒƒCƒgƒAƒEƒg‚ÌON/OFF
+ *	pos	: å…‰æºã®ä½ç½®
+ *	size	: ãƒ•ãƒ¬ã‚¢ã‚µã‚¤ã‚º
+ *	fWhite: ãƒ›ãƒ¯ã‚¤ãƒˆã‚¢ã‚¦ãƒˆã®ON/OFF
  *
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^Fƒ[ƒ‹ƒh•ÏŠ·s—ñAƒuƒŒƒ“ƒhƒ‚[ƒhAƒeƒNƒXƒ`ƒƒ[
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼šãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—ã€ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼
  */
 void RenderLensFlare(VEC3 pos, float size, BOOL fWhite){
-	devBLEND_ADD2();	//	‰ÁŽZƒ‚[ƒh
+	devBLEND_ADD2();	//	åŠ ç®—ãƒ¢ãƒ¼ãƒ‰
 
-	//	ŒõŒ¹‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒO
+	//	å…‰æºã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	//devTransBillboard(pos);
 	//TexMap3DRect(VEC3(0, 0, 0), size, size, 0xc0ffe080+(Rand(0x40)<<24));
 
-	VEC3 vLight = pos-GetVPos();		//	ƒJƒƒ‰‚©‚çŒõŒ¹‚Ö‚ÌƒxƒNƒgƒ‹
-	VEC3 vCamera = GetVDir();			//	ƒJƒƒ‰‚ÌŒü‚«
-	VEC3 vDist = vLight/5-vCamera*5;	//	ƒtƒŒƒA‚ÌŠÔŠui“K“–‚Å‚·j
+	VEC3 vLight = pos-GetVPos();		//	ã‚«ãƒ¡ãƒ©ã‹ã‚‰å…‰æºã¸ã®ãƒ™ã‚¯ãƒˆãƒ«
+	VEC3 vCamera = GetVDir();			//	ã‚«ãƒ¡ãƒ©ã®å‘ã
+	VEC3 vDist = vLight/5-vCamera*5;	//	ãƒ•ãƒ¬ã‚¢ã®é–“éš”ï¼ˆé©å½“ã§ã™ï¼‰
 
-	//	Œõ‚Ì“üŽËŠp‚ðŒvŽZ
+	//	å…‰ã®å…¥å°„è§’ã‚’è¨ˆç®—
 	D3DXVec3Normalize(&vCamera, &vCamera);
 	D3DXVec3Normalize(&vLight, &vLight);
 
 	float angle = D3DXVec3Dot(&vLight, &vCamera);
 
 	if(angle>0.9f){
-		//	ƒtƒŒƒA‚Ì•`‰æ
+		//	ãƒ•ãƒ¬ã‚¢ã®æç”»
 		DWORD aplus = (DWORD)(max(0.0f, (angle-0.9f)*FRand2(1400.0f, 2200.0f)))<<24;
 		devSetTexture(0, NULL);
 
@@ -108,14 +108,14 @@ void RenderLensFlare(VEC3 pos, float size, BOOL fWhite){
 		devTransBillboard(pos);
 		Fill3DCircle(VEC3(0, 0, 0), size/5, 0x00000000, 0x00002000+aplus);
 
-		devBLEND_ALPHA();	//	”¼“§–¾ƒ‚[ƒh
+		devBLEND_ALPHA();	//	åŠé€æ˜Žãƒ¢ãƒ¼ãƒ‰
 
-		//	ƒzƒƒCƒgƒAƒEƒg
+		//	ãƒ›ãƒ¯ã‚¤ãƒˆã‚¢ã‚¦ãƒˆ
 		if(fWhite && angle>0.9f){
 			aplus = (DWORD)(max(0.0f, (angle-0.9f)*1000.0f))<<24;
 			Fill2DRect(0, 0, g_DispWidth, g_DispHeight, aplus|0x00ffffff);
 		}
 	}else{
-		devBLEND_ALPHA();	//	”¼“§–¾ƒ‚[ƒh
+		devBLEND_ALPHA();	//	åŠé€æ˜Žãƒ¢ãƒ¼ãƒ‰
 	}
 }

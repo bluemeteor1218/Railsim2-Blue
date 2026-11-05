@@ -1,4 +1,4 @@
-#ifndef CLENSFLARE_H_INCLUDED
+ï»¿#ifndef CLENSFLARE_H_INCLUDED
 #define CLENSFLARE_H_INCLUDED
 
 class CNamedObject;
@@ -6,18 +6,18 @@ class CModelPlugin;
 class CHeadlight;
 
 /*
- *	ƒŒƒ“ƒYƒtƒŒƒA—v‘f
+ *	ãƒ¬ãƒ³ã‚ºãƒ•ãƒ¬ã‚¢è¦ç´ 
  */
 class CFlareElement{
 	friend class CLensFlare;
 private:
-	int m_Type;				//	ƒ^ƒCƒv
-	float m_Distance;		//	‹——£
-	float m_Radius;			//	”¼Œa
-	D3DCOLOR m_InnerColor;	//	“à‘¤‚ÌF
-	D3DCOLOR m_OuterColor;	//	ŠO‘¤‚ÌF
-	string m_TexFileName;	//	ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
-	LPTEX8 m_Texture;		//	ƒeƒNƒXƒ`ƒƒ
+	int m_Type;				//	ã‚¿ã‚¤ãƒ—
+	float m_Distance;		//	è·é›¢
+	float m_Radius;			//	åŠå¾„
+	D3DCOLOR m_InnerColor;	//	å†…å´ã®è‰²
+	D3DCOLOR m_OuterColor;	//	å¤–å´ã®è‰²
+	string m_TexFileName;	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
+	LPTEX8 m_Texture;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£
 public:
 	char *Read(char *);
 	void LoadData();
@@ -26,18 +26,18 @@ public:
 	}
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CFlareElement>::iterator IFlareElement;
 
 /*
- *	ƒŒƒ“ƒYƒtƒŒƒA
+ *	ãƒ¬ãƒ³ã‚ºãƒ•ãƒ¬ã‚¢
  */
 class CLensFlare{
 private:
-	float m_StartAngle;				//	ŠJnŠp“x (cos)
-	float m_Twinkle;				//	“_–Å“x‡‚¢
-	float m_Inclination;			//	Šp“x‚ÌŒX‚«
-	list<CFlareElement> m_Flare;	//	ƒtƒŒƒAƒŠƒXƒg
+	float m_StartAngle;				//	é–‹å§‹è§’åº¦ (cos)
+	float m_Twinkle;				//	ç‚¹æ»…åº¦åˆã„
+	float m_Inclination;			//	è§’åº¦ã®å‚¾ã
+	list<CFlareElement> m_Flare;	//	ãƒ•ãƒ¬ã‚¢ãƒªã‚¹ãƒˆ
 public:
 	char *Read(char *);
 	void LoadData();
@@ -45,12 +45,12 @@ public:
 };
 
 /*
- *	ƒzƒƒCƒgƒAƒEƒg
+ *	ãƒ›ãƒ¯ã‚¤ãƒˆã‚¢ã‚¦ãƒˆ
  */
 class CWhiteout{
 private:
-	float m_StartAngle;	//	ŠJnŠp“x (cos)
-	D3DCOLOR m_Color;	//	F
+	float m_StartAngle;	//	é–‹å§‹è§’åº¦ (cos)
+	D3DCOLOR m_Color;	//	è‰²
 public:
 	CWhiteout(){ m_Color = 0; }
 	char *Read(char *);
@@ -61,32 +61,32 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒwƒbƒhƒ‰ƒCƒgƒCƒ“ƒXƒ^ƒ“ƒX
+ *	ãƒ˜ãƒƒãƒ‰ãƒ©ã‚¤ãƒˆã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CHeadlightInst{
 	friend class CHeadlight;
 private:
-	VEC3 m_RenderPos;			//	ƒŒƒ“ƒ_ƒŠƒ“ƒO—pŒõŒ¹À•W
-	VEC3 m_RenderDir;			//	ƒŒƒ“ƒ_ƒŠƒ“ƒO—pŒõŒ¹•ûŒü
-	CHeadlight *m_Headlight;	//	ƒwƒbƒhƒ‰ƒCƒg
+	VEC3 m_RenderPos;			//	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ç”¨å…‰æºåº§æ¨™
+	VEC3 m_RenderDir;			//	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ç”¨å…‰æºæ–¹å‘
+	CHeadlight *m_Headlight;	//	ãƒ˜ãƒƒãƒ‰ãƒ©ã‚¤ãƒˆ
 public:
 	CHeadlightInst(VEC3, VEC3, CHeadlight *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CHeadlightInst>::iterator IHeadlightInst;
 
 /*
- *	ƒwƒbƒhƒ‰ƒCƒg
+ *	ãƒ˜ãƒƒãƒ‰ãƒ©ã‚¤ãƒˆ
  */
 class CHeadlight{
 private:
-	static list<CHeadlightInst> ms_RenderList;	//	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒŠƒXƒg
-	float m_MaxDistance;	//	Å‘å‹——£
-	VEC3 m_SourceCoord;		//	ˆÊ’u
-	VEC3 m_Direction;		//	•ûŒü
-	CNamedObject *m_Link;	//	Ú‘±æƒIƒuƒWƒFƒNƒg
-	CLensFlare m_LensFlare;	//	ƒŒƒ“ƒYƒtƒŒƒA
+	static list<CHeadlightInst> ms_RenderList;	//	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒªã‚¹ãƒˆ
+	float m_MaxDistance;	//	æœ€å¤§è·é›¢
+	VEC3 m_SourceCoord;		//	ä½ç½®
+	VEC3 m_Direction;		//	æ–¹å‘
+	CNamedObject *m_Link;	//	æ¥ç¶šå…ˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CLensFlare m_LensFlare;	//	ãƒ¬ãƒ³ã‚ºãƒ•ãƒ¬ã‚¢
 public:
 	static void InitRenderList();
 	static void RenderAll();
@@ -96,7 +96,7 @@ public:
 	void Render(CHeadlightInst *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CHeadlight>::iterator IHeadlight;
 
 #endif

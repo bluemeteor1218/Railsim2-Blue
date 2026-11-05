@@ -1,20 +1,20 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSimpleDialog.h"
 #include "CPopMenu.h"
 
-//	“à•”’è”
-const int SIMPLE_DIALOG_WIDTH = TILE_UNIT*12;	//	ƒ_ƒCƒAƒƒO•
-const int SIMPLE_DIALOG_HEIGHT = 96;			//	ƒ_ƒCƒAƒƒO‚
+//	å†…éƒ¨å®šæ•°
+const int SIMPLE_DIALOG_WIDTH = TILE_UNIT*12;	//	ãƒ€ã‚¤ã‚¢ãƒ­ã‚°å¹…
+const int SIMPLE_DIALOG_HEIGHT = 96;			//	ãƒ€ã‚¤ã‚¢ãƒ­ã‚°é«˜
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 list<CWindowCtrl *> g_DialogQueue;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSimpleDialog::CSimpleDialog(
-	char *label,	//	ƒ‰ƒxƒ‹
-	char *title		//	ƒEƒBƒ“ƒhƒEƒ^ƒCƒgƒ‹
+	char *label,	//	ãƒ©ãƒ™ãƒ«
+	char *title		//	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¿ã‚¤ãƒˆãƒ«
 ){
 	ResetTabHead();
 	int tw = g_StrTex->DrawString(label, 0)->GetWidth()+TILE_UNIT*3, tw2;
@@ -33,12 +33,12 @@ CSimpleDialog::CSimpleDialog(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CYesNoDialog::CYesNoDialog(
-	char *label,	//	ƒ‰ƒxƒ‹
-	char *title,	//	ƒEƒBƒ“ƒhƒEƒ^ƒCƒgƒ‹
-	bool def		//	ƒfƒtƒHƒ‹ƒg (true: yes)
+	char *label,	//	ãƒ©ãƒ™ãƒ«
+	char *title,	//	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¿ã‚¤ãƒˆãƒ«
+	bool def		//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ (true: yes)
 ){
 	ResetTabHead();
 	int tw = g_StrTex->DrawString(label, 0)->GetWidth()+TILE_UNIT*3, tw2;
@@ -58,7 +58,7 @@ CYesNoDialog::CYesNoDialog(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CYesNoDialog::~CYesNoDialog(){
 	DELETE_V(m_YesCommand);
@@ -66,7 +66,7 @@ CYesNoDialog::~CYesNoDialog(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CYesNoDialog::ScanInputWindow(){
 	if(CheckShift() || CheckCtrl() || CheckAlt()) return false;
@@ -86,13 +86,13 @@ bool CYesNoDialog::ScanInputWindow(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CInputDialog::CInputDialog(
-	char *label,	//	ƒ‰ƒxƒ‹
-	char *title,	//	ƒEƒBƒ“ƒhƒEƒ^ƒCƒgƒ‹
-	char *def,		//	ƒfƒtƒHƒ‹ƒg
-	int maxlen		//	Å‘å•¶š”
+	char *label,	//	ãƒ©ãƒ™ãƒ«
+	char *title,	//	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¿ã‚¤ãƒˆãƒ«
+	char *def,		//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ
+	int maxlen		//	æœ€å¤§æ–‡å­—æ•°
 ){
 	ResetTabHead();
 	int tw = g_StrTex->DrawString(label, 0)->GetWidth()+TILE_UNIT*3, tw2;
@@ -112,7 +112,7 @@ CInputDialog::CInputDialog(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CInputDialog::ScanInputWindow(){
 	if(m_Edit.IsFocus() && !m_Edit.IsComp()
@@ -130,14 +130,14 @@ bool CInputDialog::ScanInputWindow(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CMultiInputDialog::CMultiInputDialog(
-	char *title,	//	ƒEƒBƒ“ƒhƒEƒ^ƒCƒgƒ‹
-	int itemnum,	//	ƒAƒCƒeƒ€”
-	char **label,	//	ƒ‰ƒxƒ‹ƒŠƒXƒg
-	char **def,		//	ƒfƒtƒHƒ‹ƒgƒŠƒXƒg
-	int *maxlen		//	Å‘å•¶š”ƒŠƒXƒg
+	char *title,	//	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¿ã‚¤ãƒˆãƒ«
+	int itemnum,	//	ã‚¢ã‚¤ãƒ†ãƒ æ•°
+	char **label,	//	ãƒ©ãƒ™ãƒ«ãƒªã‚¹ãƒˆ
+	char **def,		//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒªã‚¹ãƒˆ
+	int *maxlen		//	æœ€å¤§æ–‡å­—æ•°ãƒªã‚¹ãƒˆ
 ){
 	ResetTabHead();
 	m_ItemNumber = itemnum;
@@ -168,7 +168,7 @@ CMultiInputDialog::CMultiInputDialog(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CMultiInputDialog::~CMultiInputDialog(){
 	DELETE_A(m_Label);
@@ -176,7 +176,7 @@ CMultiInputDialog::~CMultiInputDialog(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CMultiInputDialog::ScanInputWindow(){
 	int i;
@@ -201,17 +201,17 @@ bool CMultiInputDialog::ScanInputWindow(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	‹¤’Êƒ_ƒCƒAƒƒO‚ÉƒGƒ“ƒLƒ…[
+ *	å…±é€šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã«ã‚¨ãƒ³ã‚­ãƒ¥ãƒ¼
  */
 void EnqueueCommonDialog(
-	CWindowCtrl *dlg	//	ƒ_ƒCƒAƒƒO
+	CWindowCtrl *dlg	//	ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 ){
 	g_DialogQueue.push_back(dlg);
 	g_ModalDialog = *g_DialogQueue.begin();
 }
 
 /*
- *	‹¤’Êƒ_ƒCƒAƒƒOˆ—
+ *	å…±é€šãƒ€ã‚¤ã‚¢ãƒ­ã‚°å‡¦ç†
  */
 void ProcessCommonDialog(){
 	if(g_DialogQueue.size() && g_ModalDialog==*g_DialogQueue.begin()

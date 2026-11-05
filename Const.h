@@ -1,24 +1,24 @@
-#ifndef CONST_H_INCLUDED
+ï»¿#ifndef CONST_H_INCLUDED
 #define CONST_H_INCLUDED
 
 extern const float RAILSIM_VERSION;
 extern const char* VERSION_STRING;
 
-const int FONT_WIDTH = 6;				//	•W€ƒtƒHƒ“ƒg•
-const int FONT_HEIGHT = 12;				//	•W€ƒtƒHƒ“ƒg‚
-const int MODE_NUM = 6;					//	ƒ‚[ƒh”
-const int REPEAT_FRAME = MAXFPS/4;		//	’·‰ŸƒtƒŒ[ƒ€”
-const int DBLCLK_FRAME = MAXFPS/2;		//	ƒ_ƒuƒ‹ƒNƒŠƒbƒNƒtƒŒ[ƒ€”
-const int DETECT_2D_MIN = 5;			//	2D ŒŸoÅ¬‹——£
-const int DETECT_2D_MAX = 50;			//	2D ŒŸoÅ‘å‹——£
+const int FONT_WIDTH = 6;				//	æ¨™æº–ãƒ•ã‚©ãƒ³ãƒˆå¹…
+const int FONT_HEIGHT = 12;				//	æ¨™æº–ãƒ•ã‚©ãƒ³ãƒˆé«˜
+const int MODE_NUM = 6;					//	ãƒ¢ãƒ¼ãƒ‰æ•°
+const int REPEAT_FRAME = MAXFPS/4;		//	é•·æŠ¼ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
+const int DBLCLK_FRAME = MAXFPS/2;		//	ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
+const int DETECT_2D_MIN = 5;			//	2D æ¤œå‡ºæœ€å°è·é›¢
+const int DETECT_2D_MAX = 50;			//	2D æ¤œå‡ºæœ€å¤§è·é›¢
 
 extern char *YESNO[];
 
-//	ƒGƒCƒŠƒAƒX‚ğ“n‚¹‚È‚¢‚Ì‚Å const VEC3 ‚Å‚Í‚È‚­ƒ}ƒNƒ‚É‚·‚é
-#define V2ZERO	VEC2(0.0f, 0.0f)		//	ƒ[ƒƒxƒNƒgƒ‹
-#define V3ZERO	VEC3(0.0f, 0.0f, 0.0f)	//	ƒ[ƒƒxƒNƒgƒ‹
-#define V3RIGHT	VEC3(1.0f, 0.0f, 0.0f)	//	x ’PˆÊƒxƒNƒgƒ‹
-#define V3UP	VEC3(0.0f, 1.0f, 0.0f)	//	y ’PˆÊƒxƒNƒgƒ‹
-#define V3DIR	VEC3(0.0f, 0.0f, 1.0f)	//	z ’PˆÊƒxƒNƒgƒ‹
+//	ã‚¨ã‚¤ãƒªã‚¢ã‚¹ã‚’æ¸¡ã›ãªã„ã®ã§ const VEC3 ã§ã¯ãªããƒã‚¯ãƒ­ã«ã™ã‚‹
+#define V2ZERO	VEC2(0.0f, 0.0f)		//	ã‚¼ãƒ­ãƒ™ã‚¯ãƒˆãƒ«
+#define V3ZERO	VEC3(0.0f, 0.0f, 0.0f)	//	ã‚¼ãƒ­ãƒ™ã‚¯ãƒˆãƒ«
+#define V3RIGHT	VEC3(1.0f, 0.0f, 0.0f)	//	x å˜ä½ãƒ™ã‚¯ãƒˆãƒ«
+#define V3UP	VEC3(0.0f, 1.0f, 0.0f)	//	y å˜ä½ãƒ™ã‚¯ãƒˆãƒ«
+#define V3DIR	VEC3(0.0f, 0.0f, 1.0f)	//	z å˜ä½ãƒ™ã‚¯ãƒˆãƒ«
 
 #endif

@@ -1,12 +1,12 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CListView.h"
 #include "CExpression.h"
 #include "CModelPlugin.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern float g_FovRatio;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 CModelSwitch g_SystemSwitch[SYSTEM_SWITCH_NUM];
 
 vector<CStaticSwitchID> g_StaticSwitchTable;
@@ -16,17 +16,17 @@ int CurrentEnabledEffectorTypes(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CModelSwitch::CModelSwitch(){
 	m_ListElement = NULL;
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CModelSwitch::CModelSwitch(
-	int id	//	”Ô†
+	int id	//	ç•ªå·
 ){
 	m_ID = id;
 	m_Value = 0;
@@ -34,22 +34,22 @@ CModelSwitch::CModelSwitch(
 }
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CModelSwitch::Init(
-	int id,		//	”Ô†
-	char *name	//	ƒXƒCƒbƒ`–¼
+	int id,		//	ç•ªå·
+	char *name	//	ã‚¹ã‚¤ãƒƒãƒå
 ){
 	m_ID = id;
 	m_SwitchName = name;
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CModelSwitch::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp, *eee;
 	if(!(str = BeginNamedBlock(eee = str, "DefineSwitch", &m_SwitchName))) return NULL;
@@ -79,7 +79,7 @@ char *CModelSwitch::Read(
 }
 
 /*
- *	Œ»İ‚Ìİ’è‚ğæ“¾
+ *	ç¾åœ¨ã®è¨­å®šã‚’å–å¾—
  */
 char *CModelSwitch::GetCurrentOptionName(){
 	int i = 0;
@@ -89,10 +89,10 @@ char *CModelSwitch::GetCurrentOptionName(){
 }
 
 /*
- *	ƒGƒ“ƒgƒŠƒŠƒXƒgì¬
+ *	ã‚¨ãƒ³ãƒˆãƒªãƒªã‚¹ãƒˆä½œæˆ
  */
 void CModelSwitch::ListEntry(
-	CListView *olv	//	ƒŠƒXƒgƒrƒ…[
+	CListView *olv	//	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
 ){
 	olv->DeleteAllItems();
 	int i = 0;
@@ -105,12 +105,12 @@ void CModelSwitch::ListEntry(
 }
 
 /*
- *	ƒXƒCƒbƒ`ƒŠƒXƒgì¬
+ *	ã‚¹ã‚¤ãƒƒãƒãƒªã‚¹ãƒˆä½œæˆ
  */
 void CModelSwitch::EditSwitch(
-	CListView *olv,	//	ƒIƒvƒVƒ‡ƒ“ƒŠƒXƒgƒrƒ…[
-	int *link,		//	ƒŠƒ“ƒN•Ï”
-	int switch_id	//	ƒXƒCƒbƒ` ID
+	CListView *olv,	//	ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	int *link,		//	ãƒªãƒ³ã‚¯å¤‰æ•°
+	int switch_id	//	ã‚¹ã‚¤ãƒƒãƒ ID
 ){
 	if(!m_Entry.size()) return;
 	CListElement *ole = olv->GetFocusItem();
@@ -149,12 +149,12 @@ void CModelSwitch::EditSwitch(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CSwitchEntry::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi,	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
-	int condtype		//	ğŒƒ^ƒCƒv
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi,	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	int condtype		//	æ¡ä»¶ã‚¿ã‚¤ãƒ—
 ){
 	char *tmp, *eee;
 	int value;
@@ -177,11 +177,11 @@ char *CSwitchEntry::Read(
 }
 
 /*
- *	ƒXƒCƒbƒ`’lƒ`ƒFƒbƒN
+ *	ã‚¹ã‚¤ãƒƒãƒå€¤ãƒã‚§ãƒƒã‚¯
  */
 bool CSwitchEntry::CheckValue(
-	int value,	//	”»’è’l
-	bool def	//	ƒfƒtƒHƒ‹ƒg
+	int value,	//	åˆ¤å®šå€¤
+	bool def	//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ
 ){
 	switch(m_ConditionType){
 	case 0: {
@@ -205,28 +205,28 @@ bool CSwitchEntry::CheckValue(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSwitchApplier::CSwitchApplier(
-	const CSwitchApplier *src	//	ƒRƒs[Œ³
+	const CSwitchApplier *src	//	ã‚³ãƒ”ãƒ¼å…ƒ
 ){
 	m_TypeFlag = src->m_TypeFlag;
 	m_Expression = src->m_Expression->Duplicate();
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSwitchApplier::~CSwitchApplier(){
 	DELETE_V(m_Expression);
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CSwitchApplier::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *eee, *tmp;
 	m_TypeFlag = 0;
@@ -268,7 +268,7 @@ char *CSwitchApplier::Read(
 }
 
 /*
- *	”®ŒvZ
+ *	æ•°å¼è¨ˆç®—
  */
 int CSwitchApplier::GetSwitchValue(){
 	return m_Expression->CalcInt();
@@ -278,11 +278,11 @@ int CSwitchApplier::GetSwitchValue(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CCustomizerSwitchEntry::Read2(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp;
 	m_Customizer.clear();
@@ -296,30 +296,30 @@ char *CCustomizerSwitchEntry::Read2(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CCustomizerSwitchEntry::LoadData(
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	ICustomizerContainer icc = m_Customizer.begin();
 	for(; icc!=m_Customizer.end(); icc++) icc->LoadData(mpi);
 }
 
 /*
- *	í“K—pƒŠƒXƒgì¬
+ *	å¸¸æ™‚é©ç”¨ãƒªã‚¹ãƒˆä½œæˆ
  */
 void CCustomizerSwitchEntry::SetOffList(
-	CNamedObject *nobj	//	ŒÄ‚Ño‚µŒ³
+	CNamedObject *nobj	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	ICustomizerContainer icc = m_Customizer.begin();
 	for(; icc!=m_Customizer.end(); icc++) icc->SetOffList(nobj);
 }
 
 /*
- *	‘ã‘Öƒ‚ƒfƒ‹æ“¾
+ *	ä»£æ›¿ãƒ¢ãƒ‡ãƒ«å–å¾—
  */
 CMesh *CCustomizerSwitchEntry::GetMesh(
-	float *asc	//	ƒXƒP[ƒ‹Ši”[æ
+	float *asc	//	ã‚¹ã‚±ãƒ¼ãƒ«æ ¼ç´å…ˆ
 ){
 	if(!(m_TypeFlag&CSTM_MODELCHANGER)) return NULL;
 	ICustomizerContainer icc = m_Customizer.begin();
@@ -331,10 +331,10 @@ CMesh *CCustomizerSwitchEntry::GetMesh(
 }
 
 /*
- *	p¨“K—p
+ *	å§¿å‹¢é©ç”¨
  */
 void CCustomizerSwitchEntry::SetPosture(
-	CObject *obj	//	ƒIƒuƒWƒFƒNƒg
+	CObject *obj	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 ){
 	if(!(m_TypeFlag&CSTM_MODELMOVER)) return;
 	ICustomizerContainer icc = m_Customizer.begin();
@@ -342,10 +342,10 @@ void CCustomizerSwitchEntry::SetPosture(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CCustomizerSwitchEntry::Apply(
-	CMesh *mesh	//	ƒƒbƒVƒ…
+	CMesh *mesh	//	ãƒ¡ãƒƒã‚·ãƒ¥
 ){
 	if(!(m_TypeFlag&CSTM_MISCELLANEOUS)) return;
 	ICustomizerContainer icc = m_Customizer.begin();
@@ -356,12 +356,12 @@ void CCustomizerSwitchEntry::Apply(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CCustomizerSwitchApplier::Read2(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi,	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
-	int condtype		//	ğŒƒ^ƒCƒv
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi,	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	int condtype		//	æ¡ä»¶ã‚¿ã‚¤ãƒ—
 ){
 	char *tmp;
 	CCustomizerSwitchEntry swent;
@@ -374,30 +374,30 @@ char *CCustomizerSwitchApplier::Read2(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CCustomizerSwitchApplier::LoadDataCustomizer(
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	ICustomizerSwitchEntry ise = m_Entry.begin();
 	for(; ise!=m_Entry.end(); ise++) ise->LoadData(mpi);
 }
 
 /*
- *	í“K—pƒŠƒXƒgì¬
+ *	å¸¸æ™‚é©ç”¨ãƒªã‚¹ãƒˆä½œæˆ
  */
 void CCustomizerSwitchApplier::SetOffListCustomizer(
-	CNamedObject *nobj	//	ŒÄ‚Ño‚µŒ³
+	CNamedObject *nobj	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	ICustomizerSwitchEntry ise = m_Entry.begin();
 	for(; ise!=m_Entry.end(); ise++) ise->SetOffList(nobj);
 }
 
 /*
- *	‘ã‘Öƒ‚ƒfƒ‹æ“¾
+ *	ä»£æ›¿ãƒ¢ãƒ‡ãƒ«å–å¾—
  */
 CMesh *CCustomizerSwitchApplier::GetMeshCustomizer(
-	float *asc	//	ƒXƒP[ƒ‹Ši”[æ
+	float *asc	//	ã‚¹ã‚±ãƒ¼ãƒ«æ ¼ç´å…ˆ
 ){
 	if(!(m_TypeFlag&CSTM_MODELCHANGER)) return NULL;
 	ICustomizerSwitchEntry ise = m_Entry.begin();
@@ -414,10 +414,10 @@ CMesh *CCustomizerSwitchApplier::GetMeshCustomizer(
 }
 
 /*
- *	p¨“K—p
+ *	å§¿å‹¢é©ç”¨
  */
 void CCustomizerSwitchApplier::SetPostureCustomizer(
-	CObject *obj	//	ƒIƒuƒWƒFƒNƒg
+	CObject *obj	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 ){
 	if(!(m_TypeFlag&CSTM_MODELMOVER)) return;
 	ICustomizerSwitchEntry ise = m_Entry.begin();
@@ -432,10 +432,10 @@ void CCustomizerSwitchApplier::SetPostureCustomizer(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CCustomizerSwitchApplier::ApplyCustomizer(
-	CMesh *mesh	//	ƒƒbƒVƒ…
+	CMesh *mesh	//	ãƒ¡ãƒƒã‚·ãƒ¥
 ){
 	if(!(m_TypeFlag&CSTM_MISCELLANEOUS)) return;
 	ICustomizerSwitchEntry ise = m_Entry.begin();
@@ -453,11 +453,11 @@ void CCustomizerSwitchApplier::ApplyCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CEffectorSwitchEntry::Read2(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp;
 	m_Effector.clear();
@@ -471,20 +471,20 @@ char *CEffectorSwitchEntry::Read2(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CEffectorSwitchEntry::LoadData(
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	IEffectorContainer icc = m_Effector.begin();
 	for(; icc!=m_Effector.end(); icc++) icc->LoadData(mpi);
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CEffectorSwitchEntry::Apply(
-	CScene *scene	//	ƒV[ƒ“
+	CScene *scene	//	ã‚·ãƒ¼ãƒ³
 ){
 	if(!(m_TypeFlag&CurrentEnabledEffectorTypes())) return;
 	IEffectorContainer icc = m_Effector.begin();
@@ -495,12 +495,12 @@ void CEffectorSwitchEntry::Apply(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CEffectorSwitchApplier::Read2(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi,	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
-	int condtype		//	ğŒƒ^ƒCƒv
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi,	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	int condtype		//	æ¡ä»¶ã‚¿ã‚¤ãƒ—
 ){
 	char *tmp;
 	CEffectorSwitchEntry swent;
@@ -513,20 +513,20 @@ char *CEffectorSwitchApplier::Read2(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CEffectorSwitchApplier::LoadDataEffector(
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	IEffectorSwitchEntry ise = m_Entry.begin();
 	for(; ise!=m_Entry.end(); ise++) ise->LoadData(mpi);
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CEffectorSwitchApplier::ApplyEffector(
-	CScene *scene	//	ƒV[ƒ“
+	CScene *scene	//	ã‚·ãƒ¼ãƒ³
 ){
 	if(!(m_TypeFlag&CurrentEnabledEffectorTypes())) return;
 	IEffectorSwitchEntry ise = m_Entry.begin();
@@ -544,7 +544,7 @@ void CEffectorSwitchApplier::ApplyEffector(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒVƒXƒeƒ€ƒXƒCƒbƒ`‰Šú‰»
+ *	ã‚·ã‚¹ãƒ†ãƒ ã‚¹ã‚¤ãƒƒãƒåˆæœŸåŒ–
  */
 void InitSystemSwitch(){
 	g_SystemSwitch[SYS_SW_FRONT].Init(-SYS_SW_FRONT-1, "_FRONT");
@@ -576,10 +576,10 @@ void InitSystemSwitch(){
 }
 
 /*
- *	ƒJƒƒ‰‹——£ƒXƒCƒbƒ`İ’è
+ *	ã‚«ãƒ¡ãƒ©è·é›¢ã‚¹ã‚¤ãƒƒãƒè¨­å®š
  */
 void SetCamDistSwitch(
-	VEC3 pos	//	‹“_À•W
+	VEC3 pos	//	è¦–ç‚¹åº§æ¨™
 ){
 	g_SystemSwitch[SYS_SW_CAMDIST].SetValue(Round(g_FovRatio*V3Len(&(pos-GetVPos()))));
 }

@@ -1,11 +1,11 @@
-#ifndef CPIERSELECTMODE_H_INCLUDED
+ï»¿#ifndef CPIERSELECTMODE_H_INCLUDED
 #define CPIERSELECTMODE_H_INCLUDED
 
 #include "C3DPluginMode.h"
 #include "CRailwayMode.h"
 
 /*
- *	‹´‹r‘I‘ğƒ‚[ƒh
+ *	æ©‹è„šé¸æŠãƒ¢ãƒ¼ãƒ‰
  */
 class CPierSelectMode: public C3DPluginMode, public CRailwayMode{
 private:
@@ -21,7 +21,7 @@ public:
 	void Render3DPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CPierSelectMode *g_PierSelectMode;
 
 #endif

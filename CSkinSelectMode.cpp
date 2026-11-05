@@ -1,15 +1,15 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSkinPlugin.h"
 #include "CSkinSelectMode.h"
 
-//	“à•”’è”
-const int WW = TILE_UNIT*20, WH = TILE_UNIT*17+TILE_HALF*5;	//	‘‹ƒTƒCƒY
+//	å†…éƒ¨å®šæ•°
+const int WW = TILE_UNIT*20, WH = TILE_UNIT*17+TILE_HALF*5;	//	çª“ã‚µã‚¤ã‚º
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSkinSelectMode::CSkinSelectMode():
-	CPluginMode(lang(SkinPlugin))	//	Šî–{ƒNƒ‰ƒX
+	CPluginMode(lang(SkinPlugin))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	int i;
 	m_TestWindow.Init((g_DispWidth-WW)*2/3, (g_DispHeight-WH)/2,
@@ -40,11 +40,11 @@ CSkinSelectMode::CSkinSelectMode():
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CSkinSelectMode::WindowResized(
-	int w, int h,		//	V‹KƒTƒCƒY
-	CWindowCtrl *wnd	//	ƒEƒBƒhƒEƒRƒ“ƒgƒ[ƒ‹
+	int w, int h,		//	æ–°è¦ã‚µã‚¤ã‚º
+	CWindowCtrl *wnd	//	ã‚¦ã‚£ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	if(wnd==&m_TestWindow){
 		int i, ty = h-WH;
@@ -75,24 +75,24 @@ void CSkinSelectMode::WindowResized(
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CSkinSelectMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	return CPluginMode::Dispatch(type, data);
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆå–å¾—
  */
 CPluginList *CSkinSelectMode::GetPluginList(){
 	return g_SkinPluginList;
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CSkinSelectMode::EnterPlugin(){
 	ms_ModeLabel = lang(SelectSkin);
@@ -102,7 +102,7 @@ void CSkinSelectMode::EnterPlugin(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CSkinSelectMode::ScanInputPlugin(){
 	bool f = m_Interface.ScanInput();

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailPlugin.h"
 #include "CTiePlugin.h"
 #include "CGirderPlugin.h"
@@ -6,17 +6,17 @@
 #include "CPierSelectMode.h"
 #include "CRailBuildMode.h"
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const float RAIL_PREV_LEN;
 extern const float RAIL_SEG_MAX;
 extern const float TAPER_DIV_RATIO;
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_RailMipMap;
 
 /*
  *	[static]
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CPierPlugin::RenderPreview(){
 	if(!ms_PreviewState || !g_Pier) return;
@@ -48,7 +48,7 @@ void CPierPlugin::RenderPreview(){
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CPierPlugin::Load(){
 	char *str = m_Script, *tmp, *eee;
@@ -128,7 +128,7 @@ bool CPierPlugin::Load(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[İ’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CPierPlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -141,11 +141,11 @@ void CPierPlugin::SetPreview(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CPierPlugin::Preview(
-	VEC3 pos,	//	ˆÊ’u
-	float plen	//	‹´‹r•”’·‚³
+	VEC3 pos,	//	ä½ç½®
+	float plen	//	æ©‹è„šéƒ¨é•·ã•
 ){
 	VEC3 hpos = pos+m_JointToHeadLocal;
 	VEC3 top = hpos+m_HeadToPierLocal;
@@ -205,10 +205,10 @@ void CPierPlugin::Preview(
 }
 
 /*
- *	‹´‹r‹——£‰ÁZ
+ *	æ©‹è„šè·é›¢åŠ ç®—
  */
 void CPierPlugin::AddPierPos(
-	float len	//	‹——£
+	float len	//	è·é›¢
 ){
 	m_PierPos -= len;
 	while(m_PierPos<=0.0f) m_PierPos += m_Interval;

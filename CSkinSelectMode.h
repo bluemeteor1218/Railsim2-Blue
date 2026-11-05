@@ -1,4 +1,4 @@
-#ifndef CSKINSELECTMODE_H_INCLUDED
+ï»¿#ifndef CSKINSELECTMODE_H_INCLUDED
 #define CSKINSELECTMODE_H_INCLUDED
 
 #include "CStaticCtrl.h"
@@ -11,19 +11,19 @@
 #include "CInterfaceMode.h"
 
 /*
- *	ƒXƒLƒ“‘I‘ğƒ‚[ƒh
+ *	ã‚¹ã‚­ãƒ³é¸æŠãƒ¢ãƒ¼ãƒ‰
  */
 class CSkinSelectMode: public CPluginMode{
 private:
-	CWindowCtrl m_TestWindow;			//	ƒeƒXƒg‘‹
-	CStaticCtrl m_PropertyLabel;		//	ƒvƒƒpƒeƒB
-	CListView m_PropertyList;			//	ƒvƒƒpƒeƒB
-	CStaticCtrl m_TestLabel;			//	ƒeƒXƒg
-	CCheckBox m_CheckTest[2];			//	ƒ`ƒFƒbƒNƒ{ƒbƒNƒX
-	CGroupBox m_GroupTest;				//	ƒOƒ‹[ƒvƒ{ƒbƒNƒX
-	CRadioButton m_RadioTest[2];		//	ƒ‰ƒWƒIƒ{ƒ^ƒ“
-	CEditCtrl m_EditTest;				//	ƒGƒfƒBƒbƒgƒ{ƒbƒNƒX
-	CPushButton m_PushTest;				//	ƒvƒbƒVƒ…ƒ{ƒ^ƒ“
+	CWindowCtrl m_TestWindow;			//	ãƒ†ã‚¹ãƒˆçª“
+	CStaticCtrl m_PropertyLabel;		//	ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
+	CListView m_PropertyList;			//	ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
+	CStaticCtrl m_TestLabel;			//	ãƒ†ã‚¹ãƒˆ
+	CCheckBox m_CheckTest[2];			//	ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹
+	CGroupBox m_GroupTest;				//	ã‚°ãƒ«ãƒ¼ãƒ—ãƒœãƒƒã‚¯ã‚¹
+	CRadioButton m_RadioTest[2];		//	ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³
+	CEditCtrl m_EditTest;				//	ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹
+	CPushButton m_PushTest;				//	ãƒ—ãƒƒã‚·ãƒ¥ãƒœã‚¿ãƒ³
 public:
 	CSkinSelectMode();
 	~CSkinSelectMode(){}
@@ -35,7 +35,7 @@ public:
 	void ScanInputPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CSkinSelectMode *g_SkinSelectMode;
 
 #endif

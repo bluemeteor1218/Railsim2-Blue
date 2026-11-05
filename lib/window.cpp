@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include <windows.h>
 #include <windowsx.h>
@@ -17,66 +17,66 @@
 
 void AdjustMovieLayer();	//	movie.cpp
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern int g_DispWidth;
 extern int g_DispHeight;
 
 /*
- *	ƒƒCƒ“ƒEƒCƒ“ƒhƒE‚Ìì¬
+ *	ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
  *
- *	hInst	: ƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
+ *	hInst	: ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
  */
 BOOL CreateMainWindow(HINSTANCE hInst){
-	//	ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^
+	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²
 	WNDCLASSEX wc = {
-		sizeof(WNDCLASSEX),	//	ƒTƒCƒY
-		0,					//	ƒXƒ^ƒCƒ‹
-		MessageProc,		//	ƒƒbƒZ[ƒWƒnƒ“ƒhƒ‰
-		0L,					//	Šg’£ƒNƒ‰ƒX
-		0L,					//	Šg’£ƒEƒCƒ“ƒhƒE
-		hInst,				//	ƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
-		LoadIcon(hInst, MAKEINTRESOURCE(IDI_ICON1)),	//	ƒAƒCƒRƒ“Žw’è
-		LoadCursor(NULL, IDC_ARROW),			//	•W€ƒJ[ƒ\ƒ‹
-		(HBRUSH)GetStockObject(BLACK_BRUSH),	//	ƒEƒCƒ“ƒhƒE‚Ì‰º’n‚ð•‚É
-		NULL,				//	ƒƒjƒ…[‚È‚µ
-		CLASSNAME,			//	ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX–¼
-		NULL				//	ƒXƒ‚[ƒ‹ƒAƒCƒRƒ“‚È‚µik¬‚µ‚ÄŽg—pj
+		sizeof(WNDCLASSEX),	//	ã‚µã‚¤ã‚º
+		0,					//	ã‚¹ã‚¿ã‚¤ãƒ«
+		MessageProc,		//	ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒãƒ³ãƒ‰ãƒ©
+		0L,					//	æ‹¡å¼µã‚¯ãƒ©ã‚¹
+		0L,					//	æ‹¡å¼µã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦
+		hInst,				//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		LoadIcon(hInst, MAKEINTRESOURCE(IDI_ICON1)),	//	ã‚¢ã‚¤ã‚³ãƒ³æŒ‡å®š
+		LoadCursor(NULL, IDC_ARROW),			//	æ¨™æº–ã‚«ãƒ¼ã‚½ãƒ«
+		(HBRUSH)GetStockObject(BLACK_BRUSH),	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ä¸‹åœ°ã‚’é»’ã«
+		NULL,				//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãªã—
+		CLASSNAME,			//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹å
+		NULL				//	ã‚¹ãƒ¢ãƒ¼ãƒ«ã‚¢ã‚¤ã‚³ãƒ³ãªã—ï¼ˆç¸®å°ã—ã¦ä½¿ç”¨ï¼‰
 	};
 	RegisterClassEx(&wc);
 
-	//	ƒEƒCƒ“ƒhƒE‚Ìì¬
+	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
 	HWND hWnd = CreateWindow(
-		CLASSNAME,			//	ƒNƒ‰ƒX–¼
-		WINDOWNAME,			//	ƒ^ƒCƒgƒ‹
-		WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX,	//	ƒXƒ^ƒCƒ‹i‰¼j
-		//WS_OVERLAPPEDWINDOW,	//	ƒXƒ^ƒCƒ‹i‰¼j
-		0,					//	•\Ž¦ˆÊ’u
+		CLASSNAME,			//	ã‚¯ãƒ©ã‚¹å
+		WINDOWNAME,			//	ã‚¿ã‚¤ãƒˆãƒ«
+		WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX,	//	ã‚¹ã‚¿ã‚¤ãƒ«ï¼ˆä»®ï¼‰
+		//WS_OVERLAPPEDWINDOW,	//	ã‚¹ã‚¿ã‚¤ãƒ«ï¼ˆä»®ï¼‰
+		0,					//	è¡¨ç¤ºä½ç½®
 		0,					//	
-		g_DispWidth,		//	‰¡•(‰¼)
-		g_DispHeight,		//	c•(‰¼)
-		GetDesktopWindow(),	//	eƒEƒCƒ“ƒhƒE‚ðƒfƒXƒNƒgƒbƒv‚É
-		NULL,				//	ƒƒjƒ…[i‚È‚µj
-		wc.hInstance,		//	ƒCƒ“ƒXƒ^ƒ“ƒX
-		NULL				//	’Ç‰Áƒpƒ‰ƒ[ƒ^i‚È‚µj
+		g_DispWidth,		//	æ¨ªå¹…(ä»®)
+		g_DispHeight,		//	ç¸¦å¹…(ä»®)
+		GetDesktopWindow(),	//	è¦ªã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ã«
+		NULL,				//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼ˆãªã—ï¼‰
+		wc.hInstance,		//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+		NULL				//	è¿½åŠ ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼ˆãªã—ï¼‰
 	);
 	if(!hWnd) return FALSE;
 
-	//	ƒOƒ[ƒoƒ‹•Ï”‚É‘Þ”ð
+	//	ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã«é€€é¿
 	svw.hWnd = hWnd;
 	svw.winW = g_DispWidth;
 	svw.winH = g_DispHeight;
 
-	//	ƒEƒCƒ“ƒhƒE˜g“™‚ðl—¶‚É‚¢‚ê‚ÄAƒTƒCƒY‚ðÄÝ’è
+	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦æž ç­‰ã‚’è€ƒæ…®ã«ã„ã‚Œã¦ã€ã‚µã‚¤ã‚ºã‚’å†è¨­å®š
 	AdjustWindow();
 
-	//	ƒAƒNƒeƒBƒuƒtƒ‰ƒO‚ð—§‚Ä‚é
+	//	ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹
 	svw.fActive = FALSE;
 
 	return TRUE;
 }
 
 /*
- *	ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚ÌƒTƒCƒY‚ðŠî€‚ÉƒEƒCƒ“ƒhƒE‚ðƒŠƒTƒCƒY
+ *	ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®ã‚µã‚¤ã‚ºã‚’åŸºæº–ã«ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ãƒªã‚µã‚¤ã‚º
  */
 void AdjustWindow(){
 	RECT r = {0, 0, svw.winW, svw.winH}, d;
@@ -94,14 +94,14 @@ void AdjustWindow(){
 }
 
 /*
- *	ƒƒbƒZ[ƒWˆ—
+ *	ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å‡¦ç†
  */
 BOOL PeekAllMessage(){
 	static MSG msg;
 
-	//	‹ó‚É‚È‚é‚Ü‚Åƒ‹[ƒv
+	//	ç©ºã«ãªã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
 	while(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)){
-		//	I—¹ƒƒbƒZ[ƒW‚©H
+		//	çµ‚äº†ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‹ï¼Ÿ
 		if(msg.message==WM_QUIT) return FALSE;
 
 		TranslateMessage(&msg);
@@ -111,50 +111,50 @@ BOOL PeekAllMessage(){
 }
 
 /*
- *	ƒEƒCƒ“ƒhƒEƒƒbƒZ[ƒWˆ—
+ *	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å‡¦ç†
  *
- *	ˆø”‚Ìà–¾‚ðÈ—ª
+ *	å¼•æ•°ã®èª¬æ˜Žã‚’çœç•¥
  */
 LRESULT WINAPI MessageProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam){
 	switch(msg){
-	//	ƒAƒNƒeƒBƒu^”ñƒAƒNƒeƒBƒu‚ªØ‚è‘Ö‚í‚Á‚½
+	//	ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ï¼éžã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãŒåˆ‡ã‚Šæ›¿ã‚ã£ãŸ
 	case WM_ACTIVATEAPP:
 		OnActivateApp(wParam);
 		break;
 
-	//	ƒTƒCƒY‚ª•ÏX‚³‚ê‚½
+	//	ã‚µã‚¤ã‚ºãŒå¤‰æ›´ã•ã‚ŒãŸ
 	case WM_SIZE:
 		OnSize(wParam);
 		break;
 
-	//	ˆÚ“®‚µ‚½
+	//	ç§»å‹•ã—ãŸ
 	case WM_MOVE:
 		OnMove(wParam);
 		break;
 
-	//	ƒfƒBƒXƒvƒŒƒCƒ‚[ƒh‚ª•ÏX‚³‚ê‚½
+	//	ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ¢ãƒ¼ãƒ‰ãŒå¤‰æ›´ã•ã‚ŒãŸ
 	case WM_DISPLAYCHANGE:
-		Debug("<ƒfƒBƒXƒvƒŒƒCƒ‚[ƒh‚Ì•ÏX>\n");
+		Debug("<ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ¢ãƒ¼ãƒ‰ã®å¤‰æ›´>\n");
 		break;
 
-	//	Ä•`‰æ—v‹
+	//	å†æç”»è¦æ±‚
 	case WM_PAINT:
 		OnPaint(wParam);
 		break;
 
-	//	ƒVƒXƒeƒ€ƒƒbƒZ[ƒW
+	//	ã‚·ã‚¹ãƒ†ãƒ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 	case WM_SYSCOMMAND:
-		//	ƒXƒNƒŠ[ƒ“ƒZ[ƒo[“™‚Ì”­“®‚ð‘jŽ~
+		//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚»ãƒ¼ãƒãƒ¼ç­‰ã®ç™ºå‹•ã‚’é˜»æ­¢
 		if(wParam==SC_SCREENSAVE || wParam==SC_MONITORPOWER) return 1;
 		else return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	//	IMEƒEƒCƒ“ƒhƒE‚ª‹N“®‚µ‚½
+	//	IMEã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒèµ·å‹•ã—ãŸ
 	case WM_IME_SETCONTEXT:
-		//	FEP(IME“™)‚ÌƒEƒCƒ“ƒhƒE‚ð‹­§“I‚É•Â‚¶‚é
+		//	FEP(IMEç­‰)ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’å¼·åˆ¶çš„ã«é–‰ã˜ã‚‹
 		SendMessage(ImmGetDefaultIMEWnd(hWnd), WM_CLOSE, 0, 0);
 		break;
 
-	//	•¶ŽšƒL[‚ª‰Ÿ‚³‚ê‚½
+	//	æ–‡å­—ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸ
 	case WM_CHAR:
 		OnChar(wParam);	//	input.cpp
 		break;
@@ -163,20 +163,20 @@ LRESULT WINAPI MessageProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam){
 	case WM_SYSKEYDOWN:
 		break;
 
-	//	DirectShowƒƒbƒZ[ƒW
+	//	DirectShowãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 #ifdef UDX_USE_MOVIE
 	case WM_GRAPHNOTIFY:
 		OnGrapNotify();	//	movie.cpp
 		break;
 #endif // #ifdef UDX_USE_MOVIE
 
-	//	ƒEƒCƒ“ƒhƒE‚ª•úŠü‚³‚ê‚æ‚¤‚Æ‚µ‚½
+	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒæ”¾æ£„ã•ã‚Œã‚ˆã†ã¨ã—ãŸ
 	case WM_CLOSE:
-		//	¦DestoryWindow()‚ÍDirect3D‚Ì‰ð•úŒã‚És‚¤
+		//	â€»DestoryWindow()ã¯Direct3Dã®è§£æ”¾å¾Œã«è¡Œã†
 		PostQuitMessage(0);
 		break;
 
-	//	Žc‚è‚ÍƒfƒtƒHƒ‹ƒgˆ—‚³‚¹‚é
+	//	æ®‹ã‚Šã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå‡¦ç†ã•ã›ã‚‹
 	default:
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
@@ -184,11 +184,11 @@ LRESULT WINAPI MessageProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam){
 }
 
 /*
- *	ƒAƒNƒeƒBƒu‰»A”ñƒAƒNƒeƒBƒu‰»‚Ö‚Ì‰ž“š
+ *	ã‚¢ã‚¯ãƒ†ã‚£ãƒ–åŒ–ã€éžã‚¢ã‚¯ãƒ†ã‚£ãƒ–åŒ–ã¸ã®å¿œç­”
  */
 void OnActivateApp(WPARAM wParam){
 	svw.fActive = (BOOL)wParam;
-	Debug(svw.fActive ? "<ƒAƒNƒeƒBƒu>\n" : "<”ñƒAƒNƒeƒBƒu>\n");
+	Debug(svw.fActive ? "<ã‚¢ã‚¯ãƒ†ã‚£ãƒ–>\n" : "<éžã‚¢ã‚¯ãƒ†ã‚£ãƒ–>\n");
 	if(svw.fActive){
 		svi.wheel = 0;
 		ShowCursor(FALSE);
@@ -199,46 +199,46 @@ void OnActivateApp(WPARAM wParam){
 }
 
 /*
- *	ƒTƒCƒY•ÏX‚Ö‚Ì‰ž“š
+ *	ã‚µã‚¤ã‚ºå¤‰æ›´ã¸ã®å¿œç­”
  */
 void OnSize(WPARAM wParam){
-	//	ƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚Å‚ÍƒTƒCƒY•ÏX‚ð‹–‚³‚È‚¢
+	//	ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰ã§ã¯ã‚µã‚¤ã‚ºå¤‰æ›´ã‚’è¨±ã•ãªã„
 	if(!sv3.fWindowed) return;
 	/*
-	 *	¦9xŒn‚Åƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒhˆÚs’¼‘O‚ÉƒEƒCƒ“ƒhƒEƒTƒCƒY‚ª•ÏX‚³‚êA
-	 *		ƒEƒCƒ“ƒhƒEƒTƒCƒY‚ª‰ð‘œ“xˆÈã‚É‚È‚é‚Ì‚ð‰ñ”ð@ª
+	 *	â€»9xç³»ã§ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰ç§»è¡Œç›´å‰ã«ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºãŒå¤‰æ›´ã•ã‚Œã€
+	 *		ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºãŒè§£åƒåº¦ä»¥ä¸Šã«ãªã‚‹ã®ã‚’å›žé¿ã€€â†‘
 	 */
 
-	//	ƒNƒ‰ƒCƒAƒ“ƒg—ÌˆæƒTƒCƒY‚ÌŽæ“¾
+	//	ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã‚µã‚¤ã‚ºã®å–å¾—
 	RECT rect;
 	GetClientRect(svw.hWnd, &rect);
 
 	svw.winW = rect.right-rect.left;
 	svw.winH = rect.bottom-rect.top;
 
-	Debug("<ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ %d x %d>\n", svw.winW, svw.winH);
+	Debug("<ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸ %d x %d>\n", svw.winW, svw.winH);
 
 #ifdef UDX_USE_MOVIE
-	//	ƒ€[ƒr[ƒŒƒCƒ„[‚ÌƒŠƒTƒCƒY
+	//	ãƒ ãƒ¼ãƒ“ãƒ¼ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒªã‚µã‚¤ã‚º
 	AdjustMovieLayer();
 #endif // #ifdef UDX_USE_MOVIE
 }
 
 /*
- *	ƒEƒCƒ“ƒhƒEˆÚ“®‚Ö‚Ì‰ž“š
+ *	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ç§»å‹•ã¸ã®å¿œç­”
  */
 void OnMove(WPARAM wParam){
 #ifdef UDX_USE_MOVIE
-	//	ƒ€[ƒr[ƒŒƒCƒ„[‚ÌˆÚ“®
+	//	ãƒ ãƒ¼ãƒ“ãƒ¼ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•
 	AdjustMovieLayer();
 #endif // #ifdef UDX_USE_MOVIE
 }
 
 /*
- *	Ä•`‰æ—v‹‚Ö‚Ì‰ž“š
+ *	å†æç”»è¦æ±‚ã¸ã®å¿œç­”
  */
 void OnPaint(WPARAM wParam){
-	//	Žæ‚è‡‚¦‚¸–³Œø—Ìˆæ‚ðƒNƒŠƒA‚·‚é
+	//	å–ã‚Šåˆãˆãšç„¡åŠ¹é ˜åŸŸã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
 	PAINTSTRUCT ps;
 	HDC hDC;
 
@@ -247,18 +247,18 @@ void OnPaint(WPARAM wParam){
 }
 
 /*
- *	ƒEƒCƒ“ƒhƒEƒ^ƒCƒgƒ‹‚ÌÝ’è
+ *	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¿ã‚¤ãƒˆãƒ«ã®è¨­å®š
  *
- *	str	: •¶Žš—ñ
+ *	str	: æ–‡å­—åˆ—
  */
 void SetCaption(char *str){
 	SetWindowText(svw.hWnd, str);
 }
 
 /*
- *	I—¹—v‹
+ *	çµ‚äº†è¦æ±‚
  *
- *	¦ƒƒbƒZ[ƒW‚ªˆ—‚³‚ê‚é‚Ü‚ÅƒvƒƒOƒ‰ƒ€‚ÍI—¹‚µ‚Ü‚¹‚ñB
+ *	â€»ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒå‡¦ç†ã•ã‚Œã‚‹ã¾ã§ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¯çµ‚äº†ã—ã¾ã›ã‚“ã€‚
  */
 void SendWM_CLOSE(){
 	SendMessage(svw.hWnd, WM_CLOSE, 0, 0);

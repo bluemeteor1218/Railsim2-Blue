@@ -1,4 +1,4 @@
-#ifndef CWINDOWDIVINFO_H_INCLUDED
+ï»¿#ifndef CWINDOWDIVINFO_H_INCLUDED
 #define CWINDOWDIVINFO_H_INCLUDED
 
 #include "CCamera.h"
@@ -7,11 +7,11 @@ class CScene;
 class CWindowDivInfo;
 class CSceneryMode;
 
-const int WIN_DIV_MAX = 2;			//	‰æ–Ê•ªŠ„’PˆÊ
-const int WIN_DIV_MARGIN = 5;		//	‰æ–Ê•ªŠ„—]”’
-const int WIN_DIV_PADDING = 2;		//	‰æ–Ê•ªŠ„ü•
-const int WIN_DIV_MOVE_MARGIN = 1;	//	‰æ–Ê•ªŠ„ˆÚ“®”»’è•
-const int WIN_DIV_MIN_SIZE = 50;	//	‰æ–Ê•ªŠ„Å¬ƒTƒCƒY
+const int WIN_DIV_MAX = 2;			//	ç”»é¢åˆ†å‰²å˜ä½
+const int WIN_DIV_MARGIN = 5;		//	ç”»é¢åˆ†å‰²ä½™ç™½
+const int WIN_DIV_PADDING = 2;		//	ç”»é¢åˆ†å‰²ç·šå¹…
+const int WIN_DIV_MOVE_MARGIN = 1;	//	ç”»é¢åˆ†å‰²ç§»å‹•åˆ¤å®šå¹…
+const int WIN_DIV_MIN_SIZE = 50;	//	ç”»é¢åˆ†å‰²æœ€å°ã‚µã‚¤ã‚º
 
 class CWindowInfo {
 	friend class CWindowDivInfo;

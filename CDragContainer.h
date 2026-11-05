@@ -1,28 +1,28 @@
-#ifndef CDRAGCONTAINER_H_INCLUDED
+ï»¿#ifndef CDRAGCONTAINER_H_INCLUDED
 #define CDRAGCONTAINER_H_INCLUDED
 
 const int DRAG_THD = FONT_HEIGHT/2;
 
-//	”½•œq
+//	åå¾©å­
 typedef list<DWORD>::iterator IDWORD;
 
-//	ƒhƒ‰ƒbƒOƒ^ƒCƒv
+//	ãƒ‰ãƒ©ãƒƒã‚°ã‚¿ã‚¤ãƒ—
 typedef enum{
-	DRAG_NONE = 0,	//	•s–¾
-	DRAG_PLUGIN,	//	ƒvƒ‰ƒOƒCƒ“EƒfƒBƒŒƒNƒgƒŠ
-	DRAG_INSERT,	//	“¯ˆêƒŠƒXƒg“à‘}“ü‚Ì‚İ
+	DRAG_NONE = 0,	//	ä¸æ˜
+	DRAG_PLUGIN,	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ»ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+	DRAG_INSERT,	//	åŒä¸€ãƒªã‚¹ãƒˆå†…æŒ¿å…¥ã®ã¿
 } DRAGTYPE;
 
 /*
- *	ƒhƒ‰ƒbƒOƒRƒ“ƒeƒi
+ *	ãƒ‰ãƒ©ãƒƒã‚°ã‚³ãƒ³ãƒ†ãƒŠ
  */
 class CDragContainer{
 	friend class CDragInterface;
 private:
-	static CDragContainer *ms_Drag;	//	ƒhƒ‰ƒbƒO•¨
-	DRAGTYPE m_Type;			//	ƒ^ƒCƒv
-	list<DWORD> m_Data;			//	ƒf[ƒ^
-	CDragInterface *m_Owner;	//	Š—LÒ
+	static CDragContainer *ms_Drag;	//	ãƒ‰ãƒ©ãƒƒã‚°ç‰©
+	DRAGTYPE m_Type;			//	ã‚¿ã‚¤ãƒ—
+	list<DWORD> m_Data;			//	ãƒ‡ãƒ¼ã‚¿
+	CDragInterface *m_Owner;	//	æ‰€æœ‰è€…
 public:
 	static void BeginDrag(DRAGTYPE, CDragInterface *);
 	static void EndDrag();
@@ -38,7 +38,7 @@ public:
 };
 
 /*
- *	ƒhƒ‰ƒbƒO‰Â”\ƒCƒ“ƒ^[ƒtƒFƒCƒX
+ *	ãƒ‰ãƒ©ãƒƒã‚°å¯èƒ½ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
  */
 class CDragInterface{
 protected:

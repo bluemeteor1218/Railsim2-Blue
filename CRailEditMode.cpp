@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CPopMenu.h"
 #include "CSimpleDialog.h"
 #include "CPier.h"
@@ -14,16 +14,16 @@
 #include "CPolePlugin.h"
 #include "CSkinPlugin.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void PushUndoStack();
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const int CSR_MOVE_TSD;
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CLinePlugin *g_Line;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 bool g_ShowRailSelect = false;
 bool g_ShowRailWaySelect = false;
 bool g_ShowRailBlockSelect = false;
@@ -32,13 +32,13 @@ bool g_ShowPierSelect = false;
 bool g_ShowPoleSelect = false;
 bool g_ShowLineSelect = false;
 bool g_ShowWarpSelect = false;
-int g_RailEditModalState;					//	ƒ‚[ƒ_ƒ‹ó‘Ô
-string g_RailEditTempString;				//	ƒeƒ“ƒ|ƒ‰ƒŠ•¶š—ñ
-CYesNoDialog *g_RailEditYesNoDialog = NULL;	//	–â‡‚¹ƒ_ƒCƒAƒƒO
-CInputDialog *g_RailEditInputDialog = NULL;	//	“ü—Íƒ_ƒCƒAƒƒO
+int g_RailEditModalState;					//	ãƒ¢ãƒ¼ãƒ€ãƒ«çŠ¶æ…‹
+string g_RailEditTempString;				//	ãƒ†ãƒ³ãƒãƒ©ãƒªæ–‡å­—åˆ—
+CYesNoDialog *g_RailEditYesNoDialog = NULL;	//	å•åˆã›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
+CInputDialog *g_RailEditInputDialog = NULL;	//	å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 /*
- *	ƒŒ[ƒ‹‘I‘ğ•\¦ó‘ÔƒŠƒZƒbƒg
+ *	ãƒ¬ãƒ¼ãƒ«é¸æŠè¡¨ç¤ºçŠ¶æ…‹ãƒªã‚»ãƒƒãƒˆ
  */
 void ResetShowRailSelect(){
 	g_ShowRailSelect = false;
@@ -52,7 +52,7 @@ void ResetShowRailSelect(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailEditMode::CRailEditMode(){
 	int i, gww = TILE_UNIT*14, gwh = TILE_UNIT*(3+6);
@@ -113,7 +113,7 @@ CRailEditMode::CRailEditMode(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailEditMode::~CRailEditMode(){
 	DELETE_V(m_RailBlockMenu);
@@ -121,7 +121,7 @@ CRailEditMode::~CRailEditMode(){
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CRailEditMode::EnterCursorScenery(){
 	ms_ModeLabel = lang(EditRail);
@@ -135,7 +135,7 @@ void CRailEditMode::EnterCursorScenery(){
 }
 
 /*
- *	ƒ‚[ƒ_ƒ‹ˆ—
+ *	ãƒ¢ãƒ¼ãƒ€ãƒ«å‡¦ç†
  */
 void CRailEditMode::ModalFuncCursorScenery(){
 	bool changed = false;
@@ -166,7 +166,7 @@ void CRailEditMode::ModalFuncCursorScenery(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CRailEditMode::ScanInputCursorScenery(){
 	POINT pos = g_Cursor.GetPos();
@@ -470,7 +470,7 @@ void CRailEditMode::ScanInputCursorScenery(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CRailEditMode::RenderCursorScenery(){
 	if(ms_PhotoMode) return;

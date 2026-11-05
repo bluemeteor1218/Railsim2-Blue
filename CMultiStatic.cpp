@@ -1,18 +1,18 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CMultiStatic.h"
 #include "CSkinPlugin.h"
 
-//	“à•”’è”
-const int MULTISTATIC_MARGIN = 2;	//	—]”’
+//	å†…éƒ¨å®šæ•°
+const int MULTISTATIC_MARGIN = 2;	//	ä½™ç™½
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CMultiStatic::Init(
-	int x, int y,	//	À•W
-	int w, int h,	//	ƒTƒCƒY
-	CInterface *p,	//	e
-	int lh			//	s‚‚³
+	int x, int y,	//	åº§æ¨™
+	int w, int h,	//	ã‚µã‚¤ã‚º
+	CInterface *p,	//	è¦ª
+	int lh			//	è¡Œé«˜ã•
 ){
 	CInterface::Init(x, y, w, h, "", p);
 	LinkTab(true);
@@ -21,10 +21,10 @@ void CMultiStatic::Init(
 }
 
 /*
- *	ƒTƒCƒY•ÏX
+ *	ã‚µã‚¤ã‚ºå¤‰æ›´
  */
 void CMultiStatic::SetSize(
-	int w, int h	//	V‹KƒTƒCƒY
+	int w, int h	//	æ–°è¦ã‚µã‚¤ã‚º
 ){
 	m_Width = w; m_Height = h;
 	m_ScrollV.SetPos(m_Width-TILE_UNIT, 0);
@@ -34,10 +34,10 @@ void CMultiStatic::SetSize(
 }
 
 /*
- *	ƒeƒLƒXƒgİ’è
+ *	ãƒ†ã‚­ã‚¹ãƒˆè¨­å®š
  */
 void CMultiStatic::SetText(
-	char *t	//	ƒeƒNƒXƒg
+	char *t	//	ãƒ†ã‚¯ã‚¹ãƒˆ
 ){
 	if(t) m_Text = t;
 	m_LineText.clear();
@@ -64,7 +64,7 @@ void CMultiStatic::SetText(
 }
 
 /*
- *	ƒXƒNƒ[ƒ‹ƒo[‚ÌXV
+ *	ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã®æ›´æ–°
  */
 void CMultiStatic::SetScroll(){
 	m_Lines = (m_Height-MULTISTATIC_MARGIN*2)/m_LineHeight;
@@ -73,10 +73,10 @@ void CMultiStatic::SetScroll(){
 }
 
 /*
- *	w’èÀ•W‚ªƒŠƒXƒg“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒãƒªã‚¹ãƒˆå†…ã‹èª¿ã¹ã‚‹
  */
 bool CMultiStatic::IsInsideList(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	int px, py;
 	GetAbsPos(&px, &py);
@@ -84,7 +84,7 @@ bool CMultiStatic::IsInsideList(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CMultiStatic::ScanInput(){
 	POINT pos = g_Cursor.GetPos();
@@ -112,7 +112,7 @@ bool CMultiStatic::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CMultiStatic::Render(){
 	CInterface::RenderBrother();

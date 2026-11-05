@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "RSPV.h"
 #include "CPluginTree.h"
 #include "CScene.h"
@@ -16,60 +16,60 @@
 #include "CEnvPlugin.h"
 #include "CGameMode.h"
 
-//	“à•”’è”
-extern const float RAILSIM_VERSION = 2.15f;	//	–{‘Ìƒo[ƒWƒ‡ƒ“
-extern const char* VERSION_STRING = "2.15";	//	•\Ž¦ƒo[ƒWƒ‡ƒ“•¶Žš—ñ (2.00a “™‚ÌƒoƒOC³ƒR[ƒh‚ðŠÜ‚Þ) 
+//	å†…éƒ¨å®šæ•°
+extern const float RAILSIM_VERSION = 2.15f;	//	æœ¬ä½“ãƒãƒ¼ã‚¸ãƒ§ãƒ³
+extern const char* VERSION_STRING = "2.15";	//	è¡¨ç¤ºãƒãƒ¼ã‚¸ãƒ§ãƒ³æ–‡å­—åˆ— (2.00a ç­‰ã®ãƒã‚°ä¿®æ­£ã‚³ãƒ¼ãƒ‰ã‚’å«ã‚€) 
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern char *g_PluginViewArg;
 extern string g_SelectedSkin;
 extern bool g_CursorLockable;
 
-//	“à•”ƒOƒ[ƒoƒ‹
-int g_RSPV = RSPV_NONE;						//	RSPV ƒ‚[ƒh
-HFONT g_TempFont = NULL;					//	‰ŠúƒtƒHƒ“ƒg
-CCursor g_Cursor;							//	ƒJ[ƒ\ƒ‹
-CStringTexture *g_StrTex = NULL;			//	•¶ŽšƒeƒNƒXƒ`ƒƒ	
-CRailPlugin *g_Rail = NULL;					//	ƒJƒŒƒ“ƒgƒŒ[ƒ‹
-CTiePlugin *g_Tie = NULL;					//	ƒJƒŒƒ“ƒg––Ø
-CGirderPlugin *g_Girder = NULL;				//	ƒJƒŒƒ“ƒg‹´Œ…
-CPierPlugin *g_Pier = NULL;					//	ƒJƒŒƒ“ƒg‹´‹r
-CLinePlugin *g_Line = NULL;					//	ƒJƒŒƒ“ƒg‰Ëü
-CPolePlugin *g_Pole = NULL;					//	ƒJƒŒƒ“ƒg‰Ëü’Œ
-CSurfacePlugin *g_DefaultSurface = NULL;	//	ƒfƒtƒHƒ‹ƒgƒT[ƒtƒFƒCƒX
-CEnvPlugin *g_DefaultEnv = NULL;			//	ƒfƒtƒHƒ‹ƒgŠÂ‹«
-CSaveFile *g_SaveFile = NULL;				//	ƒJƒŒƒ“ƒgƒtƒ@ƒCƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+int g_RSPV = RSPV_NONE;						//	RSPV ãƒ¢ãƒ¼ãƒ‰
+HFONT g_TempFont = NULL;					//	åˆæœŸãƒ•ã‚©ãƒ³ãƒˆ
+CCursor g_Cursor;							//	ã‚«ãƒ¼ã‚½ãƒ«
+CStringTexture *g_StrTex = NULL;			//	æ–‡å­—ãƒ†ã‚¯ã‚¹ãƒãƒ£	
+CRailPlugin *g_Rail = NULL;					//	ã‚«ãƒ¬ãƒ³ãƒˆãƒ¬ãƒ¼ãƒ«
+CTiePlugin *g_Tie = NULL;					//	ã‚«ãƒ¬ãƒ³ãƒˆæž•æœ¨
+CGirderPlugin *g_Girder = NULL;				//	ã‚«ãƒ¬ãƒ³ãƒˆæ©‹æ¡
+CPierPlugin *g_Pier = NULL;					//	ã‚«ãƒ¬ãƒ³ãƒˆæ©‹è„š
+CLinePlugin *g_Line = NULL;					//	ã‚«ãƒ¬ãƒ³ãƒˆæž¶ç·š
+CPolePlugin *g_Pole = NULL;					//	ã‚«ãƒ¬ãƒ³ãƒˆæž¶ç·šæŸ±
+CSurfacePlugin *g_DefaultSurface = NULL;	//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚µãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
+CEnvPlugin *g_DefaultEnv = NULL;			//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆç’°å¢ƒ
+CSaveFile *g_SaveFile = NULL;				//	ã‚«ãƒ¬ãƒ³ãƒˆãƒ•ã‚¡ã‚¤ãƒ«
 
-string g_SelectedRailID;	//	‘I‘ðƒŒ[ƒ‹ ID
-string g_SelectedTieID;		//	‘I‘ð––Ø ID
-string g_SelectedGirderID;	//	‘I‘ð‹´Œ… ID
-string g_SelectedPierID;	//	‘I‘ð‹´‹r ID
-string g_SelectedLineID;	//	‘I‘ð‰Ëü ID
-string g_SelectedPoleID;	//	‘I‘ð‰Ëü’Œ ID
-string g_SelectedTrainID;	//	‘I‘ðŽÔçq ID
-string g_SelectedStationID;	//	‘I‘ð‰wŽÉ ID
-string g_SelectedStructID;	//	‘I‘ðŽ{Ý ID
-string g_SelectedSurfaceID;	//	‘I‘ð’nŒ` ID
-string g_SelectedEnvID;		//	‘I‘ð’nŒ` ID
-string g_SelectedSkinID;	//	‘I‘ðƒXƒLƒ“ ID
+string g_SelectedRailID;	//	é¸æŠžãƒ¬ãƒ¼ãƒ« ID
+string g_SelectedTieID;		//	é¸æŠžæž•æœ¨ ID
+string g_SelectedGirderID;	//	é¸æŠžæ©‹æ¡ ID
+string g_SelectedPierID;	//	é¸æŠžæ©‹è„š ID
+string g_SelectedLineID;	//	é¸æŠžæž¶ç·š ID
+string g_SelectedPoleID;	//	é¸æŠžæž¶ç·šæŸ± ID
+string g_SelectedTrainID;	//	é¸æŠžè»Šè¼Œ ID
+string g_SelectedStationID;	//	é¸æŠžé§…èˆŽ ID
+string g_SelectedStructID;	//	é¸æŠžæ–½è¨­ ID
+string g_SelectedSurfaceID;	//	é¸æŠžåœ°å½¢ ID
+string g_SelectedEnvID;		//	é¸æŠžåœ°å½¢ ID
+string g_SelectedSkinID;	//	é¸æŠžã‚¹ã‚­ãƒ³ ID
 
-CRailPluginList *g_RailPluginList;			//	ƒŒ[ƒ‹ƒŠƒXƒg
-CTiePluginList *g_TiePluginList;			//	––ØƒŠƒXƒg
-CGirderPluginList *g_GirderPluginList;		//	‹´Œ…ƒŠƒXƒg
-CPierPluginList *g_PierPluginList;			//	‹´‹rƒŠƒXƒg
-CLinePluginList *g_LinePluginList;			//	‰ËüƒŠƒXƒg
-CPolePluginList *g_PolePluginList;			//	‰Ëü’ŒƒŠƒXƒg
-CTrainPluginList *g_TrainPluginList;		//	ŽÔçqƒŠƒXƒg
-CStationPluginList *g_StationPluginList;	//	‰wŽÉƒŠƒXƒg
-CStructPluginList *g_StructPluginList;		//	Ž{ÝƒŠƒXƒg
-CSurfacePluginList *g_SurfacePluginList;	//	’nŒ`ƒŠƒXƒg
-CEnvPluginList *g_EnvPluginList;			//	’nŒ`ƒŠƒXƒg
-CSkinPluginList *g_SkinPluginList;			//	ƒXƒLƒ“ƒŠƒXƒg
+CRailPluginList *g_RailPluginList;			//	ãƒ¬ãƒ¼ãƒ«ãƒªã‚¹ãƒˆ
+CTiePluginList *g_TiePluginList;			//	æž•æœ¨ãƒªã‚¹ãƒˆ
+CGirderPluginList *g_GirderPluginList;		//	æ©‹æ¡ãƒªã‚¹ãƒˆ
+CPierPluginList *g_PierPluginList;			//	æ©‹è„šãƒªã‚¹ãƒˆ
+CLinePluginList *g_LinePluginList;			//	æž¶ç·šãƒªã‚¹ãƒˆ
+CPolePluginList *g_PolePluginList;			//	æž¶ç·šæŸ±ãƒªã‚¹ãƒˆ
+CTrainPluginList *g_TrainPluginList;		//	è»Šè¼Œãƒªã‚¹ãƒˆ
+CStationPluginList *g_StationPluginList;	//	é§…èˆŽãƒªã‚¹ãƒˆ
+CStructPluginList *g_StructPluginList;		//	æ–½è¨­ãƒªã‚¹ãƒˆ
+CSurfacePluginList *g_SurfacePluginList;	//	åœ°å½¢ãƒªã‚¹ãƒˆ
+CEnvPluginList *g_EnvPluginList;			//	åœ°å½¢ãƒªã‚¹ãƒˆ
+CSkinPluginList *g_SkinPluginList;			//	ã‚¹ã‚­ãƒ³ãƒªã‚¹ãƒˆ
 
-CTexture g_OpeningTexture;	//	ƒI[ƒvƒjƒ“ƒO—p‰æ‘œ
+CTexture g_OpeningTexture;	//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ç”¨ç”»åƒ
 
 /*
- *	ƒI[ƒvƒjƒ“ƒOƒAƒjƒ[ƒVƒ‡ƒ“
+ *	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
  */
 void Opening(){
 	static int cnt = 0, loading = 0;
@@ -147,7 +147,7 @@ void Opening(){
 }
 
 /*
- *	ƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg
+ *	ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒã‚¤ãƒ³ãƒˆ
  */
 void Main(){
 	SetListenerSens(10.0f);
@@ -160,7 +160,7 @@ void Main(){
 	g_TempFont = CreateFont(FONT_HEIGHT, 0, 0, 0,
 		FW_REGULAR, FALSE, FALSE, FALSE, SHIFTJIS_CHARSET,
 		OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, PROOF_QUALITY,
-		VARIABLE_PITCH|FF_MODERN, NULL/*"‚l‚r ‚oƒSƒVƒbƒN"*/);
+		VARIABLE_PITCH|FF_MODERN, NULL/*"ï¼­ï¼³ ï¼°ã‚´ã‚·ãƒƒã‚¯"*/);
 	g_StrTex = new CStringTexture(FONT_HEIGHT, 1);
 	g_StrTex->SetFont(g_TempFont);
 	CSkinPlugin *skin = NULL;
@@ -335,7 +335,7 @@ void Main(){
 }
 
 /*
- *	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“‚ÌŠÖ˜AƒCƒ“ƒXƒ^ƒ“ƒX‚ð‰ð•ú
+ *	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®é–¢é€£ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’è§£æ”¾
  */
 void ModelPluginFreeInst(){
 	if(g_Train) g_Train->FreeInst();
@@ -345,7 +345,7 @@ void ModelPluginFreeInst(){
 }
 
 /*
- *	Œ»Ý‘I‘ð‚³‚ê‚Ä‚¢‚éƒvƒ‰ƒOƒCƒ“‚Ì ID ‚ðƒZƒbƒg
+ *	ç¾åœ¨é¸æŠžã•ã‚Œã¦ã„ã‚‹ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã® ID ã‚’ã‚»ãƒƒãƒˆ
  */
 void SetCurrentPluginID(){
 	g_SelectedRailID = g_Rail ? g_Rail->GetID() : "";

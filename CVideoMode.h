@@ -1,4 +1,4 @@
-#ifndef CVIDEOMODE_H_INCLUDED
+ï»¿#ifndef CVIDEOMODE_H_INCLUDED
 #define CVIDEOMODE_H_INCLUDED
 
 #include "CStaticCtrl.h"
@@ -9,30 +9,30 @@
 #include "CInterfaceMode.h"
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“İ’èƒ‚[ƒh
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³è¨­å®šãƒ¢ãƒ¼ãƒ‰
  */
 class CVideoMode: public CInterfaceMode{
 private:
-	CWindowCtrl m_VideoWindow;		//	‘‹
-	CGroupBox m_PictureGroup;		//	ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgƒOƒ‹[ƒv
-	CStaticCtrl m_PictureExpr;		//	ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgà–¾
-	CStaticCtrl m_PictureInfo;		//	ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgó‘Ô
-	CStaticCtrl m_QualityLabel;		//	‰æ¿ƒ‰ƒxƒ‹
-	CRadioButton m_Quality[4];		//	‰æ¿ƒ`ƒFƒbƒN
-	CGroupBox m_VideoGroup;			//	‘¬“xƒOƒ‹[ƒv
-	CStaticCtrl m_VideoExpr;		//	ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgà–¾
-	CStaticCtrl m_VideoInfo;		//	ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgó‘Ô
-	CPushButton m_StartButton;		//	˜^‰æŠJnƒ{ƒ^ƒ“
-	CPushButton m_StopButton;		//	˜^‰æ’â~ƒ{ƒ^ƒ“
-	CPushButton m_RewindButton;		//	Šª–ß‚µƒ{ƒ^ƒ“
-	CPushButton m_ForwardButton;	//	‘‘—‚èƒ{ƒ^ƒ“
-	CCheckBox m_ExceptPause;		//	ƒ|[ƒY’†B‰e‚µ‚È‚¢
-	CCheckBox m_OnlyPhotoMode;		//	B‰eƒ‚[ƒhˆÈŠOB‰e‚µ‚È‚¢
-	CStaticCtrl m_DownsampleLabel;	//	ƒ_ƒEƒ“ƒTƒ“ƒvƒ‹ƒ‰ƒxƒ‹
-	CRadioButton m_Downsample[3];	//	ƒ_ƒEƒ“ƒTƒ“ƒvƒ‹ƒ`ƒFƒbƒN
-	CStaticCtrl m_FormatLabel;		//	ƒtƒH[ƒ}ƒbƒgƒ‰ƒxƒ‹
-	CRadioButton m_Format[2];		//	ƒtƒH[ƒ}ƒbƒgƒ`ƒFƒbƒN
-	//CCheckBox m_VideoSound;			//	˜^‰¹ƒ`ƒFƒbƒN
+	CWindowCtrl m_VideoWindow;		//	çª“
+	CGroupBox m_PictureGroup;		//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã‚°ãƒ«ãƒ¼ãƒ—
+	CStaticCtrl m_PictureExpr;		//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆèª¬æ˜
+	CStaticCtrl m_PictureInfo;		//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆçŠ¶æ…‹
+	CStaticCtrl m_QualityLabel;		//	ç”»è³ªãƒ©ãƒ™ãƒ«
+	CRadioButton m_Quality[4];		//	ç”»è³ªãƒã‚§ãƒƒã‚¯
+	CGroupBox m_VideoGroup;			//	é€Ÿåº¦ã‚°ãƒ«ãƒ¼ãƒ—
+	CStaticCtrl m_VideoExpr;		//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆèª¬æ˜
+	CStaticCtrl m_VideoInfo;		//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆçŠ¶æ…‹
+	CPushButton m_StartButton;		//	éŒ²ç”»é–‹å§‹ãƒœã‚¿ãƒ³
+	CPushButton m_StopButton;		//	éŒ²ç”»åœæ­¢ãƒœã‚¿ãƒ³
+	CPushButton m_RewindButton;		//	å·»æˆ»ã—ãƒœã‚¿ãƒ³
+	CPushButton m_ForwardButton;	//	æ—©é€ã‚Šãƒœã‚¿ãƒ³
+	CCheckBox m_ExceptPause;		//	ãƒãƒ¼ã‚ºä¸­æ’®å½±ã—ãªã„
+	CCheckBox m_OnlyPhotoMode;		//	æ’®å½±ãƒ¢ãƒ¼ãƒ‰ä»¥å¤–æ’®å½±ã—ãªã„
+	CStaticCtrl m_DownsampleLabel;	//	ãƒ€ã‚¦ãƒ³ã‚µãƒ³ãƒ—ãƒ«ãƒ©ãƒ™ãƒ«
+	CRadioButton m_Downsample[3];	//	ãƒ€ã‚¦ãƒ³ã‚µãƒ³ãƒ—ãƒ«ãƒã‚§ãƒƒã‚¯
+	CStaticCtrl m_FormatLabel;		//	ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãƒ©ãƒ™ãƒ«
+	CRadioButton m_Format[2];		//	ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãƒã‚§ãƒƒã‚¯
+	//CCheckBox m_VideoSound;			//	éŒ²éŸ³ãƒã‚§ãƒƒã‚¯
 public:
 	CVideoMode();
 	~CVideoMode(){}
@@ -49,7 +49,7 @@ public:
 //	int GetVideoSound(){ return m_VideoSound.GetCheck(); }
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CVideoMode *g_VideoMode;
 
 #endif

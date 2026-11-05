@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCamera.h"
 #include "CInterface.h"
 #include "CScene.h"
@@ -6,46 +6,46 @@
 #include "CSkinPlugin.h"
 #include "CNeutralMode.h"
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const float CLIP_PLANE_NEAR;
 extern const float CLIP_PLANE_FAR;
 extern const float FOV_DEF;
 
-//	“à•”’è”
-extern const float CAM_PAN = 0.001f;		//	ƒJƒƒ‰ƒpƒ“
-const float CAM_HEAD = 0.001f;				//	ƒwƒbƒhŠ´“x
-const float CAM_PITCH = 0.001f;				//	ƒsƒbƒ`Š´“x
-//const float CAM_BANK = 0.001f;			//	ƒoƒ“ƒNŠ´“x
-const float CAM_FOWARD = 0.0001f;			//	‘OŒãŠ´“x
-const float CAM_ZOOM = 0.00002f;			//	ƒY[ƒ€Š´“x
-const float FOV_MIN = D3DXToRadian(0.1f);	//	Å¬‹–ìŠp
-const float FOV_MAX = D3DXToRadian(179.0f);	//	Å‘å‹–ìŠp
-const int CAM_EDGE_MOVE = 20;				//	‰æ–Ê’[ˆÚ“®‘¬“x
+//	å†…éƒ¨å®šæ•°
+extern const float CAM_PAN = 0.001f;		//	ã‚«ãƒ¡ãƒ©ãƒ‘ãƒ³
+const float CAM_HEAD = 0.001f;				//	ãƒ˜ãƒƒãƒ‰æ„Ÿåº¦
+const float CAM_PITCH = 0.001f;				//	ãƒ”ãƒƒãƒæ„Ÿåº¦
+//const float CAM_BANK = 0.001f;			//	ãƒãƒ³ã‚¯æ„Ÿåº¦
+const float CAM_FOWARD = 0.0001f;			//	å‰å¾Œæ„Ÿåº¦
+const float CAM_ZOOM = 0.00002f;			//	ã‚ºãƒ¼ãƒ æ„Ÿåº¦
+const float FOV_MIN = D3DXToRadian(0.1f);	//	æœ€å°è¦–é‡è§’
+const float FOV_MAX = D3DXToRadian(179.0f);	//	æœ€å¤§è¦–é‡è§’
+const int CAM_EDGE_MOVE = 20;				//	ç”»é¢ç«¯ç§»å‹•é€Ÿåº¦
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_HidefCaptureFlag;
 extern int g_HidefBufferSize;
 extern int g_HidefQuality;
 extern float g_HidefLeft, g_HidefRight;
 extern float g_HidefBottom, g_HidefTop;
 
-//	“à•”ƒOƒ[ƒoƒ‹
-float g_FovRatio;	//	‹–ìŠp—¦
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+float g_FovRatio;	//	è¦–é‡è§’ç‡
 float g_StereoInterval = 0.0f;
-D3DCOLORVALUE g_LightColor = {1.0f, 1.0f, 1.0f, 0.0f};	//	ŒõŒ¹F
+D3DCOLORVALUE g_LightColor = {1.0f, 1.0f, 1.0f, 0.0f};	//	å…‰æºè‰²
 MTX4 g_BoldLineMtx[8][8];
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CCamera *CCamera::ms_CurrentCamera = NULL;
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CCamera::Init(
-	float defdist,	//	Šù’è‹——£
-	float mindist,	//	Å¬‹——£
-	float maxdist,	//	Å‘å‹——£
-	bool clip		//	ƒNƒŠƒbƒvİ’è
+	float defdist,	//	æ—¢å®šè·é›¢
+	float mindist,	//	æœ€å°è·é›¢
+	float maxdist,	//	æœ€å¤§è·é›¢
+	bool clip		//	ã‚¯ãƒªãƒƒãƒ—è¨­å®š
 ){
 	m_LeftState = m_MiddleState = m_RightState = 0;
 	m_DefDist = defdist;
@@ -61,11 +61,11 @@ void CCamera::Init(
 }
 
 /*
- *	ƒJƒƒ‰‚ğƒŠƒZƒbƒg
+ *	ã‚«ãƒ¡ãƒ©ã‚’ãƒªã‚»ãƒƒãƒˆ
  */
 void CCamera::ResetCamera(
-	float head, float pitch, float bank,	//	Šp“x
-	float dist								//	‹——£
+	float head, float pitch, float bank,	//	è§’åº¦
+	float dist								//	è·é›¢
 ){
 	m_PrintInfoTime = 0;
 	m_Head = head;
@@ -78,7 +78,7 @@ void CCamera::ResetCamera(
 }
 
 /*
- *	ƒtƒH[ƒJƒXˆÚ“®æİ’è
+ *	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ç§»å‹•å…ˆè¨­å®š
  */
 void CCamera::SetFocusTarget(
 	VEC3 f, float s
@@ -88,10 +88,10 @@ void CCamera::SetFocusTarget(
 }
 
 /*
- *	ƒtƒH[ƒJƒXƒCƒ“ƒXƒ^ƒ“ƒXİ’è
+ *	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹è¨­å®š
  */
 void CCamera::SetFocusInfo(
-	CDetectInfo &info	//	ƒtƒH[ƒJƒXî•ñ
+	CDetectInfo &info	//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹æƒ…å ±
 ){
 	bool flag;
 	if(flag = !GetFocusInst() && info.GetModelInst()){
@@ -104,10 +104,10 @@ void CCamera::SetFocusInfo(
 }
 
 /*
- *	ƒI[ƒgƒY[ƒ€İ’è
+ *	ã‚ªãƒ¼ãƒˆã‚ºãƒ¼ãƒ è¨­å®š
  */
 void CCamera::SetAutoZoom(
-	bool z	//	ƒtƒ‰ƒO
+	bool z	//	ãƒ•ãƒ©ã‚°
 ){
 	if(m_AutoZoom = z) m_AutoZoomBaseDist = m_Dist;
 	else m_FieldOfView = m_FieldOfViewEffect;
@@ -115,11 +115,11 @@ void CCamera::SetAutoZoom(
 }
 
 /*
- *	ƒ[ƒJƒ‹§Œäİ’è
+ *	ãƒ­ãƒ¼ã‚«ãƒ«åˆ¶å¾¡è¨­å®š
  */
 void CCamera::SetLocalFocus(
-	int l,			//	§Œäƒ‚[ƒh
-	CObject *tlocal	//	ƒ[ƒJƒ‹Œn’¼Úw’è
+	int l,			//	åˆ¶å¾¡ãƒ¢ãƒ¼ãƒ‰
+	CObject *tlocal	//	ãƒ­ãƒ¼ã‚«ãƒ«ç³»ç›´æ¥æŒ‡å®š
 ){
 	m_LocalFocus = l;
 	InvCalcParam(tlocal);
@@ -127,7 +127,7 @@ void CCamera::SetLocalFocus(
 }
 
 /*
- *	ƒ‰ƒCƒg‚ğƒŠƒZƒbƒg
+ *	ãƒ©ã‚¤ãƒˆã‚’ãƒªã‚»ãƒƒãƒˆ
  */
 void CCamera::ResetLight(){
 	m_LightSwitch = true;
@@ -136,10 +136,10 @@ void CCamera::ResetLight(){
 }
 
 /*
- *	ƒ‰ƒCƒg‚ğ˜A“®
+ *	ãƒ©ã‚¤ãƒˆã‚’é€£å‹•
  */
 void CCamera::LinkLight(
-	bool link	//	ƒŠƒ“ƒNƒtƒ‰ƒO
+	bool link	//	ãƒªãƒ³ã‚¯ãƒ•ãƒ©ã‚°
 ){
 	if(link==m_LinkLight) return;
 	if(link){
@@ -154,10 +154,10 @@ void CCamera::LinkLight(
 }
 
 /*
- *	ƒpƒ‰ƒ[ƒ^‚ğ‹tŒvZ
+ *	ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’é€†è¨ˆç®—
  */
 void CCamera::InvCalcParam(
-	CObject *tlocal	//	ƒ[ƒJƒ‹Œn’¼Úw’è
+	CObject *tlocal	//	ãƒ­ãƒ¼ã‚«ãƒ«ç³»ç›´æ¥æŒ‡å®š
 ){
 	VEC3 dir = m_Focus-m_CameraPos;
 	V3Norm(&dir, &dir);
@@ -191,7 +191,7 @@ void CCamera::InvCalcParam(
 }
 
 /*
- *	‘I‘ğ
+ *	é¸æŠ
  */
 void CCamera::Select(){
 	ms_CurrentCamera = this;
@@ -202,11 +202,11 @@ void CCamera::Select(){
 }
 
 /*
- *	ƒJƒƒ‰İ’è
+ *	ã‚«ãƒ¡ãƒ©è¨­å®š
  */
 void CCamera::Apply(
-	bool light,		//	ƒ‰ƒCƒgİ’èƒtƒ‰ƒO
-	CObject *tlocal	//	ƒ[ƒJƒ‹Œn’¼Úw’è
+	bool light,		//	ãƒ©ã‚¤ãƒˆè¨­å®šãƒ•ãƒ©ã‚°
+	CObject *tlocal	//	ãƒ­ãƒ¼ã‚«ãƒ«ç³»ç›´æ¥æŒ‡å®š
 ){
 	if(GetFocusInst()){
 		if(GetFocusInst()->GetScene()){
@@ -290,11 +290,11 @@ void CCamera::Apply(
 }
 
 /*
- *	ƒvƒƒWƒFƒNƒVƒ‡ƒ“İ’è
+ *	ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¨­å®š
  */
 void CCamera::ApplyProjection(
-	float nearclip,	//	‹ß‹——£ƒNƒŠƒbƒv
-	CObject *tlocal	//	ƒ[ƒJƒ‹Œn’¼Úw’è
+	float nearclip,	//	è¿‘è·é›¢ã‚¯ãƒªãƒƒãƒ—
+	CObject *tlocal	//	ãƒ­ãƒ¼ã‚«ãƒ«ç³»ç›´æ¥æŒ‡å®š
 ){
 	D3DVIEWPORT8 vp;
 	sv3.pDev->GetViewport(&vp);
@@ -331,10 +331,10 @@ void CCamera::ApplyProjection(
 }
 
 /*
- *	î•ñ•\¦
+ *	æƒ…å ±è¡¨ç¤º
  */
 void CCamera::PrintInfo(
-	bool ext	//	Šg’£§Œäî•ñ•\¦
+	bool ext	//	æ‹¡å¼µåˆ¶å¾¡æƒ…å ±è¡¨ç¤º
 ){
 	if(m_PrintInfoTime<=0) return;
 	static char *onoff[2] = {"OFF", "ON"};
@@ -376,10 +376,10 @@ void CCamera::PrintInfo(
 }
 
 /*
- *	ƒ[ƒJƒ‹Ø‘Ö“ü—Íƒ`ƒFƒbƒN
+ *	ãƒ­ãƒ¼ã‚«ãƒ«åˆ‡æ›¿å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CCamera::ControlLocal(
-	CObject *tlocal	//	ƒ[ƒJƒ‹Œn’¼Úw’è
+	CObject *tlocal	//	ãƒ­ãƒ¼ã‚«ãƒ«ç³»ç›´æ¥æŒ‡å®š
 ){
 	if(GetKey(DIK_HOME)==S_PUSH){
 		if(CheckCtrl()) SetLockPos(!GetLockPos());
@@ -389,11 +389,11 @@ void CCamera::ControlLocal(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 int CCamera::ScanInput(
-	int mode,		//	ƒ‚[ƒh (0: pan, 1: slide, 2: arrow, 3: slide(middle), 4: zoom only)
-	CObject *tlocal	//	ƒ[ƒJƒ‹Œn’¼Úw’è
+	int mode,		//	ãƒ¢ãƒ¼ãƒ‰ (0: pan, 1: slide, 2: arrow, 3: slide(middle), 4: zoom only)
+	CObject *tlocal	//	ãƒ­ãƒ¼ã‚«ãƒ«ç³»ç›´æ¥æŒ‡å®š
 ){
 	bool clipping = false;
 	int ret = 0, wh = CInterface::GetFocus() ? 0 : GetWheel();
@@ -558,11 +558,11 @@ int CCamera::ScanInput(
 }
 
 /*
- *	ƒXƒ‰ƒCƒh‘€ì
+ *	ã‚¹ãƒ©ã‚¤ãƒ‰æ“ä½œ
  */
 void CCamera::Slide(
-	int mode,		//	ƒ‚[ƒh (0: pan, 1: slide, 2: arrow, 3: slide(middle))
-	CObject *tlocal	//	ƒ[ƒJƒ‹Œn’¼Úw’è
+	int mode,		//	ãƒ¢ãƒ¼ãƒ‰ (0: pan, 1: slide, 2: arrow, 3: slide(middle))
+	CObject *tlocal	//	ãƒ­ãƒ¼ã‚«ãƒ«ç³»ç›´æ¥æŒ‡å®š
 ){
 	float ratio = CheckFast();
 	POINT delta = g_Cursor.GetDelta();
@@ -590,10 +590,10 @@ void CCamera::Slide(
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CCamera::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "Camera"))) return NULL;
@@ -607,11 +607,11 @@ char *CCamera::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CCamera::Save(
-	FILE *df,		//	ƒtƒ@ƒCƒ‹
-	string indent	//	ƒCƒ“ƒfƒ“ƒg
+	FILE *df,		//	ãƒ•ã‚¡ã‚¤ãƒ«
+	string indent	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
 ){
 	fprintf(df, "%sCamera{\n", indent.c_str());
 	fprintf(df, "%s\tHead = %f;\n", indent.c_str(), m_Head);

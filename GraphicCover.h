@@ -1,4 +1,4 @@
-#ifndef GRAPHICCOVER_H_INCLUDED
+ï»¿#ifndef GRAPHICCOVER_H_INCLUDED
 #define GRAPHICCOVER_H_INCLUDED
 
 class CLineDumpL;
@@ -20,14 +20,14 @@ void CastShadow(CObject *);
 void RenderShadow();
 
 /*
- *	Šp“x³‹K‰» (0`2PI ‚É‚¨‚³‚ß‚é)
+ *	è§’åº¦æ­£è¦åŒ– (0ï½2PI ã«ãŠã•ã‚ã‚‹)
  */
 inline float NormAngle(double a){
 	return (float)(a-2.0f*D3DX_PI*ceil(a/(2.0*D3DX_PI)));
 }
 
 /*
- *	‹ŠE‘O•û…•½ƒxƒNƒgƒ‹
+ *	è¦–ç•Œå‰æ–¹æ°´å¹³ãƒ™ã‚¯ãƒˆãƒ«
  */
 inline VEC3 GetVFow(){
 	VEC3 fow = GetVDir();
@@ -37,7 +37,7 @@ inline VEC3 GetVFow(){
 }
 
 /*
- *	ƒxƒNƒgƒ‹³‹K’¼Œğ‰» (dir ¨ up ¨ right ‚Ì‡‚Å•Û‘¶)
+ *	ãƒ™ã‚¯ãƒˆãƒ«æ­£è¦ç›´äº¤åŒ– (dir â†’ up â†’ right ã®é †ã§ä¿å­˜)
  */
 inline void V3NormAxis(VEC3 *r, VEC3 *u, VEC3 *d){
 	V3Norm(r, V3Cross(r, u, V3Norm(d, d)));
@@ -45,7 +45,7 @@ inline void V3NormAxis(VEC3 *r, VEC3 *u, VEC3 *d){
 }
 
 /*
- *	ƒxƒNƒgƒ‹‚ğƒ[ƒJƒ‹Œn‚É•ÏŠ·
+ *	ãƒ™ã‚¯ãƒˆãƒ«ã‚’ãƒ­ãƒ¼ã‚«ãƒ«ç³»ã«å¤‰æ›
  */
 inline VEC3 V3WorldToLocal(VEC3 *v, VEC3 *r, VEC3 *u, VEC3 *d){
 	return VEC3(V3Dot(v, r), V3Dot(v, u), V3Dot(v, d));
@@ -56,7 +56,7 @@ inline VEC3 V3WorldToLocal(VEC3 *v, CObject *obj){
 }
 
 /*
- *	ƒxƒNƒgƒ‹‚ğƒ[ƒ‹ƒhŒn‚É•ÏŠ·
+ *	ãƒ™ã‚¯ãƒˆãƒ«ã‚’ãƒ¯ãƒ¼ãƒ«ãƒ‰ç³»ã«å¤‰æ›
  */
 inline VEC3 V3LocalToWorld(VEC3 *v, VEC3 *r, VEC3 *u, VEC3 *d){
 	return *r*v->x+*u*v->y+*d*v->z;
@@ -66,7 +66,7 @@ inline VEC3 V3LocalToWorld(VEC3 *v, CObject *obj){
 }
 
 /*
- *	ƒxƒNƒgƒ‹¬•ª‘å¬•ª—£
+ *	ãƒ™ã‚¯ãƒˆãƒ«æˆåˆ†å¤§å°åˆ†é›¢
  */
 inline void V3MinMax(VEC3 a, VEC3 b, VEC3 *min, VEC3 *max){
 	if(a.x>b.x){ min->x = b.x; max->x = a.x; }else{ min->x = a.x; max->x = b.x; }
@@ -80,19 +80,19 @@ inline VEC3 VEC2toVEC3( VEC2 vec )
 }
 
 /*
- *	D3DCOLOR §Œä
+ *	D3DCOLOR åˆ¶å¾¡
  */
 inline void SplitXC(
-	DWORD c,				//	•ª‰ğ‚·‚éF
-	int *r, int *g, int *b	//	‘ã“üæ
+	DWORD c,				//	åˆ†è§£ã™ã‚‹è‰²
+	int *r, int *g, int *b	//	ä»£å…¥å…ˆ
 ){
 	*r = (c&0x00ff0000)>>16;
 	*g = (c&0x0000ff00)>>8;
 	*b = c&0x000000ff;
 }
 inline void SplitAC(
-	DWORD c,						//	•ª‰ğ‚·‚éF
-	int *a, int *r, int *g, int *b	//	‘ã“üæ
+	DWORD c,						//	åˆ†è§£ã™ã‚‹è‰²
+	int *a, int *r, int *g, int *b	//	ä»£å…¥å…ˆ
 ){
 	*a = (c&0xff000000)>>24;
 	*r = (c&0x00ff0000)>>16;
@@ -129,7 +129,7 @@ inline D3DCOLORVALUE ACtoCV(D3DCOLOR c){
 	return MAKE_CV(r/255.0f, g/255.0f, b/255.0f, a/255.0f);
 }
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_ShadowNeeded;
 extern float g_BlinkAlpha;
 

@@ -1,16 +1,16 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSimpleDialog.h"
 #include "CSkinPlugin.h"
 #include "CInterfaceMode.h"
 
-//	“à•”ƒOƒ[ƒoƒ‹
-float g_SkinDirIconRect[4] = {0.625f, 0.75f, 0.125f, 0.125f};	//	ƒtƒHƒ‹ƒ_ƒAƒCƒRƒ“—Ìˆæ
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+float g_SkinDirIconRect[4] = {0.625f, 0.75f, 0.125f, 0.125f};	//	ãƒ•ã‚©ãƒ«ãƒ€ã‚¢ã‚¤ã‚³ãƒ³é ˜åŸŸ
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CPopMenu *CTreeDirElement::ms_DirMenu;
 
 /*
- *	ƒƒjƒ…[‰Šú‰»
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼åˆæœŸåŒ–
  */
 void CTreeDirElement::InitMenu(){
 	ms_DirMenu = new CPopMenu("", NULL);
@@ -20,21 +20,21 @@ void CTreeDirElement::InitMenu(){
 }
 
 /*
- *	ƒƒjƒ…[‰ð•ú
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼è§£æ”¾
  */
 void CTreeDirElement::FreeMenu(){
 	DELETE_V(ms_DirMenu);
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTreeDirElement::CTreeDirElement(
-	char *str,			//	•¶Žš—ñ
-	CTreeDirElement *p,	//	e
-	CPluginTree *ctrl	//	ƒcƒŠ[ƒRƒ“ƒgƒ[ƒ‹
+	char *str,			//	æ–‡å­—åˆ—
+	CTreeDirElement *p,	//	è¦ª
+	CPluginTree *ctrl	//	ãƒ„ãƒªãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ):
-	CTreeElement(str, p, ctrl)	//	Šî–{ƒNƒ‰ƒX
+	CTreeElement(str, p, ctrl)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_Expand = true;
 	m_Child = NULL;
@@ -43,7 +43,7 @@ CTreeDirElement::CTreeDirElement(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTreeDirElement::~CTreeDirElement(){
 	CTreeElement *ptr = m_Child;
@@ -57,7 +57,7 @@ CTreeDirElement::~CTreeDirElement(){
 }
 
 /*
- *	eŠK‘w‚©‚çŽ©g‚ðíœ
+ *	è¦ªéšŽå±¤ã‹ã‚‰è‡ªèº«ã‚’å‰Šé™¤
  */
 void CTreeDirElement::Delete(){
 	if(m_Parent){
@@ -75,10 +75,10 @@ void CTreeDirElement::Delete(){
 }
 
 /*
- *	ƒAƒCƒeƒ€‘}“ü
+ *	ã‚¢ã‚¤ãƒ†ãƒ æŒ¿å…¥
  */
 void CTreeDirElement::InsertItem(
-	CTreeElement *item	//	‘}“üƒAƒCƒeƒ€
+	CTreeElement *item	//	æŒ¿å…¥ã‚¢ã‚¤ãƒ†ãƒ 
 ){
 	item->m_Parent = this;
 	item->m_Brother = m_Child;
@@ -86,10 +86,10 @@ void CTreeDirElement::InsertItem(
 }
 
 /*
- *	ƒAƒCƒeƒ€íœ
+ *	ã‚¢ã‚¤ãƒ†ãƒ å‰Šé™¤
  */
 void CTreeDirElement::DeleteItem(
-	CTreeElement *item	//	‘}“üƒAƒCƒeƒ€
+	CTreeElement *item	//	æŒ¿å…¥ã‚¢ã‚¤ãƒ†ãƒ 
 ){
 	CTreeElement **ptr = &m_Child;
 	while(*ptr){
@@ -107,11 +107,11 @@ void CTreeDirElement::DeleteItem(
 }
 
 /*
- *	ƒAƒCƒeƒ€ŒŸõ
+ *	ã‚¢ã‚¤ãƒ†ãƒ æ¤œç´¢
  */
 CTreeElement **CTreeDirElement::Find(
-	CTreeElement *t,	//	ƒ^[ƒQƒbƒg
-	bool rec			//	Ä‹A
+	CTreeElement *t,	//	ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+	bool rec			//	å†å¸°
 ){
 	CTreeElement **adr = &m_Child;
 	while(*adr){
@@ -129,10 +129,10 @@ CTreeElement **CTreeDirElement::Find(
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ŒŸõ
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æ¤œç´¢
  */
 CTreeFileElement *CTreeDirElement::FindPlugin(
-	CPlugin *t	//	ƒ^[ƒQƒbƒg
+	CPlugin *t	//	ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
 ){
 	CTreeElement *ptr = m_Child;
 	while(ptr){
@@ -150,7 +150,7 @@ CTreeFileElement *CTreeDirElement::FindPlugin(
 }
 
 /*
- *	ƒhƒƒbƒv
+ *	ãƒ‰ãƒ­ãƒƒãƒ—
  */
 void CTreeDirElement::Drop(){
 	if(CDragContainer::GetType()!=DRAG_PLUGIN) return;
@@ -184,7 +184,7 @@ void CTreeDirElement::Drop(){
 }
 
 /*
- *	ƒfƒBƒŒƒNƒgƒŠ“à‚ðƒŠƒXƒeƒBƒ“ƒO
+ *	ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå†…ã‚’ãƒªã‚¹ãƒ†ã‚£ãƒ³ã‚°
  */
 void CTreeDirElement::ListDirectory(){
 	if(g_RSPV) return;
@@ -200,10 +200,10 @@ void CTreeDirElement::ListDirectory(){
 }
 
 /*
- *	ƒŠƒXƒgƒrƒ…[‚É—v‘f‚ð’Ç‰Á
+ *	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã«è¦ç´ ã‚’è¿½åŠ 
  */
 void CTreeDirElement::PushListElement(
-	CPluginListView *lv	//	ƒŠƒXƒgƒrƒ…[
+	CPluginListView *lv	//	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
 ){
 	int index = lv->GetItemNum();
 	lv->InsertItem(index, (char *)m_String.c_str(), NULL, g_SkinDirIconRect);
@@ -211,7 +211,7 @@ void CTreeDirElement::PushListElement(
 }
 
 /*
- *	V‹KƒfƒBƒŒƒNƒgƒŠ
+ *	æ–°è¦ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
  */
 void CTreeDirElement::CreateNewDir(){
 	CTreeDirElement *nd = new CTreeDirElement(lang(NewDir), this, m_Owner);
@@ -223,10 +223,10 @@ void CTreeDirElement::CreateNewDir(){
 }
 
 /*
- *	ƒfƒBƒŒƒNƒgƒŠ“àƒ\[ƒg
+ *	ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå†…ã‚½ãƒ¼ãƒˆ
  */
 void CTreeDirElement::Sort(
-	bool rec	//	Ä‹Aƒ\[ƒg
+	bool rec	//	å†å¸°ã‚½ãƒ¼ãƒˆ
 ){
 	m_Child->MergeSort(&m_Child, NULL);
 	if(!rec) return;
@@ -239,11 +239,11 @@ void CTreeDirElement::Sort(
 }
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CTreeDirElement::Load(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CPluginMode *pimode	//	ƒvƒ‰ƒOƒCƒ“ƒ‚[ƒh
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CPluginMode *pimode	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ¢ãƒ¼ãƒ‰
 ){
 	char *tmp, *eee;
 	if(m_Parent && !(str = BeginNamedBlock(
@@ -273,11 +273,11 @@ char *CTreeDirElement::Load(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CTreeDirElement::Save(
-	FILE *file,		//	ƒtƒ@ƒCƒ‹
-	string indent	//	ƒCƒ“ƒfƒ“ƒg—Ê
+	FILE *file,		//	ãƒ•ã‚¡ã‚¤ãƒ«
+	string indent	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆé‡
 ){
 	if(m_Parent) fprintf(file, "%sDirectory \"%s\"{\n",
 		indent.c_str(), ExpandDoubleQuote(m_String).c_str());
@@ -292,12 +292,12 @@ void CTreeDirElement::Save(
 }
 
 /*
- *	ƒAƒCƒeƒ€ƒJƒEƒ“ƒg
+ *	ã‚¢ã‚¤ãƒ†ãƒ ã‚«ã‚¦ãƒ³ãƒˆ
  */
 int CTreeDirElement::CountItem(
-	int sum,	//	‚»‚ê‚Ü‚Å‚Ì‡Œv
-	int *fcp,	//	ƒtƒH[ƒJƒXƒAƒCƒeƒ€‚ÌˆÊ’u
-	bool exflag	//	“WŠJ‚³‚ê‚Ä‚¢‚é‚à‚Ì‚Ì‚Ý
+	int sum,	//	ãã‚Œã¾ã§ã®åˆè¨ˆ
+	int *fcp,	//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®
+	bool exflag	//	å±•é–‹ã•ã‚Œã¦ã„ã‚‹ã‚‚ã®ã®ã¿
 ){
 	if(fcp && m_Owner->GetFocusItem()==this) *fcp = sum;
 	if(exflag && !m_Expand) return 1;
@@ -311,13 +311,13 @@ int CTreeDirElement::CountItem(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 int CTreeDirElement::ScanInput(
-	int x, int y,	//	À•W
-	int cnt,		//	•\Ž¦ƒJƒEƒ“ƒg
-	int begin,		//	ŠJŽnˆÊ’u
-	int end			//	I—¹ˆÊ’u
+	int x, int y,	//	åº§æ¨™
+	int cnt,		//	è¡¨ç¤ºã‚«ã‚¦ãƒ³ãƒˆ
+	int begin,		//	é–‹å§‹ä½ç½®
+	int end			//	çµ‚äº†ä½ç½®
 ){
 	if(!m_Parent) ms_FocusNext = NULL;
 	if(m_Owner->GetFocusItem()==this) ms_FocusNext = this;
@@ -466,13 +466,13 @@ int CTreeDirElement::ScanInput(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 int CTreeDirElement::Render(
-	int x, int y,	//	À•W
-	int cnt,		//	•\Ž¦ƒJƒEƒ“ƒg
-	int begin,		//	ŠJŽnˆÊ’u
-	int end			//	I—¹ˆÊ’u
+	int x, int y,	//	åº§æ¨™
+	int cnt,		//	è¡¨ç¤ºã‚«ã‚¦ãƒ³ãƒˆ
+	int begin,		//	é–‹å§‹ä½ç½®
+	int end			//	çµ‚äº†ä½ç½®
 ){
 	if(m_EditBox && (!m_Owner->IsFocus() || m_Owner->GetFocusItem()!=this))
 		EndRename(true);

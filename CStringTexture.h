@@ -1,20 +1,20 @@
-#ifndef CSTRINGTEXTURE_H_INCLUDED
+ï»¿#ifndef CSTRINGTEXTURE_H_INCLUDED
 #define CSTRINGTEXTURE_H_INCLUDED
 
 /*
- *	•¶š—ñ•`‰æq
+ *	æ–‡å­—åˆ—æç”»å­
  */
 class CStringDrawer{
 	friend class CStringTexture;
 private:
-	int m_PosX, m_PosY;		//	ˆÊ’u
-	int m_Width, m_Height;	//	ƒTƒCƒY
-	int m_Cols;				//	è—L—ñ” (0, 1, ..., STRTEX_COLS-1)
-	DWORD m_Date;			//	XV
-	string m_String;		//	•¶š—ñ
-	D3DCOLOR m_ShadowColor;	//	‰A‰eF
-	CTexture *m_Texture;	//	ƒeƒNƒXƒ`ƒƒ
-	CStringDrawer *m_Key;	//	Šî€ˆÊ’u
+	int m_PosX, m_PosY;		//	ä½ç½®
+	int m_Width, m_Height;	//	ã‚µã‚¤ã‚º
+	int m_Cols;				//	å æœ‰åˆ—æ•° (0, 1, ..., STRTEX_COLS-1)
+	DWORD m_Date;			//	æ›´æ–°æ™‚åˆ»
+	string m_String;		//	æ–‡å­—åˆ—
+	D3DCOLOR m_ShadowColor;	//	é™°å½±è‰²
+	CTexture *m_Texture;	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	CStringDrawer *m_Key;	//	åŸºæº–ä½ç½®
 public:
 	void Init(int, int, CTexture *);
 	void Reset(CStringDrawer *);
@@ -34,17 +34,17 @@ public:
 };
 
 /*
- *	•¶š—ñƒeƒNƒXƒ`ƒƒ
+ *	æ–‡å­—åˆ—ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 class CStringTexture{
 private:
-	int m_FontSize;	//	ƒtƒHƒ“ƒg‚
-	int m_Rows;		//	s”
-	int m_Page;		//	ƒy[ƒW”
-	int m_Entry;	//	ƒGƒ“ƒgƒŠ”
-	HFONT m_hFont;	//	ƒtƒHƒ“ƒg
-	CTexture *m_Texture;		//	ƒeƒNƒXƒ`ƒƒ
-	CStringDrawer *m_Drawer;	//	•`‰æq
+	int m_FontSize;	//	ãƒ•ã‚©ãƒ³ãƒˆé«˜
+	int m_Rows;		//	è¡Œæ•°
+	int m_Page;		//	ãƒšãƒ¼ã‚¸æ•°
+	int m_Entry;	//	ã‚¨ãƒ³ãƒˆãƒªæ•°
+	HFONT m_hFont;	//	ãƒ•ã‚©ãƒ³ãƒˆ
+	CTexture *m_Texture;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	CStringDrawer *m_Drawer;	//	æç”»å­
 public:
 	CStringTexture(int, int);
 	~CStringTexture();
@@ -107,7 +107,7 @@ public:
 	}
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CStringTexture *g_StrTex;
 
 #endif

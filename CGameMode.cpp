@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "HighTimer.h"
 #include "Capture.h"
 #include "RSPV.h"
@@ -45,60 +45,60 @@
 #include "CVideoMode.h"
 #include "CExitMode.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void ModelPluginFreeInst();
 namespace LanguageResource{
 	bool InitLanguage();
 }
 
-//	“à•”’è”
-const int MODE_LABEL_WIDTH = TILE_UNIT*6;			//	ƒ‚[ƒh•\Ž¦•”•
-const int PANEL_HIDE_FRAME = MAXFPS;				//	ƒpƒlƒ‹•\Ž¦ŽžŠÔ
-const int MODE_SUB[MODE_NUM] = {8, 4, 3, 3, 3, 5};	//	ƒTƒuƒ‚[ƒh”
-const float PANEL_SHOW_RATIO = 0.5f;				//	ƒpƒlƒ‹•\Ž¦‘¬“x
-const float PANEL_HIDE_RATIO = 0.1f;				//	ƒpƒlƒ‹‰B•Á‘¬“x
+//	å†…éƒ¨å®šæ•°
+const int MODE_LABEL_WIDTH = TILE_UNIT*6;			//	ãƒ¢ãƒ¼ãƒ‰è¡¨ç¤ºéƒ¨å¹…
+const int PANEL_HIDE_FRAME = MAXFPS;				//	ãƒ‘ãƒãƒ«è¡¨ç¤ºæ™‚é–“
+const int MODE_SUB[MODE_NUM] = {8, 4, 3, 3, 3, 5};	//	ã‚µãƒ–ãƒ¢ãƒ¼ãƒ‰æ•°
+const float PANEL_SHOW_RATIO = 0.5f;				//	ãƒ‘ãƒãƒ«è¡¨ç¤ºé€Ÿåº¦
+const float PANEL_HIDE_RATIO = 0.1f;				//	ãƒ‘ãƒãƒ«éš è”½é€Ÿåº¦
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_IgnoreAcceleration;
 
-//	“à•”ƒOƒ[ƒoƒ‹
-int g_BlinkCounter = 0;			//	”Ä—p“_–ÅƒJƒEƒ“ƒ^ (0..MAXFPS-1)
-float g_BlinkAlpha = 0.0f;		//	”Ä—p“_–ÅƒAƒ‹ƒtƒ@ (0.0..1.0)
-bool g_RenderBlink = false;		//	ƒŒƒ“ƒ_ƒŠƒ“ƒO“_–Åƒtƒ‰ƒO
-LONGLONG g_SoundSync = 0;		//	ƒTƒEƒ“ƒh“¯Šú—pƒ^ƒCƒ}
-float g_FrameDelta = 0.0f;		//	ƒtƒŒ[ƒ€ŽžŠÔ [ms]
-bool g_CursorLockable = false;	//	ƒJ[ƒ\ƒ‹ƒƒbƒNŠJŽn
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+int g_BlinkCounter = 0;			//	æ±Žç”¨ç‚¹æ»…ã‚«ã‚¦ãƒ³ã‚¿ (0..MAXFPS-1)
+float g_BlinkAlpha = 0.0f;		//	æ±Žç”¨ç‚¹æ»…ã‚¢ãƒ«ãƒ•ã‚¡ (0.0..1.0)
+bool g_RenderBlink = false;		//	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ç‚¹æ»…ãƒ•ãƒ©ã‚°
+LONGLONG g_SoundSync = 0;		//	ã‚µã‚¦ãƒ³ãƒ‰åŒæœŸç”¨ã‚¿ã‚¤ãƒž
+float g_FrameDelta = 0.0f;		//	ãƒ•ãƒ¬ãƒ¼ãƒ æ™‚é–“ [ms]
+bool g_CursorLockable = false;	//	ã‚«ãƒ¼ã‚½ãƒ«ãƒ­ãƒƒã‚¯é–‹å§‹
 
-CNeutralMode *g_NeutralMode;				//	ƒjƒ…[ƒgƒ‰ƒ‹ƒ‚[ƒh
-CRailSelectMode *g_RailSelectMode;			//	ƒŒ[ƒ‹‘I‘ðƒ‚[ƒh
-CTieSelectMode *g_TieSelectMode;			//	––Ø‘I‘ðƒ‚[ƒh
-CGirderSelectMode *g_GirderSelectMode;		//	‹´Œ…‘I‘ðƒ‚[ƒh
-CPierSelectMode *g_PierSelectMode;			//	‹´‹r‘I‘ðƒ‚[ƒh
-CLineSelectMode *g_LineSelectMode;			//	‰Ëü‘I‘ðƒ‚[ƒh
-CPoleSelectMode *g_PoleSelectMode;			//	‰Ëü’Œ‘I‘ðƒ‚[ƒh
-CRailBuildMode *g_RailBuildMode;			//	ü˜HÝ’uƒ‚[ƒh
-CRailEditMode *g_RailEditMode;				//	ü˜H•ÒWƒ‚[ƒh
-CTrainEditMode *g_TrainEditMode;			//	ŽÔçq•Ò¬ƒ‚[ƒh
-CDiaEditMode *g_DiaEditMode;				//	‰^sÝ’èƒ‚[ƒh
-CTrainSetMode *g_TrainSetMode;				//	ŽÔçq”z’uƒ‚[ƒh
-CTrainViewMode *g_TrainViewMode;			//	ŽÔçqŽ‹“_ƒ‚[ƒh
-CStructSelectMode *g_StructSelectMode;		//	Ž{Ý‘I‘ðƒ‚[ƒh
-CStructBuildMode *g_StructBuildMode;		//	Ž{ÝÝ’uƒ‚[ƒh
-CStructEditMode *g_StructEditMode;			//	Ž{Ý•ÒWƒ‚[ƒh
-CStationSelectMode *g_StationSelectMode;	//	Ž{Ý‘I‘ðƒ‚[ƒh
-CStationBuildMode *g_StationBuildMode;		//	Ž{ÝÝ’uƒ‚[ƒh
-CStationEditMode *g_StationEditMode;		//	Ž{Ý•ÒWƒ‚[ƒh
-CSceneEditMode *g_SceneEditMode;			//	ƒV[ƒ“•ÒWƒ‚[ƒh
-CEnvEditMode *g_EnvEditMode;				//	ŠÂ‹«•ÒWƒ‚[ƒh
-CSimulationMode *g_SimulationMode;			//	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“Ý’èƒ‚[ƒh
-CFileMode *g_FileMode;						//	ƒtƒ@ƒCƒ‹ƒ‚[ƒh
-CConfigMode *g_ConfigMode;					//	ŠÂ‹«Ý’èƒ‚[ƒh
-CSkinSelectMode *g_SkinSelectMode;			//	ƒXƒLƒ“‘I‘ðƒ‚[ƒh
-CVideoMode *g_VideoMode;					//	ƒrƒfƒIƒ‚[ƒh
-CExitMode *g_ExitMode;						//	I—¹ƒ‚[ƒh
-CWindowCtrl *g_ModalDialog = NULL;			//	ƒ‚[ƒ_ƒ‹ƒEƒBƒ“ƒhƒE
+CNeutralMode *g_NeutralMode;				//	ãƒ‹ãƒ¥ãƒ¼ãƒˆãƒ©ãƒ«ãƒ¢ãƒ¼ãƒ‰
+CRailSelectMode *g_RailSelectMode;			//	ãƒ¬ãƒ¼ãƒ«é¸æŠžãƒ¢ãƒ¼ãƒ‰
+CTieSelectMode *g_TieSelectMode;			//	æž•æœ¨é¸æŠžãƒ¢ãƒ¼ãƒ‰
+CGirderSelectMode *g_GirderSelectMode;		//	æ©‹æ¡é¸æŠžãƒ¢ãƒ¼ãƒ‰
+CPierSelectMode *g_PierSelectMode;			//	æ©‹è„šé¸æŠžãƒ¢ãƒ¼ãƒ‰
+CLineSelectMode *g_LineSelectMode;			//	æž¶ç·šé¸æŠžãƒ¢ãƒ¼ãƒ‰
+CPoleSelectMode *g_PoleSelectMode;			//	æž¶ç·šæŸ±é¸æŠžãƒ¢ãƒ¼ãƒ‰
+CRailBuildMode *g_RailBuildMode;			//	ç·šè·¯è¨­ç½®ãƒ¢ãƒ¼ãƒ‰
+CRailEditMode *g_RailEditMode;				//	ç·šè·¯ç·¨é›†ãƒ¢ãƒ¼ãƒ‰
+CTrainEditMode *g_TrainEditMode;			//	è»Šè¼Œç·¨æˆãƒ¢ãƒ¼ãƒ‰
+CDiaEditMode *g_DiaEditMode;				//	é‹è¡Œè¨­å®šãƒ¢ãƒ¼ãƒ‰
+CTrainSetMode *g_TrainSetMode;				//	è»Šè¼Œé…ç½®ãƒ¢ãƒ¼ãƒ‰
+CTrainViewMode *g_TrainViewMode;			//	è»Šè¼Œè¦–ç‚¹ãƒ¢ãƒ¼ãƒ‰
+CStructSelectMode *g_StructSelectMode;		//	æ–½è¨­é¸æŠžãƒ¢ãƒ¼ãƒ‰
+CStructBuildMode *g_StructBuildMode;		//	æ–½è¨­è¨­ç½®ãƒ¢ãƒ¼ãƒ‰
+CStructEditMode *g_StructEditMode;			//	æ–½è¨­ç·¨é›†ãƒ¢ãƒ¼ãƒ‰
+CStationSelectMode *g_StationSelectMode;	//	æ–½è¨­é¸æŠžãƒ¢ãƒ¼ãƒ‰
+CStationBuildMode *g_StationBuildMode;		//	æ–½è¨­è¨­ç½®ãƒ¢ãƒ¼ãƒ‰
+CStationEditMode *g_StationEditMode;		//	æ–½è¨­ç·¨é›†ãƒ¢ãƒ¼ãƒ‰
+CSceneEditMode *g_SceneEditMode;			//	ã‚·ãƒ¼ãƒ³ç·¨é›†ãƒ¢ãƒ¼ãƒ‰
+CEnvEditMode *g_EnvEditMode;				//	ç’°å¢ƒç·¨é›†ãƒ¢ãƒ¼ãƒ‰
+CSimulationMode *g_SimulationMode;			//	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³è¨­å®šãƒ¢ãƒ¼ãƒ‰
+CFileMode *g_FileMode;						//	ãƒ•ã‚¡ã‚¤ãƒ«ãƒ¢ãƒ¼ãƒ‰
+CConfigMode *g_ConfigMode;					//	ç’°å¢ƒè¨­å®šãƒ¢ãƒ¼ãƒ‰
+CSkinSelectMode *g_SkinSelectMode;			//	ã‚¹ã‚­ãƒ³é¸æŠžãƒ¢ãƒ¼ãƒ‰
+CVideoMode *g_VideoMode;					//	ãƒ“ãƒ‡ã‚ªãƒ¢ãƒ¼ãƒ‰
+CExitMode *g_ExitMode;						//	çµ‚äº†ãƒ¢ãƒ¼ãƒ‰
+CWindowCtrl *g_ModalDialog = NULL;			//	ãƒ¢ãƒ¼ãƒ€ãƒ«ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 int CGameMode::ms_TopPanelTime;
 int CGameMode::ms_RightPanelTime;
 float CGameMode::ms_TopPanelShow;
@@ -110,7 +110,7 @@ CToggleIcon *CGameMode::ms_MenuIcon[];
 
 /*
  *	[static]
- *	‰Šú‰»‚Ì‰Šú‰»
+ *	åˆæœŸåŒ–ã®åˆæœŸåŒ–
  */
 void CGameMode::WakeUp(){
 	LanguageResource::InitLanguage();
@@ -120,7 +120,7 @@ void CGameMode::WakeUp(){
 
 /*
  *	[static]
- *	Šeƒ‚[ƒh‰Šú‰»
+ *	å„ãƒ¢ãƒ¼ãƒ‰åˆæœŸåŒ–
  */
 void CGameMode::InitMenu(){
 	CPluginMode::InitMenu();
@@ -247,7 +247,7 @@ void CGameMode::InitMenu(){
 
 /*
  *	[static]
- *	ƒƒCƒ“ƒ‹[ƒv
+ *	ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—
  */
 void CGameMode::MainLoop(){
 	CArrowSceneryMode::InitInterface();
@@ -380,7 +380,7 @@ void CGameMode::MainLoop(){
 
 /*
  *	[static]
- *	Ý’è‚Ì“Çž
+ *	è¨­å®šã®èª­è¾¼
  */
 void CGameMode::LoadModeSettings(){
 	char *str = g_ConfigScript, *eee;
@@ -421,10 +421,10 @@ void CGameMode::LoadModeSettings(){
 
 /*
  *	[static]
- *	Ý’è‚Ì•Û‘¶
+ *	è¨­å®šã®ä¿å­˜
  */
 void CGameMode::SaveModeSettings(
-	FILE *file	//	ƒtƒ@ƒCƒ‹
+	FILE *file	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	g_NeutralMode->SaveSetting(file);
 	g_RailSelectMode->SaveSetting(file);
@@ -456,7 +456,7 @@ void CGameMode::SaveModeSettings(
 
 /*
  *	[static]
- *	ƒjƒ…[ƒgƒ‰ƒ‹ƒ‚[ƒh‚ÖˆÚs
+ *	ãƒ‹ãƒ¥ãƒ¼ãƒˆãƒ©ãƒ«ãƒ¢ãƒ¼ãƒ‰ã¸ç§»è¡Œ
  */
 void CGameMode::SetNeutral(){
 	int i, j;
@@ -475,7 +475,7 @@ void CGameMode::SetNeutral(){
 }
 
 /*
- *	ƒtƒŒ[ƒ€“ü—Íƒ`ƒFƒbƒN
+ *	ãƒ•ãƒ¬ãƒ¼ãƒ å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CGameMode::ScanInputFrame(
 	int option	//	2: photomode
@@ -519,7 +519,7 @@ bool CGameMode::ScanInputFrame(
 }
 
 /*
- *	ƒtƒŒ[ƒ€•`‰æ
+ *	ãƒ•ãƒ¬ãƒ¼ãƒ æç”»
  */
 void CGameMode::RenderFrame(
 	int option	//	1: speedinfo, 2: photomode
@@ -643,7 +643,7 @@ void CGameMode::RenderFrame(
 }
 
 /*
- *	ƒRƒ“ƒpƒX•`‰æ
+ *	ã‚³ãƒ³ãƒ‘ã‚¹æç”»
  */
 void CGameMode::RenderCompass(){
 	if(!g_ConfigMode->GetCompass()) return;
@@ -680,7 +680,7 @@ void CGameMode::RenderCompass(){
 
 /*
  *	[static]
- *	ƒ_ƒCƒAƒƒO•`‰æ
+ *	ãƒ€ã‚¤ã‚¢ãƒ­ã‚°æç”»
  */
 bool CGameMode::RenderDialog(){
 	if(!g_ModalDialog) return false;
@@ -691,7 +691,7 @@ bool CGameMode::RenderDialog(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CGameMode::CGameMode(){
 	CInterface::ResetTabHead();
@@ -699,7 +699,7 @@ CGameMode::CGameMode(){
 }
 
 /*
- *	ƒ‚[ƒh‚ð—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CGameMode::Enter(){
 	SetViewport(0, 0, sv3.width, sv3.height);
@@ -717,7 +717,7 @@ void CGameMode::Enter(){
 }
 
 /*
- *	ƒ‚[ƒhƒ‹[ƒv
+ *	ãƒ¢ãƒ¼ãƒ‰ãƒ«ãƒ¼ãƒ—
  */
 void CGameMode::Spin(){
 	SetMasterVolume();
@@ -727,7 +727,7 @@ void CGameMode::Spin(){
 			{
 				TIMER_RAII("All");
 				if(g_CursorLockable) g_Cursor.Clip();
-				//ƒJ[ƒ\ƒ‹•`‰æ’¼‘O‚É
+				//ã‚«ãƒ¼ã‚½ãƒ«æç”»ç›´å‰ã«
 				//ScanInputDevice();
 				//g_Cursor.FixCursor();
 				g_BlinkCounter = (g_BlinkCounter+1)%MAXFPS;
@@ -767,7 +767,7 @@ void CGameMode::Spin(){
 }
 
 /*
- *	ƒTƒEƒ“ƒh’èíˆ—
+ *	ã‚µã‚¦ãƒ³ãƒ‰å®šå¸¸å‡¦ç†
  */
 void CGameMode::SpinSound(){
 	LONGLONG t = HighTimer();
@@ -778,7 +778,7 @@ void CGameMode::SpinSound(){
 }
 
 /*
- *	ŽÀŒøƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“‘¬“xŽæ“¾
+ *	å®ŸåŠ¹ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€Ÿåº¦å–å¾—
  */
 int CGameMode::GetEffectSpeed(){
 	return IsPaused() ? 0 : g_SimulationMode->GetSimSpeed();

@@ -1,4 +1,4 @@
-#ifndef SYSTEMCOVER_H_INCLUDED
+ï»¿#ifndef SYSTEMCOVER_H_INCLUDED
 #define SYSTEMCOVER_H_INCLUDED
 
 char *FlashIn(char *, ...);
@@ -26,7 +26,7 @@ string ExpandDoubleQuote(const string &);
 string RestoreDoubleQuote(const string &);
 
 /*
- *	ƒL[ƒ`ƒFƒbƒN
+ *	ã‚­ãƒ¼ãƒã‚§ãƒƒã‚¯
  */
 inline bool CheckShift(){
 	return (GetKey(DIK_LSHIFT)|GetKey(DIK_RSHIFT))>=S_PUSH;
@@ -39,14 +39,14 @@ inline bool CheckAlt(){
 }
 
 /*
- *	‚‘¬ˆÚ“®ƒ`ƒFƒbƒN
+ *	é«˜é€Ÿç§»å‹•ãƒã‚§ãƒƒã‚¯
  */
 inline float CheckFast(){
 	return CheckCtrl() ? 10.0f : 1.0f;
 }
 
 /*
- *	ƒŠƒs[ƒg”»’è
+ *	ãƒªãƒ”ãƒ¼ãƒˆåˆ¤å®š
  */
 inline bool PickRepeat(int *r, int s){
 	*r = s==S_PUSH ? 1 : (*r<1 ? 2 : *r+1);
@@ -54,25 +54,25 @@ inline bool PickRepeat(int *r, int s){
 }
 
 /*
- *	lÌŒÜ“ü
+ *	å››æ¨äº”å…¥
  */
 inline int Round(float v){ return (int)(v>0.0f ? v+0.5f : v-0.5f); }
 inline int Round(double v){ return (int)(v>0.0 ? v+0.5 : v-0.5); }
 
 /*
- *	ƒ}ƒ“ƒnƒbƒ^ƒ“‹——£
+ *	ãƒãƒ³ãƒãƒƒã‚¿ãƒ³è·é›¢
  */
 inline int Manhattan(POINT pa, POINT pb){
 	return abs(pa.x-pb.x)+abs(pa.y-pb.y);
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹‚ÉƒxƒNƒgƒ‹’l‚Ì•Û‘¶
+ *	ãƒ•ã‚¡ã‚¤ãƒ«ã«ãƒ™ã‚¯ãƒˆãƒ«å€¤ã®ä¿å­˜
  */
 inline void V3Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	VEC3 &v,	//	ƒxƒNƒgƒ‹
-	char *e		//	ƒTƒtƒBƒbƒNƒX
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	VEC3 &v,	//	ãƒ™ã‚¯ãƒˆãƒ«
+	char *e		//	ã‚µãƒ•ã‚£ãƒƒã‚¯ã‚¹
 ){
 	fprintf(df, "(%f, %f, %f)%s", v.x, v.y, v.z, e);
 }

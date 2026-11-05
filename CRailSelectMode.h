@@ -1,11 +1,11 @@
-#ifndef CRAILSELECTMODE_H_INCLUDED
+ï»¿#ifndef CRAILSELECTMODE_H_INCLUDED
 #define CRAILSELECTMODE_H_INCLUDED
 
 #include "C3DPluginMode.h"
 #include "CRailwayMode.h"
 
 /*
- *	ƒŒ[ƒ‹‘I‘ğƒ‚[ƒh
+ *	ãƒ¬ãƒ¼ãƒ«é¸æŠãƒ¢ãƒ¼ãƒ‰
  */
 class CRailSelectMode: public C3DPluginMode, public CRailwayMode{
 private:
@@ -21,7 +21,7 @@ public:
 	void Render3DPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CRailSelectMode *g_RailSelectMode;
 
 #endif

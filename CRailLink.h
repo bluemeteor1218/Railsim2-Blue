@@ -1,4 +1,4 @@
-#ifndef CRAILLINK_H_INCLUDED
+ï»¿#ifndef CRAILLINK_H_INCLUDED
 #define CRAILLINK_H_INCLUDED
 
 class CRailWayLink;
@@ -8,15 +8,15 @@ class CRailWay;
 #include "CVertexDump.h"
 
 /*
- *	ƒŒ[ƒ‹•ªŠ„q
+ *	ãƒ¬ãƒ¼ãƒ«åˆ†å‰²å­
  */
 class CRailSplitter{
 public:
-	VEC3 m_Pos;		//	À•W
+	VEC3 m_Pos;		//	åº§æ¨™
 	VEC3 m_Right;	//	up
 	VEC3 m_Up;		//	right
 	VEC3 m_Dir;		//	dir
-	int m_Selected;	//	‘I‘ğƒtƒ‰ƒO
+	int m_Selected;	//	é¸æŠãƒ•ãƒ©ã‚°
 public:
 	CRailSplitter(){}
 	CRailSplitter(const VEC3 &p, const VEC3 &d){
@@ -35,19 +35,19 @@ public:
 	void Save(FILE *, char *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CRailSplitter>::iterator IRailSplitter;
 typedef list<CRailSplitter>::reverse_iterator RIRailSplitter;
 
 /*
- *	ƒRƒlƒNƒ^ƒŠƒ“ƒN
+ *	ã‚³ãƒã‚¯ã‚¿ãƒªãƒ³ã‚¯
  */
 class CRailConnectorLink{
 public:
-	int m_Side;				//	ƒTƒCƒh
-	int m_Point;			//	ƒ|ƒCƒ“ƒg
-	float m_Cant;			//	ƒJƒ“ƒg—Ê
-	CRailConnector *m_Link;	//	ƒŠƒ“ƒN
+	int m_Side;				//	ã‚µã‚¤ãƒ‰
+	int m_Point;			//	ãƒã‚¤ãƒ³ãƒˆ
+	float m_Cant;			//	ã‚«ãƒ³ãƒˆé‡
+	CRailConnector *m_Link;	//	ãƒªãƒ³ã‚¯
 public:
 	CRailConnectorLink(){ m_Side = m_Point = 0; m_Link = NULL; }
 	CRailConnectorLink::CRailConnectorLink(int side, int point, CRailConnector *link){
@@ -69,12 +69,12 @@ public:
 };
 
 /*
- *	ƒŒ[ƒ‹ƒŠƒ“ƒN
+ *	ãƒ¬ãƒ¼ãƒ«ãƒªãƒ³ã‚¯
  */
 class CRailWayLink{
 public:
-	int m_Side;			//	ƒTƒCƒh
-	CRailWay *m_Link;	//	ƒŠƒ“ƒN
+	int m_Side;			//	ã‚µã‚¤ãƒ‰
+	CRailWay *m_Link;	//	ãƒªãƒ³ã‚¯
 public:
 	CRailWayLink(){ m_Side = 0; m_Link = NULL; }
 	CRailWayLink::CRailWayLink(int side, CRailWay *link){ m_Side = side; m_Link = link; }

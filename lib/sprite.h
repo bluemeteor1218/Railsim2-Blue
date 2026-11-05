@@ -1,16 +1,16 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 class CSprite{
-	CTexture*	m_pTex;		//	ƒeƒNƒXƒ`ƒƒEƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg
-	RECT		m_rect;		//	“]‘—Œ³‚Ì‹éŒ`
-	RECT		m_cr;		//	“–‚è”»’è‹éŒ`
-	VEC2		m_scale;	//	ƒXƒP[ƒ‹
-	VEC2		m_center;	//	’†S
-	VEC2		m_pos;		//	ˆÊ’u
-	float		m_rot;		//	‰ñ“]Šp
-	D3DCOLOR	m_color;	//	æZF
-	BOOL		m_fRender;	//	•`‰æƒtƒ‰ƒO
-	BOOL		m_fTest;	//	“–‚è”»’èƒtƒ‰ƒO
+	CTexture*	m_pTex;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ»ã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	RECT		m_rect;		//	è»¢é€å…ƒã®çŸ©å½¢
+	RECT		m_cr;		//	å½“ã‚Šåˆ¤å®šçŸ©å½¢
+	VEC2		m_scale;	//	ã‚¹ã‚±ãƒ¼ãƒ«
+	VEC2		m_center;	//	ä¸­å¿ƒ
+	VEC2		m_pos;		//	ä½ç½®
+	float		m_rot;		//	å›è»¢è§’
+	D3DCOLOR	m_color;	//	ä¹—ç®—è‰²
+	BOOL		m_fRender;	//	æç”»ãƒ•ãƒ©ã‚°
+	BOOL		m_fTest;	//	å½“ã‚Šåˆ¤å®šãƒ•ãƒ©ã‚°
 
 public:
 	CSprite();
@@ -21,79 +21,79 @@ public:
 	BOOL CollisionTest(CSprite *pSpr);
 
 	/*
-	 *	@•`‰æƒtƒ‰ƒO‚Ìİ’è
+	 *	ã€€æç”»ãƒ•ãƒ©ã‚°ã®è¨­å®š
 	 */
 	void EnableRender(BOOL f){m_fRender = f;}
 	/*
-	 *	@•`‰æƒtƒ‰ƒO‚Ìæ“¾
+	 *	ã€€æç”»ãƒ•ãƒ©ã‚°ã®å–å¾—
 	 */
 	BOOL IsEnableRender(){return m_fRender;}
 	/*
-	 *	@“–‚è”»’èƒtƒ‰ƒO‚Ìİ’è
+	 *	ã€€å½“ã‚Šåˆ¤å®šãƒ•ãƒ©ã‚°ã®è¨­å®š
 	 */
 	void EnableTest(BOOL f){m_fTest = f;}
 	/*
-	 *	@“–‚è”»’èƒtƒ‰ƒO‚Ìæ“¾
+	 *	ã€€å½“ã‚Šåˆ¤å®šãƒ•ãƒ©ã‚°ã®å–å¾—
 	 */
 	BOOL IsEnableTest(){return m_fTest;}
 	/*
-	 *	@ƒXƒP[ƒ‹‚Ìİ’è
+	 *	ã€€ã‚¹ã‚±ãƒ¼ãƒ«ã®è¨­å®š
 	 */
 	void SetScale(VEC2 s){m_scale = s;}
 	/*
-	 *	@ƒXƒP[ƒ‹‚Ìæ“¾
+	 *	ã€€ã‚¹ã‚±ãƒ¼ãƒ«ã®å–å¾—
 	 */
 	VEC2 GetScale(){return m_scale;}
 	/*
-	 *	@ˆÊ’u‚Ìİ’è
+	 *	ã€€ä½ç½®ã®è¨­å®š
 	 */
 	void SetPos(VEC2 p){m_pos = p;}
 	/*
-	 *	@ˆÊ’u‚Ìæ“¾
+	 *	ã€€ä½ç½®ã®å–å¾—
 	 */
 	VEC2 GetPos(){return m_pos;}
 	/*
-	 *	@ˆÚ“®
+	 *	ã€€ç§»å‹•
 	 */
 	void Move(VEC2 v){m_pos += v;}
 	/*
-	 *	@’†SÀ•W‚Ìİ’è
+	 *	ã€€ä¸­å¿ƒåº§æ¨™ã®è¨­å®š
 	 */
 	void SetCenter(VEC2 c){m_center = c;}
 	/*
-	 *	@’†SÀ•W‚Ìæ“¾
+	 *	ã€€ä¸­å¿ƒåº§æ¨™ã®å–å¾—
 	 */
 	VEC2 GetCenter(){return m_center;}
 	/*
-	 *	@‰ñ“]Šp‚Ìİ’è
+	 *	ã€€å›è»¢è§’ã®è¨­å®š
 	 */
 	void SetRot(float r){m_rot = r;}
 	/*
-	 *	@‰ñ“]Šp‚Ìæ“¾
+	 *	ã€€å›è»¢è§’ã®å–å¾—
 	 */
 	float GetRot(){return m_rot;}
 	/*
-	 *	@æZF‚Ìİ’è
+	 *	ã€€ä¹—ç®—è‰²ã®è¨­å®š
 	 */
 	void SetColor(D3DCOLOR c){m_color = c;}
 	/*
-	 *	@æZF‚Ìæ“¾
+	 *	ã€€ä¹—ç®—è‰²ã®å–å¾—
 	 */
 	D3DCOLOR GetColor(){return m_color;}
 	/*
-	 *	@“]‘—Œ³‹éŒ`‚Ìİ’è
+	 *	ã€€è»¢é€å…ƒçŸ©å½¢ã®è¨­å®š
 	 */
 	void SetRect(int x1, int y1, int x2, int y2){::SetRect(&m_rect, x1, y1, x2, y2);}
 	/*
-	 *	@“]‘—Œ³‹éŒ`‚Ìæ“¾
+	 *	ã€€è»¢é€å…ƒçŸ©å½¢ã®å–å¾—
 	 */
 	RECT GetRect(){return m_rect;}
 	/*
-	 *	@“–‚è”»’è‹éŒ`‚Ìİ’è
+	 *	ã€€å½“ã‚Šåˆ¤å®šçŸ©å½¢ã®è¨­å®š
 	 */
 	void SetTestRect(int x1, int y1, int x2, int y2){::SetRect(&m_cr, x1, y1, x2, y2);}
 	/*
-	 *	@“–‚è”»’è‹éŒ`‚Ìæ“¾
+	 *	ã€€å½“ã‚Šåˆ¤å®šçŸ©å½¢ã®å–å¾—
 	 */
 	RECT GetTestRect(){return m_cr;}
 };

@@ -1,92 +1,92 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "udx.h"
 #include "libraries.h"
 #include "sysvalue.h"
 
 /*
- *	ƒRƒ“ƒpƒCƒ‹EƒIƒvƒVƒ‡ƒ“
+ *	ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ãƒ»ã‚ªãƒ—ã‚·ãƒ§ãƒ³
  *
- *	¦‹@”\‚ðŽg—p‚µ‚Ä‚¢‚é‚Ì‚ÉuŽg—p‚µ‚È‚¢v‚Æ‚µ‚ÄƒRƒ“ƒpƒCƒ‹‚·‚é‚ÆŠëŒ¯‚Å‚·B
+ *	â€»æ©Ÿèƒ½ã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹ã®ã«ã€Œä½¿ç”¨ã—ãªã„ã€ã¨ã—ã¦ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã™ã‚‹ã¨å±é™ºã§ã™ã€‚
  */
-//	#define NO_SOUNDS	//	ƒTƒEƒ“ƒhŠÖŒW‚ðŽg—p‚µ‚È‚¢
-#define NO_MOVIE	//	ƒ€[ƒr[ŠÖŒW‚ðŽg—p‚µ‚È‚¢
-#define NO_MSGLOOP	//	“ÆŽ©‚ÌƒƒbƒZ[ƒWƒ‹[ƒv‹Lq‚·‚éê‡
-//	#define SCREENSAVER	//	ƒXƒNƒŠ[ƒ“ƒZ[ƒo[‚Æ‚µ‚ÄŽÀs
+//	#define NO_SOUNDS	//	ã‚µã‚¦ãƒ³ãƒ‰é–¢ä¿‚ã‚’ä½¿ç”¨ã—ãªã„
+#define NO_MOVIE	//	ãƒ ãƒ¼ãƒ“ãƒ¼é–¢ä¿‚ã‚’ä½¿ç”¨ã—ãªã„
+#define NO_MSGLOOP	//	ç‹¬è‡ªã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—è¨˜è¿°ã™ã‚‹å ´åˆ
+//	#define SCREENSAVER	//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚»ãƒ¼ãƒãƒ¼ã¨ã—ã¦å®Ÿè¡Œ
 
 /*
- *	ŽÀsŽžˆø”i•¡”Žw’è‰Â”\j
+ *	å®Ÿè¡Œæ™‚å¼•æ•°ï¼ˆè¤‡æ•°æŒ‡å®šå¯èƒ½ï¼‰
  *
- *	-win	:ƒEƒCƒ“ƒhƒEƒ‚[ƒh‚ÅŽÀs‚·‚éB
- *	-2nd	:2–‡–Ú‚ÌƒrƒfƒIƒJ[ƒh‚ðŽg—p‚·‚éiVoodoo“™jB
- *	-dbf	:ƒfƒoƒbƒOo—Íæ‚ðƒtƒ@ƒCƒ‹‚É‚·‚éB
- *	/3ds	:3DƒTƒEƒ“ƒh‚ðŽg—p‚µ‚È‚¢B
- *	/fx		:ƒTƒEƒ“ƒh‚ÉƒGƒtƒFƒNƒg‚ðŽg—p‚µ‚È‚¢B
+ *	-win	:ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã§å®Ÿè¡Œã™ã‚‹ã€‚
+ *	-2nd	:2æžšç›®ã®ãƒ“ãƒ‡ã‚ªã‚«ãƒ¼ãƒ‰ã‚’ä½¿ç”¨ã™ã‚‹ï¼ˆVoodooç­‰ï¼‰ã€‚
+ *	-dbf	:ãƒ‡ãƒãƒƒã‚°å‡ºåŠ›å…ˆã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«ã™ã‚‹ã€‚
+ *	/3ds	:3Dã‚µã‚¦ãƒ³ãƒ‰ã‚’ä½¿ç”¨ã—ãªã„ã€‚
+ *	/fx		:ã‚µã‚¦ãƒ³ãƒ‰ã«ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’ä½¿ç”¨ã—ãªã„ã€‚
  */
 CApp theApp;
 
 /*
- *	ƒvƒƒOƒ‰ƒ€ŠJŽnˆÊ’u
+ *	ãƒ—ãƒ­ã‚°ãƒ©ãƒ é–‹å§‹ä½ç½®
  */
 INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, INT){
 
-	WakeUp();	//	‰Šú‰»‚Ì‰Šú‰»
+	WakeUp();	//	åˆæœŸåŒ–ã®åˆæœŸåŒ–
 
-	if(!theApp.Init(hInst)) return 0;	//	‚à‚ë‚à‚ë‚Ì‰Šú‰»
+	if(!theApp.Init(hInst)) return 0;	//	ã‚‚ã‚ã‚‚ã‚ã®åˆæœŸåŒ–
 
 #ifdef NO_MSGLOOP
 	Main();
 #else
-	StartUp();	//	ƒvƒƒOƒ‰ƒ}’è‹`‚Ì‰Šú‰»ˆ—
+	StartUp();	//	ãƒ—ãƒ­ã‚°ãƒ©ãƒžå®šç¾©ã®åˆæœŸåŒ–å‡¦ç†
 
-	//	ƒƒbƒZ[ƒWƒ‹[ƒv
+	//	ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—
 	while(PeekAllMessage()){
-		//	ƒEƒCƒ“ƒhƒE‚ªƒAƒNƒeƒBƒu‚È‚ç
+		//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚‰
 		if(IsActive()){
-			theApp.Run();	//	ˆ—‘±s
+			theApp.Run();	//	å‡¦ç†ç¶šè¡Œ
 		}else{
 		#ifdef SCREENSAVER
-			SendWM_CLOSE();	//	I—¹—v‹
+			SendWM_CLOSE();	//	çµ‚äº†è¦æ±‚
 		#endif
-			WaitMessage();	//	ƒƒbƒZ[ƒW‘Ò‚¿
+			WaitMessage();	//	ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å¾…ã¡
 		}
 	}
-	CleanUp();	//	ƒvƒƒOƒ‰ƒ}’è‹`‚Ì‰ð•úˆ—
+	CleanUp();	//	ãƒ—ãƒ­ã‚°ãƒ©ãƒžå®šç¾©ã®è§£æ”¾å‡¦ç†
 #endif
 	return 0;
 }
 
 /*
- *	‰Šú‰»ˆ—
+ *	åˆæœŸåŒ–å‡¦ç†
  */
 BOOL CApp::Init(HINSTANCE hInst){
 #ifdef SCREENSAVER
 	if(CheckArguments("-s") || CheckArguments("/s")){
-		//	ƒXƒNƒŠ[ƒ“ƒZ[ƒo[‚Æ‚µ‚ÄŽÀs‚³‚ê‚½‚©H
+		//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚»ãƒ¼ãƒãƒ¼ã¨ã—ã¦å®Ÿè¡Œã•ã‚ŒãŸã‹ï¼Ÿ
 		;
 	}else{
-		//	‚»‚êˆÈŠO‚È‚ç‘¦I—¹
-		MsgBox("ƒvƒŒƒrƒ…[AÝ’è€–Ú‚Í‚ ‚è‚Ü‚¹‚ñ.");
+		//	ãã‚Œä»¥å¤–ãªã‚‰å³çµ‚äº†
+		MsgBox("ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã€è¨­å®šé …ç›®ã¯ã‚ã‚Šã¾ã›ã‚“.");
 		return FALSE;
 	}
 #endif
 
-	//	‘½d‹N“®‹ÖŽ~
+	//	å¤šé‡èµ·å‹•ç¦æ­¢
 	if(!m_mutex.BeginSingleBoot()){
-		MsgBox("‚±‚ÌƒvƒƒOƒ‰ƒ€‚ÍŠù‚É‹N“®‚µ‚Ä‚¢‚Ü‚·.\n");
+		MsgBox("ã“ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¯æ—¢ã«èµ·å‹•ã—ã¦ã„ã¾ã™.\n");
 		return FALSE;
 	}
 
-	//	•‚“®¬”“_—áŠO‚ð–³Œø‚É‚·‚éB
+	//	æµ®å‹•å°æ•°ç‚¹ä¾‹å¤–ã‚’ç„¡åŠ¹ã«ã™ã‚‹ã€‚
 #ifdef __BORLANDC__
 	_control87(MCW_EM, MCW_EM);
 #endif
 
-	CoInitialize(NULL);	//	COM‚Ì‰Šú‰»
+	CoInitialize(NULL);	//	COMã®åˆæœŸåŒ–
 
-	if(!InitDebugStream()) return FALSE;		//	ƒfƒoƒbƒOo—Í‚Ì‰Šú‰»
-	if(!CreateMainWindow(hInst)) return FALSE;	//	ƒEƒCƒ“ƒhƒE‚Ìì¬
-	//	DirectXŠÖ˜A‚Ì‰Šú‰»
+	if(!InitDebugStream()) return FALSE;		//	ãƒ‡ãƒãƒƒã‚°å‡ºåŠ›ã®åˆæœŸåŒ–
+	if(!CreateMainWindow(hInst)) return FALSE;	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
+	//	DirectXé–¢é€£ã®åˆæœŸåŒ–
 	if(!InitDirect3D()) return FALSE;
 	if(!InitDirectInput()) return FALSE;
 
@@ -103,19 +103,19 @@ BOOL CApp::Init(HINSTANCE hInst){
 	if(!InitDirectPlay()) return FALSE;
 #endif
 
-	g_frame.Init();	//	FPSŠÇ—‹@\‚Ì‰Šú‰»
+	g_frame.Init();	//	FPSç®¡ç†æ©Ÿæ§‹ã®åˆæœŸåŒ–
 
 #ifndef NO_MSGLOOP
-	m_func = MainLoop;	//	ƒ‹[ƒvŠÖ”‚ÌƒZƒbƒg
+	m_func = MainLoop;	//	ãƒ«ãƒ¼ãƒ—é–¢æ•°ã®ã‚»ãƒƒãƒˆ
 #endif
 	return TRUE;
 }
 
 /*
- *	‰ð•úˆ—
+ *	è§£æ”¾å‡¦ç†
  */
 CApp::~CApp(){
-	//	DirectXŠÖ˜A‚Ì‰ð•ú
+	//	DirectXé–¢é€£ã®è§£æ”¾
 #ifndef NO_COMM
 	FreeDirectPlay();
 #endif
@@ -130,25 +130,25 @@ CApp::~CApp(){
 #endif
 	FreeDirectInput();
 	FreeDirect3D();
-	DestroyWindow(svw.hWnd);	//	ƒEƒCƒ“ƒhƒE‚Ì‰ð•úiDirect3D‚Ì‰ð•ú‚æ‚è‚àŒãj
+	DestroyWindow(svw.hWnd);	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®è§£æ”¾ï¼ˆDirect3Dã®è§£æ”¾ã‚ˆã‚Šã‚‚å¾Œï¼‰
 
-	CoUninitialize();			//	COM‚Ì‰ð•ú
-	m_mutex.EndSingleBoot();	//	‘½d‹N“®‹ÖŽ~‚Ì‰ðœ
+	CoUninitialize();			//	COMã®è§£æ”¾
+	m_mutex.EndSingleBoot();	//	å¤šé‡èµ·å‹•ç¦æ­¢ã®è§£é™¤
 }
 
 /*
- *	ƒƒCƒ“ƒ‹[ƒv“àˆ—
+ *	ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—å†…å‡¦ç†
  */
 void CApp::Run(){
-	ScanInputDevice();	//	“ü—Íˆ—
-	m_func();			//	ƒ‹[ƒvŠÖ”ŒÄ‚Ño‚µ
-	SyncFrame();		//	FPS’²ß‚ÆCPU‹xŒe
+	ScanInputDevice();	//	å…¥åŠ›å‡¦ç†
+	m_func();			//	ãƒ«ãƒ¼ãƒ—é–¢æ•°å‘¼ã³å‡ºã—
+	SyncFrame();		//	FPSèª¿ç¯€ã¨CPUä¼‘æ†©
 }
 
-//	ƒtƒŒ[ƒ€ŠÇ—
+//	ãƒ•ãƒ¬ãƒ¼ãƒ ç®¡ç†
 
 /*
- *	FPS’²ß‚Ì‚½‚ß‰Šú‰»
+ *	FPSèª¿ç¯€ã®ãŸã‚åˆæœŸåŒ–
  */
 void CFrame::Init(){
 	frameWait = 1000/MAXFPS;
@@ -165,11 +165,11 @@ void CFrame::Init(){
 }
 
 /*
- *	FPS‚Ì’²ß
+ *	FPSã®èª¿ç¯€
  */
 void CFrame::Sync(){
-	DWORD now;	//	Œ»ÝŽžŠÔ
-	DWORD diff;	//	Œo‰ßŽžŠÔ
+	DWORD now;	//	ç¾åœ¨æ™‚é–“
+	DWORD diff;	//	çµŒéŽæ™‚é–“
 
 	now = timeGetTime();
 	diff = now-start;
@@ -177,28 +177,28 @@ void CFrame::Sync(){
 
 	framecnt++;
 
-	//	–ñ0.5sec‚²‚Æ‚ÉFPS‚ðŒvŽZ
+	//	ç´„0.5secã”ã¨ã«FPSã‚’è¨ˆç®—
 	if(frame==MAXFPS/2){
 		fps = (MAXFPS*500.f)/(now-old);
 		old = now;
 		frame = 0;
 	}
 #if 1
-	//	ƒEƒGƒCƒgˆ—
+	//	ã‚¦ã‚¨ã‚¤ãƒˆå‡¦ç†
 	DWORD wait;
 
 	if(++cnt==MAXFPS/10) wait = frameWait+fineWait, cnt = 0;
 	else wait = frameWait;
 
 	if(diff<wait){
-		//	Œo‰ßŽžŠÔ‚ªŽüŠú‚æ‚è’Z‚¢
+		//	çµŒéŽæ™‚é–“ãŒå‘¨æœŸã‚ˆã‚ŠçŸ­ã„
 		Sleep(wait-diff);
 		start += wait;
 	}else if(diff<wait*4){
-		//	ŽüŠú‚ð’´‚¦‚½‚ª‹–—e”ÍˆÍ“à
+		//	å‘¨æœŸã‚’è¶…ãˆãŸãŒè¨±å®¹ç¯„å›²å†…
 		start += wait;
 	}else{
-		//	‹–—e”ÍˆÍ‚Å‚Í‚È‚¢
+		//	è¨±å®¹ç¯„å›²ã§ã¯ãªã„
 		start = now-wait;
 	}
 #else

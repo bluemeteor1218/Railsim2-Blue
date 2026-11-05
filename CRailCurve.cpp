@@ -1,16 +1,16 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailCurve.h"
 #include "CRailTraceCurve.h"
 
-//	“à•”’è”
-extern const float RAIL_SEG_MAX = 100.0f;	//	ƒŒ[ƒ‹•ªŠ„Å‘å’l
+//	å†…éƒ¨å®šæ•°
+extern const float RAIL_SEG_MAX = 100.0f;	//	ãƒ¬ãƒ¼ãƒ«åˆ†å‰²æœ€å¤§å€¤
 
 /*
- *	•ªŠ„“_ŒvZ
+ *	åˆ†å‰²ç‚¹è¨ˆç®—
  */
 bool CRailCurve::CalcSplit(
-	VEC3 &pos1, VEC3 &dir1,	//	n“_
-	VEC3 &pos2, VEC3 &dir2	//	I“_
+	VEC3 &pos1, VEC3 &dir1,	//	å§‹ç‚¹
+	VEC3 &pos2, VEC3 &dir2	//	çµ‚ç‚¹
 ){
 	m_Radius = -1.0f;
 	m_CompSplit = false;
@@ -119,11 +119,11 @@ LINECOMP:;
 }
 
 /*
- *	”¼ŒaŒvZ
+ *	åŠå¾„è¨ˆç®—
  */
 bool CRailCurve::CalcRadius(
-	VEC3 &pos1, VEC3 &dir1,	//	n“_
-	VEC3 &pos2, VEC3 &dir2	//	I“_
+	VEC3 &pos1, VEC3 &dir1,	//	å§‹ç‚¹
+	VEC3 &pos2, VEC3 &dir2	//	çµ‚ç‚¹
 ){
 	if(dir1==dir2) return false;
 	float theta = acosf(V3Dot(&dir1, &dir2));
@@ -132,12 +132,12 @@ bool CRailCurve::CalcRadius(
 }
 
 /*
- *	‹Èü’·‚³ŒvZ
+ *	æ›²ç·šé•·ã•è¨ˆç®—
  */
 float CRailCurve::CalcLength(
-	VEC3 &pos1, VEC3 &dir1,	//	n“_
-	VEC3 &pos2, VEC3 &dir2,	//	I“_
-	float sum				//	—İŒv’·‚³
+	VEC3 &pos1, VEC3 &dir1,	//	å§‹ç‚¹
+	VEC3 &pos2, VEC3 &dir2,	//	çµ‚ç‚¹
+	float sum				//	ç´¯è¨ˆé•·ã•
 ){
 	if(CalcSplit(pos1, dir1, pos2, dir2)) return sum+V3Len(&(pos2-pos1));
 	CRailCurve curve;
@@ -148,7 +148,7 @@ float CRailCurve::CalcLength(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 bool CRailTraceCurve::ms_Terminate1;
 bool CRailTraceCurve::ms_Terminate2;
 IRailSplitter CRailTraceCurve::ms_SpliceItr;
@@ -157,11 +157,11 @@ IRailSplitter CRailTraceCurve::ms_SpliceItr;
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒJƒ“ƒg‚©‚çÀ•WŒnŒvZ
+ *	ã‚«ãƒ³ãƒˆã‹ã‚‰åº§æ¨™ç³»è¨ˆç®—
  */
 void CalcCantAxis(
-	VEC3 *right, VEC3 *up, VEC3 *dir,	//	‘ã“üæ
-	float cant							//	ƒJƒ“ƒg—Ê
+	VEC3 *right, VEC3 *up, VEC3 *dir,	//	ä»£å…¥å…ˆ
+	float cant							//	ã‚«ãƒ³ãƒˆé‡
 ){
 	*up = V3UP;
 	V3NormAxis(right, up, dir);

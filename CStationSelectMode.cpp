@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CStation.h"
 #include "CSaveFile.h"
 #include "CStationPlugin.h"
@@ -6,29 +6,29 @@
 #include "CStationSelectMode.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStationSelectMode::CStationSelectMode():
-	CStructSelectMode(lang(StationPlugin))	//	Šî–{ƒNƒ‰ƒX
+	CStructSelectMode(lang(StationPlugin))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 }
 
 /*
- *	Œ»İ‚Ìƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“‚ğæ“¾
+ *	ç¾åœ¨ã®ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’å–å¾—
  */
 CModelPlugin *CStationSelectMode::GetModelPlugin(){
 	return g_Station;
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆå–å¾—
  */
 CPluginList *CStationSelectMode::GetPluginList(){
 	return g_StationPluginList;
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CStationSelectMode::EnterModelPlugin(){
 	ms_ModeLabel = lang(SelectStation);
@@ -36,7 +36,7 @@ void CStationSelectMode::EnterModelPlugin(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CStationSelectMode::RenderModelPlugin(){
 	CStationPlugin::RenderPreview(V3ZERO, V3DIR, V3UP);

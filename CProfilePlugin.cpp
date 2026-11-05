@@ -1,20 +1,20 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CShadowVolume.h"
 #include "CCamera.h"
 #include "CProfilePlugin.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CScene *g_Scene;
 extern bool g_RailMipMap;
 extern CShadowVolume g_ShadowVolume;
 
 /*
- *	’f–Ê’†ŠÔ“_À•W‚ÌŒvZ
+ *	æ–­é¢ä¸­é–“ç‚¹åº§æ¨™ã®è¨ˆç®—
  */
 inline VEC3 CalcMidProfile(
-	VEC3 &p1, VEC3 &r1, VEC3 &u1,	//	‹«ŠE 1
-	VEC3 &p2, VEC3 &r2, VEC3 &u2,	//	‹«ŠE 2
-	VEC3 &mid						//	’†ŠÔ“_
+	VEC3 &p1, VEC3 &r1, VEC3 &u1,	//	å¢ƒç•Œ 1
+	VEC3 &p2, VEC3 &r2, VEC3 &u2,	//	å¢ƒç•Œ 2
+	VEC3 &mid						//	ä¸­é–“ç‚¹
 ){
 	return (1.0f-mid.z)*(p1+r1*mid.x+u1*mid.y)+mid.z*(p2+r2*mid.x+u2*mid.y);
 }
@@ -23,11 +23,11 @@ inline VEC3 CalcMidProfile(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CProfileVertex::Read(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	bool tex	//	ƒeƒNƒXƒ`ƒƒ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	bool tex	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(str, "Vertex"))) return NULL;
@@ -54,11 +54,11 @@ char *CProfileVertex::Read(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CProfileFace::Read(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	bool tex	//	ƒeƒNƒXƒ`ƒƒ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	bool tex	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(eee = str, "Face"))) return NULL;
@@ -99,21 +99,21 @@ char *CProfileFace::Read(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CProfile::CProfile(){
 	m_Texture = NULL;
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CProfile::~CProfile(){
 	ClearAll();
 }
 
 /*
- *	‚·‚×‚Ä‰ğ•ú
+ *	ã™ã¹ã¦è§£æ”¾
  */
 void CProfile::ClearAll(){
 	map<CScene *, MapPtrValue<CQuadDumpN> >::iterator itr_n;
@@ -127,10 +127,10 @@ void CProfile::ClearAll(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CProfile::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(str, "Profile"))) return NULL;
@@ -158,14 +158,14 @@ char *CProfile::Read(
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ“Ç
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­è¾¼
  */
 void CProfile::LoadTexture(){
 	if(m_UseTexture) m_Texture = g_TexList.Get(FALSE, m_TexFileName.c_str(), 0, !g_RailMipMap);
 }
 
 /*
- *	ƒ_ƒ“ƒp€”õ
+ *	ãƒ€ãƒ³ãƒ‘æº–å‚™
  */
 void CProfile::PrepareDump(){
 	if(m_UseTexture){
@@ -182,10 +182,10 @@ void CProfile::PrepareDump(){
 
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CWireframeVertex::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(str, "Vertex"))) return NULL;
@@ -202,10 +202,10 @@ char *CWireframeVertex::Read(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CWireframeLine::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(eee = str, "Line"))) return NULL;
@@ -226,20 +226,20 @@ char *CWireframeLine::Read(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CWireframe::CWireframe(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CWireframe::~CWireframe(){
 	ClearAll();
 }
 
 /*
- *	‚·‚×‚Ä‰ğ•ú
+ *	ã™ã¹ã¦è§£æ”¾
  */
 void CWireframe::ClearAll(){
 	map<CScene *, MapPtrValue<CLineDumpN> >::iterator itr_n;
@@ -249,10 +249,10 @@ void CWireframe::ClearAll(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CWireframe::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(str, "Wireframe"))) return NULL;
@@ -274,7 +274,7 @@ char *CWireframe::Read(
 }
 
 /*
- *	ƒ_ƒ“ƒp€”õ
+ *	ãƒ€ãƒ³ãƒ‘æº–å‚™
  */
 void CWireframe::PrepareDump(){
 	MapPtrValue<CLineDumpN> &dump_n = m_DumpN[g_Scene];
@@ -285,10 +285,10 @@ void CWireframe::PrepareDump(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CInterval::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(str, "Interval"))) return NULL;
@@ -305,7 +305,7 @@ char *CInterval::Read(
 }
 
 /*
- *	ƒ‚ƒfƒ‹“Ç
+ *	ãƒ¢ãƒ‡ãƒ«èª­è¾¼
  */
 void CInterval::LoadModel(){
 	m_Mesh = g_MeshList.Get(FALSE, (char *)m_ModelFileName.c_str(), 0, !g_RailMipMap);
@@ -315,14 +315,14 @@ void CInterval::LoadModel(){
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 vector<CProfileVertex *>CProfilePlugin::ms_TempIndex;
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CProfilePlugin::ReadProfile(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp;
 	CProfile profile;
@@ -346,7 +346,7 @@ char *CProfilePlugin::ReadProfile(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CProfilePlugin::LoadData(){
 	IProfile ip = m_Profile.begin();
@@ -359,15 +359,15 @@ void CProfilePlugin::LoadData(){
 }
 
 /*
- *	ƒ_ƒ“ƒv
+ *	ãƒ€ãƒ³ãƒ—
  */
 void CProfilePlugin::Dump(
-	VEC3 &p1, VEC3 &r1, VEC3 &u1,		//	n“_ (³‹K‰»Ï)
-	VEC3 &ip1, VEC3 &ir1, VEC3 &iu1,	//	”ñƒJƒ“ƒgn“_ (³‹K‰»Ï)
-	VEC3 &p2, VEC3 &r2, VEC3 &u2,		//	I“_ (³‹K‰»Ï)
-	VEC3 &ip2, VEC3 &ir2, VEC3 &iu2,	//	”ñƒJƒ“ƒgI“_ (³‹K‰»Ï)
-	float len,	//	ƒeƒNƒXƒ`ƒƒ‰„’·’·‚³
-	int prev	//	ƒvƒŒƒrƒ…[ (1: render, 2: settex, 4: mapscroll)
+	VEC3 &p1, VEC3 &r1, VEC3 &u1,		//	å§‹ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &ip1, VEC3 &ir1, VEC3 &iu1,	//	éã‚«ãƒ³ãƒˆå§‹ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &p2, VEC3 &r2, VEC3 &u2,		//	çµ‚ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &ip2, VEC3 &ir2, VEC3 &iu2,	//	éã‚«ãƒ³ãƒˆçµ‚ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	float len,	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£å»¶é•·é•·ã•
+	int prev	//	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ (1: render, 2: settex, 4: mapscroll)
 ){
 	void (CLineDumpN::*f_ll)(VEC3, D3DCOLOR, VEC3, D3DCOLOR);
 	void (CQuadDumpN::*f_qn)(
@@ -497,16 +497,16 @@ void CProfilePlugin::Dump(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CProfilePlugin::Render(
-	VEC3 &p1, VEC3 &r1, VEC3 &u1, VEC3 &d1,	//	n“_ (³‹K‰»Ï)
-	VEC3 &ip1, VEC3 &ir1, VEC3 &iu1,		//	”ñƒJƒ“ƒgn“_ (³‹K‰»Ï)
-	VEC3 &p2, VEC3 &r2, VEC3 &u2, VEC3 &d2,	//	I“_ (³‹K‰»Ï)
-	VEC3 &ip2, VEC3 &ir2, VEC3 &iu2,		//	”ñƒJƒ“ƒgI“_ (³‹K‰»Ï)
-	int close,		//	•Â½ (1: begin, 2: end)
-	float len,		//	ƒeƒNƒXƒ`ƒƒ‰„’·’·‚³
-	MAT8 *altmat	//	‘ã‘Öƒ}ƒeƒŠƒAƒ‹
+	VEC3 &p1, VEC3 &r1, VEC3 &u1, VEC3 &d1,	//	å§‹ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &ip1, VEC3 &ir1, VEC3 &iu1,		//	éã‚«ãƒ³ãƒˆå§‹ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &p2, VEC3 &r2, VEC3 &u2, VEC3 &d2,	//	çµ‚ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &ip2, VEC3 &ir2, VEC3 &iu2,		//	éã‚«ãƒ³ãƒˆçµ‚ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	int close,		//	é–‰é– (1: begin, 2: end)
+	float len,		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£å»¶é•·é•·ã•
+	MAT8 *altmat	//	ä»£æ›¿ãƒãƒ†ãƒªã‚¢ãƒ«
 ){
 	float sx1, sy1, sx2, sy2;
 	float taperz = GetTaperZ(), sz = 1.0;
@@ -611,7 +611,7 @@ ENDDUMP:;
 }
 
 /*
- *	ƒ}ƒbƒsƒ“ƒOˆÊ’uƒŠƒZƒbƒg
+ *	ãƒãƒƒãƒ”ãƒ³ã‚°ä½ç½®ãƒªã‚»ãƒƒãƒˆ
  */
 void CProfilePlugin::ResetMapTemp(){
 	IProfile ip = m_Profile.begin();
@@ -621,10 +621,10 @@ void CProfilePlugin::ResetMapTemp(){
 }
 
 /*
- *	ƒ}ƒbƒsƒ“ƒOˆÊ’uƒRƒs[
+ *	ãƒãƒƒãƒ”ãƒ³ã‚°ä½ç½®ã‚³ãƒ”ãƒ¼
  */
 void CProfilePlugin::CopyMapTemp(
-	vector<float> &mapv	//	‘ã“üæ
+	vector<float> &mapv	//	ä»£å…¥å…ˆ
 ){
 	int pn = m_Profile.size()+m_Interval.size();
 	if(!pn) return;
@@ -637,10 +637,10 @@ void CProfilePlugin::CopyMapTemp(
 }
 
 /*
- *	ƒ}ƒbƒsƒ“ƒOˆÊ’u‰ÁZ
+ *	ãƒãƒƒãƒ”ãƒ³ã‚°ä½ç½®åŠ ç®—
  */
 void CProfilePlugin::AddMapTemp(
-	float dist	//	‹——£
+	float dist	//	è·é›¢
 ){
 	IProfile ip = m_Profile.begin();
 	IInterval ii = m_Interval.begin();
@@ -655,10 +655,10 @@ void CProfilePlugin::AddMapTemp(
 }
 
 /*
- *	ƒ}ƒbƒsƒ“ƒOˆÊ’uƒZƒbƒg
+ *	ãƒãƒƒãƒ”ãƒ³ã‚°ä½ç½®ã‚»ãƒƒãƒˆ
  */
 void CProfilePlugin::SetMapTemp(
-	vector<float> &mapv	//	Œ»İˆÊ’u
+	vector<float> &mapv	//	ç¾åœ¨ä½ç½®
 ){
 	vector<float>::iterator ptr = mapv.begin();
 	IProfile ip = m_Profile.begin();
@@ -668,7 +668,7 @@ void CProfilePlugin::SetMapTemp(
 }
 
 /*
- *	ƒ_ƒ“ƒp‰ğ•ú
+ *	ãƒ€ãƒ³ãƒ‘è§£æ”¾
  */
 void CProfilePlugin::ClearDump(){
 	IProfile ip = m_Profile.begin();
@@ -681,7 +681,7 @@ void CProfilePlugin::ClearDump(){
 }
 
 /*
- *	ƒ_ƒ“ƒp‚·‚×‚Ä‰ğ•ú
+ *	ãƒ€ãƒ³ãƒ‘ã™ã¹ã¦è§£æ”¾
  */
 void CProfilePlugin::ClearDumpAll(){
 	IProfile ip = m_Profile.begin();
@@ -691,7 +691,7 @@ void CProfilePlugin::ClearDumpAll(){
 }
 
 /*
- *	ƒo[ƒeƒbƒNƒX€”õ
+ *	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹æº–å‚™
  */
 void CProfilePlugin::PrepareVertex(){
 	IProfile ip = m_Profile.begin();
@@ -709,7 +709,7 @@ void CProfilePlugin::PrepareVertex(){
 }
 
 /*
- *	‘S‚ÄƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	å…¨ã¦ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CProfilePlugin::RenderAll(){
 	IProfile ip = m_Profile.begin();
@@ -733,7 +733,7 @@ void CProfilePlugin::RenderAll(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒ_ƒ“ƒp‰ğ•ú
+ *	ãƒ€ãƒ³ãƒ‘è§£æ”¾
  */
 void CProfilePluginList::ClearDump(){
 	CProfilePlugin *ptr = Root();
@@ -744,7 +744,7 @@ void CProfilePluginList::ClearDump(){
 }
 
 /*
- *	ƒ_ƒ“ƒp‚·‚×‚Ä‰ğ•ú
+ *	ãƒ€ãƒ³ãƒ‘ã™ã¹ã¦è§£æ”¾
  */
 void CProfilePluginList::ClearDumpAll(){
 	CProfilePlugin *ptr = Root();
@@ -755,7 +755,7 @@ void CProfilePluginList::ClearDumpAll(){
 }
 
 /*
- *	ƒ_ƒ“ƒp€”õ
+ *	ãƒ€ãƒ³ãƒ‘æº–å‚™
  */
 void CProfilePluginList::PrepareVertex(){
 	CProfilePlugin *ptr = Root();
@@ -766,7 +766,7 @@ void CProfilePluginList::PrepareVertex(){
 }
 
 /*
- *	‘S‚ÄƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	å…¨ã¦ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CProfilePluginList::RenderAll(){
 	devResetMatrix();
@@ -782,12 +782,12 @@ void CProfilePluginList::RenderAll(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒ}ƒbƒsƒ“ƒOƒxƒNƒgƒ‹“Ç
+ *	ãƒãƒƒãƒ”ãƒ³ã‚°ãƒ™ã‚¯ãƒˆãƒ«èª­è¾¼
  */
 char *ReadMapVector(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	char *pref,			//	ƒvƒŒƒtƒBƒbƒNƒX
-	vector<float> &mapv	//	ƒ}ƒbƒsƒ“ƒOƒxƒNƒgƒ‹
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	char *pref,			//	ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹
+	vector<float> &mapv	//	ãƒãƒƒãƒ”ãƒ³ã‚°ãƒ™ã‚¯ãƒˆãƒ«
 ){
 	char *eee, *tmp;
 	if(tmp = Assignment(str, pref)){
@@ -804,12 +804,12 @@ char *ReadMapVector(
 }
 
 /*
- *	ƒ}ƒbƒsƒ“ƒOƒxƒNƒgƒ‹•Û‘¶
+ *	ãƒãƒƒãƒ”ãƒ³ã‚°ãƒ™ã‚¯ãƒˆãƒ«ä¿å­˜
  */
 void SaveMapVector(
-	FILE *df,			//	ƒtƒ@ƒCƒ‹
-	char *pref,			//	ƒvƒŒƒtƒBƒbƒNƒX
-	vector<float> &mapv	//	ƒ}ƒbƒsƒ“ƒOƒxƒNƒgƒ‹
+	FILE *df,			//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *pref,			//	ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹
+	vector<float> &mapv	//	ãƒãƒƒãƒ”ãƒ³ã‚°ãƒ™ã‚¯ãƒˆãƒ«
 ){
 	if(!mapv.size()) return;
 	fprintf(df, pref);

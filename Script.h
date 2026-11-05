@@ -1,16 +1,16 @@
-#ifndef SCRIPT_H_INCLUDED
+ï»¿#ifndef SCRIPT_H_INCLUDED
 #define SCRIPT_H_INCLUDED
 
-//	’èŒ`ƒGƒ‰[
+//	å®šå½¢ã‚¨ãƒ©ãƒ¼
 #define ERR_ENDBLOCK lang(SyntaxError)
 
 /*
- *	ƒGƒ‰[ƒnƒ“ƒhƒ‰
+ *	ã‚¨ãƒ©ãƒ¼ãƒãƒ³ãƒ‰ãƒ©
  */
 class CSynErr{
 private:
-	char *m_ErrorPos;	//	ƒGƒ‰[”­¶‰ÓŠ
-	string m_Message;	//	ƒf[ƒ^
+	char *m_ErrorPos;	//	ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿç®‡æ‰€
+	string m_Message;	//	ãƒ‡ãƒ¼ã‚¿
 public:
 	CSynErr(char *);
 	CSynErr(char *, const char *, ...);
@@ -18,7 +18,7 @@ public:
 	void Handle(string, char *);
 };
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 char *Space(char *);
 char *ConstInteger(char *, int *);
 char *ConstFloat(char *, float *);
@@ -45,43 +45,43 @@ char *BeginNamedBlock(char *, char *, string *);
 char *EndBlock(char *);
 
 /*
- *	”CˆÓ•¶š
+ *	ä»»æ„æ–‡å­—
  */
 inline char *Character(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char read	//	“Çæ•¶š
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char read	//	èª­å–æ–‡å­—
 ){
 	if(*str==read) return str+1;
 	return NULL;
 }
 
 /*
- *	”CˆÓ•¶š + ‹ó”’ƒXƒLƒbƒv
+ *	ä»»æ„æ–‡å­— + ç©ºç™½ã‚¹ã‚­ãƒƒãƒ—
  */
 inline char *Character2(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char read	//	“Çæ•¶š
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char read	//	èª­å–æ–‡å­—
 ){
 	return (str = Character(str, read)) ? Space(str) : NULL;
 }
 
 /*
- *	”CˆÓ—ñ
+ *	ä»»æ„åˆ—
  */
 inline char *String(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *read	//	“Çæ•¶š—ñ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read	//	èª­å–æ–‡å­—åˆ—
 ){
 	while(*read) if(*read++!=*str++) return NULL;
 	return str;
 }
 
 /*
- *	”CˆÓ—ñ + ‹ó”’ƒXƒLƒbƒv
+ *	ä»»æ„åˆ— + ç©ºç™½ã‚¹ã‚­ãƒƒãƒ—
  */
 inline char *String2(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *read	//	“Çæ•¶š—ñ
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *read	//	èª­å–æ–‡å­—åˆ—
 ){
 	return (str = String(str, read)) ? Space(str) : NULL;
 }

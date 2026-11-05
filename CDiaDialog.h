@@ -1,4 +1,4 @@
-#ifndef CDIADIALOG_H_INCLUDED
+ï»¿#ifndef CDIADIALOG_H_INCLUDED
 #define CDIADIALOG_H_INCLUDED
 
 #include "CWindowCtrl.h"
@@ -18,28 +18,28 @@ class CPointElement;
 class CDiaElement;
 
 /*
- *	ƒ_ƒCƒ„ŠÖ˜Aƒ_ƒCƒAƒƒOŠî–{ƒNƒ‰ƒX
+ *	ãƒ€ã‚¤ãƒ¤é–¢é€£ãƒ€ã‚¤ã‚¢ãƒ­ã‚°åŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CDiaDialogBase: public CWindowCtrl, public CWindowResizer, public CMenuCommander{
 protected:
-	int m_ExtHeight;				//	Šg’£—Ìˆæ‚‚³
-	CStaticCtrl	m_NameLabel;		//	–¼Ìƒ‰ƒxƒ‹
-	CEditCtrl m_NameEdit;			//	–¼ÌƒGƒfƒBƒbƒg
-	CGroupListView m_GroupListView;	//	•Ò¬ƒŠƒXƒg
-	CPopMenu *m_GroupMenu;			//	•Ò¬ƒƒjƒ…[
-	CCheckBox m_UseDefault;			//	ƒfƒtƒHƒ‹ƒgİ’è‚ğg—p
-	CStaticCtrl m_DefaultLabel;		//	ƒfƒtƒHƒ‹ƒg‘I‘ğƒ‰ƒxƒ‹
-	CListView m_RoutineListView;	//	ƒ‹[ƒ`ƒ“ƒŠƒXƒg
-	CPopMenu *m_RoutineMenu;		//	ƒ‹[ƒ`ƒ“ƒƒjƒ…[
-	CPushButton m_RoutineAdd;		//	’Ç‰Á
-	CPushButton m_RoutineDelete;	//	íœ
-	CPushButton m_RoutinePrev;		//	‚Ğ‚Æ‚Â–ß‚·
-	CPushButton m_RoutineNext;		//	‚Ğ‚Æ‚Â‘—‚é
-	CGroupBox m_DiaGroup;			//	İ’èƒOƒ‹[ƒv
-	CPushButton m_ApplyButton;		//	“K—pƒ{ƒ^ƒ“
-	CDiaInstBase *m_DiaInst;		//	ƒ_ƒCƒ„ƒCƒ“ƒXƒ^ƒ“ƒX
-	CDiaListBase *m_DiaList;		//	ƒ‹[ƒ`ƒ“
-	CDiaElementBase *m_DiaElement;	//	•ÒW’†ƒ_ƒCƒ„—v‘f
+	int m_ExtHeight;				//	æ‹¡å¼µé ˜åŸŸé«˜ã•
+	CStaticCtrl	m_NameLabel;		//	åç§°ãƒ©ãƒ™ãƒ«
+	CEditCtrl m_NameEdit;			//	åç§°ã‚¨ãƒ‡ã‚£ãƒƒãƒˆ
+	CGroupListView m_GroupListView;	//	ç·¨æˆãƒªã‚¹ãƒˆ
+	CPopMenu *m_GroupMenu;			//	ç·¨æˆãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	CCheckBox m_UseDefault;			//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®šã‚’ä½¿ç”¨
+	CStaticCtrl m_DefaultLabel;		//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆé¸æŠæ™‚ãƒ©ãƒ™ãƒ«
+	CListView m_RoutineListView;	//	ãƒ«ãƒ¼ãƒãƒ³ãƒªã‚¹ãƒˆ
+	CPopMenu *m_RoutineMenu;		//	ãƒ«ãƒ¼ãƒãƒ³ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	CPushButton m_RoutineAdd;		//	è¿½åŠ 
+	CPushButton m_RoutineDelete;	//	å‰Šé™¤
+	CPushButton m_RoutinePrev;		//	ã²ã¨ã¤æˆ»ã™
+	CPushButton m_RoutineNext;		//	ã²ã¨ã¤é€ã‚‹
+	CGroupBox m_DiaGroup;			//	è¨­å®šã‚°ãƒ«ãƒ¼ãƒ—
+	CPushButton m_ApplyButton;		//	é©ç”¨ãƒœã‚¿ãƒ³
+	CDiaInstBase *m_DiaInst;		//	ãƒ€ã‚¤ãƒ¤ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+	CDiaListBase *m_DiaList;		//	ãƒ«ãƒ¼ãƒãƒ³
+	CDiaElementBase *m_DiaElement;	//	ç·¨é›†ä¸­ãƒ€ã‚¤ãƒ¤è¦ç´ 
 public:
 	CDiaDialogBase();
 	~CDiaDialogBase();
@@ -65,11 +65,11 @@ public:
 	el *GetElement(){ return m_DiaElement ? (el *)m_DiaElement : NULL; }
 
 /*
- *	ƒ|ƒCƒ“ƒgØ‘Öƒ_ƒCƒAƒƒO
+ *	ãƒã‚¤ãƒ³ãƒˆåˆ‡æ›¿ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  */
 class CPointDialog: public CDiaDialogBase{
 private:
-	CRadioButton m_Point[3];	//	ƒ|ƒCƒ“ƒgƒ‰ƒWƒI
+	CRadioButton m_Point[3];	//	ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¸ã‚ª
 public:
 	void Init(CInterface *);
 	void ResizeDiaDialogBase(int, int);
@@ -79,22 +79,22 @@ public:
 };
 
 /*
- *	ƒ_ƒCƒ„İ’èƒ_ƒCƒAƒƒO
+ *	ãƒ€ã‚¤ãƒ¤è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  */
 class CDiaDialog: public CDiaDialogBase{
 private:
-	int m_OffsetSlide;				//	ƒIƒtƒZƒbƒgƒXƒ‰ƒCƒ_ó‘Ô
-	CRadioButton m_Action[3];		//	“®ìƒ‰ƒWƒI
-	CRadioButton m_TimeType[2];		//	ŠÔƒ‰ƒWƒI
-	CEditCtrl m_HourEdit;			//	ƒ‰ƒxƒ‹
-	CStaticCtrl m_HourLabel;		//	ƒGƒfƒBƒbƒg
-	CEditCtrl m_MinuteEdit;			//	•ªƒGƒfƒBƒbƒg
-	CStaticCtrl m_MinuteLabel;		//	•ªƒ‰ƒxƒ‹
-	CEditCtrl m_SecondEdit;			//	•bƒGƒfƒBƒbƒg
-	CStaticCtrl m_SecondLabel;		//	•bƒ‰ƒxƒ‹
-	CEditCtrl m_StopPosEdit;		//	’âÔˆÊ’uƒGƒfƒBƒbƒg
-	CPushButton m_StopPosButton;	//	’âÔˆÊ’u”½‰fƒ{ƒ^ƒ“
-//	CCheckBox m_JointCheck;			//	˜AŒ‹ƒ`ƒFƒbƒN
+	int m_OffsetSlide;				//	ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚¹ãƒ©ã‚¤ãƒ€çŠ¶æ…‹
+	CRadioButton m_Action[3];		//	å‹•ä½œãƒ©ã‚¸ã‚ª
+	CRadioButton m_TimeType[2];		//	æ™‚é–“ãƒ©ã‚¸ã‚ª
+	CEditCtrl m_HourEdit;			//	æ™‚ãƒ©ãƒ™ãƒ«
+	CStaticCtrl m_HourLabel;		//	æ™‚ã‚¨ãƒ‡ã‚£ãƒƒãƒˆ
+	CEditCtrl m_MinuteEdit;			//	åˆ†ã‚¨ãƒ‡ã‚£ãƒƒãƒˆ
+	CStaticCtrl m_MinuteLabel;		//	åˆ†ãƒ©ãƒ™ãƒ«
+	CEditCtrl m_SecondEdit;			//	ç§’ã‚¨ãƒ‡ã‚£ãƒƒãƒˆ
+	CStaticCtrl m_SecondLabel;		//	ç§’ãƒ©ãƒ™ãƒ«
+	CEditCtrl m_StopPosEdit;		//	åœè»Šä½ç½®ã‚¨ãƒ‡ã‚£ãƒƒãƒˆ
+	CPushButton m_StopPosButton;	//	åœè»Šä½ç½®åæ˜ ãƒœã‚¿ãƒ³
+//	CCheckBox m_JointCheck;			//	é€£çµãƒã‚§ãƒƒã‚¯
 public:
 	void Init(CInterface *);
 	void ResizeDiaDialogBase(int, int);

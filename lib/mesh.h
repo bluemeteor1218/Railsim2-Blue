@@ -1,9 +1,9 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 class CNamedObject;
 
 /*
- *	X ƒtƒ@ƒCƒ‹
+ *	X ãƒ•ã‚¡ã‚¤ãƒ«
  */
 class CXFile{
 	LPDIRECTXFILE			m_pXF;
@@ -35,27 +35,27 @@ public:
 };
 
 /*
- *	ƒƒbƒVƒ…
+ *	ãƒ¡ãƒƒã‚·ãƒ¥
  */
 class CMesh{
-	LPD3DXMESH m_pMesh;		//	ƒƒbƒVƒ…–{‘Ì
-	DWORD *m_pMatFlag;		//	ƒ}ƒeƒŠƒAƒ‹ƒtƒ‰ƒO (1: rendered)
-	DWORD *m_pMatOrder;		//	ƒ}ƒeƒŠƒAƒ‹‡˜
-	MAT8 *m_pMat;			//	ƒ}ƒeƒŠƒAƒ‹ƒŠƒXƒg
-	MAT8 *m_pCustomMat;		//	‘ã‘Öƒ}ƒeƒŠƒAƒ‹ƒŠƒXƒg
-	LPTEX8 *m_pTex;			//	ƒeƒNƒXƒ`ƒƒƒŠƒXƒg
-	LPTEX8 *m_pCustomTex;	//	‘ã‘ÖƒeƒNƒXƒ`ƒƒƒŠƒXƒg
-	TTMTX *m_pTexTrans;		//	ƒeƒNƒXƒ`ƒƒ•ÏŠ·ƒŠƒXƒg
-	DWORD m_dwNumMat;		//	ƒ}ƒeƒŠƒAƒ‹”
-	string m_strName;		//	ƒtƒ@ƒCƒ‹–¼
+	LPD3DXMESH m_pMesh;		//	ãƒ¡ãƒƒã‚·ãƒ¥æœ¬ä½“
+	DWORD *m_pMatFlag;		//	ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ãƒ©ã‚° (1: rendered)
+	DWORD *m_pMatOrder;		//	ãƒãƒ†ãƒªã‚¢ãƒ«é †åº
+	MAT8 *m_pMat;			//	ãƒãƒ†ãƒªã‚¢ãƒ«ãƒªã‚¹ãƒˆ
+	MAT8 *m_pCustomMat;		//	ä»£æ›¿ãƒãƒ†ãƒªã‚¢ãƒ«ãƒªã‚¹ãƒˆ
+	LPTEX8 *m_pTex;			//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚¹ãƒˆ
+	LPTEX8 *m_pCustomTex;	//	ä»£æ›¿ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚¹ãƒˆ
+	TTMTX *m_pTexTrans;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£å¤‰æ›ãƒªã‚¹ãƒˆ
+	DWORD m_dwNumMat;		//	ãƒãƒ†ãƒªã‚¢ãƒ«æ•°
+	string m_strName;		//	ãƒ•ã‚¡ã‚¤ãƒ«å
 
-	//	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^••ˆó
+	//	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿å°å°
 	CMesh &operator=(const CMesh &){ return *this; }
 public:
-	VEC3 m_min;		//	‹«ŠEƒ{ƒbƒNƒX
-	VEC3 m_max;		//	‹«ŠEƒ{ƒbƒNƒX
-	VEC3 m_center;	//	‹«ŠE‹…‚Ì’†S
-	float m_radius;	//	‹«ŠE‹…‚Ì”¼Œa
+	VEC3 m_min;		//	å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹
+	VEC3 m_max;		//	å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹
+	VEC3 m_center;	//	å¢ƒç•Œçƒã®ä¸­å¿ƒ
+	float m_radius;	//	å¢ƒç•Œçƒã®åŠå¾„
 
 	CMesh();
 	//	CMesh(CMesh& src);
@@ -87,12 +87,12 @@ public:
 	void RenderSC(MTX4 *pMtx, MAT8 *pMat);
 
 	/*
-	 *	ƒIƒuƒWƒFƒNƒg‚Ìæ“¾
+	 *	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å–å¾—
 	 */
 	LPD3DXMESH GetObject(){ return m_pMesh; }
 };
 
-//	ƒƒbƒVƒ…ƒŠƒXƒg‚Ì—v‘f
+//	ãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚¹ãƒˆã®è¦ç´ 
 struct MESHINFO{
 	CMesh m_Mesh;
 	string strName;
@@ -103,12 +103,12 @@ struct MESHINFO{
 };
 
 /*
- *	ƒƒbƒVƒ…ƒŠƒXƒgEƒNƒ‰ƒX
- *	E“¯‚¶ƒƒbƒVƒ…‚ª‘½d‚Éƒ[ƒh‚³‚ê‚È‚¢‚æ‚¤‚É‚·‚éB
- *	EQÆ”‚ğŠÄ‹‚µAg—p‚³‚ê‚Ä‚¢‚È‚¢ƒƒbƒVƒ…‚ğ‰ğ•ú‚·‚éB
+ *	ãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚¹ãƒˆãƒ»ã‚¯ãƒ©ã‚¹
+ *	ãƒ»åŒã˜ãƒ¡ãƒƒã‚·ãƒ¥ãŒå¤šé‡ã«ãƒ­ãƒ¼ãƒ‰ã•ã‚Œãªã„ã‚ˆã†ã«ã™ã‚‹ã€‚
+ *	ãƒ»å‚ç…§æ•°ã‚’ç›£è¦–ã—ã€ä½¿ç”¨ã•ã‚Œã¦ã„ãªã„ãƒ¡ãƒƒã‚·ãƒ¥ã‚’è§£æ”¾ã™ã‚‹ã€‚
  */
 class CMeshList{
-	MESHINFO *m_pList;	//	ƒŠƒXƒg‚Ìæ“ª
+	MESHINFO *m_pList;	//	ãƒªã‚¹ãƒˆã®å…ˆé ­
 public:
 	CMeshList();
 	~CMeshList();
@@ -116,5 +116,5 @@ public:
 	void Release(CMesh *);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_RenderBlink;

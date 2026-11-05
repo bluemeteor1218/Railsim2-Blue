@@ -1,11 +1,11 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 struct SYSVALUE_M{
-	IDirectMusicLoader8			*pLoader;	//	ƒ[ƒ_[
-	IDirectMusicPerformance8	*pPerf;		//	ƒpƒtƒH[ƒ}ƒ“ƒX
-	IDirectMusicSegment8		*pSeg;		//	ƒZƒOƒƒ“ƒg
-	IDirectMusicSegmentState	*pState;	//	ƒZƒOƒƒ“ƒgó‘Ô
-	MUSIC_TIME					time;		//	’â~ŠÔ
+	IDirectMusicLoader8			*pLoader;	//	ãƒ­ãƒ¼ãƒ€ãƒ¼
+	IDirectMusicPerformance8	*pPerf;		//	ãƒ‘ãƒ•ã‚©ãƒ¼ãƒãƒ³ã‚¹
+	IDirectMusicSegment8		*pSeg;		//	ã‚»ã‚°ãƒ¡ãƒ³ãƒˆ
+	IDirectMusicSegmentState	*pState;	//	ã‚»ã‚°ãƒ¡ãƒ³ãƒˆçŠ¶æ…‹
+	MUSIC_TIME					time;		//	åœæ­¢æ™‚é–“
 };
 extern SYSVALUE_M svm;
 

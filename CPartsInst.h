@@ -1,12 +1,12 @@
-#ifndef CPARTSINST_H_INCLUDED
+ï»¿#ifndef CPARTSINST_H_INCLUDED
 #define CPARTSINST_H_INCLUDED
 
 /*
- *	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒX
+ *	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CPartsInst{
 protected:
-	CObject m_Object;	//	ƒIƒuƒWƒFƒNƒg
+	CObject m_Object;	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 public:
 	CObject *GetObject(){ return &m_Object; }
 	VEC3 GetPos(){ return m_Object.GetPos(); }
@@ -14,7 +14,7 @@ public:
 	void DrawBox();
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CPartsInst>::iterator IPartsInst;
 
 #endif

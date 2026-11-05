@@ -1,16 +1,16 @@
-#ifndef CRAILBUILDMODE_H_INCLUDED
+ï»¿#ifndef CRAILBUILDMODE_H_INCLUDED
 #define CRAILBUILDMODE_H_INCLUDED
 
 #include "CSceneryMode.h"
 #include "CRailwayMode.h"
 
 /*
- *	ƒŒ[ƒ‹İ’uƒ‚[ƒh
+ *	ãƒ¬ãƒ¼ãƒ«è¨­ç½®ãƒ¢ãƒ¼ãƒ‰
  */
 class CRailBuildMode: public CArrowSceneryMode, public CRailwayMode{
 private:
-	CRailBuilder *m_Builder;	//	ƒŒ[ƒ‹İ’uq
-	CRailBuilder *m_LastPos;	//	ÅŒã”öƒAƒhƒŒƒX
+	CRailBuilder *m_Builder;	//	ãƒ¬ãƒ¼ãƒ«è¨­ç½®å­
+	CRailBuilder *m_LastPos;	//	æœ€å¾Œå°¾ã‚¢ãƒ‰ãƒ¬ã‚¹
 public:
 	CRailBuildMode();
 	~CRailBuildMode();
@@ -23,7 +23,7 @@ public:
 	void ResetBuilder();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CRailBuildMode *g_RailBuildMode;
 
 #endif

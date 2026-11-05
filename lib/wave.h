@@ -1,10 +1,10 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 using namespace std;
 
 #define FX_DRY			-1
 #define FX_REVERB		0
-#define FX_REVERB3D		1	//	•s’²‚Ì‚½‚ß–¢ƒTƒ|[ƒg
+#define FX_REVERB3D		1	//	ä¸èª¿ã®ãŸã‚æœªã‚µãƒãƒ¼ãƒˆ
 #define FX_ECHO			2
 #define FX_CHORUS		3
 #define FX_FLANGER		4
@@ -14,15 +14,15 @@ using namespace std;
 #define FX_DISTORTION	8
 
 class CWave{
-	//	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^••ˆó
+	//	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿å°å°
 	CWave& operator = (const CWave&){return *this;}
 	BOOL CreateBuffer(HMMIO hMMI, LPWAVEFORMATEX pFmt, DWORD len);
 public:
-	LPSNDBUF	m_pSB;			//	ƒZƒJƒ“ƒ_ƒŠƒoƒbƒtƒ@
-	LPSNDBUF8	m_pFX;			//	ƒGƒtƒFƒNƒgŽg—p‚Ì‚½‚ß
-	LP3DBUF		m_p3D;			//	3Dƒoƒbƒtƒ@
-	string		m_strName;		//	ƒtƒ@ƒCƒ‹–¼ (ƒŠƒ[ƒh—p)
-	DWORD		m_BytesPerSec;	//	•b“–‚½‚èƒoƒCƒg”
+	LPSNDBUF	m_pSB;			//	ã‚»ã‚«ãƒ³ãƒ€ãƒªãƒãƒƒãƒ•ã‚¡
+	LPSNDBUF8	m_pFX;			//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆä½¿ç”¨ã®ãŸã‚
+	LP3DBUF		m_p3D;			//	3Dãƒãƒƒãƒ•ã‚¡
+	string		m_strName;		//	ãƒ•ã‚¡ã‚¤ãƒ«å (ãƒªãƒ­ãƒ¼ãƒ‰ç”¨)
+	DWORD		m_BytesPerSec;	//	ç§’å½“ãŸã‚Šãƒã‚¤ãƒˆæ•°
 
 	CWave();
 	~CWave();
@@ -35,25 +35,25 @@ public:
 	void SetFX(int fx = FX_DRY);
 
 /*
- *	’âŽ~
+ *	åœæ­¢
  */
 	void Stop(){if(m_pSB) m_pSB->Stop();}
 /*
- *	‰¹—Ê‚ÌÝ’è 
+ *	éŸ³é‡ã®è¨­å®š 
  *
- *	dB	: DSBVOLUME_MIN-DSBVOLUME_MAX(1/100dB’PˆÊ)
+ *	dB	: DSBVOLUME_MIN-DSBVOLUME_MAX(1/100dBå˜ä½)
  */
 	void SetVolume(LONG dB = DSBVOLUME_MAX){if(m_pSB) m_pSB->SetVolume(dB);}
 /*
- *	3D’èˆÊ‚ÌÝ’è
+ *	3Då®šä½ã®è¨­å®š
  *
- *	v		: ˆÊ’u(ƒ[ƒgƒ‹)
+ *	v		: ä½ç½®(ãƒ¡ãƒ¼ãƒˆãƒ«)
  */
 	void SetPos(VEC3 v){if(svs.f3D && m_p3D) m_p3D->SetPosition(v.x, v.y, v.z, DS3D_IMMEDIATE);}
 /*
- *	‰¹Œ¹‚ÌˆÚ“®‘¬“x‚ÌÝ’è
+ *	éŸ³æºã®ç§»å‹•é€Ÿåº¦ã®è¨­å®š
  *
- *	v		: ‘¬“x(ƒ[ƒgƒ‹/•b)
+ *	v		: é€Ÿåº¦(ãƒ¡ãƒ¼ãƒˆãƒ«/ç§’)
  */
 	void SetVelocity(VEC3 v){if(svs.f3D && m_p3D) m_p3D->SetVelocity(v.x, v.y, v.z, DS3D_IMMEDIATE);}
 };

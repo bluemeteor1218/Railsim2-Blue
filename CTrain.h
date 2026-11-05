@@ -1,4 +1,4 @@
-#ifndef CTRAIN_H_INCLUDED
+ï»¿#ifndef CTRAIN_H_INCLUDED
 #define CTRAIN_H_INCLUDED
 
 #include "CTrainSetBuffer.h"
@@ -11,22 +11,22 @@ class CListElement;
 #include "CModelInst.h"
 
 /*
- *	ÔçqƒCƒ“ƒXƒ^ƒ“ƒX
+ *	è»Šè¼Œã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CTrain: public CModelInst{
 	friend class CTrainGroup;
 private:
-	bool m_Reverse;					//	”½“]
-	bool m_Setting;					//	”z’uì‹Æ’†
-	bool m_Warping;					//	ƒ[ƒv’†
-	bool m_WarpingOld;				//	‹Œƒ[ƒvƒtƒ‰ƒO
-	VEC3 m_OldPos[2];				//	‹ŒÀ•W
-	VEC3 m_TiltDir;					//	U‚èqƒxƒNƒgƒ‹
-	CTrainGroup *m_Group;			//	•Ò¬
-	CTrainPlugin *m_TrainPlugin;	//	Ôçqƒvƒ‰ƒOƒCƒ“
-	CListElement *m_ListElement;	//	ƒŠƒXƒg—v‘f
-	list<CAxlePosture> m_AxleList;	//	Ô²ƒŠƒXƒg
-	CTrain *m_Next;					//	Ÿ
+	bool m_Reverse;					//	åè»¢
+	bool m_Setting;					//	é…ç½®ä½œæ¥­ä¸­
+	bool m_Warping;					//	ãƒ¯ãƒ¼ãƒ—ä¸­
+	bool m_WarpingOld;				//	æ—§ãƒ¯ãƒ¼ãƒ—ãƒ•ãƒ©ã‚°
+	VEC3 m_OldPos[2];				//	æ—§åº§æ¨™
+	VEC3 m_TiltDir;					//	æŒ¯ã‚Šå­ãƒ™ã‚¯ãƒˆãƒ«
+	CTrainGroup *m_Group;			//	ç·¨æˆ
+	CTrainPlugin *m_TrainPlugin;	//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CListElement *m_ListElement;	//	ãƒªã‚¹ãƒˆè¦ç´ 
+	list<CAxlePosture> m_AxleList;	//	è»Šè»¸ãƒªã‚¹ãƒˆ
+	CTrain *m_Next;					//	æ¬¡
 public:
 	CTrain(CTrainGroup *);
 	CTrain(CTrainPlugin *, CTrainGroup *, bool);

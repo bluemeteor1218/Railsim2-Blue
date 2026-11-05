@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "md5.h"
 #include "RailMap.h"
 #include "Network.h"
@@ -23,34 +23,34 @@
 #include "CPierPlugin.h"
 #include "CLinePlugin.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 bool IsLeapYear(int);
 int GetDaysPerMonth(int, int);
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const char *LAYOUT_DIRNAME;
 
-//	“à•”’è”
-const float WIND_MAX = 0.5f;	//	Å‘å•—‘¬
+//	å†…éƒ¨å®šæ•°
+const float WIND_MAX = 0.5f;	//	æœ€å¤§é¢¨é€Ÿ
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CTrain *g_CabinViewTrain;
 extern char *YESNO[];
 
-//	“à•”ƒOƒ[ƒoƒ‹
-char *g_DayOfWeek[7];	//	—j“ú
-char *g_TrainSetString[2] = {lang(NotSet), lang(Set)};	//	•Ò¬İ’uó‘Ô
-CScene *g_Scene;					//	ƒJƒŒƒ“ƒgƒV[ƒ“
-CTrainGroup *g_TrainGroup;			//	ƒJƒŒƒ“ƒg•Ò¬
-map<void *, void *> g_AddressMap;	//	ƒAƒhƒŒƒX•ÏŠ·
-set<string> g_LackPlugin;			//	•s‘«ƒvƒ‰ƒOƒCƒ“
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+char *g_DayOfWeek[7];	//	æ›œæ—¥
+char *g_TrainSetString[2] = {lang(NotSet), lang(Set)};	//	ç·¨æˆè¨­ç½®çŠ¶æ…‹
+CScene *g_Scene;					//	ã‚«ãƒ¬ãƒ³ãƒˆã‚·ãƒ¼ãƒ³
+CTrainGroup *g_TrainGroup;			//	ã‚«ãƒ¬ãƒ³ãƒˆç·¨æˆ
+map<void *, void *> g_AddressMap;	//	ã‚¢ãƒ‰ãƒ¬ã‚¹å¤‰æ›
+set<string> g_LackPlugin;			//	ä¸è¶³ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 //int g_GroupEndCount = 0;			//	debug
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSaveFile::CSaveFile(
-	bool preset	//	ƒvƒŠƒZƒbƒg•Ò¬EƒV[ƒ“€”õ
+	bool preset	//	ãƒ—ãƒªã‚»ãƒƒãƒˆç·¨æˆãƒ»ã‚·ãƒ¼ãƒ³æº–å‚™
 ){
 	m_NetworkSyncCount = 0;
 	m_Year = m_Month = m_Day = m_Hour = m_Minute
@@ -76,7 +76,7 @@ CSaveFile::CSaveFile(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSaveFile::~CSaveFile(){
 	g_Scene = NULL;
@@ -87,7 +87,7 @@ CSaveFile::~CSaveFile(){
 }
 
 /*
- *	•—•ûŒü‚ÌXV
+ *	é¢¨æ–¹å‘ã®æ›´æ–°
  */
 void CSaveFile::UpdateWind(){
 	float theta = FRand(2.0f*D3DX_PI);
@@ -99,14 +99,14 @@ void CSaveFile::UpdateWind(){
 }
 
 /*
- *	ƒ[ƒvƒŠƒXƒgƒ‹[ƒgİ’è
+ *	ãƒ¯ãƒ¼ãƒ—ãƒªã‚¹ãƒˆãƒ«ãƒ¼ãƒˆè¨­å®š
  */
 void CSaveFile::SetWarpRoot(){
 	CRailWay::SetRoot(&m_WarpList);
 }
 
 /*
- *	•ÂÇ‹æŠÔİ’è
+ *	é–‰å¡åŒºé–“è¨­å®š
  */
 /*bool CSaveFile::SetRailBlock(char *rb){
 	bool changed = false;
@@ -119,7 +119,7 @@ void CSaveFile::SetWarpRoot(){
 }*/
 
 /*
- *	ƒ[ƒvíœ
+ *	ãƒ¯ãƒ¼ãƒ—å‰Šé™¤
  */
 bool CSaveFile::DeleteWarp(){
 	bool deleted = false;
@@ -133,7 +133,7 @@ bool CSaveFile::DeleteWarp(){
 }
 
 /*
- *	•Ò¬’Ç‰Á
+ *	ç·¨æˆè¿½åŠ 
  */
 void CSaveFile::AddGroup(){
 	m_GroupNum++;
@@ -144,10 +144,10 @@ void CSaveFile::AddGroup(){
 }
 
 /*
- *	•Ò¬íœ
+ *	ç·¨æˆå‰Šé™¤
  */
 void CSaveFile::DeleteGroup(
-	CTrainGroup *gr	//	•Ò¬
+	CTrainGroup *gr	//	ç·¨æˆ
 ){
 	CTrainGroup **adr = &m_GroupList;
 	g_TrainGroup = NULL;
@@ -173,12 +173,12 @@ void CSaveFile::DeleteGroup(
 }
 
 /*
- *	•Ò¬ƒŠƒXƒgì¬
+ *	ç·¨æˆãƒªã‚¹ãƒˆä½œæˆ
  */
 void CSaveFile::ListGroup(
-	CListView *lv	//	ƒŠƒXƒgƒrƒ…[
+	CListView *lv	//	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
 ){
-	char *train_set_string[2] = {lang(NotSet), lang(Set)};	//	•Ò¬İ’uó‘Ô
+	char *train_set_string[2] = {lang(NotSet), lang(Set)};	//	ç·¨æˆè¨­ç½®çŠ¶æ…‹
 	CTrainGroup *ptr = m_GroupList;
 	lv->DeleteAllItems();
 	int i = 0;
@@ -196,11 +196,11 @@ void CSaveFile::ListGroup(
 }
 
 /*
- *	•Ò¬ƒŠƒXƒgì¬ (ƒ_ƒCƒ„İ’è—p)
+ *	ç·¨æˆãƒªã‚¹ãƒˆä½œæˆ (ãƒ€ã‚¤ãƒ¤è¨­å®šç”¨)
  */
 void CSaveFile::ListGroupDia(
-	CListView *lv,		//	ƒŠƒXƒgƒrƒ…[
-	CDiaInstBase *dinst	//	ƒ_ƒCƒ„
+	CListView *lv,		//	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	CDiaInstBase *dinst	//	ãƒ€ã‚¤ãƒ¤
 ){
 	CTrainGroup *ptr = m_GroupList;
 	lv->DeleteAllItems();
@@ -218,10 +218,10 @@ void CSaveFile::ListGroupDia(
 }
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€íœ
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ å‰Šé™¤
  */
 void CSaveFile::DeletePlatform(
-	CPlatformInst *pf	//	ƒvƒ‰ƒbƒgƒtƒH[ƒ€
+	CPlatformInst *pf	//	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ 
 ){
 	CTrainGroup *ptr = m_GroupList;
 	while(ptr){
@@ -231,7 +231,7 @@ void CSaveFile::DeletePlatform(
 }
 
 /*
- *	•Ò¬”Ô†‚ğ•t‚¯‚é
+ *	ç·¨æˆç•ªå·ã‚’ä»˜ã‘ã‚‹
  */
 void CSaveFile::NumberGroup(){
 	int i = 0;
@@ -245,10 +245,10 @@ void CSaveFile::NumberGroup(){
 }
 
 /*
- *	Ÿ‚Ì•Ò¬‚ğ‘I‘ğ
+ *	æ¬¡ã®ç·¨æˆã‚’é¸æŠ
  */
 void CSaveFile::NextGroup(
-	bool prev	//	‹t•ûŒü
+	bool prev	//	é€†æ–¹å‘
 ){
 	if(prev){
 		CTrainGroup *ptr = m_GroupList;
@@ -266,7 +266,7 @@ void CSaveFile::NextGroup(
 }
 
 /*
- *	‡˜æ“¾
+ *	é †åºå–å¾—
  */
 vector<CTrainGroup *> CSaveFile::GetTrainGroupByVector(){
 	vector<CTrainGroup *> group_list;
@@ -279,7 +279,7 @@ vector<CTrainGroup *> CSaveFile::GetTrainGroupByVector(){
 }
 
 /*
- *	•Ò¬‡˜•ÏX
+ *	ç·¨æˆé †åºå¤‰æ›´
  */
 void CSaveFile::SetTrainGroupByVector(vector<CTrainGroup *> group_list){
 	int i;
@@ -290,12 +290,12 @@ void CSaveFile::SetTrainGroupByVector(vector<CTrainGroup *> group_list){
 }
 
 /*
- *	ƒ[ƒv“ü—Íƒ`ƒFƒbƒN
+ *	ãƒ¯ãƒ¼ãƒ—å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CSaveFile::ScanInputWarp(
-	int mode,	//	ƒ‚[ƒh
-	VEC3 rect1,	//	—Ìˆæn“_
-	VEC3 rect2	//	—ÌˆæI“_
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2	//	é ˜åŸŸçµ‚ç‚¹
 ){
 	CRailWay::ResetDetect();
 	CRailWay *warp = m_WarpList;
@@ -306,12 +306,12 @@ void CSaveFile::ScanInputWarp(
 }
 
 /*
- *	ƒCƒ“ƒXƒ^ƒ“ƒX“ü—Íƒ`ƒFƒbƒN
+ *	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CSaveFile::ScanInputInst(
-	int mode,	//	ƒ‚[ƒh
-	VEC3 rect1,	//	—Ìˆæn“_
-	VEC3 rect2	//	—ÌˆæI“_
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2	//	é ˜åŸŸçµ‚ç‚¹
 ){
 	CModelInst::ResetDetect(mode, rect1, rect2);
 	CTrainGroup *group = m_GroupList;
@@ -324,10 +324,10 @@ void CSaveFile::ScanInputInst(
 }
 
 /*
- *	ƒV[ƒ“’Ç‰Á
+ *	ã‚·ãƒ¼ãƒ³è¿½åŠ 
  */
 void CSaveFile::AddScene(
-	CSurfacePlugin *spi	//	’nŒ`ƒvƒ‰ƒOƒCƒ“
+	CSurfacePlugin *spi	//	åœ°å½¢ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	m_SceneNum++;
 	CScene **adr = &m_SceneList;
@@ -337,10 +337,10 @@ void CSaveFile::AddScene(
 }
 
 /*
- *	ƒV[ƒ“íœ
+ *	ã‚·ãƒ¼ãƒ³å‰Šé™¤
  */
 void CSaveFile::DeleteScene(
-	CScene *sc	//	ƒV[ƒ“
+	CScene *sc	//	ã‚·ãƒ¼ãƒ³
 ){
 	sc->Delete();
 	CRailWay *warp = m_WarpList;
@@ -385,10 +385,10 @@ void CSaveFile::DeleteScene(
 }
 
 /*
- *	ƒV[ƒ“ƒŠƒXƒgì¬
+ *	ã‚·ãƒ¼ãƒ³ãƒªã‚¹ãƒˆä½œæˆ
  */
 void CSaveFile::ListScene(
-	CListView *lv	//	ƒŠƒXƒgƒrƒ…[
+	CListView *lv	//	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
 ){
 	CScene *ptr = m_SceneList;
 	lv->DeleteAllItems();
@@ -405,7 +405,7 @@ void CSaveFile::ListScene(
 }
 
 /*
- *	ƒV[ƒ“”Ô†‚ğ•t‚¯‚é
+ *	ã‚·ãƒ¼ãƒ³ç•ªå·ã‚’ä»˜ã‘ã‚‹
  */
 void CSaveFile::NumberScene(){
 	int i = 0;
@@ -419,10 +419,10 @@ void CSaveFile::NumberScene(){
 }
 
 /*
- *	Ÿ‚ÌƒV[ƒ“‚ğ‘I‘ğ
+ *	æ¬¡ã®ã‚·ãƒ¼ãƒ³ã‚’é¸æŠ
  */
 void CSaveFile::NextScene(
-	bool prev	//	‹t•ûŒü
+	bool prev	//	é€†æ–¹å‘
 ){
 	CWindowInfo* active_wnd = g_ConfigMode->GetActiveWindow();
 	CScene *origscene = g_Scene;
@@ -448,7 +448,7 @@ void CSaveFile::NextScene(
 }
 
 /*
- *	‡˜æ“¾
+ *	é †åºå–å¾—
  */
 vector<CScene *> CSaveFile::GetSceneByVector(){
 	vector<CScene *> scene_list;
@@ -461,7 +461,7 @@ vector<CScene *> CSaveFile::GetSceneByVector(){
 }
 
 /*
- *	•Ò¬‡˜•ÏX
+ *	ç·¨æˆé †åºå¤‰æ›´
  */
 void CSaveFile::SetSceneByVector(vector<CScene *> scene_list){
 	int i;
@@ -472,7 +472,7 @@ void CSaveFile::SetSceneByVector(vector<CScene *> scene_list){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CSaveFile::RenderScene(
 	int option	//	1: renderwarp
@@ -529,10 +529,10 @@ void CSaveFile::RenderScene(
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“is
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€²è¡Œ
  */
 void CSaveFile::Simulate(
-	int num	//	‰ñ”
+	int num	//	å›æ•°
 ){
 	TIMER_RAII("CSaveFile::Simulate()");
 	int scale = g_SimulationMode->GetTimeScale();
@@ -602,7 +602,7 @@ void CSaveFile::Simulate(
 }
 
 /*
- *	ƒXƒCƒbƒ`ƒŠƒZƒbƒg
+ *	ã‚¹ã‚¤ãƒƒãƒãƒªã‚»ãƒƒãƒˆ
  */
 void CSaveFile::ResetSwitch(){
 	g_SystemSwitch[SYS_SW_FRONT].SetValue(0);
@@ -638,7 +638,7 @@ void CSaveFile::ResetSwitch(){
 }
 
 /*
- *	“ú•¶š—ñ‚Ìæ“¾
+ *	æ—¥æ™‚æ–‡å­—åˆ—ã®å–å¾—
  */
 char *CSaveFile::GetTimeText(){
 	return FlashIn("%02d/%02d/%02d (%s) %02d:%02d",
@@ -646,17 +646,17 @@ char *CSaveFile::GetTimeText(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 bool CSaveFile::Load(
-	const char *fname,		//	ƒtƒ@ƒCƒ‹–¼
-	const char *dirname,	//	ƒfƒBƒŒƒNƒgƒŠ–¼
-	bool warn,				//	ŠJ‚¯‚È‚¢ê‡Œx
-	bool upname,			//	ƒtƒ@ƒCƒ‹–¼XV
-	char **copy,			//	ƒf[ƒ^ƒRƒs[æ
-	int *copysize,			//	ƒRƒs[ƒTƒCƒY
-	bool checkhash,			//	ƒnƒbƒVƒ…ƒ`ƒFƒbƒN—v‹
-	char *auxdata			//	ŠO•”“ü—Í
+	const char *fname,		//	ãƒ•ã‚¡ã‚¤ãƒ«å
+	const char *dirname,	//	ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå
+	bool warn,				//	é–‹ã‘ãªã„å ´åˆè­¦å‘Š
+	bool upname,			//	ãƒ•ã‚¡ã‚¤ãƒ«åæ›´æ–°
+	char **copy,			//	ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ”ãƒ¼å…ˆ
+	int *copysize,			//	ã‚³ãƒ”ãƒ¼ã‚µã‚¤ã‚º
+	bool checkhash,			//	ãƒãƒƒã‚·ãƒ¥ãƒã‚§ãƒƒã‚¯è¦æ±‚
+	char *auxdata			//	å¤–éƒ¨å…¥åŠ›
 ){
 	FILE *df;
 	if(!auxdata){
@@ -871,20 +871,20 @@ bool CSaveFile::Load(
 		scene = scene->Next();
 	}
 	m_NetworkSyncCount = 0;
-	Simulate(1);	//	1 ‰ñ‚¾‚¯ƒVƒ~ƒ…ƒŒ[ƒg
+	Simulate(1);	//	1 å›ã ã‘ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ãƒˆ
 	return true;
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  *
- *	–ß‚è’l: 0: succeeded, 1: error, 2: file already exist
+ *	æˆ»ã‚Šå€¤: 0: succeeded, 1: error, 2: file already exist
  */
 int CSaveFile::Save(
-	const char *fname,		//	ƒtƒ@ƒCƒ‹–¼
-	const char *dirname,	//	ƒfƒBƒŒƒNƒgƒŠ–¼
-	bool overwrite,			//	ã‘‚«
-	bool upname				//	ƒtƒ@ƒCƒ‹–¼XV
+	const char *fname,		//	ãƒ•ã‚¡ã‚¤ãƒ«å
+	const char *dirname,	//	ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå
+	bool overwrite,			//	ä¸Šæ›¸ã
+	bool upname				//	ãƒ•ã‚¡ã‚¤ãƒ«åæ›´æ–°
 ){
 	FILE *df;
 	if(CheckSlash(fname) || chdir(g_BaseDir) || chdir(dirname)){
@@ -985,10 +985,10 @@ int CSaveFile::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	‰[”N‚©‚Ç‚¤‚©’²‚×‚é
+ *	é–å¹´ã‹ã©ã†ã‹èª¿ã¹ã‚‹
  */
 bool IsLeapYear(
-	int year	//	”N (A.D.1 = 0)
+	int year	//	å¹´ (A.D.1 = 0)
 ){
 	year++;
 	if(year%4) return false;
@@ -998,11 +998,11 @@ bool IsLeapYear(
 }
 
 /*
- *	Œ“–‚½‚è‚Ì“ú”‚ğ’²‚×‚é
+ *	æœˆå½“ãŸã‚Šã®æ—¥æ•°ã‚’èª¿ã¹ã‚‹
  */
 int GetDaysPerMonth(
-	int year,	//	”N
-	int month	//	Œ
+	int year,	//	å¹´
+	int month	//	æœˆ
 ){
 	static int sdpm[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	int ret = sdpm[month];
@@ -1011,10 +1011,10 @@ int GetDaysPerMonth(
 }
 
 /*
- *	•ÏŠ·ŒãƒAƒhƒŒƒXæ“¾
+ *	å¤‰æ›å¾Œã‚¢ãƒ‰ãƒ¬ã‚¹å–å¾—
  */
 void *ReplaceAdr(
-	void *oldadr	//	‹ŒƒAƒhƒŒƒX
+	void *oldadr	//	æ—§ã‚¢ãƒ‰ãƒ¬ã‚¹
 ){
 	if(oldadr){
 		if(!g_AddressMap.count(oldadr)){
@@ -1028,7 +1028,7 @@ void *ReplaceAdr(
 }
 
 /*
- *	ƒ}ƒbƒv‚ÉƒAƒhƒŒƒX‚ğ“o˜^ (ƒlƒbƒgƒ[ƒN“¯Šú—p)
+ *	ãƒãƒƒãƒ—ã«ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ç™»éŒ² (ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯åŒæœŸç”¨)
  */
 void *RegisterNewMapAddress(void *new_adr){
 	extern int g_NetworkDummyMapAddress;

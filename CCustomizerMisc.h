@@ -1,16 +1,16 @@
-#ifndef CCUSTOMIZERMISC_H_INCLUDED
+ï»¿#ifndef CCUSTOMIZERMISC_H_INCLUDED
 #define CCUSTOMIZERMISC_H_INCLUDED
 
 #include "CCustomizer.h"
 
 /*
- *	ƒ‚ƒfƒ‹•ÏXq
+ *	ãƒ¢ãƒ‡ãƒ«å¤‰æ›´å­
  */
 class CModelChanger: public CCustomizerBase{
 private:
-	string m_AltModelName;	//	‘ã‘Öƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹–¼
-	CMesh *m_AltModel;		//	‘ã‘Öƒ‚ƒfƒ‹
-	float m_AltModelScale;	//	‘ã‘ÖƒXƒP[ƒ‹
+	string m_AltModelName;	//	ä»£æ›¿ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
+	CMesh *m_AltModel;		//	ä»£æ›¿ãƒ¢ãƒ‡ãƒ«
+	float m_AltModelScale;	//	ä»£æ›¿ã‚¹ã‚±ãƒ¼ãƒ«
 public:
 	CModelChanger();
 	CCustomizerBase *Duplicate(){ return new CModelChanger(*this); }
@@ -21,14 +21,14 @@ public:
 };
 
 /*
- *	‰e—}§w’èq
+ *	å½±æŠ‘åˆ¶æŒ‡å®šå­
  */
 class CShadowInhibitor: public CCustomizerBase{
 private:
-	bool m_NoCastShadow;		//	‰e‚ğ—‚Æ‚³‚È‚¢
-	bool m_NoReceiveShadow;		//	‰e‚ğó‚¯‚È‚¢
-	bool m_Transparent;			//	“§‰ßw’è
-	vector<int> m_MaterialID;	//	ƒ}ƒeƒŠƒAƒ‹”Ô†
+	bool m_NoCastShadow;		//	å½±ã‚’è½ã¨ã•ãªã„
+	bool m_NoReceiveShadow;		//	å½±ã‚’å—ã‘ãªã„
+	bool m_Transparent;			//	é€éæŒ‡å®š
+	vector<int> m_MaterialID;	//	ãƒãƒ†ãƒªã‚¢ãƒ«ç•ªå·
 public:
 	CCustomizerBase *Duplicate(){ return new CShadowInhibitor(*this); }
 	char *Read(char *);
@@ -36,11 +36,11 @@ public:
 };
 
 /*
- *	ŠÂ‹«ƒ}ƒbƒvw’èq
+ *	ç’°å¢ƒãƒãƒƒãƒ—æŒ‡å®šå­
  */
 class CEnvMapper: public CCustomizerBase{
 private:
-	vector<int> m_MaterialID;	//	ƒ}ƒeƒŠƒAƒ‹”Ô†
+	vector<int> m_MaterialID;	//	ãƒãƒ†ãƒªã‚¢ãƒ«ç•ªå·
 public:
 	CCustomizerBase *Duplicate(){ return new CEnvMapper(*this); }
 	char *Read(char *);
@@ -48,11 +48,11 @@ public:
 };
 
 /*
- *	ƒ¿ƒeƒXƒgw’èq
+ *	Î±ãƒ†ã‚¹ãƒˆæŒ‡å®šå­
  */
 class CAlphaTester: public CCustomizerBase{
 private:
-	vector<int> m_MaterialID;	//	ƒ}ƒeƒŠƒAƒ‹”Ô†
+	vector<int> m_MaterialID;	//	ãƒãƒ†ãƒªã‚¢ãƒ«ç•ªå·
 public:
 	CCustomizerBase *Duplicate(){ return new CAlphaTester(*this); }
 	char *Read(char *);
@@ -60,13 +60,13 @@ public:
 };
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ•ÏXq
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£å¤‰æ›´å­
  */
 class CTextureChanger: public CCustomizerBase{
 private:
-	int m_MaterialID;			//	ƒ}ƒeƒŠƒAƒ‹”Ô†
-	string m_AltTextureName;	//	‘ã‘ÖƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
-	LPTEX8 m_AltTexture;		//	‘ã‘ÖƒeƒNƒXƒ`ƒƒ
+	int m_MaterialID;			//	ãƒãƒ†ãƒªã‚¢ãƒ«ç•ªå·
+	string m_AltTextureName;	//	ä»£æ›¿ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
+	LPTEX8 m_AltTexture;		//	ä»£æ›¿ãƒ†ã‚¯ã‚¹ãƒãƒ£
 public:
 	CCustomizerBase *Duplicate(){ return new CTextureChanger(*this); }
 	char *Read(char *);
@@ -75,13 +75,13 @@ public:
 };
 
 /*
- *	ƒeƒNƒXƒ`ƒƒƒgƒ‰ƒ“ƒXƒtƒH[ƒ}
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ
  */
 class CTextureTransformer: public CCustomizerBase{
 private:
-	int m_TransformType;	//	•ÏŠ·ƒ^ƒCƒv
-	int m_MaterialID;		//	ƒ}ƒeƒŠƒAƒ‹”Ô†
-	TTMTX m_Matrix;			//	•ÏŠ·s—ñ
+	int m_TransformType;	//	å¤‰æ›ã‚¿ã‚¤ãƒ—
+	int m_MaterialID;		//	ãƒãƒ†ãƒªã‚¢ãƒ«ç•ªå·
+	TTMTX m_Matrix;			//	å¤‰æ›è¡Œåˆ—
 public:
 	CCustomizerBase *Duplicate(){ return new CTextureTransformer(*this); }
 	char *Read(char *, bool);
@@ -91,12 +91,12 @@ public:
 };
 
 /*
- *	ƒAƒjƒ[ƒVƒ‡ƒ““K—pq
+ *	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é©ç”¨å­
  */
 class CAnimationApplier: public CCustomizerBase{
 private:
-	int m_MaterialID;				//	ƒ}ƒeƒŠƒAƒ‹”Ô†
-	CTextureAnimation *m_Animation;	//	ƒAƒjƒ[ƒVƒ‡ƒ“
+	int m_MaterialID;				//	ãƒãƒ†ãƒªã‚¢ãƒ«ç•ªå·
+	CTextureAnimation *m_Animation;	//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 public:
 	CCustomizerBase *Duplicate(){ return new CAnimationApplier(*this); }
 	char *Read(char *, CModelPlugin *);
@@ -104,12 +104,12 @@ public:
 };
 
 /*
- *	ƒAƒ‹ƒtƒ@•ÏXq
+ *	ã‚¢ãƒ«ãƒ•ã‚¡å¤‰æ›´å­
  */
 class CAlphaChanger: public CCustomizerBase{
 private:
-	int m_MaterialID;	//	ƒ}ƒeƒŠƒAƒ‹”Ô†
-	float m_AltAlpha;	//	‘ã‘ÖƒAƒ‹ƒtƒ@
+	int m_MaterialID;	//	ãƒãƒ†ãƒªã‚¢ãƒ«ç•ªå·
+	float m_AltAlpha;	//	ä»£æ›¿ã‚¢ãƒ«ãƒ•ã‚¡
 public:
 	CCustomizerBase *Duplicate(){ return new CAlphaChanger(*this); }
 	char *Read(char *);
@@ -117,12 +117,12 @@ public:
 };
 
 /*
- *	ƒ}ƒeƒŠƒAƒ‹•ÏXq
+ *	ãƒãƒ†ãƒªã‚¢ãƒ«å¤‰æ›´å­
  */
 class CMaterialChanger: public CCustomizerBase{
 private:
-	vector<int> m_MaterialID;	//	ƒ}ƒeƒŠƒAƒ‹”Ô†
-	MAT8 m_Material;			//	ƒ}ƒeƒŠƒAƒ‹
+	vector<int> m_MaterialID;	//	ãƒãƒ†ãƒªã‚¢ãƒ«ç•ªå·
+	MAT8 m_Material;			//	ãƒãƒ†ãƒªã‚¢ãƒ«
 public:
 	CCustomizerBase *Duplicate(){ return new CMaterialChanger(*this); }
 	char *Read(char *);

@@ -1,4 +1,4 @@
-#ifndef CTOGGLEICON_H_INCLUDED
+ï»¿#ifndef CTOGGLEICON_H_INCLUDED
 #define CTOGGLEICON_H_INCLUDED
 
 #include "CInterface.h"
@@ -6,22 +6,22 @@
 class CGameMode;
 
 /*
- *	ƒTƒCƒhƒpƒlƒ‹Eƒƒjƒ…[ƒAƒCƒRƒ“
+ *	ã‚µã‚¤ãƒ‰ãƒ‘ãƒãƒ«ãƒ»ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¢ã‚¤ã‚³ãƒ³
  */
 class CToggleIcon: public CInterface{
 private:
-	static CToggleIcon *ms_PointIcon;	//	ƒ|ƒCƒ“ƒg‚³‚ê‚½ƒAƒCƒRƒ“
-	int m_State;					//	ó‘Ô
-	int m_Check;					//	ƒ`ƒFƒbƒNƒtƒ‰ƒO
-	int m_ModeID;					//	ƒ‚[ƒh ID
-	float m_SlideY;					//	ƒXƒ‰ƒCƒh Y À•W
-	float m_TexPullU, m_TexPullV;	//	ŠJ•úƒeƒNƒXƒ`ƒƒÀ•W
-	float m_TexPushU, m_TexPushV;	//	‰Ÿ‰ºƒeƒNƒXƒ`ƒƒÀ•W
-	float m_TexIconU, m_TexIconV;	//	ƒAƒCƒRƒ“ƒeƒNƒXƒ`ƒƒÀ•W
-	string m_Expression;			//	à–¾•¶
-	DWORD m_HotKey;					//	ƒzƒbƒgƒL[
-	CToggleIcon *m_Prev, *m_Next;	//	ƒOƒ‹[ƒvƒŠƒ“ƒN
-	CGameMode *m_SyncMode;			//	‘Î‰ƒ‚[ƒh
+	static CToggleIcon *ms_PointIcon;	//	ãƒã‚¤ãƒ³ãƒˆã•ã‚ŒãŸã‚¢ã‚¤ã‚³ãƒ³
+	int m_State;					//	çŠ¶æ…‹
+	int m_Check;					//	ãƒã‚§ãƒƒã‚¯ãƒ•ãƒ©ã‚°
+	int m_ModeID;					//	ãƒ¢ãƒ¼ãƒ‰ ID
+	float m_SlideY;					//	ã‚¹ãƒ©ã‚¤ãƒ‰ Y åº§æ¨™
+	float m_TexPullU, m_TexPullV;	//	é–‹æ”¾æ™‚ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
+	float m_TexPushU, m_TexPushV;	//	æŠ¼ä¸‹æ™‚ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
+	float m_TexIconU, m_TexIconV;	//	ã‚¢ã‚¤ã‚³ãƒ³ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
+	string m_Expression;			//	èª¬æ˜æ–‡
+	DWORD m_HotKey;					//	ãƒ›ãƒƒãƒˆã‚­ãƒ¼
+	CToggleIcon *m_Prev, *m_Next;	//	ã‚°ãƒ«ãƒ¼ãƒ—ãƒªãƒ³ã‚¯
+	CGameMode *m_SyncMode;			//	å¯¾å¿œãƒ¢ãƒ¼ãƒ‰
 public:
 	static void RenderPopupText();
 	void Init(int, int, int, int, char *, char *,

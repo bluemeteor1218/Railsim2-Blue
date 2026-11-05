@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #define MUTEX_NAME "udx mutex"
 
@@ -11,10 +11,10 @@ public:
 };
 
 /*
- *	‘½d‹N“®‹Ö~
+ *	å¤šé‡èµ·å‹•ç¦æ­¢
  */
 inline BOOL CMutex::BeginSingleBoot(){
-	Debug("‘½d‹N“®‚ğ‹Ö~‚µ‚Ü‚·.\n");
+	Debug("å¤šé‡èµ·å‹•ã‚’ç¦æ­¢ã—ã¾ã™.\n");
 
 	m_hMutex = CreateMutex(NULL, FALSE, MUTEX_NAME);
 	DWORD ret = WaitForSingleObject(m_hMutex, 0);
@@ -26,7 +26,7 @@ inline BOOL CMutex::BeginSingleBoot(){
 }
 
 /*
- *	‘½d‹N“®‰ğ‹Ö
+ *	å¤šé‡èµ·å‹•è§£ç¦
  */
 inline void CMutex::EndSingleBoot(){
 	ReleaseMutex(m_hMutex);

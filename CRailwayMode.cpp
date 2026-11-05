@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CPopMenu.h"
 #include "CRailPlugin.h"
 #include "CTiePlugin.h"
@@ -9,10 +9,10 @@
 #include "CRailwayPluginSet.h"
 #include "CRailwayMode.h"
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const int ARROW_INTERFACE_HEIGHT;
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 int CRailwayMode::ms_CurrentType = 0;
 int CRailwayMode::ms_WindowPos[2][2];
 int CRailwayMode::ms_TrackNum = 1;
@@ -33,7 +33,7 @@ CCamera CRailwayMode::ms_RailwayModeCamera;
 
 /*
  *	[static]
- *	‹¤’ÊƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ì‰Šú‰»
+ *	å…±é€šã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®åˆæœŸåŒ–
  */
 void CRailwayMode::InitRailwayInterface(){
 	CInterface::ResetTabHead();
@@ -81,15 +81,15 @@ void CRailwayMode::InitRailwayInterface(){
 
 /*
  *	[static]
- *	Šeíƒvƒ‰ƒOƒCƒ“ ON/OFF æ“¾
+ *	å„ç¨®ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ ON/OFF å–å¾—
  */
 void CRailwayMode::GetPlugin(
-	CRailPlugin **b_rail,		//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin **b_tie,			//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin **b_girder,	//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
-	CPierPlugin **b_pier,		//	‹´‹rƒvƒ‰ƒOƒCƒ“
-	CLinePlugin **b_line,		//	‰Ëüƒvƒ‰ƒOƒCƒ“
-	CPolePlugin **b_pole		//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
+	CRailPlugin **b_rail,		//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin **b_tie,			//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin **b_girder,	//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPierPlugin **b_pier,		//	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CLinePlugin **b_line,		//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPolePlugin **b_pole		//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	*b_rail = ms_Type[0].GetCheck() ? g_Rail : NULL;
 	*b_tie = ms_Type[1].GetCheck() ? g_Tie : NULL;
@@ -101,16 +101,16 @@ void CRailwayMode::GetPlugin(
 
 /*
  *	[static]
- *	ƒŒ[ƒ‹ŠÖ˜AƒIƒvƒVƒ‡ƒ“İ’è
+ *	ãƒ¬ãƒ¼ãƒ«é–¢é€£ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®š
  */
 void CRailwayMode::SetRailwayOption(
 	bool rail, bool tie, bool girder,	//	on/off
 	bool pier, bool line, bool pole,	//	on/off
-	bool cant,	//	ƒJƒ“ƒgƒtƒ‰ƒO
-	bool lift,	//	•¡üƒtƒ‰ƒO
-	bool multi,	//	•¡üƒtƒ‰ƒO
-	int tnum,	//	‹O“¹”
-	float tint	//	‹O“¹ŠÔŠu
+	bool cant,	//	ã‚«ãƒ³ãƒˆãƒ•ãƒ©ã‚°
+	bool lift,	//	è¤‡ç·šãƒ•ãƒ©ã‚°
+	bool multi,	//	è¤‡ç·šãƒ•ãƒ©ã‚°
+	int tnum,	//	è»Œé“æ•°
+	float tint	//	è»Œé“é–“éš”
 ){
 	ms_Type[0].SetCheck(rail); ms_Type[1].SetCheck(tie); ms_Type[2].SetCheck(girder);
 	ms_Type[3].SetCheck(pier); ms_Type[4].SetCheck(line); ms_Type[5].SetCheck(pole);
@@ -123,10 +123,10 @@ void CRailwayMode::SetRailwayOption(
 
 /*
  *	[static]
- *	İ’è“Ç
+ *	è¨­å®šèª­è¾¼
  */
 char *CRailwayMode::LoadRailwaySetting(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	int tnum;
@@ -152,10 +152,10 @@ char *CRailwayMode::LoadRailwaySetting(
 
 /*
  *	[static]
- *	İ’è•Û‘¶
+ *	è¨­å®šä¿å­˜
  */
 void CRailwayMode::SaveRailwaySetting(
-	FILE *file	//	ƒtƒ@ƒCƒ‹
+	FILE *file	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(file, "RailwayMode{\n");
 	fprintf(file, "\tRailCheck = %s;\n", YESNO[ms_Type[0].GetCheck()]);
@@ -174,10 +174,10 @@ void CRailwayMode::SaveRailwaySetting(
 
 /*
  *	[static]
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CRailwayMode::EnterRailway(
-	int type	//	ƒ^ƒCƒv (0: interface, 1: scenery)
+	int type	//	ã‚¿ã‚¤ãƒ— (0: interface, 1: scenery)
 ){
 	ms_WindowPos[ms_CurrentType][0] = ms_RailWindow.GetPosX();
 	ms_WindowPos[ms_CurrentType][1] = ms_RailWindow.GetPosY();
@@ -188,7 +188,7 @@ void CRailwayMode::EnterRailway(
 
 /*
  *	[static]
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CRailwayMode::ScanInputRailway(){
 	if(ms_PluginSetButton.IsPushed()){
@@ -200,7 +200,7 @@ void CRailwayMode::ScanInputRailway(){
 
 /*
  *	[static]
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CRailwayMode::ReformEditValue(){
 	ms_TrackNum = GetTrackNum();

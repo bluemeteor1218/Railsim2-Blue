@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -7,10 +7,10 @@
 #include "light.h"
 
 /*
- *	ƒfƒBƒŒƒNƒVƒ‡ƒiƒ‹ƒ‰ƒCƒg‚ÌÝ’è
+ *	ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒŠãƒ«ãƒ©ã‚¤ãƒˆã®è¨­å®š
  *
- *	dir	: •ûŒü
- *	cv	: F
+ *	dir	: æ–¹å‘
+ *	cv	: è‰²
  */
 void SetDirLight(VEC3 dir, D3DCOLORVALUE cv){
 	ZeroMemory(&svl.dir, sizeof(D3DLIGHT8));
@@ -26,9 +26,9 @@ void SetDirLight(VEC3 dir, D3DCOLORVALUE cv){
 }
 
 /*
- *	ƒfƒBƒŒƒNƒVƒ‡ƒiƒ‹ƒ‰ƒCƒg‚ÌON/OFF
+ *	ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒŠãƒ«ãƒ©ã‚¤ãƒˆã®ON/OFF
  *
- *	f		: TRUE—LŒøAFALSE–³Œø
+ *	f		: TRUEï¼æœ‰åŠ¹ã€FALSEï¼ç„¡åŠ¹
  */
 void EnableDirLight(BOOL f){
 	devSetLight(0, f);
@@ -36,12 +36,12 @@ void EnableDirLight(BOOL f){
 }
 
 /*
- *	“Š‰es—ñ‚ÌŽæ“¾
+ *	æŠ•å½±è¡Œåˆ—ã®å–å¾—
  *
- *	point		: “Š‰e–Ê‚ÉŠÜ‚Ü‚ê‚é“_
- *	normal	: –@üƒxƒNƒgƒ‹
+ *	point		: æŠ•å½±é¢ã«å«ã¾ã‚Œã‚‹ç‚¹
+ *	normal	: æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
  *
- *	¦ƒfƒBƒŒƒNƒVƒ‡ƒiƒ‹ƒ‰ƒCƒg‚ÌŒü‚«‚ª‰e‹¿‚·‚éB
+ *	â€»ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒŠãƒ«ãƒ©ã‚¤ãƒˆã®å‘ããŒå½±éŸ¿ã™ã‚‹ã€‚
  */
 MTX4 GetShadowMtx(VEC3 point, VEC3 normal){
 	MTX4 mtx;

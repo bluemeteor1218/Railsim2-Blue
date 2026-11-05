@@ -1,4 +1,4 @@
-#ifndef CRAILWAY_H_INCLUDED
+ï»¿#ifndef CRAILWAY_H_INCLUDED
 #define CRAILWAY_H_INCLUDED
 
 #include "CLine.h"
@@ -20,12 +20,12 @@ class CDetectInfo;
 class CRailWayParentLink;
 
 /*
- *	‹´‹rˆÊ’uƒf[ƒ^
+ *	æ©‹è„šä½ç½®ãƒ‡ãƒ¼ã‚¿
  */
 class CPierPos{
 public:
-	float m_Pos;	//	ˆÊ’u
-	CPier *m_Link;	//	‰Ëü’Œ
+	float m_Pos;	//	ä½ç½®
+	CPier *m_Link;	//	æ¶ç·šæŸ±
 public:
 	CPierPos(){ m_Pos = 0.0f; m_Link = NULL; }
 	CPierPos(float p, CPier *l){ m_Pos = p; m_Link = l; }
@@ -35,18 +35,18 @@ public:
 	void Save(FILE *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CPierPos>::iterator IPierPos;
 
 /*
- *	‰Ëü’ŒˆÊ’uƒf[ƒ^
+ *	æ¶ç·šæŸ±ä½ç½®ãƒ‡ãƒ¼ã‚¿
  */
 class CPolePos{
 public:
-	float m_Pos;	//	ˆÊ’u
-	int m_Track;	//	‹O“¹”Ô†
-	bool m_Multi;	//	•¡ü—pƒŠƒ“ƒN
-	CPole *m_Link;	//	‰Ëü’Œ
+	float m_Pos;	//	ä½ç½®
+	int m_Track;	//	è»Œé“ç•ªå·
+	bool m_Multi;	//	è¤‡ç·šç”¨ãƒªãƒ³ã‚¯
+	CPole *m_Link;	//	æ¶ç·šæŸ±
 public:
 	CPolePos(){ m_Pos = 0.0f; m_Link = NULL; }
 	CPolePos(float p, CPole *l, int t, bool m){
@@ -58,54 +58,54 @@ public:
 	void Save(FILE *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CPolePos>::iterator IPolePos;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒŒ[ƒ‹ƒCƒ“ƒXƒ^ƒ“ƒX
+ *	ãƒ¬ãƒ¼ãƒ«ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CRailWay{
 	friend class CRailWayLink;
 	friend class CGroupEndLocator;
 	friend class CRailBuildMode;
 private:
-	static CRailWay **ms_Root;				//	Ú‘±ƒ‹[ƒg
-	static float ms_MinDist;				//	Å¬ŒŸo‹——£
-	static CRailWayLink ms_Detect;			//	ŒŸoî•ñ
-	void *m_OldAdr;							//	‹ŒƒAƒhƒŒƒX
-	int m_Selected;							//	‘I‘ğƒtƒ‰ƒO
-	vector<float> m_RailMapV;				//	ƒŒ[ƒ‹ƒ}ƒbƒsƒ“ƒO V À•W
-	vector<float> m_TieMapV;				//	––Øƒ}ƒbƒsƒ“ƒO V À•W
-	vector<float> m_GirderMapV;				//	‹´Œ…ƒ}ƒbƒsƒ“ƒO V À•W
-	vector<float> m_LineMapV;				//	‰Ëüƒ}ƒbƒsƒ“ƒO V À•W
-	float m_PierPos;						//	‹´‹rİ’uˆÊ’u
-	float m_PolePos;						//	‰Ëü’ŒˆÊ’u
-	float m_SegLen;							//	ƒZƒOƒƒ“ƒg’·
-	bool m_BuildLine;						//	‰Ëüİ’uƒtƒ‰ƒO
-	bool m_WarpDummy;						//	ƒ[ƒv—pƒ_ƒ~[ƒŒ[ƒ‹
-	bool m_MultiTrackDummy;					//	•¡ü—pƒ_ƒ~[ƒŒ[ƒ‹
-	int m_DummyTrackNum;					//	ƒ_ƒ~[—p‹O“¹”
-	float m_DummyTrackInterval;				//	ƒ_ƒ~[—p‹O“¹ŠÔŠu	
-	std::string m_RailBlock;				//	•ÂÇ‹æŠÔ
-	int m_SpeedLimit;						//	§ŒÀ‘¬“x
-	CRailConnectorLink m_Link[2];			//	Ú‘±ƒRƒlƒNƒ^
-	list<CRailSplitter> m_SplitList;		//	•ªŠ„“_ƒŠƒXƒg
-	CRailWayParentLink *m_Parent;			//	eƒIƒuƒWƒFƒNƒg
-	CPlatformInst *m_Platform;				//	ƒvƒ‰ƒbƒgƒtƒH[ƒ€
-	CScene *m_Scene;						//	ƒV[ƒ“
-	CRailPlugin *m_RailPlugin;				//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *m_TiePlugin;				//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *m_GirderPlugin;			//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
-	CPierPlugin *m_PierPlugin;				//	‹´‹rƒvƒ‰ƒOƒCƒ“
-	CLinePlugin *m_LinePlugin;				//	‰Ëüƒvƒ‰ƒOƒCƒ“
-	CPolePlugin *m_PolePlugin;				//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
-	list<CPierPos> m_PierList;				//	‹´‹rƒŠƒXƒg
-	list<CPolePos> m_PoleList;				//	‰Ëü’ŒƒŠƒXƒg
-	list<CGroupEndLocator *> m_GroupEnd;	//	•Ò¬I’[ƒf[ƒ^
-	CRailWay *m_Next;						//	ƒŠƒXƒgŸ
+	static CRailWay **ms_Root;				//	æ¥ç¶šãƒ«ãƒ¼ãƒˆ
+	static float ms_MinDist;				//	æœ€å°æ¤œå‡ºè·é›¢
+	static CRailWayLink ms_Detect;			//	æ¤œå‡ºæƒ…å ±
+	void *m_OldAdr;							//	æ—§ã‚¢ãƒ‰ãƒ¬ã‚¹
+	int m_Selected;							//	é¸æŠãƒ•ãƒ©ã‚°
+	vector<float> m_RailMapV;				//	ãƒ¬ãƒ¼ãƒ«ãƒãƒƒãƒ”ãƒ³ã‚° V åº§æ¨™
+	vector<float> m_TieMapV;				//	æ•æœ¨ãƒãƒƒãƒ”ãƒ³ã‚° V åº§æ¨™
+	vector<float> m_GirderMapV;				//	æ©‹æ¡ãƒãƒƒãƒ”ãƒ³ã‚° V åº§æ¨™
+	vector<float> m_LineMapV;				//	æ¶ç·šãƒãƒƒãƒ”ãƒ³ã‚° V åº§æ¨™
+	float m_PierPos;						//	æ©‹è„šè¨­ç½®ä½ç½®
+	float m_PolePos;						//	æ¶ç·šæŸ±ä½ç½®
+	float m_SegLen;							//	ã‚»ã‚°ãƒ¡ãƒ³ãƒˆé•·
+	bool m_BuildLine;						//	æ¶ç·šè¨­ç½®ãƒ•ãƒ©ã‚°
+	bool m_WarpDummy;						//	ãƒ¯ãƒ¼ãƒ—ç”¨ãƒ€ãƒŸãƒ¼ãƒ¬ãƒ¼ãƒ«
+	bool m_MultiTrackDummy;					//	è¤‡ç·šç”¨ãƒ€ãƒŸãƒ¼ãƒ¬ãƒ¼ãƒ«
+	int m_DummyTrackNum;					//	ãƒ€ãƒŸãƒ¼ç”¨è»Œé“æ•°
+	float m_DummyTrackInterval;				//	ãƒ€ãƒŸãƒ¼ç”¨è»Œé“é–“éš”	
+	std::string m_RailBlock;				//	é–‰å¡åŒºé–“
+	int m_SpeedLimit;						//	åˆ¶é™é€Ÿåº¦
+	CRailConnectorLink m_Link[2];			//	æ¥ç¶šã‚³ãƒã‚¯ã‚¿
+	list<CRailSplitter> m_SplitList;		//	åˆ†å‰²ç‚¹ãƒªã‚¹ãƒˆ
+	CRailWayParentLink *m_Parent;			//	è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CPlatformInst *m_Platform;				//	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ 
+	CScene *m_Scene;						//	ã‚·ãƒ¼ãƒ³
+	CRailPlugin *m_RailPlugin;				//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *m_TiePlugin;				//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *m_GirderPlugin;			//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPierPlugin *m_PierPlugin;				//	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CLinePlugin *m_LinePlugin;				//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPolePlugin *m_PolePlugin;				//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	list<CPierPos> m_PierList;				//	æ©‹è„šãƒªã‚¹ãƒˆ
+	list<CPolePos> m_PoleList;				//	æ¶ç·šæŸ±ãƒªã‚¹ãƒˆ
+	list<CGroupEndLocator *> m_GroupEnd;	//	ç·¨æˆçµ‚ç«¯ãƒ‡ãƒ¼ã‚¿
+	CRailWay *m_Next;						//	ãƒªã‚¹ãƒˆæ¬¡
 public:
 	static void SetRoot(CRailWay **r){ ms_Root = r; }
 	static void ResetDetect(){ ms_MinDist = -1.0f; }
@@ -189,52 +189,52 @@ public:
 	void SaveWarp(FILE *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CRailWay *>::iterator IPRailWay;
 typedef list<list<CRailWay *> >::iterator ILPRailWay;
 typedef list<list<list<CRailWay *> > >::iterator ILLPRailWay;
 
 /*
- *	Ú‘±æƒJƒ“ƒg—Ê‚ğ‹‚ß‚é
+ *	æ¥ç¶šå…ˆã‚«ãƒ³ãƒˆé‡ã‚’æ±‚ã‚ã‚‹
  */
 inline float CRailWayLink::GetCant(){
 	return m_Side ? -m_Link->m_Link[m_Side].m_Cant : m_Link->m_Link[m_Side].m_Cant;
 }
 
 /*
- *	Ú‘±æÀ•W‚ğ‹‚ß‚é
+ *	æ¥ç¶šå…ˆåº§æ¨™ã‚’æ±‚ã‚ã‚‹
  */
 inline VEC3 CRailWayLink::GetPos(){
 	return m_Link->m_Link[m_Side].GetPos();
 }
 
 /*
- *	Ú‘±æ”½‘ÎÀ•W‚ğ‹‚ß‚é
+ *	æ¥ç¶šå…ˆåå¯¾åº§æ¨™ã‚’æ±‚ã‚ã‚‹
  */
 inline VEC3 CRailWayLink::GetOppositePos(){
 	return m_Link->m_Link[!m_Side].GetPos();
 }
 
 /*
- *	Å‰‚Ì•ªŠ„“_‚Ü‚Å‚Ì dir ƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+ *	æœ€åˆã®åˆ†å‰²ç‚¹ã¾ã§ã® dir ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹
  */
 inline VEC3 CRailWayLink::GetFirstDir(){
 	return m_Link->GetFirstDir(m_Side);
 }
 
 /*
- *	ƒŒ[ƒ‹Ú‘±ˆêƒf[ƒ^
+ *	ãƒ¬ãƒ¼ãƒ«æ¥ç¶šä¸€æ™‚ãƒ‡ãƒ¼ã‚¿
  */
 class CRailLinkTemp{
 public:
-	int m_Side;					//	ƒTƒCƒh
-	float m_SumLen;				//	ÏZ‹——£
-	IRailSplitter m_SpliceItr;	//	ƒXƒvƒŠƒbƒgˆÊ’u
-	VEC3 m_Pos;					//	À•W
+	int m_Side;					//	ã‚µã‚¤ãƒ‰
+	float m_SumLen;				//	ç©ç®—è·é›¢
+	IRailSplitter m_SpliceItr;	//	ã‚¹ãƒ—ãƒªãƒƒãƒˆä½ç½®
+	VEC3 m_Pos;					//	åº§æ¨™
 	VEC3 m_Right;				//	right
 	VEC3 m_Up;					//	up
 	VEC3 m_Dir;					//	dir
-	CRailWay *m_Link;			//	ƒŒ[ƒ‹
+	CRailWay *m_Link;			//	ãƒ¬ãƒ¼ãƒ«
 public:
 	CRailLinkTemp(){ m_Link = NULL; }
 	CRailLinkTemp(int, float, VEC3 &, VEC3 &, VEC3 &, VEC3 &, CRailWay *, IRailSplitter);
@@ -244,7 +244,7 @@ public:
 	void CopyMapTemp(){ m_Link->CopyMapTemp(m_Side); }
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern list<list<list<CRailWay *> > > g_MultiTrackRailList;
 extern ILLPRailWay g_MultiTrackSegment;
 extern ILPRailWay g_SingleTrackSegment;
@@ -253,7 +253,7 @@ extern int g_DummyTrackNum;
 extern float g_DummyTrackInterval;
 extern map<std::string, CTrainGroup *> g_RailBlockMap;
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 CTrainGroup* GetRailBlockUser(std::string&);
 void SetRailBlockUser(std::string&, CTrainGroup *);
 void ClearRailBlockUser(CTrainGroup *);

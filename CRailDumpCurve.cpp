@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "RailMap.h"
 #include "CRailDetectCurve.h"
 #include "CRailDumpCurve.h"
@@ -7,7 +7,7 @@
 #include "CGirderPlugin.h"
 #include "CCamera.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_ShowRailSelect;
 extern bool g_ShowRailWaySelect;
 extern bool g_ShowRailBlockSelect;
@@ -18,31 +18,31 @@ extern float g_DummyTrackInterval;
 extern VEC3 g_RailMapCenter;
 extern VEC2 g_RailMapOffset;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 // diffuse, ambient, specular, emissive
-MAT8 g_MatSelect[5] = {												//	‘I‘ğƒ}ƒeƒŠƒAƒ‹ (•s“§–¾)
-	{{0,0,0,1}, {0,0,0,1}, {0,0,0,1}, {1,1,1,1}, 1.0f},				//	”ñ‘I‘ğ
-	{{0,0,0,1}, {0,0,0,1}, {0,0,0,1}, {1,0,0,1}, 1.0f},				//	ƒnƒCƒ‰ƒCƒg
-	{{0,0,0,1}, {0,0,0,1}, {0,0,0,1}, {0,1,0,1}, 1.0f},				//	‘I‘ğ
-	{{0,0,0,1}, {0,0,0,1}, {0,0,0,1}, {1,1,0,1}, 1.0f},				//	‘I‘ğ+ƒnƒCƒ‰ƒCƒg
-	{{0,0,0,1}, {0,0,0,1}, {0,0,0,1}, {1,0.5f,0,1}, 1.0f}};			//	”–‚¢ƒnƒCƒ‰ƒCƒg
-MAT8 g_MatSelectA[5] = {											//	‘I‘ğƒ}ƒeƒŠƒAƒ‹ (”¼“§–¾)
-	{{0,0,0,0.75f}, {0,0,0,1}, {0,0,0,1}, {1,1,1,1}, 1.0f},			//	”ñ‘I‘ğ
-	{{0,0,0,0.75f}, {0,0,0,1}, {0,0,0,1}, {1,0,0,1}, 1.0f},			//	ƒnƒCƒ‰ƒCƒg
-	{{0,0,0,0.75f}, {0,0,0,1}, {0,0,0,1}, {0,1,0,1}, 1.0f},			//	‘I‘ğ
-	{{0,0,0,0.75f}, {0,0,0,1}, {0,0,0,1}, {1,1,0,1}, 1.0f},			//	‘I‘ğ+ƒnƒCƒ‰ƒCƒg
-	{{0,0,0,0.75f}, {0,0,0,1}, {0,0,0,1}, {1,0.5f,0,1}, 1.0f}};		//	”–‚¢ƒnƒCƒ‰ƒCƒg
+MAT8 g_MatSelect[5] = {												//	é¸æŠãƒãƒ†ãƒªã‚¢ãƒ« (ä¸é€æ˜)
+	{{0,0,0,1}, {0,0,0,1}, {0,0,0,1}, {1,1,1,1}, 1.0f},				//	éé¸æŠ
+	{{0,0,0,1}, {0,0,0,1}, {0,0,0,1}, {1,0,0,1}, 1.0f},				//	ãƒã‚¤ãƒ©ã‚¤ãƒˆ
+	{{0,0,0,1}, {0,0,0,1}, {0,0,0,1}, {0,1,0,1}, 1.0f},				//	é¸æŠ
+	{{0,0,0,1}, {0,0,0,1}, {0,0,0,1}, {1,1,0,1}, 1.0f},				//	é¸æŠ+ãƒã‚¤ãƒ©ã‚¤ãƒˆ
+	{{0,0,0,1}, {0,0,0,1}, {0,0,0,1}, {1,0.5f,0,1}, 1.0f}};			//	è–„ã„ãƒã‚¤ãƒ©ã‚¤ãƒˆ
+MAT8 g_MatSelectA[5] = {											//	é¸æŠãƒãƒ†ãƒªã‚¢ãƒ« (åŠé€æ˜)
+	{{0,0,0,0.75f}, {0,0,0,1}, {0,0,0,1}, {1,1,1,1}, 1.0f},			//	éé¸æŠ
+	{{0,0,0,0.75f}, {0,0,0,1}, {0,0,0,1}, {1,0,0,1}, 1.0f},			//	ãƒã‚¤ãƒ©ã‚¤ãƒˆ
+	{{0,0,0,0.75f}, {0,0,0,1}, {0,0,0,1}, {0,1,0,1}, 1.0f},			//	é¸æŠ
+	{{0,0,0,0.75f}, {0,0,0,1}, {0,0,0,1}, {1,1,0,1}, 1.0f},			//	é¸æŠ+ãƒã‚¤ãƒ©ã‚¤ãƒˆ
+	{{0,0,0,0.75f}, {0,0,0,1}, {0,0,0,1}, {1,0.5f,0,1}, 1.0f}};		//	è–„ã„ãƒã‚¤ãƒ©ã‚¤ãƒˆ
 D3DCOLOR g_ColorSelect[5] = {
-	0xffffffff, 0xffff0000, 0xff00ff00, 0xffffff00, 0xff800000};	//	D3DCOLOR ”Å
+	0xffffffff, 0xffff0000, 0xff00ff00, 0xffffff00, 0xff800000};	//	D3DCOLOR ç‰ˆ
 
 /*
- *	ƒgƒŒ[ƒXŠ®—¹
+ *	ãƒˆãƒ¬ãƒ¼ã‚¹å®Œäº†
  */
 void CRailDumpCurve::FinishTrace(
-	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	n“_
-	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	I“_
-	float sumlen, float seglen,	//	ÏZ‹——£EƒZƒOƒƒ“ƒg‹——£
-	CRailSplitter &splitter		//	•ªŠ„q
+	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	å§‹ç‚¹
+	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	çµ‚ç‚¹
+	float sumlen, float seglen,	//	ç©ç®—è·é›¢ãƒ»ã‚»ã‚°ãƒ¡ãƒ³ãƒˆè·é›¢
+	CRailSplitter &splitter		//	åˆ†å‰²å­
 ){
 	VEC3 tpos1 = pos1, ipos1 = pos1, tpos2 = pos2, ipos2 = pos2;
 	VEC3 icright1, icup1 = V3UP, icright2, icup2 = V3UP;
@@ -83,13 +83,13 @@ void CRailDumpCurve::FinishTrace(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒgƒŒ[ƒXŠ®—¹
+ *	ãƒˆãƒ¬ãƒ¼ã‚¹å®Œäº†
  */
 void CRailRenderCurve::FinishTrace(
-	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	n“_
-	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	I“_
-	float sumlen, float seglen,	//	ÏZ‹——£EƒZƒOƒƒ“ƒg‹——£
-	CRailSplitter &splitter		//	•ªŠ„q
+	VEC3 &pos1, VEC3 &right1, VEC3 &up1, VEC3 &dir1,	//	å§‹ç‚¹
+	VEC3 &pos2, VEC3 &right2, VEC3 &up2, VEC3 &dir2,	//	çµ‚ç‚¹
+	float sumlen, float seglen,	//	ç©ç®—è·é›¢ãƒ»ã‚»ã‚°ãƒ¡ãƒ³ãƒˆè·é›¢
+	CRailSplitter &splitter		//	åˆ†å‰²å­
 ){
 	if(!g_MultiTrackDummy) RailMapLine(pos1, 0xffffffff, pos2, 0xffffffff);
 	VEC3 tpos1 = pos1, ipos1 = pos1, tpos2 = pos2, ipos2 = pos2;

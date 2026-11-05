@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSimpleDialog.h"
 #include "CScene.h"
 #include "CSaveFile.h"
@@ -10,7 +10,7 @@
 #include "CSkinPlugin.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CDiaEditMode::CDiaEditMode(){
 	m_PointDialog.Init(&m_Interface);
@@ -20,13 +20,13 @@ CDiaEditMode::CDiaEditMode(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CDiaEditMode::~CDiaEditMode(){
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CDiaEditMode::EnterCursorScenery(){
 	ms_ModeLabel = lang(DiaSetting);
@@ -39,7 +39,7 @@ void CDiaEditMode::EnterCursorScenery(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CDiaEditMode::ScanInputCursorScenery(){
 	if(!m_Interface.ScanInput()){
@@ -117,7 +117,7 @@ void CDiaEditMode::ScanInputCursorScenery(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CDiaEditMode::RenderCursorScenery(){
 	if(ms_PhotoMode) return;

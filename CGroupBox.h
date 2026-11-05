@@ -1,10 +1,10 @@
-#ifndef CGROUPBOX_H_INCLUDED
+ï»¿#ifndef CGROUPBOX_H_INCLUDED
 #define CGROUPBOX_H_INCLUDED
 
 #include "CInterface.h"
 
 /*
- *	ƒOƒ‹[ƒvƒ{ƒbƒNƒX
+ *	ã‚°ãƒ«ãƒ¼ãƒ—ãƒœãƒƒã‚¯ã‚¹
  */
 class CGroupBox: public CInterface{
 private:

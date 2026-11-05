@@ -1,22 +1,22 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CJobTimer.h"
 #include "CShadowVolume.h"
 #include "CScene.h"
 #include "CEnvPlugin.h"
 
-//	“à•”’è”
-const int TRI_DUMP_MAX_MAX = 21845;	//	OŠpŒ`ƒ_ƒ“ƒvÅ‘å’l‚ÌÅ‘å’l
-const float SHADOW_INF_DIST = 1.0e10f;	//	ƒVƒƒƒhƒEƒ{ƒŠƒ…[ƒ€–³ŒÀ‰““_
+//	å†…éƒ¨å®šæ•°
+const int TRI_DUMP_MAX_MAX = 21845;	//	ä¸‰è§’å½¢ãƒ€ãƒ³ãƒ—æœ€å¤§å€¤ã®æœ€å¤§å€¤
+const float SHADOW_INF_DIST = 1.0e10f;	//	ã‚·ãƒ£ãƒ‰ã‚¦ãƒœãƒªãƒ¥ãƒ¼ãƒ ç„¡é™é ç‚¹
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_HidefCaptureFlag;
 extern int g_HidefBufferSize;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTriDumpS::CTriDumpS(
-	int trinum	//	lŠpŒ`”
+	int trinum	//	å››è§’å½¢æ•°
 ){
 	m_TriNum = trinum;
 	if(m_TriNum>TRI_DUMP_MAX_MAX) m_TriNum = TRI_DUMP_MAX_MAX;
@@ -26,10 +26,10 @@ CTriDumpS::CTriDumpS(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTriDumpS::CTriDumpS(
-	CTriDumpS *src	//	ˆø‚«Œp‚¬Œ³
+	CTriDumpS *src	//	å¼•ãç¶™ãå…ƒ
 ){
 	m_TriNum = src->m_TriNum;
 	m_Count = src->m_Count;
@@ -38,7 +38,7 @@ CTriDumpS::CTriDumpS(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTriDumpS::~CTriDumpS(){
 	DELETE_A(m_Buffer);
@@ -46,7 +46,7 @@ CTriDumpS::~CTriDumpS(){
 }
 
 /*
- *	ƒoƒbƒtƒ@’Ç‰Á
+ *	ãƒãƒƒãƒ•ã‚¡è¿½åŠ 
  */
 void CTriDumpS::Feed(){
 	m_Next = new CTriDumpS(this);
@@ -55,10 +55,10 @@ void CTriDumpS::Feed(){
 }
 
 /*
- *	ƒvƒŠƒ~ƒeƒBƒu’Ç‰Á
+ *	ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–è¿½åŠ 
  */
 void CTriDumpS::Add(
-	VEC3 p1, VEC3 p2, VEC3 p3	//	’¸“_
+	VEC3 p1, VEC3 p2, VEC3 p3	//	é ‚ç‚¹
 ){
 	if(m_Count==m_TriNum) Feed();
 	VTX_S *buf = &m_Buffer[m_Count*3];
@@ -69,10 +69,10 @@ void CTriDumpS::Add(
 }
 
 /*
- *	‘¦•`‰æ
+ *	å³æç”»
  */
 void CTriDumpS::Preview(
-	VEC3 p1, VEC3 p2, VEC3 p3	//	’¸“_
+	VEC3 p1, VEC3 p2, VEC3 p3	//	é ‚ç‚¹
 ){
 	VTX_S prev[3], *buf = prev;
 	*buf = p1; buf++;
@@ -83,7 +83,7 @@ void CTriDumpS::Preview(
 }
 
 /*
- *	ƒo[ƒeƒbƒNƒX€”õ
+ *	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹æº–å‚™
  */
 void CTriDumpS::PrepareVertex(){
 	m_Vertex.Create(m_Buffer, FVF_S, m_Count*3*sizeof(VTX_S));
@@ -91,10 +91,10 @@ void CTriDumpS::PrepareVertex(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CTriDumpS::Render(
-	bool drawup	//	DrawPrimitiveUp ‚ğg—p
+	bool drawup	//	DrawPrimitiveUp ã‚’ä½¿ç”¨
 ){
 	devSetTexture(0, NULL);
 	if(drawup){
@@ -110,21 +110,21 @@ void CTriDumpS::Render(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CShadowVolume::CShadowVolume(){
 	m_FaceVolume = NULL;
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CShadowVolume::~CShadowVolume(){
 	DELETE_V(m_FaceVolume);
 }
 
 /*
- *	ƒŠƒZƒbƒg
+ *	ãƒªã‚»ãƒƒãƒˆ
  */
 void CShadowVolume::Reset(){
 	DELETE_V(m_FaceVolume);
@@ -132,11 +132,11 @@ void CShadowVolume::Reset(){
 }
 
 /*
- *	ƒƒbƒVƒ…‚©‚ç¶¬
+ *	ãƒ¡ãƒƒã‚·ãƒ¥ã‹ã‚‰ç”Ÿæˆ
  */
 void CShadowVolume::BuildFromMesh(
-	CObject *obj,	//	ƒIƒuƒWƒFƒNƒg
-	VEC3 vLight		//	ƒ‰ƒCƒg•ûŒü
+	CObject *obj,	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	VEC3 vLight		//	ãƒ©ã‚¤ãƒˆæ–¹å‘
 ){
 	TIMER_RAII("CShadowVolume::BuildFromMesh()");
 
@@ -154,7 +154,7 @@ void CShadowVolume::BuildFromMesh(
 	WORD* pIndices = NULL;
 	DWORD* pAttributes = NULL;
 
-	//	ƒoƒbƒtƒ@‚ğƒƒbƒN
+	//	ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯
 	if(FAILED(pMesh->LockVertexBuffer(D3DLOCK_READONLY, (BYTE **)&pVertices))){
 		return;
 	}
@@ -215,61 +215,61 @@ void CShadowVolume::BuildFromMesh(
 		for(j = 0; j<cnt; j++) m_FaceVolume->Add(v1, v2, vLight*SHADOW_INF_DIST);
 	}
 
-	//	ƒoƒbƒtƒ@‚ÌƒƒbƒN‚ğ‰ğœ
+	//	ãƒãƒƒãƒ•ã‚¡ã®ãƒ­ãƒƒã‚¯ã‚’è§£é™¤
 	pMesh->UnlockVertexBuffer();
 	pMesh->UnlockIndexBuffer();
 	pMesh->UnlockAttributeBuffer();
 }
 
 /*
- *	‹«ŠE•Ó‚ğ’Ç‰Á
+ *	å¢ƒç•Œè¾ºã‚’è¿½åŠ 
  */
 void CShadowVolume::AddFaceEdge(
-	VEC3 &v1, VEC3 &v2,	//	’¸“_
-	VEC3 &vLight		//	ŒõŒ¹•ûŒü
+	VEC3 &v1, VEC3 &v2,	//	é ‚ç‚¹
+	VEC3 &vLight		//	å…‰æºæ–¹å‘
 ){
 	m_FaceVolume->Add(v1, v2, vLight*SHADOW_INF_DIST);
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CShadowVolume::Render(){
-	//	‚¢‚ë‚¢‚ëİ’è
+	//	ã„ã‚ã„ã‚è¨­å®š
 	devSetState( D3DRS_ZENABLE, TRUE );
 	devSetState( D3DRS_ZWRITEENABLE, FALSE );
 	devSetState( D3DRS_STENCILENABLE, TRUE );
 	devSetState( D3DRS_SHADEMODE, D3DSHADE_FLAT );
 
-	//	ƒXƒeƒ“ƒVƒ‹ƒeƒXƒg‚Íí‚ÉƒpƒX
+	//	ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ†ã‚¹ãƒˆã¯å¸¸ã«ãƒ‘ã‚¹
 	devSetState( D3DRS_STENCILFUNC, D3DCMP_ALWAYS );
 	devSetState( D3DRS_STENCILZFAIL, D3DSTENCILOP_KEEP );
 	devSetState( D3DRS_STENCILFAIL, D3DSTENCILOP_KEEP );
 
-	//	Z ƒeƒXƒg‚ªƒpƒX‚·‚é‚Æ‚±‚ë‚¾‚¯ƒCƒ“ƒNƒŠƒƒ“ƒg
+	//	Z ãƒ†ã‚¹ãƒˆãŒãƒ‘ã‚¹ã™ã‚‹ã¨ã“ã‚ã ã‘ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
 	devSetState( D3DRS_STENCILREF, 0x1 );
 	devSetState( D3DRS_STENCILMASK, 0xffffffff );
 	devSetState( D3DRS_STENCILWRITEMASK, 0xffffffff );
 	devSetState( D3DRS_STENCILPASS, D3DSTENCILOP_INCR );
 
-	//	ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚É‚Í•`‚©‚È‚¢iƒXƒeƒ“ƒVƒ‹‚Ì‚İ•`‚­j
+	//	ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã«ã¯æã‹ãªã„ï¼ˆã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã®ã¿æãï¼‰
 	devSetState( D3DRS_ALPHABLENDENABLE, TRUE );
 	devSetState( D3DRS_SRCBLEND, D3DBLEND_ZERO );
 	devSetState( D3DRS_DESTBLEND, D3DBLEND_ONE );
 
-	//	ƒVƒƒƒhƒEƒ{ƒŠƒ…[ƒ€‚Ìè‘O–Ê‚ğ•`‰æ
+	//	ã‚·ãƒ£ãƒ‰ã‚¦ãƒœãƒªãƒ¥ãƒ¼ãƒ ã®æ‰‹å‰é¢ã‚’æç”»
 	devTransform( &sv3.mtxFront );
 	m_FaceVolume->Render( true );
 
-	//	Z ƒeƒXƒg‚ªƒpƒX‚·‚é‚Æ‚±‚ë‚¾‚¯ƒfƒNƒŠƒƒ“ƒg
+	//	Z ãƒ†ã‚¹ãƒˆãŒãƒ‘ã‚¹ã™ã‚‹ã¨ã“ã‚ã ã‘ãƒ‡ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
 	devSetState( D3DRS_STENCILPASS, D3DSTENCILOP_DECR );
 
-	//	ƒJƒŠƒ“ƒO‚ğ‹t‚É‚µ‚Ä‰œ–Ê‚ğ•`‰æ
+	//	ã‚«ãƒªãƒ³ã‚°ã‚’é€†ã«ã—ã¦å¥¥é¢ã‚’æç”»
 	devSetState( D3DRS_CULLMODE, D3DCULL_CW );
 	devTransform( &sv3.mtxFront );
 	m_FaceVolume->Render( true );
 
-	//	İ’è‚ğ–ß‚·
+	//	è¨­å®šã‚’æˆ»ã™
 	devSetState( D3DRS_SHADEMODE, D3DSHADE_GOURAUD );
 	devSetState( D3DRS_CULLMODE, D3DCULL_CCW );
 	devSetState( D3DRS_ZWRITEENABLE, TRUE );
@@ -278,12 +278,12 @@ void CShadowVolume::Render(){
 }
 
 /*
- *	•`‰æ
+ *	æç”»
  */
 void CShadowVolume::Draw(
 	D3DCOLOR color	//	shadow color
 ){
-	//	‚¢‚ë‚¢‚ëİ’è
+	//	ã„ã‚ã„ã‚è¨­å®š
 	devSetState( D3DRS_ZENABLE, FALSE );
 	devSetState( D3DRS_STENCILENABLE, TRUE );
 	devSetState( D3DRS_FOGENABLE, FALSE );
@@ -298,16 +298,16 @@ void CShadowVolume::Draw(
 	devSetTexState( 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE );
 	devSetTexState( 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
 
-	//	ƒXƒeƒ“ƒVƒ‹ƒoƒbƒtƒ@‚Ì’l‚ª 1 ˆÈã‚Ì‚Æ‚±‚ë‚Í‰e
+	//	ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒãƒƒãƒ•ã‚¡ã®å€¤ãŒ 1 ä»¥ä¸Šã®ã¨ã“ã‚ã¯å½±
 	devSetState( D3DRS_STENCILREF, 0x1 );
 	devSetState( D3DRS_STENCILFUNC, D3DCMP_LESSEQUAL );
 	devSetState( D3DRS_STENCILPASS, D3DSTENCILOP_KEEP );
 
-	//	‰e•”•ª‚ğˆÃ‚­‚·‚é
+	//	å½±éƒ¨åˆ†ã‚’æš—ãã™ã‚‹
 	if(g_HidefCaptureFlag) Fill2DRect(0, 0, g_HidefBufferSize, g_HidefBufferSize, color);
 	else Fill2DRect(0, 0, g_DispWidth, g_DispHeight, color);
 
-	//	İ’è‚ğ–ß‚·
+	//	è¨­å®šã‚’æˆ»ã™
 	devSetState( D3DRS_ZENABLE, TRUE );
 	devSetState( D3DRS_STENCILENABLE, FALSE );
 	//devSetState( D3DRS_FOGENABLE, TRUE );

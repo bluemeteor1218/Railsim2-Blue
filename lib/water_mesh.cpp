@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -8,7 +8,7 @@
 #include "water_mesh.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CWaterMesh::CWaterMesh(){
 	Init(VEC3(0, 0, 0), 10, 10, 0.005f);
@@ -18,18 +18,18 @@ CWaterMesh::CWaterMesh(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CWaterMesh::~CWaterMesh(){
 }
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  *
- *	pos	: ’†SÀ•W
- *	w		: ‰¡•(X)
- *	h		: c•(Y)
- *	d		: UVŒë·i…–Ê‚Ìr‚ê‹ï‡j
+ *	pos	: ä¸­å¿ƒåº§æ¨™
+ *	w		: æ¨ªå¹…(X)
+ *	h		: ç¸¦å¹…(Y)
+ *	d		: UVèª¤å·®ï¼ˆæ°´é¢ã®è’ã‚Œå…·åˆï¼‰
  */
 void CWaterMesh::Init(VEC3 pos, float w, float h, float d){
 	for(int y = 0; y<MESH_H+1; y++){
@@ -50,11 +50,11 @@ void CWaterMesh::Init(VEC3 pos, float w, float h, float d){
 }
 
 /*
- *	…–Ê‚ÉÕŒ‚‚ğ—^‚¦‚é
+ *	æ°´é¢ã«è¡æ’ƒã‚’ä¸ãˆã‚‹
  *
- *	x		: XÀ•W
- *	y		: YÀ•W
- *	d		: •ÏˆÊ
+ *	x		: Xåº§æ¨™
+ *	y		: Yåº§æ¨™
+ *	d		: å¤‰ä½
  */
 void CWaterMesh::Impact(float x, float y, float d){
 	int ix = (int)(x/m_dw);
@@ -65,41 +65,41 @@ void CWaterMesh::Impact(float x, float y, float d){
 }
 
 /*
- *	•`‰æAƒpƒ‰ƒ[ƒ^XV
+ *	æç”»ã€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿æ›´æ–°
  */
 void CWaterMesh::Render(){
 	/*
-	 *	ˆÈ‰º‚ÌUV•Ï‰»ƒAƒ‹ƒSƒŠƒYƒ€‚Í http://	homepage1.nifty.com/kaneko/
-	 *	‚É‚ ‚éu‹àq‚³‚ñv‚ÌƒvƒƒOƒ‰ƒ€‚ğQl‚É‚³‚¹‚Ä’¸‚«‚Ü‚µ‚½B
+	 *	ä»¥ä¸‹ã®UVå¤‰åŒ–ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã¯ http://	homepage1.nifty.com/kaneko/
+	 *	ã«ã‚ã‚‹ã€Œé‡‘å­ã•ã‚“ã€ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’å‚è€ƒã«ã•ã›ã¦é ‚ãã¾ã—ãŸã€‚
 	 */
 
-	//	‚PƒtƒŒ[ƒ€‘O‚ÌUVÀ•W‚ğ•Û‘¶
+	//	ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®UVåº§æ¨™ã‚’ä¿å­˜
 	memcpy(m_ouv, m_cuv, sizeof(m_cuv));
 
 	int x, y;
 
-	//	UVÀ•W‚Ì·•ª‚ğ‚Æ‚é
+	//	UVåº§æ¨™ã®å·®åˆ†ã‚’ã¨ã‚‹
 	for(y = 1; y<MESH_H; y++){
 		for(x = 1; x<MESH_W; x++){
 			VEC2 duv(0, 0);
 
-			//	ã‰º¶‰E‚Æ•½‹Ï‚·‚é
+			//	ä¸Šä¸‹å·¦å³ã¨å¹³å‡ã™ã‚‹
 			duv += m_ouv[y+1][x]*0.1f;
 			duv += m_ouv[y][x+1]*0.1f;
 			duv += m_ouv[y][x-1]*0.1f;
 			duv += m_ouv[y-1][x]*0.1f;
 			duv -= m_ouv[y][x]*0.4f;
 
-			//	UV‚Ì·‚¾‚¯‘¬“x‚ğ‰ÁZA‘¬“x•ª‚¾‚¯UV‚ğC³
+			//	UVã®å·®ã ã‘é€Ÿåº¦ã‚’åŠ ç®—ã€é€Ÿåº¦åˆ†ã ã‘UVã‚’ä¿®æ­£
 			m_vec[y][x] += duv;
 			m_cuv[y][x] += m_vec[y][x]*m_speed;
-			m_vec[y][x] *= m_gain;	//	Œ¸Š
+			m_vec[y][x] *= m_gain;	//	æ¸›è¡°
 		}
 	}
 	int idx = 0;
 	float x1, y1, x2, y2, u1, u2, v1, v2;
 
-	//	’¸“_î•ñ‚Ìì¬
+	//	é ‚ç‚¹æƒ…å ±ã®ä½œæˆ
 	for(y = 0; y<MESH_H; y++){
 		for(x = 0; x<MESH_W; x++){
 			idx = (y*MESH_W+x)*6;
@@ -129,7 +129,7 @@ void CWaterMesh::Render(){
 			m_vt[idx+5] = m_vt[idx+1];
 		}
 	}
-	//	’¸“_ƒoƒbƒtƒ@‚Ìì¬AƒŒƒ“ƒ_ƒŠƒ“ƒO
+	//	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆã€ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	m_vtx.Create(m_vt, FVF_LX, sizeof(m_vt));
 	m_vtx.RenderTL();
 }

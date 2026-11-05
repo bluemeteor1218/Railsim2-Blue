@@ -1,39 +1,39 @@
-#ifndef CPIERPLUGIN_H_INCLUDED
+ï»¿#ifndef CPIERPLUGIN_H_INCLUDED
 #define CPIERPLUGIN_H_INCLUDED
 
 #include "CProfilePlugin.h"
 
 /*
- *	‹´‹rƒvƒ‰ƒOƒCƒ“
+ *	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CPierPlugin: public CProfilePlugin{
 	friend class CPier;
 	friend class CLineBuildCurve;
 private:
-	int m_TrackNum;			//	‹O“¹”
-	float m_TrackInterval;	//	‹O“¹ŠÔŠu
-	float m_Interval;			//	ŠÔŠu
-	float m_Offset;				//	ƒIƒtƒZƒbƒg
-	float m_BuildMinAlt;		//	ŒšİÅ¬‚“x
-	float m_TaperX, m_TaperY;	//	XY ƒe[ƒp
-	float m_TaperZ;				//	Z ƒe[ƒp (“™ŠÔŠu”z’u—p)
-	float m_PierPos;			//	‰Ëü’ŒŠÔÏZ‹——£
-	bool m_Direction;			//	‰„’·•ûŒü (false: down, true: up)
-	VEC3 m_JointToHeadLocal;	//	ƒWƒ‡ƒCƒ“ƒg•”Eƒwƒbƒh”z’uƒ[ƒJƒ‹À•W
-	VEC3 m_HeadToPierLocal;		//	ƒwƒbƒh•”E‹´‹r”z’uƒ[ƒJƒ‹À•W
-	VEC3 m_BaseToPierLocal;		//	Šî‘b•”E‹´‹r”z’uƒ[ƒJƒ‹À•W
-	CMesh *m_JointMesh;			//	ƒWƒ‡ƒCƒ“ƒg•”ƒƒbƒVƒ…
-	CMesh *m_HeadMesh;			//	ƒwƒbƒh•”ƒƒbƒVƒ…
-	CMesh *m_BaseMesh;			//	Šî‘b•”ƒƒbƒVƒ…
-	string m_JointFile;			//	ƒWƒ‡ƒCƒ“ƒg•”ƒtƒ@ƒCƒ‹–¼
-	string m_HeadFile;			//	ƒwƒbƒh•”ƒtƒ@ƒCƒ‹–¼
-	string m_BaseFile;			//	Šî‘b•”ƒtƒ@ƒCƒ‹–¼
-	float m_JointScale;			//	ƒWƒ‡ƒCƒ“ƒg•”ƒXƒP[ƒ‹
-	float m_HeadScale;			//	ƒwƒbƒh•”ƒXƒP[ƒ‹
-	float m_BaseScale;			//	Šî‘b•”ƒXƒP[ƒ‹
-	CObject m_JointObject;		//	ƒWƒ‡ƒCƒ“ƒg•”ƒIƒuƒWƒFƒNƒg
-	CObject m_HeadObject;		//	ƒwƒbƒh•”ƒIƒuƒWƒFƒNƒg
-	CObject m_BaseObject;		//	Šî‘b•”ƒIƒuƒWƒFƒNƒg
+	int m_TrackNum;			//	è»Œé“æ•°
+	float m_TrackInterval;	//	è»Œé“é–“éš”
+	float m_Interval;			//	é–“éš”
+	float m_Offset;				//	ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	float m_BuildMinAlt;		//	å»ºè¨­æœ€å°é«˜åº¦
+	float m_TaperX, m_TaperY;	//	XY ãƒ†ãƒ¼ãƒ‘
+	float m_TaperZ;				//	Z ãƒ†ãƒ¼ãƒ‘ (ç­‰é–“éš”é…ç½®ç”¨)
+	float m_PierPos;			//	æ¶ç·šæŸ±é–“ç©ç®—è·é›¢
+	bool m_Direction;			//	å»¶é•·æ–¹å‘ (false: down, true: up)
+	VEC3 m_JointToHeadLocal;	//	ã‚¸ãƒ§ã‚¤ãƒ³ãƒˆéƒ¨ãƒ»ãƒ˜ãƒƒãƒ‰é…ç½®ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™
+	VEC3 m_HeadToPierLocal;		//	ãƒ˜ãƒƒãƒ‰éƒ¨ãƒ»æ©‹è„šé…ç½®ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™
+	VEC3 m_BaseToPierLocal;		//	åŸºç¤éƒ¨ãƒ»æ©‹è„šé…ç½®ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™
+	CMesh *m_JointMesh;			//	ã‚¸ãƒ§ã‚¤ãƒ³ãƒˆéƒ¨ãƒ¡ãƒƒã‚·ãƒ¥
+	CMesh *m_HeadMesh;			//	ãƒ˜ãƒƒãƒ‰éƒ¨ãƒ¡ãƒƒã‚·ãƒ¥
+	CMesh *m_BaseMesh;			//	åŸºç¤éƒ¨ãƒ¡ãƒƒã‚·ãƒ¥
+	string m_JointFile;			//	ã‚¸ãƒ§ã‚¤ãƒ³ãƒˆéƒ¨ãƒ•ã‚¡ã‚¤ãƒ«å
+	string m_HeadFile;			//	ãƒ˜ãƒƒãƒ‰éƒ¨ãƒ•ã‚¡ã‚¤ãƒ«å
+	string m_BaseFile;			//	åŸºç¤éƒ¨ãƒ•ã‚¡ã‚¤ãƒ«å
+	float m_JointScale;			//	ã‚¸ãƒ§ã‚¤ãƒ³ãƒˆéƒ¨ã‚¹ã‚±ãƒ¼ãƒ«
+	float m_HeadScale;			//	ãƒ˜ãƒƒãƒ‰éƒ¨ã‚¹ã‚±ãƒ¼ãƒ«
+	float m_BaseScale;			//	åŸºç¤éƒ¨ã‚¹ã‚±ãƒ¼ãƒ«
+	CObject m_JointObject;		//	ã‚¸ãƒ§ã‚¤ãƒ³ãƒˆéƒ¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CObject m_HeadObject;		//	ãƒ˜ãƒƒãƒ‰éƒ¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CObject m_BaseObject;		//	åŸºç¤éƒ¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 public:
 	static void RenderPreview();
 	CPierPlugin(char *id): CProfilePlugin(id){}
@@ -56,7 +56,7 @@ public:
 };
 
 /*
- *	‹´‹rƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CPierPluginList: public CProfilePluginList{
 private:
@@ -68,7 +68,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CPierPlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CPierPlugin *g_Pier;
 extern CPierPluginList *g_PierPluginList;
 

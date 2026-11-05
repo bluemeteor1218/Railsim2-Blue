@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+﻿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -7,7 +7,7 @@
 #include "wave_stream.h"
 
 /*
- *	�R���X�g���N�^
+ *	コンストラクタ
  */
 CWaveStream::CWaveStream(){
 	m_hEvent = NULL;
@@ -16,26 +16,26 @@ CWaveStream::CWaveStream(){
 }
 
 /*
- *	�f�X�g���N�^
+ *	デストラクタ
  */
 CWaveStream::~CWaveStream(){
 	End();
 }
 
 /*
- *	�X�g���[�~���O�J�n
+ *	ストリーミング開始
  *
- *	format	: �E�F�[�u�t�H�[�}�b�g
- *	size		: �X�g���[���o�b�t�@�̂P�u���b�N�̃T�C�Y
- *	count		: �u���b�N��
+ *	format	: ウェーブフォーマット
+ *	size		: ストリームバッファの１ブロックのサイズ
+ *	count		: ブロック数
  *
- *	��DirectMusic�ƕ��p����ꍇ�́AFreeMusic()�Ńp�t�H�[�}���X��������邱�ƁB
+ *	※DirectMusicと併用する場合は、FreeMusic()でパフォーマンスを解放すること。
  */
 BOOL CWaveStream::Begin(LPWAVEFORMATEX format, DWORD size, int count){
 	if(!svs.pDS) return FALSE;
-	End();	//	���s���Ȃ�I��
+	End();	//	実行中なら終了
 
-	//	�T�E���h�o�b�t�@�̍쐬
+	//	サウンドバッファの作成
 	DSBUFFERDESC dsbdesc;
 
 	memset(&dsbdesc, 0, sizeof(DSBUFFERDESC));
@@ -54,7 +54,7 @@ BOOL CWaveStream::Begin(LPWAVEFORMATEX format, DWORD size, int count){
 		Debug("CWaveStream::CreateSoundBuffer\n");
 		return FALSE;
 	}
-	//	�T�E���h�o�b�t�@�̏�����
+	//	サウンドバッファの初期化
 	LPBYTE	pBuf1, pBuf2;
 	DWORD	size1, size2;
 
@@ -71,20 +71,20 @@ BOOL CWaveStream::Begin(LPWAVEFORMATEX format, DWORD size, int count){
 
 	m_pBuf->Unlock(pBuf1, size1, pBuf2, size2);
 
-	//	�ʒm�I�u�W�F�N�g�̍쐬
+	//	通知オブジェクトの作成
 	m_pBuf->QueryInterface(IID_IDirectSoundNotify, (LPVOID *)&m_pNotify);
 
 	if(FAILED(hr)){
 		Debug("IDirectSoundNotify\n");
 		return FALSE;
 	}
-	//	�ʒm�C�x���g�̍쐬
+	//	通知イベントの作成
 	m_hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 
 	DSBPOSITIONNOTIFY *pn = new DSBPOSITIONNOTIFY[count];
 
 	for(int i = 0; i<count; i++){
-		pn[i].dwOffset = (size*i)+size-1;	//	size*i����_���H
+		pn[i].dwOffset = (size*i)+size-1;	//	size*iじゃダメ？
 		pn[i].hEventNotify = m_hEvent;
 	}
 	hr = m_pNotify->SetNotificationPositions(count, pn);
@@ -94,7 +94,7 @@ BOOL CWaveStream::Begin(LPWAVEFORMATEX format, DWORD size, int count){
 		Debug("SetNotificationPositions\n");
 		return FALSE;
 	}
-	//	�o�b�t�@�������O�o�b�t�@�Ƃ݂Ȃ��ă��[�v�Đ�
+	//	バッファをリングバッファとみなしてループ再生
 	m_wpos = 0;
 	m_pBuf->Play(0, 0, DSBPLAY_LOOPING);
 
@@ -102,7 +102,7 @@ BOOL CWaveStream::Begin(LPWAVEFORMATEX format, DWORD size, int count){
 }
 
 /*
- *	�X�g���[�~���O�I��
+ *	ストリーミング終了
  */
 void CWaveStream::End(){
 	if(m_pBuf) m_pBuf->Stop();
@@ -117,22 +117,22 @@ void CWaveStream::End(){
 }
 
 /*
- *	�X�g���[���o�b�t�@�Ƀf�[�^���[����
+ *	ストリームバッファにデータを補充する
  *
- *	pData	: �f�[�^
- *	size	: �f�[�^�T�C�Y�iBegin()�Ŏw�肵���l�Ɠ����j
+ *	pData	: データ
+ *	size	: データサイズ（Begin()で指定した値と同じ）
  *
- *	���X�g���[���o�b�t�@�̍Đ��ɓ������܂��B
+ *	※ストリームバッファの再生に同期します。
  */
 BOOL CWaveStream::Enqueue(LPBYTE pData, DWORD size){
-	//	�ʒm�C�x���g��҂�
+	//	通知イベントを待つ
 	DWORD ret = WaitForSingleObject(m_hEvent, STREAM_TIMEOUT);
 
 	if(ret==WAIT_TIMEOUT){
 		Debug("time out CWaveStream::Enqueue\n");
 		return FALSE;
 	}
-	//	�����݃J�[�\���̈��S�Ȉʒu�ɏC��
+	//	書込みカーソルの安全な位置に修正
 	DWORD ppos, wpos;
 
 	m_pBuf->GetCurrentPosition(&ppos, &wpos);
@@ -141,7 +141,7 @@ BOOL CWaveStream::Enqueue(LPBYTE pData, DWORD size){
 	|| (ppos>wpos && (m_wpos>ppos || m_wpos<wpos)))	//	 |xxWoooPxx|
 		m_wpos = wpos;
 
-	//	�o�b�t�@�����b�N
+	//	バッファをロック
 	LPBYTE	pBuf1, pBuf2;
 	DWORD	size1, size2;
 	HRESULT hr;
@@ -153,18 +153,18 @@ BOOL CWaveStream::Enqueue(LPBYTE pData, DWORD size){
 	if(hr==DSERR_BUFFERLOST)	m_pBuf->Restore();
 	else if(FAILED(hr))		return FALSE;
 
-	//	�f�[�^���R�s�[
+	//	データをコピー
 	CopyMemory(pBuf1, pData, size1);
 
 	if(pBuf2)
 		CopyMemory(pBuf2, pData+size1, size2);
 
-	//	�o�b�t�@���A�����b�N
+	//	バッファをアンロック
 	m_pBuf->Unlock(pBuf1, size1, pBuf2, size2);
 
-	//	�����݈ʒu���X�V
+	//	書込み位置を更新
 	m_wpos += size1;
-	m_wpos %= m_size;	//	�o�b�t�@�T�C�Y�𒴂�������
+	m_wpos %= m_size;	//	バッファサイズを超えたら一周
 
 	return TRUE;
 }

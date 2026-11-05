@@ -1,10 +1,10 @@
-#ifndef CSTATIONBUILDMODE_H_INCLUDED
+ï»¿#ifndef CSTATIONBUILDMODE_H_INCLUDED
 #define CSTATIONBUILDMODE_H_INCLUDED
 
 #include "CStructBuildMode.h"
 
 /*
- *	‰wÉİ’uƒ‚[ƒh
+ *	é§…èˆè¨­ç½®ãƒ¢ãƒ¼ãƒ‰
  */
 class CStationBuildMode: public CStructBuildMode{
 protected:
@@ -16,7 +16,7 @@ public:
 	void RenderStructBuild();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CStationBuildMode *g_StationBuildMode;
 
 #endif

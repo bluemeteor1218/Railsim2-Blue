@@ -1,4 +1,4 @@
-#ifndef CRAILWAYPLUGINSET_H_INCLUDED
+ï»¿#ifndef CRAILWAYPLUGINSET_H_INCLUDED
 #define CRAILWAYPLUGINSET_H_INCLUDED
 
 #include "CPlugin.h"
@@ -12,33 +12,33 @@ class CLinePlugin;
 class CPolePlugin;
 
 /*
- *	ƒŒ[ƒ‹ŠÖ˜Aƒvƒ‰ƒOƒCƒ“ƒZƒbƒg
+ *	ãƒ¬ãƒ¼ãƒ«é–¢é€£ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚»ãƒƒãƒˆ
  */
 class CRailwayPluginSet: public CPlugin{
 private:
-	string m_RailID;				//	ƒŒ[ƒ‹ ID
-	string m_TieID;					//	––Ø ID
-	string m_GirderID;				//	‹´Œ… ID
-	string m_PierID;				//	‹´‹r ID
-	string m_LineID;				//	‰Ëü ID
-	string m_PoleID;				//	‰Ëü’Œ ID
-	bool m_RailFlag;				//	ƒŒ[ƒ‹ƒtƒ‰ƒO
-	bool m_TieFlag;					//	––Øƒtƒ‰ƒO
-	bool m_GirderFlag;				//	‹´Œ…ƒtƒ‰ƒO
-	bool m_PierFlag;				//	‹´‹rƒtƒ‰ƒO
-	bool m_LineFlag;				//	‰Ëüƒtƒ‰ƒO
-	bool m_PoleFlag;				//	‰Ëü’Œƒtƒ‰ƒO
-	CRailPlugin *m_RailPlugin;		//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *m_TiePlugin;		//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *m_GirderPlugin;	//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
-	CPierPlugin *m_PierPlugin;		//	‹´‹rƒvƒ‰ƒOƒCƒ“
-	CLinePlugin *m_LinePlugin;		//	‰Ëüƒvƒ‰ƒOƒCƒ“
-	CPolePlugin *m_PolePlugin;		//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
-	bool m_EnableCant;				//	ƒJƒ“ƒgƒtƒ‰ƒO
-	bool m_LiftRailSurface;			//	‚¿ã‚°ƒtƒ‰ƒO
-	bool m_MultiTrack;				//	•¡üƒtƒ‰ƒO
-	int m_TrackNum;					//	‹O“¹”
-	float m_TrackInterval;			//	‹O“¹ŠÔŠu
+	string m_RailID;				//	ãƒ¬ãƒ¼ãƒ« ID
+	string m_TieID;					//	æ•æœ¨ ID
+	string m_GirderID;				//	æ©‹æ¡ ID
+	string m_PierID;				//	æ©‹è„š ID
+	string m_LineID;				//	æ¶ç·š ID
+	string m_PoleID;				//	æ¶ç·šæŸ± ID
+	bool m_RailFlag;				//	ãƒ¬ãƒ¼ãƒ«ãƒ•ãƒ©ã‚°
+	bool m_TieFlag;					//	æ•æœ¨ãƒ•ãƒ©ã‚°
+	bool m_GirderFlag;				//	æ©‹æ¡ãƒ•ãƒ©ã‚°
+	bool m_PierFlag;				//	æ©‹è„šãƒ•ãƒ©ã‚°
+	bool m_LineFlag;				//	æ¶ç·šãƒ•ãƒ©ã‚°
+	bool m_PoleFlag;				//	æ¶ç·šæŸ±ãƒ•ãƒ©ã‚°
+	CRailPlugin *m_RailPlugin;		//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *m_TiePlugin;		//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *m_GirderPlugin;	//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPierPlugin *m_PierPlugin;		//	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CLinePlugin *m_LinePlugin;		//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPolePlugin *m_PolePlugin;		//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	bool m_EnableCant;				//	ã‚«ãƒ³ãƒˆãƒ•ãƒ©ã‚°
+	bool m_LiftRailSurface;			//	æŒã¡ä¸Šã’ãƒ•ãƒ©ã‚°
+	bool m_MultiTrack;				//	è¤‡ç·šãƒ•ãƒ©ã‚°
+	int m_TrackNum;					//	è»Œé“æ•°
+	float m_TrackInterval;			//	è»Œé“é–“éš”
 public:
 	CRailwayPluginSet(char *, bool);
 	~CRailwayPluginSet();
@@ -55,17 +55,17 @@ public:
 	void Apply();
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CRailwayPluginSet>::iterator IRailwayPluginSet;
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void LoadRailwayPluginSetList();
 IRailwayPluginSet FindRailwayPluginSet(string);
 void AddRailwayPluginSet(string, bool);
 void ListRailwayPluginSet();
 void ModalFuncRailwayPluginSet();
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CPopMenu *g_RailwayPluginSetMenu;
 extern list<CRailwayPluginSet> g_RailwayPluginSetList;
 

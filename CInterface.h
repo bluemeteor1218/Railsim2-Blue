@@ -1,32 +1,32 @@
-#ifndef CINTERFACE_H_INCLUDED
+ï»¿#ifndef CINTERFACE_H_INCLUDED
 #define CINTERFACE_H_INCLUDED
 
 #include "CCursor.h"
 
-const int TILE_UNIT = 16;	//	’PˆÊƒ^ƒCƒ‹• [px]
-const int TILE_HALF = TILE_UNIT/2;	//	”¼•ª
+const int TILE_UNIT = 16;	//	å˜ä½ã‚¿ã‚¤ãƒ«å¹… [px]
+const int TILE_HALF = TILE_UNIT/2;	//	åŠåˆ†
 const int TILE_QUAD = TILE_UNIT/4;	//	1/4
 
 /*
- *	ƒ†[ƒU[ƒCƒ“ƒ^[ƒtƒFƒCƒXƒNƒ‰ƒX
+ *	ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã‚¯ãƒ©ã‚¹
  */
 class CInterface{
 	friend class CPopMenu;
 protected:
-	static CInterface *ms_Focus;	//	ƒtƒH[ƒJƒX
-	static CInterface *ms_Drop;		//	ƒhƒƒbƒvæ
-	static CInterface *ms_TabHead;	//	ƒ^ƒuƒŠƒ“ƒN
-	int m_PosX, m_PosY;		//	À•W
-	int m_Width, m_Height;	//	ƒTƒCƒY
-	bool m_Enabled;			//	—LŒøƒtƒ‰ƒO
-	bool m_Visible;			//	•\Ž¦ƒtƒ‰ƒO
-	string m_Text;			//	ƒeƒLƒXƒg
-	CInterface *m_Parent;	//	e
-	CInterface *m_Brother;	//	ŒZ’í
-	CInterface *m_Child;	//	Žq
-	CInterface *m_Owner;	//	ƒtƒH[ƒJƒXŠ—LŽÒ
-	CInterface *m_TabPrev;	//	ƒ^ƒuŽŸ
-	CInterface *m_TabNext;	//	ƒ^ƒu‘O
+	static CInterface *ms_Focus;	//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
+	static CInterface *ms_Drop;		//	ãƒ‰ãƒ­ãƒƒãƒ—å…ˆ
+	static CInterface *ms_TabHead;	//	ã‚¿ãƒ–ãƒªãƒ³ã‚¯
+	int m_PosX, m_PosY;		//	åº§æ¨™
+	int m_Width, m_Height;	//	ã‚µã‚¤ã‚º
+	bool m_Enabled;			//	æœ‰åŠ¹ãƒ•ãƒ©ã‚°
+	bool m_Visible;			//	è¡¨ç¤ºãƒ•ãƒ©ã‚°
+	string m_Text;			//	ãƒ†ã‚­ã‚¹ãƒˆ
+	CInterface *m_Parent;	//	è¦ª
+	CInterface *m_Brother;	//	å…„å¼Ÿ
+	CInterface *m_Child;	//	å­
+	CInterface *m_Owner;	//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹æ‰€æœ‰è€…
+	CInterface *m_TabPrev;	//	ã‚¿ãƒ–æ¬¡
+	CInterface *m_TabNext;	//	ã‚¿ãƒ–å‰
 public:
 	static void ResetTabHead(){ ms_TabHead = NULL; }
 	static void ProcessKey();
@@ -68,7 +68,7 @@ public:
 };
 
 /*
- *	ƒtƒHƒ“ƒgcˆÊ’uC³
+ *	ãƒ•ã‚©ãƒ³ãƒˆç¸¦ä½ç½®ä¿®æ­£
  */
 inline int FontY(int h){ return (h-FONT_HEIGHT)>>1; }
 

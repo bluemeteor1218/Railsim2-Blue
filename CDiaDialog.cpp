@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CDiaDialog.h"
 #include "CRailConnector.h"
 #include "CStation.h"
@@ -6,18 +6,18 @@
 #include "CSaveFile.h"
 #include "CSkinPlugin.h"
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 char *g_DiaDefaultString[2] = {lang(IndividualSetting), lang(Default)};
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CDiaDialogBase::CDiaDialogBase(){
 	m_GroupMenu = NULL;
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CDiaDialogBase::~CDiaDialogBase(){
 	DELETE_V(m_GroupMenu);
@@ -25,15 +25,15 @@ CDiaDialogBase::~CDiaDialogBase(){
 }
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CDiaDialogBase::Init(
-	int x, int y,	//	ˆÊ’u
-	int w, int h,	//	ƒTƒCƒY
-	char *title,	//	ƒ^ƒCƒgƒ‹
-	CInterface *p,	//	e
-	char *dialabel,	//	ƒOƒ‹[ƒvƒ‰ƒxƒ‹
-	int exth		//	Šg’£—Ìˆæ‚‚³
+	int x, int y,	//	ä½ç½®
+	int w, int h,	//	ã‚µã‚¤ã‚º
+	char *title,	//	ã‚¿ã‚¤ãƒˆãƒ«
+	CInterface *p,	//	è¦ª
+	char *dialabel,	//	ã‚°ãƒ«ãƒ¼ãƒ—ãƒ©ãƒ™ãƒ«
+	int exth		//	æ‹¡å¼µé ˜åŸŸé«˜ã•
 ){
 	m_ExtHeight = exth;
 	m_DiaInst = NULL;
@@ -59,22 +59,22 @@ void CDiaDialogBase::Init(
 	m_DiaGroup.Init(0, 0, 1, 1, dialabel, this);
 	class CRoutineAdder: public CMenuCommand{
 	private:
-		CDiaDialogBase *m_Owner;	//	ƒ_ƒCƒAƒƒO
+		CDiaDialogBase *m_Owner;	//	ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 	public:
 		CRoutineAdder(CDiaDialogBase *o){ m_Owner = o; }
 		void Exec(){ m_Owner->AddRoutine(); }
 	};
 	class CRoutineDeleter: public CMenuCommand{
 	private:
-		CDiaDialogBase *m_Owner;	//	ƒ_ƒCƒAƒƒO
+		CDiaDialogBase *m_Owner;	//	ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 	public:
 		CRoutineDeleter(CDiaDialogBase *o){ m_Owner = o; }
 		void Exec(){ m_Owner->DeleteRoutine(); }
 	};
 	class CRoutineRotater: public CMenuCommand{
 	private:
-		CDiaDialogBase *m_Owner;	//	ƒ_ƒCƒAƒƒO
-		bool m_Prev;				//	‹t‰ñ“]
+		CDiaDialogBase *m_Owner;	//	ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
+		bool m_Prev;				//	é€†å›è»¢
 	public:
 		CRoutineRotater(CDiaDialogBase *o, bool p){ m_Owner = o; m_Prev = p; }
 		void Exec(){ m_Owner->RotateRoutine(m_Prev); }
@@ -91,7 +91,7 @@ void CDiaDialogBase::Init(
 }
 
 /*
- *	‰Šú‰» 2
+ *	åˆæœŸåŒ– 2
  */
 void CDiaDialogBase::InitFoot(){
 	m_ApplyButton.Init(0, 0, 1, 1, lang(Close), this);
@@ -99,11 +99,11 @@ void CDiaDialogBase::InitFoot(){
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CDiaDialogBase::WindowResized(
-	int w, int h,		//	V‹KƒTƒCƒY
-	CWindowCtrl *wnd	//	ƒEƒBƒhƒEƒRƒ“ƒgƒ[ƒ‹
+	int w, int h,		//	æ–°è¦ã‚µã‚¤ã‚º
+	CWindowCtrl *wnd	//	ã‚¦ã‚£ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	int varh = h-m_ExtHeight-TILE_UNIT*5-TILE_QUAD*5;
 	int lvh1 = varh/2, lvh2 = varh-lvh1;
@@ -132,11 +132,11 @@ void CDiaDialogBase::WindowResized(
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CDiaDialogBase::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	switch(type){
 	case CMD_GROUP: {
@@ -159,10 +159,10 @@ CPopMenu *CDiaDialogBase::Dispatch(
 }
 
 /*
- *	ƒ_ƒCƒAƒƒO—LŒø‰»
+ *	ãƒ€ã‚¤ã‚¢ãƒ­ã‚°æœ‰åŠ¹åŒ–
  */
 void CDiaDialogBase::Enter(
-	CDiaInstBase *dinst	//	ƒ_ƒCƒ„ƒCƒ“ƒXƒg
+	CDiaInstBase *dinst	//	ãƒ€ã‚¤ãƒ¤ã‚¤ãƒ³ã‚¹ãƒˆ
 ){
 	m_DiaInst = dinst;
 	m_DiaElement = NULL;
@@ -185,10 +185,10 @@ void CDiaDialogBase::Enter(
 }
 
 /*
- *	•Ò¬‚ğƒZƒbƒg
+ *	ç·¨æˆã‚’ã‚»ãƒƒãƒˆ
  */
 void CDiaDialogBase::SetTrainGroup(
-	CTrainGroup *group	//	•Ò¬
+	CTrainGroup *group	//	ç·¨æˆ
 ){
 	g_TrainGroup = group;
 	m_DiaList = NULL;
@@ -214,10 +214,10 @@ void CDiaDialogBase::SetTrainGroup(
 }
 
 /*
- *	ƒ_ƒCƒ„—v‘f‚ğƒZƒbƒg
+ *	ãƒ€ã‚¤ãƒ¤è¦ç´ ã‚’ã‚»ãƒƒãƒˆ
  */
 void CDiaDialogBase::SetDiaElementBase(
-	CDiaElementBase *el	//	—v‘f
+	CDiaElementBase *el	//	è¦ç´ 
 ){
 	m_DiaElement = el;
 	m_DiaGroup.Show(!!m_DiaElement);
@@ -225,7 +225,7 @@ void CDiaDialogBase::SetDiaElementBase(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CDiaDialogBase::ScanInputDia(){
 	if(!m_Visible){
@@ -278,7 +278,7 @@ void CDiaDialogBase::ScanInputDia(){
 }
 
 /*
- *	ƒ‹[ƒ`ƒ“’Ç‰Á
+ *	ãƒ«ãƒ¼ãƒãƒ³è¿½åŠ 
  */
 void CDiaDialogBase::AddRoutine(){
 	if(!m_DiaList) m_DiaList = m_DiaInst->Search(g_TrainGroup);
@@ -288,7 +288,7 @@ void CDiaDialogBase::AddRoutine(){
 }
 
 /*
- *	ƒ‹[ƒ`ƒ“íœ
+ *	ãƒ«ãƒ¼ãƒãƒ³å‰Šé™¤
  */
 void CDiaDialogBase::DeleteRoutine(){
 	if(!m_DiaList || !m_DiaElement) return;
@@ -305,10 +305,10 @@ void CDiaDialogBase::DeleteRoutine(){
 }
 
 /*
- *	ƒ‹[ƒ`ƒ“‰ñ“]
+ *	ãƒ«ãƒ¼ãƒãƒ³å›è»¢
  */
 void CDiaDialogBase::RotateRoutine(
-	bool prev	//	‹t‰ñ“]
+	bool prev	//	é€†å›è»¢
 ){
 	if(!m_DiaList) return;
 	m_DiaList->RotateElement(prev);
@@ -322,10 +322,10 @@ void CDiaDialogBase::RotateRoutine(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CPointDialog::Init(
-	CInterface *p	//	e
+	CInterface *p	//	è¦ª
 ){
 	int ww = TILE_UNIT*16, wh = TILE_UNIT*20;
 	CDiaDialogBase::Init(TILE_UNIT, g_DispHeight-wh-TILE_UNIT,
@@ -338,10 +338,10 @@ void CPointDialog::Init(
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CPointDialog::ResizeDiaDialogBase(
-	int w, int h	//	V‹KƒTƒCƒY
+	int w, int h	//	æ–°è¦ã‚µã‚¤ã‚º
 ){
 	int i, tw = w-TILE_UNIT*2+TILE_QUAD;
 	for(i = 0; i<3; i++){
@@ -351,7 +351,7 @@ void CPointDialog::ResizeDiaDialogBase(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CPointDialog::ScanInputDiaDialogBase(){
 	CPointElement *pe = GetElement();
@@ -364,10 +364,10 @@ void CPointDialog::ScanInputDiaDialogBase(){
 }
 
 /*
- *	—v‘f’l‚ğƒZƒbƒg
+ *	è¦ç´ å€¤ã‚’ã‚»ãƒƒãƒˆ
  */
 void CPointDialog::SetElementValue(
-	CDiaElementBase *el	//	ƒ_ƒCƒ„—v‘f
+	CDiaElementBase *el	//	ãƒ€ã‚¤ãƒ¤è¦ç´ 
 ){
 	if(el){
 		CPointElement *pe = (CPointElement *)el;
@@ -381,10 +381,10 @@ void CPointDialog::SetElementValue(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CDiaDialog::Init(
-	CInterface *p	//	e
+	CInterface *p	//	è¦ª
 ){
 	int ww = TILE_UNIT*16, wh = TILE_UNIT*25;
 	CDiaDialogBase::Init(TILE_UNIT, g_DispHeight-wh-TILE_UNIT,
@@ -402,7 +402,7 @@ void CDiaDialog::Init(
 	m_MinuteLabel.Init(0, 0, TILE_UNIT, TILE_UNIT, lang(Min), &m_DiaGroup, 0, 1);
 	m_SecondEdit.Init(0, 0, TILE_UNIT*2, TILE_UNIT, "", &m_DiaGroup, 2);
 	m_SecondLabel.Init(0, 0, TILE_UNIT, TILE_UNIT, lang(Sec), &m_DiaGroup, 0, 1);
-//	m_JointCheck.Init(0, 0, 1, 1, "‘¼•Ò¬‚Æ‚Ì˜AŒ‹‚ğ‹–‰Â", &m_DiaGroup);
+//	m_JointCheck.Init(0, 0, 1, 1, "ä»–ç·¨æˆã¨ã®é€£çµã‚’è¨±å¯", &m_DiaGroup);
 	m_StopPosEdit.Init(0, 0, TILE_UNIT*8-TILE_HALF, TILE_UNIT, "", &m_DiaGroup, 9);
 	m_StopPosButton.Init(0, 0, TILE_UNIT*3, TILE_UNIT, lang(Apply), &m_DiaGroup);
 	InitFoot();
@@ -410,10 +410,10 @@ void CDiaDialog::Init(
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CDiaDialog::ResizeDiaDialogBase(
-	int w, int h	//	V‹KƒTƒCƒY
+	int w, int h	//	æ–°è¦ã‚µã‚¤ã‚º
 ){
 	int i, tw = w-TILE_UNIT*2+TILE_QUAD;
 	for(i = 0; i<3; i++){
@@ -438,7 +438,7 @@ void CDiaDialog::ResizeDiaDialogBase(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CDiaDialog::ScanInputDiaDialogBase(){
 	CDiaElement *de = GetElement();
@@ -509,7 +509,7 @@ void CDiaDialog::ScanInputDiaDialogBase(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CDiaDialog::RenderDiaDialogBase(){
 	CDiaElement *de = GetElement();
@@ -536,10 +536,10 @@ void CDiaDialog::RenderDiaDialogBase(){
 }
 
 /*
- *	—v‘f’l‚ğƒZƒbƒg
+ *	è¦ç´ å€¤ã‚’ã‚»ãƒƒãƒˆ
  */
 void CDiaDialog::SetElementValue(
-	CDiaElementBase *el	//	ƒ_ƒCƒ„—v‘f
+	CDiaElementBase *el	//	ãƒ€ã‚¤ãƒ¤è¦ç´ 
 ){
 	if(el){
 		CDiaElement *de = (CDiaElement *)el;

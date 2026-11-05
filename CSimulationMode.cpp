@@ -1,27 +1,27 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSkinPlugin.h"
 #include "CSimulationMode.h"
 
-//	“à•”’è”
-const int WW = 512, WH = 384;	//	‘‹ƒTƒCƒY
+//	å†…éƒ¨å®šæ•°
+const int WW = 512, WH = 384;	//	çª“ã‚µã‚¤ã‚º
 const int TIME_SCALE_MAX = 10;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 bool g_ManualControl = false;
 bool g_IgnoreAcceleration = false;
 
 const int SCALE_TABLE[TIME_SCALE_NUM] = {
-	2880, 1400, 480, 288, 144, 72, 48, 24, 6, 1};	//	À¢ŠE 1 •b‚ ‚½‚èƒQ[ƒ€“à•b”
+	2880, 1400, 480, 288, 144, 72, 48, 24, 6, 1};	//	å®Ÿä¸–ç•Œ 1 ç§’ã‚ãŸã‚Šã‚²ãƒ¼ãƒ å†…ç§’æ•°
 const int SPEED_TABLE[SIM_SPEED_NUM] = {
-	0, 1, 2, 10, 100};	//	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“”{‘¬
+	0, 1, 2, 10, 100};	//	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³å€é€Ÿ
 
 /*
- *	ƒQ[ƒ€“à 1 “ú‚ ‚½‚èƒtƒŒ[ƒ€”
+ *	ã‚²ãƒ¼ãƒ å†… 1 æ—¥ã‚ãŸã‚Šãƒ•ãƒ¬ãƒ¼ãƒ æ•°
  *	900, 1800, 5400, 9000, 18000, 36000, 54000, 108000, 432000, 2592000
  */
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSimulationMode::CSimulationMode(){
 	int i, wide = WW-TILE_UNIT*2, win = wide-TILE_UNIT*2;
@@ -85,7 +85,7 @@ CSimulationMode::CSimulationMode(){
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CSimulationMode::EnterInterface(){
 	ms_ModeLabel = lang(SimulationSetting);
@@ -96,7 +96,7 @@ void CSimulationMode::EnterInterface(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CSimulationMode::ScanInputInterface(){
 	m_Interface.ScanInput();
@@ -109,7 +109,7 @@ void CSimulationMode::ScanInputInterface(){
 }
 
 /*
- *	ŠÔİ’è‰Šú‰»
+ *	æ™‚é–“è¨­å®šåˆæœŸåŒ–
  */
 void CSimulationMode::InitTimeOption(){
 	m_TimeScale[3].SetCheck();
@@ -121,30 +121,30 @@ void CSimulationMode::InitTimeOption(){
 }
 
 /*
- *	ŠÔ²ƒXƒP[ƒ‹æ“¾
+ *	æ™‚é–“è»¸ã‚¹ã‚±ãƒ¼ãƒ«å–å¾—
  */
 int CSimulationMode::GetTimeScale(){
 	return SCALE_TABLE[m_TimeScale->GetNumber()];
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“‘¬“xæ“¾
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€Ÿåº¦å–å¾—
  */
 int CSimulationMode::GetSimSpeed(){
 	return SPEED_TABLE[m_SimSpeed->GetNumber()];
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“‘¬“xİ’è
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€Ÿåº¦è¨­å®š
  */
 void CSimulationMode::SetSimSpeed(
-	int sp	//	ƒXƒs[ƒh
+	int sp	//	ã‚¹ãƒ”ãƒ¼ãƒ‰
 ){
 	if(0<=sp && sp<SIM_SPEED_NUM) m_SimSpeed[sp].SetCheck();
 }
 
 /*
- *	ƒ|[ƒYØ‚è‘Ö‚¦
+ *	ãƒãƒ¼ã‚ºåˆ‡ã‚Šæ›¿ãˆ
  */
 void CSimulationMode::TogglePause(){
 	int sp = m_SimSpeed->GetNumber();

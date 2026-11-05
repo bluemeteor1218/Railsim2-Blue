@@ -1,31 +1,31 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CListView.h"
 #include "CModelInst.h"
 #include "CEnvPlugin.h"
 #include "CConfigMode.h"
 #include "CSceneryMode.h"
 
-//	“à•”’è”
-const int SYSTEM_OBJECT_NUM = 4;	//	ƒVƒXƒeƒ€ƒXƒCƒbƒ`”
+//	å†…éƒ¨å®šæ•°
+const int SYSTEM_OBJECT_NUM = 4;	//	ã‚·ã‚¹ãƒ†ãƒ ã‚¹ã‚¤ãƒƒãƒæ•°
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern MAT8 *g_AltMaterial;
 extern MAT8 g_MatSelect[];
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 bool g_PreSimulationFlag;
 CNamedObject g_SystemObject[SYSTEM_OBJECT_NUM];
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CModelInst *CNamedObjectAfterRenderer::ms_CurrentInst;
 CModelPlugin *CNamedObjectAfterRenderer::ms_CurrentPlugin;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CNamedObjectAfterRenderer::CNamedObjectAfterRenderer(
-	CNamedObject *obj,	//	–¼‘O•t‚«ƒIƒuƒWƒFƒNƒg
-	CPartsInst *parts	//	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒX
+	CNamedObject *obj,	//	åå‰ä»˜ãã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CPartsInst *parts	//	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	int i;
 	for(i = 0; i<INSTANCE_SWITCH_NUM; i++) m_InstSwitch[i] = g_SystemSwitch[i].GetValue();
@@ -42,10 +42,10 @@ CNamedObjectAfterRenderer::CNamedObjectAfterRenderer(
 }
 
 /*
- *	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CNamedObjectAfterRenderer::CNamedObjectAfterRenderer(
-	const CNamedObjectAfterRenderer &src	//	ƒRƒs[Œ³
+	const CNamedObjectAfterRenderer &src	//	ã‚³ãƒ”ãƒ¼å…ƒ
 ){
 	int i;
 	for(i = 0; i<INSTANCE_SWITCH_NUM; i++) m_InstSwitch[i] = src.m_InstSwitch[i];
@@ -58,14 +58,14 @@ CNamedObjectAfterRenderer::CNamedObjectAfterRenderer(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CNamedObjectAfterRenderer::~CNamedObjectAfterRenderer(){
 	if(m_PartsInstCreation) DELETE_V(m_PartsInst);
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CNamedObjectAfterRenderer::Render(
 	int mode	//	1: noshadow, 2: transparent
@@ -85,7 +85,7 @@ void CNamedObjectAfterRenderer::Render(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 int CNamedObject::ms_AfterMode;
 int CNamedObject::ms_AfterRender;
 bool CNamedObject::ms_CastShadowDefault;
@@ -97,10 +97,10 @@ list<CNamedObjectAfterRenderer> CNamedObject::ms_TransRenderList;
 
 /*
  *	[static]
- *	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒXİ’è
+ *	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹è¨­å®š
  */
 void CNamedObject::SetPartsInst(
-	list<CPartsInst> *pl	//	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒXƒŠƒXƒg
+	list<CPartsInst> *pl	//	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒªã‚¹ãƒˆ
 ){
 	if(ms_PartsInstValid = !!pl){
 		ms_PartsInst = pl->begin();
@@ -113,7 +113,7 @@ void CNamedObject::SetPartsInst(
 
 /*
  *	[static]
- *	ƒŠƒXƒg‰Šú‰»
+ *	ãƒªã‚¹ãƒˆåˆæœŸåŒ–
  */
 void CNamedObject::InitAfterRenderList(){
 	ms_AfterRenderList.clear();
@@ -122,7 +122,7 @@ void CNamedObject::InitAfterRenderList(){
 
 /*
  *	[static]
- *	‘S‚ÄƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	å…¨ã¦ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CNamedObject::AfterRenderAll(){
 	devBLEND_ALPHA();
@@ -134,7 +134,7 @@ void CNamedObject::AfterRenderAll(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 CNamedObject::CNamedObject(){
 	m_Mesh = NULL;
@@ -143,11 +143,11 @@ CNamedObject::CNamedObject(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CNamedObject::ReadModelInfo(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp;
 	if(!(str = AsgnString(str, "ModelFileName", &m_ModelFileName))) return NULL;
@@ -164,10 +164,10 @@ char *CNamedObject::ReadModelInfo(
 }
 
 /*
- *	ƒ‚ƒfƒ‹“Ç
+ *	ãƒ¢ãƒ‡ãƒ«èª­è¾¼
  */
 void CNamedObject::LoadModel(
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	m_Mesh = g_MeshList.Get(FALSE, m_ModelFileName.c_str(), 0, !g_NamedObjectMipMap);
 	mpi->ChDir();
@@ -176,10 +176,10 @@ void CNamedObject::LoadModel(
 }
 
 /*
- *	ƒƒbƒVƒ…İ’è
+ *	ãƒ¡ãƒƒã‚·ãƒ¥è¨­å®š
  */
 void CNamedObject::SetMesh(
-	CObject *obj	//	ƒIƒuƒWƒFƒNƒg
+	CObject *obj	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 ){
 	float asc = -1.0f;
 	CMesh *altmesh = m_Customizer.GetMesh(&asc);
@@ -188,12 +188,12 @@ void CNamedObject::SetMesh(
 }
 
 /*
- *	p¨ŒÅ’è
+ *	å§¿å‹¢å›ºå®š
  */
 void CNamedObject::SetPreviewPosture(
-	VEC3 pos,	//	ˆÊ’u
-	VEC3 dir,	//	•ûŒü
-	VEC3 up		//	ƒAƒbƒv
+	VEC3 pos,	//	ä½ç½®
+	VEC3 dir,	//	æ–¹å‘
+	VEC3 up		//	ã‚¢ãƒƒãƒ—
 ){
 	m_PreviewObject.SetScale(1.0f);
 	m_PreviewObject.SetPos(pos);
@@ -201,14 +201,14 @@ void CNamedObject::SetPreviewPosture(
 }
 
 /*
- *	ŒŸo”»’è
+ *	æ¤œå‡ºåˆ¤å®š
  */
 void CNamedObject::CheckDetect(){
 	CModelInst::CheckDetect(this, GetParts());
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CNamedObject::Render(){
 	CPartsInst *parts = GetParts();
@@ -226,10 +226,10 @@ void CNamedObject::Render(){
 }
 
 /*
- *	ƒAƒtƒ^[ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ã‚¢ãƒ•ã‚¿ãƒ¼ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CNamedObject::RenderAfter(
-	CPartsInst *parts,	//	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒX
+	CPartsInst *parts,	//	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 	int mode			//	1: noshadow, 2: transparent
 ){
 	CObject *obj = parts ? parts->GetObject() : &m_PreviewObject;
@@ -243,11 +243,11 @@ void CNamedObject::RenderAfter(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CObjectJoint3D::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp, *eee;
 	string obj;
@@ -283,7 +283,7 @@ char *CObjectJoint3D::Read(
 }
 
 /*
- *	ƒ[ƒJƒ‹Œn‚ğƒZƒbƒg
+ *	ãƒ­ãƒ¼ã‚«ãƒ«ç³»ã‚’ã‚»ãƒƒãƒˆ
  */
 void CObjectJoint3D::SetTurnLocal(){
 	m_Link = m_DirLink = m_UpLink = &g_SystemObject[SYS_OBJ_LOCAL];
@@ -297,12 +297,12 @@ void CObjectJoint3D::SetTurnLocal(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (‹Œ‹KŠi—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (æ—§è¦æ ¼ç”¨)
  */
 CFreeObject3D::CFreeObject3D(
-	char *objname,		//	ƒIƒuƒWƒFƒNƒg–¼
-	char *modelname,	//	ƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹–¼
-	float scale			//	ƒXƒP[ƒ‹
+	char *objname,		//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
+	char *modelname,	//	ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
+	float scale			//	ã‚¹ã‚±ãƒ¼ãƒ«
 ){
 	m_ObjectName = objname;
 	m_ModelFileName = modelname;
@@ -312,11 +312,11 @@ CFreeObject3D::CFreeObject3D(
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CFreeObject3D::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *eee;
 	if(!(str = BeginNamedBlock(eee = str, "Object3D", &m_ObjectName))) return NULL;
@@ -329,7 +329,7 @@ char *CFreeObject3D::Read(
 }
 
 /*
- *	p¨İ’è
+ *	å§¿å‹¢è¨­å®š
  */
 void CFreeObject3D::SetPostureFreeObject(){
 	CObject *obj = GetPartsObject();
@@ -356,7 +356,7 @@ void CFreeObject3D::SetPostureFreeObject(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒVƒXƒeƒ€ƒIƒuƒWƒFƒNƒg‰Šú‰»
+ *	ã‚·ã‚¹ãƒ†ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåˆæœŸåŒ–
  */
 void InitSystemObject(){
 	g_SystemObject[SYS_OBJ_WORLD].Init("_WORLD");
@@ -366,10 +366,10 @@ void InitSystemObject(){
 }
 
 /*
- *	ƒVƒXƒeƒ€ƒIƒuƒWƒFƒNƒg‚ÌŒŸõ
+ *	ã‚·ã‚¹ãƒ†ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ¤œç´¢
  */
 CNamedObject *FindSystemObject(
-	const string &name	//	ƒIƒuƒWƒFƒNƒg–¼
+	const string &name	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
 ){
 	int i;
 	for(i = 0; i<SYSTEM_OBJECT_NUM; i++)
@@ -378,23 +378,23 @@ CNamedObject *FindSystemObject(
 }
 
 /*
- *	ƒVƒXƒeƒ€ƒIƒuƒWƒFƒNƒg + w’èƒvƒ‰ƒOƒCƒ““àƒIƒuƒWƒFƒNƒg‚ÌŒŸõ
+ *	ã‚·ã‚¹ãƒ†ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ + æŒ‡å®šãƒ—ãƒ©ã‚°ã‚¤ãƒ³å†…ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ¤œç´¢
  */
 CNamedObject *FindObjectHybrid(
-	CModelPlugin *mpi,	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
-	const string &name	//	ƒIƒuƒWƒFƒNƒg–¼
+	CModelPlugin *mpi,	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	const string &name	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
 ){
 	CNamedObject *ret = mpi->FindObject(name);
 	return ret ? ret : FindSystemObject(name);
 }
 
 /*
- *	ƒIƒuƒWƒFƒNƒgd•¡ƒ`ƒFƒbƒN
+ *	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé‡è¤‡ãƒã‚§ãƒƒã‚¯
  */
 void CheckObjectHybrid(
-	char *eee,			//	ƒGƒ‰[•ñˆÊ’u
-	CModelPlugin *mpi,	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
-	const string &name	//	ƒIƒuƒWƒFƒNƒg–¼
+	char *eee,			//	ã‚¨ãƒ©ãƒ¼å ±å‘Šä½ç½®
+	CModelPlugin *mpi,	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	const string &name	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
 ){
 	if(FindSystemObject(name))
 		throw CSynErr(eee, "%s: \"%s\"", lang(ReservedObjectName), name.c_str());

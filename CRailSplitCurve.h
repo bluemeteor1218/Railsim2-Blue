@@ -1,4 +1,4 @@
-#ifndef CRAILSPLITCURVE_H_INCLUDED
+ï»¿#ifndef CRAILSPLITCURVE_H_INCLUDED
 #define CRAILSPLITCURVE_H_INCLUDED
 
 #include "CRailCurve.h"
@@ -9,15 +9,15 @@ class CGirderPlugin;
 class CRailWay;
 
 /*
- *	ƒŒ[ƒ‹İ’uƒJ[ƒu
+ *	ãƒ¬ãƒ¼ãƒ«è¨­ç½®ã‚«ãƒ¼ãƒ–
  */
 class CRailSplitCurve: public CRailCurve{
 protected:
-	int m_GradMode;					//	ƒJƒ“ƒgŒXÎƒ‚[ƒh
-	CRailPlugin *m_RailPlugin;		//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *m_TiePlugin;		//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *m_GirderPlugin;	//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
-	CRailWay *m_RailWay;			//	ƒŒ[ƒ‹ƒCƒ“ƒXƒ^ƒ“ƒX
+	int m_GradMode;					//	ã‚«ãƒ³ãƒˆå‚¾æ–œãƒ¢ãƒ¼ãƒ‰
+	CRailPlugin *m_RailPlugin;		//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *m_TiePlugin;		//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *m_GirderPlugin;	//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CRailWay *m_RailWay;			//	ãƒ¬ãƒ¼ãƒ«ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 public:
 	CRailSplitCurve(CRailPlugin *, CTiePlugin *, CGirderPlugin *, CRailWay *);
 	void SetGradMode(int gm){ m_GradMode = gm; }

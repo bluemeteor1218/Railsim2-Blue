@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -17,14 +17,14 @@ int g_InputPollCount = 0;
 CRITICAL_SECTION g_InputPollCriticalSection;
 
 /*
- *	DirectInput‚Ì‰Šú‰»
+ *	DirectInputã®åˆæœŸåŒ–
  */
 BOOL InitDirectInput(){
 	DebugHL();
 	Debug("InitDirectInput\n");
 
 	FAILED_ASSERT(
-		"DirectInput‚ª‰Šú‰»‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½.",
+		"DirectInputãŒåˆæœŸåŒ–ã§ãã¾ã›ã‚“ã§ã—ãŸ.",
 		DirectInput8Create(
 			GetModuleHandle(NULL), DIRECTINPUT_VERSION, IID_IDirectInput8,
 			(void **)&svi.pDI, NULL
@@ -42,7 +42,7 @@ BOOL InitDirectInput(){
 }
 
 /*
- *	DirectInput‚Ì‰ğ•ú
+ *	DirectInputã®è§£æ”¾
  */
 void FreeDirectInput(){
 	if(!svi.pDI) return;
@@ -61,35 +61,35 @@ void FreeDirectInput(){
 }
 
 /*
- *	ƒL[ƒ{[ƒh‚Ì‰Šú‰»
+ *	ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®åˆæœŸåŒ–
  */
 BOOL InitKeyboard(){
-	//	ƒfƒoƒCƒX‚ğì¬
+	//	ãƒ‡ãƒã‚¤ã‚¹ã‚’ä½œæˆ
 	FAILED_ASSERT(
-		"ƒL[ƒ{[ƒhƒfƒoƒCƒX‚ªì¬‚Å‚«‚Ü‚¹‚ñ.",
+		"ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãƒ‡ãƒã‚¤ã‚¹ãŒä½œæˆã§ãã¾ã›ã‚“.",
 		svi.pDI->CreateDevice(GUID_SysKeyboard, &svi.pKey, NULL));
 
-	//	“ü—Íƒf[ƒ^ƒtƒH[ƒ}ƒbƒg‚ğw’è
+	//	å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æŒ‡å®š
 	FAILED_ASSERT(
-		"ƒL[ƒ{[ƒhƒtƒH[ƒ}ƒbƒg‚ªİ’è‚Å‚«‚Ü‚¹‚ñ.",
+		"ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãŒè¨­å®šã§ãã¾ã›ã‚“.",
 		svi.pKey->SetDataFormat(&c_dfDIKeyboard));
 
-	//	‹¦’²ƒŒƒxƒ‹‚ğw’è
+	//	å”èª¿ãƒ¬ãƒ™ãƒ«ã‚’æŒ‡å®š
 	FAILED_ASSERT(
-		"ƒL[ƒ{[ƒh‚Ì‹¦’²ƒŒƒxƒ‹‚ªİ’è‚Å‚«‚Ü‚¹‚ñ.",
+		"ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®å”èª¿ãƒ¬ãƒ™ãƒ«ãŒè¨­å®šã§ãã¾ã›ã‚“.",
 		svi.pKey->SetCooperativeLevel(svw.hWnd, DISCL_BACKGROUND|DISCL_NONEXCLUSIVE));
 
-	//	ƒAƒNƒZƒXŒ ‚ğ“¾‚é
+	//	ã‚¢ã‚¯ã‚»ã‚¹æ¨©ã‚’å¾—ã‚‹
 	svi.pKey->Acquire();
 
-	//	I—¹ƒL[‚Ìİ’è
+	//	çµ‚äº†ã‚­ãƒ¼ã®è¨­å®š
 	//SetExitKey(DIK_F9);
 
 	return TRUE;
 }
 
 /*
- *	ƒL[ƒ{[ƒh‚Ì‰ğ•ú
+ *	ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®è§£æ”¾
  */
 void FreeKeyboard(){
 	if(svi.pKey) svi.pKey->Unacquire();
@@ -97,28 +97,28 @@ void FreeKeyboard(){
 }
 
 /*
- *	ƒ}ƒEƒX‚Ì‰Šú‰»
+ *	ãƒã‚¦ã‚¹ã®åˆæœŸåŒ–
  */
 BOOL InitMouse(){
 	FAILED_ASSERT(
-		"ƒ}ƒEƒXƒfƒoƒCƒX‚ªì¬‚Å‚«‚Ü‚¹‚ñ.",
+		"ãƒã‚¦ã‚¹ãƒ‡ãƒã‚¤ã‚¹ãŒä½œæˆã§ãã¾ã›ã‚“.",
 		svi.pDI->CreateDevice(GUID_SysMouse, &svi.pMouse, NULL));
 
 	FAILED_ASSERT(
-		"ƒL[ƒ{[ƒhƒtƒH[ƒ}ƒbƒg‚ªİ’è‚Å‚«‚Ü‚¹‚ñ.",
+		"ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãŒè¨­å®šã§ãã¾ã›ã‚“.",
 		svi.pMouse->SetDataFormat(&c_dfDIMouse));
 
 	FAILED_ASSERT(
-		"ƒ}ƒEƒX‚Ì‹¦’²ƒŒƒxƒ‹‚ªİ’è‚Å‚«‚Ü‚¹‚ñ.",
+		"ãƒã‚¦ã‚¹ã®å”èª¿ãƒ¬ãƒ™ãƒ«ãŒè¨­å®šã§ãã¾ã›ã‚“.",
 		svi.pMouse->SetCooperativeLevel(svw.hWnd, DISCL_BACKGROUND|DISCL_NONEXCLUSIVE));
 
 	svi.pMouse->Acquire();
 
-	//	ƒtƒ‹ƒXƒNƒŠ[ƒ“‚ÍƒJ[ƒ\ƒ‹‚ğ”ñ•\¦
+	//	ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æ™‚ã¯ã‚«ãƒ¼ã‚½ãƒ«ã‚’éè¡¨ç¤º
 	if(!sv3.fWindowed){
 		ShowCursor(FALSE);
 
-		//	ƒJ[ƒ\ƒ‹‚ğƒZƒ“ƒ^ƒŠƒ“ƒO
+		//	ã‚«ãƒ¼ã‚½ãƒ«ã‚’ã‚»ãƒ³ã‚¿ãƒªãƒ³ã‚°
 		SetCursor(svw.winW/2, svw.winH/2);
 	}
 
@@ -126,7 +126,7 @@ BOOL InitMouse(){
 }
 
 /*
- *	ƒ}ƒEƒX‚Ì‰ğ•ú
+ *	ãƒã‚¦ã‚¹ã®è§£æ”¾
  */
 void FreeMouse(){
 	if(svi.pMouse) svi.pMouse->Unacquire();
@@ -134,17 +134,17 @@ void FreeMouse(){
 }
 
 /*
- *	ƒWƒ‡ƒCƒXƒeƒBƒbƒN‚Ì‰Šú‰»
+ *	ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®åˆæœŸåŒ–
  */
 BOOL InitJoyStick(){
-	//	ƒfƒoƒCƒX‚Ì—ñ‹“
+	//	ãƒ‡ãƒã‚¤ã‚¹ã®åˆ—æŒ™
 	svi.numJoy = 0;
 
 	svi.pDI->EnumDevices(
 		DI8DEVCLASS_GAMECTRL, EnumJoyCallback, NULL, DIEDFL_ATTACHEDONLY);
 
-	if(svi.numJoy==0) return TRUE;	//	–³‚¢‚È‚çd•û‚ª–³‚¢
-	else Debug("ƒWƒ‡ƒCƒXƒeƒBƒbƒN” = %d\n", svi.numJoy);
+	if(svi.numJoy==0) return TRUE;	//	ç„¡ã„ãªã‚‰ä»•æ–¹ãŒç„¡ã„
+	else Debug("ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯æ•° = %d\n", svi.numJoy);
 
 	HRESULT hr;
 
@@ -152,22 +152,22 @@ BOOL InitJoyStick(){
 		hr = svi.pJoy[i]->SetDataFormat(&c_dfDIJoystick2);
 
 		if(hr!=DI_OK){
-			Debug("ƒWƒ‡ƒCƒXƒeƒBƒbƒN[%d]‚ÌƒtƒH[ƒ}ƒbƒg‚ªw’è‚Å‚«‚Ü‚¹‚ñ.\n", i);
+			Debug("ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯[%d]ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãŒæŒ‡å®šã§ãã¾ã›ã‚“.\n", i);
 			continue;
 		}
 		hr = svi.pJoy[i]->SetCooperativeLevel(
 			svw.hWnd, DISCL_BACKGROUND|DISCL_NONEXCLUSIVE);
 
 		if(hr!=DI_OK){
-			Debug("ƒWƒ‡ƒCƒXƒeƒBƒbƒN[%d]‚Ì‹¦’²ƒŒƒxƒ‹‚ªİ’è‚Å‚«‚Ü‚¹‚ñ.\n", i);
+			Debug("ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯[%d]ã®å”èª¿ãƒ¬ãƒ™ãƒ«ãŒè¨­å®šã§ãã¾ã›ã‚“.\n", i);
 			continue;
 		}
 
-		//	‰Â“®”ÍˆÍ‚Ìw’è
+		//	å¯å‹•ç¯„å›²ã®æŒ‡å®š
 		hr = svi.pJoy[i]->EnumObjects(EnumAxisCallback, (VOID *)i, DIDFT_AXIS);
 
 		if(hr!=DI_OK){
-			Debug("ƒWƒ‡ƒCƒXƒeƒBƒbƒN[%d]‚Ì²‚Ì—ñ‹“‚ª‚Å‚«‚Ü‚¹‚ñ.\n", i);
+			Debug("ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯[%d]ã®è»¸ã®åˆ—æŒ™ãŒã§ãã¾ã›ã‚“.\n", i);
 			continue;
 		}
 
@@ -177,7 +177,7 @@ BOOL InitJoyStick(){
 }
 
 /*
- *	ƒWƒ‡ƒCƒXƒeƒBƒbƒN‚Ì‰ğ•ú
+ *	ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®è§£æ”¾
  */
 void FreeJoyStick(){
 	for(int i = 0; i<svi.numJoy; i++){
@@ -187,14 +187,14 @@ void FreeJoyStick(){
 }
 
 /*
- *	ƒWƒ‡ƒCƒXƒeƒBƒbƒN—ñ‹“‚ÌƒR[ƒ‹ƒoƒbƒN
+ *	ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯åˆ—æŒ™æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
  */
 BOOL CALLBACK EnumJoyCallback(const DIDEVICEINSTANCE *pInst, VOID *pContext){
 	HRESULT hr = svi.pDI->CreateDevice(
 		pInst->guidInstance, &svi.pJoy[svi.numJoy], NULL);
 
 	if(hr!=DI_OK){
-		Debug("ƒWƒ‡ƒCƒXƒeƒBƒbƒN[%d]‚ª‰Šú‰»‚Å‚«‚Ü‚¹‚ñ.\n", svi.numJoy);
+		Debug("ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯[%d]ãŒåˆæœŸåŒ–ã§ãã¾ã›ã‚“.\n", svi.numJoy);
 	}
 	if(++svi.numJoy==MAX_JOYSTICK) return DIENUM_STOP;
 
@@ -202,7 +202,7 @@ BOOL CALLBACK EnumJoyCallback(const DIDEVICEINSTANCE *pInst, VOID *pContext){
 }
 
 /*
- *	ƒWƒ‡ƒCƒXƒeƒBƒbƒN²—ñ‹“‚ÌƒR[ƒ‹ƒoƒbƒN
+ *	ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯è»¸åˆ—æŒ™æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
  */
 BOOL CALLBACK EnumAxisCallback(LPCDIDEVICEOBJECTINSTANCE lpddoi, LPVOID pvRef){
 	int i = (int)pvRef;
@@ -222,7 +222,7 @@ BOOL CALLBACK EnumAxisCallback(LPCDIDEVICEOBJECTINSTANCE lpddoi, LPVOID pvRef){
 }
 
 /*
- *	“ü—ÍƒfƒoƒCƒX‚ÌƒXƒLƒƒƒ“
+ *	å…¥åŠ›ãƒ‡ãƒã‚¤ã‚¹ã®ã‚¹ã‚­ãƒ£ãƒ³
  */
 void ScanInputDevice(){
 	EnterCriticalSection(&g_InputPollCriticalSection);
@@ -239,14 +239,14 @@ void ScanInputDevice(){
 	ScanMouse();
 	ScanJoyStick();
 
-	//	I—¹ƒL[”»’è
+	//	çµ‚äº†ã‚­ãƒ¼åˆ¤å®š
 	//if(svi.key[svi.exitKey]&0x80) SendWM_CLOSE();
 
 	LeaveCriticalSection(&g_InputPollCriticalSection);
 }
 
 /*
- *	“ü—Íƒoƒbƒtƒ@‚ğƒNƒŠƒA
+ *	å…¥åŠ›ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¯ãƒªã‚¢
  */
 void FlushInputDevice(){
 	memset(svi.key, 0, sizeof(svi.key));
@@ -268,24 +268,24 @@ void InputPollOnce(){
 	BYTE keyTemp[256];
 	HRESULT hr;
 
-	//	ƒfƒoƒCƒX‚Ìó‘Ô‚ğ“¾‚é
+	//	ãƒ‡ãƒã‚¤ã‚¹ã®çŠ¶æ…‹ã‚’å¾—ã‚‹
 	hr = svi.pKey->GetDeviceState(sizeof(keyTemp), &keyTemp);
 	if(FAILED(hr)){
-		memset(svi.key, 0, 256);	//	ƒNƒŠƒA
-		//	ƒAƒNƒZƒXŒ ‚ğÄæ“¾
+		memset(svi.key, 0, 256);	//	ã‚¯ãƒªã‚¢
+		//	ã‚¢ã‚¯ã‚»ã‚¹æ¨©ã‚’å†å–å¾—
 		if(hr==DIERR_INPUTLOST) {
-			Debug("ƒL[ƒ{[ƒh‚ÌƒAƒNƒZƒXŒ ‚ğ¸‚¢‚Ü‚µ‚½.\n");
+			Debug("ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®ã‚¢ã‚¯ã‚»ã‚¹æ¨©ã‚’å¤±ã„ã¾ã—ãŸ.\n");
 			svi.pKey->Acquire();
 		}
 	}else{
 		for(i = 0; i<256; ++i) svi.keyPoll[i] |= keyTemp[i];
 	}
 
-	//	ƒNƒŠƒbƒN‚ÌŒŸo
+	//	ã‚¯ãƒªãƒƒã‚¯ã®æ¤œå‡º
 	DIMOUSESTATE ms;
 	hr = svi.pMouse->GetDeviceState(sizeof(ms), &ms);
 	if(hr==DIERR_INPUTLOST){
-		Debug("ƒ}ƒEƒX‚ÌƒAƒNƒZƒXŒ ‚ğ¸‚¢‚Ü‚µ‚½.\n");
+		Debug("ãƒã‚¦ã‚¹ã®ã‚¢ã‚¯ã‚»ã‚¹æ¨©ã‚’å¤±ã„ã¾ã—ãŸ.\n");
 		svi.pMouse->Acquire();
 	}else{
 		svi.wheelPoll += ms.lZ;
@@ -295,7 +295,7 @@ void InputPollOnce(){
 }
 
 /*
- *	DirectInput‚Ì‰Šú‰»
+ *	DirectInputã®åˆæœŸåŒ–
  */
 unsigned int __stdcall InputPollingThread(void* lpThreadParameter){
 	while(!g_FinishInputThread){
@@ -310,10 +310,10 @@ unsigned int __stdcall InputPollingThread(void* lpThreadParameter){
 }
 
 /*
- *	ƒL[ƒ{[ƒh‚ÌƒXƒLƒƒƒ“
+ *	ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®ã‚¹ã‚­ãƒ£ãƒ³
  */
 void ScanKeyboard(){
-	//	’¼‘O‚Ìó‘Ô‚ğ•Û‘¶
+	//	ç›´å‰ã®çŠ¶æ…‹ã‚’ä¿å­˜
 	memcpy(svi.keyOld, svi.key, 256);
 	memcpy(svi.key, svi.keyPoll, 256);
 	memset(svi.keyPoll, 0, sizeof(svi.key));
@@ -322,22 +322,22 @@ void ScanKeyboard(){
 POINT GetCursorPosClient(){
 	POINT cur;
 	GetCursorPos(&cur);
-	//	ƒEƒCƒ“ƒhƒEƒ‚[ƒh‚ÍÀ•WŒn‚ğ•ÏŠ·
+	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰æ™‚ã¯åº§æ¨™ç³»ã‚’å¤‰æ›
 	if(sv3.fWindowed) ScreenToClient(svw.hWnd, &cur);
 	return cur;
 }
 
 /*
- *	ƒ}ƒEƒX‚ÌƒXƒLƒƒƒ“
+ *	ãƒã‚¦ã‚¹ã®ã‚¹ã‚­ãƒ£ãƒ³
  */
 void ScanMouse(){
-	//	ƒJ[ƒ\ƒ‹ˆÊ’u‚ÌŒŸo
+	//	ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã®æ¤œå‡º
 
-	//	DirectInput‚ÍÀ•W‚Ìƒ}ƒbƒsƒ“ƒO‚ª‚¤‚Ü‚­‚Å‚«‚È‚¢‚½‚ßA
-	//	ƒJ[ƒ\ƒ‹ˆÊ’u‚ÌŒŸo‚É‚Í Win32 API ‚ğg—p‚·‚éB
+	//	DirectInputã¯åº§æ¨™ã®ãƒãƒƒãƒ”ãƒ³ã‚°ãŒã†ã¾ãã§ããªã„ãŸã‚ã€
+	//	ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã®æ¤œå‡ºã«ã¯ Win32 API ã‚’ä½¿ç”¨ã™ã‚‹ã€‚
 	svi.cur = GetCursorPosClient();
 
-	//	ƒEƒCƒ“ƒhƒE“à”»’è
+	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦å†…åˆ¤å®š
 	if(sv3.fWindowed){
 		svi.inside = 0<=svi.cur.x && svi.cur.x<svw.winW
 			&& 0<=svi.cur.y && svi.cur.y<svw.winH ? TRUE : FALSE;
@@ -345,7 +345,7 @@ void ScanMouse(){
 		svi.inside = TRUE;
 	}
 
-	//	’¼‘O‚Ìó‘Ô‚ğ•Û‘¶
+	//	ç›´å‰ã®çŠ¶æ…‹ã‚’ä¿å­˜
 	memcpy(svi.btnOld, svi.btn, 4);
 	memcpy(svi.btn, svi.btnPoll, 4);
 	memset(svi.btnPoll, 0, sizeof(svi.btnPoll));
@@ -355,12 +355,12 @@ void ScanMouse(){
 }
 
 /*
- *	ƒWƒ‡ƒCƒXƒeƒBƒbƒN‚ÌƒXƒLƒƒƒ“
+ *	ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ã‚¹ã‚­ãƒ£ãƒ³
  */
 void ScanJoyStick(){
 	if(!svi.fJoy) return;
 
-	//	’¼‘O‚Ìó‘Ô‚ğ•Û‘¶
+	//	ç›´å‰ã®çŠ¶æ…‹ã‚’ä¿å­˜
 	memcpy(svi.joyOld, svi.joy, MAX_JOYSTICK*(MAX_BUTTON+6));
 
 	HRESULT hr;
@@ -370,7 +370,7 @@ void ScanJoyStick(){
 		hr = svi.pJoy[i]->Poll();
 
 		if(hr==DIERR_INPUTLOST){
-			Debug("ƒWƒ‡ƒCƒXƒeƒBƒbƒN[%d]‚ÌƒAƒNƒZƒXŒ ‚ğ¸‚¢‚Ü‚µ‚½.\n", i);
+			Debug("ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯[%d]ã®ã‚¢ã‚¯ã‚»ã‚¹æ¨©ã‚’å¤±ã„ã¾ã—ãŸ.\n", i);
 			svi.pMouse->Acquire();
 			continue;
 		}
@@ -378,7 +378,7 @@ void ScanJoyStick(){
 		hr = svi.pJoy[i]->GetDeviceState(sizeof(DIJOYSTATE2), &js);
 
 		if(hr!=DI_OK){
-			Debug("ƒWƒ‡ƒCƒXƒeƒBƒbƒN[%d]‚Ìó‘Ô‚ªæ“¾‚Å‚«‚Ü‚¹‚ñ.\n", i);
+			Debug("ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯[%d]ã®çŠ¶æ…‹ãŒå–å¾—ã§ãã¾ã›ã‚“.\n", i);
 			continue;
 		}
 
@@ -398,22 +398,22 @@ void ScanJoyStick(){
 }
 
 /*
- *	ƒL[‚Ìó‘Ôæ“¾
+ *	ã‚­ãƒ¼ã®çŠ¶æ…‹å–å¾—
  *
- *	id	: DIK_UP, DIK_SPACE ‚È‚Ç
+ *	id	: DIK_UP, DIK_SPACE ãªã©
  */
 int GetKey(int id){
 	return ((svi.key[id]&0x80)>>6)|((svi.keyOld[id]&0x80)>>7);
 }
 
 /*
- *	‚Ç‚ê‚©ƒL[‚ª‰Ÿ‚³‚ê‚½iuŠÔj‚©‚ğ”»’è
- *	‰Ÿ‚³‚ê‚½uŠÔ‚ª‚È‚¯‚ê‚Î‰Ÿ‚³‚ê‚Ä‚¢‚é‚à‚Ì‚ğ•Ô‚·
+ *	ã©ã‚Œã‹ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸï¼ˆç¬é–“ï¼‰ã‹ã‚’åˆ¤å®š
+ *	æŠ¼ã•ã‚ŒãŸç¬é–“ãŒãªã‘ã‚Œã°æŠ¼ã•ã‚Œã¦ã„ã‚‹ã‚‚ã®ã‚’è¿”ã™
  */
 int CheckKeyDown(){
 	int i, s, t = -1;
 	for(i = 0; i<256; i++){
-		//	Å‰‚ÉŒŸo‚µ‚½ƒL[‚ğ•Ô‚·
+		//	æœ€åˆã«æ¤œå‡ºã—ãŸã‚­ãƒ¼ã‚’è¿”ã™
 		s = GetKey(i);
 		if(s==S_PUSH) return i;
 		if(t<0 && s>S_PUSH) t = i;
@@ -422,14 +422,14 @@ int CheckKeyDown(){
 }
 
 /*
- *	ƒL[ƒoƒbƒtƒ@‚ÌƒNƒŠƒA
+ *	ã‚­ãƒ¼ãƒãƒƒãƒ•ã‚¡ã®ã‚¯ãƒªã‚¢
  */
 void FlushKey(){
 	memset(svi.key, 0, sizeof(svi.key));
 }
 
 /*
- *	‰Ÿ‚³‚ê‚½•¶šƒL[‚ğæ“¾
+ *	æŠ¼ã•ã‚ŒãŸæ–‡å­—ã‚­ãƒ¼ã‚’å–å¾—
  */
 int DequeueChar(){
 	if(!svi.charKey.size()) return 0;
@@ -439,23 +439,23 @@ int DequeueChar(){
 }
 
 /*
- *	WM_CHARƒƒbƒZ[ƒW‚Ö‚Ìƒnƒ“ƒhƒ‰
+ *	WM_CHARãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¸ã®ãƒãƒ³ãƒ‰ãƒ©
  */
 void OnChar(WPARAM wParam){
 	svi.charKey.push_back((TCHAR)wParam);
 }
 
 /*
- *	I—¹ƒL[‚Ìİ’è
+ *	çµ‚äº†ã‚­ãƒ¼ã®è¨­å®š
  *
- *	id	: ƒL[ID
+ *	id	: ã‚­ãƒ¼ID
  */
 void SetExitKey(int id){
 	svi.exitKey = id;
 }
 
 /*
- *	ƒ}ƒEƒXƒ{ƒ^ƒ“‚Ìó‘Ôæ“¾
+ *	ãƒã‚¦ã‚¹ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹å–å¾—
  *
  *	id	: DIM_LEFT, DIM_RIGHT, DIM_MIDDLE
  */
@@ -464,58 +464,58 @@ int GetButton(int id){
 }
 
 /*
- *	ƒJ[ƒ\ƒ‹À•W‚Ìæ“¾
+ *	ã‚«ãƒ¼ã‚½ãƒ«åº§æ¨™ã®å–å¾—
  */
 POINT GetCursorXY(){
 	return svi.cur;
 }
 
 /*
- *	ƒJ[ƒ\ƒ‹XÀ•W‚Ìæ“¾
+ *	ã‚«ãƒ¼ã‚½ãƒ«Xåº§æ¨™ã®å–å¾—
  */
 int GetCursorX(){
 	return svi.cur.x;
 }
 
 /*
- *	ƒJ[ƒ\ƒ‹YÀ•W‚Ìæ“¾
+ *	ã‚«ãƒ¼ã‚½ãƒ«Yåº§æ¨™ã®å–å¾—
  */
 int GetCursorY(){
 	return svi.cur.y;
 }
 
 /*
- *	ƒJ[ƒ\ƒ‹‚ªƒEƒBƒ“ƒhƒE“à‚©’²‚×‚é
+ *	ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å†…ã‹èª¿ã¹ã‚‹
  */
 BOOL IsCursorInside(){
 	return svi.inside;
 }
 
 /*
- *	ƒzƒC[ƒ‹ˆÊ’u‚Ìæ“¾
+ *	ãƒ›ã‚¤ãƒ¼ãƒ«ä½ç½®ã®å–å¾—
  */
 LONG GetWheel(){
 	return svi.wheel;
 }
 
 /*
- *	ƒJ[ƒ\ƒ‹À•W‚Ìİ’è
+ *	ã‚«ãƒ¼ã‚½ãƒ«åº§æ¨™ã®è¨­å®š
  *
- *	x, y	FƒEƒCƒ“ƒhƒEÀ•W
+ *	x, y	ï¼šã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦åº§æ¨™
  */
 void SetCursor(int x, int y){
 	POINT cur = {x, y};
 
-	//	ƒEƒCƒ“ƒhƒEƒ‚[ƒh‚ÍÀ•WŒn‚ğ•ÏŠ·
+	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰æ™‚ã¯åº§æ¨™ç³»ã‚’å¤‰æ›
 	if(sv3.fWindowed) ClientToScreen(svw.hWnd, &cur);
 
 	SetCursorPos(cur.x, cur.y);
 }
 
 /*
- *	ƒWƒ‡ƒCƒXƒeƒBƒbƒNg—p‚Ì—L–³‚ğw’è
+ *	ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯ä½¿ç”¨ã®æœ‰ç„¡ã‚’æŒ‡å®š
  *
- *	f		: TRUE—LŒø‚É‚·‚éAFALSE–³Œø‚É‚·‚é
+ *	f		: TRUEï¼æœ‰åŠ¹ã«ã™ã‚‹ã€FALSEï¼ç„¡åŠ¹ã«ã™ã‚‹
  */
 void EnableJoyStick(BOOL f){
 	svi.fJoy = f;
@@ -524,17 +524,17 @@ void EnableJoyStick(BOOL f){
 }
 
 /*
- *	ƒWƒ‡ƒCƒXƒeƒBƒbƒNƒ{ƒ^ƒ“‚Ìó‘Ôæ“¾
+ *	ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹å–å¾—
  *
- *	n		: ƒWƒ‡ƒCƒXƒeƒBƒbƒNID
- *	id	: DIJ_UP, DIJ_BT1 ‚È‚Ç
+ *	n		: ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯ID
+ *	id	: DIJ_UP, DIJ_BT1 ãªã©
  */
 int GetJoy(int n, int id){
 	return ((svi.joy[n][id]&0x80)>>6)|((svi.joyOld[n][id]&0x80)>>7);
 }
 
 /*
- *	ƒƒbƒZ[ƒWƒ{ƒbƒNƒX•\¦
+ *	ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹è¡¨ç¤º
  */
 void MsgBox(char *msg){
 	MessageBox(svw.hWnd, msg, "", MB_OK);
@@ -542,9 +542,9 @@ void MsgBox(char *msg){
 }
 
 /*
- *	ƒƒbƒZ[ƒWƒ{ƒbƒNƒX•\¦(Yes/No)
+ *	ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹è¡¨ç¤º(Yes/No)
  *
- *	msg	: •¶š—ñ
+ *	msg	: æ–‡å­—åˆ—
  */
 int MsgYesNo(char *msg){
 	int ret = MessageBox(

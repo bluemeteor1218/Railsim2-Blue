@@ -1,4 +1,4 @@
-#ifndef CRAILTRACECURVE_H_INCLUDED
+ï»¿#ifndef CRAILTRACECURVE_H_INCLUDED
 #define CRAILTRACECURVE_H_INCLUDED
 
 #include "CRailCurve.h"
@@ -10,16 +10,16 @@ class CGirderPlugin;
 class CRailWay;
 
 /*
- *	ƒŒ[ƒ‹ƒgƒŒ[ƒXƒJ[ƒu
+ *	ãƒ¬ãƒ¼ãƒ«ãƒˆãƒ¬ãƒ¼ã‚¹ã‚«ãƒ¼ãƒ–
  */
 class CRailTraceCurve{
 protected:
-	static bool ms_Terminate1, ms_Terminate2;	//	I’[ƒtƒ‰ƒO
-	static IRailSplitter ms_SpliceItr;			//	splice ˆÊ’u
-	CRailWay *m_RailWay;			//	ì‹ÆƒŒ[ƒ‹
-	CRailPlugin *m_RailPlugin;		//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *m_TiePlugin;		//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *m_GirderPlugin;	//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
+	static bool ms_Terminate1, ms_Terminate2;	//	çµ‚ç«¯ãƒ•ãƒ©ã‚°
+	static IRailSplitter ms_SpliceItr;			//	splice ä½ç½®
+	CRailWay *m_RailWay;			//	ä½œæ¥­ãƒ¬ãƒ¼ãƒ«
+	CRailPlugin *m_RailPlugin;		//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *m_TiePlugin;		//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *m_GirderPlugin;	//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 public:
 	static void SetTerminate(bool t1, bool t2){ ms_Terminate1 = t1; ms_Terminate2 = t2; }
 	static void SetSplitItr(IRailSplitter sit){ ms_SpliceItr = sit; }

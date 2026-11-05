@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "HighTimer.h"
 #include "CModelPlugin.h"
 #include "CEnvPlugin.h"
@@ -7,12 +7,12 @@
 #include "C3DPluginMode.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 C3DPluginMode::C3DPluginMode(
-	char *tname	//	ƒvƒ‰ƒOƒCƒ“ƒ^ƒCƒv–¼
+	char *tname	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚¿ã‚¤ãƒ—å
 ):
-	CPluginMode(tname)	//	Šî–{ƒNƒ‰ƒX
+	CPluginMode(tname)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	new CPopMenu("-", m_PreviewMenu);
 	new CPopMenu(lang(ResetCamera), m_PreviewMenu);
@@ -22,7 +22,7 @@ C3DPluginMode::C3DPluginMode(
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void C3DPluginMode::EnterPlugin(){
 	CTreeElement *tmp = m_PluginTree.GetFocusItem();
@@ -34,7 +34,7 @@ void C3DPluginMode::EnterPlugin(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void C3DPluginMode::ScanInputPlugin(){
 	POINT pos = g_Cursor.GetPos();
@@ -50,28 +50,28 @@ void C3DPluginMode::ScanInputPlugin(){
 		case 32:
 			class CCameraResetter: public CMenuCommand{
 			private:
-				CCamera *m_Camera;	//	ƒJƒƒ‰
+				CCamera *m_Camera;	//	ã‚«ãƒ¡ãƒ©
 			public:
 				CCameraResetter(CCamera *c){ m_Camera = c; }
 				void Exec(){ m_Camera->ResetCamera(); }
 			};
 			class CLightResetter: public CMenuCommand{
 			private:
-				CCamera *m_Camera;	//	ƒJƒƒ‰
+				CCamera *m_Camera;	//	ã‚«ãƒ¡ãƒ©
 			public:
 				CLightResetter(CCamera *c){ m_Camera = c; }
 				void Exec(){ m_Camera->ResetLight(); }
 			};
 			class CLightLinker: public CMenuCommand{
 			private:
-				CCamera *m_Camera;	//	ƒJƒƒ‰
+				CCamera *m_Camera;	//	ã‚«ãƒ¡ãƒ©
 			public:
 				CLightLinker(CCamera *c){ m_Camera = c; }
 				void Exec(){ m_Camera->LinkLight(!m_Camera->IsLightLinked()); }
 			};
 			class CLightSwitcher: public CMenuCommand{
 			private:
-				CCamera *m_Camera;	//	ƒJƒƒ‰
+				CCamera *m_Camera;	//	ã‚«ãƒ¡ãƒ©
 			public:
 				CLightSwitcher(CCamera *c){ m_Camera = c; }
 				void Exec(){ m_Camera->SwitchLight(!m_Camera->IsLightOn()); }
@@ -93,7 +93,7 @@ void C3DPluginMode::ScanInputPlugin(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void C3DPluginMode::RenderPlugin(){
 	devSetState(D3DRS_DIFFUSEMATERIALSOURCE, D3DMCS_COLOR1);
@@ -120,19 +120,19 @@ void C3DPluginMode::RenderPlugin(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CModelPluginMode::CModelPluginMode(
-	char *tname	//	ƒvƒ‰ƒOƒCƒ“ƒ^ƒCƒv–¼
+	char *tname	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚¿ã‚¤ãƒ—å
 ):
-	C3DPluginMode(tname)	//	Šî–{ƒNƒ‰ƒX
+	C3DPluginMode(tname)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_Camera = &m_MyCamera;
 	m_PreviewModel = NULL;
 }
 
 /*
- *	ƒXƒCƒbƒ`ƒEƒBƒ“ƒhƒE‰Šú‰»
+ *	ã‚¹ã‚¤ãƒƒãƒã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åˆæœŸåŒ–
  */
 void CModelPluginMode::InitSwitchWindow(){
 	int ww = TILE_UNIT*16, wh = TILE_UNIT*10;
@@ -150,11 +150,11 @@ void CModelPluginMode::InitSwitchWindow(){
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CModelPluginMode::WindowResized(
-	int w, int h,		//	V‹KƒTƒCƒY
-	CWindowCtrl *wnd	//	ƒEƒBƒhƒEƒRƒ“ƒgƒ[ƒ‹
+	int w, int h,		//	æ–°è¦ã‚µã‚¤ã‚º
+	CWindowCtrl *wnd	//	ã‚¦ã‚£ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	if(wnd==&m_SwitchWindow){
 		int h0 = h-TILE_UNIT*5/2, h1 = h0/2;
@@ -167,14 +167,14 @@ void CModelPluginMode::WindowResized(
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CModelPluginMode::Enter3DPlugin(){
 	EnterModelPlugin();
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CModelPluginMode::ScanInput3DPlugin(){
 	CModelInst *inst = ScanInputModelPlugin();
@@ -198,7 +198,7 @@ void CModelPluginMode::ScanInput3DPlugin(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CModelPluginMode::Render3DPlugin(){
 	devSetState(D3DRS_DIFFUSEMATERIALSOURCE, D3DMCS_MATERIAL);

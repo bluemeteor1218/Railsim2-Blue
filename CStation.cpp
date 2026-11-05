@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CPopMenu.h"
 #include "CSimpleDialog.h"
 #include "CRailWay.h"
@@ -9,14 +9,14 @@
 #include "CStationEditMode.h"
 #include "CDiaEditMode.h"
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CStation **CStation::ms_Root = NULL;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (“Ç—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (èª­è¾¼ç”¨)
  */
 CPlatformInst::CPlatformInst(
-	CStation *station	//	‰w
+	CStation *station	//	é§…
 ){
 	m_Length = -1.0f;
 	m_Stoppable = false;
@@ -25,12 +25,12 @@ CPlatformInst::CPlatformInst(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPlatformInst::CPlatformInst(
-	CStation *station,	//	‰w
-	bool stoppable,		//	’âÔ‰Â”\ /*CP932‘Î‰*/
-	bool *opendoor		//	ƒhƒAŠJ
+	CStation *station,	//	é§…
+	bool stoppable,		//	åœè»Šå¯èƒ½ /*CP932å¯¾å¿œ*/
+	bool *opendoor		//	ãƒ‰ã‚¢é–‹
 ){
 	m_Length = -1.0f;
 	m_Stoppable = stoppable;
@@ -40,17 +40,17 @@ CPlatformInst::CPlatformInst(
 }
 
 /*
- *	ƒŒ[ƒ‹íœ
+ *	ãƒ¬ãƒ¼ãƒ«å‰Šé™¤
  */
 void CPlatformInst::DeleteRailWay(
-	CRailWay *way	//	ƒŒ[ƒ‹
+	CRailWay *way	//	ãƒ¬ãƒ¼ãƒ«
 ){
 	m_Length = -1.0f;
 	m_RailList.remove(way);
 }
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€íœ
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ å‰Šé™¤
  */
 void CPlatformInst::DeletePlatform(){
 	g_SaveFile->DeletePlatform(this);
@@ -62,7 +62,7 @@ void CPlatformInst::DeletePlatform(){
 }
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€eİ’è
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ è¦ªè¨­å®š
  */
 void CPlatformInst::SetPlatformParent(CDetectInfo *d_info){
 	IPRailWay ipr = m_RailList.begin();
@@ -70,7 +70,7 @@ void CPlatformInst::SetPlatformParent(CDetectInfo *d_info){
 }
 
 /*
- *	’·‚³ŒvZ
+ *	é•·ã•è¨ˆç®—
  */
 float CPlatformInst::GetLength(){
 	if(m_Length<0.0f){
@@ -82,7 +82,7 @@ float CPlatformInst::GetLength(){
 }
 
 /*
- *	ó‘Ôæ“¾ (1: approach, 2: stop)
+ *	çŠ¶æ…‹å–å¾— (1: approach, 2: stop)
  */
 int CPlatformInst::GetPlatformState(){
 	int state = 0;
@@ -92,7 +92,7 @@ int CPlatformInst::GetPlatformState(){
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“is
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€²è¡Œ
  */
 void CPlatformInst::Simulate(){
 	IPRailWay ipr = m_RailList.begin();
@@ -100,7 +100,7 @@ void CPlatformInst::Simulate(){
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CPlatformInst::RestoreAddress(){
 	IPRailWay ipr = m_RailList.begin();
@@ -108,10 +108,10 @@ void CPlatformInst::RestoreAddress(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CPlatformInst::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee, *tmp;
 	if(!(str = BeginBlock(str, "Platform"))) return NULL;
@@ -135,10 +135,10 @@ char *CPlatformInst::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CPlatformInst::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){	
 	fprintf(df, "\t\t\t\t\tPlatform{\n");
 	fprintf(df, "\t\t\t\t\t\tAddress = %p;\n", this);
@@ -159,7 +159,7 @@ void CPlatformInst::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (“Ç—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (èª­è¾¼ç”¨)
  */
 CStation::CStation(){
 	m_StationPlugin = NULL;
@@ -167,15 +167,15 @@ CStation::CStation(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStation::CStation(
-	CStationPlugin *spi,	//	‰wÉƒvƒ‰ƒOƒCƒ“
-	VEC3 pos,				//	ˆÊ’u
+	CStationPlugin *spi,	//	é§…èˆãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	VEC3 pos,				//	ä½ç½®
 	VEC3 dir,				//	dir
 	VEC3 up					//	up
 ):
-	CStruct(spi, pos, dir, up, false)	//	Šî–{ƒNƒ‰ƒX
+	CStruct(spi, pos, dir, up, false)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_StationPlugin = spi;
 	m_Next = *ms_Root;
@@ -185,24 +185,24 @@ CStation::CStation(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStation::~CStation(){
 	DELETE_V(m_Next);	//	CStruct::m_Next is not linked
 }
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€’Ç‰Á
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ è¿½åŠ 
  */
 CPlatformInst *CStation::PushPlatformInst(
-	CPlatformInst &pfi	//	’âÔ‰Â”\ /*CP932‘Î‰*/
+	CPlatformInst &pfi	//	åœè»Šå¯èƒ½ /*CP932å¯¾å¿œ*/
 ){
 	m_PlatformList.push_back(pfi);
 	return &*m_PlatformList.rbegin();
 }
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€”z—ñ\’z
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ é…åˆ—æ§‹ç¯‰
  */
 void CStation::MakePlatformArray(){
 	m_PlatformArray.clear();
@@ -211,21 +211,21 @@ void CStation::MakePlatformArray(){
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“‘I‘ğƒ‚[ƒhæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³é¸æŠãƒ¢ãƒ¼ãƒ‰å–å¾—
  */
 bool CStation::IsSelectVisible(){
 	return g_StationEditMode->IsModeActive() || g_DiaEditMode->IsModeActive();
 }
 
 /*
- *	“P‹
+ *	æ’¤å»
  */
 void CStation::Remove(){
 	m_Scene->DeleteStation(this);
 }
 
 /*
- *	ƒŠƒXƒg‚©‚çíœ
+ *	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
  */
 void CStation::Delete(){
 	m_Next = NULL;
@@ -235,14 +235,14 @@ void CStation::Delete(){
 }
 
 /*
- *	‘€ì
+ *	æ“ä½œ
  */
 CModelInst *CStation::Control(){
 	if(CEditBox::IsActive()) return this;
 	if(GetKey(DIK_DELETE)==S_PUSH){
 		class CStationDeleter: public CMenuCommand{
 		private:
-			CStation *m_Station;	//	‰wÉ
+			CStation *m_Station;	//	é§…èˆ
 		public:
 			CStationDeleter(CStation *s){ m_Station = s; }
 			void Exec(){
@@ -260,7 +260,7 @@ CModelInst *CStation::Control(){
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“is
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€²è¡Œ
  */
 void CStation::SimulateStruct(){
 	IPlatformInst ipi = m_PlatformList.begin();
@@ -268,7 +268,7 @@ void CStation::SimulateStruct(){
 }
 
 /*
- *	ê—pƒXƒCƒbƒ`İ’è
+ *	å°‚ç”¨ã‚¹ã‚¤ãƒƒãƒè¨­å®š
  */
 void CStation::SetSwitchStruct(){
 	int i = 0, apr1 = 0, apr2 = 0, stpp = 0;
@@ -285,7 +285,7 @@ void CStation::SetSwitchStruct(){
 }
 
 /*
- *	’âÔ‰Â”\‚©
+ *	åœè»Šå¯èƒ½ã‹
  */
 bool CStation::IsStoppable(){
 	IPlatformInst ipi = m_PlatformList.begin();
@@ -294,7 +294,7 @@ bool CStation::IsStoppable(){
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CStation::RestoreAddress(){
 	IPlatformInst ipi = m_PlatformList.begin();
@@ -315,10 +315,10 @@ void CStation::RestoreAddress(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CStation::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee, *tmp;
 	if(!(str = BeginBlock(str, "Station"))){
@@ -355,10 +355,10 @@ char *CStation::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CStation::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){	
 	fprintf(df, "\t\t\tStation{\n");
 	fprintf(df, "\t\t\t\tAddress = %p;\n", this);

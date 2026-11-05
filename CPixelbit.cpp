@@ -1,15 +1,15 @@
-#include "CPixelbit.h"
+ï»¿#include "CPixelbit.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void Dialog(char *, ...);
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 HMODULE CPixelbit::ms_hMSIMG32;
 BOOL (WINAPI *CPixelbit::ms_TransBlt)(HDC, int, int, int, int, HDC, int, int, int, int, UINT);
 
 /*
  *	[static]
- *	ŠO•”ƒ‰ƒCƒuƒ‰ƒŠ‚Ì‰Šú‰»
+ *	å¤–éƒ¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®åˆæœŸåŒ–
  */
 BOOL CPixelbit::InitExtFunc(){
 	ms_hMSIMG32 = LoadLibrary("msimg32.dll");
@@ -21,14 +21,14 @@ BOOL CPixelbit::InitExtFunc(){
 
 /*
  *	[static]
- *	ŠO•”ƒ‰ƒCƒuƒ‰ƒŠ‚Ì‰ğ•ú
+ *	å¤–éƒ¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®è§£æ”¾
  */
 void CPixelbit::FreeExtFunc(){
 	FreeLibrary(ms_hMSIMG32);
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPixelbit::CPixelbit(){
 	m_PixelAdr = NULL;
@@ -39,10 +39,10 @@ CPixelbit::CPixelbit(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (ƒTƒCƒYw’è)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (ã‚µã‚¤ã‚ºæŒ‡å®š)
  */
 CPixelbit::CPixelbit(
-	int w, int h	//	ƒTƒCƒY
+	int w, int h	//	ã‚µã‚¤ã‚º
 ){
 	m_PixelAdr = NULL;
 	m_ColorKey = 0xffffffff;
@@ -52,7 +52,7 @@ CPixelbit::CPixelbit(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPixelbit::~CPixelbit(){
 	if(m_PixelAdr){
@@ -64,13 +64,13 @@ CPixelbit::~CPixelbit(){
 }
 
 /*
- *	ƒTƒCƒY‚ğw’è‚µ‚Ä‰Šú‰»
+ *	ã‚µã‚¤ã‚ºã‚’æŒ‡å®šã—ã¦åˆæœŸåŒ–
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚ç TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::Clear(
-	int w, int h,	//	ƒTƒCƒY
-	int sbit		//	ƒrƒbƒg[“x
+	int w, int h,	//	ã‚µã‚¤ã‚º
+	int sbit		//	ãƒ“ãƒƒãƒˆæ·±åº¦
 ){
 	if(sbit!=24) sbit = 32;
 	m_BitsPerPixel = sbit;
@@ -119,12 +119,12 @@ BOOL CPixelbit::Clear(
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹‚©‚ç“Ç
+ *	ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­è¾¼
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚çƒrƒbƒg[“x‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ãƒ“ãƒƒãƒˆæ·±åº¦ã‚’è¿”ã™
  */
 int CPixelbit::Load(
-	char *fname	//	ƒtƒ@ƒCƒ‹–¼
+	char *fname	//	ãƒ•ã‚¡ã‚¤ãƒ«å
 ){
 	PBYTE buf;
 	HANDLE fh;
@@ -147,13 +147,13 @@ int CPixelbit::Load(
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹‚É•Û‘¶
+ *	ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚ç TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::Save(
-	char *fname,	//	ƒtƒ@ƒCƒ‹–¼
-	int sbit		//	ƒrƒbƒg[“x
+	char *fname,	//	ãƒ•ã‚¡ã‚¤ãƒ«å
+	int sbit		//	ãƒ“ãƒƒãƒˆæ·±åº¦
 ){
 	DWORD wrote, size;
 	if(m_Width*m_Height<1) return FALSE;
@@ -175,12 +175,12 @@ BOOL CPixelbit::Save(
 }
 
 /*
- *	ƒNƒŠƒbƒvƒ{[ƒh‚©‚ç“\‚è•t‚¯
+ *	ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã‹ã‚‰è²¼ã‚Šä»˜ã‘
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚çƒrƒbƒg[“x‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ãƒ“ãƒƒãƒˆæ·±åº¦ã‚’è¿”ã™
  */
 int CPixelbit::PasteFromClipboard(
-	HWND hWnd	//	‘‹ƒnƒ“ƒhƒ‹
+	HWND hWnd	//	çª“ãƒãƒ³ãƒ‰ãƒ«
 ){
 	if(!OpenClipboard(hWnd)) return 0;
 	PBYTE buf;
@@ -196,13 +196,13 @@ int CPixelbit::PasteFromClipboard(
 }
 
 /*
- *	ƒNƒŠƒbƒvƒ{[ƒh‚ÉƒRƒs[
+ *	ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«ã‚³ãƒ”ãƒ¼
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚ç TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::CopyToClipboard(
-	HWND hWnd,	//	‘‹ƒnƒ“ƒhƒ‹
-	int sbit	//	ƒrƒbƒg[“x
+	HWND hWnd,	//	çª“ãƒãƒ³ãƒ‰ãƒ«
+	int sbit	//	ãƒ“ãƒƒãƒˆæ·±åº¦
 ){
 	if(m_Width*m_Height<1) return FALSE;
 	if(!OpenClipboard(hWnd)) return FALSE;
@@ -224,12 +224,12 @@ BOOL CPixelbit::CopyToClipboard(
 }
 
 /*
- *	ƒƒ‚ƒŠ—Ìˆæã‚Ìƒrƒbƒgƒ}ƒbƒv‚ğŠ„‚è“–‚Ä‚é
+ *	ãƒ¡ãƒ¢ãƒªé ˜åŸŸä¸Šã®ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ã‚’å‰²ã‚Šå½“ã¦ã‚‹
  *
- *	–ß‚è’l: ¬Œ÷‚µ‚½‚ç TRUE ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: æˆåŠŸã—ãŸã‚‰ TRUE ã‚’è¿”ã™
  */
 BOOL CPixelbit::Assign(
-	PBYTE ptr	//	BITMAPINFOHEADER ‚Ìæ“ª
+	PBYTE ptr	//	BITMAPINFOHEADER ã®å…ˆé ­
 ){
 	int w, h;
 	LPBITMAPINFOHEADER head;
@@ -252,11 +252,11 @@ BOOL CPixelbit::Assign(
 }
 
 /*
- *	ƒƒ‚ƒŠ‚©‚çƒpƒŒƒbƒg‰æ‘œ (4bit/pixel) ‚ğ“Ç‚İ‚Ş
+ *	ãƒ¡ãƒ¢ãƒªã‹ã‚‰ãƒ‘ãƒ¬ãƒƒãƒˆç”»åƒ (4bit/pixel) ã‚’èª­ã¿è¾¼ã‚€
  */
 void CPixelbit::Set4PAL1(
-	int w, int h,	//	‰æ‘œƒTƒCƒY
-	PBYTE ptr		//	ƒpƒŒƒbƒgŠJnƒAƒhƒŒƒX
+	int w, int h,	//	ç”»åƒã‚µã‚¤ã‚º
+	PBYTE ptr		//	ãƒ‘ãƒ¬ãƒƒãƒˆé–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹
 ){
 	int i, j, len = w%32 ? (w/32+1)*4 : w/8, bit;
 	PDWORD pal = (PDWORD)ptr;
@@ -272,11 +272,11 @@ void CPixelbit::Set4PAL1(
 }
 
 /*
- *	ƒƒ‚ƒŠ‚©‚çƒpƒŒƒbƒg‰æ‘œ (4bit/pixel) ‚ğ“Ç‚İ‚Ş
+ *	ãƒ¡ãƒ¢ãƒªã‹ã‚‰ãƒ‘ãƒ¬ãƒƒãƒˆç”»åƒ (4bit/pixel) ã‚’èª­ã¿è¾¼ã‚€
  */
 void CPixelbit::Set4PAL4(
-	int w, int h,	//	‰æ‘œƒTƒCƒY
-	PBYTE ptr		//	ƒpƒŒƒbƒgŠJnƒAƒhƒŒƒX
+	int w, int h,	//	ç”»åƒã‚µã‚¤ã‚º
+	PBYTE ptr		//	ãƒ‘ãƒ¬ãƒƒãƒˆé–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹
 ){
 	int i, j, len = w%8 ? (w/8+1)*4 : w/2, bit;
 	PDWORD pal = (PDWORD)ptr;
@@ -292,11 +292,11 @@ void CPixelbit::Set4PAL4(
 }
 
 /*
- *	ƒƒ‚ƒŠ‚©‚çƒpƒŒƒbƒg‰æ‘œ (8bit/pixel) ‚ğ“Ç‚İ‚Ş
+ *	ãƒ¡ãƒ¢ãƒªã‹ã‚‰ãƒ‘ãƒ¬ãƒƒãƒˆç”»åƒ (8bit/pixel) ã‚’èª­ã¿è¾¼ã‚€
  */
 void CPixelbit::Set4PAL8(
-	int w, int h,	//	‰æ‘œƒTƒCƒY
-	PBYTE ptr		//	ƒpƒŒƒbƒgŠJnƒAƒhƒŒƒX
+	int w, int h,	//	ç”»åƒã‚µã‚¤ã‚º
+	PBYTE ptr		//	ãƒ‘ãƒ¬ãƒƒãƒˆé–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹
 ){
 	int i, j, len = w%4 ? (w/4+1)*4 : w;
 	PDWORD pal = (PDWORD)ptr;
@@ -309,11 +309,11 @@ void CPixelbit::Set4PAL8(
 }
 
 /*
- *	ƒƒ‚ƒŠã‚Ì BGR (24bit/pixel) —ñ‚©‚ç‰æ‘œ‚ğ“Ç‚İ‚Ş
+ *	ãƒ¡ãƒ¢ãƒªä¸Šã® BGR (24bit/pixel) åˆ—ã‹ã‚‰ç”»åƒã‚’èª­ã¿è¾¼ã‚€
  */
 void CPixelbit::Set4BGR24(
-	int w, int h,	//	‰æ‘œƒTƒCƒY
-	PBYTE ptr		//	ƒrƒbƒgƒ}ƒbƒvŠJnƒAƒhƒŒƒX
+	int w, int h,	//	ç”»åƒã‚µã‚¤ã‚º
+	PBYTE ptr		//	ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—é–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹
 ){
 	int i, j, len = w%4 ? (w*3/4+1)*4 : w*3;
 	for(i = 0; i<h; i++){
@@ -329,11 +329,11 @@ void CPixelbit::Set4BGR24(
 }
 
 /*
- *	ƒƒ‚ƒŠã‚Ì BGR (32bit/pixel) —ñ‚©‚ç‰æ‘œ‚ğ“Ç‚İ‚Ş
+ *	ãƒ¡ãƒ¢ãƒªä¸Šã® BGR (32bit/pixel) åˆ—ã‹ã‚‰ç”»åƒã‚’èª­ã¿è¾¼ã‚€
  */
 void CPixelbit::Set4BGR32(
-	int w, int h,	//	‰æ‘œƒTƒCƒY
-	PBYTE ptr		//	ƒrƒbƒgƒ}ƒbƒvŠJnƒAƒhƒŒƒX
+	int w, int h,	//	ç”»åƒã‚µã‚¤ã‚º
+	PBYTE ptr		//	ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—é–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹
 ){
 	int i, j, len = w*4;
 	for(i = 0; i<h; i++){
@@ -344,12 +344,12 @@ void CPixelbit::Set4BGR32(
 }
 
 /*
- *	DIB ƒf[ƒ^ì¬ (•Û‘¶EƒNƒŠƒbƒvƒ{[ƒhƒRƒs[—p)
+ *	DIB ãƒ‡ãƒ¼ã‚¿ä½œæˆ (ä¿å­˜ãƒ»ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã‚³ãƒ”ãƒ¼ç”¨)
  */
 void CPixelbit::PrepareDIB(
-	PBYTE buf,	//	BITMAPINFOHEADER ‚Ìæ“ª
-	int len,	//	ƒ‰ƒCƒ“’·
-	int sbit	//	ƒrƒbƒg[“x
+	PBYTE buf,	//	BITMAPINFOHEADER ã®å…ˆé ­
+	int len,	//	ãƒ©ã‚¤ãƒ³é•·
+	int sbit	//	ãƒ“ãƒƒãƒˆæ·±åº¦
 ){
 	int i, j;
 	LPBITMAPINFOHEADER head = (LPBITMAPINFOHEADER)buf;
@@ -378,12 +378,12 @@ void CPixelbit::PrepareDIB(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	POINT \‘¢‘Ì‚É’l‚ğ‘ã“ü‚µ‚Ä¶¬
+ *	POINT æ§‹é€ ä½“ã«å€¤ã‚’ä»£å…¥ã—ã¦ç”Ÿæˆ
  *
- *	–ß‚è’l:	POINT ‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+ *	æˆ»ã‚Šå€¤:	POINT ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 POINT MakeRect(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	POINT pos;
 	pos.x = x;
@@ -392,13 +392,13 @@ POINT MakeRect(
 }
 
 /*
- *	RECT \‘¢‘Ì‚É’l‚ğ‘ã“ü‚µ‚Ä¶¬
+ *	RECT æ§‹é€ ä½“ã«å€¤ã‚’ä»£å…¥ã—ã¦ç”Ÿæˆ
  *
- *	–ß‚è’l:	RECT ‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+ *	æˆ»ã‚Šå€¤:	RECT ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 RECT MakeRect(
-	int x, int y,	//	À•W
-	int w, int h	//	ƒTƒCƒY
+	int x, int y,	//	åº§æ¨™
+	int w, int h	//	ã‚µã‚¤ã‚º
 ){
 	RECT rect;
 	rect.left = x;
@@ -409,13 +409,13 @@ RECT MakeRect(
 }
 
 /*
- *	RGB ’l‚©‚ç HSV ’l‚ğŒvZ
+ *	RGB å€¤ã‹ã‚‰ HSV å€¤ã‚’è¨ˆç®—
  */
 void RGBtoHSV(
-	BYTE r, BYTE g, BYTE b,	//	RGB ’l
-	int *hh,	//	h ’l (F‘Š) ‘ã“üæ
-	int *ss,	//	s ’l (Ê“x) ‘ã“üæ
-	int *vv		//	v ’l (–¾“x) ‘ã“üæ
+	BYTE r, BYTE g, BYTE b,	//	RGB å€¤
+	int *hh,	//	h å€¤ (è‰²ç›¸) ä»£å…¥å…ˆ
+	int *ss,	//	s å€¤ (å½©åº¦) ä»£å…¥å…ˆ
+	int *vv		//	v å€¤ (æ˜åº¦) ä»£å…¥å…ˆ
 ){
 	int rr, gg, bb, x, h, v, t;
 	v = r>g ? (r>b ? r : b) : (g>b ? g : b);	//	_max(r, g, b);

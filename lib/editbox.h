@@ -1,28 +1,28 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
-#define EDIT_PROC	0	//	“ü—Í’†‚Å‚ ‚é
-#define EDIT_OK		1	//	“ü—Í‚ÍŠm’è‚³‚ê‚½
-#define EDIT_CANCEL	-1	//	“ü—Í‚ÍƒLƒƒƒ“ƒZƒ‹‚³‚ê‚½
+#define EDIT_PROC	0	//	å…¥åŠ›ä¸­ã§ã‚ã‚‹
+#define EDIT_OK		1	//	å…¥åŠ›ã¯ç¢ºå®šã•ã‚ŒãŸ
+#define EDIT_CANCEL	-1	//	å…¥åŠ›ã¯ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚ŒãŸ
 
 BOOL SelectFile(char *file, int len, const char *def, const char *ext, int flag);
 
 class CEditBox{
-	static bool ms_Active;	//	ƒGƒfƒBƒbƒgƒ{ƒbƒNƒX—LŒøƒtƒ‰ƒO
+	static bool ms_Active;	//	ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹æœ‰åŠ¹ãƒ•ãƒ©ã‚°
 
-	HIMC m_hImc;		//	FEP‚Ìƒnƒ“ƒhƒ‰
+	HIMC m_hImc;		//	FEPã®ãƒãƒ³ãƒ‰ãƒ©
 	//	LPCANDIDATELIST m_pList;
-	string m_str;		//	•Û‘¶—p•¶Žš—ñ
-	string m_show;		//	•\Ž¦‚·‚é•¶Žš—ñ
-	string m_comp;		//	•ÏŠ·’†‚Ì•¶Žš—ñ
-	int m_x;			//	•\Ž¦ŠJŽnXˆÊ’u
-	int m_y;			//	•\Ž¦ŠJŽnYˆÊ’u
-	int m_width;		//	•ÒW—ÌˆæÅ¬•
-	int m_pos;			//	ƒLƒƒƒŒƒbƒgˆÊ’u
-	int m_selpos;		//	‘I‘ðŠJŽnˆÊ’u
-	int m_max;			//	Å‘å•¶Žš”
-	int m_frame;		//	“_–ÅƒJƒEƒ“ƒ^
-	int m_oldsize;		//	•ÏŠ·•¶Žš—ñƒTƒCƒY
-	BOOL m_old_iscomp;	//	•ÏŠ·’†‚©‚Ç‚¤‚© (IsComp ‚Æ‚ÍˆÙ‚È‚é)
+	string m_str;		//	ä¿å­˜ç”¨æ–‡å­—åˆ—
+	string m_show;		//	è¡¨ç¤ºã™ã‚‹æ–‡å­—åˆ—
+	string m_comp;		//	å¤‰æ›ä¸­ã®æ–‡å­—åˆ—
+	int m_x;			//	è¡¨ç¤ºé–‹å§‹Xä½ç½®
+	int m_y;			//	è¡¨ç¤ºé–‹å§‹Yä½ç½®
+	int m_width;		//	ç·¨é›†é ˜åŸŸæœ€å°å¹…
+	int m_pos;			//	ã‚­ãƒ£ãƒ¬ãƒƒãƒˆä½ç½®
+	int m_selpos;		//	é¸æŠžé–‹å§‹ä½ç½®
+	int m_max;			//	æœ€å¤§æ–‡å­—æ•°
+	int m_frame;		//	ç‚¹æ»…ã‚«ã‚¦ãƒ³ã‚¿
+	int m_oldsize;		//	å¤‰æ›æ–‡å­—åˆ—ã‚µã‚¤ã‚º
+	BOOL m_old_iscomp;	//	å¤‰æ›ä¸­ã‹ã©ã†ã‹ (IsComp ã¨ã¯ç•°ãªã‚‹)
 
 	void DrawCaret();
 	void BackSpace();
@@ -56,38 +56,38 @@ public:
 	void Render();
 
 	/*
-	 *	ˆÊ’uÝ’è
+	 *	ä½ç½®è¨­å®š
 	 */
 	void SetPos(int x, int y){
 		m_x = x; m_y = y;
 	}
 	/*
-	 *	ƒGƒfƒBƒbƒgƒ{ƒbƒNƒX“à‚Ì•¶Žš—ñ‚ðŽæ“¾
+	 *	ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹å†…ã®æ–‡å­—åˆ—ã‚’å–å¾—
 	 *
-	 *	str	: •¶Žš—ñ‚ÌŠi”[æ
+	 *	str	: æ–‡å­—åˆ—ã®æ ¼ç´å…ˆ
 	 */
 	void GetText(string &str){
 		str = m_str;
 	}
 	/*
-	 *	FEP‚Ìó‘Ô‚ðŽæ“¾
+	 *	FEPã®çŠ¶æ…‹ã‚’å–å¾—
 	 *
-	 *	–ß‚è’lFTRUEFEP‹N“®’†AFALSE”ñ‹N“®’†
+	 *	æˆ»ã‚Šå€¤ï¼šTRUEï¼FEPèµ·å‹•ä¸­ã€FALSEï¼éžèµ·å‹•ä¸­
 	 */
 	BOOL IsFEPOpen(){
 		return ImmGetOpenStatus(m_hImc);
 	}
 	/*
-	 *	•ÏŠ·’†‚Å‚ ‚é‚©‚ðŽæ“¾
+	 *	å¤‰æ›ä¸­ã§ã‚ã‚‹ã‹ã‚’å–å¾—
 	 *
-	 *	–ß‚è’lFTRUE•ÏŠ·’†AFALSE”ñ•ÏŠ·’†
+	 *	æˆ»ã‚Šå€¤ï¼šTRUEï¼å¤‰æ›ä¸­ã€FALSEï¼éžå¤‰æ›ä¸­
 	 */
 	BOOL IsComp(){
 		if(m_comp!="") return TRUE;
 		else return FALSE;
 	}
 	/*
-	 *	•ÏŠ·’†‚ÌƒJ[ƒ\ƒ‹ˆÊ’u‚ÌŽæ“¾
+	 *	å¤‰æ›ä¸­ã®ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã®å–å¾—
 	 */
 	int CEditBox::GetFEPCursorPos(){
 		return ImmGetCompositionString(m_hImc, GCS_CURSORPOS, NULL, 0);
@@ -95,7 +95,7 @@ public:
 };
 
 /*
- *	‘S”¼Šp‚Ì”»’è
+ *	å…¨åŠè§’ã®åˆ¤å®š
  */
 inline BOOL Is2ByteChar(BYTE c){
 	if((c>=0x81 && c<=0x9f) || (c>=0xe0 && c<=0xfc))
@@ -105,7 +105,7 @@ inline BOOL Is2ByteChar(BYTE c){
 }
 
 /*
- *	•\Ž¦‰Â”\•¶Žš‚Ì”»’è
+ *	è¡¨ç¤ºå¯èƒ½æ–‡å­—ã®åˆ¤å®š
  */
 inline BOOL IsPrintChar(int c){
 	if(__isascii(c) && isprint(c)) return TRUE;

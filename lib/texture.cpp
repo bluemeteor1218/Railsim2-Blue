@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -7,11 +7,11 @@
 #include "draw.h"
 #include "texture.h"
 
-//	“à•”ƒOƒ[ƒoƒ‹
-CTexList g_TexList;		//	ƒeƒNƒXƒ`ƒƒƒŠƒXƒg
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+CTexList g_TexList;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚¹ãƒˆ
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTexture::CTexture(){
 	m_pTex = NULL;
@@ -19,35 +19,35 @@ CTexture::CTexture(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTexture::~CTexture(){
 	Free();
 }
 
 /*
- *	“Ç‚İ
+ *	èª­è¾¼ã¿
  *
- *	strFile	: ƒtƒ@ƒCƒ‹–¼iBMP, PNG‚È‚Çj
- *	cTrans	: “§‰ßF
- *	nMipLv	: ƒ~ƒbƒvƒ}ƒbƒv‚k‚u
+ *	strFile	: ãƒ•ã‚¡ã‚¤ãƒ«åï¼ˆBMP, PNGãªã©ï¼‰
+ *	cTrans	: é€éè‰²
+ *	nMipLv	: ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ï¼¬ï¼¶
  */
 BOOL CTexture::Load(LPCSTR strFile, D3DCOLOR cTrans, int nMipLv){
-	Free();	//	Šù‘¶‚È‚ç‰ğ•ú
+	Free();	//	æ—¢å­˜ãªã‚‰è§£æ”¾
 	if(!(m_pTex = g_TexList.Get(FALSE, strFile, cTrans, nMipLv))) return FALSE;
 	m_pTex->GetLevelDesc(0, &m_desc);
 	return TRUE;
 }
-//	ƒŠƒ\[ƒXiƒrƒbƒgƒ}ƒbƒv‚Ì‚İj
+//	ãƒªã‚½ãƒ¼ã‚¹ï¼ˆãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ã®ã¿ï¼‰
 BOOL CTexture::LoadResource(LPCSTR strRes, D3DCOLOR cTrans, int nMipLv){
-	Free();	//	Šù‘¶‚È‚ç‰ğ•ú
+	Free();	//	æ—¢å­˜ãªã‚‰è§£æ”¾
 	if(!(m_pTex = g_TexList.Get(TRUE, strRes, cTrans, nMipLv))) return FALSE;
 	m_pTex->GetLevelDesc(0, &m_desc);
 	return TRUE;
 }
 
 /*
- *	‰ğ•ú
+ *	è§£æ”¾
  */
 void CTexture::Free(){
 	if(!m_pTex) return;
@@ -61,13 +61,13 @@ void CTexture::Free(){
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ‚Ìì¬
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ä½œæˆ
  */
 BOOL CTexture::Create(int w, int h){
-	Free();	//	Šù‘¶‚È‚ç‰ğ•ú
+	Free();	//	æ—¢å­˜ãªã‚‰è§£æ”¾
 	m_fCreate = TRUE;
 
-	//	ƒeƒNƒXƒ`ƒƒ‚Ìì¬
+	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ä½œæˆ
 	HRESULT hr;
 	int texW = (int)powf(2, ceilf(logf(w)/logf(2)));
 	int texH = (int)powf(2, ceilf(logf(h)/logf(2)));
@@ -77,7 +77,7 @@ BOOL CTexture::Create(int w, int h){
 		D3DPOOL_MANAGED, &m_pTex);
 	if(FAILED(hr)) goto error;
 
-	m_pTex->GetLevelDesc(0, &m_desc);	//	ÀÛ‚ÌƒeƒNƒXƒ`ƒƒƒTƒCƒY‚ğæ“¾
+	m_pTex->GetLevelDesc(0, &m_desc);	//	å®Ÿéš›ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µã‚¤ã‚ºã‚’å–å¾—
 #if 0
 	Debug("Allocated Texture %d x %d.\n", m_desc.Width, m_desc.Height);
 #endif
@@ -87,10 +87,10 @@ error:
 }
 
 /*
- *	•¶š—ñ‚ğ‘‚«‚Ş
+ *	æ–‡å­—åˆ—ã‚’æ›¸ãè¾¼ã‚€
  *
- *	str		: •¶š—ñiTAB–³Œøj
- *	font	: ƒtƒHƒ“ƒgƒnƒ“ƒhƒ‹
+ *	str		: æ–‡å­—åˆ—ï¼ˆTABç„¡åŠ¹ï¼‰
+ *	font	: ãƒ•ã‚©ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ«
  */
 BOOL CTexture::DrawInText(int x, int y, LPCSTR str,
 	HFONT hFont, D3DCOLOR col, D3DCOLOR sdw, int w, int h){
@@ -105,7 +105,7 @@ BOOL CTexture::DrawInText(int x, int y, LPCSTR str,
 	SetTextColor(hDC, 0x00ffffff);
 
 	if(w<0){
-		//	•`‰æ—Ìˆæ‚Ìæ“¾
+		//	æç”»é ˜åŸŸã®å–å¾—
 		RECT drawRect = {0, 0, 1, 1};
 
 		DrawText(hDC, str, -1, &drawRect, DT_CALCRECT|DT_LEFT|DT_EXPANDTABS|DT_NOPREFIX);
@@ -114,7 +114,7 @@ BOOL CTexture::DrawInText(int x, int y, LPCSTR str,
 		h = drawRect.bottom;
 	}
 
-	//	DIB‚Ìì¬
+	//	DIBã®ä½œæˆ
 	BITMAPINFO bmi;
 
 	ZeroMemory(&bmi.bmiHeader, sizeof(BITMAPINFOHEADER));
@@ -134,15 +134,15 @@ BOOL CTexture::DrawInText(int x, int y, LPCSTR str,
 		(VOID **)&pDIB, NULL, 0);
 	if(!pDIB) return FALSE;
 
-	//	DIB‚É•¶š—ñ‚ğ•`‰æ
+	//	DIBã«æ–‡å­—åˆ—ã‚’æç”»
 	HBITMAP hOldBM = (HBITMAP)SelectObject(hDC, hBM);
 	memset(pDIB, 0, dibSize);
 	DrawText(hDC, str, -1, &rect, DT_LEFT|DT_EXPANDTABS|DT_NOCLIP|DT_NOPREFIX);
 
-	//	DIB(32bit)‚ğƒeƒNƒXƒ`ƒƒ(16bit)‚Ö“]‘—
+	//	DIB(32bit)ã‚’ãƒ†ã‚¯ã‚¹ãƒãƒ£(16bit)ã¸è»¢é€
 	D3DLOCKED_RECT lockRect;
 
-	HRESULT hr = m_pTex->LockRect(0, &lockRect, NULL, 0);	//	ƒƒbƒN
+	HRESULT hr = m_pTex->LockRect(0, &lockRect, NULL, 0);	//	ãƒ­ãƒƒã‚¯
 
 	if(SUCCEEDED(hr)){
 		int i, j;
@@ -150,7 +150,7 @@ BOOL CTexture::DrawInText(int x, int y, LPCSTR str,
 		BYTE r = (col&0x00ff0000)>>16;
 		BYTE g = (col&0x0000ff00)>>8;
 		BYTE b = col&0x000000ff;
-		WORD color = ((a&0xf0)<<8)|((r&0xf0)<<4)|(g&0xf0)|((b&0xf0)>>4);	//	16bit‰»
+		WORD color = ((a&0xf0)<<8)|((r&0xf0)<<4)|(g&0xf0)|((b&0xf0)>>4);	//	16bitåŒ–
 
 		WORD *pDst, *pSdw, *pSdw2 /* , *pSdw3 */ ;
 		DWORD *pSrc = (DWORD *)pDIB;
@@ -167,7 +167,7 @@ BOOL CTexture::DrawInText(int x, int y, LPCSTR str,
 			r = (sdw&0x00ff0000)>>16;
 			g = (sdw&0x0000ff00)>>8;
 			b = sdw&0x000000ff;
-			WORD shadow = ((a&0xf0)<<8)|((r&0xf0)<<4)|(g&0xf0)|((b&0xf0)>>4);	//	16bit‰»
+			WORD shadow = ((a&0xf0)<<8)|((r&0xf0)<<4)|(g&0xf0)|((b&0xf0)>>4);	//	16bitåŒ–
 			for(i = 0; i<ch; i++){
 				pDst = (WORD *)lockRect.pBits+(lockRect.Pitch/2)*(y+i)+x;
 				pSdw = (WORD *)lockRect.pBits+(lockRect.Pitch/2)*(y+i+1)+x+1;
@@ -199,9 +199,9 @@ BOOL CTexture::DrawInText(int x, int y, LPCSTR str,
 				}
 			}
 		}
-		m_pTex->UnlockRect(0);	//	ƒƒbƒN‰ğœ
+		m_pTex->UnlockRect(0);	//	ãƒ­ãƒƒã‚¯è§£é™¤
 	}
-	//	Œãn––
+	//	å¾Œå§‹æœ«
 	SelectObject(hDC, hOldBM);
 	SelectObject(hDC, hOldFont);
 	DeleteObject(hBM);
@@ -211,12 +211,12 @@ BOOL CTexture::DrawInText(int x, int y, LPCSTR str,
 }
 
 /*
- *	2D‰æ‘œ‚Æ‚µ‚ÄƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	2Dç”»åƒã¨ã—ã¦ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	x, y	: •`‰æˆÊ’u
- *	XV‚·‚éƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^	: ƒeƒNƒXƒ`ƒƒ
+ *	x, y	: æç”»ä½ç½®
+ *	æ›´æ–°ã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿	: ãƒ†ã‚¯ã‚¹ãƒãƒ£
  *
- *	¦–‘O‚Éƒ‰ƒCƒeƒBƒ“ƒOOFF‚É‚·‚é‚±‚ÆB
+ *	â€»äº‹å‰ã«ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°OFFã«ã™ã‚‹ã“ã¨ã€‚
  */
 void CTexture::Render(int x, int y){
 	if(m_pTex){
@@ -229,28 +229,28 @@ void CTexture::Render(int x, int y){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  *
- *	¦CMeshƒNƒ‰ƒX‚©‚çRelease()‚ªŒÄ‚Î‚ê‚é‚Ì‚ÅƒfƒXƒgƒ‰ƒNƒ^‚Í•s—v
+ *	â€»CMeshã‚¯ãƒ©ã‚¹ã‹ã‚‰Release()ãŒå‘¼ã°ã‚Œã‚‹ã®ã§ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¯ä¸è¦
  */
 CTexList::CTexList(){
 	m_pList = NULL;
 }
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTexList::~CTexList(){
 	while(m_pList) Release(m_pList->pTex);
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ‚ğƒŠƒXƒg‚©‚çŒŸõ‚µA‚È‚¯‚ê‚Îƒ[ƒh
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰æ¤œç´¢ã—ã€ãªã‘ã‚Œã°ãƒ­ãƒ¼ãƒ‰
  */
 LPTEX8 CTexList::Get(BOOL fRes, LPCSTR strName, D3DCOLOR cTrans, int nMipLv){
-	//	ƒŠƒXƒg‚©‚çƒeƒNƒXƒ`ƒƒ[‚ğŒŸõ
+	//	ãƒªã‚¹ãƒˆã‹ã‚‰ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚’æ¤œç´¢
 	TEXINFO *p = m_pList;
 
-	//	ƒtƒ@ƒCƒ‹‚È‚çƒtƒ‹ƒpƒX‚É•ÏŠ·
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ãªã‚‰ãƒ•ãƒ«ãƒ‘ã‚¹ã«å¤‰æ›
 	char full[_MAX_PATH];
 	if(!fRes){
 		_fullpath(full, strName, _MAX_PATH);
@@ -260,16 +260,16 @@ LPTEX8 CTexList::Get(BOOL fRes, LPCSTR strName, D3DCOLOR cTrans, int nMipLv){
 	if(!cTrans) cTrans = CheckTexTrans(strName);
 
 	while(p){
-		//	Œ©‚Â‚©‚ê‚ÎQÆƒJƒEƒ“ƒ^‚ğ‘‚â‚µAƒeƒNƒXƒ`ƒƒ‚ğ•Ô‚·
+		//	è¦‹ã¤ã‹ã‚Œã°å‚ç…§ã‚«ã‚¦ãƒ³ã‚¿ã‚’å¢—ã‚„ã—ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’è¿”ã™
 		if(!_mbsicmp((PUCHAR)p->strName.c_str(), (PUCHAR)strName)
 			&& p->cTrans==cTrans && p->nMipLv==nMipLv){
-			//	Debug("[%s] is in texture-list.\n", strName); /*ƒfƒoƒbƒO*/
+			//	Debug("[%s] is in texture-list.\n", strName); /*ãƒ‡ãƒãƒƒã‚°*/
 			p->nRef++;
 			return p->pTex;
 		}
 		p = p->pNext;
 	}
-	//	Œ©‚Â‚©‚ç‚È‚¯‚ê‚Îƒ[ƒh
+	//	è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°ãƒ­ãƒ¼ãƒ‰
 	Debug("load(%s) ... ", strName);
 
 	p = new TEXINFO;
@@ -282,7 +282,7 @@ LPTEX8 CTexList::Get(BOOL fRes, LPCSTR strName, D3DCOLOR cTrans, int nMipLv){
 	}
 	Debug("ok.\n");
 
-	//	ƒŠƒXƒg‚Ìæ“ª‚É’Ç‰ÁAQÆƒJƒEƒ“ƒ^‚ğİ’è‚·‚é
+	//	ãƒªã‚¹ãƒˆã®å…ˆé ­ã«è¿½åŠ ã€å‚ç…§ã‚«ã‚¦ãƒ³ã‚¿ã‚’è¨­å®šã™ã‚‹
 	TEXINFO *q = m_pList;
 	m_pList = p;
 	p->pNext = q;
@@ -295,29 +295,29 @@ LPTEX8 CTexList::Get(BOOL fRes, LPCSTR strName, D3DCOLOR cTrans, int nMipLv){
 }
 
 /*
- *	‰Â”\‚È‚çƒeƒNƒXƒ`ƒƒ‚ğ‰ğ•ú‚·‚é
+ *	å¯èƒ½ãªã‚‰ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’è§£æ”¾ã™ã‚‹
  */
 void CTexList::Release(LPTEX8 pTex){
-	//	ƒeƒNƒXƒ`ƒƒ‚ğŒŸõ
+	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’æ¤œç´¢
 	TEXINFO *p = m_pList;
 	TEXINFO *q = NULL;
 
 	while(p){
-		//	Œ©‚Â‚©‚ê‚ÎQÆƒJƒEƒ“ƒ^‚ğŒ¸‚ç‚·
+		//	è¦‹ã¤ã‹ã‚Œã°å‚ç…§ã‚«ã‚¦ãƒ³ã‚¿ã‚’æ¸›ã‚‰ã™
 		if(p->pTex==pTex){
 			p->nRef--;
 
-			//	QÆ‚ª‚È‚­‚È‚ê‚ÎƒeƒNƒXƒ`ƒƒ‚ğ‰ğ•úAƒŠƒXƒg‚©‚çŠO‚·
+			//	å‚ç…§ãŒãªããªã‚Œã°ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’è§£æ”¾ã€ãƒªã‚¹ãƒˆã‹ã‚‰å¤–ã™
 			if(p->nRef==0){
 				Debug("release(%s)\n", p->strName.c_str());
 				RELEASE(p->pTex);
 
 				if(p==m_pList){
-					//	ƒŠƒXƒg‚Ìæ“ª
+					//	ãƒªã‚¹ãƒˆã®å…ˆé ­
 					m_pList = p->pNext;
 					delete p;
 				}else{
-					//	“r’†
+					//	é€”ä¸­
 					q->pNext = p->pNext;
 					delete p;
 				}
@@ -333,7 +333,7 @@ void CTexList::Release(LPTEX8 pTex){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼‚©‚ç“§‰ßF‚ğ‹‚ß‚é
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰é€éè‰²ã‚’æ±‚ã‚ã‚‹
  */
 D3DCOLOR CheckTexTrans(LPCSTR str){
 	char *ptr = (char *)str, *sharp = NULL, *dot = NULL;
@@ -367,7 +367,7 @@ D3DCOLOR CheckTexTrans(LPCSTR str){
 }
 
 /*
- *	•¶š—ñ•`‰æƒTƒCƒY‚ÌŒvZ
+ *	æ–‡å­—åˆ—æç”»ã‚µã‚¤ã‚ºã®è¨ˆç®—
  */
 void CalcTextRect(int *w, int *h, LPCSTR str, HFONT hFont){
 	if(!*str){

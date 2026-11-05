@@ -1,20 +1,20 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CPluginTree.h"
 
-//	“à•”’è”
-const int PT_NAME_MAX = 64;	//	–¼ÌÅ‘å’·
+//	å†…éƒ¨å®šæ•°
+const int PT_NAME_MAX = 64;	//	åç§°æœ€å¤§é•·
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CTreeElement *CTreeElement::ms_FocusPrev;
 CTreeElement *CTreeElement::ms_FocusNext;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTreeElement::CTreeElement(
-	char *str,			//	•¶Žš—ñ
-	CTreeDirElement *p,	//	e
-	CPluginTree *ctrl	//	ƒcƒŠ[ƒRƒ“ƒgƒ[ƒ‹
+	char *str,			//	æ–‡å­—åˆ—
+	CTreeDirElement *p,	//	è¦ª
+	CPluginTree *ctrl	//	ãƒ„ãƒªãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	m_State = 0;
 	m_Width = -1;
@@ -27,14 +27,14 @@ CTreeElement::CTreeElement(
 }
 
 /*
- *	eŠK‘w‚©‚çŽ©g‚ðíœ
+ *	è¦ªéšŽå±¤ã‹ã‚‰è‡ªèº«ã‚’å‰Šé™¤
  */
 void CTreeElement::Delete(){
 	if(m_Parent) m_Parent->DeleteItem(this);
 }
 
 /*
- *	Žw’èÀ•W‚ª”ÍˆÍ“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒç¯„å›²å†…ã‹èª¿ã¹ã‚‹
  */
 bool CTreeElement::IsInsideItem(
 	int ix, int iy,	//	
@@ -45,7 +45,7 @@ bool CTreeElement::IsInsideItem(
 }
 
 /*
- *	ƒŠƒl[ƒ€ŠJŽn
+ *	ãƒªãƒãƒ¼ãƒ é–‹å§‹
  */
 void CTreeElement::BeginRename(){
 	if(!IsRenamable()) return;
@@ -56,10 +56,10 @@ void CTreeElement::BeginRename(){
 }
 
 /*
- *	ƒŠƒl[ƒ€I—¹
+ *	ãƒªãƒãƒ¼ãƒ çµ‚äº†
  */
 void CTreeElement::EndRename(
-	bool update	//	XVƒtƒ‰ƒO
+	bool update	//	æ›´æ–°ãƒ•ãƒ©ã‚°
 ){
 	if(update){
 		string newname;
@@ -74,7 +74,7 @@ void CTreeElement::EndRename(
 }
 
 /*
- *	ƒhƒ‰ƒbƒO‘€ì‚Ì€”õ
+ *	ãƒ‰ãƒ©ãƒƒã‚°æ“ä½œã®æº–å‚™
  */
 void CTreeElement::PrepareDrag(){
 	m_State = 1;
@@ -83,7 +83,7 @@ void CTreeElement::PrepareDrag(){
 }
 
 /*
- *	ƒhƒ‰ƒbƒOƒAƒCƒeƒ€•\Ž¦
+ *	ãƒ‰ãƒ©ãƒƒã‚°ã‚¢ã‚¤ãƒ†ãƒ è¡¨ç¤º
  */
 void CTreeElement::RenderDragItem(){
 	POINT pos = g_Cursor.GetPos();
@@ -91,10 +91,10 @@ void CTreeElement::RenderDragItem(){
 }
 
 /*
- *	ƒ\[ƒg—p”äŠrŠÖ”
+ *	ã‚½ãƒ¼ãƒˆç”¨æ¯”è¼ƒé–¢æ•°
  */
 int CTreeElement::Compare(
-	CTreeElement *rhs	//	‰E•Ó
+	CTreeElement *rhs	//	å³è¾º
 ){
 	int ret;
 	if(IsDirectory()){
@@ -116,11 +116,11 @@ int CTreeElement::Compare(
 }
 
 /*
- *	ƒ}[ƒWƒ\[ƒg
+ *	ãƒžãƒ¼ã‚¸ã‚½ãƒ¼ãƒˆ
  */
 void CTreeElement::MergeSort(
-	CTreeElement **seed,	//	ŠJŽnƒ|ƒCƒ“ƒ^
-	CTreeElement *end		//	I—¹ƒ|ƒCƒ“ƒ^
+	CTreeElement **seed,	//	é–‹å§‹ãƒã‚¤ãƒ³ã‚¿
+	CTreeElement *end		//	çµ‚äº†ãƒã‚¤ãƒ³ã‚¿
 ){
 	int num1 = 0, num2 = 0, id = 0;
 	CTreeElement *ptr = this, *mid = this, *last = this, **carrier = seed;
@@ -167,7 +167,7 @@ void CTreeElement::MergeSort(
 }
 
 /*
- *	ŠJ‚­
+ *	é–‹ã
  */
 void CTreeElement::Open(){
 	m_Owner->SetFocusItem(this);

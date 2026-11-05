@@ -1,17 +1,17 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCustomizerMover.h"
 #include "CSaveFile.h"
 #include "CConfigMode.h"
 
-//	“à•”ƒOƒ[ƒoƒ‹
-bool g_PreviewAnimation = true;	//	ƒvƒŒƒrƒ…[ŽžƒAƒjƒ[ƒVƒ‡ƒ“ƒtƒ‰ƒO (•Ò¬ƒvƒŒƒrƒ…[‚Å‚Í false)
-bool g_MoverEnabled = true;		//	ƒ€[ƒo[—LŒøƒtƒ‰ƒO (ƒ|[ƒYŽžƒXƒCƒbƒ`“K—pˆ—‚Å‚Í false)
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+bool g_PreviewAnimation = true;	//	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼æ™‚ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ•ãƒ©ã‚° (ç·¨æˆãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã§ã¯ false)
+bool g_MoverEnabled = true;		//	ãƒ ãƒ¼ãƒãƒ¼æœ‰åŠ¹ãƒ•ãƒ©ã‚° (ãƒãƒ¼ã‚ºæ™‚ã‚¹ã‚¤ãƒƒãƒé©ç”¨å‡¦ç†ã§ã¯ false)
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CMoverState::Read(
-	char *str	//	‘ÎÛ•¶Žš—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = Assignment(eee = str, "MoverState"))) return NULL;
@@ -23,11 +23,11 @@ char *CMoverState::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CMoverState::Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *ind	//	ƒCƒ“ƒfƒ“ƒg
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *ind	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
 ){
 	fprintf(df, "%sMoverState = ", ind);
 	V3Save(df, m_Pos, ", ");
@@ -38,10 +38,10 @@ void CMoverState::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 void CMoverBase::InitMover(
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	m_State = mpi->AddMover();
 }
@@ -50,25 +50,25 @@ void CMoverBase::InitMover(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“K—pƒtƒ‰ƒOƒŠƒZƒbƒg
+ *	é©ç”¨ãƒ•ãƒ©ã‚°ãƒªã‚»ãƒƒãƒˆ
  */
 void CDynamicMoverBase::ResetOffCustomizer(
-	int v	//	Ý’è’l
+	int v	//	è¨­å®šå€¤
 ){
 	/*
-	 *	m_ApplyFlag ‚ÌˆÓ–¡
-	 *	0: –¢“K—p
-	 *	1: ƒXƒCƒbƒ`ðŒ^‚Å“K—pÏ‚Ý
-	 *	2: ƒXƒCƒbƒ`ðŒ‹U‚Å–¢“K—p
+	 *	m_ApplyFlag ã®æ„å‘³
+	 *	0: æœªé©ç”¨
+	 *	1: ã‚¹ã‚¤ãƒƒãƒæ¡ä»¶çœŸã§é©ç”¨æ¸ˆã¿
+	 *	2: ã‚¹ã‚¤ãƒƒãƒæ¡ä»¶å½ã§æœªé©ç”¨
 	 */
 	m_ApplyFlag = v ? (m_ApplyFlag ? m_ApplyFlag : v) : 0;
 }
 
 /*
- *	íŽž“K—pƒŠƒXƒgì¬
+ *	å¸¸æ™‚é©ç”¨ãƒªã‚¹ãƒˆä½œæˆ
  */
 void CDynamicMoverBase::SetOffListCustomizer(
-	CNamedObject *nobj	//	ŒÄ‚Ño‚µŒ³
+	CNamedObject *nobj	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	nobj->AddOffList(this);
 }
@@ -77,10 +77,10 @@ void CDynamicMoverBase::SetOffListCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CStaticMoverBase::ReadTimingInfo(
-	char *str	//	‘ÎÛ•¶Žš—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	char *timinglabel[6] = {
@@ -96,16 +96,16 @@ char *CStaticMoverBase::ReadTimingInfo(
 }
 
 /*
- *	‘O’x‰„ˆ—
+ *	å‰é…å»¶å‡¦ç†
  *
- *	–ß‚è’l: ƒNƒŒƒWƒbƒg
+ *	æˆ»ã‚Šå€¤: ã‚¯ãƒ¬ã‚¸ãƒƒãƒˆ
  */
 float CStaticMoverBase::ProcDelay(){
 	if(!g_PreviewAnimation) return m_ApplyFlag ? 0.0f : 1.0f;
 	CMoverState *mstate = GetState();
 	VEC3 pos = mstate->GetPos();
 	float *timing = m_AnimationTime, credit = 1.0f;
-	if(m_ApplyFlag){	//	‹t•ûŒü
+	if(m_ApplyFlag){	//	é€†æ–¹å‘
 		pos.x = 3.0f-pos.x;
 		timing += 3;
 	}
@@ -136,11 +136,11 @@ float CStaticMoverBase::ProcDelay(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CStaticRotator::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(eee = str, "StaticRotation"))) return NULL;
@@ -155,10 +155,10 @@ char *CStaticRotator::Read(
 }
 
 /*
- *	Žp¨“K—p
+ *	å§¿å‹¢é©ç”¨
  */
 void CStaticRotator::SetPostureCustomizer(
-	CObject *obj	//	ƒIƒuƒWƒFƒNƒg
+	CObject *obj	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 ){
 	if(m_ApplyFlag==1) return;
 	float ratio = ProcDelay();
@@ -170,11 +170,11 @@ void CStaticRotator::SetPostureCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CStaticMover::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	char *eee;
 	if(!(str = BeginBlock(eee = str, "StaticMove"))) return NULL;
@@ -186,10 +186,10 @@ char *CStaticMover::Read(
 }
 
 /*
- *	Žp¨“K—p
+ *	å§¿å‹¢é©ç”¨
  */
 void CStaticMover::SetPostureCustomizer(
-	CObject *obj	//	ƒIƒuƒWƒFƒNƒg
+	CObject *obj	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 ){
 	if(m_ApplyFlag==1) return;
 	float ratio = ProcDelay();
@@ -201,11 +201,11 @@ void CStaticMover::SetPostureCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CDynamicRotator::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(eee = str, "DynamicRotation"))) return NULL;
@@ -233,10 +233,10 @@ char *CDynamicRotator::Read(
 }
 
 /*
- *	Žp¨“K—p
+ *	å§¿å‹¢é©ç”¨
  */
 void CDynamicRotator::SetPostureCustomizer(
-	CObject *obj	//	ƒIƒuƒWƒFƒNƒg
+	CObject *obj	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 ){
 	if(m_ApplyFlag==1 || !g_PreviewAnimation) return;
 	CMoverState *mstate = GetState();
@@ -261,11 +261,11 @@ void CDynamicRotator::SetPostureCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CWindTracker::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(eee = str, "TrackWind"))) return NULL;
@@ -283,10 +283,10 @@ char *CWindTracker::Read(
 }
 
 /*
- *	Žp¨“K—p
+ *	å§¿å‹¢é©ç”¨
  */
 void CWindTracker::SetPostureCustomizer(
-	CObject *obj	//	ƒIƒuƒWƒFƒNƒg
+	CObject *obj	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 ){
 	CMoverState *mstate = GetState();
 	VEC3 tr = obj->GetRight(), tu = obj->GetUp(), td = obj->GetDir();
@@ -313,11 +313,11 @@ void CWindTracker::SetPostureCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CWindmill::Read(
-	char *str,			//	‘ÎÛ•¶Žš—ñ
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(eee = str, "Windmill"))) return NULL;
@@ -336,10 +336,10 @@ char *CWindmill::Read(
 }
 
 /*
- *	Žp¨“K—p
+ *	å§¿å‹¢é©ç”¨
  */
 void CWindmill::SetPostureCustomizer(
-	CObject *obj	//	ƒIƒuƒWƒFƒNƒg
+	CObject *obj	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 ){
 	CMoverState *mstate = GetState();
 	VEC3 odir = mstate->GetDir();
@@ -369,10 +369,10 @@ void CWindmill::SetPostureCustomizer(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Çž
+ *	èª­è¾¼
  */
 char *CAnalogClock::Read(
-	char *str	//	‘ÎÛ•¶Žš—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 //	if(!(str = BeginBlock(eee = str, "AnalogClock"))) return NULL;
@@ -387,10 +387,10 @@ char *CAnalogClock::Read(
 }
 
 /*
- *	Žp¨“K—p
+ *	å§¿å‹¢é©ç”¨
  */
 void CAnalogClock::SetPostureCustomizer(
-	CObject *obj	//	ƒIƒuƒWƒFƒNƒg
+	CObject *obj	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 ){
 	double theta = 2.0f*D3DX_PI;
 	double time = g_RSPV ? 0.0 : g_SaveFile->GetAbsTime();

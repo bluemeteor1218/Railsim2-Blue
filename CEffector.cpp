@@ -1,45 +1,45 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CModelPlugin.h"
 #include "CStation.h"
 #include "CRailWay.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CScene *g_Scene;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 CHeadlight g_TempHeadlight;
 CParticle g_TempParticle;
 CSoundEffector g_TempSoundEffector;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CEffectorContainer::CEffectorContainer(){
 	m_Effector = NULL;
 }
 
 /*
- *	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CEffectorContainer::CEffectorContainer(
-	const CEffectorContainer &src	//	ƒRƒs[Œ³
+	const CEffectorContainer &src	//	ã‚³ãƒ”ãƒ¼å…ƒ
 ){
 	m_Effector = src.m_Effector->Duplicate();
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CEffectorContainer::~CEffectorContainer(){
 	DELETE_V(m_Effector);
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CEffectorContainer::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp;
 	bool is_station = !strcmp(mpi->DirName(), "Station");
@@ -82,11 +82,11 @@ char *CEffectorContainer::Read(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CHeadlightApplier::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	if(!(str = g_TempHeadlight.Read(str, mpi))) return NULL;
 	m_Headlight = mpi->AddHeadlight(g_TempHeadlight);
@@ -94,19 +94,19 @@ char *CHeadlightApplier::Read(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CHeadlightApplier::LoadDataEffector(
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	m_Headlight->LoadData();
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CHeadlightApplier::ApplyEffector(
-	CScene *scene	//	ƒV[ƒ“
+	CScene *scene	//	ã‚·ãƒ¼ãƒ³
 ){
 	if(!g_PreSimulationFlag && (!scene || scene==g_Scene)) m_Headlight->Register();
 }
@@ -115,11 +115,11 @@ void CHeadlightApplier::ApplyEffector(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CParticleApplier::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	if(!(str = g_TempParticle.Read(str, mpi))) return NULL;
 	m_Particle = mpi->AddParticle(g_TempParticle);
@@ -127,19 +127,19 @@ char *CParticleApplier::Read(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CParticleApplier::LoadDataEffector(
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	m_Particle->LoadData();
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CParticleApplier::ApplyEffector(
-	CScene *scene	//	ƒV[ƒ“
+	CScene *scene	//	ã‚·ãƒ¼ãƒ³
 ){
 	if(g_PreSimulationFlag) m_Particle->Register(scene);
 }
@@ -148,11 +148,11 @@ void CParticleApplier::ApplyEffector(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CSoundApplier::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	if(!(str = g_TempSoundEffector.Read(str, mpi))) return NULL;
 	m_SoundEffector = mpi->AddSoundEffector(g_TempSoundEffector);
@@ -160,10 +160,10 @@ char *CSoundApplier::Read(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CSoundApplier::ApplyEffector(
-	CScene *scene	//	ƒV[ƒ“
+	CScene *scene	//	ã‚·ãƒ¼ãƒ³
 ){
 	if(!g_PreSimulationFlag) m_SoundEffector->Register(scene);
 }
@@ -183,10 +183,10 @@ void CEffectorRailConnectorBase::CalculatePlatformID(){
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CEffectorRailConnectorBase::ApplyEffector(
-	CScene *scene	//	ƒV[ƒ“
+	CScene *scene	//	ã‚·ãƒ¼ãƒ³
 ){
 	if(m_RailEnd1<0 || m_RailEnd2<0) return;
 	if(g_PreSimulationFlag){
@@ -213,10 +213,10 @@ void CEffectorRailDisconnectorBase::CalculatePlatformID(){
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CEffectorRailDisconnectorBase::ApplyEffector(
-	CScene *scene	//	ƒV[ƒ“
+	CScene *scene	//	ã‚·ãƒ¼ãƒ³
 ){
 	if(m_RailEnd<0) return;
 	if(g_PreSimulationFlag){
@@ -234,11 +234,11 @@ void CEffectorRailDisconnectorBase::ApplyEffector(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CEffectorRailConnector::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	char *eee;
 	if(!(str = Assignment(str, "ConnectRail"))) return NULL;
@@ -251,12 +251,12 @@ char *CEffectorRailConnector::Read(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CEffectorRailConnector::ApplyEffectorRailConnectorBase(
-	CScene *scene,		//	ƒV[ƒ“
-	CRailWay *rail1,	//	ƒŒ[ƒ‹1
-	CRailWay *rail2		//	ƒŒ[ƒ‹2
+	CScene *scene,		//	ã‚·ãƒ¼ãƒ³
+	CRailWay *rail1,	//	ãƒ¬ãƒ¼ãƒ«1
+	CRailWay *rail2		//	ãƒ¬ãƒ¼ãƒ«2
 ){
 	rail1->ConnectRailWay(m_PlatformEnd1, rail2, m_PlatformEnd2, scene);
 }
@@ -265,11 +265,11 @@ void CEffectorRailConnector::ApplyEffectorRailConnectorBase(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CEffectorRailBrancher::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	char *eee;
 	if(!(str = Assignment(str, "BranchRail"))) return NULL;
@@ -282,12 +282,12 @@ char *CEffectorRailBrancher::Read(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CEffectorRailBrancher::ApplyEffectorRailConnectorBase(
-	CScene *scene,		//	ƒV[ƒ“
-	CRailWay *rail1,	//	ƒŒ[ƒ‹1
-	CRailWay *rail2		//	ƒŒ[ƒ‹2
+	CScene *scene,		//	ã‚·ãƒ¼ãƒ³
+	CRailWay *rail1,	//	ãƒ¬ãƒ¼ãƒ«1
+	CRailWay *rail2		//	ãƒ¬ãƒ¼ãƒ«2
 ){
 	rail1->BranchRailWay(m_PlatformEnd1, rail2, m_PlatformEnd2, scene);
 }
@@ -296,11 +296,11 @@ void CEffectorRailBrancher::ApplyEffectorRailConnectorBase(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CEffectorRailDisconnector::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ŒÄ‚Ño‚µŒ³
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	char *eee;
 	if(!(str = Assignment(str, "DisconnectRail"))) return NULL;
@@ -311,11 +311,11 @@ char *CEffectorRailDisconnector::Read(
 }
 
 /*
- *	•ÏXq“K—p
+ *	å¤‰æ›´å­é©ç”¨
  */
 void CEffectorRailDisconnector::ApplyEffectorRailDisconnectorBase(
-	CScene *scene,	//	ƒV[ƒ“
-	CRailWay *rail	//	ƒŒ[ƒ‹
+	CScene *scene,	//	ã‚·ãƒ¼ãƒ³
+	CRailWay *rail	//	ãƒ¬ãƒ¼ãƒ«
 ){
 	rail->DisconnectRailWay(m_PlatformEnd, scene);
 }

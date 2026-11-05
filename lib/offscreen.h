@@ -1,12 +1,12 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 class COffScreen{
-	LPTEX8	m_pTex;		//	ƒeƒNƒXƒ`ƒƒ[
-	LPSURF8	m_pRT;		//	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-	LPSURF8	m_pZB;		//	‚yƒoƒbƒtƒ@
-	LPSURF8 m_pOldRT;	//	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒgi‘Þ”ð—pj
-	LPSURF8 m_pOldZB;	//	‚yƒoƒbƒtƒ@i‘Þ”ð—pj
-	BOOL	m_fRender;	//	ƒŒƒ“ƒ_ƒŠƒ“ƒO‰Â”\‚©H
+	LPTEX8	m_pTex;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼
+	LPSURF8	m_pRT;		//	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+	LPSURF8	m_pZB;		//	ï¼ºãƒãƒƒãƒ•ã‚¡
+	LPSURF8 m_pOldRT;	//	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆï¼ˆé€€é¿ç”¨ï¼‰
+	LPSURF8 m_pOldZB;	//	ï¼ºãƒãƒƒãƒ•ã‚¡ï¼ˆé€€é¿ç”¨ï¼‰
+	BOOL	m_fRender;	//	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°å¯èƒ½ã‹ï¼Ÿ
 
 public:
 	COffScreen();
@@ -18,7 +18,7 @@ public:
 	void End();
 
 	/*
-	 *	ƒeƒNƒXƒ`ƒƒ[‚ÌŽæ“¾
+	 *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã®å–å¾—
 	 */
 	LPTEX8 GetTexture(){return m_pTex;}
 };

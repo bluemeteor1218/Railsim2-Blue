@@ -1,14 +1,14 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailConnector.h"
 #include "CRailWay.h"
 #include "CScene.h"
 #include "CTrainGroup.h"
 #include "CConfigMode.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void CalcCantAxis(VEC3 *, VEC3 *, VEC3 *, float);
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CScene *g_Scene;
 extern D3DCOLOR g_ColorSelect[];
 
@@ -22,20 +22,20 @@ void SetStaticPointOption(void *point_id, int point_opt){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒJƒ“ƒgŒvZ
+ *	ã‚«ãƒ³ãƒˆè¨ˆç®—
  */
 void CRailSplitter::CalcCantAxis(
-	float cant	//	ƒJƒ“ƒg—Ê
+	float cant	//	ã‚«ãƒ³ãƒˆé‡
 ){
 	::CalcCantAxis(&m_Right, &m_Up, &m_Dir, cant);
 }
 
 /*
- *	’†ŠÔ“_ŒvZ
+ *	ä¸­é–“ç‚¹è¨ˆç®—
  */
 CRailSplitter CRailSplitter::CalcMid(
-	CRailSplitter *rhs,	//	‰E•Ó
-	float q1			//	¬‡—¦
+	CRailSplitter *rhs,	//	å³è¾º
+	float q1			//	æ··åˆç‡
 ){
 	float q2 = 1.0f-q1;
 	VEC3 tr, tu = q1*m_Up+rhs->m_Up, td = q1*m_Dir+rhs->m_Dir;
@@ -44,10 +44,10 @@ CRailSplitter CRailSplitter::CalcMid(
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CRailSplitter::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "Splitter"))) return NULL;
@@ -60,11 +60,11 @@ char *CRailSplitter::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CRailSplitter::Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *ind	//	ƒCƒ“ƒfƒ“ƒg
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *ind	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
 ){
 	fprintf(df, "%sSplitter{\n", ind);
 	fprintf(df, "%s\tPos = ", ind); V3Save(df, m_Pos, ";\n");
@@ -77,7 +77,7 @@ void CRailSplitter::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	‰eI’[ƒtƒ‰ƒOŒvZ
+ *	å½±çµ‚ç«¯ãƒ•ãƒ©ã‚°è¨ˆç®—
  */
 bool CRailConnectorLink::GetShadowTerminate(){
 	CRailWayLink *come = m_Link->m_Link[m_Side];
@@ -88,25 +88,25 @@ bool CRailConnectorLink::GetShadowTerminate(){
 }
 
 /*
- *	ƒRƒlƒNƒ^ƒŠƒ“ƒN”ŒvZ
+ *	ã‚³ãƒã‚¯ã‚¿ãƒªãƒ³ã‚¯æ•°è¨ˆç®—
  */
 int CRailConnectorLink::GetLinkCount(){
 	return m_Link->GetLinkCount();
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CRailConnectorLink::RestoreAddress(){
 	m_Link = (CRailConnector *)ReplaceAdr(m_Link);
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CRailConnectorLink::Read(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *pref	//	ƒvƒŒƒtƒBƒbƒNƒX
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *pref	//	ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹
 ){
 	char *eee;
 	if(!(str = Assignment(eee = str, pref))) throw CSynErr(eee);
@@ -120,11 +120,11 @@ char *CRailConnectorLink::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CRailConnectorLink::Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *pref	//	ƒvƒŒƒtƒBƒbƒNƒX
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *pref	//	ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹
 ){
 	fprintf(df, "%s%d, %d, %p;\n", pref, m_Side, m_Point, m_Link);
 }
@@ -133,7 +133,7 @@ void CRailConnectorLink::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	”½‘Î‘¤‚Öƒ[ƒv
+ *	åå¯¾å´ã¸ãƒ¯ãƒ¼ãƒ—
  */
 void CRailWayLink::WarpToOppositeEnd(){
 	CScene *scene = m_Link->m_Link[!m_Side].m_Link->GetScene();
@@ -151,18 +151,18 @@ void CRailWayLink::WarpToOppositeEnd(){
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CRailWayLink::RestoreAddress(){
 	m_Link = (CRailWay *)ReplaceAdr(m_Link);
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CRailWayLink::Read(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	char *pref	//	ƒvƒŒƒtƒBƒbƒNƒX
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	char *pref	//	ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹
 ){
 	char *eee;
 	if(!(str = Assignment(eee = str, pref))) throw CSynErr(eee);
@@ -174,11 +174,11 @@ char *CRailWayLink::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CRailWayLink::Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *pref	//	ƒvƒŒƒtƒBƒbƒNƒX
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *pref	//	ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹
 ){
 	fprintf(df, "%s%d, %p;\n", pref, m_Side, m_Link);
 }
@@ -187,17 +187,17 @@ void CRailWayLink::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CPierPos::RestoreAddress(){
 	m_Link = (CPier *)ReplaceAdr(m_Link);
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CPierPos::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = Assignment(eee = str, "PierLink"))) return NULL;
@@ -209,10 +209,10 @@ char *CPierPos::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CPierPos::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\t\t\t\t\tPierLink = %f, %p;\n", m_Pos, m_Link);
 }
@@ -221,17 +221,17 @@ void CPierPos::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CPolePos::RestoreAddress(){
 	m_Link = (CPole *)ReplaceAdr(m_Link);
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CPolePos::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = Assignment(eee = str, "PoleLink"))) return NULL;
@@ -247,10 +247,10 @@ char *CPolePos::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CPolePos::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\t\t\t\t\tPoleLink = %f, %d, %s, %p;\n",
 		m_Pos, m_Track, YESNO[m_Multi], m_Link);
@@ -259,13 +259,13 @@ void CPolePos::Save(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CRailConnector **CRailConnector::ms_Root = NULL;
 float CRailConnector::ms_MinDist;
 CRailConnector *CRailConnector::ms_Detect;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (“Ç—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (èª­è¾¼ç”¨)
  */
 CRailConnector::CRailConnector(){
 	m_OldAdr = NULL;
@@ -281,13 +281,13 @@ CRailConnector::CRailConnector(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailConnector::CRailConnector(
-	VEC3 &pos,	//	À•W
+	VEC3 &pos,	//	åº§æ¨™
 	VEC3 &dir	//	dir
 ):
-	m_Splitter(pos, dir)	//	•ªŠ„q
+	m_Splitter(pos, dir)	//	åˆ†å‰²å­
 {
 	m_OldAdr = NULL;
 	m_Selected = 0;
@@ -302,14 +302,14 @@ CRailConnector::CRailConnector(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailConnector::~CRailConnector(){
 	DELETE_V(m_Next);
 }
 
 /*
- *	è“®ƒ|ƒCƒ“ƒgİ’è
+ *	æ‰‹å‹•ãƒã‚¤ãƒ³ãƒˆè¨­å®š
  */
 void CRailConnector::SetNetPoint(int np){
 	m_NetPoint = np;
@@ -317,7 +317,7 @@ void CRailConnector::SetNetPoint(int np){
 }
 
 /*
- *	ƒ|ƒCƒ“ƒgİ’èƒlƒbƒgƒ[ƒN“¯Šú
+ *	ãƒã‚¤ãƒ³ãƒˆè¨­å®šãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯åŒæœŸ
  */
 void CRailConnector::SwitchNetPoint(){
 	if(g_NetworkInitialized){
@@ -330,7 +330,7 @@ void CRailConnector::SwitchNetPoint(){
 }
 
 /*
- *	–¢g—p‚È‚çƒŠƒXƒg‚©‚çíœ
+ *	æœªä½¿ç”¨ãªã‚‰ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
  */
 CRailConnector *CRailConnector::Delete(){
 	int i, j;
@@ -342,14 +342,14 @@ CRailConnector *CRailConnector::Delete(){
 }
 
 /*
- *	•Ò¬“P‹
+ *	ç·¨æˆæ’¤å»
  */
 void CRailConnector::RemoveGroup(){
 	if(m_User) m_User->Remove();
 }
 
 /*
- *	Šm’è
+ *	ç¢ºå®š
  */
 void CRailConnector::Stabilize(
 	VEC3 up	//	up
@@ -362,7 +362,7 @@ void CRailConnector::Stabilize(
 }
 
 /*
- *	ƒRƒlƒNƒ^ƒŠƒ“ƒN”ŒvZ
+ *	ã‚³ãƒã‚¯ã‚¿ãƒªãƒ³ã‚¯æ•°è¨ˆç®—
  */
 int CRailConnector::GetLinkCount(){
 	int i, j, n = 0;
@@ -371,7 +371,7 @@ int CRailConnector::GetLinkCount(){
 }
 
 /*
- *	i“ü‰Â”\«ƒ`ƒFƒbƒN
+ *	é€²å…¥å¯èƒ½æ€§ãƒã‚§ãƒƒã‚¯
  */
 bool CRailConnector::CheckRailBlock(CTrainGroup *group){
 	int i, j;
@@ -385,12 +385,12 @@ bool CRailConnector::CheckRailBlock(CTrainGroup *group){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CRailConnector::ScanInput(
-	int mode,		//	ƒ‚[ƒh
-	VEC3 &rect1,	//	—Ìˆæn“_
-	VEC3 &rect2		//	—ÌˆæI“_
+	int mode,		//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 &rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 &rect2		//	é ˜åŸŸçµ‚ç‚¹
 ){
 	if(GetLinkCount()<3) return;
 	VEC3 center = m_Splitter.m_Pos;
@@ -416,7 +416,7 @@ void CRailConnector::ScanInput(
 }
 
 /*
- *	ƒ|ƒŠƒSƒ“‚ğƒ_ƒ“ƒv
+ *	ãƒãƒªã‚´ãƒ³ã‚’ãƒ€ãƒ³ãƒ—
  */
 bool CRailConnector::Dump(){
 	if(m_CantProc) return false;
@@ -442,11 +442,11 @@ bool CRailConnector::Dump(){
 }
 
 /*
- *	ƒRƒlƒNƒ^•`‰æ
+ *	ã‚³ãƒã‚¯ã‚¿æç”»
  */
 void CRailConnector::Render(
-	D3DCOLOR color,	//	üF
-	bool net_point	//	ƒlƒbƒgƒ|ƒCƒ“ƒg•\¦
+	D3DCOLOR color,	//	ç·šè‰²
+	bool net_point	//	ãƒãƒƒãƒˆãƒã‚¤ãƒ³ãƒˆè¡¨ç¤º
 ){
 	if(!color) color = g_ColorSelect[m_Selected];
 	Draw3DPointAs2DRect(m_Splitter.m_Pos, color, 5);
@@ -463,7 +463,7 @@ void CRailConnector::Render(
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CRailConnector::RestoreAddress(){
 	int i, j;
@@ -474,10 +474,10 @@ void CRailConnector::RestoreAddress(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CRailConnector::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee, *tmp;
 	if(!(str = BeginBlock(str, "RailConnector"))){
@@ -504,10 +504,10 @@ char *CRailConnector::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CRailConnector::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\t\t\tRailConnector{\n");
 	fprintf(df, "\t\t\t\tAddress = %p;\n", this);

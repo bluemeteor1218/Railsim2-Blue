@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 
 using namespace std;
@@ -12,14 +12,14 @@ using namespace std;
 #endif
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ[‚Ì“Ç‚İ
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã®èª­è¾¼ã¿
  *
- *	ppTex		: “Ç‚İæ
- *	strFile	: ƒtƒ@ƒCƒ‹–¼
- *	cTrans	: “§‰ßF
- *	nMipLv	: ƒ~ƒbƒvƒ}ƒbƒvEƒŒƒxƒ‹
+ *	ppTex		: èª­è¾¼ã¿å…ˆ
+ *	strFile	: ãƒ•ã‚¡ã‚¤ãƒ«å
+ *	cTrans	: é€éè‰²
+ *	nMipLv	: ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ãƒ»ãƒ¬ãƒ™ãƒ«
  *
- *	¦ƒTƒCƒY‚ª‚Q‚Ìæ”‚Å‚È‚¢ê‡‚Í©“®“I‚É“§–¾‚È—Ìˆæ‚ª’Ç‰Á‚³‚ê‚éB
+ *	â€»ã‚µã‚¤ã‚ºãŒï¼’ã®ä¹—æ•°ã§ãªã„å ´åˆã¯è‡ªå‹•çš„ã«é€æ˜ãªé ˜åŸŸãŒè¿½åŠ ã•ã‚Œã‚‹ã€‚
  */
 inline HRESULT LOAD_TEXTURE(
 	LPTEX8 *ppTex, LPCSTR strFile, D3DCOLOR cTrans = 0, int nMipLv = 1){
@@ -32,7 +32,7 @@ inline HRESULT LOAD_TEXTURE(
 		cTrans, NULL, NULL, ppTex);
 	return hr;
 }
-//	ƒVƒXƒeƒ€ƒƒ‚ƒŠ‚Ö
+//	ã‚·ã‚¹ãƒ†ãƒ ãƒ¡ãƒ¢ãƒªã¸
 inline HRESULT LOAD_TEXTURE_SYS(
 	LPTEX8 *ppTex, LPCSTR strFile, D3DCOLOR cTrans = 0, int nMipLv = 1){
 	HRESULT hr;
@@ -44,7 +44,7 @@ inline HRESULT LOAD_TEXTURE_SYS(
 		cTrans, NULL, NULL, ppTex);
 	return hr;
 }
-//	ƒŠƒ\[ƒX‚©‚ç
+//	ãƒªã‚½ãƒ¼ã‚¹ã‹ã‚‰
 inline HRESULT LOAD_TEXTURE_RES(
 	LPTEX8 *ppTex, LPCSTR strRes, D3DCOLOR cTrans = 0, int nMipLv = 1){
 	HRESULT hr;
@@ -58,14 +58,14 @@ inline HRESULT LOAD_TEXTURE_RES(
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒEƒNƒ‰ƒX
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ»ã‚¯ãƒ©ã‚¹
  */
 class CTexture{
-	BOOL m_fCreate;				//	©ìƒtƒ‰ƒO
-	LPTEX8			m_pTex;		//	ƒeƒNƒXƒ`ƒƒEƒIƒuƒWƒFƒNƒg
-	D3DSURFACE_DESC	m_desc;		//	ƒTƒCƒY“™‚Ìî•ñ
+	BOOL m_fCreate;				//	è‡ªä½œãƒ•ãƒ©ã‚°
+	LPTEX8			m_pTex;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	D3DSURFACE_DESC	m_desc;		//	ã‚µã‚¤ã‚ºç­‰ã®æƒ…å ±
 
-	//	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^••ˆó
+	//	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿å°å°
 	CTexture& operator = (const CTexture&){return *this;}
 public:
 	CTexture();
@@ -81,22 +81,22 @@ public:
 	void Render(int x, int y);
 
 	/*
-	 *	ƒTƒCƒY‚Ìæ“¾i‚Q‚Ìæ”ƒTƒCƒY‚É‘µ‚¦‚ç‚ê‚éj
+	 *	ã‚µã‚¤ã‚ºã®å–å¾—ï¼ˆï¼’ã®ä¹—æ•°ã‚µã‚¤ã‚ºã«æƒãˆã‚‰ã‚Œã‚‹ï¼‰
 	 *
-	 *	pSize	: ƒTƒCƒY‚ÌŠi”[æ
+	 *	pSize	: ã‚µã‚¤ã‚ºã®æ ¼ç´å…ˆ
 	 */
 	void GetSize(int *pW, int *pH){*pW = m_desc.Width, *pH = m_desc.Height;}
 	/*
-	 *	ƒeƒNƒXƒ`ƒƒEƒIƒuƒWƒFƒNƒg‚Ìæ“¾
+	 *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å–å¾—
 	 */
 	LPTEX8 GetObject(){ return m_pTex; }
 	/*
-	 *	ƒT[ƒtƒFƒCƒX‚Ìæ“¾
+	 *	ã‚µãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
 	 */
 	void GetSurface(LPSURF8 *ppSur){m_pTex->GetSurfaceLevel(0, ppSur);}
 };
 
-//	ƒeƒNƒXƒ`ƒƒƒŠƒXƒg‚Ì—v‘f
+//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚¹ãƒˆã®è¦ç´ 
 struct TEXINFO{
 	LPTEX8 pTex;
 	string strName;
@@ -107,12 +107,12 @@ struct TEXINFO{
 };
 
 /*
- *	ƒeƒNƒXƒ`ƒƒƒŠƒXƒgEƒNƒ‰ƒX (CMeshƒNƒ‰ƒX‚Åg—p)
- *	E“¯‚¶ƒeƒNƒXƒ`ƒƒ[‚ª‘½d‚Éƒ[ƒh‚³‚ê‚È‚¢‚æ‚¤‚É‚·‚éB
- *	EQÆ”‚ğŠÄ‹‚µAg—p‚³‚ê‚Ä‚¢‚È‚¢ƒeƒNƒXƒ`ƒƒ[‚ğ‰ğ•ú‚·‚éB
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒªã‚¹ãƒˆãƒ»ã‚¯ãƒ©ã‚¹ (CMeshã‚¯ãƒ©ã‚¹ã§ä½¿ç”¨)
+ *	ãƒ»åŒã˜ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ãŒå¤šé‡ã«ãƒ­ãƒ¼ãƒ‰ã•ã‚Œãªã„ã‚ˆã†ã«ã™ã‚‹ã€‚
+ *	ãƒ»å‚ç…§æ•°ã‚’ç›£è¦–ã—ã€ä½¿ç”¨ã•ã‚Œã¦ã„ãªã„ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚’è§£æ”¾ã™ã‚‹ã€‚
  */
 class CTexList{
-	TEXINFO *m_pList;	//	ƒŠƒXƒg‚Ìæ“ª
+	TEXINFO *m_pList;	//	ãƒªã‚¹ãƒˆã®å…ˆé ­
 public:
 	CTexList();
 	~CTexList();
@@ -121,21 +121,21 @@ public:
 };
 
 /*
- *	ƒeƒNƒXƒ`ƒƒƒXƒe[ƒWEƒXƒe[ƒg‚Ìİ’è
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ»ã‚¹ãƒ†ãƒ¼ãƒˆã®è¨­å®š
  *
- *	stage	FƒXƒe[ƒW
- *	param	Fƒpƒ‰ƒ[ƒ^
- *	state	Fó‘Ô
+ *	stage	ï¼šã‚¹ãƒ†ãƒ¼ã‚¸
+ *	param	ï¼šãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
+ *	state	ï¼šçŠ¶æ…‹
  */
 inline void devSetTexState(DWORD stage, D3DTEXTURESTAGESTATETYPE pram, DWORD state){
 	sv3.pDev->SetTextureStageState(stage, pram, state);
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ‚Ìİ’è
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è¨­å®š
  *
- *	n		: ƒXƒe[ƒW
- *	pTex	: ƒeƒNƒXƒ`ƒƒ
+ *	n		: ã‚¹ãƒ†ãƒ¼ã‚¸
+ *	pTex	: ãƒ†ã‚¯ã‚¹ãƒãƒ£
  */
 inline void devSetTexture(DWORD n, LPTEX8 pTex){
 #if UDX_TEXTURE_MEASURE
@@ -145,9 +145,9 @@ inline void devSetTexture(DWORD n, LPTEX8 pTex){
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ‚Ìæ“¾
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å–å¾—
  *
- *	n		: ƒXƒe[ƒW
+ *	n		: ã‚¹ãƒ†ãƒ¼ã‚¸
  */
 inline LPTEX8 devGetTexture(DWORD n){
 	IDirect3DBaseTexture8 *pTex;
@@ -156,12 +156,12 @@ inline LPTEX8 devGetTexture(DWORD n){
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ[ƒJƒ‰[‚Ìİ’è
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚«ãƒ©ãƒ¼ã®è¨­å®š
  *
- *	stage	: ƒeƒNƒXƒ`ƒƒ[ƒXƒe[ƒW
- *	op	: ‰‰Zƒ^ƒCƒv
- *	arg1	: ˆø”‚P
- *	arg2	: ˆø”‚Q
+ *	stage	: ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¸
+ *	op	: æ¼”ç®—ã‚¿ã‚¤ãƒ—
+ *	arg1	: å¼•æ•°ï¼‘
+ *	arg2	: å¼•æ•°ï¼’
  */
 inline void devSetTexColor(
 	DWORD stage,
@@ -173,20 +173,20 @@ inline void devSetTexColor(
 	devSetTexState(stage, D3DTSS_COLORARG2, arg2);
 }
 
-//	•W€‚Ìƒ}ƒbƒsƒ“ƒO
+//	æ¨™æº–ã®ãƒãƒƒãƒ”ãƒ³ã‚°
 #define devTEX_SINGLE() devSetTexState(1, D3DTSS_COLOROP, D3DTOP_DISABLE)
-//	ƒ‰ƒCƒgƒ}ƒbƒsƒ“ƒOiƒVƒ“ƒOƒ‹ƒpƒXj
+//	ãƒ©ã‚¤ãƒˆãƒãƒƒãƒ”ãƒ³ã‚°ï¼ˆã‚·ãƒ³ã‚°ãƒ«ãƒ‘ã‚¹ï¼‰
 #define devTEX_LIGHTMAP() devSetTexColor(1, D3DTOP_MODULATE, D3DTA_TEXTURE, D3DTA_CURRENT)
-//	ŠÂ‹«ƒ}ƒbƒsƒ“ƒOiƒVƒ“ƒOƒ‹ƒpƒXj
+//	ç’°å¢ƒãƒãƒƒãƒ”ãƒ³ã‚°ï¼ˆã‚·ãƒ³ã‚°ãƒ«ãƒ‘ã‚¹ï¼‰
 #define devTEX_ENVMAP() devSetTexColor(1, D3DTOP_ADDSMOOTH, D3DTA_TEXTURE, D3DTA_CURRENT)
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ[ƒ¿‚Ìİ’è
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼Î±ã®è¨­å®š
  *
- *	stage	: ƒeƒNƒXƒ`ƒƒ[ƒXƒe[ƒW
- *	op	: ‰‰Zƒ^ƒCƒv
- *	arg1	: ˆø”‚P
- *	arg2	: ˆø”‚Q
+ *	stage	: ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¸
+ *	op	: æ¼”ç®—ã‚¿ã‚¤ãƒ—
+ *	arg1	: å¼•æ•°ï¼‘
+ *	arg2	: å¼•æ•°ï¼’
  */
 inline void devSetTexAlpha(
 	DWORD stage,
@@ -199,14 +199,14 @@ inline void devSetTexAlpha(
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ[ƒtƒBƒ‹ƒ^[‚Ìİ’è
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã®è¨­å®š
  *
- *	stage	: ƒeƒNƒXƒ`ƒƒ[ƒXƒe[ƒW
- *	type	: ƒtƒBƒ‹ƒ^[ƒ^ƒCƒv
+ *	stage	: ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¸
+ *	type	: ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã‚¿ã‚¤ãƒ—
  *
- *	D3DTEXF_NONE	: ƒtƒBƒ‹ƒ^‚È‚µ
- *	D3DTEXF_POINT	: Å‹ß“_•âŠ®
- *	D3DTEXF_LINEAR	: üŒ`•âŠ®
+ *	D3DTEXF_NONE	: ãƒ•ã‚£ãƒ«ã‚¿ãªã—
+ *	D3DTEXF_POINT	: æœ€è¿‘ç‚¹è£œå®Œ
+ *	D3DTEXF_LINEAR	: ç·šå½¢è£œå®Œ
  *	etc...
  */
 inline void devSetTexFilter(DWORD stage, DWORD type){
@@ -220,16 +220,16 @@ inline void devSetTexFilter(DWORD stage, DWORD type){
 #define devTEX_LINEAR(stage) devSetTexFilter(stage, D3DTEXF_LINEAR)
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ[ƒAƒhƒŒƒbƒVƒ“ƒOƒ‚[ƒh‚Ìİ’è
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚¢ãƒ‰ãƒ¬ãƒƒã‚·ãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰ã®è¨­å®š
  *
- *	stage	: ƒeƒNƒXƒ`ƒƒ[ƒXƒe[ƒW
- *	mode	: ƒAƒhƒŒƒbƒVƒ“ƒOƒ‚[ƒh
+ *	stage	: ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¸
+ *	mode	: ã‚¢ãƒ‰ãƒ¬ãƒƒã‚·ãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰
  *
- *	D3DTADDRESS_WRAP		: ƒ‰ƒbƒviƒfƒtƒHƒ‹ƒgj
- *	D3DTADDRESS_MIRROR		: ƒ~ƒ‰[
- *	D3DTADDRESS_CLAMP		: ƒNƒ‰ƒ“ƒv
- *	D3DTADDRESS_BORDER		: ‹«ŠEF
- *	D3DTADDRESS_MIRRORONCE	: ƒ~ƒ‰[‚Q
+ *	D3DTADDRESS_WRAP		: ãƒ©ãƒƒãƒ—ï¼ˆãƒ‡ãƒ•ã‚©ãƒ«ãƒˆï¼‰
+ *	D3DTADDRESS_MIRROR		: ãƒŸãƒ©ãƒ¼
+ *	D3DTADDRESS_CLAMP		: ã‚¯ãƒ©ãƒ³ãƒ—
+ *	D3DTADDRESS_BORDER		: å¢ƒç•Œè‰²
+ *	D3DTADDRESS_MIRRORONCE	: ãƒŸãƒ©ãƒ¼ï¼’
  */
 inline void devSetTexAddress(DWORD stage, D3DTEXTUREADDRESS mode){
 	devSetTexState(stage, D3DTSS_ADDRESSU, mode);
@@ -243,10 +243,10 @@ inline void devSetTexAddress(DWORD stage, D3DTEXTUREADDRESS mode){
 #define devTEX_MIRROR2()	devSetTexAddress(0, D3DTADDRESS_MIRRORONCE)
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ[ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€‚ÌON/OFF
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã®ON/OFF
  *
- *	stage	: ƒeƒNƒXƒ`ƒƒ[ƒXƒe[ƒW
- *	f		: ƒtƒ‰ƒO
+ *	stage	: ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¸
+ *	f		: ãƒ•ãƒ©ã‚°
  */
 inline void devSetTexTrans(DWORD stage, BOOL f){
 	devSetTexState(
@@ -255,12 +255,12 @@ inline void devSetTexTrans(DWORD stage, BOOL f){
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒ[ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ 
  *
- *	stage	: ƒeƒNƒXƒ`ƒƒ[ƒXƒe[ƒW
- *	pMtx	: •ÏŠ·s—ñ
+ *	stage	: ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¸
+ *	pMtx	: å¤‰æ›è¡Œåˆ—
  *
- *	¦–‘O‚ÉdevSetTexTrans()‚ÅTURE‚ğİ’è‚·‚é‚±‚ÆB
+ *	â€»äº‹å‰ã«devSetTexTrans()ã§TUREã‚’è¨­å®šã™ã‚‹ã“ã¨ã€‚
  */
 inline void devTexTransform(DWORD stage, MTX4 *pMtx){
 	sv3.pDev->SetTransform(
@@ -268,10 +268,10 @@ inline void devTexTransform(DWORD stage, MTX4 *pMtx){
 }
 
 /*
- *	ŠÂ‹«ƒ}ƒbƒv‚Ìİ’è
+ *	ç’°å¢ƒãƒãƒƒãƒ—ã®è¨­å®š
  *
- *	stage	: ƒeƒNƒXƒ`ƒƒ[ƒXƒe[ƒW
- *	f		: ƒtƒ‰ƒO
+ *	stage	: ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¸
+ *	f		: ãƒ•ãƒ©ã‚°
  */
 inline void devSetEnvMap(DWORD stage, BOOL f){
 	devSetTexTrans(stage, f);
@@ -286,6 +286,6 @@ inline void devSetEnvMap(DWORD stage, BOOL f){
 		f ? D3DTSS_TCI_CAMERASPACENORMAL : D3DTSS_TCI_PASSTHRU);
 }
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 D3DCOLOR CheckTexTrans(LPCSTR str);
 void CalcTextRect(int *w, int *h, LPCSTR str, HFONT hFont);

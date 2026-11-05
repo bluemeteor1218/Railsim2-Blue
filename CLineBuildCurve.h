@@ -1,4 +1,4 @@
-#ifndef CLINEBUILDCURVE_H_INCLUDED
+ï»¿#ifndef CLINEBUILDCURVE_H_INCLUDED
 #define CLINEBUILDCURVE_H_INCLUDED
 
 #include "CRailTraceCurve.h"
@@ -9,13 +9,13 @@ class CLinePlugin;
 class CPolePlugin;
 
 /*
- *	‰Ëüİ’uƒJ[ƒu
+ *	æ¶ç·šè¨­ç½®ã‚«ãƒ¼ãƒ–
  */
 class CLineBuildCurve: public CRailTraceCurve{
 private:
-	CPierPlugin *m_PierPlugin;	//	‹´‹rƒvƒ‰ƒOƒCƒ“
-	CLinePlugin *m_LinePlugin;	//	‰Ëüƒvƒ‰ƒOƒCƒ“
-	CPolePlugin *m_PolePlugin;	//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
+	CPierPlugin *m_PierPlugin;	//	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CLinePlugin *m_LinePlugin;	//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPolePlugin *m_PolePlugin;	//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 public:
 	CLineBuildCurve(CRailWay *, CRailPlugin *, CTiePlugin *,
 		CGirderPlugin *, CPierPlugin *, CLinePlugin *, CPolePlugin *);

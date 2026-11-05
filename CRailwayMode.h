@@ -1,4 +1,4 @@
-#ifndef CRAILWAYMODE_H_INCLUDED
+ï»¿#ifndef CRAILWAYMODE_H_INCLUDED
 #define CRAILWAYMODE_H_INCLUDED
 
 #include "CWindowCtrl.h"
@@ -17,27 +17,27 @@ class CPolePlugin;
 class CRailBuilder;
 
 /*
- *	ü˜HŠÖŒWƒ‚[ƒhŠî–{ƒNƒ‰ƒX
+ *	ç·šè·¯é–¢ä¿‚ãƒ¢ãƒ¼ãƒ‰åŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CRailwayMode{
 protected:
-	static int ms_CurrentType;				//	ƒ‚[ƒhƒ^ƒCƒv
-	static int ms_WindowPos[][2];			//	ƒEƒBƒ“ƒhƒEÀ•W
-	static int ms_TrackNum;					//	ü”
-	static float ms_TrackInterval;			//	üŠÔŠu
-	static CWindowCtrl ms_RailWindow;		//	ü˜Hİ’è‘‹
-	static CPushButton ms_PluginSetButton;	//	ƒvƒ‰ƒOƒCƒ“ƒZƒbƒgƒ{ƒ^ƒ“
-	static CStaticCtrl ms_TypeLabel;		//	í—Şƒ‰ƒxƒ‹
-	static CCheckBox ms_Type[];				//	í—Şƒ`ƒFƒbƒN
-	static CCheckBox ms_EnableCant;			//	ƒJƒ“ƒgƒ`ƒFƒbƒN
-	static CCheckBox ms_LiftRailSurface;	//	‚“x•â³ƒ`ƒFƒbƒN
-	static CStaticCtrl ms_MultiTrackLabel;	//	•¡üƒ‰ƒxƒ‹
-	static CCheckBox ms_MultiTrackCheck;	//	•¡üƒ`ƒFƒbƒN
-	static CStaticCtrl ms_TrackNumLabel;	//	‹O“¹”ƒ‰ƒxƒ‹
-	static CEditCtrl ms_TrackNumEdit;		//	‹O“¹”
-	static CStaticCtrl ms_TrackIntLabel;	//	‹O“¹ŠÔŠuƒ‰ƒxƒ‹
-	static CEditCtrl ms_TrackIntEdit;		//	‹O“¹ŠÔŠu
-	static CCamera ms_RailwayModeCamera;	//	ƒJƒƒ‰
+	static int ms_CurrentType;				//	ãƒ¢ãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—
+	static int ms_WindowPos[][2];			//	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åº§æ¨™
+	static int ms_TrackNum;					//	ç·šæ•°
+	static float ms_TrackInterval;			//	ç·šé–“éš”
+	static CWindowCtrl ms_RailWindow;		//	ç·šè·¯è¨­å®šçª“
+	static CPushButton ms_PluginSetButton;	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚»ãƒƒãƒˆãƒœã‚¿ãƒ³
+	static CStaticCtrl ms_TypeLabel;		//	ç¨®é¡ãƒ©ãƒ™ãƒ«
+	static CCheckBox ms_Type[];				//	ç¨®é¡ãƒã‚§ãƒƒã‚¯
+	static CCheckBox ms_EnableCant;			//	ã‚«ãƒ³ãƒˆãƒã‚§ãƒƒã‚¯
+	static CCheckBox ms_LiftRailSurface;	//	é«˜åº¦è£œæ­£ãƒã‚§ãƒƒã‚¯
+	static CStaticCtrl ms_MultiTrackLabel;	//	è¤‡ç·šãƒ©ãƒ™ãƒ«
+	static CCheckBox ms_MultiTrackCheck;	//	è¤‡ç·šãƒã‚§ãƒƒã‚¯
+	static CStaticCtrl ms_TrackNumLabel;	//	è»Œé“æ•°ãƒ©ãƒ™ãƒ«
+	static CEditCtrl ms_TrackNumEdit;		//	è»Œé“æ•°
+	static CStaticCtrl ms_TrackIntLabel;	//	è»Œé“é–“éš”ãƒ©ãƒ™ãƒ«
+	static CEditCtrl ms_TrackIntEdit;		//	è»Œé“é–“éš”
+	static CCamera ms_RailwayModeCamera;	//	ã‚«ãƒ¡ãƒ©
 public:
 	static void InitRailwayInterface();
 	static void GetPlugin(CRailPlugin **, CTiePlugin **,

@@ -1,24 +1,24 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include <list>
 
 using namespace std;
 
-//	ƒL[^ƒ{ƒ^ƒ“‚Ìó‘Ô
-#define S_FREE		0	//	—£‚³‚ê‚Ä‚¢‚éFb'00
-#define S_PULL		1	//	—£‚³‚ê‚½	Fb'01
-#define S_PUSH		2	//	‰Ÿ‚³‚ê‚½	Fb'10
-#define S_HOLD		3	//	‰Ÿ‚³‚ê‚Ä‚¢‚éFb'11
+//	ã‚­ãƒ¼ï¼ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹
+#define S_FREE		0	//	é›¢ã•ã‚Œã¦ã„ã‚‹ï¼šb'00
+#define S_PULL		1	//	é›¢ã•ã‚ŒãŸ	ï¼šb'01
+#define S_PUSH		2	//	æŠ¼ã•ã‚ŒãŸ	ï¼šb'10
+#define S_HOLD		3	//	æŠ¼ã•ã‚Œã¦ã„ã‚‹ï¼šb'11
 
-//	ƒ}ƒEƒXƒ{ƒ^ƒ“
-#define DIM_LEFT	0	//	¶ƒ{ƒ^ƒ“
-#define DIM_RIGHT	1	//	‰Eƒ{ƒ^ƒ“
-#define DIM_MIDDLE	2	//	’†‰›ƒ{ƒ^ƒ“iƒzƒC[ƒ‹j
+//	ãƒžã‚¦ã‚¹ãƒœã‚¿ãƒ³
+#define DIM_LEFT	0	//	å·¦ãƒœã‚¿ãƒ³
+#define DIM_RIGHT	1	//	å³ãƒœã‚¿ãƒ³
+#define DIM_MIDDLE	2	//	ä¸­å¤®ãƒœã‚¿ãƒ³ï¼ˆãƒ›ã‚¤ãƒ¼ãƒ«ï¼‰
 
-#define MAX_JOYSTICK	8	//	Å‘åƒWƒ‡ƒCƒXƒeƒBƒbƒN”
-#define MAX_BUTTON		8	//	Å‘åƒ{ƒ^ƒ“”
+#define MAX_JOYSTICK	8	//	æœ€å¤§ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯æ•°
+#define MAX_BUTTON		8	//	æœ€å¤§ãƒœã‚¿ãƒ³æ•°
 
-//	ƒWƒ‡ƒCƒXƒeƒBƒbƒN‚ÌƒL[^ƒ{ƒ^ƒ“
+//	ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ã‚­ãƒ¼ï¼ãƒœã‚¿ãƒ³
 #define DIJ_UP		0
 #define DIJ_DOWN	1
 #define DIJ_LEFT	2
@@ -35,31 +35,31 @@ using namespace std;
 #define DIJ_BT8		13
 
 struct SYSVALUE_I{
-	LPDIRECTINPUT8		pDI;		//	DirectPlayƒIƒuƒWƒFƒNƒg
-	LPDIRECTINPUTDEVICE8 pKey;		//	ƒL[ƒ{[ƒhEƒIƒuƒWƒFƒNƒg
-	LPDIRECTINPUTDEVICE8 pMouse;	//	ƒ}ƒEƒXEƒIƒuƒWƒFƒNƒg
-	LPDIRECTINPUTDEVICE8 pJoy[MAX_JOYSTICK];	//	ƒWƒ‡ƒCƒXƒeƒBƒbƒNƒIƒuƒWƒFƒNƒg
+	LPDIRECTINPUT8		pDI;		//	DirectPlayã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	LPDIRECTINPUTDEVICE8 pKey;		//	ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãƒ»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	LPDIRECTINPUTDEVICE8 pMouse;	//	ãƒžã‚¦ã‚¹ãƒ»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	LPDIRECTINPUTDEVICE8 pJoy[MAX_JOYSTICK];	//	ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
-	BYTE key[256];		//	ƒL[‚Ìó‘Ô
-	BYTE keyPoll[256];	//	ƒL[‚Ìó‘Ô
-	BYTE keyOld[256];	//	ƒL[‚Ìó‘Ôi‹Œj
-	BYTE exitKey;		//	I—¹ƒL[
-	list<int> charKey;	//	•¶ŽšƒR[ƒh
+	BYTE key[256];		//	ã‚­ãƒ¼ã®çŠ¶æ…‹
+	BYTE keyPoll[256];	//	ã‚­ãƒ¼ã®çŠ¶æ…‹
+	BYTE keyOld[256];	//	ã‚­ãƒ¼ã®çŠ¶æ…‹ï¼ˆæ—§ï¼‰
+	BYTE exitKey;		//	çµ‚äº†ã‚­ãƒ¼
+	list<int> charKey;	//	æ–‡å­—ã‚³ãƒ¼ãƒ‰
 
-	//	ƒ}ƒEƒX
-	BYTE btn[4];		//	ƒ{ƒ^ƒ“‚Ìó‘Ô
-	BYTE btnPoll[4];	//	ƒ{ƒ^ƒ“‚Ìó‘Ô
-	BYTE btnOld[4];		//	ƒ{ƒ^ƒ“‚Ìó‘Ôi‹Œj
-	POINT cur;			//	ƒJ[ƒ\ƒ‹À•W
-	LONG wheel;			//	ƒzƒC[ƒ‹‚Ìó‘Ô
-	LONG wheelPoll;		//	ƒzƒC[ƒ‹‚Ìó‘Ô
-	BOOL inside;		//	ƒJ[ƒ\ƒ‹‚ªƒEƒBƒ“ƒhƒE“à‚©
+	//	ãƒžã‚¦ã‚¹
+	BYTE btn[4];		//	ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹
+	BYTE btnPoll[4];	//	ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹
+	BYTE btnOld[4];		//	ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ï¼ˆæ—§ï¼‰
+	POINT cur;			//	ã‚«ãƒ¼ã‚½ãƒ«åº§æ¨™
+	LONG wheel;			//	ãƒ›ã‚¤ãƒ¼ãƒ«ã®çŠ¶æ…‹
+	LONG wheelPoll;		//	ãƒ›ã‚¤ãƒ¼ãƒ«ã®çŠ¶æ…‹
+	BOOL inside;		//	ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å†…ã‹
 
-	//	ƒWƒ‡ƒCƒXƒeƒBƒbƒN
-	BOOL fJoy;		//	Žg—p‚Ì—L–³
-	int numJoy;		//	ƒfƒoƒCƒX”
-	BYTE joy[MAX_JOYSTICK][MAX_BUTTON+6];	//	ƒ{ƒ^ƒ“‚Ìó‘Ô
-	BYTE joyOld[MAX_JOYSTICK][MAX_BUTTON+6];//	ƒ{ƒ^ƒ“‚Ìó‘Ôi‹Œj
+	//	ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯
+	BOOL fJoy;		//	ä½¿ç”¨ã®æœ‰ç„¡
+	int numJoy;		//	ãƒ‡ãƒã‚¤ã‚¹æ•°
+	BYTE joy[MAX_JOYSTICK][MAX_BUTTON+6];	//	ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹
+	BYTE joyOld[MAX_JOYSTICK][MAX_BUTTON+6];//	ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ï¼ˆæ—§ï¼‰
 };
 extern SYSVALUE_I svi;
 

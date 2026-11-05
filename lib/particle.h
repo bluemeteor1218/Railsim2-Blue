@@ -1,14 +1,14 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #if 0
 
 /*
- *	¶¬—pƒpƒ‰ƒ[ƒ^
+ *	ç”Ÿæˆç”¨ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
  */
 struct PARTICLE_PARAM{
-	float minLife;	//	õ–½iÅ¬AÅ‘åj
+	float minLife;	//	å¯¿å‘½ï¼ˆæœ€å°ã€æœ€å¤§ï¼‰
 	float maxLife;
-	BYTE minR;		//	FiR, G, B, Alphaj
+	BYTE minR;		//	è‰²ï¼ˆR, G, B, Alphaï¼‰
 	BYTE maxR;
 	BYTE minG;
 	BYTE maxG;
@@ -16,45 +16,45 @@ struct PARTICLE_PARAM{
 	BYTE maxB;
 	BYTE minA;
 	BYTE maxA;
-	float minAP;	//	ƒ¿’l•Ï‰»—Ê
+	float minAP;	//	Î±å€¤å¤‰åŒ–é‡
 	float maxAP;
-	float minSize;	//	ƒTƒCƒYi”¼Œaj
+	float minSize;	//	ã‚µã‚¤ã‚ºï¼ˆåŠå¾„ï¼‰
 	float maxSize;
-	float minSP;	//	ƒTƒCƒY•Ï‰»—Ê
+	float minSP;	//	ã‚µã‚¤ã‚ºå¤‰åŒ–é‡
 	float maxSP;
-	float minV;		//	‘¬“x
+	float minV;		//	é€Ÿåº¦
 	float maxV;
 };
 /*
- *	•Û—pƒpƒ‰ƒ[ƒ^
+ *	ä¿æŒç”¨ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
  */
 struct PARTICLE{
-	float		lifeTime;	//	õ–½i•bj
-	float		age;		//	”N—îi•bj
-	BYTE		r;			//	R ¬•ª
-	BYTE		g;			//	G ¬•ª
-	BYTE		b;			//	B ¬•ª
-	float		alpha;		//	ƒ¿’li0-255j
-	float		aplus;		//	ƒ¿’l‰ÁZ—Ê^•b
-	float		size;		//	ƒTƒCƒYi”¼Œaj
-	float		splus;		//	ƒTƒCƒY‰ÁZ—Ê^•b
-	VEC3		pos;		//	ˆÊ’u
-	VEC3		vec;		//	ˆÚ“®•ûŒü^•b
+	float		lifeTime;	//	å¯¿å‘½ï¼ˆç§’ï¼‰
+	float		age;		//	å¹´é½¢ï¼ˆç§’ï¼‰
+	BYTE		r;			//	R æˆåˆ†
+	BYTE		g;			//	G æˆåˆ†
+	BYTE		b;			//	B æˆåˆ†
+	float		alpha;		//	Î±å€¤ï¼ˆ0-255ï¼‰
+	float		aplus;		//	Î±å€¤åŠ ç®—é‡ï¼ç§’
+	float		size;		//	ã‚µã‚¤ã‚ºï¼ˆåŠå¾„ï¼‰
+	float		splus;		//	ã‚µã‚¤ã‚ºåŠ ç®—é‡ï¼ç§’
+	VEC3		pos;		//	ä½ç½®
+	VEC3		vec;		//	ç§»å‹•æ–¹å‘ï¼ç§’
 };
 /*
- *	ƒp[ƒeƒBƒNƒ‹ƒGƒ~ƒbƒ^EƒNƒ‰ƒX
+ *	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚¨ãƒŸãƒƒã‚¿ãƒ»ã‚¯ãƒ©ã‚¹
  */
 class CParticle{
-	PARTICLE *m_pb;	//	—±qƒf[ƒ^
-	VTX_LX*	m_vt;	//	’¸“_ƒe[ƒuƒ‹
-	int		m_num;	//	—±q”
-	VEC3	m_pos;	//	—±q”­¶ˆÊ’u
-	VEC3	m_gravity;	//	d—Í
-	float	m_rx[2];//	•úo•ûŒü‚Ì”ÍˆÍ
+	PARTICLE *m_pb;	//	ç²’å­ãƒ‡ãƒ¼ã‚¿
+	VTX_LX*	m_vt;	//	é ‚ç‚¹ãƒ†ãƒ¼ãƒ–ãƒ«
+	int		m_num;	//	ç²’å­æ•°
+	VEC3	m_pos;	//	ç²’å­ç™ºç”Ÿä½ç½®
+	VEC3	m_gravity;	//	é‡åŠ›
+	float	m_rx[2];//	æ”¾å‡ºæ–¹å‘ã®ç¯„å›²
 	float	m_ry[2];
 	float	m_rz[2];
 
-	//	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^••ˆó
+	//	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿å°å°
 	CParticle& operator = (const CParticle&){return *this;}
 public:
 
@@ -66,19 +66,19 @@ public:
 	BOOL Render();
 
 	/*
-	 *	d—Í‚Ìİ’è
+	 *	é‡åŠ›ã®è¨­å®š
 	 */
 	void SetGravity(VEC3 g){m_gravity = g;}
 	/*
-	 *	•úo•ûŒü‚Ì”ÍˆÍİ’è(X)
+	 *	æ”¾å‡ºæ–¹å‘ã®ç¯„å›²è¨­å®š(X)
 	 */
 	void SetXRange(float min, float max){m_rx[0] = min, m_rx[1] = max;}
 	/*
-	 *	•úo•ûŒü‚Ì”ÍˆÍİ’è(Y)
+	 *	æ”¾å‡ºæ–¹å‘ã®ç¯„å›²è¨­å®š(Y)
 	 */
 	void SetYRange(float min, float max){m_ry[0] = min, m_ry[1] = max;}
 	/*
-	 *	•úo•ûŒü‚Ì”ÍˆÍİ’è(Z)
+	 *	æ”¾å‡ºæ–¹å‘ã®ç¯„å›²è¨­å®š(Z)
 	 */
 	void SetZRange(float min, float max){m_rz[0] = min, m_rz[1] = max;}
 };

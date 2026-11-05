@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 typedef LPDIRECT3DVERTEXBUFFER8 LPVB8;
 typedef D3DPRIMITIVETYPE PRIMTYPE;
@@ -6,12 +6,12 @@ typedef D3DPRIMITIVETYPE PRIMTYPE;
 void CalcNormal(VEC3 t[3], VEC3 *n);
 
 /*
- *	’¸“_ƒtƒH[ƒ}ƒbƒg
+ *	é ‚ç‚¹ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
  *
- *	¦ƒ‰ƒCƒeƒBƒ“ƒOÏ‚İ’¸“_‚ğg—p‚·‚éê‡‚Íƒ‰ƒCƒeƒBƒ“ƒO‚ğOFF‚·‚éB
+ *	â€»ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°æ¸ˆã¿é ‚ç‚¹ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆã¯ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’OFFã™ã‚‹ã€‚
  */
 
-//	À•W3D•ÏŠ·Ï‚İAƒ‰ƒCƒeƒBƒ“ƒOÏ‚İ
+//	åº§æ¨™3Då¤‰æ›æ¸ˆã¿ã€ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°æ¸ˆã¿
 #define FVF_TL (D3DFVF_XYZRHW|D3DFVF_DIFFUSE)
 
 struct VTX_TL{
@@ -20,7 +20,7 @@ struct VTX_TL{
 	DWORD d;
 };
 
-//	À•W3D•ÏŠ·Ï‚İAƒ‰ƒCƒeƒBƒ“ƒOÏ‚İAƒeƒNƒXƒ`ƒƒ—L‚è
+//	åº§æ¨™3Då¤‰æ›æ¸ˆã¿ã€ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°æ¸ˆã¿ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£æœ‰ã‚Š
 #define FVF_TLX (D3DFVF_XYZRHW|D3DFVF_DIFFUSE|D3DFVF_TEX1)
 
 struct VTX_TLX{
@@ -31,7 +31,7 @@ struct VTX_TLX{
 	FLOAT v;
 };
 
-//	ƒ‰ƒCƒeƒBƒ“ƒOÏ‚İ
+//	ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°æ¸ˆã¿
 #define FVF_L (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 
 struct VTX_L{
@@ -39,7 +39,7 @@ struct VTX_L{
 	DWORD d;
 };
 
-//	ƒ‰ƒCƒeƒBƒ“ƒOÏ‚İAƒeƒNƒXƒ`ƒƒ—L‚è
+//	ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°æ¸ˆã¿ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£æœ‰ã‚Š
 #define FVF_LX (D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1)
 
 struct VTX_LX{
@@ -54,7 +54,7 @@ inline void SetVTX_LX(VTX_LX *vt, float x, float y, float z, D3DCOLOR d, float u
 
 void SetRectTL_LX(VTX_LX *vt, int x1, int y1, int x2, int y2, int z, D3DCOLOR c);
 
-//	ƒ‰ƒCƒeƒBƒ“ƒOÏ‚İAƒeƒNƒXƒ`ƒƒ~‚Q
+//	ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°æ¸ˆã¿ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£Ã—ï¼’
 #define FVF_LX2 (D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX2)
 
 struct VTX_LX2{
@@ -64,7 +64,7 @@ struct VTX_LX2{
 	FLOAT u2, v2;
 };
 
-//	–¢ƒ‰ƒCƒeƒBƒ“ƒO
+//	æœªãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°
 #define FVF_N (D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_DIFFUSE)
 
 struct VTX_N{
@@ -78,7 +78,7 @@ inline void SetVTX_N(
 	vt->x = x, vt->y = y, vt->z = z, vt->n = n, vt->d = d;
 }
 
-//	–¢ƒ‰ƒCƒeƒBƒ“ƒOAƒeƒNƒXƒ`ƒƒ—L‚è
+//	æœªãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£æœ‰ã‚Š
 #define FVF_NX (D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_DIFFUSE|D3DFVF_TEX1)
 
 struct VTX_NX{
@@ -93,7 +93,7 @@ inline void SetVTX_NX(
 	vt->x = x, vt->y = y, vt->z = z, vt->n = n, vt->d = d, vt->u = u, vt->v = v;
 }
 
-//	–¢ƒ‰ƒCƒeƒBƒ“ƒOAƒeƒNƒXƒ`ƒƒ~‚Q
+//	æœªãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£Ã—ï¼’
 #define FVF_NX2 (D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_DIFFUSE|D3DFVF_TEX2)
 
 struct VTX_NX2{
@@ -104,14 +104,14 @@ struct VTX_NX2{
 	FLOAT u2, v2;
 };
 
-//	’¸“_ƒNƒ‰ƒX
+//	é ‚ç‚¹ã‚¯ãƒ©ã‚¹
 class CVertex{
-	LPVB8 m_pVB;	//	’¸“_ƒoƒbƒtƒ@
-	DWORD m_fvf;	//	’¸“_ƒtƒH[ƒ}ƒbƒg
-	UINT m_stride;	//	Ÿ‚Ì’¸“_ƒf[ƒ^‚Ü‚Å‚ÌƒoƒCƒg”
-	UINT m_num;		//	’¸“_”
+	LPVB8 m_pVB;	//	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+	DWORD m_fvf;	//	é ‚ç‚¹ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+	UINT m_stride;	//	æ¬¡ã®é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã¾ã§ã®ãƒã‚¤ãƒˆæ•°
+	UINT m_num;		//	é ‚ç‚¹æ•°
 
-	//	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^••ˆó
+	//	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿å°å°
 	CVertex& operator = (const CVertex&){return *this;}
 public:
 	CVertex();
@@ -131,15 +131,15 @@ public:
 	void Render(PRIMTYPE type, UINT count);
 
 	/*
-	 *	’¸“_ƒtƒH[ƒ}ƒbƒg‚Ìæ“¾
+	 *	é ‚ç‚¹ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®å–å¾—
 	 */
 	DWORD GetFVF(){return m_fvf;}
 	/*
-	 *	’¸“_”‚Ìæ“¾
+	 *	é ‚ç‚¹æ•°ã®å–å¾—
 	 */
 	UINT Count(){return m_num;}
 	/*
-	 *	’¸“_ƒoƒbƒtƒ@‚Ìæ“¾
+	 *	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®å–å¾—
 	 */
 	LPVB8 GetObject(){return m_pVB;}
 };

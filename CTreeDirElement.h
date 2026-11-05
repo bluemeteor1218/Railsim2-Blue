@@ -1,4 +1,4 @@
-#ifndef CTREEDIRELEMENT_H_INCLUDED
+ï»¿#ifndef CTREEDIRELEMENT_H_INCLUDED
 #define CTREEDIRELEMENT_H_INCLUDED
 
 #include "CTreeElement.h"
@@ -6,16 +6,16 @@
 class CPluginMode;
 
 /*
- *	ƒcƒŠ[ƒfƒBƒŒƒNƒgƒŠ—v‘f
+ *	ãƒ„ãƒªãƒ¼ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªè¦ç´ 
  */
 class CTreeDirElement: public CTreeElement{
 	friend class CPluginTree;
 	friend class CTreeElement;
 private:
-	static CPopMenu *ms_DirMenu;	//	ƒfƒBƒŒƒNƒgƒŠƒƒjƒ…[
-	bool m_Expand;					//	“WŠJƒtƒ‰ƒO
-	CTreeElement *m_Child;			//	q
-	CMiniButton m_ExButton;			//	“WŠJƒ{ƒ^ƒ“
+	static CPopMenu *ms_DirMenu;	//	ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	bool m_Expand;					//	å±•é–‹ãƒ•ãƒ©ã‚°
+	CTreeElement *m_Child;			//	å­
+	CMiniButton m_ExButton;			//	å±•é–‹ãƒœã‚¿ãƒ³
 public:
 	static void InitMenu();
 	static void FreeMenu();

@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 void Draw2DLine(int x1, int y1, int x2, int y2, D3DCOLOR c1 = 0xffffffff, D3DCOLOR c2 = 0);
 void Draw3DLine(VEC3 p1, VEC3 p2, D3DCOLOR c1 = 0xffffffff, D3DCOLOR c2 = 0);
@@ -17,10 +17,10 @@ void Fill3DCircle(VEC3 pos, float r, D3DCOLOR cc = 0xffffffff, D3DCOLOR ca = 0xf
 void DrawBox(BOX8 *pB, D3DCOLOR c = 0xffffffff);
 
 /*
- *	UVÀ•W‚Ìw’è
+ *	UVåº§æ¨™ã®æŒ‡å®š
  *
- *	u1, v1	: ¶’[‚Ì’l
- *	u2, v2	: ‰E’[‚Ì’l
+ *	u1, v1	: å·¦ç«¯ã®å€¤
+ *	u2, v2	: å³ç«¯ã®å€¤
  */
 inline void SetUVMap(float u1, float v1, float u2, float v2){
 	sv3.u[0] = u1, sv3.u[1] = u2;
@@ -28,9 +28,9 @@ inline void SetUVMap(float u1, float v1, float u2, float v2){
 }
 
 /*
- *	À•W²‚ğ•`‰æ
+ *	åº§æ¨™è»¸ã‚’æç”»
  *
- *	s		: ²‚Ì’·‚³
+ *	s		: è»¸ã®é•·ã•
  */
 inline void DrawAxis(float s = 5){
 	Draw3DLine(VEC3(0, 0, 0), VEC3(s, 0, 0), 0xffff0000);

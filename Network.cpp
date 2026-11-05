@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "md5.h"
 #include "Network.h"
 #include "CListView.h"
@@ -10,14 +10,14 @@
 #include "CTrainGroup.h"
 #include "CSaveFile.h"
 
-//	“à•”’è”
+//	å†…éƒ¨å®šæ•°
 extern const int RSN_SCRNAME_MAX = 32;
 extern const int RSN_SYNC_INTERVAL_MIN = MAXFPS/10;
 extern const int RSN_SYNC_INTERVAL_MAX = MAXFPS*5;
 const int RSN_MEMBER_MAX = 12;
 const int RSN_TRANSFER_STRIDE = 16000;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 CRITICAL_SECTION g_NetworkCS;
 
 bool g_NetworkCloseRequest = false;
@@ -216,7 +216,7 @@ struct RSNMemberInfo{
 	vector<RSNMergeTrainControlInfo> merge_train_ctrl;
 	RSNMemberInfo(): sync_limit(0){}
 };
-vector<RSNMemberInfo> g_NetworkMembers; // g—p‚ÍƒNƒŠƒeƒBƒJƒ‹ƒZƒNƒVƒ‡ƒ“‚É“ü‚ê‚é‚±‚Æ
+vector<RSNMemberInfo> g_NetworkMembers; // ä½¿ç”¨æ™‚ã¯ã‚¯ãƒªãƒ†ã‚£ã‚«ãƒ«ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã«å…¥ã‚Œã‚‹ã“ã¨
 bool g_NetworkMemberUpdated = false;
 
 struct RSNChatLog{
@@ -1145,11 +1145,11 @@ void StartNetworkSimulation(){
 
 const int CHAT_MSG_MAX = 16;
 
-static CInterface g_NetworkInterface;	//	ƒlƒbƒgƒ[ƒNƒCƒ“ƒ^[ƒtƒFƒCƒX
-static CInterface g_ChatInterface;		//	ƒlƒbƒgƒ[ƒNƒCƒ“ƒ^[ƒtƒFƒCƒX
-static CCheckBox g_ChatCheckBox;		//	ƒ`ƒƒƒbƒg•\¦
-static CEditCtrl g_ChatEditCtrl;		//	ƒ`ƒƒƒbƒg“ü—Í
-static CPushButton g_ChatSendButton;	//	ƒ`ƒƒƒbƒg‘—M
+static CInterface g_NetworkInterface;	//	ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
+static CInterface g_ChatInterface;		//	ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
+static CCheckBox g_ChatCheckBox;		//	ãƒãƒ£ãƒƒãƒˆè¡¨ç¤º
+static CEditCtrl g_ChatEditCtrl;		//	ãƒãƒ£ãƒƒãƒˆå…¥åŠ›
+static CPushButton g_ChatSendButton;	//	ãƒãƒ£ãƒƒãƒˆé€ä¿¡
 
 bool g_ChatBackground = true;
 

@@ -1,13 +1,13 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CLensFlare.h"
 #include "CModelPlugin.h"
 #include "CConfigMode.h"
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CFlareElement::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	m_Texture = NULL;
@@ -39,7 +39,7 @@ char *CFlareElement::Read(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CFlareElement::LoadData(){
 	if(m_Type==2) m_Texture = g_TexList.Get(
@@ -50,10 +50,10 @@ void CFlareElement::LoadData(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CLensFlare::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(str, "LensFlare"))) return NULL;
@@ -75,7 +75,7 @@ char *CLensFlare::Read(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CLensFlare::LoadData(){
 	IFlareElement ifl = m_Flare.begin();
@@ -83,14 +83,14 @@ void CLensFlare::LoadData(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CLensFlare::Render(
-	VEC3 pos,		//	ŒõŒ¹À•W
-	VEC3 dir,		//	ŒõŒ¹•ûŒü
-	VEC3 toward,	//	Šî€•ûŒü
-	float vol,		//	ƒ}ƒXƒ^ƒAƒ‹ƒtƒ@’l
-	float maxdist	//	Å‘å‹——£
+	VEC3 pos,		//	å…‰æºåº§æ¨™
+	VEC3 dir,		//	å…‰æºæ–¹å‘
+	VEC3 toward,	//	åŸºæº–æ–¹å‘
+	float vol,		//	ãƒã‚¹ã‚¿ã‚¢ãƒ«ãƒ•ã‚¡å€¤
+	float maxdist	//	æœ€å¤§è·é›¢
 ){
 	if(!m_Flare.size()) return;
 	float range = V3Len(&(GetVPos()-pos));
@@ -100,7 +100,7 @@ void CLensFlare::Render(
 	V3Norm(&vCamera, &vCamera);
 	float angle = V3Dot(&dir, &-toward);
 	if(angle<=m_StartAngle) return;
-	devBLEND_ADD2();	//	‰ÁZƒ‚[ƒh‚Éİ’è
+	devBLEND_ADD2();	//	åŠ ç®—ãƒ¢ãƒ¼ãƒ‰ã«è¨­å®š
 	float alpha = vol*(angle-m_StartAngle)/(1.0f-m_StartAngle);
 	float shift = 0.0f, bl = alpha*FRand2(1.0f-m_Twinkle, 1.0f);
 	IFlareElement ifl = m_Flare.begin();
@@ -136,17 +136,17 @@ void CLensFlare::Render(
 		}
 		shift = dist;
 	}
-	devBLEND_ALPHA();	//	”¼“§–¾ƒ‚[ƒh‚É–ß‚·
+	devBLEND_ALPHA();	//	åŠé€æ˜ãƒ¢ãƒ¼ãƒ‰ã«æˆ»ã™
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CWhiteout::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "Whiteout"))) return NULL;
@@ -158,15 +158,15 @@ char *CWhiteout::Read(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CWhiteout::Render(
-	VEC3 dir,	//	ŒõŒ¹•ûŒü
-	float vol	//	ƒ}ƒXƒ^ƒAƒ‹ƒtƒ@’l
+	VEC3 dir,	//	å…‰æºæ–¹å‘
+	float vol	//	ãƒã‚¹ã‚¿ã‚¢ãƒ«ãƒ•ã‚¡å€¤
 ){
 	if(!m_Color) return;
-	VEC3 vLight = -dir;			//	ƒJƒƒ‰‚©‚çŒõŒ¹‚Ö‚ÌƒxƒNƒgƒ‹
-	VEC3 vCamera = GetVDir();	//	ƒJƒƒ‰‚ÌŒü‚«
+	VEC3 vLight = -dir;			//	ã‚«ãƒ¡ãƒ©ã‹ã‚‰å…‰æºã¸ã®ãƒ™ã‚¯ãƒˆãƒ«
+	VEC3 vCamera = GetVDir();	//	ã‚«ãƒ¡ãƒ©ã®å‘ã
 	V3Norm(&vCamera, &vCamera);
 	V3Norm(&vLight, &vLight);
 	float angle = V3Dot(&vLight, &vCamera);
@@ -179,12 +179,12 @@ void CWhiteout::Render(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CHeadlightInst::CHeadlightInst(
-	VEC3 pos,		//	ŒõŒ¹À•W
-	VEC3 dir,		//	ŒõŒ¹•ûŒü
-	CHeadlight *hl	//	ƒwƒbƒhƒ‰ƒCƒg
+	VEC3 pos,		//	å…‰æºåº§æ¨™
+	VEC3 dir,		//	å…‰æºæ–¹å‘
+	CHeadlight *hl	//	ãƒ˜ãƒƒãƒ‰ãƒ©ã‚¤ãƒˆ
 ){
 	m_RenderPos = pos;
 	m_RenderDir = dir;
@@ -194,12 +194,12 @@ CHeadlightInst::CHeadlightInst(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 list<CHeadlightInst> CHeadlight::ms_RenderList;
 
 /*
  *	[static]
- *	ƒŠƒXƒg‰Šú‰»
+ *	ãƒªã‚¹ãƒˆåˆæœŸåŒ–
  */
 void CHeadlight::InitRenderList(){
 	ms_RenderList.clear();
@@ -207,7 +207,7 @@ void CHeadlight::InitRenderList(){
 
 /*
  *	[static]
- *	‘S‚ÄƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	å…¨ã¦ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CHeadlight::RenderAll(){
 	devSetTexture(0, NULL);
@@ -223,11 +223,11 @@ void CHeadlight::RenderAll(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CHeadlight::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	Ôçqƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp, *eee;
 	string obj;
@@ -244,14 +244,14 @@ char *CHeadlight::Read(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CHeadlight::LoadData(){
 	m_LensFlare.LoadData();
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒŠƒXƒg‚É“o˜^
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒªã‚¹ãƒˆã«ç™»éŒ²
  */
 bool CHeadlight::Register(){
 	CObject *obj = m_Link->GetObject();
@@ -267,10 +267,10 @@ bool CHeadlight::Register(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CHeadlight::Render(
-	CHeadlightInst *inst	//	ƒCƒ“ƒXƒ^ƒ“ƒX
+	CHeadlightInst *inst	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	m_LensFlare.Render(inst->m_RenderPos, inst->m_RenderDir,
 		inst->m_RenderPos-GetVPos(), 1.0f, m_MaxDistance);

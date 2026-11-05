@@ -1,20 +1,20 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
-//	¦‚±‚Ìƒtƒ@ƒCƒ‹‚ğ‘‚«Š·‚¦‚½ê‡‚Ímain.cpp‚ğƒŠƒrƒ‹ƒh‚µ‚Ä‰º‚³‚¢B
+//	â€»ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›¸ãæ›ãˆãŸå ´åˆã¯main.cppã‚’ãƒªãƒ“ãƒ«ãƒ‰ã—ã¦ä¸‹ã•ã„ã€‚
 
-const int MAXFPS = 30;	//	FPS‚Ì–Ú•W’l
+const int MAXFPS = 30;	//	FPSã®ç›®æ¨™å€¤
 
 class CFrame{
-	DWORD frame;		//	ƒtƒŒ[ƒ€‚ğƒJƒEƒ“ƒg
-	DWORD frameWait;	//	ƒtƒŒ[ƒ€–ˆ‚ÌƒEƒGƒCƒg
-	DWORD fineWait;		//	MAXFPS/10–ˆ‚ÌƒEƒGƒCƒg
-	DWORD cnt;			//	MAXFPS/10‚Ü‚ÅƒtƒŒ[ƒ€‚ğƒJƒEƒ“ƒg
-	DWORD start;		//	ŠJnŠÔ
-	DWORD old;			//	MAXFPS/2ƒtƒŒ[ƒ€‘O‚ÌŠÔ
+	DWORD frame;		//	ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ã‚«ã‚¦ãƒ³ãƒˆ
+	DWORD frameWait;	//	ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®ã‚¦ã‚¨ã‚¤ãƒˆ
+	DWORD fineWait;		//	MAXFPS/10æ¯ã®ã‚¦ã‚¨ã‚¤ãƒˆ
+	DWORD cnt;			//	MAXFPS/10ã¾ã§ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ã‚«ã‚¦ãƒ³ãƒˆ
+	DWORD start;		//	é–‹å§‹æ™‚é–“
+	DWORD old;			//	MAXFPS/2ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®æ™‚é–“
 
 public:
-	float fps;		//	FPS‚ÌÀ‘ª’l
-	DWORD framecnt;	//	‹N“®Œã‚ÌƒtƒŒ[ƒ€ƒJƒEƒ“ƒg
+	float fps;		//	FPSã®å®Ÿæ¸¬å€¤
+	DWORD framecnt;	//	èµ·å‹•å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚«ã‚¦ãƒ³ãƒˆ
 
 	void Init();
 	void Sync();
@@ -23,33 +23,33 @@ public:
 extern CFrame g_frame;
 
 /*
- *	FPS ‚Ìæ“¾
+ *	FPS ã®å–å¾—
  */
 inline float GetFPS(){ return g_frame.fps; }
 
 /*
- *	ƒtƒŒ[ƒ€ƒJƒEƒ“ƒg‚Ìæ“¾
+ *	ãƒ•ãƒ¬ãƒ¼ãƒ ã‚«ã‚¦ãƒ³ãƒˆã®å–å¾—
  */
 inline DWORD GetFrameCount(){ return g_frame.framecnt; }
 
 /*
- *	ƒtƒŒ[ƒ€“¯Šú
+ *	ãƒ•ãƒ¬ãƒ¼ãƒ åŒæœŸ
  */
 inline void SyncFrame(){ g_frame.Sync(); }
 
 /*
- *	—”‰Šú‰»
+ *	ä¹±æ•°åˆæœŸåŒ–
  */
 inline void Randomize(){ srand((unsigned int)time(NULL)); }
 
 /*
- *	0`x-1‚Ì—”
+ *	0ï½x-1ã®ä¹±æ•°
  */
 inline int Rand(int x){ return rand()%x; }
 inline float FRand(float x){ return rand()*x/RAND_MAX; }
 
 /*
- *	”ÍˆÍw’è‚Ì—”
+ *	ç¯„å›²æŒ‡å®šã®ä¹±æ•°
  */
 inline int Rand2(int a, int b){ return Rand(b-a)+a; }
 inline float FRand2(float a, float b){ return FRand(b-a)+a; }

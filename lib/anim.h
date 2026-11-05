@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 struct ANIM_STATE{
 	VEC3 pos;
@@ -6,13 +6,13 @@ struct ANIM_STATE{
 };
 
 class CAnim{
-	CMesh		*m_pMeshList;	//	ƒƒbƒVƒ…ƒŠƒXƒg
-	ANIM_STATE	*m_pStateTable;	//	ƒƒbƒVƒ…•Ê‚Ìó‘Ô(ƒNƒH[ƒ^ƒjƒIƒ“AÀ•W)
-	CObject		m_obj;			//	ƒAƒjƒ[ƒVƒ‡ƒ“‘S‘Ì‚ÌÀ•WŠÇ—
-	int			m_nMeshes;		//	ƒƒbƒVƒ…”
-	int			m_nFrames;		//	ƒtƒŒ[ƒ€”
-	float		m_playFrame;	//	Ä¶’†‚ÌƒtƒŒ[ƒ€
-	float		m_speed;		//	ƒ‹[ƒv–ˆ‚ÌƒtƒŒ[ƒ€‰ÁZ’l
+	CMesh		*m_pMeshList;	//	ãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚¹ãƒˆ
+	ANIM_STATE	*m_pStateTable;	//	ãƒ¡ãƒƒã‚·ãƒ¥åˆ¥ã®çŠ¶æ…‹(ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã€åº§æ¨™)
+	CObject		m_obj;			//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å…¨ä½“ã®åº§æ¨™ç®¡ç†
+	int			m_nMeshes;		//	ãƒ¡ãƒƒã‚·ãƒ¥æ•°
+	int			m_nFrames;		//	ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
+	float		m_playFrame;	//	å†ç”Ÿä¸­ã®ãƒ•ãƒ¬ãƒ¼ãƒ 
+	float		m_speed;		//	ãƒ«ãƒ¼ãƒ—æ¯ã®ãƒ•ãƒ¬ãƒ¼ãƒ åŠ ç®—å€¤
 
 	void ComputeMatrix(MTX4 *pMtx, int s1, int s2, float rate);
 public:
@@ -24,29 +24,29 @@ public:
 	BOOL Render(BOOL fLoop);
 
 	/*
-	 *	Ä¶‘¬“x‚ğw’è
+	 *	å†ç”Ÿé€Ÿåº¦ã‚’æŒ‡å®š
 	 */
 	void SetSpeed(float s){m_speed = s;}
 	/*
-	 *	Ä¶’†‚ÌƒtƒŒ[ƒ€‚ğİ’è
+	 *	å†ç”Ÿä¸­ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’è¨­å®š
 	 */
 	void SetFrame(float f){m_playFrame = max(0.0f, min(f, m_nFrames-1.0f));}
 	/*
-	 *	Ä¶’†‚ÌƒtƒŒ[ƒ€‚ğæ“¾
+	 *	å†ç”Ÿä¸­ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å–å¾—
 	 */
 	float GetFrame(){return m_playFrame;}
 	/*
-	 *	ƒtƒŒ[ƒ€”‚ğæ“¾
+	 *	ãƒ•ãƒ¬ãƒ¼ãƒ æ•°ã‚’å–å¾—
 	 */
 	int GetNumFrames(){return m_nFrames;}
 	/*
-	À•WŠÇ‘€ìƒIƒuƒWƒFƒNƒg‚ğæ“¾
+	åº§æ¨™ç®¡æ“ä½œã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—
 
-	 *	¦“–‚è”»’è—p‚Ìî•ñ‚ÍŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚¹‚ñB
+	 *	â€»å½“ã‚Šåˆ¤å®šç”¨ã®æƒ…å ±ã¯å«ã¾ã‚Œã¦ã„ã¾ã›ã‚“ã€‚
 	 */
 	CObject *GetObject(){return &m_obj;}
 	/*
-	 *	ƒƒbƒVƒ…ƒŠƒXƒg‚ğæ“¾
+	 *	ãƒ¡ãƒƒã‚·ãƒ¥ãƒªã‚¹ãƒˆã‚’å–å¾—
 	 */
 	void GetMeshList(CMesh **ppMesh, int *pNum){
 		*ppMesh = m_pMeshList;

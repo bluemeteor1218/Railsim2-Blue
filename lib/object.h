@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 class CNamedObject;
 
@@ -9,11 +9,11 @@ BOOL IntersectTriangle(
 	FLOAT *t, FLOAT *u, FLOAT *v);
 
 class CObject{
-	CMesh		*m_pMesh;		//	ƒƒbƒVƒ…EƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg
-	CObject		*m_pParent;		//	eƒIƒuƒWƒFƒNƒg
-	MTX4		m_mtx;			//	ƒ}ƒgƒŠƒNƒX
-	float		m_scale;		//	ƒXƒP[ƒ‹
-	BOX8		m_box;			//	‹«ŠEƒ{ƒbƒNƒXiƒgƒ‰ƒ“ƒXƒtƒH[ƒ€‘Oj
+	CMesh		*m_pMesh;		//	ãƒ¡ãƒƒã‚·ãƒ¥ãƒ»ã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CObject		*m_pParent;		//	è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	MTX4		m_mtx;			//	ãƒãƒˆãƒªã‚¯ã‚¹
+	float		m_scale;		//	ã‚¹ã‚±ãƒ¼ãƒ«
+	BOX8		m_box;			//	å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹ï¼ˆãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ å‰ï¼‰
 
 public:
 	static MAT8 matShadow;
@@ -87,7 +87,7 @@ public:
 };
 
 /*
- *	‹«ŠEƒ{ƒbƒNƒX‚ğƒZƒbƒg
+ *	å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹ã‚’ã‚»ãƒƒãƒˆ
  */
 inline void SetBoxMinMax(BOX8 *pB, VEC3 min, VEC3 max){
 	pB->v[0].x = max.x, pB->v[0].y = max.y, pB->v[0].z = max.z;
@@ -101,17 +101,17 @@ inline void SetBoxMinMax(BOX8 *pB, VEC3 min, VEC3 max){
 }
 
 /*
- *	‹«ŠE‹…ƒeƒXƒg
+ *	å¢ƒç•Œçƒãƒ†ã‚¹ãƒˆ
  *
- *	c1, r1		: ƒIƒuƒWƒFƒNƒgA‚Ì’†S‚Æ”¼Œa
- *	c2, r2		: ƒIƒuƒWƒFƒNƒgB‚Ì’†S‚Æ”¼Œa
+ *	c1, r1		: ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆAã®ä¸­å¿ƒã¨åŠå¾„
+ *	c2, r2		: ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆBã®ä¸­å¿ƒã¨åŠå¾„
  */
 inline BOOL SphereTest(VEC3 c1, float r1, VEC3 c2, float r2){
 	if(D3DXVec3Length(&VEC3(c1-c2))<r1+r2) return TRUE;
 	else return FALSE;
 }
 
-//	è”²‚«—pƒ}ƒNƒ(^^;
+//	æ‰‹æŠœãç”¨ãƒã‚¯ãƒ­(^^;
 #define OBJ_CTRL(o, v) \{\
 	ON_HOLD(DIK_LEFT) o.Move(VEC3(-v, 0, 0));\
 	ON_HOLD(DIK_RIGHT) o.Move(VEC3(v, 0, 0));\

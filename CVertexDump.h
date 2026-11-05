@@ -1,27 +1,27 @@
-#ifndef CVERTEXDUMP_H_INCLUDED
+ï»¿#ifndef CVERTEXDUMP_H_INCLUDED
 #define CVERTEXDUMP_H_INCLUDED
 
-#define LINE_DUMP_MAX (sv3.capsMaxPrim/2)	//	’¼üƒ_ƒ“ƒvÅ‘å’l
-#define QUAD_DUMP_MAX (sv3.capsMaxPrim/6)	//	lŠpŒ`ƒ_ƒ“ƒvÅ‘å’l
+#define LINE_DUMP_MAX (sv3.capsMaxPrim/2)	//	ç›´ç·šãƒ€ãƒ³ãƒ—æœ€å¤§å€¤
+#define QUAD_DUMP_MAX (sv3.capsMaxPrim/6)	//	å››è§’å½¢ãƒ€ãƒ³ãƒ—æœ€å¤§å€¤
 
 /*
- *	ƒfƒBƒtƒ…[ƒYƒ|ƒCƒ“ƒ^
+ *	ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚ºãƒã‚¤ãƒ³ã‚¿
  */
 class CDiffusePointer{
 private:
-	D3DCOLOR *m_Pointer;	//	ƒ|ƒCƒ“ƒ^
-	D3DCOLOR m_Default;		//	ƒfƒtƒHƒ‹ƒg’l
+	D3DCOLOR *m_Pointer;	//	ãƒã‚¤ãƒ³ã‚¿
+	D3DCOLOR m_Default;		//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤
 public:
 	CDiffusePointer(D3DCOLOR *p){ m_Default = *(m_Pointer = p); }
 	void Restore(){ *m_Pointer = m_Default; }
 	void Set(D3DCOLOR c){ *m_Pointer = c; }
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CDiffusePointer>::iterator IDiffusePointer;
 
 /*
- *	ƒo[ƒeƒbƒNƒXƒ_ƒ“ƒp
+ *	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹ãƒ€ãƒ³ãƒ‘
  */
 class CVertexDump{
 protected:
@@ -29,15 +29,15 @@ public:
 };
 
 /*
- *	’¼üƒ_ƒ“ƒv (ƒ‰ƒCƒeƒBƒ“ƒOÏEÀ•W•ÏŠ·Ï‚İ)
+ *	ç›´ç·šãƒ€ãƒ³ãƒ— (ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°æ¸ˆãƒ»åº§æ¨™å¤‰æ›æ¸ˆã¿)
  */
 class CLineDumpTL: public CVertexDump{
 private:
-	int m_LineNum;		//	’¼ü”
-	int m_Count;		//	ƒJƒEƒ“ƒ^
-	VTX_TL *m_Buffer;	//	ƒoƒbƒtƒ@
-	CVertex m_Vertex;	//	ƒo[ƒeƒbƒNƒX
-	CLineDumpTL *m_Next;	//	Ÿ
+	int m_LineNum;		//	ç›´ç·šæ•°
+	int m_Count;		//	ã‚«ã‚¦ãƒ³ã‚¿
+	VTX_TL *m_Buffer;	//	ãƒãƒƒãƒ•ã‚¡
+	CVertex m_Vertex;	//	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
+	CLineDumpTL *m_Next;	//	æ¬¡
 public:
 	CLineDumpTL(int);
 	CLineDumpTL(CLineDumpTL *);
@@ -51,15 +51,15 @@ public:
 };
 
 /*
- *	’¼üƒ_ƒ“ƒv (ƒ‰ƒCƒeƒBƒ“ƒOÏ)
+ *	ç›´ç·šãƒ€ãƒ³ãƒ— (ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°æ¸ˆ)
  */
 class CLineDumpL: public CVertexDump{
 private:
-	int m_LineNum;		//	’¼ü”
-	int m_Count;		//	ƒJƒEƒ“ƒ^
-	VTX_L *m_Buffer;	//	ƒoƒbƒtƒ@
-	CVertex m_Vertex;	//	ƒo[ƒeƒbƒNƒX
-	CLineDumpL *m_Next;	//	Ÿ
+	int m_LineNum;		//	ç›´ç·šæ•°
+	int m_Count;		//	ã‚«ã‚¦ãƒ³ã‚¿
+	VTX_L *m_Buffer;	//	ãƒãƒƒãƒ•ã‚¡
+	CVertex m_Vertex;	//	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
+	CLineDumpL *m_Next;	//	æ¬¡
 public:
 	CLineDumpL(int);
 	CLineDumpL(CLineDumpL *);
@@ -73,15 +73,15 @@ public:
 };
 
 /*
- *	’¼üƒ_ƒ“ƒv (–¢ƒ‰ƒCƒeƒBƒ“ƒO)
+ *	ç›´ç·šãƒ€ãƒ³ãƒ— (æœªãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°)
  */
 class CLineDumpN: public CVertexDump{
 private:
-	int m_LineNum;		//	’¼ü”
-	int m_Count;		//	ƒJƒEƒ“ƒ^
-	VTX_N *m_Buffer;	//	ƒoƒbƒtƒ@
-	CVertex m_Vertex;	//	ƒo[ƒeƒbƒNƒX
-	CLineDumpN *m_Next;	//	Ÿ
+	int m_LineNum;		//	ç›´ç·šæ•°
+	int m_Count;		//	ã‚«ã‚¦ãƒ³ã‚¿
+	VTX_N *m_Buffer;	//	ãƒãƒƒãƒ•ã‚¡
+	CVertex m_Vertex;	//	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
+	CLineDumpN *m_Next;	//	æ¬¡
 public:
 	CLineDumpN(int);
 	CLineDumpN(CLineDumpN *);
@@ -95,15 +95,15 @@ public:
 };
 
 /*
- *	lŠpŒ`ƒ_ƒ“ƒv (ƒeƒNƒXƒ`ƒƒ‚È‚µ)
+ *	å››è§’å½¢ãƒ€ãƒ³ãƒ— (ãƒ†ã‚¯ã‚¹ãƒãƒ£ãªã—)
  */
 class CQuadDumpN: public CVertexDump{
 private:
-	int m_QuadNum;		//	lŠpŒ`”
-	int m_Count;		//	ƒJƒEƒ“ƒ^
-	VTX_N *m_Buffer;	//	ƒoƒbƒtƒ@
-	CVertex m_Vertex;	//	ƒo[ƒeƒbƒNƒX
-	CQuadDumpN *m_Next;	//	Ÿ
+	int m_QuadNum;		//	å››è§’å½¢æ•°
+	int m_Count;		//	ã‚«ã‚¦ãƒ³ã‚¿
+	VTX_N *m_Buffer;	//	ãƒãƒƒãƒ•ã‚¡
+	CVertex m_Vertex;	//	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
+	CQuadDumpN *m_Next;	//	æ¬¡
 public:
 	CQuadDumpN(int);
 	CQuadDumpN(CQuadDumpN *);
@@ -121,16 +121,16 @@ public:
 };
 
 /*
- *	lŠpŒ`ƒ_ƒ“ƒv (ƒeƒNƒXƒ`ƒƒ‚ ‚è)
+ *	å››è§’å½¢ãƒ€ãƒ³ãƒ— (ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚ã‚Š)
  */
 class CQuadDumpNX: public CVertexDump{
 private:
-	int m_QuadNum;			//	lŠpŒ`”
-	int m_Count;			//	ƒJƒEƒ“ƒ^
-	VTX_NX *m_Buffer;		//	ƒoƒbƒtƒ@
-	CVertex m_Vertex;		//	ƒo[ƒeƒbƒNƒX
-	LPTEX8 m_Texture;		//	ƒeƒNƒXƒ`ƒƒƒ|ƒCƒ“ƒ^
-	CQuadDumpNX *m_Next;	//	Ÿ
+	int m_QuadNum;			//	å››è§’å½¢æ•°
+	int m_Count;			//	ã‚«ã‚¦ãƒ³ã‚¿
+	VTX_NX *m_Buffer;		//	ãƒãƒƒãƒ•ã‚¡
+	CVertex m_Vertex;		//	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
+	LPTEX8 m_Texture;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒã‚¤ãƒ³ã‚¿
+	CQuadDumpNX *m_Next;	//	æ¬¡
 public:
 	CQuadDumpNX(int, LPTEX8);
 	CQuadDumpNX(CQuadDumpNX *);

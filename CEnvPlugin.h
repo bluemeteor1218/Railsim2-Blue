@@ -1,19 +1,19 @@
-#ifndef CENVPLUGIN_H_INCLUDED
+ï»¿#ifndef CENVPLUGIN_H_INCLUDED
 #define CENVPLUGIN_H_INCLUDED
 
 #include "CPlugin.h"
 #include "CLensFlare.h"
 
 /*
- *	ƒ‰ƒCƒgƒZƒbƒeƒBƒ“ƒO
+ *	ãƒ©ã‚¤ãƒˆã‚»ãƒƒãƒ†ã‚£ãƒ³ã‚°
  */
 class CLightSetting{
 	friend class CEnvPlugin;
 private:
-	float m_SunAlt;			//	‘¾—z‚“x
-	D3DCOLOR m_Directional;	//	•½sŒõŒ¹F
-	D3DCOLOR m_Ambient;		//	ŠÂ‹«ŒõŒ¹F
-	D3DCOLOR m_SkyColor;	//	‹ó‚ÌF
+	float m_SunAlt;			//	å¤ªé™½é«˜åº¦
+	D3DCOLOR m_Directional;	//	å¹³è¡Œå…‰æºè‰²
+	D3DCOLOR m_Ambient;		//	ç’°å¢ƒå…‰æºè‰²
+	D3DCOLOR m_SkyColor;	//	ç©ºã®è‰²
 public:
 	char *Read(char *);
 	bool operator<(const CLightSetting &rhs){
@@ -21,55 +21,55 @@ public:
 	}
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CLightSetting>::iterator ILightSetting;
 
 /*
- *	‰q¯ƒf[ƒ^
+ *	è¡›æ˜Ÿãƒ‡ãƒ¼ã‚¿
  */
 class CMoon{
 	friend class CEnvPlugin;
 private:
-	string m_MoonFile;			//	ƒtƒ@ƒCƒ‹–¼
-	CMesh *m_MoonMesh;			//	ƒƒbƒVƒ…
-	CObject m_MoonObject;		//	ƒIƒuƒWƒFƒNƒg
-	float m_MoonScale;			//	ƒXƒP[ƒ‹
-	float m_AxialInclination;	//	Œö“]²‚ÌŒX‚«
-	float m_RevolutionPeriod;	//	Œö“]üŠú
-	float m_InitialPhase;		//	‰ŠúˆÊ‘Š
-	float m_RevolutionPerDay;	//	1 “ú“–‚½‚èŒö“]Šp“x
+	string m_MoonFile;			//	ãƒ•ã‚¡ã‚¤ãƒ«å
+	CMesh *m_MoonMesh;			//	ãƒ¡ãƒƒã‚·ãƒ¥
+	CObject m_MoonObject;		//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	float m_MoonScale;			//	ã‚¹ã‚±ãƒ¼ãƒ«
+	float m_AxialInclination;	//	å…¬è»¢è»¸ã®å‚¾ã
+	float m_RevolutionPeriod;	//	å…¬è»¢å‘¨æœŸ
+	float m_InitialPhase;		//	åˆæœŸä½ç›¸
+	float m_RevolutionPerDay;	//	1 æ—¥å½“ãŸã‚Šå…¬è»¢è§’åº¦
 public:
 	char *Read(char *);
 	void LoadData();
 	void Render(double, float, VEC3, float);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CMoon>::iterator IMoon;
 
 /*
- *	ŠÂ‹«ƒvƒ‰ƒOƒCƒ“
+ *	ç’°å¢ƒãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CEnvPlugin: public CPlugin{
 private:
-	float m_Latitude;				//	ˆÜ“x
-	string m_EnvMapTexFile;			//	ŠÂ‹«ƒ}ƒbƒvƒtƒ@ƒCƒ‹–¼
-	LPTEX8 m_EnvMapTexture;			//	ŠÂ‹«ƒ}ƒbƒsƒ“ƒO
-	string m_LandscapeFile;			//	ŒiŠÏƒtƒ@ƒCƒ‹–¼
-	CMesh *m_LandscapeMesh;			//	ŒiŠÏƒƒbƒVƒ…
-	CObject m_LandscapeObject;		//	ŒiŠÏƒIƒuƒWƒFƒNƒg
-	float m_LandscapeScale;			//	ŒiŠÏƒXƒP[ƒ‹
-	string m_SunFile;				//	ŒiŠÏƒtƒ@ƒCƒ‹–¼
-	CMesh *m_SunMesh;				//	ŒiŠÏƒƒbƒVƒ…
-	CObject m_SunObject;			//	ŒiŠÏƒIƒuƒWƒFƒNƒg
-	float m_SunScale;				//	ŒiŠÏƒXƒP[ƒ‹
-	float m_SunAxialInclination;	//	’n²‚ÌŒX‚«
-	CLensFlare m_SunLensFlare;		//	‘¾—zƒŒƒ“ƒYƒtƒŒƒA
-	CWhiteout m_SunWhiteout;		//	‘¾—zƒzƒƒCƒgƒAƒEƒg
-	float m_NightThreshold;			//	’‹–éè‡’l
-	D3DCOLOR m_ShadowColor;			//	‰e‚ÌF
-	list<CLightSetting> m_Light;	//	ŒõŒ¹İ’è
-	list<CMoon> m_Moon;				//	ŒƒŠƒXƒg
+	float m_Latitude;				//	ç·¯åº¦
+	string m_EnvMapTexFile;			//	ç’°å¢ƒãƒãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«å
+	LPTEX8 m_EnvMapTexture;			//	ç’°å¢ƒãƒãƒƒãƒ”ãƒ³ã‚°
+	string m_LandscapeFile;			//	æ™¯è¦³ãƒ•ã‚¡ã‚¤ãƒ«å
+	CMesh *m_LandscapeMesh;			//	æ™¯è¦³ãƒ¡ãƒƒã‚·ãƒ¥
+	CObject m_LandscapeObject;		//	æ™¯è¦³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	float m_LandscapeScale;			//	æ™¯è¦³ã‚¹ã‚±ãƒ¼ãƒ«
+	string m_SunFile;				//	æ™¯è¦³ãƒ•ã‚¡ã‚¤ãƒ«å
+	CMesh *m_SunMesh;				//	æ™¯è¦³ãƒ¡ãƒƒã‚·ãƒ¥
+	CObject m_SunObject;			//	æ™¯è¦³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	float m_SunScale;				//	æ™¯è¦³ã‚¹ã‚±ãƒ¼ãƒ«
+	float m_SunAxialInclination;	//	åœ°è»¸ã®å‚¾ã
+	CLensFlare m_SunLensFlare;		//	å¤ªé™½ãƒ¬ãƒ³ã‚ºãƒ•ãƒ¬ã‚¢
+	CWhiteout m_SunWhiteout;		//	å¤ªé™½ãƒ›ãƒ¯ã‚¤ãƒˆã‚¢ã‚¦ãƒˆ
+	float m_NightThreshold;			//	æ˜¼å¤œé–¾å€¤
+	D3DCOLOR m_ShadowColor;			//	å½±ã®è‰²
+	list<CLightSetting> m_Light;	//	å…‰æºè¨­å®š
+	list<CMoon> m_Moon;				//	æœˆãƒªã‚¹ãƒˆ
 public:
 	CEnvPlugin(char *id): CPlugin(id){}
 	~CEnvPlugin(){}
@@ -86,7 +86,7 @@ public:
 };
 
 /*
- *	ŠÂ‹«ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	ç’°å¢ƒãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CEnvPluginList: public CPluginList{
 private:
@@ -98,7 +98,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CEnvPlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern float g_DayAlpha;
 extern float g_NightAlpha;
 extern D3DCOLOR g_NoLightColor;

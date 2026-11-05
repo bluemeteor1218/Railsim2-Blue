@@ -1,4 +1,4 @@
-#ifndef CSTATIONPLUGIN_H_INCLUDED
+ï»¿#ifndef CSTATIONPLUGIN_H_INCLUDED
 #define CSTATIONPLUGIN_H_INCLUDED
 
 #include "CStructPlugin.h"
@@ -15,39 +15,39 @@ class CPlatformInst;
 class CStation;
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ 
  */
 class CPlatform{
 	friend class CStation;
 private:
-	static CRailPlugin *ms_PlatformRail;		//	ƒJƒŒƒ“ƒgƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	static CTiePlugin *ms_PlatformTie;			//	ƒJƒŒƒ“ƒg––Øƒvƒ‰ƒOƒCƒ“
-	static CGirderPlugin *ms_PlatformGirder;	//	ƒJƒŒƒ“ƒg‹´Œ…ƒvƒ‰ƒOƒCƒ“
-	static CPierPlugin *ms_PlatformPier;		//	ƒJƒŒƒ“ƒg‹´‹rƒvƒ‰ƒOƒCƒ“
-	static CLinePlugin *ms_PlatformLine;		//	ƒJƒŒƒ“ƒg‰Ëüƒvƒ‰ƒOƒCƒ“
-	static CPolePlugin *ms_PlatformPole;		//	ƒJƒŒƒ“ƒg‰Ëü’Œƒvƒ‰ƒOƒCƒ“
-	int m_TrackNum;					//	‹O“¹”
-	float m_TrackInterval;			//	‹O“¹ŠÔŠu
-	bool m_Stoppable;				//	’âÔ‰Â”\ /*CP932‘Î‰*/
-	bool m_OpenDoor[2];				//	ƒhƒAŠJ (left, right)
-	bool m_RailPluginValid;			//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“—LŒøƒtƒ‰ƒO
-	bool m_TiePluginValid;			//	––Øƒvƒ‰ƒOƒCƒ“—LŒøƒtƒ‰ƒO
-	bool m_GirderPluginValid;		//	‹´Œ…ƒvƒ‰ƒOƒCƒ“—LŒøƒtƒ‰ƒO
-	bool m_PierPluginValid;			//	‹´‹rƒvƒ‰ƒOƒCƒ“—LŒøƒtƒ‰ƒO
-	bool m_LinePluginValid;			//	‰Ëüƒvƒ‰ƒOƒCƒ“—LŒøƒtƒ‰ƒO
-	bool m_PolePluginValid;			//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“—LŒøƒtƒ‰ƒO
-	CRailPlugin *m_RailPlugin;		//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *m_TiePlugin;		//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *m_GirderPlugin;	//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
-	CPierPlugin *m_PierPlugin;		//	‹´‹rƒvƒ‰ƒOƒCƒ“
-	CLinePlugin *m_LinePlugin;		//	‰Ëüƒvƒ‰ƒOƒCƒ“
-	CPolePlugin *m_PolePlugin;		//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
-	bool m_LiftRailSurface;			//	ƒŒ[ƒ‹•\–Ê‚¿ã‚°
-	bool m_EnableCant;				//	ƒJƒ“ƒg—LŒø
-	char *m_ParentObjectScriptPos;	//	eƒIƒuƒWƒFƒNƒgƒp[ƒX‰ÓŠ]
-	string m_ParentObjectName;		//	eƒIƒuƒWƒFƒNƒg–¼
-	CNamedObject *m_ParentObject;	//	eƒIƒuƒWƒFƒNƒg
-	list<VEC3> m_CoordList;			//	§Œä“_ƒŠƒXƒg
+	static CRailPlugin *ms_PlatformRail;		//	ã‚«ãƒ¬ãƒ³ãƒˆãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	static CTiePlugin *ms_PlatformTie;			//	ã‚«ãƒ¬ãƒ³ãƒˆæ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	static CGirderPlugin *ms_PlatformGirder;	//	ã‚«ãƒ¬ãƒ³ãƒˆæ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	static CPierPlugin *ms_PlatformPier;		//	ã‚«ãƒ¬ãƒ³ãƒˆæ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	static CLinePlugin *ms_PlatformLine;		//	ã‚«ãƒ¬ãƒ³ãƒˆæ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	static CPolePlugin *ms_PlatformPole;		//	ã‚«ãƒ¬ãƒ³ãƒˆæ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	int m_TrackNum;					//	è»Œé“æ•°
+	float m_TrackInterval;			//	è»Œé“é–“éš”
+	bool m_Stoppable;				//	åœè»Šå¯èƒ½ /*CP932å¯¾å¿œ*/
+	bool m_OpenDoor[2];				//	ãƒ‰ã‚¢é–‹ (left, right)
+	bool m_RailPluginValid;			//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æœ‰åŠ¹ãƒ•ãƒ©ã‚°
+	bool m_TiePluginValid;			//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æœ‰åŠ¹ãƒ•ãƒ©ã‚°
+	bool m_GirderPluginValid;		//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æœ‰åŠ¹ãƒ•ãƒ©ã‚°
+	bool m_PierPluginValid;			//	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³æœ‰åŠ¹ãƒ•ãƒ©ã‚°
+	bool m_LinePluginValid;			//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³æœ‰åŠ¹ãƒ•ãƒ©ã‚°
+	bool m_PolePluginValid;			//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æœ‰åŠ¹ãƒ•ãƒ©ã‚°
+	CRailPlugin *m_RailPlugin;		//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *m_TiePlugin;		//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *m_GirderPlugin;	//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPierPlugin *m_PierPlugin;		//	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CLinePlugin *m_LinePlugin;		//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPolePlugin *m_PolePlugin;		//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	bool m_LiftRailSurface;			//	ãƒ¬ãƒ¼ãƒ«è¡¨é¢æŒã¡ä¸Šã’
+	bool m_EnableCant;				//	ã‚«ãƒ³ãƒˆæœ‰åŠ¹
+	char *m_ParentObjectScriptPos;	//	è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ‘ãƒ¼ã‚¹ç®‡æ‰€]
+	string m_ParentObjectName;		//	è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
+	CNamedObject *m_ParentObject;	//	è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	list<VEC3> m_CoordList;			//	åˆ¶å¾¡ç‚¹ãƒªã‚¹ãƒˆ
 public:
 	static void ResetPlatformPlugin();
 	CPlatform();
@@ -61,16 +61,16 @@ public:
 	void Build(MTX4 *, CStation *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CPlatform>::iterator IPlatform;
 
 /*
- *	‰wÉƒvƒ‰ƒOƒCƒ“
+ *	é§…èˆãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CStationPlugin: public CStructPlugin{
 	friend class CStation;
 protected:
-	list<CPlatform> m_Platform;	//	ƒvƒ‰ƒbƒgƒtƒH[ƒ€
+	list<CPlatform> m_Platform;	//	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ 
 public:
 	static void RenderPreview(VEC3, VEC3, VEC3);
 	CStationPlugin(char *id): CStructPlugin(id){}
@@ -88,7 +88,7 @@ public:
 };
 
 /*
- *	{İƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	æ–½è¨­ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CStationPluginList: public CStructPluginList{
 private:
@@ -101,7 +101,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CStationPlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CStationPlugin *g_Station;
 extern CStationPluginList *g_StationPluginList;
 

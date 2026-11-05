@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CWindowDivInfo.h"
 #include "CConfigMode.h"
 #include "CSceneryMode.h"
@@ -6,7 +6,7 @@
 #include "CScene.h"
 #include "CSaveFile.h"
 
-//	“à•”’è”
+//	å†…éƒ¨å®šæ•°
 const int DRAG_BAR_WIDTH = 1;
 
 CWindowInfo::CWindowInfo(){
@@ -66,10 +66,10 @@ void CWindowInfo::OnDeleteScene(CScene *scene){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CWindowInfo::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(eee = str, "WindowInfo"))) throw CSynErr(eee);
@@ -89,11 +89,11 @@ char *CWindowInfo::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CWindowInfo::Save(
-	FILE *df,		//	ƒtƒ@ƒCƒ‹
-	string indent	//	ƒCƒ“ƒfƒ“ƒg
+	FILE *df,		//	ãƒ•ã‚¡ã‚¤ãƒ«
+	string indent	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
 ){
 	fprintf(df, "%sWindowInfo{\n", indent.c_str());
 	fprintf(df, "%s\tDivided = %s;\n", indent.c_str(), YESNO[m_Div!=NULL]);
@@ -469,10 +469,10 @@ void CWindowDivInfo::OnDeleteScene(CScene *scene){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CWindowDivInfo::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(eee = str, "WindowDivInfo"))) throw CSynErr(eee);
@@ -491,11 +491,11 @@ char *CWindowDivInfo::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CWindowDivInfo::Save(
-	FILE *df,		//	ƒtƒ@ƒCƒ‹
-	string indent	//	ƒCƒ“ƒfƒ“ƒg
+	FILE *df,		//	ãƒ•ã‚¡ã‚¤ãƒ«
+	string indent	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
 ){
 	fprintf(df, "%sWindowDivInfo{\n", indent.c_str());
 	fprintf(df, "%s\tHorzRatio = %f;\n", indent.c_str(), m_HorzRatio);

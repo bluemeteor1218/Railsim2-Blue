@@ -1,12 +1,12 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 struct SYSVALUE_S{
-	LPDIRECTSOUND8	pDS;		//	DirectSoundƒIƒuƒWƒFƒNƒg
-	LPSNDBUF		pPB;		//	ƒvƒ‰ƒCƒ}ƒŠƒoƒbƒtƒ@
-	LP3DLISTENER	pListener;	//	ƒŠƒXƒi[
-	BOOL f3D;			//	3Dƒtƒ‰ƒO
-	BOOL fFX;			//	FXƒtƒ‰ƒO
-	LONG initVolume;	//	‰Šúƒ{ƒŠƒ…[ƒ€
+	LPDIRECTSOUND8	pDS;		//	DirectSoundã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	LPSNDBUF		pPB;		//	ãƒ—ãƒ©ã‚¤ãƒžãƒªãƒãƒƒãƒ•ã‚¡
+	LP3DLISTENER	pListener;	//	ãƒªã‚¹ãƒŠãƒ¼
+	BOOL f3D;			//	3Dãƒ•ãƒ©ã‚°
+	BOOL fFX;			//	FXãƒ•ãƒ©ã‚°
+	LONG initVolume;	//	åˆæœŸãƒœãƒªãƒ¥ãƒ¼ãƒ 
 };
 extern SYSVALUE_S svs;
 
@@ -21,11 +21,11 @@ void SetListenerPos(VEC3 v);
 void SetListenerDir(VEC3 d, VEC3 u);
 
 /*
- *	ƒEƒF[ƒuƒtƒH[ƒ}ƒbƒg‚ðŽæ“¾
+ *	ã‚¦ã‚§ãƒ¼ãƒ–ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆã‚’å–å¾—
  *
- *	freq	: ƒTƒ“ƒvƒŠƒ“ƒOŽü”g”
- *	bit	: —ÊŽq‰»ƒrƒbƒg”
- *	ch	: ƒ`ƒƒƒ“ƒlƒ‹”
+ *	freq	: ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°å‘¨æ³¢æ•°
+ *	bit	: é‡å­åŒ–ãƒ“ãƒƒãƒˆæ•°
+ *	ch	: ãƒãƒ£ãƒ³ãƒãƒ«æ•°
  */
 inline WAVEFORMATEX GetWaveFormat(DWORD freq, WORD bit, WORD ch){
 	WAVEFORMATEX wfmt;

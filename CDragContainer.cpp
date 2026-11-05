@@ -1,16 +1,16 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CDragContainer.h"
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CDragContainer *CDragContainer::ms_Drag = NULL;
 
 /*
  *	[static]
- *	ƒhƒ‰ƒbƒOŠJŽn
+ *	ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹
  */
 void CDragContainer::BeginDrag(
-	DRAGTYPE type,		//	ƒ^ƒCƒv
-	CDragInterface *o	//	Š—LŽÒ
+	DRAGTYPE type,		//	ã‚¿ã‚¤ãƒ—
+	CDragInterface *o	//	æ‰€æœ‰è€…
 ){
 	EndDrag();
 	ms_Drag = new CDragContainer(type, o);
@@ -18,7 +18,7 @@ void CDragContainer::BeginDrag(
 
 /*
  *	[static]
- *	ƒhƒ‰ƒbƒOI—¹
+ *	ãƒ‰ãƒ©ãƒƒã‚°çµ‚äº†
  */
 void CDragContainer::EndDrag(){
 	DELETE_V(ms_Drag);
@@ -26,44 +26,44 @@ void CDragContainer::EndDrag(){
 
 /*
  *	[static]
- *	ƒf[ƒ^‘}“ü
+ *	ãƒ‡ãƒ¼ã‚¿æŒ¿å…¥
  */
 void CDragContainer::Insert(
-	DWORD data	//	ƒf[ƒ^
+	DWORD data	//	ãƒ‡ãƒ¼ã‚¿
 ){
 	ms_Drag->InsertData(data);
 }
 
 /*
  *	[static]
- *	ƒhƒ‰ƒbƒOƒAƒCƒeƒ€•\Ž¦
+ *	ãƒ‰ãƒ©ãƒƒã‚°ã‚¢ã‚¤ãƒ†ãƒ è¡¨ç¤º
  */
 void CDragContainer::Render(){
 	if(ms_Drag) ms_Drag->RenderDragItem();
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CDragContainer::CDragContainer(
-	DRAGTYPE type,		//	ƒ^ƒCƒv
-	CDragInterface *o	//	Š—LŽÒ
+	DRAGTYPE type,		//	ã‚¿ã‚¤ãƒ—
+	CDragInterface *o	//	æ‰€æœ‰è€…
 ){
 	m_Type = type;
 	m_Owner = o;
 }
 
 /*
- *	ƒf[ƒ^‘}“ü
+ *	ãƒ‡ãƒ¼ã‚¿æŒ¿å…¥
  */
 void CDragContainer::InsertData(
-	DWORD data	//	ƒf[ƒ^
+	DWORD data	//	ãƒ‡ãƒ¼ã‚¿
 ){
 	m_Data.insert(m_Data.end(), data);
 }
 
 /*
- *	ƒhƒ‰ƒbƒOƒAƒCƒeƒ€•\Ž¦
+ *	ãƒ‰ãƒ©ãƒƒã‚°ã‚¢ã‚¤ãƒ†ãƒ è¡¨ç¤º
  */
 void CDragContainer::RenderDragItem(){
 	m_Owner->RenderDragItem();

@@ -1,22 +1,22 @@
-#ifndef CSHADOWVOLUME_H_INCLUDED
+ï»¿#ifndef CSHADOWVOLUME_H_INCLUDED
 #define CSHADOWVOLUME_H_INCLUDED
 
-#define TRI_DUMP_MAX (sv3.capsMaxPrim/3)	//	OŠpŒ`ƒ_ƒ“ƒvÅ‘å’l
+#define TRI_DUMP_MAX (sv3.capsMaxPrim/3)	//	ä¸‰è§’å½¢ãƒ€ãƒ³ãƒ—æœ€å¤§å€¤
 
-//	ƒVƒƒƒhƒEƒ{ƒŠƒ…[ƒ€—p FVF
+//	ã‚·ãƒ£ãƒ‰ã‚¦ãƒœãƒªãƒ¥ãƒ¼ãƒ ç”¨ FVF
 #define FVF_S (D3DFVF_XYZ)
 typedef VEC3 VTX_S;
 
 /*
- *	lŠpŒ`ƒ_ƒ“ƒv (À•W‚Ì‚İ)
+ *	å››è§’å½¢ãƒ€ãƒ³ãƒ— (åº§æ¨™ã®ã¿)
  */
 class CTriDumpS{
 private:
-	int m_TriNum;		//	lŠpŒ`”
-	int m_Count;		//	ƒJƒEƒ“ƒ^
-	VTX_S *m_Buffer;	//	ƒoƒbƒtƒ@
-	CVertex m_Vertex;	//	ƒo[ƒeƒbƒNƒX
-	CTriDumpS *m_Next;	//	Ÿ
+	int m_TriNum;		//	å››è§’å½¢æ•°
+	int m_Count;		//	ã‚«ã‚¦ãƒ³ã‚¿
+	VTX_S *m_Buffer;	//	ãƒãƒƒãƒ•ã‚¡
+	CVertex m_Vertex;	//	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹
+	CTriDumpS *m_Next;	//	æ¬¡
 public:
 	CTriDumpS(int);
 	CTriDumpS(CTriDumpS *);
@@ -30,13 +30,13 @@ public:
 };
 
 /*
- *	ƒGƒbƒWƒCƒ“ƒfƒbƒNƒX
+ *	ã‚¨ãƒƒã‚¸ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
  */
 class CEdgeIndex{
 	friend class CShadowVolume;
 private:
-	WORD m_Index1, m_Index2;	//	ƒCƒ“ƒfƒbƒNƒX
-	WORD m_Large, m_Small;		//	‘å¬’l
+	WORD m_Index1, m_Index2;	//	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+	WORD m_Large, m_Small;		//	å¤§å°å€¤
 public:
 	CEdgeIndex(WORD i1, WORD i2){
 		m_Index1 = i1; m_Index2 = i2;
@@ -56,12 +56,12 @@ public:
 };
 
 /*
- *	ƒVƒƒƒhƒEƒ{ƒŠƒ…[ƒ€
+ *	ã‚·ãƒ£ãƒ‰ã‚¦ãƒœãƒªãƒ¥ãƒ¼ãƒ 
  */
 class CShadowVolume{
 private:
-	vector<CEdgeIndex> m_TempIndex;	//	ì‹Æ—pƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
-	CTriDumpS *m_FaceVolume;		//	–Ê—pƒ{ƒŠƒ…[ƒ€ƒ_ƒ“ƒp
+	vector<CEdgeIndex> m_TempIndex;	//	ä½œæ¥­ç”¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
+	CTriDumpS *m_FaceVolume;		//	é¢ç”¨ãƒœãƒªãƒ¥ãƒ¼ãƒ ãƒ€ãƒ³ãƒ‘
 public:
 	CShadowVolume();
 	~CShadowVolume();

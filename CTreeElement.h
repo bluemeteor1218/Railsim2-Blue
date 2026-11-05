@@ -1,32 +1,32 @@
-#ifndef CTREEELEMENT_H_INCLUDED
+ï»¿#ifndef CTREEELEMENT_H_INCLUDED
 #define CTREEELEMENT_H_INCLUDED
 
-const int TREE_ICON_OFS = 2;	//	ƒAƒCƒRƒ“‚Æ•¶š‚Ì‹——£
-const int TREE_ICON_MARGIN = 2;	//	•¶š—]”’
+const int TREE_ICON_OFS = 2;	//	ã‚¢ã‚¤ã‚³ãƒ³ã¨æ–‡å­—ã®è·é›¢
+const int TREE_ICON_MARGIN = 2;	//	æ–‡å­—ä½™ç™½
 
 class CPlugin;
 class CPluginListView;
 
 /*
- *	ƒcƒŠ[—v‘f
+ *	ãƒ„ãƒªãƒ¼è¦ç´ 
  */
 class CTreeElement{
 	friend class CPluginTree;
 	friend class CTreeFileElement;
 	friend class CTreeDirElement;
 protected:
-	static CTreeElement *ms_FocusPrev;	//	ƒtƒH[ƒJƒXƒAƒCƒeƒ€‚Ì‘O
-	static CTreeElement *ms_FocusNext;	//	ƒtƒH[ƒJƒXƒAƒCƒeƒ€‚ÌŸ
-	int m_State;						//	ó‘Ô
-	int m_Width;						//	•¶š—ñ•
-	bool m_RenameWait;					//	ƒŠƒl[ƒ€‘Ò‚¿
-	DWORD m_ClickTime;					//	ƒNƒŠƒbƒN
-	POINT m_DownPos;					//	ƒNƒŠƒbƒNÀ•W
-	string m_String;					//	•¶š—ñ
-	CEditBox *m_EditBox;				//	–¼Ì•ÏX—pƒGƒfƒBƒbƒgƒ{ƒbƒNƒX
-	CTreeDirElement *m_Parent;			//	e
-	CTreeElement *m_Brother;			//	ŒZ’í
-	CPluginTree *m_Owner;				//	ƒcƒŠ[ƒRƒ“ƒgƒ[ƒ‹
+	static CTreeElement *ms_FocusPrev;	//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚¢ã‚¤ãƒ†ãƒ ã®å‰
+	static CTreeElement *ms_FocusNext;	//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚¢ã‚¤ãƒ†ãƒ ã®æ¬¡
+	int m_State;						//	çŠ¶æ…‹
+	int m_Width;						//	æ–‡å­—åˆ—å¹…
+	bool m_RenameWait;					//	ãƒªãƒãƒ¼ãƒ å¾…ã¡
+	DWORD m_ClickTime;					//	ã‚¯ãƒªãƒƒã‚¯æ™‚åˆ»
+	POINT m_DownPos;					//	ã‚¯ãƒªãƒƒã‚¯åº§æ¨™
+	string m_String;					//	æ–‡å­—åˆ—
+	CEditBox *m_EditBox;				//	åç§°å¤‰æ›´ç”¨ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹
+	CTreeDirElement *m_Parent;			//	è¦ª
+	CTreeElement *m_Brother;			//	å…„å¼Ÿ
+	CPluginTree *m_Owner;				//	ãƒ„ãƒªãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 public:
 	CTreeElement(char *, CTreeDirElement *, CPluginTree *);
 	virtual ~CTreeElement(){}

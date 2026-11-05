@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSimpleDialog.h"
 #include "CScene.h"
 #include "CSaveFile.h"
@@ -8,14 +8,14 @@
 #include "CTrainSetMode.h"
 #include "CSkinPlugin.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_UpdateTrainGroupList;
 
 /*
- *	ƒŠƒl[ƒ€I—¹ˆ—
+ *	ãƒªãƒãƒ¼ãƒ çµ‚äº†å‡¦ç†
  */
 void CGroupListView::EndRename(
-	CListElement *item	//	ƒAƒCƒeƒ€
+	CListElement *item	//	ã‚¢ã‚¤ãƒ†ãƒ 
 ){
 	CTrainGroup *sc = (CTrainGroup *)item->GetData();
 	sc->SetName(item->GetString(0));
@@ -25,7 +25,7 @@ void CGroupListView::EndRename(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒ_ƒuƒ‹ƒNƒŠƒbƒN
+ *	ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯
  */
 void CTrainListView::DoubleClick(){
 	CTrain *train = (CTrain *)m_FocusItem->GetData();
@@ -36,7 +36,7 @@ void CTrainListView::DoubleClick(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	Ôçq–¼•ÏX
+ *	è»Šè¼Œåå¤‰æ›´
  */
 void CGroupRenamer::Exec(){
 	m_Group->GetListElement()->BeginRename();
@@ -46,7 +46,7 @@ void CGroupRenamer::Exec(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainSetMode::CTrainSetMode(){
 	int ww = TILE_UNIT*16, wh = TILE_UNIT*10;
@@ -62,18 +62,18 @@ CTrainSetMode::CTrainSetMode(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainSetMode::~CTrainSetMode(){
 	DELETE_V(m_GroupMenu);
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CTrainSetMode::WindowResized(
-	int w, int h,		//	V‹KƒTƒCƒY
-	CWindowCtrl *wnd	//	ƒEƒBƒhƒEƒRƒ“ƒgƒ[ƒ‹
+	int w, int h,		//	æ–°è¦ã‚µã‚¤ã‚º
+	CWindowCtrl *wnd	//	ã‚¦ã‚£ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	if(wnd==&m_GroupWindow){
 		m_GroupListView.SetSize(w-TILE_UNIT, h-TILE_UNIT*2);
@@ -81,11 +81,11 @@ void CTrainSetMode::WindowResized(
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CTrainSetMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	switch(type){
 	case CMD_GROUP: {
@@ -102,7 +102,7 @@ CPopMenu *CTrainSetMode::Dispatch(
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CTrainSetMode::EnterCursorScenery(){
 	ms_ModeLabel = lang(SetTrain);
@@ -112,7 +112,7 @@ void CTrainSetMode::EnterCursorScenery(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CTrainSetMode::ScanInputCursorScenery(){
 	if(g_UpdateTrainGroupList){
@@ -166,7 +166,7 @@ void CTrainSetMode::ScanInputCursorScenery(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CTrainSetMode::RenderCursorScenery(){
 	if(!ms_PhotoMode) CRailDetectCurve2D::RenderLink();

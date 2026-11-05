@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "HighTimer.h"
 #include "Capture.h"
 #include "Network.h"
@@ -8,18 +8,18 @@
 #include "CConfigMode.h"
 #include "CSaveFile.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 bool ScanInputNetworkInterface();
 void RenderNetworkInterface();
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern int g_AncientNightFlag;
 
 /*
- *	ƒŠƒl[ƒ€‰Â”\‚©
+ *	ãƒªãƒãƒ¼ãƒ å¯èƒ½ã‹
  */
 bool CPluginListView::IsRenamable(
-	CListElement *item	//	ƒAƒCƒeƒ€
+	CListElement *item	//	ã‚¢ã‚¤ãƒ†ãƒ 
 ){
 	CTreeElement *tel = (CTreeElement *)item->GetData();
 	CTreeFileElement *fe = tel->IsFile();
@@ -28,20 +28,20 @@ bool CPluginListView::IsRenamable(
 }
 
 /*
- *	ƒhƒƒbƒv‰Â”\‚©
+ *	ãƒ‰ãƒ­ãƒƒãƒ—å¯èƒ½ã‹
  */
 bool CPluginListView::IsDroppable(
-	CListElement *item	//	ƒAƒCƒeƒ€
+	CListElement *item	//	ã‚¢ã‚¤ãƒ†ãƒ 
 ){
 	return !!((CTreeElement *)item->GetData())->IsDirectory();
 }
 
 /*
- *	ƒŠƒl[ƒ€Šm”F
+ *	ãƒªãƒãƒ¼ãƒ ç¢ºèª
  */
 bool CPluginListView::ConfirmRename(
-	CListElement *item,	//	ƒAƒCƒeƒ€
-	string &newname		//	V‹K–¼
+	CListElement *item,	//	ã‚¢ã‚¤ãƒ†ãƒ 
+	string &newname		//	æ–°è¦å
 ){
 	CTreeElement *tel = (CTreeElement *)item->GetData();
 	CTreeFileElement *fe = tel->IsFile();
@@ -50,10 +50,10 @@ bool CPluginListView::ConfirmRename(
 }
 
 /*
- *	ƒŠƒl[ƒ€I—¹ˆ—
+ *	ãƒªãƒãƒ¼ãƒ çµ‚äº†å‡¦ç†
  */
 void CPluginListView::EndRename(
-	CListElement *item	//	ƒAƒCƒeƒ€
+	CListElement *item	//	ã‚¢ã‚¤ãƒ†ãƒ 
 ){
 	CTreeElement *te = (CTreeElement *)item->GetData();
 	te->SetString(item->GetString(0));
@@ -62,7 +62,7 @@ void CPluginListView::EndRename(
 }
 
 /*
- *	ƒhƒƒbƒv
+ *	ãƒ‰ãƒ­ãƒƒãƒ—
  */
 void CPluginListView::Drop(){
 	((CTreeDirElement *)m_DropItem->GetData())->Drop();
@@ -70,7 +70,7 @@ void CPluginListView::Drop(){
 }
 
 /*
- *	ƒ_ƒuƒ‹ƒNƒŠƒbƒN
+ *	ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯
  */
 void CPluginListView::DoubleClick(){
 	CTreeElement *el = (CTreeElement *)m_FocusItem->GetData();
@@ -82,14 +82,14 @@ void CPluginListView::DoubleClick(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CInterfaceMode::CInterfaceMode(){
 	m_Camera = NULL;
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CInterfaceMode::EnterGame(){
 	CSoundEffector::InitPlayList();
@@ -102,7 +102,7 @@ void CInterfaceMode::EnterGame(){
 }
 
 /*
- *	ƒ‚[ƒhƒ‹[ƒv
+ *	ãƒ¢ãƒ¼ãƒ‰ãƒ«ãƒ¼ãƒ—
  */
 void CInterfaceMode::SpinGame(){
 //	static double a = 0.0, s = 0.95;
@@ -164,13 +164,13 @@ void CInterfaceMode::SpinGame(){
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 bool CPluginMode::ms_ShowProperty = true;
 CPopMenu *CPluginMode::ms_DirMenu = NULL;
 CWindowCtrl *CPluginMode::ms_LastInfoWindow = NULL;
 
 /*
- *	ƒƒjƒ…[‰Šú‰»
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼åˆæœŸåŒ–
  */
 void CPluginMode::InitMenu(){
 	ms_DirMenu = new CPopMenu("", NULL);
@@ -180,17 +180,17 @@ void CPluginMode::InitMenu(){
 }
 
 /*
- *	ƒƒjƒ…[‰ğ•ú
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼è§£æ”¾
  */
 void CPluginMode::FreeMenu(){
 	DELETE_V(ms_DirMenu);
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPluginMode::CPluginMode(
-	char *tname //	ƒvƒ‰ƒOƒCƒ“ƒ^ƒCƒv–¼
+	char *tname //	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚¿ã‚¤ãƒ—å
 ){
 	if(!g_RSPV){
 		m_PluginTree.Init(0, TILE_UNIT*2, g_DispWidth, g_DispHeight-TILE_UNIT*2,
@@ -215,7 +215,7 @@ CPluginMode::CPluginMode(
 	m_PluginMenu = NULL;
 	class CPropertyViewer: public CMenuCommand{
 	private:
-		CPluginMode *m_Owner;	//	ƒvƒ‰ƒOƒCƒ“ƒ‚[ƒh
+		CPluginMode *m_Owner;	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ¢ãƒ¼ãƒ‰
 	public:
 		CPropertyViewer(CPluginMode *o){ m_Owner = o; }
 		void Exec(){ m_Owner->ViewProperty(); }
@@ -225,7 +225,7 @@ CPluginMode::CPluginMode(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPluginMode::~CPluginMode(){
 	DELETE_V(m_PluginMenu);
@@ -233,11 +233,11 @@ CPluginMode::~CPluginMode(){
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CPluginMode::WindowResized(
-	int w, int h,		//	V‹KƒTƒCƒY
-	CWindowCtrl *wnd	//	ƒEƒBƒhƒEƒRƒ“ƒgƒ[ƒ‹
+	int w, int h,		//	æ–°è¦ã‚µã‚¤ã‚º
+	CWindowCtrl *wnd	//	ã‚¦ã‚£ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	if(wnd==&m_ListWindow){
 		m_PluginListView.SetSize(w-TILE_UNIT, h-TILE_UNIT*2);
@@ -247,16 +247,16 @@ void CPluginMode::WindowResized(
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CPluginMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	if(type==CMD_PILVELEM){
 		class CListDirCreator: public CMenuCommand{
 		private:
-			CTreeDirElement *m_TreeElement;	//	ƒcƒŠ[—v‘f
+			CTreeDirElement *m_TreeElement;	//	ãƒ„ãƒªãƒ¼è¦ç´ 
 		public:
 			CListDirCreator(CTreeDirElement *p){ m_TreeElement = p; }
 			void Exec(){
@@ -265,7 +265,7 @@ CPopMenu *CPluginMode::Dispatch(
 		};
 		class CListDirDeleter: public CMenuCommand{
 		private:
-			CTreeDirElement *m_TreeElement;	//	ƒcƒŠ[—v‘f
+			CTreeDirElement *m_TreeElement;	//	ãƒ„ãƒªãƒ¼è¦ç´ 
 		public:
 			CListDirDeleter(CTreeDirElement *p){ m_TreeElement = p; }
 			void Exec(){
@@ -276,7 +276,7 @@ CPopMenu *CPluginMode::Dispatch(
 		};
 		class CListDirRenamer: public CMenuCommand{
 		private:
-			CListElement *m_ListElement;	//	ƒŠƒXƒg—v‘f
+			CListElement *m_ListElement;	//	ãƒªã‚¹ãƒˆè¦ç´ 
 		public:
 			CListDirRenamer(CListElement *p){ m_ListElement = p; }
 			void Exec(){ m_ListElement->BeginRename(); }
@@ -301,7 +301,7 @@ CPopMenu *CPluginMode::Dispatch(
 }
 
 /*
- *	ƒvƒƒpƒeƒB•\¦
+ *	ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£è¡¨ç¤º
  */
 void CPluginMode::ViewProperty(){
 	if(!m_ListWindow.IsVisible()){
@@ -312,21 +312,21 @@ void CPluginMode::ViewProperty(){
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ŒŸõ
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æ¤œç´¢
  */
 CPlugin *CPluginMode::FindPluginBase(
-	char *type,	//	ƒ^ƒCƒv
-	char *id	//	¯•Êq
+	char *type,	//	ã‚¿ã‚¤ãƒ—
+	char *id	//	è­˜åˆ¥å­
 ){
 	if(string(type)==PluginDirName()) return GetPluginList()->FindPlugin(id, false);
 	return FindPlugin(type, id);
 }
 
 /*
- *	İ’è“Ç
+ *	è¨­å®šèª­è¾¼
  */
 char *CPluginMode::LoadInterfaceSetting(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	if(str) str = m_PluginTree.Load(str, PluginDirName(), this);
 	GetPluginList()->BuildTree(&m_PluginTree);
@@ -334,16 +334,16 @@ char *CPluginMode::LoadInterfaceSetting(
 }
 
 /*
- *	İ’è•Û‘¶
+ *	è¨­å®šä¿å­˜
  */
 void CPluginMode::SaveInterfaceSetting(
-	FILE *file	//	ƒtƒ@ƒCƒ‹
+	FILE *file	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	m_PluginTree.Save(file, PluginDirName());
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CPluginMode::EnterInterface(){
 	if(g_RSPV){
@@ -367,7 +367,7 @@ void CPluginMode::EnterInterface(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CPluginMode::ScanInputInterface(){
 	if(CheckCtrl() && GetKey(DIK_S)==S_PUSH)
@@ -376,7 +376,7 @@ void CPluginMode::ScanInputInterface(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CPluginMode::RenderInterface(){
 	if(!g_RSPV && m_ListWindow.IsVisible()) m_InfoWindow.Show(false);

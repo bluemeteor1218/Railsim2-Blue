@@ -1,14 +1,14 @@
-//	Copyright (c) 2002 Midikyou
+﻿//	Copyright (c) 2002 Midikyou
 
 #define CLASSNAME		"RAILSIM2_WINDOW_CLASS"
 #define WINDOWNAME		"RailSim II"
 #define WM_GRAPHNOTIFY WM_APP+1	//	for DirectShow
 
 struct SYSVALUE_W{
-	HWND hWnd;	//	���C���E�E�C���h�E�̃n���h��
-	BOOL fActive;	//	���C���E�E�C���h�E�̃A�N�e�B�u�t���O
-	int winW;	//	�N���C�A���g�̈�̉����isv3.width�Ƃ͕K��������v���Ȃ��j
-	int winH;	//	�N���C�A���g�̈�̏c���isv3.height�Ƃ͕K��������v���Ȃ��j
+	HWND hWnd;	//	メイン・ウインドウのハンドル
+	BOOL fActive;	//	メイン・ウインドウのアクティブフラグ
+	int winW;	//	クライアント領域の横幅（sv3.widthとは必ずしも一致しない）
+	int winH;	//	クライアント領域の縦幅（sv3.heightとは必ずしも一致しない）
 };
 extern SYSVALUE_W svw;
 
@@ -28,7 +28,7 @@ void SetCaption(char *str);
 void SendWM_CLOSE();
 
 /*
- *	�A�N�e�B�u��Ԃ̔���
+ *	アクティブ状態の判定
  */
 inline BOOL IsActive(){
 	return svw.fActive;

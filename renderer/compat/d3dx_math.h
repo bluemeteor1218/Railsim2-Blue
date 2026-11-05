@@ -56,6 +56,10 @@ struct D3DXVECTOR3 {
     D3DXVECTOR3() = default;
     D3DXVECTOR3(const float* p) : x(p[0]), y(p[1]), z(p[2]) {}
     D3DXVECTOR3(float fx, float fy, float fz) : x(fx), y(fy), z(fz) {}
+#ifdef D3DVECTOR_DEFINED
+    D3DXVECTOR3(const D3DVECTOR& v) : x(v.x), y(v.y), z(v.z) {}
+    operator D3DVECTOR() const { return D3DVECTOR{x, y, z}; }
+#endif
 
     operator float*() { return &x; }
     operator const float*() const { return &x; }

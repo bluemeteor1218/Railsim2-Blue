@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSimpleDialog.h"
 #include "CTrain.h"
 #include "CTrainGroup.h"
@@ -8,18 +8,18 @@
 #include "CSkinPlugin.h"
 #include "CTrainEditMode.h"
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const float GROUP_PREVIEW_SPEED;
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_PreviewAnimation;
 extern bool g_UpdateTrainGroupList;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainEditMode::CTrainEditMode():
-	CModelPluginMode(lang(TrainPlugin))	//	Šî–{ƒNƒ‰ƒX
+	CModelPluginMode(lang(TrainPlugin))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_MyCamera.Init(40.0f, 2.0f, 200.0f, false);
 	int ww = TILE_UNIT*16, wh = TILE_UNIT*10;
@@ -80,7 +80,7 @@ CTrainEditMode::CTrainEditMode():
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainEditMode::~CTrainEditMode(){
 	DELETE_V(m_GroupMenu);
@@ -89,11 +89,11 @@ CTrainEditMode::~CTrainEditMode(){
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CTrainEditMode::WindowResized(
-	int w, int h,		//	V‹KƒTƒCƒY
-	CWindowCtrl *wnd	//	ƒEƒBƒhƒEƒRƒ“ƒgƒ[ƒ‹
+	int w, int h,		//	æ–°è¦ã‚µã‚¤ã‚º
+	CWindowCtrl *wnd	//	ã‚¦ã‚£ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	if(wnd==&m_TemplateWindow){
 		m_TemplateListView.SetSize(w-TILE_UNIT, h-TILE_UNIT*2);
@@ -110,11 +110,11 @@ void CTrainEditMode::WindowResized(
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CTrainEditMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	CListElement *renametarget = NULL;
 RETRY:
@@ -122,7 +122,7 @@ RETRY:
 	case CMD_PITVELEM:
 		class CTrainAdder: public CMenuCommand{
 		private:
-			CTrainPlugin *m_TrainPlugin;	//	Ôçqƒvƒ‰ƒOƒCƒ“
+			CTrainPlugin *m_TrainPlugin;	//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 		public:
 			CTrainAdder(CTrainPlugin *tp){ m_TrainPlugin = tp; }
 			void Exec(){ g_TrainEditMode->AddTrain(m_TrainPlugin); }
@@ -155,7 +155,7 @@ RETRY:
 		};
 		class CGroupDeleter: public CMenuCommand{
 		private:
-			CTrainGroup *m_Group;	//	•Ò¬
+			CTrainGroup *m_Group;	//	ç·¨æˆ
 		public:
 			CGroupDeleter(CTrainGroup *gr){ m_Group = gr; }
 			void Exec(){ g_TrainEditMode->DeleteGroup(m_Group); }
@@ -184,7 +184,7 @@ RETRY:
 		if(!data) return NULL;
 		class CTrainReverser: public CMenuCommand{
 		private:
-			CTrain *m_Train;	//	Ôçq
+			CTrain *m_Train;	//	è»Šè¼Œ
 		public:
 			CTrainReverser(CTrain *tr){ m_Train = tr; }
 			void Exec(){
@@ -197,7 +197,7 @@ RETRY:
 		};
 		class CTrainDeleter: public CMenuCommand{
 		private:
-			CTrain *m_Train;	//	Ôçq
+			CTrain *m_Train;	//	è»Šè¼Œ
 		public:
 			CTrainDeleter(CTrain *tr){ m_Train = tr; }
 			void Exec(){ g_TrainEditMode->DeleteTrain(m_Train); }
@@ -214,11 +214,11 @@ RETRY:
 }
 
 /*
- *	ƒ_ƒuƒ‹ƒNƒŠƒbƒNˆ—
+ *	ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯å‡¦ç†
  */
 void CTrainEditMode::DoubleClick(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	switch(type){
 	case CMD_PITVELEM:
@@ -231,7 +231,7 @@ void CTrainEditMode::DoubleClick(
 }
 
 /*
- *	ƒvƒŒƒrƒ…[ƒ‚[ƒh•ÏX
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ãƒ¢ãƒ¼ãƒ‰å¤‰æ›´
  */
 void CTrainEditMode::SwitchPreviewMode(){
 	m_GroupPreview = !m_GroupPreview;
@@ -240,7 +240,7 @@ void CTrainEditMode::SwitchPreviewMode(){
 }
 
 /*
- *	•Ò¬’Ç‰Á
+ *	ç·¨æˆè¿½åŠ 
  */
 void CTrainEditMode::AddGroup(){
 	if(g_NetworkInitialized){
@@ -256,10 +256,10 @@ void CTrainEditMode::AddGroup(){
 }
 
 /*
- *	•Ò¬íœ
+ *	ç·¨æˆå‰Šé™¤
  */
 void CTrainEditMode::DeleteGroup(
-	CTrainGroup *gr	//	•Ò¬
+	CTrainGroup *gr	//	ç·¨æˆ
 ){
 	if(g_NetworkInitialized){
 		g_Skin->Error();
@@ -278,10 +278,10 @@ void CTrainEditMode::DeleteGroup(
 }
 
 /*
- *	ƒeƒ“ƒvƒŒ[ƒg‚©‚ç•Ò¬’Ç‰Á
+ *	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‹ã‚‰ç·¨æˆè¿½åŠ 
  */
 void CTrainEditMode::NewFromTemplate(
-	CTrainGroupTemplate *tmp	//	ƒeƒ“ƒvƒŒ[ƒg
+	CTrainGroupTemplate *tmp	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 ){
 	if(g_NetworkInitialized){
 		g_Skin->Error();
@@ -300,10 +300,10 @@ void CTrainEditMode::NewFromTemplate(
 }
 
 /*
- *	ƒeƒ“ƒvƒŒ[ƒg‚©‚çÔçq’Ç‰Á
+ *	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‹ã‚‰è»Šè¼Œè¿½åŠ 
  */
 void CTrainEditMode::AddFromTemplate(
-	CTrainGroupTemplate *tmp	//	ƒeƒ“ƒvƒŒ[ƒg
+	CTrainGroupTemplate *tmp	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 ){
 	if(g_NetworkInitialized){
 		g_Skin->Error();
@@ -319,10 +319,10 @@ void CTrainEditMode::AddFromTemplate(
 }
 
 /*
- *	Ôçq’Ç‰Á
+ *	è»Šè¼Œè¿½åŠ 
  */
 void CTrainEditMode::AddTrain(
-	CTrainPlugin *tpi	//	Ôçqƒvƒ‰ƒOƒCƒ“
+	CTrainPlugin *tpi	//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	if(g_NetworkInitialized){
 		g_Skin->Error();
@@ -342,10 +342,10 @@ void CTrainEditMode::AddTrain(
 }
 
 /*
- *	Ôçqíœ
+ *	è»Šè¼Œå‰Šé™¤
  */
 void CTrainEditMode::DeleteTrain(
-	CTrain *tr	//	Ôçq
+	CTrain *tr	//	è»Šè¼Œ
 ){
 	if(g_NetworkInitialized){
 		g_Skin->Error();
@@ -362,25 +362,25 @@ void CTrainEditMode::DeleteTrain(
 }
 
 /*
- *	Œ»İ‚Ìƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“‚ğæ“¾
+ *	ç¾åœ¨ã®ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’å–å¾—
  */
 CModelPlugin *CTrainEditMode::GetModelPlugin(){
 	return g_Train;
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆå–å¾—
  */
 CPluginList *CTrainEditMode::GetPluginList(){
 	return g_TrainPluginList;
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ŒŸõ
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æ¤œç´¢
  */
 CPlugin *CTrainEditMode::FindModelPlugin(
-	char *type,	//	ƒ^ƒCƒv
-	char *id	//	¯•Êq
+	char *type,	//	ã‚¿ã‚¤ãƒ—
+	char *id	//	è­˜åˆ¥å­
 ){
 	if(string(type)=="TrainGroupTemplate"){
 		ITrainGroupTemplate itgt = FindTrainGroupTemplate(id);
@@ -390,17 +390,17 @@ CPlugin *CTrainEditMode::FindModelPlugin(
 }
 
 /*
- *	İ’è“Ç
+ *	è¨­å®šèª­è¾¼
  */
 char *CTrainEditMode::LoadModelPluginSetting(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	ListTrainGroupTemplate();
 	return str;
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CTrainEditMode::EnterModelPlugin(){
 	ms_ModeLabel = lang(EditTrain);
@@ -413,14 +413,14 @@ void CTrainEditMode::EnterModelPlugin(){
 }
 
 /*
- *	ƒ‚[ƒ_ƒ‹ˆ—
+ *	ãƒ¢ãƒ¼ãƒ€ãƒ«å‡¦ç†
  */
 void CTrainEditMode::ModalFuncModelPlugin(){
 	ModalFuncTrainGroupTemplate();
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 CModelInst *CTrainEditMode::ScanInputModelPlugin(){
 	if(g_RSPV) return NULL;
@@ -510,7 +510,7 @@ CModelInst *CTrainEditMode::ScanInputModelPlugin(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CTrainEditMode::RenderModelPlugin(){
 	if(!g_Train) return;

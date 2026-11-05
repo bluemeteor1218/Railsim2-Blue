@@ -1,16 +1,16 @@
-#ifndef CTRAINPLUGIN_H_INCLUDED
+ï»¿#ifndef CTRAINPLUGIN_H_INCLUDED
 #define CTRAINPLUGIN_H_INCLUDED
 
 #include "CModelPlugin.h"
 #include "CTrainSetBuffer.h"
 
 /*
- *	ƒIƒuƒWƒFƒNƒgƒWƒ‡ƒCƒ“ƒg ZY w’è
+ *	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚¸ãƒ§ã‚¤ãƒ³ãƒˆ ZY æŒ‡å®š
  */
 class CObjectJointZY: public CObjectJoint{
 public:
-	VEC2 m_AttachCoord;	//	Ú‘±æƒ[ƒJƒ‹ ZY À•W
-	VEC2 m_LocalCoord;	//	©•ª‘¤ƒ[ƒJƒ‹ ZY À•W
+	VEC2 m_AttachCoord;	//	æ¥ç¶šå…ˆãƒ­ãƒ¼ã‚«ãƒ« ZY åº§æ¨™
+	VEC2 m_LocalCoord;	//	è‡ªåˆ†å´ãƒ­ãƒ¼ã‚«ãƒ« ZY åº§æ¨™
 public:
 	char *Read(char *, CModelPlugin *);
 	VEC3 GetPos(){
@@ -26,11 +26,11 @@ public:
 };
 
 /*
- *	ƒIƒuƒWƒFƒNƒgƒWƒ‡ƒCƒ“ƒg ZY + X w’è
+ *	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚¸ãƒ§ã‚¤ãƒ³ãƒˆ ZY + X æŒ‡å®š
  */
 class CObjectJointZYX: public CObjectJointZY{
 public:
-	float m_AttachX;	//	Ú‘±æƒ[ƒJƒ‹ X À•W
+	float m_AttachX;	//	æ¥ç¶šå…ˆãƒ­ãƒ¼ã‚«ãƒ« X åº§æ¨™
 public:
 	char *Read(char *, CModelPlugin *);
 	VEC3 GetPos(){
@@ -45,17 +45,17 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	Ô²
+ *	è»Šè»¸
  */
 class CAxleObject: public CNamedObject{
 	friend class CAxlePosture;
 	friend class CTrainPlugin;
 private:
-	int m_Symmetric;		//	‘ÎÌƒJƒEƒ“ƒg
-	float m_Diameter;		//	’¼Œa
-	float m_MaxRotation;	//	ƒtƒŒ[ƒ€“–‚½‚è‰ñ“]—ÊÅ‘å’l
-	bool m_WheelSound;		//	Ô—Ö‰¹ƒtƒ‰ƒO
-	VEC2 m_Coord;			//	À•W
+	int m_Symmetric;		//	å¯¾ç§°ã‚«ã‚¦ãƒ³ãƒˆ
+	float m_Diameter;		//	ç›´å¾„
+	float m_MaxRotation;	//	ãƒ•ãƒ¬ãƒ¼ãƒ å½“ãŸã‚Šå›è»¢é‡æœ€å¤§å€¤
+	bool m_WheelSound;		//	è»Šè¼ªéŸ³ãƒ•ãƒ©ã‚°
+	VEC2 m_Coord;			//	åº§æ¨™
 public:
 	bool operator<(const CAxleObject &rhs) const{ return m_Coord.x<rhs.m_Coord.x; }
 	virtual int GetType(){ return 1; }
@@ -65,38 +65,38 @@ public:
 	void SetPosture(VEC3, VEC3, VEC3, float);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CAxleObject>::iterator IAxleObject;
 
 /*
- *	Ô‘Ì
+ *	è»Šä½“
  */
 class CBodyObject: public CNamedObject{
 	friend class CTrainPlugin;
 private:
-	static VEC3 ms_TiltDir;				//	U‚èqƒxƒNƒgƒ‹
-	float m_TiltRatio;					//	U‚èqŒW”
-	float m_TiltMaxAngle;				//	U‚èqÅ‘åŠp“x
-	float m_TiltBaseAlt;				//	U‚èqŠî€‚‚³
-	CObjectJointZY m_Joint1, m_Joint2;	//	Ú‘±î•ñ
+	static VEC3 ms_TiltDir;				//	æŒ¯ã‚Šå­ãƒ™ã‚¯ãƒˆãƒ«
+	float m_TiltRatio;					//	æŒ¯ã‚Šå­ä¿‚æ•°
+	float m_TiltMaxAngle;				//	æŒ¯ã‚Šå­æœ€å¤§è§’åº¦
+	float m_TiltBaseAlt;				//	æŒ¯ã‚Šå­åŸºæº–é«˜ã•
+	CObjectJointZY m_Joint1, m_Joint2;	//	æ¥ç¶šæƒ…å ±
 public:
 	static void SetTiltDir(VEC3 &td){ ms_TiltDir = td; }
 	char *Read(char *, CModelPlugin *);
 	void SetPosture();
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CBodyObject>::iterator IBodyObject;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒtƒŠ[ƒIƒuƒWƒFƒNƒgƒRƒ“ƒeƒi
+ *	ãƒ•ãƒªãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚³ãƒ³ãƒ†ãƒŠ
  */
 class CFreeObjectContainer{
 private:
-	CFreeObjectBase *m_FreeObject;	//	ƒtƒŠ[ƒIƒuƒWƒFƒNƒg
+	CFreeObjectBase *m_FreeObject;	//	ãƒ•ãƒªãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 public:
 	CFreeObjectContainer();
 	CFreeObjectContainer(const CFreeObjectContainer &);
@@ -113,21 +113,21 @@ public:
 	void Render(){ m_FreeObject->RenderFreeObject(); }
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CFreeObjectContainer>::iterator IFreeObjectContainer;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	2 “_”z’u
+ *	2 ç‚¹é…ç½®
  */
 class CFreeObjectZY: public CNamedObject, public CFreeObjectBase{
 	friend class CTrainPlugin;
 private:
-	float m_FixPosition;				//	pos ŒÅ’èˆÊ’u
-	float m_FixRight;					//	right ŒÅ’èˆÊ’u
-	CObjectJointZYX m_Joint1, m_Joint2;	//	Ú‘±î•ñ
+	float m_FixPosition;				//	pos å›ºå®šä½ç½®
+	float m_FixRight;					//	right å›ºå®šä½ç½®
+	CObjectJointZYX m_Joint1, m_Joint2;	//	æ¥ç¶šæƒ…å ±
 public:
 	CFreeObjectBase *Duplicate(){ return new CFreeObjectZY(*this); }
 	char *Read(char *, CModelPlugin *);
@@ -142,26 +142,26 @@ public:
 };
 
 /*
- *	OŠpŒ`•Ó
+ *	ä¸‰è§’å½¢è¾º
  */
 class CTriangleLinkZY: public CNamedObject{
 	friend class CFreeTriangleZY;
 	friend class CFreeCrankZY;
 	friend class CFreePistonZY;
 private:
-	VEC2 m_LinkCoord;			//	OŠpŒ`ƒŠƒ“ƒNÀ•W
-	CObjectJointZYX m_Joint;	//	Ú‘±î•ñ
+	VEC2 m_LinkCoord;			//	ä¸‰è§’å½¢ãƒªãƒ³ã‚¯åº§æ¨™
+	CObjectJointZYX m_Joint;	//	æ¥ç¶šæƒ…å ±
 public:
 	char *Read(char *, CModelPlugin *);
 };
 
 /*
- *	OŠpŒ`ƒIƒuƒWƒFƒNƒg
+ *	ä¸‰è§’å½¢ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
  */
 class CFreeTriangleZY: public CFreeObjectBase{
 	friend class CTrainPlugin;
 private:
-	CTriangleLinkZY m_Link1, m_Link2;	//	•Ó
+	CTriangleLinkZY m_Link1, m_Link2;	//	è¾º
 public:
 	CFreeObjectBase *Duplicate(){ return new CFreeTriangleZY(*this); }
 	char *Read(char *, CModelPlugin *);
@@ -181,25 +181,25 @@ public:
 };
 
 /*
- *	ƒNƒ‰ƒ“ƒNƒXƒ‰ƒCƒ_
+ *	ã‚¯ãƒ©ãƒ³ã‚¯ã‚¹ãƒ©ã‚¤ãƒ€
  */
 class CCrankSlideZY: public CNamedObject{
 	friend class CFreeCrankZY;
 private:
-	VEC2 m_Direction;			//	OŠpŒ`ƒŠƒ“ƒNÀ•W
-	CObjectJointZYX m_Joint;	//	Ú‘±î•ñ
+	VEC2 m_Direction;			//	ä¸‰è§’å½¢ãƒªãƒ³ã‚¯åº§æ¨™
+	CObjectJointZYX m_Joint;	//	æ¥ç¶šæƒ…å ±
 public:
 	char *Read(char *, CModelPlugin *);
 };
 
 /*
- *	ƒNƒ‰ƒ“ƒNƒIƒuƒWƒFƒNƒg
+ *	ã‚¯ãƒ©ãƒ³ã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
  */
 class CFreeCrankZY: public CFreeObjectBase{
 	friend class CTrainPlugin;
 private:
-	CTriangleLinkZY m_Link;	//	•Ó
-	CCrankSlideZY m_Slide;	//	ƒXƒ‰ƒCƒ_
+	CTriangleLinkZY m_Link;	//	è¾º
+	CCrankSlideZY m_Slide;	//	ã‚¹ãƒ©ã‚¤ãƒ€
 public:
 	CFreeObjectBase *Duplicate(){ return new CFreeCrankZY(*this); }
 	char *Read(char *, CModelPlugin *);
@@ -219,12 +219,12 @@ public:
 };
 
 /*
- *	ƒsƒXƒgƒ“ƒIƒuƒWƒFƒNƒg
+ *	ãƒ”ã‚¹ãƒˆãƒ³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
  */
 class CFreePistonZY: public CFreeObjectBase{
 	friend class CTrainPlugin;
 private:
-	CTriangleLinkZY m_Link1, m_Link2;	//	•Ó
+	CTriangleLinkZY m_Link1, m_Link2;	//	è¾º
 public:
 	CFreeObjectBase *Duplicate(){ return new CFreePistonZY(*this); }
 	char *Read(char *, CModelPlugin *);
@@ -247,25 +247,25 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	Ôçqƒvƒ‰ƒOƒCƒ“
+ *	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CTrainPlugin: public CModelPlugin{
 	friend class CTrain;
 	friend class CTrainGroup;
 private:
-	float m_FrontLimit;							//	‘O•”˜AŒ‹ˆÊ’u
-	float m_TailLimit;							//	Œã•”˜AŒ‹ˆÊ’u
-	float m_Length;								//	’·‚³
-	float m_MaxVelocity;						//	Å‚‘¬“x
-	float m_MaxAcceleration;					//	Å‚‰Á‘¬“x
-	float m_MaxDeceleration;					//	Å‚Œ¸‘¬“x
-	float m_TiltSpeed;							//	U‚èq“®ì‘¬“x
-	float m_DoorClosingTime;					//	ƒhƒA•Â‚ßŠ—vŠÔ
-	list<CAxleObject> m_AxleObject;				//	Ô²
-	list<CBodyObject> m_BodyObject;				//	Ô‘Ì
-	list<CFreeObjectContainer> m_FreeObject;	//	ƒtƒŠ[ƒIƒuƒWƒFƒNƒg
-	CObjectJoint3D m_FrontCabin;				//	‘O•”‰^“]ÈˆÊ’u
-	CObjectJoint3D m_TailCabin;					//	Œã•”‰^“]ÈˆÊ’u
+	float m_FrontLimit;							//	å‰éƒ¨é€£çµä½ç½®
+	float m_TailLimit;							//	å¾Œéƒ¨é€£çµä½ç½®
+	float m_Length;								//	é•·ã•
+	float m_MaxVelocity;						//	æœ€é«˜é€Ÿåº¦
+	float m_MaxAcceleration;					//	æœ€é«˜åŠ é€Ÿåº¦
+	float m_MaxDeceleration;					//	æœ€é«˜æ¸›é€Ÿåº¦
+	float m_TiltSpeed;							//	æŒ¯ã‚Šå­å‹•ä½œé€Ÿåº¦
+	float m_DoorClosingTime;					//	ãƒ‰ã‚¢é–‰ã‚æ‰€è¦æ™‚é–“
+	list<CAxleObject> m_AxleObject;				//	è»Šè»¸
+	list<CBodyObject> m_BodyObject;				//	è»Šä½“
+	list<CFreeObjectContainer> m_FreeObject;	//	ãƒ•ãƒªãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CObjectJoint3D m_FrontCabin;				//	å‰éƒ¨é‹è»¢å¸­ä½ç½®
+	CObjectJoint3D m_TailCabin;					//	å¾Œéƒ¨é‹è»¢å¸­ä½ç½®
 public:
 	static void RenderPreview();
 	CTrainPlugin(char *id): CModelPlugin(id){}
@@ -289,7 +289,7 @@ public:
 };
 
 /*
- *	Ôçqƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CTrainPluginList: public CModelPluginList{
 private:
@@ -302,7 +302,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CTrainPlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CTrainPlugin *g_Train;
 extern CTrainPluginList *g_TrainPluginList;
 

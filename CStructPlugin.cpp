@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCamera.h"
 #include "CStructPlugin.h"
 #include "CStruct.h"
@@ -7,18 +7,18 @@
 #include "CConfigMode.h"
 #include "CSaveFile.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_MoverEnabled;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 CStructPlugin *g_Struct = NULL;
 
 /*
  *	[static]
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CStructPlugin::RenderPreview(
-	VEC3 pos,	//	ˆÊ’u
+	VEC3 pos,	//	ä½ç½®
 	VEC3 dir,	//	dir
 	VEC3 up		//	up
 ){
@@ -32,13 +32,13 @@ void CStructPlugin::RenderPreview(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStructPlugin::~CStructPlugin(){
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CStructPlugin::Load(){
 	char *str = m_Script, *tmp, *eee;
@@ -76,10 +76,10 @@ bool CStructPlugin::Load(){
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 char *CStructPlugin::LoadStructBefore(
-	char *str	//	‘ÎÛ•¶Žš—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(eee = str, "StructInfo"))) throw CSynErr(eee);
@@ -88,7 +88,7 @@ char *CStructPlugin::LoadStructBefore(
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CStructPlugin::LoadOldForm(){
 	if(!ChDir()) return false;
@@ -107,7 +107,7 @@ bool CStructPlugin::LoadOldForm(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[Ý’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CStructPlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -118,7 +118,7 @@ void CStructPlugin::SetPreview(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CStructPlugin::Preview(){
 	SetPartsInst(NULL);
@@ -129,10 +129,10 @@ void CStructPlugin::Preview(){
 }
 
 /*
- *	ƒIƒuƒWƒFƒNƒgŒŸõ
+ *	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæ¤œç´¢
  */
 CNamedObject *CStructPlugin::FindObject(
-	const string &name	//	ƒIƒuƒWƒFƒNƒg–¼
+	const string &name	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
 ){
 	CNamedObject *ret;
 	IFreeObjectContainer ifo = m_FreeObject.begin();
@@ -141,14 +141,14 @@ CNamedObject *CStructPlugin::FindObject(
 }
 
 /*
- *	ƒTƒEƒ“ƒh—LŒø‚©‚Ç‚¤‚©
+ *	ã‚µã‚¦ãƒ³ãƒ‰æœ‰åŠ¹ã‹ã©ã†ã‹
  */
 bool CStructPlugin::IsSoundEnabled(){
 	return !!g_ConfigMode->GetStructSound();
 }
 
 /*
- *	Žp¨Ý’è
+ *	å§¿å‹¢è¨­å®š
  */
 void CStructPlugin::SetPosture(){
 	IFreeObjectContainer ifo = m_FreeObject.begin();
@@ -156,10 +156,10 @@ void CStructPlugin::SetPosture(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CStructPlugin::ScanInput(
-	CStruct *strct	//	Ž{ÝƒCƒ“ƒXƒ^ƒ“ƒX
+	CStruct *strct	//	æ–½è¨­ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	strct->SetLocalAxis();
 	SetCamDistSwitch(strct->GetPos());
@@ -169,10 +169,10 @@ void CStructPlugin::ScanInput(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CStructPlugin::Render(
-	CStruct *strct	//	Ž{ÝƒCƒ“ƒXƒ^ƒ“ƒX
+	CStruct *strct	//	æ–½è¨­ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	SetAnimation(strct);
 	if(strct){
@@ -194,10 +194,10 @@ void CStructPlugin::Render(
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“is
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€²è¡Œ
  */
 void CStructPlugin::Simulate(
-	CStruct *strct	//	Ž{ÝƒCƒ“ƒXƒ^ƒ“ƒX
+	CStruct *strct	//	æ–½è¨­ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	SetMoverState(strct);
 	strct->SetLocalAxis();

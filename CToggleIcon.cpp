@@ -1,19 +1,19 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CToggleIcon.h"
 #include "CSkinPlugin.h"
 #include "CNeutralMode.h"
 
-//	“à•”’è”
-const float TI_SLIDE_RATIO = 0.2f;		//	ƒXƒ‰ƒCƒh‘¬“x
-const float FRAME_TEX_UNIT = 0.125f;	//	ƒtƒŒ[ƒ€ƒ}ƒbƒsƒ“ƒO’PˆÊ
-const float ICON_TEX_UNIT = 0.25f;		//	ƒAƒCƒRƒ“ƒ}ƒbƒsƒ“ƒO’PˆÊ
+//	å†…éƒ¨å®šæ•°
+const float TI_SLIDE_RATIO = 0.2f;		//	ã‚¹ãƒ©ã‚¤ãƒ‰é€Ÿåº¦
+const float FRAME_TEX_UNIT = 0.125f;	//	ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ”ãƒ³ã‚°å˜ä½
+const float ICON_TEX_UNIT = 0.25f;		//	ã‚¢ã‚¤ã‚³ãƒ³ãƒãƒƒãƒ”ãƒ³ã‚°å˜ä½
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CToggleIcon *CToggleIcon::ms_PointIcon;
 
 /*
  *	[static]
- *	ƒ|ƒbƒvƒAƒbƒvƒeƒLƒXƒg‚Ì•`‰æ
+ *	ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ãƒ†ã‚­ã‚¹ãƒˆã®æç”»
  */
 void CToggleIcon::RenderPopupText(){
 	if(!ms_PointIcon) return;
@@ -27,21 +27,21 @@ void CToggleIcon::RenderPopupText(){
 }
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CToggleIcon::Init(
-	int x, int y,		//	À•W
-	int w, int h,		//	ƒTƒCƒY
-	char *t,			//	ƒeƒLƒXƒg
-	char *expr,			//	à–¾•¶
-	CInterface *p,		//	e
-	CToggleIcon *l,		//	‘OƒŠƒ“ƒN
-	CGameMode *mode,	//	‘Î‰ƒ‚[ƒh
-	DWORD key,			//	ƒzƒbƒgƒL[
-	float u1, float v1,	//	ŠJ•úƒeƒNƒXƒ`ƒƒÀ•W
-	float u2, float v2,	//	‰Ÿ‰ºƒeƒNƒXƒ`ƒƒÀ•W
-	float u3, float v3,	//	ƒAƒCƒRƒ“ƒeƒNƒXƒ`ƒƒÀ•W
-	int mid				//	ƒ‚[ƒh ID
+	int x, int y,		//	åº§æ¨™
+	int w, int h,		//	ã‚µã‚¤ã‚º
+	char *t,			//	ãƒ†ã‚­ã‚¹ãƒˆ
+	char *expr,			//	èª¬æ˜æ–‡
+	CInterface *p,		//	è¦ª
+	CToggleIcon *l,		//	å‰ãƒªãƒ³ã‚¯
+	CGameMode *mode,	//	å¯¾å¿œãƒ¢ãƒ¼ãƒ‰
+	DWORD key,			//	ãƒ›ãƒƒãƒˆã‚­ãƒ¼
+	float u1, float v1,	//	é–‹æ”¾æ™‚ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
+	float u2, float v2,	//	æŠ¼ä¸‹æ™‚ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
+	float u3, float v3,	//	ã‚¢ã‚¤ã‚³ãƒ³ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
+	int mid				//	ãƒ¢ãƒ¼ãƒ‰ ID
 ){
 	CInterface::Init(x, y, w, h, t, p);
 	m_State = 0;
@@ -65,7 +65,7 @@ void CToggleIcon::Init(
 }
 
 /*
- *	ƒ`ƒFƒbƒNƒNƒŠƒA
+ *	ãƒã‚§ãƒƒã‚¯ã‚¯ãƒªã‚¢
  */
 void CToggleIcon::ClearGroupCheck(){
 	CToggleIcon *ptr = this;
@@ -76,10 +76,10 @@ void CToggleIcon::ClearGroupCheck(){
 }
 
 /*
- *	ƒ`ƒFƒbƒNİ’è
+ *	ãƒã‚§ãƒƒã‚¯è¨­å®š
  */
 void CToggleIcon::SetCheck(
-	bool inv	//	”½“]ƒtƒ‰ƒO
+	bool inv	//	åè»¢ãƒ•ãƒ©ã‚°
 ){
 	if(inv && m_Check){
 		m_Check = 0;
@@ -94,11 +94,11 @@ void CToggleIcon::SetCheck(
 }
 
 /*
- *	ƒXƒ‰ƒCƒhÀ•Wİ’è
+ *	ã‚¹ãƒ©ã‚¤ãƒ‰åº§æ¨™è¨­å®š
  */
 void CToggleIcon::SetSlidePos(
-	int x, int y,	//	À•W
-	bool fix		//	ŒÅ’èƒtƒ‰ƒO
+	int x, int y,	//	åº§æ¨™
+	bool fix		//	å›ºå®šãƒ•ãƒ©ã‚°
 ){
 	if(fix){
 		m_SlideY = y;
@@ -110,11 +110,11 @@ void CToggleIcon::SetSlidePos(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CToggleIcon::ScanInput(
-	bool enkey,		//	ƒzƒbƒgƒL[—LŒø
-	bool enmouse	//	ƒ}ƒEƒX—LŒø
+	bool enkey,		//	ãƒ›ãƒƒãƒˆã‚­ãƒ¼æœ‰åŠ¹
+	bool enmouse	//	ãƒã‚¦ã‚¹æœ‰åŠ¹
 ){
 	POINT pos = g_Cursor.GetPos();
 	if(enmouse && IsInside(pos.x, pos.y)){
@@ -158,10 +158,10 @@ bool CToggleIcon::ScanInput(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CToggleIcon::Render(
-	float altu, float altv	//	‘ã‘ÖƒeƒNƒXƒ`ƒƒÀ•W
+	float altu, float altv	//	ä»£æ›¿ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
 ){
 	CInterface::RenderBrother();
 	int px, py, push = m_State==2;

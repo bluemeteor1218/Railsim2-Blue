@@ -1,4 +1,4 @@
-#ifndef CCONFIGMODE_H_INCLUDED
+ï»¿#ifndef CCONFIGMODE_H_INCLUDED
 #define CCONFIGMODE_H_INCLUDED
 
 #include "CStaticCtrl.h"
@@ -9,63 +9,63 @@
 #include "CWindowDivInfo.h"
 #include "CInterfaceMode.h"
 
-const int RES_MODE_NUM = 4;			//	‰ğ‘œ“xƒ^ƒCƒv”
-const int MIPMAP_NUM = 4;			//	ƒ~ƒbƒvƒ}ƒbƒv‹æ•ª”
-const int PISND_NUM = 4;			//	ƒvƒ‰ƒOƒCƒ“ƒTƒEƒ“ƒh‹æ•ª”
-const int STEREO_METHOD_NUM = 2;	//	ƒXƒeƒŒƒIè–@”
+const int RES_MODE_NUM = 4;			//	è§£åƒåº¦ã‚¿ã‚¤ãƒ—æ•°
+const int MIPMAP_NUM = 4;			//	ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—åŒºåˆ†æ•°
+const int PISND_NUM = 4;			//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚µã‚¦ãƒ³ãƒ‰åŒºåˆ†æ•°
+const int STEREO_METHOD_NUM = 2;	//	ã‚¹ãƒ†ãƒ¬ã‚ªæ‰‹æ³•æ•°
 
 /*
- *	ŠÂ‹«İ’èƒ‚[ƒh
+ *	ç’°å¢ƒè¨­å®šãƒ¢ãƒ¼ãƒ‰
  */
 class CConfigMode: public CInterfaceMode{
 private:
-	CWindowCtrl m_ConfigWindow1;		//	‘‹ 1
+	CWindowCtrl m_ConfigWindow1;		//	çª“ 1
 
-	CGroupBox m_InterfaceGroup;			//	ƒCƒ“ƒ^[ƒtƒFƒCƒX
-	CCheckBox m_HideTopPanel;			//	ãƒpƒlƒ‹‚ğ‰B‚·
-	CCheckBox m_HideRightPanel;			//	‰Eƒpƒlƒ‹‚ğ‰B‚·
-	CCheckBox m_WindowShadow;			//	ƒEƒBƒ“ƒhƒE‚Ì‰e
+	CGroupBox m_InterfaceGroup;			//	ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
+	CCheckBox m_HideTopPanel;			//	ä¸Šãƒ‘ãƒãƒ«ã‚’éš ã™
+	CCheckBox m_HideRightPanel;			//	å³ãƒ‘ãƒãƒ«ã‚’éš ã™
+	CCheckBox m_WindowShadow;			//	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å½±
 
-	CGroupBox m_DeviceGroup;			//	ƒfƒoƒCƒX
-	CStaticCtrl m_NeedRestart;			//	—vÄ‹N“®
-	CCheckBox m_FullScreen;				//	ƒtƒ‹ƒXƒNƒŠ[ƒ“
-	CStaticCtrl m_ResLabel;				//	‰ğ‘œ“x
-	CRadioButton m_Resolution[RES_MODE_NUM];	//	‰ğ‘œ“xƒ`ƒFƒbƒN
-	CStaticCtrl m_MipMapLabel;			//	ƒ~ƒbƒvƒ}ƒbƒv
-	CCheckBox m_MipMap[MIPMAP_NUM];		//	ƒ~ƒbƒvƒ}ƒbƒvƒ`ƒFƒbƒN
+	CGroupBox m_DeviceGroup;			//	ãƒ‡ãƒã‚¤ã‚¹
+	CStaticCtrl m_NeedRestart;			//	è¦å†èµ·å‹•
+	CCheckBox m_FullScreen;				//	ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³
+	CStaticCtrl m_ResLabel;				//	è§£åƒåº¦
+	CRadioButton m_Resolution[RES_MODE_NUM];	//	è§£åƒåº¦ãƒã‚§ãƒƒã‚¯
+	CStaticCtrl m_MipMapLabel;			//	ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—
+	CCheckBox m_MipMap[MIPMAP_NUM];		//	ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ãƒã‚§ãƒƒã‚¯
 
-	CGroupBox m_AccessoryGroup;			//	ƒAƒNƒZƒTƒŠ
-	CCheckBox m_Compass;				//	ƒRƒ“ƒpƒX
-	CCheckBox m_WindMeter;				//	•——ÍŒv
-	CCheckBox m_ShowMap;				//	’n}
+	CGroupBox m_AccessoryGroup;			//	ã‚¢ã‚¯ã‚»ã‚µãƒª
+	CCheckBox m_Compass;				//	ã‚³ãƒ³ãƒ‘ã‚¹
+	CCheckBox m_WindMeter;				//	é¢¨åŠ›è¨ˆ
+	CCheckBox m_ShowMap;				//	åœ°å›³
 
-	CGroupBox m_EffectGroup;			//	‹ŠoŒø‰Ê
-	CCheckBox m_Shadow;					//	‰e
-	CCheckBox m_LinearFilter;			//	ƒeƒNƒXƒ`ƒƒƒtƒBƒ‹ƒ^
-	CCheckBox m_EnvMap;					//	ŠÂ‹«ƒ}ƒbƒsƒ“ƒO
-	CCheckBox m_SpecularLight;			//	‹¾–Ê”½ËŒõ
-	CCheckBox m_SunLensFlare;			//	‘¾—zƒŒƒ“ƒYƒtƒŒƒA
-	CCheckBox m_SunWhiteout;			//	‘¾—zƒzƒƒCƒgƒAƒEƒg
-	CCheckBox m_MiscLensFlare;			//	‚»‚Ì‘¼ƒŒƒ“ƒYƒtƒŒƒA
-	CCheckBox m_MiscParticle;			//	ƒp[ƒeƒBƒNƒ‹
-	CCheckBox m_Wind;					//	•—
-	CGroupBox m_SoundGroup;				//	ƒTƒEƒ“ƒh
-	CCheckBox m_InterfaceSound;			//	ƒCƒ“ƒ^[ƒtƒFƒCƒX
-	CCheckBox m_PluginSound[PISND_NUM];	//	ƒvƒ‰ƒOƒCƒ“ƒTƒEƒ“ƒh
+	CGroupBox m_EffectGroup;			//	è¦–è¦šåŠ¹æœ
+	CCheckBox m_Shadow;					//	å½±
+	CCheckBox m_LinearFilter;			//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚£ãƒ«ã‚¿
+	CCheckBox m_EnvMap;					//	ç’°å¢ƒãƒãƒƒãƒ”ãƒ³ã‚°
+	CCheckBox m_SpecularLight;			//	é¡é¢åå°„å…‰
+	CCheckBox m_SunLensFlare;			//	å¤ªé™½ãƒ¬ãƒ³ã‚ºãƒ•ãƒ¬ã‚¢
+	CCheckBox m_SunWhiteout;			//	å¤ªé™½ãƒ›ãƒ¯ã‚¤ãƒˆã‚¢ã‚¦ãƒˆ
+	CCheckBox m_MiscLensFlare;			//	ãã®ä»–ãƒ¬ãƒ³ã‚ºãƒ•ãƒ¬ã‚¢
+	CCheckBox m_MiscParticle;			//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«
+	CCheckBox m_Wind;					//	é¢¨
+	CGroupBox m_SoundGroup;				//	ã‚µã‚¦ãƒ³ãƒ‰
+	CCheckBox m_InterfaceSound;			//	ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
+	CCheckBox m_PluginSound[PISND_NUM];	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚µã‚¦ãƒ³ãƒ‰
 
-	CGroupBox m_MiscGroup;				//	‚»‚Ì‘¼
-	CCheckBox m_UseUndo;				//	ƒAƒ“ƒhƒDg—p
+	CGroupBox m_MiscGroup;				//	ãã®ä»–
+	CCheckBox m_UseUndo;				//	ã‚¢ãƒ³ãƒ‰ã‚¥ä½¿ç”¨
 
-	CWindowCtrl m_ConfigWindow2;		//	‘‹ 2
-	CGroupBox m_StereoGroup;			//	ƒXƒeƒŒƒI
-	CCheckBox m_StereoEnabled;			//	ƒXƒeƒŒƒI—LŒø
-	CStaticCtrl m_StereoMethodLabel;	//	ƒXƒeƒŒƒIè–@
-	CRadioButton m_StereoMethod[STEREO_METHOD_NUM];	//	ƒXƒeƒŒƒIè–@
-	CStaticCtrl m_StereoIntervalLabel;	//	ƒXƒeƒŒƒIè–@
-	CEditCtrl m_StereoIntervalEdit;		//	‹“_ŠÔŠu
+	CWindowCtrl m_ConfigWindow2;		//	çª“ 2
+	CGroupBox m_StereoGroup;			//	ã‚¹ãƒ†ãƒ¬ã‚ª
+	CCheckBox m_StereoEnabled;			//	ã‚¹ãƒ†ãƒ¬ã‚ªæœ‰åŠ¹
+	CStaticCtrl m_StereoMethodLabel;	//	ã‚¹ãƒ†ãƒ¬ã‚ªæ‰‹æ³•
+	CRadioButton m_StereoMethod[STEREO_METHOD_NUM];	//	ã‚¹ãƒ†ãƒ¬ã‚ªæ‰‹æ³•
+	CStaticCtrl m_StereoIntervalLabel;	//	ã‚¹ãƒ†ãƒ¬ã‚ªæ‰‹æ³•
+	CEditCtrl m_StereoIntervalEdit;		//	è¦–ç‚¹é–“éš”
 
-	CWindowInfo m_RootWindow;			//	‰æ–Ê•ªŠ„î•ñ
-	CWindowInfo* m_ActiveWindow;		//	ƒ|ƒCƒ“ƒg‚µ‚Ä‚¢‚é‰æ–Ê
+	CWindowInfo m_RootWindow;			//	ç”»é¢åˆ†å‰²æƒ…å ±
+	CWindowInfo* m_ActiveWindow;		//	ãƒã‚¤ãƒ³ãƒˆã—ã¦ã„ã‚‹ç”»é¢
 
 public:
 	CConfigMode();
@@ -112,7 +112,7 @@ public:
 	void FreeWindowDiv();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern char *g_ConfigBuffer;
 extern char *g_ConfigScript;
 extern float g_ConfigVersion;

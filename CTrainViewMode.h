@@ -1,19 +1,19 @@
-#ifndef CTRAINVIEWMODE_H_INCLUDED
+ï»¿#ifndef CTRAINVIEWMODE_H_INCLUDED
 #define CTRAINVIEWMODE_H_INCLUDED
 
 #include "CTrainListView.h"
 #include "CSceneryMode.h"
 
 /*
- *	ƒjƒ…[ƒgƒ‰ƒ‹ƒ‚[ƒh
+ *	ãƒ‹ãƒ¥ãƒ¼ãƒˆãƒ©ãƒ«ãƒ¢ãƒ¼ãƒ‰
  */
 class CTrainViewMode: public CCursorSceneryMode, public CWindowResizer, public CMenuCommander{
 private:
-	int m_ViewMode;					//	‹“_ƒ‚[ƒh
-	CObject m_GroupLocal;			//	•Ò¬ƒ[ƒJƒ‹Œn
-	CWindowCtrl m_GroupWindow;		//	•Ò¬‘‹
-	CGroupListView m_GroupListView;	//	•Ò¬ƒŠƒXƒg
-	CPopMenu *m_GroupMenu;			//	•Ò¬ƒƒjƒ…[
+	int m_ViewMode;					//	è¦–ç‚¹ãƒ¢ãƒ¼ãƒ‰
+	CObject m_GroupLocal;			//	ç·¨æˆãƒ­ãƒ¼ã‚«ãƒ«ç³»
+	CWindowCtrl m_GroupWindow;		//	ç·¨æˆçª“
+	CGroupListView m_GroupListView;	//	ç·¨æˆãƒªã‚¹ãƒˆ
+	CPopMenu *m_GroupMenu;			//	ç·¨æˆãƒ¡ãƒ‹ãƒ¥ãƒ¼
 public:
 	CTrainViewMode();
 	~CTrainViewMode();
@@ -27,7 +27,7 @@ public:
 	void RenderCursorScenery();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CTrainViewMode *g_TrainViewMode;
 
 #endif

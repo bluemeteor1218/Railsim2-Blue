@@ -1,22 +1,22 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CListView.h"
 #include "CDiaInst.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void *ReplaceAdr(void *);
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern map<void *, void *> g_AddressMap;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CDiaElementBase::CDiaElementBase(){
 	m_ListElement = NULL;
 }
 
 /*
- *	ƒŠƒXƒg—v‘f•¶š—ñXV
+ *	ãƒªã‚¹ãƒˆè¦ç´ æ–‡å­—åˆ—æ›´æ–°
  */
 void CDiaElementBase::UpdateCaption(){
 	if(m_ListElement) m_ListElement->SetString(0, (char *)GetListCaption().c_str());
@@ -26,14 +26,14 @@ void CDiaElementBase::UpdateCaption(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CDiaListBase::CDiaListBase(){
 	m_UseDefault = true;
 }
 
 /*
- *	—v‘f‰ğ•ú
+ *	è¦ç´ è§£æ”¾
  */
 void CDiaListBase::Free(){
 	IPDiaElementBase ipde = m_DiaList.begin();
@@ -42,11 +42,11 @@ void CDiaListBase::Free(){
 }
 
 /*
- *	—v‘fƒŠƒXƒgì¬
+ *	è¦ç´ ãƒªã‚¹ãƒˆä½œæˆ
  */
 void CDiaListBase::ListElement(
-	CListView *lv,	//	ƒŠƒXƒgƒrƒ…[
-	int sel			//	‘I‘ğˆÊ’u
+	CListView *lv,	//	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	int sel			//	é¸æŠä½ç½®
 ){
 	lv->DeleteAllItems();
 	if(!Size()) m_DiaList.push_back(NewEntry());
@@ -68,10 +68,10 @@ void CDiaListBase::ListElement(
 }
 
 /*
- *	—v‘f’Ç‰Á
+ *	è¦ç´ è¿½åŠ 
  */
 int CDiaListBase::AddElement(
-	CDiaElementBase *el	//	‚±‚ÌŒã‚É’Ç‰Á
+	CDiaElementBase *el	//	ã“ã®å¾Œã«è¿½åŠ 
 ){
 	int i = 0;
 	IPDiaElementBase ipde = m_DiaList.begin();
@@ -86,10 +86,10 @@ int CDiaListBase::AddElement(
 }
 
 /*
- *	—v‘fíœ
+ *	è¦ç´ å‰Šé™¤
  */
 int CDiaListBase::DeleteElement(
-	CDiaElementBase *el	//	íœ—v‘f
+	CDiaElementBase *el	//	å‰Šé™¤è¦ç´ 
 ){
 	int i = 0;
 	IPDiaElementBase ipde = m_DiaList.begin();
@@ -104,10 +104,10 @@ int CDiaListBase::DeleteElement(
 }
 
 /*
- *	—v‘f‰ñ“]
+ *	è¦ç´ å›è»¢
  */
 void CDiaListBase::RotateElement(
-	bool prev	//	‹t‰ñ“]
+	bool prev	//	é€†å›è»¢
 ){
 	if(Size()<2) return;
 	if(prev) m_DiaList.splice(m_DiaList.begin(), m_DiaList, --m_DiaList.end(), m_DiaList.end());
@@ -115,7 +115,7 @@ void CDiaListBase::RotateElement(
 }
 
 /*
- *	Å‰‚Ì—v‘f‚ğæ“¾‚µA‚Ğ‚Æ‚Â‘—‚é
+ *	æœ€åˆã®è¦ç´ ã‚’å–å¾—ã—ã€ã²ã¨ã¤é€ã‚‹
  */
 CDiaElementBase *CDiaListBase::DequeueBase(bool rotate){
 	if(m_DiaList.size()){
@@ -129,11 +129,11 @@ CDiaElementBase *CDiaListBase::DequeueBase(bool rotate){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CDiaListBase::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CTrainGroup **gadr	//	•Ò¬ƒAƒhƒŒƒXŠi”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CTrainGroup **gadr	//	ç·¨æˆã‚¢ãƒ‰ãƒ¬ã‚¹æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = BeginBlock(str, Label()))) return NULL;
@@ -154,12 +154,12 @@ char *CDiaListBase::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CDiaListBase::Save(
-	FILE *df,			//	ƒtƒ@ƒCƒ‹
-	char *ind,			//	ƒCƒ“ƒfƒ“ƒg
-	CTrainGroup *group	//	•Ò¬
+	FILE *df,			//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *ind,			//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
+	CTrainGroup *group	//	ç·¨æˆ
 ){
 	string ind2 = string(ind)+"\t";
 	fprintf(df, "%s%s{\n", ind, Label());
@@ -174,7 +174,7 @@ void CDiaListBase::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CDiaInstBase::~CDiaInstBase(){
 	IPDiaListBase ipdl = m_DiaMap.begin();
@@ -185,10 +185,10 @@ CDiaInstBase::~CDiaInstBase(){
 }
 
 /*
- *	ƒ_ƒCƒ„ƒŠƒXƒgŒŸõ
+ *	ãƒ€ã‚¤ãƒ¤ãƒªã‚¹ãƒˆæ¤œç´¢
  */
 CDiaListBase *CDiaInstBase::Search(
-	CTrainGroup *group	//	•Ò¬
+	CTrainGroup *group	//	ç·¨æˆ
 ){
 	CDiaListBase *&dlist = m_DiaMap[group];
 	if(!dlist){
@@ -199,10 +199,10 @@ CDiaListBase *CDiaInstBase::Search(
 }
 
 /*
- *	ƒ_ƒCƒ„ƒŠƒXƒgŒŸõ (ƒfƒtƒHƒ‹ƒgİ’è‚È‚çƒfƒtƒHƒ‹ƒg‚ğ•Ô‚·)
+ *	ãƒ€ã‚¤ãƒ¤ãƒªã‚¹ãƒˆæ¤œç´¢ (ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®šãªã‚‰ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚’è¿”ã™)
  */
 CDiaListBase *CDiaInstBase::SearchEffectBase(
-	CTrainGroup *group	//	•Ò¬
+	CTrainGroup *group	//	ç·¨æˆ
 ){
 	if(!m_DiaMap.count(group)) return Search(NULL);
 	CDiaListBase *dlist = m_DiaMap[group];
@@ -211,7 +211,7 @@ CDiaListBase *CDiaInstBase::SearchEffectBase(
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CDiaInstBase::RestoreAddress(){
 	map<CTrainGroup *, CDiaListBase *> diamap;
@@ -222,10 +222,10 @@ void CDiaInstBase::RestoreAddress(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CDiaInstBase::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee, *tmp;
 	if(!(str = BeginBlock(str, Label()))) return NULL;
@@ -247,11 +247,11 @@ char *CDiaInstBase::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CDiaInstBase::Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *ind	//	ƒCƒ“ƒfƒ“ƒg
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *ind	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
 ){
 	string ind2 = string(ind)+"\t";
 	fprintf(df, "%s%s{\n", ind, Label());
@@ -266,14 +266,14 @@ void CDiaInstBase::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPointElement::CPointElement(){
 	m_PointSwitch = 0;
 }
 
 /*
- *	ƒŠƒXƒg•¶š—ñæ“¾
+ *	ãƒªã‚¹ãƒˆæ–‡å­—åˆ—å–å¾—
  */
 string CPointElement::GetListCaption(){
 	static char *cap[3] = {lang(Random), lang(Left), lang(Right)};
@@ -281,28 +281,28 @@ string CPointElement::GetListCaption(){
 }
 
 /*
- *	ƒ|ƒCƒ“ƒgŒvZ
+ *	ãƒã‚¤ãƒ³ãƒˆè¨ˆç®—
  */
 int CPointElement::CalcPoint(){
 	return m_PointSwitch ? m_PointSwitch-1 : Rand(2);
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CPointElement::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	if(!(str = AsgnInteger(str, "Point", &m_PointSwitch))) return NULL;
 	return str;
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CPointElement::Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *ind	//	ƒCƒ“ƒfƒ“ƒg
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *ind	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
 ){
 	fprintf(df, "%sPoint = %d;\n", ind, m_PointSwitch);
 }
@@ -311,7 +311,7 @@ void CPointElement::Save(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CDiaElement::CDiaElement(){
 	m_Action = 0;
@@ -324,7 +324,7 @@ CDiaElement::CDiaElement(){
 }
 
 /*
- *	ƒŠƒXƒg•¶š—ñæ“¾
+ *	ãƒªã‚¹ãƒˆæ–‡å­—åˆ—å–å¾—
  */
 string CDiaElement::GetListCaption(){
 	char *timetype[2] = {lang(Duration), lang(Time)};
@@ -342,15 +342,15 @@ string CDiaElement::GetListCaption(){
 		ret = lang(Pass);
 		break;
 	}
-//	if(m_Joint) ret += " / ˜AŒ‹";
+//	if(m_Joint) ret += " / é€£çµ";
 	return ret;
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CDiaElement::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "DiaElement"))) return NULL;
@@ -369,11 +369,11 @@ char *CDiaElement::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CDiaElement::Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *ind	//	ƒCƒ“ƒfƒ“ƒg
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *ind	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
 ){
 	fprintf(df, "%sDiaElement{\n", ind);
 	fprintf(df, "%s\tAction = %d;\n", ind, m_Action);

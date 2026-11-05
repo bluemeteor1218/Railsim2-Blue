@@ -1,10 +1,10 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailPlugin.h"
 #include "CGirderPlugin.h"
 #include "CGirderSelectMode.h"
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CGirderPlugin::Load(){
 	char *str = m_Script, *tmp, *eee;
@@ -37,7 +37,7 @@ bool CGirderPlugin::Load(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[Ý’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CGirderPlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -50,13 +50,13 @@ void CGirderPlugin::SetPreview(){
 }
 
 /*
- *	‹´‹rÝ’uˆÊ’uŒvŽZ
+ *	æ©‹è„šè¨­ç½®ä½ç½®è¨ˆç®—
  */
 void CGirderPlugin::CalcPierPos(
-	VEC3 *pos,		//	ˆÊ’u
-	VEC3 *right,	//	right (³‹K‰»Ï)
-	VEC3 *up,		//	up (³‹K‰»Ï)
-	VEC3 *dir		//	dir (³‹K‰»Ï)
+	VEC3 *pos,		//	ä½ç½®
+	VEC3 *right,	//	right (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 *up,		//	up (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 *dir		//	dir (æ­£è¦åŒ–æ¸ˆ)
 ){
 	if(m_FlattenCant){
 		right->y = 0.0f;

@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+﻿//	Copyright (c) 2002 Midikyou
 
 #define DEBUG_FILE "debug.txt"
 
@@ -13,29 +13,29 @@ BOOL CheckArguments(LPCSTR str);
 void DumpSysInfo();
 
 /*
- *	���������U�Ȃ�x���E�C���h�E��\������FALSE��Ԃ�
+ *	条件式が偽なら警告ウインドウを表示してFALSEを返す
  *
- *	msg	: ���b�Z�[�W
- *	b		: ������
+ *	msg	: メッセージ
+ *	b		: 条件式
  *
- *	��DirectX�̃G���[�Ɍ��肷��Ȃ�DXTrace()���g���܂��傤�B
+ *	※DirectXのエラーに限定するならDXTrace()を使いましょう。
  */
 #define ASSERT(msg, b) \
 if(!(b)) {\
-	MessageBox(GetActiveWindow(), msg, "�G���[", MB_SYSTEMMODAL); \
+	MessageBox(GetActiveWindow(), msg, "エラー", MB_SYSTEMMODAL); \
 	return FALSE; \
 }
 
 /*
- *	�֐��̖߂�l�𔻒肷��ASSERT()
+ *	関数の戻り値を判定するASSERT()
  *
- *	caption	: �^�C�g��
- *	func		: ���肷��֐�
+ *	caption	: タイトル
+ *	func		: 判定する関数
  */
 #define FAILED_ASSERT(caption, func) ASSERT(caption, !FAILED(func))
 
 /*
- *	DirectX�I�u�W�F�N�g�̈��S�ȉ��
+ *	DirectXオブジェクトの安全な解放
  */
 #define RELEASE(x) \
 if(x){ \
@@ -44,10 +44,10 @@ if(x){ \
 }
 
 /*
- *	��ƃf�B���N�g���̕ύX
+ *	作業ディレクトリの変更
  */
 #define CHANGE_DIR(dir) SetCurrentDirectory(dir)
 
-//	�֐��錾
+//	関数宣言
 void Dialog(char *, ...);
 void ErrorDialog(char *, ...);

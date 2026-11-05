@@ -1,7 +1,7 @@
-#ifndef RSPV_H_INCLUDED
+ï»¿#ifndef RSPV_H_INCLUDED
 #define RSPV_H_INCLUDED
 
-//	ƒvƒŒƒrƒ…[ƒ^ƒCƒv
+//	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã‚¿ã‚¤ãƒ—
 const int RSPV_NONE = 0;
 const int RSPV_RAIL = 1;
 const int RSPV_TIE = 2;

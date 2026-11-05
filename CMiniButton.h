@@ -1,18 +1,18 @@
-#ifndef CMINIBUTTON_H_INCLUDED
+ï»¿#ifndef CMINIBUTTON_H_INCLUDED
 #define CMINIBUTTON_H_INCLUDED
 
 #include "CInterface.h"
 
 /*
- *	³•ûŒ`ƒ~ƒjƒ{ƒ^ƒ“
+ *	æ­£æ–¹å½¢ãƒŸãƒ‹ãƒœã‚¿ãƒ³
  */
 class CMiniButton: public CInterface{
 private:
-	int m_State;			//	ó‘Ô
-	int m_Repeat;			//	’·‰ŸƒJƒEƒ“ƒ^
-	bool m_Mode;			//	ƒ‚[ƒh (0: ƒ{ƒ^ƒ“, 1: ƒŠƒs[ƒ^)
-	bool m_Pushed;			//	‰Ÿ‰ºƒtƒ‰ƒO
-	float m_TexU, m_TexV;	//	ƒeƒNƒXƒ`ƒƒÀ•W
+	int m_State;			//	çŠ¶æ…‹
+	int m_Repeat;			//	é•·æŠ¼ã‚«ã‚¦ãƒ³ã‚¿
+	bool m_Mode;			//	ãƒ¢ãƒ¼ãƒ‰ (0: ãƒœã‚¿ãƒ³, 1: ãƒªãƒ”ãƒ¼ã‚¿)
+	bool m_Pushed;			//	æŠ¼ä¸‹ãƒ•ãƒ©ã‚°
+	float m_TexU, m_TexV;	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
 public:
 	void Init(int, int, int, int, CInterface *, float, float, bool);
 	void SetUV(float u, float v){ m_TexU = u; m_TexV = v; }

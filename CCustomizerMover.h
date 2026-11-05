@@ -1,15 +1,15 @@
-#ifndef CCUSTOMIZERMOVER_H_INCLUDED
+ï»¿#ifndef CCUSTOMIZERMOVER_H_INCLUDED
 #define CCUSTOMIZERMOVER_H_INCLUDED
 
 #include "CCustomizer.h"
 
 /*
- *	ˆÚ“®qŠî–{ƒNƒ‰ƒX
+ *	ç§»å‹•å­åŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CMoverBase: public CCustomizerBase{
 private:
-	CMoverState **m_State;		//	ó‘Ô•Ï”
-	CMoverState m_PreviewState;	//	ƒvƒŒƒrƒ…[—pó‘Ô•Ï”
+	CMoverState **m_State;		//	çŠ¶æ…‹å¤‰æ•°
+	CMoverState m_PreviewState;	//	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ç”¨çŠ¶æ…‹å¤‰æ•°
 public:
 	CMoverBase(){ m_State = NULL; }
 	virtual CCustomizerBase *Duplicate() = 0;
@@ -22,11 +22,11 @@ public:
 };
 
 /*
- *	ˆÚ“®qŠî–{ƒNƒ‰ƒX
+ *	ç§»å‹•å­åŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CDynamicMoverBase: public CMoverBase{
 protected:
-	int m_ApplyFlag;	//	“K—pƒtƒ‰ƒO
+	int m_ApplyFlag;	//	é©ç”¨ãƒ•ãƒ©ã‚°
 public:
 	virtual CCustomizerBase *Duplicate() = 0;
 	virtual void SetOffListCustomizer(CNamedObject *);
@@ -35,11 +35,11 @@ public:
 };
 
 /*
- *	Ã“IˆÚ“®qŠî–{ƒNƒ‰ƒX
+ *	é™çš„ç§»å‹•å­åŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CStaticMoverBase: public CDynamicMoverBase{
 protected:
-	float m_AnimationTime[6];	//	ƒAƒjƒ[ƒVƒ‡ƒ“ŠÔ
+	float m_AnimationTime[6];	//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ™‚é–“
 public:
 	virtual CCustomizerBase *Duplicate() = 0;
 	char *ReadTimingInfo(char *);
@@ -51,12 +51,12 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	Ã“I‰ñ“]q
+ *	é™çš„å›è»¢å­
  */
 class CStaticRotator: public CStaticMoverBase{
 private:
-	float m_RotationAngle;	//	‰ñ“]Šp“x
-	VEC3 m_RotationAxis;	//	‰ñ“]²
+	float m_RotationAngle;	//	å›è»¢è§’åº¦
+	VEC3 m_RotationAxis;	//	å›è»¢è»¸
 public:
 	CCustomizerBase *Duplicate(){ return new CStaticRotator(*this); }
 	char *Read(char *, CModelPlugin *);
@@ -64,11 +64,11 @@ public:
 };
 
 /*
- *	Ã“IˆÚ“®q
+ *	é™çš„ç§»å‹•å­
  */
 class CStaticMover: public CStaticMoverBase{
 private:
-	VEC3 m_Displacement;	//	•ÏˆÊ
+	VEC3 m_Displacement;	//	å¤‰ä½
 public:
 	CCustomizerBase *Duplicate(){ return new CStaticMover(*this); }
 	char *Read(char *, CModelPlugin *);
@@ -76,14 +76,14 @@ public:
 };
 
 /*
- *	“®“I‰ñ“]q
+ *	å‹•çš„å›è»¢å­
  */
 class CDynamicRotator: public CDynamicMoverBase{
 private:
-	float m_RotationSpeed;	//	‰ñ“]Šp“x
-	float m_Acceleration;	//	‰Á‘¬“x
-	float m_Deceleration;	//	Œ¸‘¬“x
-	VEC3 m_RotationAxis;	//	‰ñ“]²
+	float m_RotationSpeed;	//	å›è»¢è§’åº¦
+	float m_Acceleration;	//	åŠ é€Ÿåº¦
+	float m_Deceleration;	//	æ¸›é€Ÿåº¦
+	VEC3 m_RotationAxis;	//	å›è»¢è»¸
 public:
 	CCustomizerBase *Duplicate(){ return new CDynamicRotator(*this); }
 	char *Read(char *, CModelPlugin *);
@@ -91,13 +91,13 @@ public:
 };
 
 /*
- *	•—ƒgƒ‰ƒbƒJ
+ *	é¢¨ãƒˆãƒ©ãƒƒã‚«
  */
 class CWindTracker: public CMoverBase{
 private:
-	float m_TrackSpeed;		//	’ÇÕ‘¬“x
-	bool m_FixAxisFlag;		//	²ŒÅ’èƒtƒ‰ƒO
-	VEC3 m_FixAxis;			//	ŒÅ’è²
+	float m_TrackSpeed;		//	è¿½è·¡é€Ÿåº¦
+	bool m_FixAxisFlag;		//	è»¸å›ºå®šãƒ•ãƒ©ã‚°
+	VEC3 m_FixAxis;			//	å›ºå®šè»¸
 public:
 	CCustomizerBase *Duplicate(){ return new CWindTracker(*this); }
 	char *Read(char *, CModelPlugin *);
@@ -105,15 +105,15 @@ public:
 };
 
 /*
- *	•—Ô
+ *	é¢¨è»Š
  */
 class CWindmill: public CMoverBase{
 private:
-	int m_Symmetric;		//	‘ÎÌƒJƒEƒ“ƒg
-	float m_RotationSpeed;	//	‰ñ“]‘¬“x
-	float m_MaxRotation;	//	ƒtƒŒ[ƒ€“–‚½‚è‰ñ“]—ÊÅ‘å’l
-	bool m_Directional;		//	•ûŒü«
-	VEC3 m_RotationAxis;	//	‰ñ“]²
+	int m_Symmetric;		//	å¯¾ç§°ã‚«ã‚¦ãƒ³ãƒˆ
+	float m_RotationSpeed;	//	å›è»¢é€Ÿåº¦
+	float m_MaxRotation;	//	ãƒ•ãƒ¬ãƒ¼ãƒ å½“ãŸã‚Šå›è»¢é‡æœ€å¤§å€¤
+	bool m_Directional;		//	æ–¹å‘æ€§
+	VEC3 m_RotationAxis;	//	å›è»¢è»¸
 public:
 	CCustomizerBase *Duplicate(){ return new CWindmill(*this); }
 	char *Read(char *, CModelPlugin *);
@@ -121,11 +121,11 @@ public:
 };
 
 /*
- *	ƒAƒiƒƒOŒv
+ *	ã‚¢ãƒŠãƒ­ã‚°æ™‚è¨ˆ
  */
 class CAnalogClock: public CCustomizerBase{
 private:
-	int m_HandType;			//	jƒ^ƒCƒv
+	int m_HandType;			//	é‡ã‚¿ã‚¤ãƒ—
 public:
 	CCustomizerBase *Duplicate(){ return new CAnalogClock(*this); }
 	char *Read(char *);

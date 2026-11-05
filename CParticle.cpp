@@ -1,24 +1,24 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CModelPlugin.h"
 #include "CEnvPlugin.h"
 #include "CScene.h"
 #include "CConfigMode.h"
 
-//	“à•”ƒOƒ[ƒoƒ‹
-VEC3 g_WindDir = V3ZERO;	//	•—•ûŒü
-VEC3 g_WindDirNorm = V3DIR;	//	•—•ûŒü (³‹K‰»Ï)
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+VEC3 g_WindDir = V3ZERO;	//	é¢¨æ–¹å‘
+VEC3 g_WindDirNorm = V3DIR;	//	é¢¨æ–¹å‘ (æ­£è¦åŒ–æ¸ˆ)
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CParticleInst::CParticleInst(
-	CParticle *emitter,	//	ƒGƒ~ƒbƒ^
-	VEC3 pos,			//	À•W
-	VEC3 dir,			//	‘¬“x
-	float initradius,	//	”¼Œa
-	float finradius,	//	ƒAƒ‹ƒtƒ@
-	int lifetime,		//	õ–½
-	CScene *scene		//	ƒV[ƒ“
+	CParticle *emitter,	//	ã‚¨ãƒŸãƒƒã‚¿
+	VEC3 pos,			//	åº§æ¨™
+	VEC3 dir,			//	é€Ÿåº¦
+	float initradius,	//	åŠå¾„
+	float finradius,	//	ã‚¢ãƒ«ãƒ•ã‚¡
+	int lifetime,		//	å¯¿å‘½
+	CScene *scene		//	ã‚·ãƒ¼ãƒ³
 ){
 	m_Emitter = emitter;
 	m_Pos = pos;
@@ -35,7 +35,7 @@ CParticleInst::CParticleInst(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CParticleInst::Render(){
 	if(m_Timer>m_Lifetime || m_Scene!=g_Scene) return;
@@ -57,7 +57,7 @@ void CParticleInst::Render(){
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“is
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€²è¡Œ
  */
 bool CParticleInst::Simulate(){
 	m_Timer++;
@@ -75,10 +75,10 @@ bool CParticleInst::Simulate(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CParticleState::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = Assignment(eee = str, "ParticleState"))) return NULL;
@@ -90,11 +90,11 @@ char *CParticleState::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CParticleState::Save(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *ind	//	ƒCƒ“ƒfƒ“ƒg
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *ind	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
 ){
 	fprintf(df, "%sParticleState = %f, ", ind, m_EmissionCredit);
 	V3Save(df, m_OldPos, ";\n");
@@ -103,12 +103,12 @@ void CParticleState::Save(
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 list<CParticleInst> CParticle::ms_RenderList;
 
 /*
  *	[static]
- *	ƒŠƒXƒg‰Šú‰»
+ *	ãƒªã‚¹ãƒˆåˆæœŸåŒ–
  */
 void CParticle::InitRenderList(){
 	ms_RenderList.clear();
@@ -116,7 +116,7 @@ void CParticle::InitRenderList(){
 
 /*
  *	[static]
- *	‘S‚ÄƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	å…¨ã¦ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CParticle::RenderAll(){
 	if(!g_ConfigMode->GetMiscParticle()) return;
@@ -136,7 +136,7 @@ void CParticle::RenderAll(){
 
 /*
  *	[static]
- *	‘S‚ÄƒVƒ~ƒ…ƒŒ[ƒg
+ *	å…¨ã¦ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ãƒˆ
  */
 void CParticle::SimulateAll(){
 	IParticleInst ipi = ms_RenderList.begin();
@@ -148,11 +148,11 @@ void CParticle::SimulateAll(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CParticle::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	Ôçqƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp, *eee;
 	int i;
@@ -204,27 +204,27 @@ char *CParticle::Read(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CParticle::LoadData(){
 	m_Texture = g_TexList.Get(FALSE, m_TextureFileName.c_str(), 0, !g_NamedObjectMipMap);
 }
 
 /*
- *	ó‘Ô•Ï”‚ğƒAƒ^ƒbƒ`
+ *	çŠ¶æ…‹å¤‰æ•°ã‚’ã‚¢ã‚¿ãƒƒãƒ
  */
 void CParticle::Link(
-	CParticleState *stt	//	ó‘Ô•Ï”
+	CParticleState *stt	//	çŠ¶æ…‹å¤‰æ•°
 ){
 	m_LinkState = stt;
 	m_LinkState->m_ApplyFlag = false;
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒŠƒXƒg‚É“o˜^
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒªã‚¹ãƒˆã«ç™»éŒ²
  */
 void CParticle::Register(
-	CScene *scene	//	ƒV[ƒ“
+	CScene *scene	//	ã‚·ãƒ¼ãƒ³
 ){
 	if(!m_LinkState || !scene) return;
 	m_LinkState->m_ApplyFlag = true;

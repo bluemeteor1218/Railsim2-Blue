@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "RailMap.h"
 #include "CVertexDump.h"
 #include "CConfigMode.h"
@@ -6,17 +6,17 @@
 #include "CSurfacePlugin.h"
 #include "CScene.h"
 
-//	“à•”ƒOƒ[ƒoƒ‹
-bool g_MapDrawNeeded;				//	’n}•`‰æ‚ª•K—v‚©‚Ç‚¤‚©
-float g_RailMapScale = 0.5f;		//	2D ƒ}ƒbƒvƒXƒP[ƒ‹
-VEC3 g_RailMapCenter = V3ZERO;		//	2D ƒ}ƒbƒv 3D Šî€ˆÊ’u
-VEC2 g_RailMapOffset;				//	2D ƒ}ƒbƒv•`‰æ’†SˆÊ’u
-VEC2 g_RailMapMove;					//	2D ƒ}ƒbƒv•`‰æˆÚ“®‹——£
-bool g_RotateMap = false;			//	2D ƒ}ƒbƒv‰ñ“]
-VEC2 g_MapRotateRight;				//	2D ƒ}ƒbƒv‰ñ“] right
-VEC2 g_MapRotateDir;				//	2D ƒ}ƒbƒv‰ñ“] dir
-CLineDumpTL *g_LineDumpTL = NULL;	//	2D ƒ}ƒbƒvƒ_ƒ“ƒp
-CLineDumpTL *g_LineDumpTL2 = NULL;	//	2D ƒ}ƒbƒvƒ_ƒ“ƒp (‰e—p)
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+bool g_MapDrawNeeded;				//	åœ°å›³æç”»ãŒå¿…è¦ã‹ã©ã†ã‹
+float g_RailMapScale = 0.5f;		//	2D ãƒãƒƒãƒ—ã‚¹ã‚±ãƒ¼ãƒ«
+VEC3 g_RailMapCenter = V3ZERO;		//	2D ãƒãƒƒãƒ— 3D åŸºæº–ä½ç½®
+VEC2 g_RailMapOffset;				//	2D ãƒãƒƒãƒ—æç”»ä¸­å¿ƒä½ç½®
+VEC2 g_RailMapMove;					//	2D ãƒãƒƒãƒ—æç”»ç§»å‹•è·é›¢
+bool g_RotateMap = false;			//	2D ãƒãƒƒãƒ—å›è»¢
+VEC2 g_MapRotateRight;				//	2D ãƒãƒƒãƒ—å›è»¢ right
+VEC2 g_MapRotateDir;				//	2D ãƒãƒƒãƒ—å›è»¢ dir
+CLineDumpTL *g_LineDumpTL = NULL;	//	2D ãƒãƒƒãƒ—ãƒ€ãƒ³ãƒ‘
+CLineDumpTL *g_LineDumpTL2 = NULL;	//	2D ãƒãƒƒãƒ—ãƒ€ãƒ³ãƒ‘ (å½±ç”¨)
 
 struct RailMapTextData{
 	string m_Text;
@@ -44,7 +44,7 @@ typedef list<RailMapTextData> RailMapTextDataList;
 RailMapTextDataList g_RailMapTextData;
 
 /*
- *	2D ƒ}ƒbƒv‰Šú‰»
+ *	2D ãƒãƒƒãƒ—åˆæœŸåŒ–
  */
 void InitRailMap(){
 	if(g_ConfigMode->GetShowMap() && CSceneryMode::GetPhotoMode()!=2){
@@ -76,7 +76,7 @@ void InitRailMap(){
 }
 
 /*
- *	2D ƒ}ƒbƒv’¼üƒ_ƒ“ƒv
+ *	2D ãƒãƒƒãƒ—ç›´ç·šãƒ€ãƒ³ãƒ—
  */
 void DumpMapLine(VEC2 p1, D3DCOLOR c1, VEC2 p2, D3DCOLOR c2, bool shadow){
 	if(!g_MapDrawNeeded) return;
@@ -94,7 +94,7 @@ void DumpMapLine(VEC2 p1, D3DCOLOR c1, VEC2 p2, D3DCOLOR c2, bool shadow){
 }
 
 /*
- *	2D ƒ}ƒbƒvÀ•W•ÏŠ·
+ *	2D ãƒãƒƒãƒ—åº§æ¨™å¤‰æ›
  */
 VEC2 TransformMapPos(VEC3 p){
 	VEC3 t = (p-g_RailMapCenter)*g_RailMapScale;
@@ -104,7 +104,7 @@ VEC2 TransformMapPos(VEC3 p){
 }
 
 /*
- *	3D ƒ}ƒbƒv’¼üƒ_ƒ“ƒv
+ *	3D ãƒãƒƒãƒ—ç›´ç·šãƒ€ãƒ³ãƒ—
  */
 void RailMapLine(VEC3 p1, D3DCOLOR c1, VEC3 p2, D3DCOLOR c2, bool shadow, bool bold){
 	if(!g_MapDrawNeeded) return;
@@ -148,7 +148,7 @@ void RailMapText(VEC3 pos, char *text, D3DCOLOR color){
 }
 
 /*
- *	2D ƒ}ƒbƒvƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	2D ãƒãƒƒãƒ—ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void RenderRailMap(){
 	if(!g_MapDrawNeeded) return;

@@ -1,25 +1,25 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CListView.h"
 #include "CPopMenu.h"
 #include "CSkinPlugin.h"
 #include "CGameMode.h"
 
-//	“à•”’è”
-const int LV_COL_MARGIN = 4;	//	—ñ—]”’
-const int LV_NAME_MAX = 256;	//	–¼ÌÅ‘å’·
-const int COL_HEAD_GRAB = 4;	//	ƒwƒbƒh‚Â‚Ü‚İ•
-const int COL_HEAD_MIN = 16;	//	ƒwƒbƒhÅ¬•
-const int COL_HEAD_MAX = 512;	//	ƒwƒbƒhÅ‘å•
+//	å†…éƒ¨å®šæ•°
+const int LV_COL_MARGIN = 4;	//	åˆ—ä½™ç™½
+const int LV_NAME_MAX = 256;	//	åç§°æœ€å¤§é•·
+const int COL_HEAD_GRAB = 4;	//	ãƒ˜ãƒƒãƒ‰ã¤ã¾ã¿å¹…
+const int COL_HEAD_MIN = 16;	//	ãƒ˜ãƒƒãƒ‰æœ€å°å¹…
+const int COL_HEAD_MAX = 512;	//	ãƒ˜ãƒƒãƒ‰æœ€å¤§å¹…
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CListElement::CListElement(
-	int cols,		//	—ñ”
-	char *str,		//	‘æˆê—v‘f
-	CListView *ctrl	//	ƒŠƒXƒgƒrƒ…[
+	int cols,		//	åˆ—æ•°
+	char *str,		//	ç¬¬ä¸€è¦ç´ 
+	CListView *ctrl	//	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
 ):
-	m_String(cols)	//	ƒf[ƒ^
+	m_String(cols)	//	ãƒ‡ãƒ¼ã‚¿
 {
 	m_Selected = false;
 	m_Data = 0;
@@ -30,7 +30,7 @@ CListElement::CListElement(
 }
 
 /*
- *	ƒŠƒl[ƒ€ŠJn
+ *	ãƒªãƒãƒ¼ãƒ é–‹å§‹
  */
 void CListElement::BeginRename(){
 	m_EditBox = new CEditBox;
@@ -40,10 +40,10 @@ void CListElement::BeginRename(){
 }
 
 /*
- *	ƒŠƒl[ƒ€I—¹
+ *	ãƒªãƒãƒ¼ãƒ çµ‚äº†
  */
 void CListElement::EndRename(
-	bool update	//	XVƒtƒ‰ƒO
+	bool update	//	æ›´æ–°ãƒ•ãƒ©ã‚°
 ){
 	if(update){
 		string newname;
@@ -59,11 +59,11 @@ void CListElement::EndRename(
 }
 
 /*
- *	ƒhƒ‰ƒbƒOƒAƒCƒeƒ€•\¦
+ *	ãƒ‰ãƒ©ãƒƒã‚°ã‚¢ã‚¤ãƒ†ãƒ è¡¨ç¤º
  */
 void CListElement::RenderDragItem(
-	int x, int y,	//	À•W
-	bool focus		//	ƒtƒH[ƒJƒX
+	int x, int y,	//	åº§æ¨™
+	bool focus		//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
 ){
 	CStringDrawer *sd = g_StrTex->DrawString(m_String[0].c_str(), 0);
 	int tw = sd->GetWidth()+LV_COL_MARGIN*2;
@@ -82,13 +82,13 @@ void CListElement::RenderDragItem(
 }
 
 /*
- *	s•`‰æ
+ *	è¡Œæç”»
  */
 bool CListElement::Render(
-	int x, int y,	//	À•W
-	int tw, int th,	//	Å‘åƒTƒCƒY
-	bool focus,		//	ƒtƒH[ƒJƒX
-	bool drop		//	ƒhƒƒbƒv
+	int x, int y,	//	åº§æ¨™
+	int tw, int th,	//	æœ€å¤§ã‚µã‚¤ã‚º
+	bool focus,		//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
+	bool drop		//	ãƒ‰ãƒ­ãƒƒãƒ—
 ){
 	D3DCOLOR fc;
 	devSetTexture(0, NULL);
@@ -127,27 +127,27 @@ bool CListElement::Render(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	s•`‰æ
+ *	è¡Œæç”»
  */
 CIconListElement::CIconListElement(
-	int cols,			//	—ñ”
-	char *str,			//	‘æˆê—v‘f
-	CListView *ctrl,	//	ƒŠƒXƒgƒrƒ…[
-	LPTEX8 icon,		//	ƒAƒCƒRƒ“ƒeƒNƒXƒ`ƒƒ
-	float *rect			//	ƒAƒCƒRƒ“ˆÊ’u
+	int cols,			//	åˆ—æ•°
+	char *str,			//	ç¬¬ä¸€è¦ç´ 
+	CListView *ctrl,	//	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	LPTEX8 icon,		//	ã‚¢ã‚¤ã‚³ãƒ³ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	float *rect			//	ã‚¢ã‚¤ã‚³ãƒ³ä½ç½®
 ):
-	CListElement(cols, str, ctrl)	//	Šî–{ƒNƒ‰ƒX
+	CListElement(cols, str, ctrl)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_IconTex = icon;
 	memcpy(m_IconRect, rect, sizeof(float)*4);
 }
 
 /*
- *	ƒhƒ‰ƒbƒOƒAƒCƒeƒ€•\¦
+ *	ãƒ‰ãƒ©ãƒƒã‚°ã‚¢ã‚¤ãƒ†ãƒ è¡¨ç¤º
  */
 void CIconListElement::RenderDragItem(
-	int x, int y,	//	À•W
-	bool focus		//	ƒtƒH[ƒJƒX
+	int x, int y,	//	åº§æ¨™
+	bool focus		//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
 ){
 	CStringDrawer *sd = g_StrTex->DrawString(m_String[0].c_str(), 0);
 	int tw = TILE_UNIT+sd->GetWidth()+LV_COL_MARGIN*3;
@@ -172,13 +172,13 @@ void CIconListElement::RenderDragItem(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 bool CIconListElement::Render(
-	int x, int y,	//	À•W
-	int tw, int th,	//	Å‘åƒTƒCƒY
-	bool focus,		//	ƒtƒH[ƒJƒX
-	bool drop		//	ƒhƒƒbƒv
+	int x, int y,	//	åº§æ¨™
+	int tw, int th,	//	æœ€å¤§ã‚µã‚¤ã‚º
+	bool focus,		//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
+	bool drop		//	ãƒ‰ãƒ­ãƒƒãƒ—
 ){
 	D3DCOLOR fc;
 	if(m_IconTex) devSetTexture(0, m_IconTex);
@@ -229,7 +229,7 @@ bool CIconListElement::Render(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CListView::CListView(){
 	m_ColHeader = NULL;
@@ -238,7 +238,7 @@ CListView::CListView(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CListView::~CListView(){
 	DELETE_A(m_ColHeader);
@@ -246,18 +246,18 @@ CListView::~CListView(){
 }
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CListView::Init(
-	int x, int y,			//	À•W
-	int w, int h,			//	ƒTƒCƒY
-	CInterface *p,			//	e
-	int cols,				//	—ñ”
-	char **coln,			//	—ñ–¼
-	DRAGTYPE drag,			//	ƒhƒ‰ƒbƒOƒ^ƒCƒv
-	DWORD flags,			//	ƒtƒ‰ƒO
-	CMenuCommander *cmd,	//	ƒRƒ}ƒ“ƒ_
-	CMDTYPE ctype			//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
+	int x, int y,			//	åº§æ¨™
+	int w, int h,			//	ã‚µã‚¤ã‚º
+	CInterface *p,			//	è¦ª
+	int cols,				//	åˆ—æ•°
+	char **coln,			//	åˆ—å
+	DRAGTYPE drag,			//	ãƒ‰ãƒ©ãƒƒã‚°ã‚¿ã‚¤ãƒ—
+	DWORD flags,			//	ãƒ•ãƒ©ã‚°
+	CMenuCommander *cmd,	//	ã‚³ãƒãƒ³ãƒ€
+	CMDTYPE ctype			//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
 ){
 	CInterface::Init(x, y, w, h, "", p);
 	m_State = 0;
@@ -287,10 +287,10 @@ void CListView::Init(
 }
 
 /*
- *	ƒTƒCƒY•ÏX
+ *	ã‚µã‚¤ã‚ºå¤‰æ›´
  */
 void CListView::SetSize(
-	int w, int h	//	V‹KƒTƒCƒY
+	int w, int h	//	æ–°è¦ã‚µã‚¤ã‚º
 ){
 	m_Width = w; m_Height = h;
 	m_ScrollV.SetPos(m_Width-TILE_UNIT, 0);
@@ -300,11 +300,11 @@ void CListView::SetSize(
 }
 
 /*
- *	—ñ••ÏX
+ *	åˆ—å¹…å¤‰æ›´
  */
 void CListView::ResizeCol(
-	int col,	//	—ñ”Ô†
-	int cw		//	V‹KƒTƒCƒY
+	int col,	//	åˆ—ç•ªå·
+	int cw		//	æ–°è¦ã‚µã‚¤ã‚º
 ){
 	int j, tmax = m_Width-TILE_UNIT, smax = tmax;
 	for(j = 0; j<m_Cols; j++){
@@ -340,11 +340,11 @@ void CListView::ResizeCol(
 }
 
 /*
- *	ƒAƒCƒeƒ€‘}“ü
+ *	ã‚¢ã‚¤ãƒ†ãƒ æŒ¿å…¥
  */
 CListElement *CListView::InsertItem(
-	int index,			//	s
-	CListElement *item	//	ƒAƒCƒeƒ€
+	int index,			//	è¡Œ
+	CListElement *item	//	ã‚¢ã‚¤ãƒ†ãƒ 
 ){
 	if(index<0 || index>m_ItemNum) index = m_ItemNum;
 	if(!m_FocusItem){
@@ -363,10 +363,10 @@ CListElement *CListView::InsertItem(
 }
 
 /*
- *	”Ô†‚©‚çƒAƒCƒeƒ€æ“¾
+ *	ç•ªå·ã‹ã‚‰ã‚¢ã‚¤ãƒ†ãƒ å–å¾—
  */
 CListElement *CListView::GetElement(
-	int index	//	”Ô†
+	int index	//	ç•ªå·
 ){
 	if(index<0 || m_ItemNum<=index) return NULL;
 	CListElement *ie = m_Data;
@@ -375,17 +375,17 @@ CListElement *CListView::GetElement(
 }
 
 /*
- *	ƒAƒCƒeƒ€‘}“ü
+ *	ã‚¢ã‚¤ãƒ†ãƒ æŒ¿å…¥
  */
 CListElement *CListView::InsertItem(
-	int index,	//	s
-	char *str	//	•¶š—ñ
+	int index,	//	è¡Œ
+	char *str	//	æ–‡å­—åˆ—
 ){
 	return InsertItem(index, new CListElement(m_Cols, str, this));
 }
 
 /*
- *	‘SƒAƒCƒeƒ€íœ
+ *	å…¨ã‚¢ã‚¤ãƒ†ãƒ å‰Šé™¤
  */
 void CListView::DeleteAllItems(){
 	CListElement *ie = m_Data;
@@ -399,10 +399,10 @@ void CListView::DeleteAllItems(){
 }
 
 /*
- *	ƒAƒCƒeƒ€íœ
+ *	ã‚¢ã‚¤ãƒ†ãƒ å‰Šé™¤
  */
 void CListView::DeleteItem(
-	int index	//	s
+	int index	//	è¡Œ
 ){
 	if(index<0 || m_ItemNum<=index) return;
 	CListElement **ie = &m_Data;
@@ -418,7 +418,7 @@ void CListView::DeleteItem(
 }
 
 /*
- *	‘I‘ğ‚³‚ê‚Ä‚¢‚éÅ‰‚ÌƒAƒCƒeƒ€”Ô†‚ğæ“¾
+ *	é¸æŠã•ã‚Œã¦ã„ã‚‹æœ€åˆã®ã‚¢ã‚¤ãƒ†ãƒ ç•ªå·ã‚’å–å¾—
  */
 int CListView::GetSelectionMark(){
 	int i;
@@ -431,11 +431,11 @@ int CListView::GetSelectionMark(){
 }
 
 /*
- *	w’è‚µ‚½‚Ğ‚Æ‚Â‚ÌƒAƒCƒeƒ€‚ğ‘I‘ğó‘Ô‚É‚·‚é
+ *	æŒ‡å®šã—ãŸã²ã¨ã¤ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’é¸æŠçŠ¶æ…‹ã«ã™ã‚‹
  */
 void CListView::SetSelectionMark(
-	int index,	//	—ñ
-	int mode	//	’Ç‰Á‘I‘ğƒ‚[ƒh (0: normal, 1: add, 2: invert)
+	int index,	//	åˆ—
+	int mode	//	è¿½åŠ é¸æŠãƒ¢ãƒ¼ãƒ‰ (0: normal, 1: add, 2: invert)
 ){
 	int i;
 	CListElement *ie = m_Data;
@@ -454,12 +454,12 @@ void CListView::SetSelectionMark(
 }
 
 /*
- *	w’è‚µ‚½”ÍˆÍ‚ğ‘I‘ğó‘Ô‚É‚·‚é
+ *	æŒ‡å®šã—ãŸç¯„å›²ã‚’é¸æŠçŠ¶æ…‹ã«ã™ã‚‹
  */
 void CListView::SetSelectionArea(
-	int begin,	//	‘I‘ğŠJns
-	int end,	//	‘I‘ğI—¹s
-	int mode	//	’Ç‰Á‘I‘ğƒ‚[ƒh
+	int begin,	//	é¸æŠé–‹å§‹è¡Œ
+	int end,	//	é¸æŠçµ‚äº†è¡Œ
+	int mode	//	è¿½åŠ é¸æŠãƒ¢ãƒ¼ãƒ‰
 ){
 	int i;
 	CListElement *ie = m_Data;
@@ -479,10 +479,10 @@ void CListView::SetSelectionArea(
 }
 
 /*
- *	w’è‚µ‚½ƒAƒCƒeƒ€‚ğ‰Â‹ó‘Ô‚É‚·‚é
+ *	æŒ‡å®šã—ãŸã‚¢ã‚¤ãƒ†ãƒ ã‚’å¯è¦–çŠ¶æ…‹ã«ã™ã‚‹
  */
 void CListView::EnsureVisible(
-	int index	//	—ñ
+	int index	//	åˆ—
 ){
 	if(index<0 || m_ItemNum<=index) return;
 	SetScroll();
@@ -491,7 +491,7 @@ void CListView::EnsureVisible(
 }
 
 /*
- *	ƒXƒNƒ[ƒ‹ƒo[‚ÌXV
+ *	ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã®æ›´æ–°
  */
 void CListView::SetScroll(){
 	m_Rows = (m_Height-TILE_UNIT)/m_RowHeight;
@@ -500,7 +500,7 @@ void CListView::SetScroll(){
 }
 
 /*
- *	‘}“üˆÊ’uæ“¾
+ *	æŒ¿å…¥ä½ç½®å–å¾—
  */
 int CListView::CalcInsertRow(int cy){
 	int px, py;
@@ -514,10 +514,10 @@ int CListView::CalcInsertRow(int cy){
 }
 
 /*
- *	w’èÀ•W‚ªƒŠƒXƒg“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒãƒªã‚¹ãƒˆå†…ã‹èª¿ã¹ã‚‹
  */
 bool CListView::IsInsideList(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	int px, py;
 	GetAbsPos(&px, &py);
@@ -525,10 +525,10 @@ bool CListView::IsInsideList(
 }
 
 /*
- *	w’èÀ•W‚Ì‘Î‰”Ô†‚ğ’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ã®å¯¾å¿œç•ªå·ã‚’èª¿ã¹ã‚‹
  */
 int CListView::HitTest(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	int px, py;
 	GetAbsPos(&px, &py);
@@ -537,7 +537,7 @@ int CListView::HitTest(
 }
 
 /*
- *	ƒhƒ‰ƒbƒO‘€ì‚Ì€”õ
+ *	ãƒ‰ãƒ©ãƒƒã‚°æ“ä½œã®æº–å‚™
  */
 void CListView::PrepareDrag(){
 	if(!m_DragType || !m_FocusItem) return;
@@ -552,7 +552,7 @@ void CListView::PrepareDrag(){
 }
 
 /*
- *	ƒhƒ‰ƒbƒOƒAƒCƒeƒ€•\¦
+ *	ãƒ‰ãƒ©ãƒƒã‚°ã‚¢ã‚¤ãƒ†ãƒ è¡¨ç¤º
  */
 void CListView::RenderDragItem(){
 	CInterface::RenderBrother();
@@ -569,7 +569,7 @@ void CListView::RenderDragItem(){
 }
 
 /*
- *	ƒhƒƒbƒv‘€ì‚ÌŒŸo
+ *	ãƒ‰ãƒ­ãƒƒãƒ—æ“ä½œã®æ¤œå‡º
  *	assuming cursor is inside list
  */
 bool CListView::CheckDrop(){
@@ -584,7 +584,7 @@ bool CListView::CheckDrop(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CListView::ScanInput(){
 	POINT pos = g_Cursor.GetPos();
@@ -806,7 +806,7 @@ bool CListView::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CListView::Render(){
 	CInterface::RenderBrother();
@@ -872,31 +872,31 @@ void CListView::Render(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CIconListView::Init(
-	int x, int y,			//	À•W
-	int w, int h,			//	ƒTƒCƒY
-	CInterface *p,			//	e
-	int cols,				//	—ñ”
-	char **coln,			//	—ñ–¼
-	DRAGTYPE drag,			//	ƒhƒ‰ƒbƒOƒ^ƒCƒv
-	DWORD flags,			//	ƒtƒ‰ƒO
-	CMenuCommander *cmd,	//	ƒRƒ}ƒ“ƒ_
-	CMDTYPE ctype			//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
+	int x, int y,			//	åº§æ¨™
+	int w, int h,			//	ã‚µã‚¤ã‚º
+	CInterface *p,			//	è¦ª
+	int cols,				//	åˆ—æ•°
+	char **coln,			//	åˆ—å
+	DRAGTYPE drag,			//	ãƒ‰ãƒ©ãƒƒã‚°ã‚¿ã‚¤ãƒ—
+	DWORD flags,			//	ãƒ•ãƒ©ã‚°
+	CMenuCommander *cmd,	//	ã‚³ãƒãƒ³ãƒ€
+	CMDTYPE ctype			//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
 ){
 	CListView::Init(x, y, w, h, p, cols, coln, drag, flags, cmd, ctype);
 	m_RowHeight = TILE_UNIT;
 }
 
 /*
- *	ƒAƒCƒeƒ€‘}“ü
+ *	ã‚¢ã‚¤ãƒ†ãƒ æŒ¿å…¥
  */
 CListElement *CIconListView::InsertItem(
-	int index,		//	s
-	char *str,		//	•¶š—ñ
-	LPTEX8 icon,	//	ƒAƒCƒRƒ“ƒeƒNƒXƒ`ƒƒ
-	float *rect		//	ƒAƒCƒRƒ“ˆÊ’u
+	int index,		//	è¡Œ
+	char *str,		//	æ–‡å­—åˆ—
+	LPTEX8 icon,	//	ã‚¢ã‚¤ã‚³ãƒ³ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	float *rect		//	ã‚¢ã‚¤ã‚³ãƒ³ä½ç½®
 ){
 	return CListView::InsertItem(
 		index, new CIconListElement(m_Cols, str, this, icon, rect));

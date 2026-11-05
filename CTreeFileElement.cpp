@@ -1,54 +1,54 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CEditCtrl.h"
 #include "CSkinPlugin.h"
 #include "CInterfaceMode.h"
 
-//	“à•”ƒOƒ[ƒoƒ‹
-float g_SkinFileIconRect[4] = {0.875f, 0.75f, 0.125f, 0.125f};	//	ƒtƒ@ƒCƒ‹ƒAƒCƒRƒ“—Ìˆæ
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+float g_SkinFileIconRect[4] = {0.875f, 0.75f, 0.125f, 0.125f};	//	ãƒ•ã‚¡ã‚¤ãƒ«ã‚¢ã‚¤ã‚³ãƒ³é ˜åŸŸ
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTreeFileElement::CTreeFileElement(
-	char *str,			//	•¶Žš—ñ
-	CTreeDirElement *p,	//	e
-	CPluginTree *ctrl,	//	ƒcƒŠ[ƒRƒ“ƒgƒ[ƒ‹
-	CPlugin *pi			//	ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	æ–‡å­—åˆ—
+	CTreeDirElement *p,	//	è¦ª
+	CPluginTree *ctrl,	//	ãƒ„ãƒªãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
+	CPlugin *pi			//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ):
-	CTreeElement(str, p, ctrl)	//	Šî–{ƒNƒ‰ƒX
+	CTreeElement(str, p, ctrl)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_CommandType = CMD_PITVELEM;
 	m_Plugin = pi;
 }
 
 /*
- *	ƒŠƒl[ƒ€‰Â”\‚©
+ *	ãƒªãƒãƒ¼ãƒ å¯èƒ½ã‹
  */
 bool CTreeFileElement::IsRenamable(){
 	return m_Plugin && m_Plugin->IsRenamable();
 }
 
 /*
- *	ƒŠƒl[ƒ€Šm”F
+ *	ãƒªãƒãƒ¼ãƒ ç¢ºèª
  */
 bool CTreeFileElement::ConfirmRename(
-	string &newname	//	V‹K–¼
+	string &newname	//	æ–°è¦å
 ){
 	return m_Plugin && m_Plugin->ConfirmRename(newname);
 }
 
 /*
- *	ƒfƒŠ[ƒg‰Â”\‚©
+ *	ãƒ‡ãƒªãƒ¼ãƒˆå¯èƒ½ã‹
  */
 bool CTreeFileElement::IsDeletable(){
 	return m_Plugin && m_Plugin->IsDeletable();
 }
 
 /*
- *	ƒŠƒXƒgƒrƒ…[‚É—v‘f‚ð’Ç‰Á
+ *	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã«è¦ç´ ã‚’è¿½åŠ 
  */
 void CTreeFileElement::PushListElement(
-	CPluginListView *lv	//	ƒŠƒXƒgƒrƒ…[
+	CPluginListView *lv	//	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
 ){
 	int index = lv->GetItemNum();
 	LPTEX8 icon = m_Plugin->GetIconTexture();
@@ -60,36 +60,36 @@ void CTreeFileElement::PushListElement(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CTreeFileElement::Save(
-	FILE *file,		//	ƒtƒ@ƒCƒ‹
-	string indent	//	ƒCƒ“ƒfƒ“ƒg—Ê
+	FILE *file,		//	ãƒ•ã‚¡ã‚¤ãƒ«
+	string indent	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆé‡
 ){
 	fprintf(file, "%sFile = %s, \"%s\";\n",
 		indent.c_str(), m_Plugin->DirName(), m_Plugin->SaveString());
 }
 
 /*
- *	ƒAƒCƒeƒ€ƒJƒEƒ“ƒg
+ *	ã‚¢ã‚¤ãƒ†ãƒ ã‚«ã‚¦ãƒ³ãƒˆ
  */
 int CTreeFileElement::CountItem(
-	int sum,	//	‚»‚ê‚Ü‚Å‚Ì‡Œv
-	int *fcp,	//	ƒtƒH[ƒJƒXƒAƒCƒeƒ€‚ÌˆÊ’u
-	bool exflag	//	“WŠJ‚³‚ê‚Ä‚¢‚é‚à‚Ì‚Ì‚Ý
+	int sum,	//	ãã‚Œã¾ã§ã®åˆè¨ˆ
+	int *fcp,	//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®
+	bool exflag	//	å±•é–‹ã•ã‚Œã¦ã„ã‚‹ã‚‚ã®ã®ã¿
 ){
 	if(fcp && m_Owner->GetFocusItem()==this) *fcp = sum;
 	return 1;
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 int CTreeFileElement::ScanInput(
-	int x, int y,	//	À•W
-	int cnt,		//	•\Ž¦ƒJƒEƒ“ƒg
-	int begin,		//	ŠJŽnˆÊ’u
-	int end			//	I—¹ˆÊ’u
+	int x, int y,	//	åº§æ¨™
+	int cnt,		//	è¡¨ç¤ºã‚«ã‚¦ãƒ³ãƒˆ
+	int begin,		//	é–‹å§‹ä½ç½®
+	int end			//	çµ‚äº†ä½ç½®
 ){
 	if(m_Owner->GetFocusItem()==this) ms_FocusNext = this;
 	else if(!ms_FocusNext) ms_FocusPrev = this;
@@ -184,13 +184,13 @@ int CTreeFileElement::ScanInput(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 int CTreeFileElement::Render(
-	int x, int y,	//	À•W
-	int cnt,		//	•\Ž¦ƒJƒEƒ“ƒg
-	int begin,		//	ŠJŽnˆÊ’u
-	int end			//	I—¹ˆÊ’u
+	int x, int y,	//	åº§æ¨™
+	int cnt,		//	è¡¨ç¤ºã‚«ã‚¦ãƒ³ãƒˆ
+	int begin,		//	é–‹å§‹ä½ç½®
+	int end			//	çµ‚äº†ä½ç½®
 ){
 	if(m_EditBox && (!m_Owner->IsFocus() || m_Owner->GetFocusItem()!=this))
 		EndRename(true);

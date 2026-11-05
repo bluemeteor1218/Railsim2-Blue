@@ -1,17 +1,17 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #define STREAM_TIMEOUT	INFINITE
 #define THREAD_TIMEOUT	1000
 
-//	ƒXƒgƒŠ[ƒ~ƒ“ƒOÄ¶‚ğŠÇ—
+//	ã‚¹ãƒˆãƒªãƒ¼ãƒŸãƒ³ã‚°å†ç”Ÿã‚’ç®¡ç†
 class CWaveStream{
-	LPSNDBUF	m_pBuf;		//	ƒXƒgƒŠ[ƒ€ƒoƒbƒtƒ@
-	LPSNDNOTIFY	m_pNotify;	//	Ä¶is“x‚Ì’Ê’mƒIƒuƒWƒFƒNƒg
-	HANDLE		m_hEvent;	//	Ä¶is“x‚Ì’Ê’mƒCƒxƒ“ƒg
-	DWORD		m_size;		//	ƒoƒbƒtƒ@ƒTƒCƒY
-	DWORD		m_wpos;		//	ƒoƒbƒtƒ@‘‚İˆÊ’u
+	LPSNDBUF	m_pBuf;		//	ã‚¹ãƒˆãƒªãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡
+	LPSNDNOTIFY	m_pNotify;	//	å†ç”Ÿé€²è¡Œåº¦ã®é€šçŸ¥ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	HANDLE		m_hEvent;	//	å†ç”Ÿé€²è¡Œåº¦ã®é€šçŸ¥ã‚¤ãƒ™ãƒ³ãƒˆ
+	DWORD		m_size;		//	ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º
+	DWORD		m_wpos;		//	ãƒãƒƒãƒ•ã‚¡æ›¸è¾¼ã¿ä½ç½®
 
-	//	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^••ˆó
+	//	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿å°å°
 	CWaveStream& operator = (const CWaveStream&){return *this;}
 public:
 	CWaveStream();
@@ -22,26 +22,26 @@ public:
 	BOOL Enqueue(LPBYTE pData, DWORD size);
 };
 
-//	ƒXƒŒƒbƒhŠÇ—
+//	ã‚¹ãƒ¬ãƒƒãƒ‰ç®¡ç†
 class CThread{
 public:
 	DWORD	m_idThread;
 	HANDLE	m_hThread;
 
 	/*
-	 *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	 */
 	CThread(){
 		m_hThread = NULL;
 	}
 	/*
-	 *	ƒfƒXƒgƒ‰ƒNƒ^
+	 *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	 */
 	~CThread(){
 		End();
 	}
 	/*
-	 *	ƒXƒŒƒbƒhì¬
+	 *	ã‚¹ãƒ¬ãƒƒãƒ‰ä½œæˆ
 	 */
 	BOOL Begin(LPTHREAD_START_ROUTINE func, void *pData){
 		m_hThread = CreateThread(NULL, 0, func, pData, 0, &m_idThread);
@@ -53,12 +53,12 @@ public:
 		return TRUE;
 	}
 	/*
-	 *	ƒXƒŒƒbƒh‰ğ•ú
+	 *	ã‚¹ãƒ¬ãƒƒãƒ‰è§£æ”¾
 	 */
 	void End(DWORD timeout = THREAD_TIMEOUT){
 		if(m_hThread){
 			if(WaitForSingleObject(m_hThread, timeout)==WAIT_TIMEOUT){
-				//	ƒ^ƒCƒ€ƒAƒEƒg‚µ‚½‚ç‹­§I—¹
+				//	ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã—ãŸã‚‰å¼·åˆ¶çµ‚äº†
 				Debug("time out CThread::End\n");
 				TerminateThread(m_hThread, 0);
 			}
@@ -69,9 +69,9 @@ public:
 };
 
 /*
- *	Win32API CreateThread ‚Å‚Í‚È‚­A
- *	ƒ‰ƒ“ƒ^ƒCƒ€ƒ‰ƒCƒuƒ‰ƒŠ _beginthreadex ‚ğg—p‚·‚éƒXƒŒƒbƒhƒNƒ‰ƒX
- *	ƒvƒƒWƒFƒNƒgİ’è‚ÌƒR[ƒh¶¬‚ğƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒ‰ƒCƒuƒ‰ƒŠ‚Éİ’è‚·‚é‚±‚Æ
+ *	Win32API CreateThread ã§ã¯ãªãã€
+ *	ãƒ©ãƒ³ã‚¿ã‚¤ãƒ ãƒ©ã‚¤ãƒ–ãƒ©ãƒª _beginthreadex ã‚’ä½¿ç”¨ã™ã‚‹ã‚¹ãƒ¬ãƒƒãƒ‰ã‚¯ãƒ©ã‚¹
+ *	ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆè¨­å®šã®ã‚³ãƒ¼ãƒ‰ç”Ÿæˆã‚’ãƒãƒ«ãƒã‚¹ãƒ¬ãƒƒãƒ‰ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã«è¨­å®šã™ã‚‹ã“ã¨
  */
 class CCrtThread
 {

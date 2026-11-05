@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "RailMap.h"
 #include "CSimpleDialog.h"
 #include "CRailWay.h"
@@ -11,10 +11,10 @@
 #include "CSimulationMode.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (“Ç—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (èª­è¾¼ç”¨)
  */
 CTrain::CTrain(
-	CTrainGroup *group	//	•Ò¬
+	CTrainGroup *group	//	ç·¨æˆ
 ){
 	m_Reverse = false;
 	m_Warping = m_WarpingOld = false;
@@ -26,14 +26,14 @@ CTrain::CTrain(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrain::CTrain(
-	CTrainPlugin *tpi,	//	Ôçqƒvƒ‰ƒOƒCƒ“
-	CTrainGroup *group,	//	•Ò¬
-	bool rev			//	”½“]ƒtƒ‰ƒO
+	CTrainPlugin *tpi,	//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTrainGroup *group,	//	ç·¨æˆ
+	bool rev			//	åè»¢ãƒ•ãƒ©ã‚°
 ):
-	CModelInst(tpi)	//	Šî–{ƒNƒ‰ƒX
+	CModelInst(tpi)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_Reverse = rev;
 	m_Warping = m_WarpingOld = false;
@@ -46,14 +46,14 @@ CTrain::CTrain(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrain::~CTrain(){
 	DELETE_V(m_Next);
 }
 
 /*
- *	Ôçq”½“]
+ *	è»Šè¼Œåè»¢
  */
 void CTrain::Reverse(){
 	if(m_Group->IsSet()){
@@ -66,18 +66,18 @@ void CTrain::Reverse(){
 }
 
 /*
- *	Ôçq’·‚ğ‹‚ß‚é
+ *	è»Šè¼Œé•·ã‚’æ±‚ã‚ã‚‹
  */
 float CTrain::GetLength(){
 	return m_TrainPlugin->m_Length;
 }
 
 /*
- *	Ôçq”z’u€”õ
+ *	è»Šè¼Œé…ç½®æº–å‚™
  */
 float CTrain::SetSetBuffer(
-	float ofs,						//	ƒIƒtƒZƒbƒg
-	list<CTrainSetBuffer> *buflist	//	ƒŠƒXƒg
+	float ofs,						//	ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	list<CTrainSetBuffer> *buflist	//	ãƒªã‚¹ãƒˆ
 ){
 	IAxlePosture ia = m_AxleList.begin();
 	for(; ia!=m_AxleList.end(); ia++){
@@ -95,7 +95,7 @@ float CTrain::SetSetBuffer(
 }
 
 /*
- *	ƒV[ƒ“æ“¾
+ *	ã‚·ãƒ¼ãƒ³å–å¾—
  */
 CScene *CTrain::GetScene(){
 	if(m_Warping || !m_AxleList.size()) return NULL;
@@ -104,7 +104,7 @@ CScene *CTrain::GetScene(){
 }
 
 /*
- *	ƒV[ƒ“ƒ`ƒFƒbƒN
+ *	ã‚·ãƒ¼ãƒ³ãƒã‚§ãƒƒã‚¯
  */
 bool CTrain::CheckScene(){
 	CScene *scene = GetScene();
@@ -116,10 +116,10 @@ bool CTrain::CheckScene(){
 }
 
 /*
- *	Ô²“K—p
+ *	è»Šè»¸é©ç”¨
  */
 void CTrain::ApplyAxle(
-	bool sim	//	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“ƒtƒ‰ƒO
+	bool sim	//	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ãƒ•ãƒ©ã‚°
 ){
 	IAxlePosture ia = m_AxleList.begin();
 	bool oldwarp = m_WarpingOld;
@@ -149,7 +149,7 @@ void CTrain::ApplyAxle(
 }
 
 /*
- *	U‚èqƒŠƒZƒbƒg
+ *	æŒ¯ã‚Šå­ãƒªã‚»ãƒƒãƒˆ
  */
 void CTrain::ResetTilt(){
 	m_OldPos[0] = m_OldPos[1] = m_Pos;
@@ -157,26 +157,26 @@ void CTrain::ResetTilt(){
 }
 
 /*
- *	‘¬“xî•ñ•\¦
+ *	é€Ÿåº¦æƒ…å ±è¡¨ç¤º
  */
 void CTrain::PrintInfo(){
 	m_Group->PrintInfo();
 }
 
 /*
- *	‘¬“x‘€ì
+ *	é€Ÿåº¦æ“ä½œ
  */
 CModelInst *CTrain::Control(){
 	return m_Group->Control(this);
 }
 
 /*
- *	‰^“]È‹“_İ’è
+ *	é‹è»¢å¸­è¦–ç‚¹è¨­å®š
  */
 void CTrain::SetCabinView(
-	bool rev,	//	‹t•ûŒüƒtƒ‰ƒO
-	VEC3 pos,	//	À•WƒIƒtƒZƒbƒg
-	VEC3 dir	//	•ûŒüƒIƒtƒZƒbƒg
+	bool rev,	//	é€†æ–¹å‘ãƒ•ãƒ©ã‚°
+	VEC3 pos,	//	åº§æ¨™ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	VEC3 dir	//	æ–¹å‘ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 ){
 	if(m_Warping) return;
 	if(GetScene()!=g_Scene){
@@ -209,31 +209,31 @@ void CTrain::SetCabinView(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CTrain::ScanInput(
-	int mode,		//	ƒ‚[ƒh (0: link)
-	VEC3 &rect1,	//	—Ìˆæn“_
-	VEC3 &rect2		//	—ÌˆæI“_
+	int mode,		//	ãƒ¢ãƒ¼ãƒ‰ (0: link)
+	VEC3 &rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 &rect2		//	é ˜åŸŸçµ‚ç‚¹
 ){
 	if(!CheckScene()) return;
 	ms_CurrentInst = this;
 	m_TrainPlugin->SetSwitch(this);
 	m_TrainPlugin->SetPartsInst(this);
 	ApplyAxle(false);
-	m_TrainPlugin->SetPartsInst(this);	//	ƒŠƒZƒbƒg‚ª—v‚éI
+	m_TrainPlugin->SetPartsInst(this);	//	ãƒªã‚»ãƒƒãƒˆãŒè¦ã‚‹ï¼
 	m_TrainPlugin->ScanInput(this);
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CTrain::Render(){
 	if(!CheckScene() || m_Warping) return;
 	m_TrainPlugin->SetSwitch(this);
 	m_TrainPlugin->SetPartsInst(this);
-//	ApplyAxle(false);					//	ApplyAxle •s—vH
-//	m_TrainPlugin->SetPartsInst(this);	//	ƒŠƒZƒbƒg‚ª—v‚éI
+//	ApplyAxle(false);					//	ApplyAxle ä¸è¦ï¼Ÿ
+//	m_TrainPlugin->SetPartsInst(this);	//	ãƒªã‚»ãƒƒãƒˆãŒè¦ã‚‹ï¼
 	m_TrainPlugin->Render(this);
 	if(g_MapDrawNeeded){
 		float front, tail;
@@ -250,7 +250,7 @@ void CTrain::Render(){
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒgis
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ãƒˆé€²è¡Œ
  */
 void CTrain::SimulateModelInst(){
 	CheckScene();
@@ -258,16 +258,16 @@ void CTrain::SimulateModelInst(){
 	m_TrainPlugin->SetSwitch(this);
 	m_TrainPlugin->SetPartsInst(this);
 	ApplyAxle(true);
-//	m_TrainPlugin->SetPartsInst(this);	//	CAxlePosture ‚Íˆ—Ï‚È‚Ì‚ÅƒŠƒZƒbƒg‚Í•s—v
+//	m_TrainPlugin->SetPartsInst(this);	//	CAxlePosture ã¯å‡¦ç†æ¸ˆãªã®ã§ãƒªã‚»ãƒƒãƒˆã¯ä¸è¦
 	m_TrainPlugin->Simulate(this);
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CTrain::Read(
-	char *str,		//	‘ÎÛ•¶š—ñ
-	CTrain ***root	//	Ši”[æ
+	char *str,		//	å¯¾è±¡æ–‡å­—åˆ—
+	CTrain ***root	//	æ ¼ç´å…ˆ
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "Train"))){
@@ -294,10 +294,10 @@ char *CTrain::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CTrain::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\t\tTrain{\n");
 	fprintf(df, "\t\t\tTrainPlugin = \"%s\";\n", CheckPluginID(m_TrainPlugin));

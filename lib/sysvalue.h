@@ -1,13 +1,13 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #ifndef SYSVALUE_H
 #define SYSVALUE_H
 
 char g_errMsg[512];				//	for ASSERT()
-char g_debugDest[_MAX_PATH];	//	ƒfƒoƒbƒO•¶š‚Ìo—Íæ
+char g_debugDest[_MAX_PATH];	//	ãƒ‡ãƒãƒƒã‚°æ–‡å­—ã®å‡ºåŠ›å…ˆ
 
-int g_DispWidth = 640;	//	‰æ–Ê•
-int g_DispHeight = 480;	//	‰æ–Ê‚
+int g_DispWidth = 640;	//	ç”»é¢å¹…
+int g_DispHeight = 480;	//	ç”»é¢é«˜
 
 SYSVALUE_W svw;		//	Window
 SYSVALUE_3D sv3;	//	3D

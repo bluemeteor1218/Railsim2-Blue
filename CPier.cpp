@@ -1,27 +1,27 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CScene.h"
 #include "CPier.h"
 #include "CPierPlugin.h"
 #include "CSurfacePlugin.h"
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const float RAIL_SEG_MAX;
 
-//	“à•”’è”
-extern const float TAPER_DIV_RATIO = 0.2f;	//	ƒe[ƒp•ªŠ„ŒW”
+//	å†…éƒ¨å®šæ•°
+extern const float TAPER_DIV_RATIO = 0.2f;	//	ãƒ†ãƒ¼ãƒ‘åˆ†å‰²ä¿‚æ•°
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_ShowPierSelect;
 extern MAT8 g_MatSelect[];
 extern MAT8 g_MatSelectA[];
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CPier **CPier::ms_Root = NULL;
 float CPier::ms_MinDist;
 CPier *CPier::ms_Detect;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPier::CPier(){
 	m_Selected = 0;
@@ -32,14 +32,14 @@ CPier::CPier(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPier::CPier(
-	VEC3 jpos,			//	ƒWƒ‡ƒCƒ“ƒg•”À•W
-	VEC3 jdir,			//	ƒWƒ‡ƒCƒ“ƒg•” right
-	VEC3 jup,			//	ƒWƒ‡ƒCƒ“ƒg•” up
-	float pickalt,		//	’nŒ` pick ŠJn‚“x
-	CPierPlugin *ipi	//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
+	VEC3 jpos,			//	ã‚¸ãƒ§ã‚¤ãƒ³ãƒˆéƒ¨åº§æ¨™
+	VEC3 jdir,			//	ã‚¸ãƒ§ã‚¤ãƒ³ãƒˆéƒ¨ right
+	VEC3 jup,			//	ã‚¸ãƒ§ã‚¤ãƒ³ãƒˆéƒ¨ up
+	float pickalt,		//	åœ°å½¢ pick é–‹å§‹é«˜åº¦
+	CPierPlugin *ipi	//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	m_Selected = 0;
 	m_Valid = false;
@@ -55,14 +55,14 @@ CPier::CPier(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPier::~CPier(){
 	DELETE_V(m_Next);
 }
 
 /*
- *	ƒƒbƒVƒ…İ’è
+ *	ãƒ¡ãƒƒã‚·ãƒ¥è¨­å®š
  */
 void CPier::SetMesh(){
 	if(m_PierPlugin){
@@ -73,10 +73,10 @@ void CPier::SetMesh(){
 }
 
 /*
- *	ƒp[ƒc‰Šú‰»
+ *	ãƒ‘ãƒ¼ãƒ„åˆæœŸåŒ–
  */
 bool CPier::Init(
-	float *pickalt	//	’nŒ`ŒŸo
+	float *pickalt	//	åœ°å½¢æ¤œå‡º
 ){
 	VEC3 jpos = m_JointObject.GetPos();
 	VEC3 jright, jup = m_JointObject.GetUp(), jdir = m_JointObject.GetDir();
@@ -118,7 +118,7 @@ bool CPier::Init(
 }
 
 /*
- *	ƒŠƒXƒg‚©‚çíœ
+ *	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
  */
 void CPier::Delete(){
 	g_Scene->DeletePierLink(this);
@@ -127,9 +127,9 @@ void CPier::Delete(){
 }
 
 /*
- *	—LŒøŠm”F
+ *	æœ‰åŠ¹ç¢ºèª
  *
- *	!m_Valid ‚È‚ç‚ÎƒŠƒXƒg‚Í˜AŒ‹‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚ÅAƒƒ‚ƒŠƒŠ[ƒN“™‚Í”­¶‚µ‚È‚¢
+ *	!m_Valid ãªã‚‰ã°ãƒªã‚¹ãƒˆã¯é€£çµã•ã‚Œã¦ã„ãªã„ã®ã§ã€ãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯ç­‰ã¯ç™ºç”Ÿã—ãªã„
  */
 bool CPier::Confirm(){
 	if(m_Valid) return true;
@@ -138,12 +138,12 @@ bool CPier::Confirm(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CPier::ScanInput(
-	int mode,		//	ƒ‚[ƒh
-	VEC3 &rect1,	//	—Ìˆæn“_
-	VEC3 &rect2		//	—ÌˆæI“_
+	int mode,		//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 &rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 &rect2		//	é ˜åŸŸçµ‚ç‚¹
 ){
 	VEC3 center = 0.5f*(m_PierBegin+m_PierEnd);
 	VEC3 sc = WorldToScreen(center);
@@ -178,10 +178,10 @@ void CPier::ScanInput(
 }
 
 /*
- *	’f–Ê‚ğƒ_ƒ“ƒv
+ *	æ–­é¢ã‚’ãƒ€ãƒ³ãƒ—
  */
 void CPier::Dump(
-	int prev	//	ƒvƒŒƒrƒ…[ƒtƒ‰ƒO
+	int prev	//	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ãƒ•ãƒ©ã‚°
 ){
 	if(!m_PierPlugin || m_PierArea<=0.0f) return;
 	float tsx = 1.0f+m_PierArea*m_PierPlugin->m_TaperX;
@@ -209,7 +209,7 @@ void CPier::Dump(
 }
 
 /*
- *	“™ŠÔŠuƒIƒuƒWƒFƒNƒg‚ğƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ç­‰é–“éš”ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CPier::Render(){
 	if(!m_PierPlugin) return;
@@ -258,10 +258,10 @@ void CPier::Render(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CPier::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "Pier"))){
@@ -290,10 +290,10 @@ char *CPier::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CPier::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\t\t\tPier{\n");
 	fprintf(df, "\t\t\t\tAddress = %p;\n", this);

@@ -1,16 +1,16 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCamera.h"
 #include "CPolePlugin.h"
 #include "CPoleSelectMode.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_RailMipMap;
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CObject CPolePlugin::ms_PreviewObject;
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CPolePlugin::Load(){
 	char *str = m_Script, *tmp, *eee;
@@ -44,7 +44,7 @@ bool CPolePlugin::Load(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[İ’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CPolePlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -57,10 +57,10 @@ void CPolePlugin::SetPreview(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CPolePlugin::Preview(
-	VEC3 pos	//	x“_À•W
+	VEC3 pos	//	æ”¯æŒç‚¹åº§æ¨™
 ){
 	ms_PreviewObject.SetMesh(m_Mesh, V3ZERO, m_ModelScale);
 	ms_PreviewObject.SetPos(pos);

@@ -1,17 +1,17 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CStaticCtrl.h"
 #include "CSkinPlugin.h"
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CStaticCtrl::Init(
-	int x, int y,	//	À•W
-	int w, int h,	//	ƒTƒCƒY
-	char *t,		//	ƒeƒLƒXƒg
-	CInterface *p,	//	e
-	int horz,		//	…•½ˆÊ’u
-	int vert		//	‚’¼ˆÊ’u
+	int x, int y,	//	åº§æ¨™
+	int w, int h,	//	ã‚µã‚¤ã‚º
+	char *t,		//	ãƒ†ã‚­ã‚¹ãƒˆ
+	CInterface *p,	//	è¦ª
+	int horz,		//	æ°´å¹³ä½ç½®
+	int vert		//	å‚ç›´ä½ç½®
 ){
 	CInterface::Init(x, y, w, h, t, p);
 	m_HorzPos = horz;
@@ -19,7 +19,7 @@ void CStaticCtrl::Init(
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CStaticCtrl::Render(){
 	CInterface::RenderBrother();

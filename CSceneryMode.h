@@ -1,4 +1,4 @@
-#ifndef CSCENERYMODE_H_INCLUDED
+ï»¿#ifndef CSCENERYMODE_H_INCLUDED
 #define CSCENERYMODE_H_INCLUDED
 
 #include "CWindowCtrl.h"
@@ -9,11 +9,11 @@
 #include "CGameMode.h"
 
 /*
- *	ƒV[ƒ“ƒ‚[ƒh
+ *	ã‚·ãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰
  */
 class CSceneryMode: public CGameMode{
 protected:
-	static int ms_PhotoMode;	//	B‰eƒ‚[ƒh
+	static int ms_PhotoMode;	//	æ’®å½±ãƒ¢ãƒ¼ãƒ‰
 	static bool ms_NeedResetViewport;
 public:
 	static int GetPhotoMode(){ return ms_PhotoMode; }
@@ -41,19 +41,19 @@ public:
 };
 
 /*
- *	–îˆóƒV[ƒ“ƒ‚[ƒh
+ *	çŸ¢å°ã‚·ãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰
  */
 class CArrowSceneryMode: public CSceneryMode{
 protected:
-	static CWindowCtrl ms_OptionWindow;	//	”Ä—pİ’è‘‹
-	static CStaticCtrl ms_SnapLabel;	//	ƒXƒiƒbƒvƒ‰ƒxƒ‹
-	static CCheckBox ms_Grid;			//	ƒOƒŠƒbƒhƒ`ƒFƒbƒN
-	static CRadioButton ms_Snap[];		//	ƒXƒiƒbƒvƒ‰ƒWƒI
-	static CCheckBox ms_Axle[];			//	ƒXƒiƒbƒv“K—p²
-	static CStaticCtrl ms_BuildLabel;	//	İ’u•û–@ƒ‰ƒxƒ‹
-	static CCheckBox ms_Build[];		//	‚‰Ëƒ`ƒFƒbƒN
-	bool m_ArrowMode;	//	3D ƒ‚[ƒh
-	VEC3 m_SnapPos;		//	ƒXƒiƒbƒv“K—pŒãÀ•W
+	static CWindowCtrl ms_OptionWindow;	//	æ±ç”¨è¨­å®šçª“
+	static CStaticCtrl ms_SnapLabel;	//	ã‚¹ãƒŠãƒƒãƒ—ãƒ©ãƒ™ãƒ«
+	static CCheckBox ms_Grid;			//	ã‚°ãƒªãƒƒãƒ‰ãƒã‚§ãƒƒã‚¯
+	static CRadioButton ms_Snap[];		//	ã‚¹ãƒŠãƒƒãƒ—ãƒ©ã‚¸ã‚ª
+	static CCheckBox ms_Axle[];			//	ã‚¹ãƒŠãƒƒãƒ—é©ç”¨è»¸
+	static CStaticCtrl ms_BuildLabel;	//	è¨­ç½®æ–¹æ³•ãƒ©ãƒ™ãƒ«
+	static CCheckBox ms_Build[];		//	é«˜æ¶ãƒã‚§ãƒƒã‚¯
+	bool m_ArrowMode;	//	3D ãƒ¢ãƒ¼ãƒ‰
+	VEC3 m_SnapPos;		//	ã‚¹ãƒŠãƒƒãƒ—é©ç”¨å¾Œåº§æ¨™
 public:
 	static void InitInterface();
 	static int GetAltMask();
@@ -80,7 +80,7 @@ public:
 };
 
 /*
- *	ƒJ[ƒ\ƒ‹ƒV[ƒ“ƒ‚[ƒh
+ *	ã‚«ãƒ¼ã‚½ãƒ«ã‚·ãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰
  */
 class CCursorSceneryMode: public CSceneryMode{
 protected:

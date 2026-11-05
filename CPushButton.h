@@ -1,17 +1,17 @@
-#ifndef CPUSHBUTTON_H_INCLUDED
+ï»¿#ifndef CPUSHBUTTON_H_INCLUDED
 #define CPUSHBUTTON_H_INCLUDED
 
 #include "CInterface.h"
 
 /*
- *	ƒvƒbƒVƒ…ƒ{ƒ^ƒ“
+ *	ãƒ—ãƒƒã‚·ãƒ¥ãƒœã‚¿ãƒ³
  */
 class CPushButton: public CInterface{
 private:
-	int m_State;		//	ó‘Ô
-	bool m_Sound;		//	‰¹İ’è
-	bool m_Pushed;		//	‰Ÿ‰ºƒtƒ‰ƒO
-	bool m_Pushable;	//	ƒvƒbƒVƒ…‰Â”\ /*CP932‘Î‰*/
+	int m_State;		//	çŠ¶æ…‹
+	bool m_Sound;		//	éŸ³è¨­å®š
+	bool m_Pushed;		//	æŠ¼ä¸‹ãƒ•ãƒ©ã‚°
+	bool m_Pushable;	//	ãƒ—ãƒƒã‚·ãƒ¥å¯èƒ½ /*CP932å¯¾å¿œ*/
 public:
 	void Init(int, int, int, int, char *, CInterface *);
 	void SetSound(bool s){ m_Sound = s; }

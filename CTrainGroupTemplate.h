@@ -1,4 +1,4 @@
-#ifndef CTRAINGROUPTEMPLATE_H_INCLUDED
+ï»¿#ifndef CTRAINGROUPTEMPLATE_H_INCLUDED
 #define CTRAINGROUPTEMPLATE_H_INCLUDED
 
 #include "CWindowCtrl.h"
@@ -9,17 +9,17 @@ class CTrainPlugin;
 class CTrainGroup;
 
 /*
- *	Ôçqƒeƒ“ƒvƒŒ[ƒg
+ *	è»Šè¼Œãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
  *
- *	ƒXƒCƒbƒ`•t‚«Ôçqƒvƒ‰ƒOƒCƒ“ƒ|ƒCƒ“ƒ^
+ *	ã‚¹ã‚¤ãƒƒãƒä»˜ãè»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒã‚¤ãƒ³ã‚¿
  */
 class CTrainTemplate{
 	friend class CTrainGroupTemplate;
 private:
-	bool m_Reverse;					//	”½“]ƒtƒ‰ƒO
-	vector<int> m_SwitchOption;		//	ƒXƒCƒbƒ`İ’è’l
-	string m_TrainID;				//	Ôçq ID
-	CTrainPlugin *m_TrainPlugin;	//	Ôçqƒvƒ‰ƒOƒCƒ“
+	bool m_Reverse;					//	åè»¢ãƒ•ãƒ©ã‚°
+	vector<int> m_SwitchOption;		//	ã‚¹ã‚¤ãƒƒãƒè¨­å®šå€¤
+	string m_TrainID;				//	è»Šè¼Œ ID
+	CTrainPlugin *m_TrainPlugin;	//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 public:
 	CTrainTemplate(){
 		Init(NULL, false, R2L(vector<int>()));
@@ -38,16 +38,16 @@ public:
 	void AddToGroup(CTrainGroup *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CTrainTemplate>::iterator ITrainTemplate;
 
 /*
- *	•Ò¬ƒeƒ“ƒvƒŒ[ƒg
+ *	ç·¨æˆãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
  */
 class CTrainGroupTemplate: public CPlugin{
 private:
-	list<CTrainTemplate> m_TrainList;	//	ÔçqƒŠƒXƒg
-	CTreeFileElement *m_TreeElement;	//	ƒcƒŠ[—v‘f
+	list<CTrainTemplate> m_TrainList;	//	è»Šè¼Œãƒªã‚¹ãƒˆ
+	CTreeFileElement *m_TreeElement;	//	ãƒ„ãƒªãƒ¼è¦ç´ 
 public:
 	CTrainGroupTemplate(char *);
 	void PushTrain(CTrainTemplate &t){ m_TrainList.push_back(t); }
@@ -71,10 +71,10 @@ public:
 	void SetPreview();
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CTrainGroupTemplate>::iterator ITrainGroupTemplate;
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void LoadTrainGroupTemplateList();
 ITrainGroupTemplate FindTrainGroupTemplate(CTrainGroupTemplate *);
 ITrainGroupTemplate FindTrainGroupTemplate(string);
@@ -84,7 +84,7 @@ void AddTrainGroupTemplate();
 void ListTrainGroupTemplate();
 void ModalFuncTrainGroupTemplate();
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CTrainGroupTemplate *g_TrainGroupTemplate;
 extern list<CTrainGroupTemplate> g_TrainGroupTemplateList;
 

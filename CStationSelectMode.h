@@ -1,10 +1,10 @@
-#ifndef CSTATIONSELECTMODE_H_INCLUDED
+ï»¿#ifndef CSTATIONSELECTMODE_H_INCLUDED
 #define CSTATIONSELECTMODE_H_INCLUDED
 
 #include "CStructSelectMode.h"
 
 /*
- *	‰wÉ‘I‘ğƒ‚[ƒh
+ *	é§…èˆé¸æŠãƒ¢ãƒ¼ãƒ‰
  */
 class CStationSelectMode: public CStructSelectMode{
 private:
@@ -18,7 +18,7 @@ public:
 	void RenderModelPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CStationSelectMode *g_StationSelectMode;
 
 #endif

@@ -1,23 +1,23 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CPixelbit.h"
 
-//	“à•”’è”
+//	å†…éƒ¨å®šæ•°
 const char *const DIALOG_TITLE = "RailSim II";
 
-const int FLASHBUF_SIZE = 1024;	//	ˆêƒoƒbƒtƒ@ƒTƒCƒY
-const int FLASHBUF_NUM = 8;		//	ˆêƒoƒbƒtƒ@”
+const int FLASHBUF_SIZE = 1024;	//	ä¸€æ™‚ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º
+const int FLASHBUF_NUM = 8;		//	ä¸€æ™‚ãƒãƒƒãƒ•ã‚¡æ•°
 
-//	“à•”ƒOƒ[ƒoƒ‹
-char g_FlashBuf[FLASHBUF_NUM][FLASHBUF_SIZE];	//	ˆêƒoƒbƒtƒ@
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+char g_FlashBuf[FLASHBUF_NUM][FLASHBUF_SIZE];	//	ä¸€æ™‚ãƒãƒƒãƒ•ã‚¡
 
-int g_FlashBufSelect = 0;	//	ˆêƒoƒbƒtƒ@”Ô†
+int g_FlashBufSelect = 0;	//	ä¸€æ™‚ãƒãƒƒãƒ•ã‚¡ç•ªå·
 
 /*
- *	ˆêƒoƒbƒtƒ@‚É‘®•to—Í
+ *	ä¸€æ™‚ãƒãƒƒãƒ•ã‚¡ã«æ›¸å¼ä»˜å‡ºåŠ›
  */
 char *FlashIn(
-	char *format,	//	‘®
-	...				//	”CˆÓƒpƒ‰ƒƒ^
+	char *format,	//	æ›¸å¼
+	...				//	ä»»æ„ãƒ‘ãƒ©ãƒ¡ã‚¿
 ){
 	g_FlashBufSelect = (g_FlashBufSelect+1)%FLASHBUF_NUM;
 	va_list	vl;
@@ -28,20 +28,20 @@ char *FlashIn(
 }
 
 /*
- *	ˆêƒoƒbƒtƒ@‚ÌƒAƒhƒŒƒX‚ğæ“¾
+ *	ä¸€æ™‚ãƒãƒƒãƒ•ã‚¡ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
  */
 char *FlashOut(
-	int n	//	”Ô† (-1 ‚Å‘O‰ñ FlashIn ‚µ‚½ƒoƒbƒtƒ@)
+	int n	//	ç•ªå· (-1 ã§å‰å› FlashIn ã—ãŸãƒãƒƒãƒ•ã‚¡)
 ){
 	return g_FlashBuf[n<0 ? g_FlashBufSelect : n];
 }
 
 /*
- *	‘®•tƒ_ƒCƒAƒƒO
+ *	æ›¸å¼ä»˜ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  */
 void Dialog(
-	char *format,	//	‘®
-	...				//	”CˆÓƒpƒ‰ƒƒ^
+	char *format,	//	æ›¸å¼
+	...				//	ä»»æ„ãƒ‘ãƒ©ãƒ¡ã‚¿
 ){
 	g_FlashBufSelect = (g_FlashBufSelect+1)%FLASHBUF_NUM;
 	va_list	vl;
@@ -53,11 +53,11 @@ void Dialog(
 }
 
 /*
- *	ƒGƒ‰[ƒ_ƒCƒAƒƒO
+ *	ã‚¨ãƒ©ãƒ¼ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  */
 void ErrorDialog(
-	char *format,	//	‘®
-	...				//	”CˆÓƒpƒ‰ƒƒ^
+	char *format,	//	æ›¸å¼
+	...				//	ä»»æ„ãƒ‘ãƒ©ãƒ¡ã‚¿
 ){
 	g_FlashBufSelect = (g_FlashBufSelect+1)%FLASHBUF_NUM;
 	va_list	vl;
@@ -73,11 +73,11 @@ void ErrorDialog(
 }
 
 /*
- *	‚Í‚¢E‚¢‚¢‚¦ƒ_ƒCƒAƒƒO
+ *	ã¯ã„ãƒ»ã„ã„ãˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  */
 int YesNo(
-	char *format,	//	‘®
-	...				//	”CˆÓƒpƒ‰ƒƒ^
+	char *format,	//	æ›¸å¼
+	...				//	ä»»æ„ãƒ‘ãƒ©ãƒ¡ã‚¿
 ){
 	g_FlashBufSelect = (g_FlashBufSelect+1)%FLASHBUF_NUM;
 	va_list	vl;
@@ -89,11 +89,11 @@ int YesNo(
 }
 
 /*
- *	‚Í‚¢E‚¢‚¢‚¦EƒLƒƒƒ“ƒZƒ‹ƒ_ƒCƒAƒƒO
+ *	ã¯ã„ãƒ»ã„ã„ãˆãƒ»ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  */
 int YesNoCancel(
-	char *format,	//	‘®
-	...				//	”CˆÓƒpƒ‰ƒƒ^
+	char *format,	//	æ›¸å¼
+	...				//	ä»»æ„ãƒ‘ãƒ©ãƒ¡ã‚¿
 ){
 	g_FlashBufSelect = (g_FlashBufSelect+1)%FLASHBUF_NUM;
 	va_list	vl;
@@ -105,17 +105,17 @@ int YesNoCancel(
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹‘I‘ğƒ_ƒCƒAƒƒO
+ *	ãƒ•ã‚¡ã‚¤ãƒ«é¸æŠãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  *
- *	–ß‚è’l: TRUE = ‘I‘ğ¬Œ÷AFALSE = ƒLƒƒƒ“ƒZƒ‹A¸”s
+ *	æˆ»ã‚Šå€¤: TRUE = é¸æŠæˆåŠŸã€FALSE = ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã€å¤±æ•—
  */
 BOOL SelectFile(
-	HWND hWnd,			//	ŒÄ‚Ño‚µŒ³ƒnƒ“ƒhƒ‹
-	char *file,			//	ƒtƒ@ƒCƒ‹–¼Ši”[æ
-	int len,			//	ƒtƒ@ƒCƒ‹–¼‚ÌÅ‘å•¶š”
-	const char *filt,	//	ƒtƒBƒ‹ƒ^
-	const char *def,	//	ƒfƒtƒHƒ‹ƒgŠg’£q
-	int flag			//	TRUE = ‘AFALSE = “Ç
+	HWND hWnd,			//	å‘¼ã³å‡ºã—å…ƒãƒãƒ³ãƒ‰ãƒ«
+	char *file,			//	ãƒ•ã‚¡ã‚¤ãƒ«åæ ¼ç´å…ˆ
+	int len,			//	ãƒ•ã‚¡ã‚¤ãƒ«åã®æœ€å¤§æ–‡å­—æ•°
+	const char *filt,	//	ãƒ•ã‚£ãƒ«ã‚¿
+	const char *def,	//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæ‹¡å¼µå­
+	int flag			//	TRUE = æ›¸è¾¼ã€FALSE = èª­è¾¼
 ){
 	OPENFILENAME ofn;
 	memset(&ofn, 0, sizeof(OPENFILENAME));
@@ -139,14 +139,14 @@ BOOL SelectFile(
 }
 
 /*
- *	Fì¬ƒ_ƒCƒAƒƒO
+ *	è‰²ä½œæˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°
  *
- *	–ß‚è’l: TRUE = ‘I‘ğ¬Œ÷AFALSE = ƒLƒƒƒ“ƒZƒ‹A¸”s
+ *	æˆ»ã‚Šå€¤: TRUE = é¸æŠæˆåŠŸã€FALSE = ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã€å¤±æ•—
  */
 BOOL ColorDialog(
-	HWND hWnd,		//	ŒÄ‚Ño‚µŒ³ƒnƒ“ƒhƒ‹
-	PDWORD color,	//	FŠi”[æ
-	DWORD init		//	‰Šú‰»F
+	HWND hWnd,		//	å‘¼ã³å‡ºã—å…ƒãƒãƒ³ãƒ‰ãƒ«
+	PDWORD color,	//	è‰²æ ¼ç´å…ˆ
+	DWORD init		//	åˆæœŸåŒ–è‰²
 ){
 	static COLORREF colorsave[16];
 	CHOOSECOLOR ccs;
@@ -165,7 +165,7 @@ BOOL ColorDialog(
 }
 
 /*
- *	GetLastError() ‚ÌÚ×‚ğ•\¦
+ *	GetLastError() ã®è©³ç´°ã‚’è¡¨ç¤º
  */
 void ShowLastError(){
 	LPVOID lpMsgBuf;
@@ -177,22 +177,22 @@ void ShowLastError(){
 }
 
 /*
- *	Šg’£qƒ`ƒFƒbƒN
+ *	æ‹¡å¼µå­ãƒã‚§ãƒƒã‚¯
  */
 bool CheckFileExt(
-	char *fname,	//	ƒtƒ@ƒCƒ‹–¼
-	char *ext		//	Šg’£q (ƒsƒŠƒIƒhŠÜ‚Ş)
+	char *fname,	//	ãƒ•ã‚¡ã‚¤ãƒ«å
+	char *ext		//	æ‹¡å¼µå­ (ãƒ”ãƒªã‚ªãƒ‰å«ã‚€)
 ){
 	int len1 = strlen(fname), len2 = strlen(ext);
 	return len1>len2 && !strcmpi(&fname[len1-len2], ext);
 }
 
 /*
- *	Šg’£q©“®•t‰Á
+ *	æ‹¡å¼µå­è‡ªå‹•ä»˜åŠ 
  */
 string FixFileExt(
-	char *fname,	//	ƒtƒ@ƒCƒ‹–¼
-	char *ext		//	Šg’£q (ƒsƒŠƒIƒh‚Ü‚¸)
+	char *fname,	//	ãƒ•ã‚¡ã‚¤ãƒ«å
+	char *ext		//	æ‹¡å¼µå­ (ãƒ”ãƒªã‚ªãƒ‰ã¾ãš)
 ){
 	int len = strlen(fname), next = strlen(ext);
 	if(*CharPrev(fname, fname+len)=='.') return string(fname)+ext;
@@ -203,21 +203,21 @@ string FixFileExt(
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹–¼ƒtƒ‹ƒpƒX‚©‚çƒfƒBƒŒƒNƒgƒŠ•”•ª‚Ì‚İæ‚èo‚·
+ *	ãƒ•ã‚¡ã‚¤ãƒ«åãƒ•ãƒ«ãƒ‘ã‚¹ã‹ã‚‰ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªéƒ¨åˆ†ã®ã¿å–ã‚Šå‡ºã™
  */
 void CutPath(
-	char *path	//	ƒpƒXŠi”[æ
+	char *path	//	ãƒ‘ã‚¹æ ¼ç´å…ˆ
 ){
 	char *ptr = path+strlen(path);
 	for(; ptr>path && *ptr!='\\'; ptr = CharPrev(path, ptr)) *ptr = 0;
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹–¼ƒtƒ‹ƒpƒX‚©‚çƒtƒ@ƒCƒ‹–¼•”•ª‚Ì‚İæ‚èo‚·
+ *	ãƒ•ã‚¡ã‚¤ãƒ«åãƒ•ãƒ«ãƒ‘ã‚¹ã‹ã‚‰ãƒ•ã‚¡ã‚¤ãƒ«åéƒ¨åˆ†ã®ã¿å–ã‚Šå‡ºã™
  */
 void CutFileName(
-	char *name,	//	ƒtƒ@ƒCƒ‹–¼Ši”[æ
-	char *path	//	ƒtƒ‹ƒpƒX
+	char *name,	//	ãƒ•ã‚¡ã‚¤ãƒ«åæ ¼ç´å…ˆ
+	char *path	//	ãƒ•ãƒ«ãƒ‘ã‚¹
 ){
 	char *ptr = path+strlen(path);
 	while(ptr>path && *ptr!='\\') ptr = CharPrev(path, ptr);
@@ -225,20 +225,20 @@ void CutFileName(
 }
 
 /*
- *	Àsƒtƒ@ƒCƒ‹‚ÌƒfƒBƒŒƒNƒgƒŠ‚ğæ“¾
+ *	å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å–å¾—
  */
 void GetAppPath(
-	char *path	//	ƒpƒXŠi”[æ
+	char *path	//	ãƒ‘ã‚¹æ ¼ç´å…ˆ
 ){
 	GetModuleFileName(GetModuleHandle(NULL), path, 1024);
 	CutPath(path);
 }
 
 /*
- *	w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹ƒpƒX‚Æ“¯‚¶êŠ‚ğƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚Éw’è
+ *	æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã¨åŒã˜å ´æ‰€ã‚’ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«æŒ‡å®š
  */
 void MoveToFile(
-	char *path	//	ƒpƒXŠi”[æ
+	char *path	//	ãƒ‘ã‚¹æ ¼ç´å…ˆ
 ){
 	char *tmp = FlashIn("%s", path);
 	CutPath(tmp);
@@ -246,10 +246,10 @@ void MoveToFile(
 }
 
 /*
- *	ƒtƒ@ƒCƒ‹–¼‚É '/' '\' ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©’²‚×‚é
+ *	ãƒ•ã‚¡ã‚¤ãƒ«åã« '/' '\' ãŒå«ã¾ã‚Œã¦ã„ã‚‹ã‹èª¿ã¹ã‚‹
  */
 bool CheckSlash(
-	const char *chk	//	ƒpƒXŠi”[æ
+	const char *chk	//	ãƒ‘ã‚¹æ ¼ç´å…ˆ
 ){
 	for(; *chk; chk = CharNext(chk)) if(*chk=='\\' || *chk=='/') return true;
 	return false;
@@ -259,7 +259,7 @@ bool CheckSlash(
  *	convert from " to ''
  */
 string ExpandDoubleQuote(
-	const string &str	//	‘ÎÛ•¶š—ñ
+	const string &str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	string ret = str;
 	int i = 0;
@@ -278,7 +278,7 @@ string ExpandDoubleQuote(
  *	convert from '' to "
  */
 string RestoreDoubleQuote(
-	const string &str	//	‘ÎÛ•¶š—ñ
+	const string &str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	string ret = str;
 	int i = 0;

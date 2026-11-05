@@ -1,28 +1,28 @@
-#define LANGUAGE_CPP
+ï»¿#define LANGUAGE_CPP
 
 #include "stdafx.h"
 #include "CPlugin.h"
 
-//	“à•”’è”
+//	å†…éƒ¨å®šæ•°
 char *LANG_FILE_NAME = "Language.txt";
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern char *g_DayOfWeek[];
 
-//	“à•”ƒOƒ[ƒoƒ‹1
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«1
 string g_LanguageName;
 
 namespace LanguageResource
 {
 
 /*
- *	Œ¾Œê‰Šú‰»
+ *	è¨€èªåˆæœŸåŒ–
  */
 bool InitLanguage(){
 	chdir(g_BaseDir);
 	char *buf = LoadBinaryText(LANG_FILE_NAME), *str = buf, *eee;
 
-	//	â‘Î•K—v‚È‚à‚Ì
+	//	çµ¶å¯¾å¿…è¦ãªã‚‚ã®
 	SyntaxError = "Syntax error";
 	InvalidVersion = "Invalid version";
 	UnsupportedVersion = "Unsupported version";

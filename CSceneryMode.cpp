@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "HighTimer.h"
 #include "CPixelbit.h"
 #include "Capture.h"
@@ -13,30 +13,30 @@
 #include "CConfigMode.h"
 #include "CNeutralMode.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void ProcessCommonDialog();
 bool ScanInputNetworkInterface();
 void RenderNetworkInterface();
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const float CAM_PAN;
 
-//	“à•”’è”
+//	å†…éƒ¨å®šæ•°
 extern const int ARROW_INTERFACE_HEIGHT = TILE_UNIT*8;
-const float ARROW_FOLLOW = 0.5f;	//	–îˆó’ÇÕ‘¬“x
+const float ARROW_FOLLOW = 0.5f;	//	çŸ¢å°è¿½è·¡é€Ÿåº¦
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern float g_RailMapScale;
 extern float g_StereoInterval;
 extern bool g_RotateMap;
 extern VEC2 g_RailMapMove;
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 int CSceneryMode::ms_PhotoMode = 0;
 bool CSceneryMode::ms_NeedResetViewport = false;
 
 /*
- *	ƒV[ƒ“ƒJƒƒ‰æ“¾
+ *	ã‚·ãƒ¼ãƒ³ã‚«ãƒ¡ãƒ©å–å¾—
  */
 CCamera *CSceneryMode::GetCamera(){
 	if(IsWindowDivisible() && g_ConfigMode->IsWindowDiv()){
@@ -47,7 +47,7 @@ CCamera *CSceneryMode::GetCamera(){
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CSceneryMode::EnterGame(){
 	CInterface::SetFocus(NULL);
@@ -57,7 +57,7 @@ void CSceneryMode::EnterGame(){
 }
 
 /*
- *	ƒ‚[ƒhƒ‹[ƒv
+ *	ãƒ¢ãƒ¼ãƒ‰ãƒ«ãƒ¼ãƒ—
  */
 void CSceneryMode::SpinGame(){
 	devSetState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);
@@ -166,7 +166,7 @@ void CSceneryMode::SpinGame(){
 }
 
 /*
- *	ƒrƒ…[ƒ|[ƒg etc. ƒŠƒZƒbƒg
+ *	ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆ etc. ãƒªã‚»ãƒƒãƒˆ
  */
 void CSceneryMode::ResetViewport(){
 	SetViewport(0, 0, sv3.width, sv3.height);
@@ -179,14 +179,14 @@ void CSceneryMode::ResetViewport(){
 }
 
 /*
- *	ƒJƒƒ‰“K—p
+ *	ã‚«ãƒ¡ãƒ©é©ç”¨
  */
 void CSceneryMode::ApplyCamera(){
 	GetCamera()->Apply(false);
 }
 
 /*
- *	ƒVƒ‡[ƒgƒJƒbƒgƒL[‚Ìˆ—
+ *	ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼ã®å‡¦ç†
  */
 bool CSceneryMode::ProcessShortcutKey(){
 	static int drag_map = 0;
@@ -254,7 +254,7 @@ bool CSceneryMode::ProcessShortcutKey(){
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CWindowCtrl CArrowSceneryMode::ms_OptionWindow;
 CStaticCtrl CArrowSceneryMode::ms_SnapLabel;
 CCheckBox CArrowSceneryMode::ms_Grid;
@@ -265,7 +265,7 @@ CCheckBox CArrowSceneryMode::ms_Build[2];
 
 /*
  *	[static]
- *	‹¤’ÊƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ì‰Šú‰»
+ *	å…±é€šã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®åˆæœŸåŒ–
  */
 void CArrowSceneryMode::InitInterface(){
 	CInterface::ResetTabHead();
@@ -301,7 +301,7 @@ void CArrowSceneryMode::InitInterface(){
 
 /*
  *	[static]
- *	‚“xƒNƒŠƒbƒvƒ}ƒXƒN’læ“¾
+ *	é«˜åº¦ã‚¯ãƒªãƒƒãƒ—ãƒã‚¹ã‚¯å€¤å–å¾—
  */
 int CArrowSceneryMode::GetAltMask(){
 	if(CheckAlt()) return 0;
@@ -312,7 +312,7 @@ int CArrowSceneryMode::GetAltMask(){
 
 /*
  *	[static]
- *	‚“xƒNƒŠƒbƒvƒ}ƒXƒN’læ“¾
+ *	é«˜åº¦ã‚¯ãƒªãƒƒãƒ—ãƒã‚¹ã‚¯å€¤å–å¾—
  */
 float CArrowSceneryMode::GetSnapScale(){
 	static float snap[4] = {10.0f, 1.0f, 0.1f, 0.01f};
@@ -320,21 +320,21 @@ float CArrowSceneryMode::GetSnapScale(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CArrowSceneryMode::CArrowSceneryMode(){
 	m_ArrowMode = false;
 }
 
 /*
- *	•ÒWÀ•Wæ“¾
+ *	ç·¨é›†åº§æ¨™å–å¾—
  */
 VEC3 *CArrowSceneryMode::ArrowPos(){
 	return g_Scene->GetArrowPos();
 }
 
 /*
- *	ƒXƒiƒbƒvÀ•Wæ“¾
+ *	ã‚¹ãƒŠãƒƒãƒ—åº§æ¨™å–å¾—
  */
 VEC3 CArrowSceneryMode::GetSnapPos(){
 	VEC3 arrowpos = *ArrowPos();
@@ -347,7 +347,7 @@ VEC3 CArrowSceneryMode::GetSnapPos(){
 }
 
 /*
- *	ƒOƒŠƒbƒh•`‰æ
+ *	ã‚°ãƒªãƒƒãƒ‰æç”»
  */
 void CArrowSceneryMode::DrawGrid(){
 	if(ms_Grid.GetCheck()){
@@ -362,7 +362,7 @@ void CArrowSceneryMode::DrawGrid(){
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CArrowSceneryMode::EnterScenery(){
 	*ArrowPos() = GetCamera()->GetFocus();
@@ -372,7 +372,7 @@ void CArrowSceneryMode::EnterScenery(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CArrowSceneryMode::ScanInputScenery(){
 	bool setcam = false;
@@ -416,7 +416,7 @@ void CArrowSceneryMode::ScanInputScenery(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CArrowSceneryMode::RenderScenery(){
 	ms_OptionWindow.SetColor(m_ArrowMode ? 0x80ffffff : 0xffffffff);
@@ -461,14 +461,14 @@ void CArrowSceneryMode::RenderScenery(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CCursorSceneryMode::EnterScenery(){
 	EnterCursorScenery();
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CCursorSceneryMode::ScanInputScenery(){
 	//g_Cursor.ScanInput();
@@ -491,7 +491,7 @@ void CCursorSceneryMode::ScanInputScenery(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CCursorSceneryMode::RenderScenery(){
 	RenderCursorScenery();

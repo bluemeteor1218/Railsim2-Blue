@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -11,43 +11,43 @@
 #include "frame.h"
 #include "..\Const.h"
 
-//	“à•”’è”
-extern const float CLIP_PLANE_NEAR = 0.5f;		//	‘O•ûƒNƒŠƒbƒv–Ê
-extern const float CLIP_PLANE_FAR = 10000.0f;	//	Œã•ûƒNƒŠƒbƒv–Ê
-extern const float FOV_DEF = 0.25f*D3DX_PI;		//	ƒfƒtƒHƒ‹ƒg‹–ìŠp
+//	å†…éƒ¨å®šæ•°
+extern const float CLIP_PLANE_NEAR = 0.5f;		//	å‰æ–¹ã‚¯ãƒªãƒƒãƒ—é¢
+extern const float CLIP_PLANE_FAR = 10000.0f;	//	å¾Œæ–¹ã‚¯ãƒªãƒƒãƒ—é¢
+extern const float FOV_DEF = 0.25f*D3DX_PI;		//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¦–é‡è§’
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern char *g_PluginViewArg;
 extern int g_DispWidth;
 extern int g_DispHeight;
 extern bool g_FullScreen;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 bool g_StencilEnabled = false;
 DWORD g_BufferClearMode;
 
 /*
- *	Direct3D‚Ì‰Šú‰»
+ *	Direct3Dã®åˆæœŸåŒ–
  */
 BOOL InitDirect3D(){
 	DebugHL();
 	Debug("InitDirect3D\n");
 
-	//	Direct3D‚Ìì¬
+	//	Direct3Dã®ä½œæˆ
 	sv3.pD3D = Direct3DCreate8(D3D_SDK_VERSION);
 
-	ASSERT("Direct3D‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½.", sv3.pD3D); 
+	ASSERT("Direct3Dã®åˆæœŸåŒ–ã«å¤±æ•—ã—ã¾ã—ãŸ.", sv3.pD3D); 
 
-	//	ƒfƒoƒCƒX‚Ìì¬
+	//	ãƒ‡ãƒã‚¤ã‚¹ã®ä½œæˆ
 	if(!Create3DDevice(g_DispWidth, g_DispHeight)) return FALSE;
 
-	GetDeviceCaps();	//	ƒfƒoƒCƒX”\—Í‚Ìæ“¾
+	GetDeviceCaps();	//	ãƒ‡ãƒã‚¤ã‚¹èƒ½åŠ›ã®å–å¾—
 
-	//	ŠÂ‹«İ’è
+	//	ç’°å¢ƒè¨­å®š
 	InitMetrics();
 	InitRenderState();
 
-	//	ŠÖ˜AƒIƒuƒWƒFƒNƒg‚Ìì¬
+	//	é–¢é€£ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½œæˆ
 	SetDirLight(VEC3(1, -1, 1), MAKE_CV(0.5f, 0.5f, 0.5f, 0.0f));
 	D3DXCreateSprite(sv3.pDev, &sv3.pSpr);
 	CreateFont(FONT_HEIGHT, 0xffffffff, FW_NORMAL);
@@ -56,7 +56,7 @@ BOOL InitDirect3D(){
 }
 
 /*
- *	Direct3D‚Ì‰ğ•ú
+ *	Direct3Dã®è§£æ”¾
  */
 void FreeDirect3D(){
 	DebugHL();
@@ -69,19 +69,19 @@ void FreeDirect3D(){
 }
 
 /*
- *	3DƒfƒoƒCƒX‚Ìì¬
+ *	3Dãƒ‡ãƒã‚¤ã‚¹ã®ä½œæˆ
  *
- *	width	: ƒrƒ…[ƒ|[ƒg‰¡•
- *	height: ƒrƒ…[ƒ|[ƒgc•
+ *	width	: ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆæ¨ªå¹…
+ *	height: ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆç¸¦å¹…
  */
 BOOL Create3DDevice(int width, int height){
 	sv3.width = width;
 	sv3.height = height;
 
-	SelectDisplayAdapter();	//	ƒfƒBƒXƒvƒŒƒCƒAƒ_ƒvƒ^‚Ì‘I‘ğ(sv3.iAdapter)
-	SetPresentParam();		//	ƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^‚Ìw’è(sv3.d3dpp)
+	SelectDisplayAdapter();	//	ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ã‚¢ãƒ€ãƒ—ã‚¿ã®é¸æŠ(sv3.iAdapter)
+	SetPresentParam();		//	ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®æŒ‡å®š(sv3.d3dpp)
 
-	//	ƒEƒCƒ“ƒhƒEƒ‚[ƒh‚È‚çƒEƒCƒ“ƒhƒE‚ğ•\¦‚·‚é
+	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ãªã‚‰ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’è¡¨ç¤ºã™ã‚‹
 	if(sv3.fWindowed){
 		ShowWindow(svw.hWnd, SW_SHOW);
 		UpdateWindow(svw.hWnd);
@@ -110,23 +110,23 @@ BOOL Create3DDevice(int width, int height){
 			hr = sv3.pD3D->CreateDevice(
 				sv3.iAdapter, D3DDEVTYPE_REF, svw.hWnd,
 				D3DCREATE_SOFTWARE_VERTEXPROCESSING, &sv3.d3dpp, &sv3.pDev);
-			FAILED_ASSERT("3DƒfƒoƒCƒX‚ªì¬‚Å‚«‚Ü‚¹‚ñ.", hr);
+			FAILED_ASSERT("3Dãƒ‡ãƒã‚¤ã‚¹ãŒä½œæˆã§ãã¾ã›ã‚“.", hr);
 		}
 	}
-	Debug("ƒfƒoƒCƒXƒ^ƒCƒv = %s\n", sv3.type);
+	Debug("ãƒ‡ãƒã‚¤ã‚¹ã‚¿ã‚¤ãƒ— = %s\n", sv3.type);
 	return TRUE;
 }
 
 /*
- *	ƒfƒBƒXƒvƒŒƒCƒAƒ_ƒvƒ^‚Ì‘I‘ğ
+ *	ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ã‚¢ãƒ€ãƒ—ã‚¿ã®é¸æŠ
  */
 void SelectDisplayAdapter(){
-	//	ƒAƒ_ƒvƒ^”‚Ìæ“¾
+	//	ã‚¢ãƒ€ãƒ—ã‚¿æ•°ã®å–å¾—
 	int num = sv3.pD3D->GetAdapterCount();
-	Debug("ƒAƒ_ƒvƒ^” = %d\n", num);
+	Debug("ã‚¢ãƒ€ãƒ—ã‚¿æ•° = %d\n", num);
 
-	//	ƒAƒ_ƒvƒ^‚Ì‘I‘ğ
-	Debug("ƒAƒ_ƒvƒ^ID = ");
+	//	ã‚¢ãƒ€ãƒ—ã‚¿ã®é¸æŠ
+	Debug("ã‚¢ãƒ€ãƒ—ã‚¿ID = ");
 
 	if(num>=2 && CheckArguments("-2nd")){
 		Debug("1\n");
@@ -135,54 +135,54 @@ void SelectDisplayAdapter(){
 		Debug("D3DADAPTER_DEFAULT\n");
 		sv3.iAdapter = D3DADAPTER_DEFAULT;
 	}
-	//	ƒAƒ_ƒvƒ^î•ñ‚Ìæ“¾
+	//	ã‚¢ãƒ€ãƒ—ã‚¿æƒ…å ±ã®å–å¾—
 	D3DADAPTER_IDENTIFIER8 id;
 
 	sv3.pD3D->GetAdapterIdentifier(sv3.iAdapter, 0, &id);
-	Debug("ƒAƒ_ƒvƒ^–¼ = %s\n", id.Description);
+	Debug("ã‚¢ãƒ€ãƒ—ã‚¿å = %s\n", id.Description);
 }
 
 /*
- *	ƒfƒoƒCƒXƒpƒ‰ƒ[ƒ^‚Ì‰Šú‰»
+ *	ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®åˆæœŸåŒ–
  */
 BOOL SetPresentParam(){
-	//	ƒfƒBƒXƒvƒŒƒCƒ‚[ƒh‚ğƒJƒEƒ“ƒg(ƒŠƒtƒŒƒbƒVƒ…ƒŒ[ƒg‚Ìˆá‚¢‚àl—¶)
+	//	ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ¢ãƒ¼ãƒ‰ã‚’ã‚«ã‚¦ãƒ³ãƒˆ(ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒ¬ãƒ¼ãƒˆã®é•ã„ã‚‚è€ƒæ…®)
 	UINT num = sv3.pD3D->GetAdapterModeCount(sv3.iAdapter);
-	Debug("ƒAƒ_ƒvƒ^‚Ìƒ‚[ƒh” = %d\n", num);
+	Debug("ã‚¢ãƒ€ãƒ—ã‚¿ã®ãƒ¢ãƒ¼ãƒ‰æ•° = %d\n", num);
 
-	//	Œ»İ‚ÌƒT[ƒtƒFƒCƒXƒtƒH[ƒ}ƒbƒg‚ğæ“¾
+	//	ç¾åœ¨ã®ã‚µãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’å–å¾—
 	D3DDISPLAYMODE mode;
 	D3DFORMAT formatAlt = D3DFMT_UNKNOWN;
 
 	sv3.pD3D->GetAdapterDisplayMode(sv3.iAdapter, &mode);
 	sv3.format = mode.Format;
 
-	Debug("Œ»İ‚Ìƒ‚[ƒh = %d x %d %s\n",
+	Debug("ç¾åœ¨ã®ãƒ¢ãƒ¼ãƒ‰ = %d x %d %s\n",
 		mode.Width, mode.Height, FormatToString(mode.Format));
 
-	//	ƒfƒBƒXƒvƒŒƒCƒ‚[ƒh‚ğ—ñ‹“
+	//	ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ¢ãƒ¼ãƒ‰ã‚’åˆ—æŒ™
 	for(int i = 0; i<num; i++){
 		sv3.pD3D->EnumAdapterModes(sv3.iAdapter, i, &mode);
 
-		//	‰ğ‘œ“x‚ªˆê’v‚·‚é‚©H
+		//	è§£åƒåº¦ãŒä¸€è‡´ã™ã‚‹ã‹ï¼Ÿ
 		if(mode.Width==sv3.width && mode.Height==sv3.height){
-			//	ƒtƒH[ƒ}ƒbƒg‚ªˆê’v‚·‚é‚©H
+			//	ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãŒä¸€è‡´ã™ã‚‹ã‹ï¼Ÿ
 			if(mode.Format==sv3.format)
-				break;	//	—ñ‹“I—¹
+				break;	//	åˆ—æŒ™çµ‚äº†
 			else
-				formatAlt = mode.Format;	//	‘ã‘ÖƒtƒH[ƒ}ƒbƒg‚ğ•Û‘¶
+				formatAlt = mode.Format;	//	ä»£æ›¿ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’ä¿å­˜
 		}
 	}
-	Debug("ƒEƒCƒ“ƒhƒE‰» = ");
+	Debug("ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦åŒ– = ");
 
 	if(mode.Format!=sv3.format){
-		//	ˆê’v‚·‚éƒ‚[ƒh‚ª‚È‚¢‚Ì‚Å‘ã‘ÖƒtƒH[ƒ}ƒbƒg‚ğg—p‚·‚é
+		//	ä¸€è‡´ã™ã‚‹ãƒ¢ãƒ¼ãƒ‰ãŒãªã„ã®ã§ä»£æ›¿ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’ä½¿ç”¨ã™ã‚‹
 		sv3.format = formatAlt;
 
-		Debug("OFF(ƒtƒH[ƒ}ƒbƒg•ÏX)\n");
+		Debug("OFF(ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆå¤‰æ›´)\n");
 		sv3.fWindowed = FALSE;
 	}else{
-		//	ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚ÌŒˆ’è
+		//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰ã®æ±ºå®š
 		if(!g_FullScreen || g_PluginViewArg || CheckArguments("-win")){
 			Debug("ON\n");
 			sv3.fWindowed = TRUE;
@@ -191,10 +191,10 @@ BOOL SetPresentParam(){
 			sv3.fWindowed = FALSE;
 		}
 	}
-	Debug("‘I‘ğ‚³‚ê‚½ƒ‚[ƒh = %d x %d %s ",
+	Debug("é¸æŠã•ã‚ŒãŸãƒ¢ãƒ¼ãƒ‰ = %d x %d %s ",
 		sv3.width, sv3.height, FormatToString(sv3.format));
 
-	//	ƒpƒ‰ƒ[ƒ^İ’è
+	//	ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è¨­å®š
 	ZeroMemory(&sv3.d3dpp, sizeof(sv3.d3dpp));
 
 	sv3.d3dpp.BackBufferCount = 1;
@@ -217,17 +217,17 @@ BOOL SetPresentParam(){
 }
 
 /*
- *	g—p‰Â”\‚ÈƒfƒvƒX^ƒXƒeƒ“ƒVƒ‹ƒoƒbƒtƒ@‚ÌƒtƒH[ƒ}ƒbƒg‚ğŒŸõ
+ *	ä½¿ç”¨å¯èƒ½ãªãƒ‡ãƒ—ã‚¹ï¼ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒãƒƒãƒ•ã‚¡ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æ¤œç´¢
  */
 D3DFORMAT FindDepthStencilFormat(D3DFORMAT form){
 	HRESULT hr;
 
 #define TEST_DSFORMAT(dev, dsf) \
-	hr = sv3.pD3D->CheckDeviceFormat( /* ƒTƒ|[ƒg‚µ‚Ä‚¢‚é‚©H */ \
+	hr = sv3.pD3D->CheckDeviceFormat( /* ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã‚‹ã‹ï¼Ÿ */ \
 		sv3.iAdapter, dev, \
 		form, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, dsf); \
 	if(SUCCEEDED(hr)) { \
-		hr = sv3.pD3D->CheckDepthStencilMatch( /* ŒİŠ·«ƒeƒXƒg */ \
+		hr = sv3.pD3D->CheckDepthStencilMatch( /* äº’æ›æ€§ãƒ†ã‚¹ãƒˆ */ \
 			sv3.iAdapter, dev, \
 			form, form, dsf); \
 		if(SUCCEEDED(hr)) return dsf; \
@@ -250,7 +250,7 @@ D3DFORMAT FindDepthStencilFormat(D3DFORMAT form){
 }
 
 /*
- *	ƒT[ƒtƒFƒCƒXƒtƒH[ƒ}ƒbƒg‚ğ•¶š—ñ‚É•ÏŠ·
+ *	ã‚µãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æ–‡å­—åˆ—ã«å¤‰æ›
  */
 const char *FormatToString(D3DFORMAT f){
 	switch(f){
@@ -277,7 +277,7 @@ const char *FormatToString(D3DFORMAT f){
 }
 
 /*
- *	ƒoƒbƒtƒ@ƒTƒCƒY“K—p
+ *	ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚ºé©ç”¨
  */
 void AffectWindowSize()
 {
@@ -295,7 +295,7 @@ void AffectWindowSize()
 	);
 	sv3.pDev->SetTransform(D3DTS_PROJECTION, &sv3.mtxProj);
 
-	//ƒrƒ…[ƒ|[ƒgs—ñ‚Ìì¬(ƒ[ƒ‹ƒh¨ƒXƒNƒŠ[ƒ“À•W•ÏŠ·—p)
+	//ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆè¡Œåˆ—ã®ä½œæˆ(ãƒ¯ãƒ¼ãƒ«ãƒ‰â†’ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™å¤‰æ›ç”¨)
 	sv3.mtxVPort = MTX4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
 	sv3.mtxVPort._11 =  width *0.5f;
 	sv3.mtxVPort._22 = -height*0.5f;
@@ -304,7 +304,7 @@ void AffectWindowSize()
 }
 
 /*
- *	À•WŒn‚Ì‰Šú‰»
+ *	åº§æ¨™ç³»ã®åˆæœŸåŒ–
  */
 void InitMetrics(){
 #if 0
@@ -319,7 +319,7 @@ void InitMetrics(){
 	sv3.pDev->SetViewport(&vp);
 #endif
 
-	//	ŠeÀ•W•ÏŠ·s—ñ‚Ìw’è
+	//	å„åº§æ¨™å¤‰æ›è¡Œåˆ—ã®æŒ‡å®š
 	sv3.mtxWorld = MTX4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 	sv3.pDev->SetTransform(D3DTS_WORLD, &sv3.mtxWorld);
 
@@ -330,13 +330,13 @@ void InitMetrics(){
 		&D3DXVECTOR3(0.0f, 1.0f, 0.0f));
 	sv3.pDev->SetTransform(D3DTS_VIEW, &sv3.mtxView);
 
-	//	ƒNƒŠƒbƒsƒ“ƒOİ’è
+	//	ã‚¯ãƒªãƒƒãƒ”ãƒ³ã‚°è¨­å®š
 	D3DCLIPSTATUS8 cs;
 
 	cs.ClipUnion = cs.ClipIntersection = D3DCS_ALL;
 	sv3.pDev->SetClipStatus(&cs);
 
-	//	Œü‚«s—ñ‚Ìì¬
+	//	å‘ãè¡Œåˆ—ã®ä½œæˆ
 	sv3.mtxFront = MTX4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 	sv3.mtxRear = MTX4(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1);
 	sv3.mtxLeft = MTX4(0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 0, 1);
@@ -344,7 +344,7 @@ void InitMetrics(){
 	sv3.mtxTop = MTX4(1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1);
 	sv3.mtxBottom = MTX4(1, 0, 0, 0, 0, 0, -1, 0, 0, -1, 0, 0, 0, 0, 0, 1);
 
-	//	UVÀ•W‚Ì‰Šú‰»
+	//	UVåº§æ¨™ã®åˆæœŸåŒ–
 	sv3.u[0] = 0, sv3.u[1] = 1;
 	sv3.v[0] = 0, sv3.v[1] = 1;
 
@@ -352,7 +352,7 @@ void InitMetrics(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒOEƒXƒe[ƒg‚Ì‰Šú‰»
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ»ã‚¹ãƒ†ãƒ¼ãƒˆã®åˆæœŸåŒ–
  */
 void InitRenderState(){
 	devSetLighting(TRUE);
@@ -376,7 +376,7 @@ void InitRenderState(){
 }
 
 /*
- *	ƒfƒoƒCƒX”\—Í‚Ìæ“¾
+ *	ãƒ‡ãƒã‚¤ã‚¹èƒ½åŠ›ã®å–å¾—
  */
 void GetDeviceCaps(){
 	D3DCAPS8 caps;
@@ -396,20 +396,20 @@ void GetDeviceCaps(){
 	sv3.capsTexMipMap = (caps.TextureCaps&D3DPTEXTURECAPS_MIPMAP)!=0;
 	sv3.capsTexBump = (caps.TextureOpCaps&D3DTEXOPCAPS_BUMPENVMAP)!=0;
 	Debug(
-		"Å‘åƒvƒŠƒ~ƒeƒBƒu = %d\n" 
-		"Å‘åƒ‰ƒCƒg = %d\n"
-		"ƒtƒHƒO{\n"
-		"\t’¸“_ = %d\n"
-		"\tƒsƒNƒZƒ‹ = %d\n"
-		"\t”ÍˆÍ = %d\n"
+		"æœ€å¤§ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ– = %d\n" 
+		"æœ€å¤§ãƒ©ã‚¤ãƒˆ = %d\n"
+		"ãƒ•ã‚©ã‚°{\n"
+		"\té ‚ç‚¹ = %d\n"
+		"\tãƒ”ã‚¯ã‚»ãƒ« = %d\n"
+		"\tç¯„å›² = %d\n"
 		"}\n"
-		"ƒeƒNƒXƒ`ƒƒ[{\n"
-		"\t—˜—p‰Â”\ƒƒ‚ƒŠ = %d KB\n"
-		"\tÅ‘åƒTƒCƒY = %d x %d\n"
-		"\tÅ‘åƒXƒe[ƒW = %d\n"
-		"\tƒAƒ‹ƒtƒ@ƒuƒŒƒ“ƒh = %d\n"
-		"\tƒ~ƒbƒvƒ}ƒbƒv = %d\n"
-		"\tƒoƒ“ƒvƒ}ƒbƒv = %d\n"
+		"ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼{\n"
+		"\tåˆ©ç”¨å¯èƒ½ãƒ¡ãƒ¢ãƒª = %d KB\n"
+		"\tæœ€å¤§ã‚µã‚¤ã‚º = %d x %d\n"
+		"\tæœ€å¤§ã‚¹ãƒ†ãƒ¼ã‚¸ = %d\n"
+		"\tã‚¢ãƒ«ãƒ•ã‚¡ãƒ–ãƒ¬ãƒ³ãƒ‰ = %d\n"
+		"\tãƒŸãƒƒãƒ—ãƒãƒƒãƒ— = %d\n"
+		"\tãƒãƒ³ãƒ—ãƒãƒƒãƒ— = %d\n"
 		"}\n",
 		sv3.capsMaxPrim,
 		sv3.capsMaxLight,
@@ -444,35 +444,35 @@ BOOL ResetD3DDevice()
 }
 
 /*
- *	ƒV[ƒ“‚ÌŠJn
+ *	ã‚·ãƒ¼ãƒ³ã®é–‹å§‹
  *
- *	c	: ƒNƒŠƒAƒJƒ‰[Ac = 0‚ÅƒNƒŠƒA‚µ‚È‚¢B
+ *	c	: ã‚¯ãƒªã‚¢ã‚«ãƒ©ãƒ¼ã€c = 0ã§ã‚¯ãƒªã‚¢ã—ãªã„ã€‚
  */
 BOOL BeginScene(D3DCOLOR c){
-	//	ƒfƒoƒCƒX‚ÌƒeƒXƒg
+	//	ãƒ‡ãƒã‚¤ã‚¹ã®ãƒ†ã‚¹ãƒˆ
 	HRESULT hr = sv3.pDev->TestCooperativeLevel();
 
 	if(hr==D3DERR_DEVICELOST){
-		Debug("3DƒfƒoƒCƒX‚ªƒƒXƒg‚µ‚Ä‚¢‚Ü‚·.\n");
+		Debug("3Dãƒ‡ãƒã‚¤ã‚¹ãŒãƒ­ã‚¹ãƒˆã—ã¦ã„ã¾ã™.\n");
 		return FALSE;
 	}else if(hr==D3DERR_DEVICENOTRESET){
-		Debug("3DƒfƒoƒCƒX‚ÌƒŠƒZƒbƒg‚ª•K—v‚Å‚·.\n");
+		Debug("3Dãƒ‡ãƒã‚¤ã‚¹ã®ãƒªã‚»ãƒƒãƒˆãŒå¿…è¦ã§ã™.\n");
 		/*
-		 *	–{—ˆ‚È‚ç‚±‚±‚Å sv3.pDev->Reset()‚ğŒÄ‚Ño‚µ‚ÄƒfƒoƒCƒX‚ÌÄİ’è
-		 *	‚ğ‚İ‚é‚×‚«‚¾‚ªA‚»‚Ì‘O‚ÉƒfƒoƒCƒX‚ÉŠÖ˜A‚·‚éƒIƒuƒWƒFƒNƒg‚ğ‰ğ•ú
-		 *	‚µ‚Ä‚¨‚©‚È‚­‚Ä‚Í‚È‚ç‚È‚¢B
+		 *	æœ¬æ¥ãªã‚‰ã“ã“ã§ sv3.pDev->Reset()ã‚’å‘¼ã³å‡ºã—ã¦ãƒ‡ãƒã‚¤ã‚¹ã®å†è¨­å®š
+		 *	ã‚’è©¦ã¿ã‚‹ã¹ãã ãŒã€ãã®å‰ã«ãƒ‡ãƒã‚¤ã‚¹ã«é–¢é€£ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è§£æ”¾
+		 *	ã—ã¦ãŠã‹ãªãã¦ã¯ãªã‚‰ãªã„ã€‚
 		 *
-		 *	‚»‚Ìƒ^ƒCƒ~ƒ“ƒO‚ğƒvƒƒOƒ‰ƒ}‚É’Ê’m‚µ‚½‚èA‰ğ•ú‚Ì‹`–±‚ğ‚¨‚µ‚Â‚¯‚é
-		 *	‚Ì‚Í“–ƒ‰ƒCƒuƒ‰ƒŠ‚ÌƒRƒ“ƒZƒvƒg‚É”½‚·‚éB@
+		 *	ãã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã‚’ãƒ—ãƒ­ã‚°ãƒ©ãƒã«é€šçŸ¥ã—ãŸã‚Šã€è§£æ”¾ã®ç¾©å‹™ã‚’ãŠã—ã¤ã‘ã‚‹
+		 *	ã®ã¯å½“ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®ã‚³ãƒ³ã‚»ãƒ—ãƒˆã«åã™ã‚‹ã€‚ã€€
 		 *
-		 *	]‚Á‚ÄA‚±‚±‚ÅƒvƒƒOƒ‰ƒ€I—¹‚³‚¹‚é‚±‚Æ‚É‚·‚éB
+		 *	å¾“ã£ã¦ã€ã“ã“ã§ãƒ—ãƒ­ã‚°ãƒ©ãƒ çµ‚äº†ã•ã›ã‚‹ã“ã¨ã«ã™ã‚‹ã€‚
 		 */
 	//	SendWM_CLOSE();
 		if(!ResetD3DDevice()) return FALSE;
 	}
 	else if(sv3.d3dpp.BackBufferWidth!=svw.winW || sv3.d3dpp.BackBufferHeight!=svw.winH)
 	{
-		Debug("ƒoƒbƒtƒ@ƒTƒCƒY‚ğ•ÏX‚µ‚Ü‚·.\n");
+		Debug("ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚ºã‚’å¤‰æ›´ã—ã¾ã™.\n");
 		sv3.d3dpp.BackBufferWidth	= svw.winW;
 		sv3.d3dpp.BackBufferHeight	= svw.winH;
 		sv3.width  = svw.winW;
@@ -480,15 +480,15 @@ BOOL BeginScene(D3DCOLOR c){
 		AffectWindowSize();
 		if(!ResetD3DDevice()) return FALSE;
 	}
-	//	ƒV[ƒ“ŠJn
+	//	ã‚·ãƒ¼ãƒ³é–‹å§‹
 	if(FAILED(sv3.pDev->BeginScene())) return FALSE;
 
-	//	ƒNƒŠƒA
+	//	ã‚¯ãƒªã‚¢
 	sv3.pDev->Clear(0, NULL, (c!=0 ? D3DCLEAR_TARGET : 0)|g_BufferClearMode, c, 1.0f, 0);
-	//	ƒrƒ…[ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€
+	//	ãƒ“ãƒ¥ãƒ¼ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ 
 	sv3.pDev->SetTransform(D3DTS_VIEW, &sv3.mtxView);
 
-	//	Šeí•ÏŠ·s—ñ‚ÌŒvZ
+	//	å„ç¨®å¤‰æ›è¡Œåˆ—ã®è¨ˆç®—
 	float tmp;
 	D3DXMatrixInverse(&sv3.mtxViewInv, &tmp, &sv3.mtxView);
 
@@ -499,7 +499,7 @@ BOOL BeginScene(D3DCOLOR c){
 }
 
 /*
- *	ƒV[ƒ“‚ÌI—¹
+ *	ã‚·ãƒ¼ãƒ³ã®çµ‚äº†
  */
 void EndScene(){
 	sv3.pDev->EndScene();
@@ -507,10 +507,10 @@ void EndScene(){
 }
 
 /*
- *	ƒJƒ‰[’l‚ğX8R8G8B8ƒtƒH[ƒ}ƒbƒg‚É•ÏŠ·‚·‚é
+ *	ã‚«ãƒ©ãƒ¼å€¤ã‚’X8R8G8B8ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã«å¤‰æ›ã™ã‚‹
  *
- *	d		: ”CˆÓƒtƒH[ƒ}ƒbƒg‚ÌF
- *	fmt	: ƒtƒH[ƒ}ƒbƒg
+ *	d		: ä»»æ„ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®è‰²
+ *	fmt	: ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
  */
 D3DCOLOR GetXRGB32(DWORD d, D3DFORMAT fmt){
 	D3DCOLOR c;
@@ -555,7 +555,7 @@ D3DCOLOR GetXRGB32(DWORD d, D3DFORMAT fmt){
 }
 
 /*
- *	ƒ}ƒeƒŠƒAƒ‹‚Ì‰Šú‰»
+ *	ãƒãƒ†ãƒªã‚¢ãƒ«ã®åˆæœŸåŒ–
  */
 void devResetMaterial(){
 	MAT8 mat;
@@ -570,7 +570,7 @@ void devResetMaterial(){
 }
 
 /*
- *	ƒƒCƒ„ƒtƒŒ[ƒ€—pƒ}ƒeƒŠƒAƒ‹
+ *	ãƒ¯ã‚¤ãƒ¤ãƒ•ãƒ¬ãƒ¼ãƒ ç”¨ãƒãƒ†ãƒªã‚¢ãƒ«
  */
 void devSetLineMaterial(){
 	MAT8 mat;

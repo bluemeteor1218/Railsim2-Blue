@@ -1,4 +1,4 @@
-#ifndef CINTERFACEMODE_H_INCLUDED
+ï»¿#ifndef CINTERFACEMODE_H_INCLUDED
 #define CINTERFACEMODE_H_INCLUDED
 
 #include "CGameMode.h"
@@ -9,12 +9,12 @@
 #include "CPluginTree.h"
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgƒrƒ…[
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
  */
 class CPluginListView: public CIconListView{
 	friend class CTreeDirElement;
 private:
-	CTreeDirElement *m_ShowDir;	//	•\¦ƒfƒBƒŒƒNƒgƒŠ
+	CTreeDirElement *m_ShowDir;	//	è¡¨ç¤ºãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 public:
 	bool IsRenamable(CListElement *);
 	bool IsDroppable(CListElement *);
@@ -29,11 +29,11 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒCƒ“ƒ^[ƒtƒFƒCƒXƒ‚[ƒh
+ *	ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ãƒ¢ãƒ¼ãƒ‰
  */
 class CInterfaceMode: public CGameMode{
 protected:
-	CCamera *m_Camera;	//	ƒJƒƒ‰
+	CCamera *m_Camera;	//	ã‚«ãƒ¡ãƒ©
 public:
 	CInterfaceMode();
 	virtual ~CInterfaceMode(){}
@@ -51,20 +51,20 @@ public:
 };
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒ‚[ƒh
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ¢ãƒ¼ãƒ‰
  */
 class CPluginMode: public CInterfaceMode, public CWindowResizer, public CMenuCommander{
 protected:
-	static bool ms_ShowProperty;			//	ƒvƒƒpƒeƒB•\¦ƒtƒ‰ƒO
-	static CPopMenu *ms_DirMenu;			//	ƒfƒBƒŒƒNƒgƒŠƒƒjƒ…[
-	static CWindowCtrl *ms_LastInfoWindow;	//	ÅŒã‚Ég—p‚µ‚½î•ñ‘‹
-	CWindowCtrl m_ListWindow;				//	ƒŠƒXƒg‘‹
-	CPluginListView m_PluginListView;		//	ƒŠƒXƒg
-	CPluginTree m_PluginTree;				//	ƒcƒŠ[
-	CWindowCtrl m_InfoWindow;				//	ƒvƒ‰ƒOƒCƒ“î•ñ‘‹
-	CMultiStatic m_InfoStatic;				//	ƒvƒ‰ƒOƒCƒ“î•ñ•\¦
-	CPopMenu *m_PluginMenu;					//	ƒcƒŠ[ƒƒjƒ…[
-	CPopMenu *m_PreviewMenu;				//	ƒvƒŒƒrƒ…[ƒƒjƒ…[
+	static bool ms_ShowProperty;			//	ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£è¡¨ç¤ºãƒ•ãƒ©ã‚°
+	static CPopMenu *ms_DirMenu;			//	ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	static CWindowCtrl *ms_LastInfoWindow;	//	æœ€å¾Œã«ä½¿ç”¨ã—ãŸæƒ…å ±çª“
+	CWindowCtrl m_ListWindow;				//	ãƒªã‚¹ãƒˆçª“
+	CPluginListView m_PluginListView;		//	ãƒªã‚¹ãƒˆ
+	CPluginTree m_PluginTree;				//	ãƒ„ãƒªãƒ¼
+	CWindowCtrl m_InfoWindow;				//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æƒ…å ±çª“
+	CMultiStatic m_InfoStatic;				//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æƒ…å ±è¡¨ç¤º
+	CPopMenu *m_PluginMenu;					//	ãƒ„ãƒªãƒ¼ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	CPopMenu *m_PreviewMenu;				//	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 public:
 	static void InitMenu();
 	static void FreeMenu();

@@ -1,4 +1,4 @@
-#ifndef CTRAINLISTVIEW_H_INCLUDED
+ï»¿#ifndef CTRAINLISTVIEW_H_INCLUDED
 #define CTRAINLISTVIEW_H_INCLUDED
 
 #include "CListView.h"
@@ -6,7 +6,7 @@
 class CTrainGroup;
 
 /*
- *	•Ò¬ƒŠƒXƒgƒrƒ…[
+ *	ç·¨æˆãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
  */
 class CGroupListView: public CListView{
 private:
@@ -16,7 +16,7 @@ public:
 };
 
 /*
- *	ÔçqƒŠƒXƒgƒrƒ…[
+ *	è»Šè¼Œãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
  */
 class CTrainListView: public CListView{
 private:
@@ -28,11 +28,11 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒŠƒl[ƒ}
+ *	ãƒªãƒãƒ¼ãƒ
  */
 class CGroupRenamer: public CMenuCommand{
 private:
-	CTrainGroup *m_Group;	//	•Ò¬
+	CTrainGroup *m_Group;	//	ç·¨æˆ
 public:
 	CGroupRenamer(CTrainGroup *gr){ m_Group = gr; }
 	void Exec();

@@ -1,4 +1,4 @@
-#ifndef CMODELSWITCH_H_INCLUDED
+ï»¿#ifndef CMODELSWITCH_H_INCLUDED
 #define CMODELSWITCH_H_INCLUDED
 
 #include "CCustomizer.h"
@@ -10,7 +10,7 @@ class CExpression;
 class CModelPlugin;
 class CModelInst;
 
-//	ƒVƒXƒeƒ€ƒXƒCƒbƒ`”Ô†
+//	ã‚·ã‚¹ãƒ†ãƒ ã‚¹ã‚¤ãƒƒãƒç•ªå·
 extern enum{
 	SYS_SW_FRONT = 0,
 	SYS_SW_CONNECT1,
@@ -25,7 +25,7 @@ extern enum{
 	SYS_SW_APPROACH1,
 	SYS_SW_APPROACH2,
 	SYS_SW_STOPPING,
-	//	ª instance switches (repaired when afterrender)
+	//	â†‘ instance switches (repaired when afterrender)
 	SYS_SW_NIGHT,
 	SYS_SW_WEATHER,
 	SYS_SW_SEASON,
@@ -41,23 +41,23 @@ extern enum{
 	SYS_SW_FORCE_DWORD = 0xffffffff
 } SYS_SW_ID;
 
-//	“à•”’è”
-const int SYSTEM_SWITCH_NUM = 25;	//	ƒVƒXƒeƒ€ƒXƒCƒbƒ`”
-const int INSTANCE_SWITCH_NUM = 13;	//	“àAƒCƒ“ƒXƒ^ƒ“ƒXƒXƒCƒbƒ`”
+//	å†…éƒ¨å®šæ•°
+const int SYSTEM_SWITCH_NUM = 25;	//	ã‚·ã‚¹ãƒ†ãƒ ã‚¹ã‚¤ãƒƒãƒæ•°
+const int INSTANCE_SWITCH_NUM = 13;	//	å†…ã€ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚¹ã‚¤ãƒƒãƒæ•°
 
 /*
- *	ƒ‚ƒfƒ‹ƒXƒCƒbƒ`
+ *	ãƒ¢ãƒ‡ãƒ«ã‚¹ã‚¤ãƒƒãƒ
  */
 class CModelSwitch{
 	friend class CModelPlugin;
 	friend class CSwitchApplier;
 private:
-	int m_ID;						//	”Ô†
-	int m_Value;					//	’l
-	string m_SwitchName;			//	ƒXƒCƒbƒ`–¼
-	string m_GroupCommon;			//	•Ò¬‹¤’Ê¯•Êq
-	list<string> m_Entry;			//	ƒGƒ“ƒgƒŠ
-	CListElement *m_ListElement;	//	ƒŠƒXƒg—v‘f
+	int m_ID;						//	ç•ªå·
+	int m_Value;					//	å€¤
+	string m_SwitchName;			//	ã‚¹ã‚¤ãƒƒãƒå
+	string m_GroupCommon;			//	ç·¨æˆå…±é€šè­˜åˆ¥å­
+	list<string> m_Entry;			//	ã‚¨ãƒ³ãƒˆãƒª
+	CListElement *m_ListElement;	//	ãƒªã‚¹ãƒˆè¦ç´ 
 public:
 	CModelSwitch();
 	CModelSwitch(int);
@@ -76,11 +76,11 @@ public:
 	void SetListElement(CListElement *le){ m_ListElement = le; }
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CModelSwitch>::iterator IModelSwitch;
 
 /*
- *	ƒlƒbƒgƒ[ƒN“¯Šú—pƒXƒCƒbƒ`¯•Êî•ñ
+ *	ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯åŒæœŸç”¨ã‚¹ã‚¤ãƒƒãƒè­˜åˆ¥æƒ…å ±
  */
 struct CStaticSwitchID{
 	CModelInst *inst;
@@ -96,14 +96,14 @@ struct CStaticSwitchID{
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒXƒCƒbƒ`“K—pƒGƒ“ƒgƒŠ
+ *	ã‚¹ã‚¤ãƒƒãƒé©ç”¨ã‚¨ãƒ³ãƒˆãƒª
  */
 class CSwitchEntry{
 	friend class CSwitchApplier;
 protected:
-	int m_TypeFlag;			//	ƒ^ƒCƒvƒtƒ‰ƒO
+	int m_TypeFlag;			//	ã‚¿ã‚¤ãƒ—ãƒ•ãƒ©ã‚°
 	int m_ConditionType;	//	0: case, 1: always, 2: true, 3: false, 4: default
-	vector<int> m_Value;	//	“K—p”Ô†
+	vector<int> m_Value;	//	é©ç”¨ç•ªå·
 public:
 	virtual ~CSwitchEntry(){}
 	char *Read(char *, CModelPlugin *, int);
@@ -113,12 +113,12 @@ public:
 };
 
 /*
- *	ƒXƒCƒbƒ`“K—pq
+ *	ã‚¹ã‚¤ãƒƒãƒé©ç”¨å­
  */
 class CSwitchApplier{
 protected:
-	int m_TypeFlag;				//	ƒ^ƒCƒvƒtƒ‰ƒO
-	CExpression *m_Expression;	//	Ú‘±æƒXƒCƒbƒ`
+	int m_TypeFlag;				//	ã‚¿ã‚¤ãƒ—ãƒ•ãƒ©ã‚°
+	CExpression *m_Expression;	//	æ¥ç¶šå…ˆã‚¹ã‚¤ãƒƒãƒ
 public:
 	CSwitchApplier(){ m_Expression = NULL; }
 	CSwitchApplier(const CSwitchApplier *);
@@ -132,12 +132,12 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒJƒXƒ^ƒ}ƒCƒUƒXƒCƒbƒ`“K—pƒGƒ“ƒgƒŠ
+ *	ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚¶ã‚¹ã‚¤ãƒƒãƒé©ç”¨ã‚¨ãƒ³ãƒˆãƒª
  */
 class CCustomizerSwitchEntry: public CSwitchEntry{
 	friend class CSwitchApplier;
 private:
-	list<CCustomizerContainer> m_Customizer;	//	ƒJƒXƒ^ƒ}ƒCƒUƒŠƒXƒg
+	list<CCustomizerContainer> m_Customizer;	//	ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚¶ãƒªã‚¹ãƒˆ
 public:
 	char *Read2(char *, CModelPlugin *);
 	void LoadData(CModelPlugin *);
@@ -147,15 +147,15 @@ public:
 	void Apply(CMesh *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CCustomizerSwitchEntry>::iterator ICustomizerSwitchEntry;
 
 /*
- *	ƒJƒXƒ^ƒ}ƒCƒUƒXƒCƒbƒ`“K—pq
+ *	ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚¶ã‚¹ã‚¤ãƒƒãƒé©ç”¨å­
  */
 class CCustomizerSwitchApplier: public CCustomizerBase, public CSwitchApplier{
 private:
-	list<CCustomizerSwitchEntry> m_Entry;	//	ƒGƒ“ƒgƒŠ
+	list<CCustomizerSwitchEntry> m_Entry;	//	ã‚¨ãƒ³ãƒˆãƒª
 public:
 	CCustomizerSwitchApplier(){}
 	CCustomizerSwitchApplier(const CCustomizerSwitchApplier &rhs):
@@ -174,27 +174,27 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒGƒtƒFƒNƒ^ƒXƒCƒbƒ`“K—pƒGƒ“ƒgƒŠ
+ *	ã‚¨ãƒ•ã‚§ã‚¯ã‚¿ã‚¹ã‚¤ãƒƒãƒé©ç”¨ã‚¨ãƒ³ãƒˆãƒª
  */
 class CEffectorSwitchEntry: public CSwitchEntry{
 	friend class CSwitchApplier;
 private:
-	list<CEffectorContainer> m_Effector;	//	ƒJƒXƒ^ƒ}ƒCƒUƒŠƒXƒg
+	list<CEffectorContainer> m_Effector;	//	ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚¶ãƒªã‚¹ãƒˆ
 public:
 	char *Read2(char *, CModelPlugin *);
 	void LoadData(CModelPlugin *);
 	void Apply(CScene *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CEffectorSwitchEntry>::iterator IEffectorSwitchEntry;
 
 /*
- *	ƒGƒtƒFƒNƒ^ƒXƒCƒbƒ`“K—pq
+ *	ã‚¨ãƒ•ã‚§ã‚¯ã‚¿ã‚¹ã‚¤ãƒƒãƒé©ç”¨å­
  */
 class CEffectorSwitchApplier: public CEffectorBase, public CSwitchApplier{
 private:
-	list<CEffectorSwitchEntry> m_Entry;	//	ƒGƒ“ƒgƒŠ
+	list<CEffectorSwitchEntry> m_Entry;	//	ã‚¨ãƒ³ãƒˆãƒª
 public:
 	CEffectorSwitchApplier(){}
 	CEffectorSwitchApplier(const CEffectorSwitchApplier &rhs):
@@ -206,11 +206,11 @@ public:
 	void ApplyEffector(CScene *);
 };
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void InitSystemSwitch();
 void SetCamDistSwitch(VEC3);
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CModelSwitch g_SystemSwitch[];
 extern vector<CStaticSwitchID> g_StaticSwitchTable;
 

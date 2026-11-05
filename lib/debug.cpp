@@ -1,10 +1,10 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
 
 /*
- *	ƒfƒoƒbƒOo—Í‚Ì‰Šú‰»
+ *	ãƒ‡ãƒãƒƒã‚°å‡ºåŠ›ã®åˆæœŸåŒ–
  */
 BOOL InitDebugStream(){
 	if(CheckArguments("-dbf")){
@@ -18,7 +18,7 @@ BOOL InitDebugStream(){
 }
 
 /*
- *	ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒpƒX‚ðŽæ“¾
+ *	ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒ‘ã‚¹ã‚’å–å¾—
  */
 /*	void GetAppPath(char *path){
 	GetModuleFileName(GetModuleHandle(NULL), path, _MAX_PATH);
@@ -28,10 +28,10 @@ BOOL InitDebugStream(){
 }*/
 
 /*
- *	ƒfƒoƒbƒOo—Í
+ *	ãƒ‡ãƒãƒƒã‚°å‡ºåŠ›
  *
- *	szDebug	: o—Í‘Ž®
- *	...		: ‰Â•Ïˆø”
+ *	szDebug	: å‡ºåŠ›æ›¸å¼
+ *	...		: å¯å¤‰å¼•æ•°
  */
 void Debug(LPCTSTR szDebug, ...){
 	char	szBuffer[256] = "";
@@ -51,7 +51,7 @@ void Debug(LPCTSTR szDebug, ...){
 }
 
 /*
- *	ƒfƒoƒbƒOo—Íi…•½ü‚ðˆø‚­j
+ *	ãƒ‡ãƒãƒƒã‚°å‡ºåŠ›ï¼ˆæ°´å¹³ç·šã‚’å¼•ãï¼‰
  */
 #define _H_LINE	"----------------------------------------\n"
 
@@ -66,7 +66,7 @@ void DebugHL(){
 }
 
 /*
- *	ŽÀsŽžˆø”‚Ìƒ`ƒFƒbƒN
+ *	å®Ÿè¡Œæ™‚å¼•æ•°ã®ãƒã‚§ãƒƒã‚¯
  */
 BOOL CheckArguments(LPCSTR str){
 	int i;
@@ -75,17 +75,17 @@ BOOL CheckArguments(LPCSTR str){
 }
 
 /*
- *	ƒVƒXƒeƒ€î•ñ‚Ìƒ_ƒ“ƒv
+ *	ã‚·ã‚¹ãƒ†ãƒ æƒ…å ±ã®ãƒ€ãƒ³ãƒ—
  */
 void DumpSysInfo(){
-	//	“úŽž‚ÌŽæ“¾
+	//	æ—¥æ™‚ã®å–å¾—
 	SYSTEMTIME stm;
 
 	GetLocalTime(&stm);
 	Debug("%4d/%02d/%02d %02d:%02d\n",
 		stm.wYear, stm.wMonth, stm.wDay, stm.wHour, stm.wMinute);
 
-	//	OS‚ÌŽæ“¾
+	//	OSã®å–å¾—
 	OSVERSIONINFO ver = {0};
 
 	ver.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
@@ -94,12 +94,12 @@ void DumpSysInfo(){
 	Debug("OS = ID %d ver, %d.%d build %d\n",
 		ver.dwPlatformId, ver.dwMajorVersion, ver.dwMinorVersion, ver.dwBuildNumber);
 
-	//	ƒƒ‚ƒŠ[ƒTƒCƒY‚ÌŽæ“¾
+	//	ãƒ¡ãƒ¢ãƒªãƒ¼ã‚µã‚¤ã‚ºã®å–å¾—
 	MEMORYSTATUS mems;
 	mems.dwLength = sizeof(MEMORYSTATUS);
 
 	GlobalMemoryStatus(&mems);
 
-	Debug("—˜—p‰Â”\^“‹Úƒƒ‚ƒŠ = %d/%d MB\n",
+	Debug("åˆ©ç”¨å¯èƒ½ï¼æ­è¼‰ãƒ¡ãƒ¢ãƒª = %d/%d MB\n",
 		mems.dwAvailPhys>>20, mems.dwTotalPhys>>20);
 }

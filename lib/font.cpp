@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -6,11 +6,11 @@
 #include "font.h"
 
 /*
- *	ƒtƒHƒ“ƒgì¬
+ *	ãƒ•ã‚©ãƒ³ãƒˆä½œæˆ
  *
- *	size	: cƒTƒCƒY
- *	c		: F
- *	weight	: ‘¾‚³(FW_NORMAL, FW_BOLD, FW_HEAVY...)
+ *	size	: ç¸¦ã‚µã‚¤ã‚º
+ *	c		: è‰²
+ *	weight	: å¤ªã•(FW_NORMAL, FW_BOLD, FW_HEAVY...)
  */
 void CreateFont(int size, D3DCOLOR c, LONG weight){
 	FreeFont();
@@ -24,7 +24,7 @@ void CreateFont(int size, D3DCOLOR c, LONG weight){
 		CLIP_DEFAULT_PRECIS,
 		DEFAULT_QUALITY,
 		DEFAULT_PITCH|FF_DONTCARE,
-		"‚l‚r ƒSƒVƒbƒN"
+		"ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯"
 	};
 
 	D3DXCreateFontIndirect(sv3.pDev, &logFont, &svf.pFont);
@@ -33,35 +33,35 @@ void CreateFont(int size, D3DCOLOR c, LONG weight){
 }
 
 /*
- *	ƒtƒHƒ“ƒg‰ğ•ú
+ *	ãƒ•ã‚©ãƒ³ãƒˆè§£æ”¾
  */
 void FreeFont(){
 	RELEASE(svf.pFont);
 }
 
 /*
- *	ƒtƒHƒ“ƒgg—pŠJn
+ *	ãƒ•ã‚©ãƒ³ãƒˆä½¿ç”¨é–‹å§‹
  */
 void BeginFont(){
 	svf.pFont->Begin();
 }
 
 /*
- *	ƒtƒHƒ“ƒgg—pI—¹
+ *	ãƒ•ã‚©ãƒ³ãƒˆä½¿ç”¨çµ‚äº†
  */
 void EndFont(){
 	svf.pFont->End();
 }
 
 /*
- *	ƒeƒLƒXƒg•`‰æ
+ *	ãƒ†ã‚­ã‚¹ãƒˆæç”»
  *
- *	x	: X À•W
- *	y	: Y À•W
- *	str	: •¶š—ñ
+ *	x	: X åº§æ¨™
+ *	y	: Y åº§æ¨™
+ *	str	: æ–‡å­—åˆ—
  *
- *	¦•‰‰×‚ª‚‚¢‚Ì‚Å‚ ‚Ü‚è•p”É‚Ég—p‚µ‚È‚¢‚æ‚¤‚ÉB
- *	Ã“I‚È•¶š—ñ‚Ì•`‰æ‚ÍCTexture: :CreateText()‚ğ—˜—p‚·‚é•û‚ª‹gB
+ *	â€»è² è·ãŒé«˜ã„ã®ã§ã‚ã¾ã‚Šé »ç¹ã«ä½¿ç”¨ã—ãªã„ã‚ˆã†ã«ã€‚
+ *	é™çš„ãªæ–‡å­—åˆ—ã®æç”»ã¯CTexture: :CreateText()ã‚’åˆ©ç”¨ã™ã‚‹æ–¹ãŒå‰ã€‚
  */
 void Text(int x, int y, D3DCOLOR c, const char *str){
 	RECT rect = {x, y, sv3.width, sv3.height};
@@ -71,11 +71,11 @@ void Text(int x, int y, D3DCOLOR c, const char *str){
 }
 
 /*
- *	ƒeƒLƒXƒg•`‰æi‘®•tj
+ *	ãƒ†ã‚­ã‚¹ãƒˆæç”»ï¼ˆæ›¸å¼ä»˜ï¼‰
  *
- *	x	: X À•W
- *	y	: Y À•W
- *	str	: •¶š—ñ
+ *	x	: X åº§æ¨™
+ *	y	: Y åº§æ¨™
+ *	str	: æ–‡å­—åˆ—
  */
 void TextF(int x, int y, D3DCOLOR c, const char *str, ...){
 	char buf[4096];

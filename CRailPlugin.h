@@ -1,24 +1,24 @@
-#ifndef CRAILPLUGIN_H_INCLUDED
+ï»¿#ifndef CRAILPLUGIN_H_INCLUDED
 #define CRAILPLUGIN_H_INCLUDED
 
 #include "CProfilePlugin.h"
 
 /*
- *	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
+ *	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CRailPlugin: public CProfilePlugin{
 	friend class CRailBuilder;
 	friend class CLineBuildCurve;
 	friend class CPierPlugin;
 private:
-	float m_Gauge;				//	ƒQ[ƒW
-	float m_Height;				//	‚‚³
-	float m_SurfaceAlt;			//	ƒŒ[ƒ‹•\–Ê‚“x
-	float m_CantRatio;			//	ƒJƒ“ƒgŒW”
-	float m_MaxCant;			//	ƒJƒ“ƒgÅ‘å’l [deg]
-	float m_JointInterval;		//	Œp‚¬–ÚŠÔŠu
-	bool m_FlattenCant;			//	ƒJƒ“ƒg–³Œø‰»
-	CWaveArray *m_WheelSound;	//	Ô—Ö‰¹
+	float m_Gauge;				//	ã‚²ãƒ¼ã‚¸
+	float m_Height;				//	é«˜ã•
+	float m_SurfaceAlt;			//	ãƒ¬ãƒ¼ãƒ«è¡¨é¢é«˜åº¦
+	float m_CantRatio;			//	ã‚«ãƒ³ãƒˆä¿‚æ•°
+	float m_MaxCant;			//	ã‚«ãƒ³ãƒˆæœ€å¤§å€¤ [deg]
+	float m_JointInterval;		//	ç¶™ãç›®é–“éš”
+	bool m_FlattenCant;			//	ã‚«ãƒ³ãƒˆç„¡åŠ¹åŒ–
+	CWaveArray *m_WheelSound;	//	è»Šè¼ªéŸ³
 public:
 	static void RenderPreview();
 	CRailPlugin(char *);
@@ -36,7 +36,7 @@ public:
 };
 
 /*
- *	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CRailPluginList: public CProfilePluginList{
 private:
@@ -48,7 +48,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CRailPlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CRailPlugin *g_Rail;
 extern CRailPluginList *g_RailPluginList;
 

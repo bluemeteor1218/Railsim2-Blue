@@ -1,14 +1,14 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CScrollBarV.h"
 #include "CSkinPlugin.h"
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CScrollBarV::Init(
-	int x, int y,	//	À•W
-	int w, int h,	//	ƒTƒCƒY
-	CInterface *p	//	e
+	int x, int y,	//	åº§æ¨™
+	int w, int h,	//	ã‚µã‚¤ã‚º
+	CInterface *p	//	è¦ª
 ){
 	CInterface::Init(x, y, w, h, "", p);
 	m_State = m_Repeat = m_Scroll = 0;
@@ -19,20 +19,20 @@ void CScrollBarV::Init(
 }
 
 /*
- *	ƒTƒCƒY•ÏX
+ *	ã‚µã‚¤ã‚ºå¤‰æ›´
  */
 void CScrollBarV::SetSize(
-	int w, int h	//	V‹KƒTƒCƒY
+	int w, int h	//	æ–°è¦ã‚µã‚¤ã‚º
 ){
 	m_Width = w; m_Height = h;
 	m_DownButton.SetPos(0, m_Height-TILE_UNIT);
 }
 
 /*
- *	ƒXƒNƒ[ƒ‹ˆÊ’uİ’è
+ *	ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ä½ç½®è¨­å®š
  */
 void CScrollBarV::SetScroll(
-	int s	//	ƒXƒNƒ[ƒ‹ˆÊ’u
+	int s	//	ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ä½ç½®
 ){
 	m_Scroll = s;
 	if(m_Scroll+m_Page>m_Range) m_Scroll = m_Range-m_Page;
@@ -40,10 +40,10 @@ void CScrollBarV::SetScroll(
 }
 
 /*
- *	ƒXƒ‰ƒCƒ_•İ’è
+ *	ã‚¹ãƒ©ã‚¤ãƒ€å¹…è¨­å®š
  */
 void CScrollBarV::SetPage(
-	int p	//	ƒXƒ‰ƒCƒ_•
+	int p	//	ã‚¹ãƒ©ã‚¤ãƒ€å¹…
 ){
 	m_Page = p;
 	if(m_Scroll+m_Page>m_Range) m_Scroll = m_Range-m_Page;
@@ -51,10 +51,10 @@ void CScrollBarV::SetPage(
 }
 
 /*
- *	‘S”ÍˆÍİ’è
+ *	å…¨ç¯„å›²è¨­å®š
  */
 void CScrollBarV::SetRange(
-	int r	//	‘S”ÍˆÍ
+	int r	//	å…¨ç¯„å›²
 ){
 	m_Range = r;
 	if(m_Scroll+m_Page>m_Range) m_Scroll = m_Range-m_Page;
@@ -62,11 +62,11 @@ void CScrollBarV::SetRange(
 }
 
 /*
- *	ƒXƒ‰ƒCƒ_ˆÊ’uî•ñ‚ÌŒvZ
+ *	ã‚¹ãƒ©ã‚¤ãƒ€ä½ç½®æƒ…å ±ã®è¨ˆç®—
  */
 void CScrollBarV::CalcSlider(
-	int *by,	//	ƒXƒ‰ƒCƒ_ˆÊ’u (‰æ–ÊÀ•WŒn)
-	int *bh		//	ƒXƒ‰ƒCƒ_•
+	int *by,	//	ã‚¹ãƒ©ã‚¤ãƒ€ä½ç½® (ç”»é¢åº§æ¨™ç³»)
+	int *bh		//	ã‚¹ãƒ©ã‚¤ãƒ€å¹…
 ){
 	int sr = m_Height-2*TILE_UNIT;
 	if(m_Page>=m_Range){
@@ -80,10 +80,10 @@ void CScrollBarV::CalcSlider(
 }
 
 /*
- *	w’èÀ•W‚ªƒXƒNƒ[ƒ‹•”“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«éƒ¨å†…ã‹èª¿ã¹ã‚‹
  */
 bool CScrollBarV::IsInsideScroll(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	int px, py;
 	GetAbsPos(&px, &py);
@@ -91,10 +91,10 @@ bool CScrollBarV::IsInsideScroll(
 }
 
 /*
- *	w’èÀ•W‚ªƒXƒ‰ƒCƒ_“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒã‚¹ãƒ©ã‚¤ãƒ€å†…ã‹èª¿ã¹ã‚‹
  */
 bool CScrollBarV::IsInsideSlider(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	int px, py, by, bh;
 	GetAbsPos(&px, &py);
@@ -104,7 +104,7 @@ bool CScrollBarV::IsInsideSlider(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CScrollBarV::ScanInput(){
 	POINT pos = g_Cursor.GetPos();
@@ -183,7 +183,7 @@ bool CScrollBarV::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CScrollBarV::Render(){
 	CInterface::RenderBrother();

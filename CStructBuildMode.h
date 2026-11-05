@@ -1,22 +1,22 @@
-#ifndef CSTRUCTBUILDMODE_H_INCLUDED
+ï»¿#ifndef CSTRUCTBUILDMODE_H_INCLUDED
 #define CSTRUCTBUILDMODE_H_INCLUDED
 
 #include "CSceneryMode.h"
 
 /*
- *	{İİ’uƒ‚[ƒh
+ *	æ–½è¨­è¨­ç½®ãƒ¢ãƒ¼ãƒ‰
  */
 class CStructBuildMode: public CArrowSceneryMode{
 protected:
-	static CWindowCtrl ms_StructWindow;	//	{İİ’è‘‹
-	static CStaticCtrl ms_DirLabel;		//	•ûŒüƒ‰ƒxƒ‹
-	static CRadioButton ms_Dir[];		//	•ûŒüƒ‰ƒWƒI
-	static CCheckBox ms_FitNormal;		//	’nŒ`‚É‡‚í‚¹‚ÄŒXÎ
-	int m_BuildAngle;	//	İ’uŠp“x
-	bool m_HitFlag;		//	”»’èƒtƒ‰ƒO
-	VEC3 m_Pos;			//	À•W
-	VEC3 m_HitPos;		//	”»’èÀ•W
-	VEC3 m_HitNorm;		//	”»’è–@ü
+	static CWindowCtrl ms_StructWindow;	//	æ–½è¨­è¨­å®šçª“
+	static CStaticCtrl ms_DirLabel;		//	æ–¹å‘ãƒ©ãƒ™ãƒ«
+	static CRadioButton ms_Dir[];		//	æ–¹å‘ãƒ©ã‚¸ã‚ª
+	static CCheckBox ms_FitNormal;		//	åœ°å½¢ã«åˆã‚ã›ã¦å‚¾æ–œ
+	int m_BuildAngle;	//	è¨­ç½®è§’åº¦
+	bool m_HitFlag;		//	åˆ¤å®šãƒ•ãƒ©ã‚°
+	VEC3 m_Pos;			//	åº§æ¨™
+	VEC3 m_HitPos;		//	åˆ¤å®šåº§æ¨™
+	VEC3 m_HitNorm;		//	åˆ¤å®šæ³•ç·š
 public:
 	static void InitInterface();
 	static int GetAngleSplit();
@@ -31,7 +31,7 @@ public:
 	virtual void RenderStructBuild();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CStructBuildMode *g_StructBuildMode;
 
 #endif

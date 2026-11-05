@@ -1,4 +1,4 @@
-#ifndef CSCENE_H_INCLUDED
+ï»¿#ifndef CSCENE_H_INCLUDED
 #define CSCENE_H_INCLUDED
 
 #include "CCamera.h"
@@ -19,27 +19,27 @@ class CSurfacePlugin;
 class CEnvPlugin;
 
 /*
- *	ƒV[ƒ“
+ *	ã‚·ãƒ¼ãƒ³
  */
 class CScene: public CStruct{
 	friend class CSceneEditMode;
 private:
-	int m_Serial;						//	ƒVƒŠƒAƒ‹ƒiƒ“ƒo[
-	string m_Name;						//	ƒV[ƒ“–¼
-	VEC3 m_ArrowPos;					//	•ÒWÀ•W
-	CListElement *m_ListElement;		//	ƒŠƒXƒg—v‘f
-	CCamera m_Camera;					//	ƒJƒƒ‰
-	CRailConnector *m_RailConnector;	//	ƒRƒlƒNƒ^
-	CRailWay *m_RailWay;				//	ƒŒ[ƒ‹
-	CPier *m_Pier;						//	‹´‹r
-	CLine *m_Line;						//	‰Ëü
-	CPole *m_Pole;						//	‰Ëü’Œ
-	CStation *m_Station;				//	‰wÉ
-	CStruct *m_Struct;					//	{İ
-	CSurfacePlugin *m_SurfacePlugin;	//	’nŒ`ƒvƒ‰ƒOƒCƒ“
-	CEnvPlugin *m_EnvPlugin;			//	ŠÂ‹«ƒvƒ‰ƒOƒCƒ“
-	bool m_IsDumpReady;					//	ƒ_ƒ“ƒvŠ®—¹
-	CScene *m_Next;						//	Ÿ
+	int m_Serial;						//	ã‚·ãƒªã‚¢ãƒ«ãƒŠãƒ³ãƒãƒ¼
+	string m_Name;						//	ã‚·ãƒ¼ãƒ³å
+	VEC3 m_ArrowPos;					//	ç·¨é›†åº§æ¨™
+	CListElement *m_ListElement;		//	ãƒªã‚¹ãƒˆè¦ç´ 
+	CCamera m_Camera;					//	ã‚«ãƒ¡ãƒ©
+	CRailConnector *m_RailConnector;	//	ã‚³ãƒã‚¯ã‚¿
+	CRailWay *m_RailWay;				//	ãƒ¬ãƒ¼ãƒ«
+	CPier *m_Pier;						//	æ©‹è„š
+	CLine *m_Line;						//	æ¶ç·š
+	CPole *m_Pole;						//	æ¶ç·šæŸ±
+	CStation *m_Station;				//	é§…èˆ
+	CStruct *m_Struct;					//	æ–½è¨­
+	CSurfacePlugin *m_SurfacePlugin;	//	åœ°å½¢ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CEnvPlugin *m_EnvPlugin;			//	ç’°å¢ƒãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	bool m_IsDumpReady;					//	ãƒ€ãƒ³ãƒ—å®Œäº†
+	CScene *m_Next;						//	æ¬¡
 public:
 	CScene();
 	CScene(CSurfacePlugin *, CEnvPlugin *, char *);
@@ -97,15 +97,15 @@ public:
 	CMODELINST_CASTFUNC(CScene);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CScene *g_Scene;
 extern map<void *, void *> g_AddressMap;
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void *ReplaceAdr(void *);
 
 /*
- *	ƒJƒŒƒ“ƒgƒV[ƒ“‚Ì’nŒ`‚ğæ“¾
+ *	ã‚«ãƒ¬ãƒ³ãƒˆã‚·ãƒ¼ãƒ³ã®åœ°å½¢ã‚’å–å¾—
  */
 inline CSurfacePlugin *Surface(){ return g_Scene->GetSurface(); }
 

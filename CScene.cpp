@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CJobTimer.h"
 #include "CRailDetectCurve.h"
 #include "CRailConnector.h"
@@ -21,21 +21,21 @@
 #include "CSimulationMode.h"
 #include "CConfigMode.h"
 
-//	“à•”’è”
-const float SURFACE_PICK_OFFSET = 10.0f;	//	’nŒ`ƒsƒbƒNƒIƒtƒZƒbƒg
+//	å†…éƒ¨å®šæ•°
+const float SURFACE_PICK_OFFSET = 10.0f;	//	åœ°å½¢ãƒ”ãƒƒã‚¯ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CLineDumpN *g_LineDumpN;
 extern COffScreen g_HidefCapture;
 extern bool g_HidefCaptureFlag;
 extern bool g_SelectMultiTrackDummy;
 
-//	“à•”ƒOƒ[ƒoƒ‹
-CSurfacePlugin *g_Surface;	//	ƒJƒŒƒ“ƒgƒT[ƒtƒFƒCƒX
-CEnvPlugin *g_Env;			//	ƒJƒŒƒ“ƒgŠÂ‹«
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+CSurfacePlugin *g_Surface;	//	ã‚«ãƒ¬ãƒ³ãƒˆã‚µãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
+CEnvPlugin *g_Env;			//	ã‚«ãƒ¬ãƒ³ãƒˆç’°å¢ƒ
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (“Ç—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (èª­è¾¼ç”¨)
  */
 CScene::CScene(){
 	m_ArrowPos = V3ZERO;
@@ -55,14 +55,14 @@ CScene::CScene(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CScene::CScene(
-	CSurfacePlugin *spi,	//	’nŒ`ƒvƒ‰ƒOƒCƒ“
-	CEnvPlugin *epi,		//	ŠÂ‹«ƒvƒ‰ƒOƒCƒ“
-	char *name				//	–¼Ì
+	CSurfacePlugin *spi,	//	åœ°å½¢ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CEnvPlugin *epi,		//	ç’°å¢ƒãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	char *name				//	åç§°
 ):
-	CStruct(spi)	//	Šî–{ƒNƒ‰ƒX
+	CStruct(spi)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_Name = name;
 	m_ArrowPos = V3ZERO;
@@ -90,7 +90,7 @@ CScene::CScene(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CScene::~CScene(){
 	DELETE_V(m_RailConnector);
@@ -104,14 +104,14 @@ CScene::~CScene(){
 }
 
 /*
- *	”Ô†•t‚«ƒV[ƒ“–¼æ“¾
+ *	ç•ªå·ä»˜ãã‚·ãƒ¼ãƒ³åå–å¾—
  */
 char *CScene::GetNumberedName(){
 	return FlashIn("(%d/%d) %s", m_Serial+1, g_SaveFile->GetSceneNum(), m_Name.c_str());
 }
 
 /*
- *	‹Gßİ’è
+ *	å­£ç¯€è¨­å®š
  */
 void CScene::SetSeason(){
 	static int season[12] = {3, 3, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3};
@@ -121,10 +121,10 @@ void CScene::SetSeason(){
 }
 
 /*
- *	ƒV[ƒ““K—p
+ *	ã‚·ãƒ¼ãƒ³é©ç”¨
  */
 void CScene::Enter(
-	bool selectcamera	//	ƒJƒƒ‰‘I‘ğƒtƒ‰ƒO
+	bool selectcamera	//	ã‚«ãƒ¡ãƒ©é¸æŠãƒ•ãƒ©ã‚°
 ){
 	g_Scene = this;
 	g_Surface = m_SurfacePlugin;
@@ -145,7 +145,7 @@ void CScene::Enter(
 }
 
 /*
- *	ƒVƒXƒeƒ€À•WŒnİ’è
+ *	ã‚·ã‚¹ãƒ†ãƒ åº§æ¨™ç³»è¨­å®š
  */
 void CScene::SetGlobalAxis(){
 	VEC3 ldir, lup = V3UP;
@@ -156,21 +156,21 @@ void CScene::SetGlobalAxis(){
 }
 
 /*
- *	ƒŒ[ƒ‹ƒŠƒXƒgƒ‹[ƒgÄİ’è
+ *	ãƒ¬ãƒ¼ãƒ«ãƒªã‚¹ãƒˆãƒ«ãƒ¼ãƒˆå†è¨­å®š
  */
 void CScene::ResetRailWayRoot(){
 	CRailWay::SetRoot(&m_RailWay);
 }
 
 /*
- *	ƒŒ[ƒ‹ƒŠƒXƒgƒ‹[ƒgÄİ’è
+ *	ãƒ¬ãƒ¼ãƒ«ãƒªã‚¹ãƒˆãƒ«ãƒ¼ãƒˆå†è¨­å®š
  */
 void CScene::ResetRailConnectorRoot(){
 	CRailConnector::SetRoot(&m_RailConnector);
 }
 
 /*
- *	ƒV[ƒ“íœˆ—
+ *	ã‚·ãƒ¼ãƒ³å‰Šé™¤å‡¦ç†
  */
 void CScene::Delete(){
 	while(m_Station) DeleteStation(m_Station);
@@ -187,10 +187,10 @@ void CScene::Delete(){
 }
 
 /*
- *	•Ò¬‚Ìíœ
+ *	ç·¨æˆã®å‰Šé™¤
  */
 void CScene::DeleteGroup(
-	CTrainGroup *group	//	•Ò¬
+	CTrainGroup *group	//	ç·¨æˆ
 ){
 	CRailConnector *con = m_RailConnector;
 	while(con){
@@ -205,10 +205,10 @@ void CScene::DeleteGroup(
 }
 
 /*
- *	‹´‹rƒŠƒ“ƒN‚Ìíœ
+ *	æ©‹è„šãƒªãƒ³ã‚¯ã®å‰Šé™¤
  */
 void CScene::DeletePierLink(
-	CPier *pier	//	‹´‹r
+	CPier *pier	//	æ©‹è„š
 ){
 	CRailWay *ptr = m_RailWay;
 	while(ptr){
@@ -218,10 +218,10 @@ void CScene::DeletePierLink(
 }
 
 /*
- *	‰ËüƒŠƒ“ƒN‚Ìíœ
+ *	æ¶ç·šãƒªãƒ³ã‚¯ã®å‰Šé™¤
  */
 void CScene::DeletePoleLink(
-	CPole *pole	//	‰Ëü’Œ
+	CPole *pole	//	æ¶ç·šæŸ±
 ){
 	CRailWay *ptr = m_RailWay;
 	while(ptr){
@@ -231,7 +231,7 @@ void CScene::DeletePoleLink(
 }
 
 /*
- *	–¢g—pƒRƒlƒNƒ^“P‹
+ *	æœªä½¿ç”¨ã‚³ãƒã‚¯ã‚¿æ’¤å»
  */
 bool CScene::DeleteRailConnector(){
 	bool deleted = false;
@@ -245,7 +245,7 @@ bool CScene::DeleteRailConnector(){
 }
 
 /*
- *	ƒŒ[ƒ‹“P‹
+ *	ãƒ¬ãƒ¼ãƒ«æ’¤å»
  */
 bool CScene::DeleteRailWay(){
 	bool deleted = false;
@@ -266,7 +266,7 @@ bool CScene::DeleteRailWay(){
 }
 
 /*
- *	•ÂÇ‹æŠÔİ’è
+ *	é–‰å¡åŒºé–“è¨­å®š
  */
 bool CScene::SetRailBlock(char *rb){
 	bool changed = false;
@@ -284,7 +284,7 @@ bool CScene::SetRailBlock(char *rb){
 }
 
 /*
- *	§ŒÀ‘¬“xİ’è
+ *	åˆ¶é™é€Ÿåº¦è¨­å®š
  */
 bool CScene::SetSpeedLimit(int sl){
 	bool changed = false;
@@ -302,10 +302,10 @@ bool CScene::SetSpeedLimit(int sl){
 }
 
 /*
- *	‹´‹r“P‹
+ *	æ©‹è„šæ’¤å»
  */
 bool CScene::DeletePier(
-	CPier *pier	//	‹´‹r
+	CPier *pier	//	æ©‹è„š
 ){
 	bool deleted = false;
 	CPier **adr = &m_Pier;
@@ -323,10 +323,10 @@ bool CScene::DeletePier(
 }
 
 /*
- *	‰Ëü“P‹
+ *	æ¶ç·šæ’¤å»
  */
 bool CScene::DeleteLine(
-	CLine *line	//	‰Ëü
+	CLine *line	//	æ¶ç·š
 ){
 	bool deleted = false;
 	CLine **adr = &m_Line;
@@ -344,10 +344,10 @@ bool CScene::DeleteLine(
 }
 
 /*
- *	‰Ëü’Œ“P‹
+ *	æ¶ç·šæŸ±æ’¤å»
  */
 bool CScene::DeletePole(
-	CPole *pole	//	‰Ëü’Œ
+	CPole *pole	//	æ¶ç·šæŸ±
 ){
 	bool deleted = false;
 	CPole **adr = &m_Pole;
@@ -365,10 +365,10 @@ bool CScene::DeletePole(
 }
 
 /*
- *	‰wÉ“P‹
+ *	é§…èˆæ’¤å»
  */
 bool CScene::DeleteStation(
-	CStation *station	//	‰wÉ
+	CStation *station	//	é§…èˆ
 ){
 	bool deleted = false;
 	CStation **adr = &m_Station;
@@ -387,10 +387,10 @@ bool CScene::DeleteStation(
 }
 
 /*
- *	{İ“P‹
+ *	æ–½è¨­æ’¤å»
  */
 bool CScene::DeleteStruct(
-	CStruct *strct	//	{İ
+	CStruct *strct	//	æ–½è¨­
 ){
 	bool deleted = false;
 	CStruct **adr = &m_Struct;
@@ -408,13 +408,13 @@ bool CScene::DeleteStruct(
 }
 
 /*
- *	ƒŒ[ƒ‹“ü—Íƒ`ƒFƒbƒN
+ *	ãƒ¬ãƒ¼ãƒ«å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CScene::ScanInputRailWay(
-	int mode,	//	ƒ‚[ƒh (0: link)
-	VEC3 rect1,	//	—Ìˆæn“_
-	VEC3 rect2,	//	—ÌˆæI“_
-	bool mtd	//	•¡üƒ_ƒ~[‘I‘ğƒtƒ‰ƒO
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰ (0: link)
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2,	//	é ˜åŸŸçµ‚ç‚¹
+	bool mtd	//	è¤‡ç·šãƒ€ãƒŸãƒ¼é¸æŠãƒ•ãƒ©ã‚°
 ){
 	g_SelectMultiTrackDummy = mtd;
 	if(mode==2) V3MinMax(rect1, rect2, &rect1, &rect2);
@@ -429,12 +429,12 @@ void CScene::ScanInputRailWay(
 }
 
 /*
- *	ƒRƒlƒNƒ^“ü—Íƒ`ƒFƒbƒN
+ *	ã‚³ãƒã‚¯ã‚¿å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CScene::ScanInputRailConnector(
-	int mode,	//	ƒ‚[ƒh (0: link)
-	VEC3 rect1,	//	—Ìˆæn“_
-	VEC3 rect2	//	—ÌˆæI“_
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰ (0: link)
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2	//	é ˜åŸŸçµ‚ç‚¹
 ){
 	if(mode==2) V3MinMax(rect1, rect2, &rect1, &rect2);
 	CRailConnector::ResetDetect();
@@ -446,12 +446,12 @@ void CScene::ScanInputRailConnector(
 }
 
 /*
- *	‹´‹r“ü—Íƒ`ƒFƒbƒN
+ *	æ©‹è„šå…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CScene::ScanInputPier(
-	int mode,	//	ƒ‚[ƒh
-	VEC3 rect1,	//	—Ìˆæn“_
-	VEC3 rect2	//	—ÌˆæI“_
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2	//	é ˜åŸŸçµ‚ç‚¹
 ){
 	if(mode==2) V3MinMax(rect1, rect2, &rect1, &rect2);
 	CPier::ResetDetect();
@@ -463,12 +463,12 @@ void CScene::ScanInputPier(
 }
 
 /*
- *	‰Ëü“ü—Íƒ`ƒFƒbƒN
+ *	æ¶ç·šå…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CScene::ScanInputLine(
-	int mode,	//	ƒ‚[ƒh
-	VEC3 rect1,	//	—Ìˆæn“_
-	VEC3 rect2	//	—ÌˆæI“_
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2	//	é ˜åŸŸçµ‚ç‚¹
 ){
 	if(mode==2) V3MinMax(rect1, rect2, &rect1, &rect2);
 	CLine::ResetDetect();
@@ -480,12 +480,12 @@ void CScene::ScanInputLine(
 }
 
 /*
- *	‰Ëü’Œ“ü—Íƒ`ƒFƒbƒN
+ *	æ¶ç·šæŸ±å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CScene::ScanInputPole(
-	int mode,	//	ƒ‚[ƒh
-	VEC3 rect1,	//	—Ìˆæn“_
-	VEC3 rect2	//	—ÌˆæI“_
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2	//	é ˜åŸŸçµ‚ç‚¹
 ){
 	if(mode==2) V3MinMax(rect1, rect2, &rect1, &rect2);
 	CPole::ResetDetect();
@@ -497,13 +497,13 @@ void CScene::ScanInputPole(
 }
 
 /*
- *	‰wÉ“ü—Íƒ`ƒFƒbƒN
+ *	é§…èˆå…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CScene::ScanInputStation(
-	int mode,	//	ƒ‚[ƒh
-	VEC3 rect1,	//	—Ìˆæn“_
-	VEC3 rect2,	//	—ÌˆæI“_
-	bool init	//	‰Šú‰»ƒtƒ‰ƒO
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2,	//	é ˜åŸŸçµ‚ç‚¹
+	bool init	//	åˆæœŸåŒ–ãƒ•ãƒ©ã‚°
 ){
 	if(init) CModelInst::ResetDetect(mode, rect1, rect2);
 	CStation *station = m_Station;
@@ -514,13 +514,13 @@ void CScene::ScanInputStation(
 }
 
 /*
- *	{İ“ü—Íƒ`ƒFƒbƒN
+ *	æ–½è¨­å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CScene::ScanInputStruct(
-	int mode,	//	ƒ‚[ƒh
-	VEC3 rect1,	//	—Ìˆæn“_
-	VEC3 rect2,	//	—ÌˆæI“_
-	bool init	//	‰Šú‰»ƒtƒ‰ƒO
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2,	//	é ˜åŸŸçµ‚ç‚¹
+	bool init	//	åˆæœŸåŒ–ãƒ•ãƒ©ã‚°
 ){
 	if(init) CModelInst::ResetDetect(mode, rect1, rect2);
 	CStruct *strct = m_Struct;
@@ -531,11 +531,11 @@ void CScene::ScanInputStruct(
 }
 
 /*
- *	‰ËüŒŸõ
+ *	æ¶ç·šæ¤œç´¢
  */
 CLine *CScene::FindLine(
-	CPoleLink *from,	//	Ú‘±Œ³
-	CPoleLink *to		//	Ú‘±æ
+	CPoleLink *from,	//	æ¥ç¶šå…ƒ
+	CPoleLink *to		//	æ¥ç¶šå…ˆ
 ){
 	CLine *line = m_Line;
 	while(line){
@@ -551,12 +551,12 @@ CLine *CScene::FindLine(
 }
 
 /*
- *	‹´‹rE‰Ëüİ’u
+ *	æ©‹è„šãƒ»æ¶ç·šè¨­ç½®
  */
 void CScene::BuildLine(
-	CPierPlugin *ipi,	//	‹´‹rƒvƒ‰ƒOƒCƒ“
-	CLinePlugin *lpi,	//	‰Ëüƒvƒ‰ƒOƒCƒ“
-	CPolePlugin *ppi	//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
+	CPierPlugin *ipi,	//	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CLinePlugin *lpi,	//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPolePlugin *ppi	//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	CRailConnector *con = m_RailConnector;
 	while(con){
@@ -573,14 +573,14 @@ void CScene::BuildLine(
 }
 
 /*
- *	’nŒ`ƒsƒbƒN
+ *	åœ°å½¢ãƒ”ãƒƒã‚¯
  */
 bool CScene::PickScene(
-	VEC3 pos,	//	À•W
-	VEC3 dir,	//	•ûŒü
-	VEC3 *hit,	//	ƒqƒbƒgÀ•WŠi”[æ
-	VEC3 *tri,	//	OŠpŒ`’¸“_Ši”[æ
-	int inv		//	— –Êƒtƒ‰ƒO
+	VEC3 pos,	//	åº§æ¨™
+	VEC3 dir,	//	æ–¹å‘
+	VEC3 *hit,	//	ãƒ’ãƒƒãƒˆåº§æ¨™æ ¼ç´å…ˆ
+	VEC3 *tri,	//	ä¸‰è§’å½¢é ‚ç‚¹æ ¼ç´å…ˆ
+	int inv		//	è£é¢ãƒ•ãƒ©ã‚°
 ){
 	m_SurfacePlugin->SetSwitch(this);
 	m_SurfacePlugin->SetPartsInst(this);
@@ -589,13 +589,13 @@ bool CScene::PickScene(
 }
 
 /*
- *	’nŒ`ƒsƒbƒNE‚“x§ŒÀ
+ *	åœ°å½¢ãƒ”ãƒƒã‚¯ãƒ»é«˜åº¦åˆ¶é™
  */
 bool CScene::ClipAlt(
-	VEC3 *pos,	//	À•W
-	VEC3 *hit,	//	ƒqƒbƒgÀ•WŠi”[æ
-	VEC3 *norm,	//	–@üŠi”[æ
-	int clip	//	ƒNƒŠƒbƒvƒ‚[ƒh (1: ’n‰º, 2: ‚‰Ë)
+	VEC3 *pos,	//	åº§æ¨™
+	VEC3 *hit,	//	ãƒ’ãƒƒãƒˆåº§æ¨™æ ¼ç´å…ˆ
+	VEC3 *norm,	//	æ³•ç·šæ ¼ç´å…ˆ
+	int clip	//	ã‚¯ãƒªãƒƒãƒ—ãƒ¢ãƒ¼ãƒ‰ (1: åœ°ä¸‹, 2: é«˜æ¶)
 ){
 	VEC3 opos = *pos, tmp, tri[3];
 	bool ret = false, ugpick = false;
@@ -620,7 +620,7 @@ bool CScene::ClipAlt(
 }
 
 /*
- *	ŠeíƒCƒ“ƒXƒ^ƒ“ƒX‚ğƒ_ƒ“ƒv
+ *	å„ç¨®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ãƒ€ãƒ³ãƒ—
  */
 void CScene::Dump(){
 	g_RailPluginList->ClearDump();
@@ -652,7 +652,7 @@ void CScene::Dump(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CScene::RenderScene(){
 	TIMER_RAII("CScene::RenderScene()");
@@ -736,14 +736,14 @@ void CScene::RenderScene(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒOdã‚°
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ä»•ä¸Šã’
  */
 void CScene::RenderAfter(){
 	if(m_EnvPlugin) m_EnvPlugin->RenderAfter();
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒgis
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ãƒˆé€²è¡Œ
  */
 void CScene::SimulateScene(){
 	SetSeason();
@@ -763,7 +763,7 @@ void CScene::SimulateScene(){
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CScene::RestoreAddress(){
 	CRailConnector *con = m_RailConnector;
@@ -804,11 +804,11 @@ void CScene::RestoreAddress(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CScene::Read(
-	char *str,		//	‘ÎÛ•¶š—ñ
-	CScene ***root	//	Ši”[æ
+	char *str,		//	å¯¾è±¡æ–‡å­—åˆ—
+	CScene ***root	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = BeginBlock(str, "Scene"))){
@@ -893,10 +893,10 @@ char *CScene::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CScene::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\tScene{\n");
 	fprintf(df, "\t\tAddress = %p;\n", this);

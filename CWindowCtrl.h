@@ -1,4 +1,4 @@
-#ifndef CWINDOWCTRL_H_INCLUDED
+ï»¿#ifndef CWINDOWCTRL_H_INCLUDED
 #define CWINDOWCTRL_H_INCLUDED
 
 #include "CInterface.h"
@@ -7,7 +7,7 @@
 class CWindowCtrl;
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒU
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚¶
  */
 class CWindowResizer{
 public:
@@ -15,18 +15,18 @@ public:
 };
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒRƒ“ƒgƒ[ƒ‹
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
  */
 class CWindowCtrl: public CInterface{
 protected:
-	int m_State;					//	ó‘Ô
-	int m_OldX, m_OldY;				//	ˆÚ“®‘OÀ•W
-	int m_DragX, m_DragY;			//	ƒ^ƒCƒgƒ‹ƒo[ƒhƒ‰ƒbƒOÀ•W
-	int m_MinWidth, m_MinHeight;	//	Å¬ƒTƒCƒY
-	int m_MaxWidth, m_MaxHeight;	//	Å‘åƒTƒCƒY
-	D3DCOLOR m_Color;				//	ƒEƒBƒ“ƒhƒEF
-	CMiniButton *m_CloseButton;		//	ƒNƒ[ƒYƒ{ƒ^ƒ“
-	CWindowResizer *m_Resizer;		//	ƒŠƒTƒCƒU
+	int m_State;					//	çŠ¶æ…‹
+	int m_OldX, m_OldY;				//	ç§»å‹•å‰åº§æ¨™
+	int m_DragX, m_DragY;			//	ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ãƒ‰ãƒ©ãƒƒã‚°åº§æ¨™
+	int m_MinWidth, m_MinHeight;	//	æœ€å°ã‚µã‚¤ã‚º
+	int m_MaxWidth, m_MaxHeight;	//	æœ€å¤§ã‚µã‚¤ã‚º
+	D3DCOLOR m_Color;				//	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦è‰²
+	CMiniButton *m_CloseButton;		//	ã‚¯ãƒ­ãƒ¼ã‚ºãƒœã‚¿ãƒ³
+	CWindowResizer *m_Resizer;		//	ãƒªã‚µã‚¤ã‚¶
 public:
 	CWindowCtrl();
 	virtual ~CWindowCtrl();
@@ -49,7 +49,7 @@ public:
 	virtual void RenderWindow(){}
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CWindowCtrl *g_ModalDialog;
 
 #endif

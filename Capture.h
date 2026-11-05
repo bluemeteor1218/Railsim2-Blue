@@ -1,9 +1,9 @@
-#ifndef CAPTURE_H_INCLUDED
+ï»¿#ifndef CAPTURE_H_INCLUDED
 #define CAPTURE_H_INCLUDED
 
 class CSceneryMode;
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void InitCapture();
 void ReleaseCaptureRS();
 void VideoCapture(int, CSceneryMode *);
@@ -13,7 +13,7 @@ void CountVideoAVI();
 void StartVideoCapture();
 void StopVideoCapture();
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern int g_VideoState;
 extern int g_VideoFrame;
 extern int g_PictureCount;

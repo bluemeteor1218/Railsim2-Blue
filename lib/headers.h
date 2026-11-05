@@ -1,14 +1,14 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include <io.h>
 #include <direct.h>
 #include <windows.h>
 #include <mmsystem.h>	//	timeGetTime()
-#include <imm.h>			//	IMEŠÖ˜A
+#include <imm.h>			//	IMEé–¢é€£
 #include <stdio.h>
 #include <math.h>
 #include <string>		//	for std::string
-#include <mbstring.h>	//	•¶š”»•Ê
+#include <mbstring.h>	//	æ–‡å­—åˆ¤åˆ¥
 #include <time.h>		//	time()
 
 #include <process.h>
@@ -17,8 +17,8 @@
 	#include "bcc.h"
 #endif
 
-#if defined(_MSC_VER) && (_MSC_VER<1200)	//	for VC++6.0–¢–
-	//	dinput.h‚Ì'UINT_PTR'–¢’è‹`ƒGƒ‰[‚ª‰ñ”ğ‚Å‚«‚é‚Í‚¸EEEi“äj
+#if defined(_MSC_VER) && (_MSC_VER<1200)	//	for VC++6.0æœªæº€
+	//	dinput.hã®'UINT_PTR'æœªå®šç¾©ã‚¨ãƒ©ãƒ¼ãŒå›é¿ã§ãã‚‹ã¯ãšãƒ»ãƒ»ãƒ»ï¼ˆè¬ï¼‰
 	#ifdef _WIN64
 	typedef unsigned __int64 UINT_PTR, *PUINT_PTR;
 	#else
@@ -37,13 +37,12 @@ typedef unsigned long *DWORD_PTR;
 #include <d3d8.h>
 #include <d3dx8.h>
 #include <dinput.h>
-#include <dmusicc.h>
-#include <dmusici.h>
-//#include <dshow.h>
+#include <dsound.h>
+//	DirectMusic is not part of the modern SDK and the music module is unused.
 #include <dxfile.h>
 
 /*
- *	Œ^–¼•ÏX
+ *	å‹åå¤‰æ›´
  */
 typedef D3DXVECTOR2		VEC2;
 typedef D3DXVECTOR3		VEC3;

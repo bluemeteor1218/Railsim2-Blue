@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailSplitCurve.h"
 #include "CRailDumpCurve.h"
 #include "CLineBuildCurve.h"
@@ -18,42 +18,42 @@
 #include "CSkinPlugin.h"
 #include "CRailEditMode.h"
 
-#define EXTEND_RAIL 0	//	‰„’·İ’u
+#define EXTEND_RAIL 0	//	å»¶é•·è¨­ç½®
 
-//	“à•”’è”
-const float RAIL_SEG_MIN = 4.0f;	//	ƒŒ[ƒ‹•ªŠ„Å¬’l
-const float WARP_DRAW_LEN = 0.1f;	//	ƒ[ƒv•\¦’·‚³
-const float POINT_DEC_MIN = 5.0f;	//	ƒ|ƒCƒ“ƒg¶‰EŒˆ’èÅ¬‹——£
+//	å†…éƒ¨å®šæ•°
+const float RAIL_SEG_MIN = 4.0f;	//	ãƒ¬ãƒ¼ãƒ«åˆ†å‰²æœ€å°å€¤
+const float WARP_DRAW_LEN = 0.1f;	//	ãƒ¯ãƒ¼ãƒ—è¡¨ç¤ºé•·ã•
+const float POINT_DEC_MIN = 5.0f;	//	ãƒã‚¤ãƒ³ãƒˆå·¦å³æ±ºå®šæœ€å°è·é›¢
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_ShowWarpSelect;
 extern D3DCOLOR g_ColorSelect[];
 extern CDetectInfo g_StationPlatformParentDetectInfo;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 bool g_MultiTrackDummy = false;
 int g_DummyTrackNum;
 float g_DummyTrackInterval;
-CGroupEndLocator g_HitTrainGroup;	//	Õ“Ë—ñÔ‘ã“üæ
-map<std::string, CTrainGroup *> g_RailBlockMap;	//	•ÂÇî•ñ
+CGroupEndLocator g_HitTrainGroup;	//	è¡çªåˆ—è»Šä»£å…¥å…ˆ
+map<std::string, CTrainGroup *> g_RailBlockMap;	//	é–‰å¡æƒ…å ±
 
 /*
- *	“®‚­ƒŒ[ƒ‹‚ÌeƒIƒuƒWƒFƒNƒgî•ñ
+ *	å‹•ããƒ¬ãƒ¼ãƒ«ã®è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæƒ…å ±
  */
 class CRailWayParentLink{
 	friend class CRailWay;
 private:
-	CDetectInfo m_DetectInfo;			//	eƒIƒuƒWƒFƒNƒg
-	list<CRailSplitter> m_SplitList;	//	•ªŠ„“_ƒŠƒXƒg
+	CDetectInfo m_DetectInfo;			//	è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	list<CRailSplitter> m_SplitList;	//	åˆ†å‰²ç‚¹ãƒªã‚¹ãƒˆ
 };
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CRailWay **CRailWay::ms_Root = NULL;
 float CRailWay::ms_MinDist;
 CRailWayLink CRailWay::ms_Detect;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (“Ç—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (èª­è¾¼ç”¨)
  */
 CRailWay::CRailWay(){
 	m_OldAdr = NULL;
@@ -79,18 +79,18 @@ CRailWay::CRailWay(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailWay::CRailWay(
-	CRailConnectorLink &link1,	//	n“_
-	CRailConnectorLink &link2,	//	I“_
-	CRailPlugin *rpi,			//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *tpi,			//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *gpi,			//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
-	CPierPlugin *ipi,			//	‹´‹rƒvƒ‰ƒOƒCƒ“
-	CLinePlugin *lpi,			//	‰Ëüƒvƒ‰ƒOƒCƒ“
-	CPolePlugin *ppi,			//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
-	list<CRailSplitter> *splist	//	Œq‚¬•Ï‚¦Œ³ƒŠƒXƒg
+	CRailConnectorLink &link1,	//	å§‹ç‚¹
+	CRailConnectorLink &link2,	//	çµ‚ç‚¹
+	CRailPlugin *rpi,			//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *tpi,			//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *gpi,			//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPierPlugin *ipi,			//	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CLinePlugin *lpi,			//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPolePlugin *ppi,			//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	list<CRailSplitter> *splist	//	ç¹‹ãå¤‰ãˆå…ƒãƒªã‚¹ãƒˆ
 ){
 	m_OldAdr = NULL;
 	m_Selected = 0;
@@ -127,7 +127,7 @@ CRailWay::CRailWay(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailWay::~CRailWay(){
 	DELETE_V(m_Parent);
@@ -135,7 +135,7 @@ CRailWay::~CRailWay(){
 }
 
 /*
- *	eƒIƒuƒWƒFƒNƒgİ’è
+ *	è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè¨­å®š
  */
 void CRailWay::SetParent(CDetectInfo *d_info){
 	DELETE_V(m_Parent);
@@ -147,7 +147,7 @@ void CRailWay::SetParent(CDetectInfo *d_info){
 }
 
 /*
- *	ƒ[ƒvİ’è
+ *	ãƒ¯ãƒ¼ãƒ—è¨­å®š
  */
 void CRailWay::SetWarpDummy(){
 	m_BuildLine = true;
@@ -157,11 +157,11 @@ void CRailWay::SetWarpDummy(){
 }
 
 /*
- *	ƒŠƒ“ƒN‰Â”\‚©’²‚×‚é
+ *	ãƒªãƒ³ã‚¯å¯èƒ½ã‹èª¿ã¹ã‚‹
  */
 bool CRailWay::IsLinkable(
-	int s,		//	ƒTƒCƒh
-	VEC3 &pos	//	À•W
+	int s,		//	ã‚µã‚¤ãƒ‰
+	VEC3 &pos	//	åº§æ¨™
 ){
 	CRailConnectorLink& rlink = m_Link[s];
 	if(pos!=rlink.GetPos()) return true;
@@ -172,7 +172,7 @@ bool CRailWay::IsLinkable(
 }
 
 /*
- *	ƒZƒOƒƒ“ƒg’·æ“¾
+ *	ã‚»ã‚°ãƒ¡ãƒ³ãƒˆé•·å–å¾—
  */
 float CRailWay::GetSegLen(){
 	if(m_SegLen>=0.0f) return m_SegLen;
@@ -189,13 +189,13 @@ float CRailWay::GetSegLen(){
 }
 
 /*
- *	Šm’è
+ *	ç¢ºå®š
  */
 void CRailWay::Stabilize(){
 	m_BuildLine = true;
 	m_Link[0].Connect(R2L(CreateLink(0)));
 	m_Link[1].Connect(R2L(CreateLink(1)));
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Å‚â‚Á‚Ä‚é‚Ì‚Å•s—v
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã§ã‚„ã£ã¦ã‚‹ã®ã§ä¸è¦
 	//	if(m_RailPlugin) m_RailPlugin->CopyMapTemp(&m_RailMapV);
 	//	if(m_TiePlugin) m_TiePlugin->CopyMapTemp(&m_TieMapV);
 	//	if(m_GirderPlugin) m_GirderPlugin->CopyMapTemp(&m_GirderMapV);
@@ -204,12 +204,12 @@ void CRailWay::Stabilize(){
 }
 
 /*
- *	•ªŠ„˜AŒ‹“_æ“¾
+ *	åˆ†å‰²é€£çµç‚¹å–å¾—
  */
 CRailConnectorLink CRailWay::SplitLink(
-	CRailLinkTemp *spl,	//	•ªŠ„“_
-	CRailWay **wadr,	//	Ú‘±ƒŒ[ƒ‹Ši”[æ
-	IRailSplitter sit	//	splice ˆÊ’u
+	CRailLinkTemp *spl,	//	åˆ†å‰²ç‚¹
+	CRailWay **wadr,	//	æ¥ç¶šãƒ¬ãƒ¼ãƒ«æ ¼ç´å…ˆ
+	IRailSplitter sit	//	splice ä½ç½®
 ){
 	int s = spl->m_Side;
 	if(spl->m_Pos==m_Link[s].GetPos()){
@@ -225,7 +225,7 @@ CRailConnectorLink CRailWay::SplitLink(
 	m_Link[1] = con->CreateLink(0, 0);
 	m_Link[1].Connect(R2L(CreateLink(1)));
 	m_SegLen = -1.0f;
-	//GetSegLen(); CopyMapTemp ‚Å‹‚ß‚é‚Ì‚Å•s—v
+	//GetSegLen(); CopyMapTemp ã§æ±‚ã‚ã‚‹ã®ã§ä¸è¦
 	list<CRailSplitter> splist;
 	IRailSplitter irs = m_SplitList.begin();
 	bool splfound = false;
@@ -286,7 +286,7 @@ CRailConnectorLink CRailWay::SplitLink(
 }
 
 /*
- *	‘I‘ğ•”•ª‚ğ•ª—£
+ *	é¸æŠéƒ¨åˆ†ã‚’åˆ†é›¢
  */
 void CRailWay::SplitSelect(){
 	IRailSplitter irs = ++m_SplitList.begin(), spl = irs;
@@ -305,7 +305,7 @@ void CRailWay::SplitSelect(){
 }
 
 /*
- *	‘I‘ğ‚³‚ê‚Ä‚¢‚ê‚ÎƒŠƒXƒg‚©‚çíœ
+ *	é¸æŠã•ã‚Œã¦ã„ã‚Œã°ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
  */
 CRailWay *CRailWay::Delete(){
 	if(m_GroupEnd.size()
@@ -341,7 +341,7 @@ CRailWay *CRailWay::Delete(){
 }
 
 /*
- *	•Ê‚ÌƒŒ[ƒ‹‚ğÚ‘±
+ *	åˆ¥ã®ãƒ¬ãƒ¼ãƒ«ã‚’æ¥ç¶š
  */
 void CRailWay::ConnectRailWay(int my_side, CRailWay *o_rail, int o_side, CScene *scene){
 	CRailConnectorLink& rlink = m_Link[my_side];
@@ -365,7 +365,7 @@ void CRailWay::ConnectRailWay(int my_side, CRailWay *o_rail, int o_side, CScene 
 }
 
 /*
- *	•Ê‚ÌƒŒ[ƒ‹‚É•ªŠò
+ *	åˆ¥ã®ãƒ¬ãƒ¼ãƒ«ã«åˆ†å²
  */
 void CRailWay::BranchRailWay(int my_side, CRailWay *o_rail, int o_side, CScene *scene){
 	CRailConnectorLink& rlink = m_Link[my_side];
@@ -385,7 +385,7 @@ void CRailWay::BranchRailWay(int my_side, CRailWay *o_rail, int o_side, CScene *
 }
 
 /*
- *	ƒŒ[ƒ‹‚ÌÚ‘±‚ğ‰ğœ
+ *	ãƒ¬ãƒ¼ãƒ«ã®æ¥ç¶šã‚’è§£é™¤
  */
 void CRailWay::DisconnectRailWay(int my_side, CScene *scene){
 	CRailConnectorLink& rlink = m_Link[my_side];
@@ -405,7 +405,7 @@ void CRailWay::DisconnectRailWay(int my_side, CScene *scene){
 }
 
 /*
- *	‘I‘ğ‚³‚ê‚Ä‚¢‚ê‚Î•ÂÇ‹æŠÔİ’è
+ *	é¸æŠã•ã‚Œã¦ã„ã‚Œã°é–‰å¡åŒºé–“è¨­å®š
  */
 bool CRailWay::SetRailBlock(char *rb){
 	if(m_WarpDummy || m_MultiTrackDummy) return false;
@@ -415,7 +415,7 @@ bool CRailWay::SetRailBlock(char *rb){
 }
 
 /*
- *	i“ü‰Â”\«ƒ`ƒFƒbƒN
+ *	é€²å…¥å¯èƒ½æ€§ãƒã‚§ãƒƒã‚¯
  */
 bool CRailWay::CheckRailBlock(CTrainGroup *group){
 	if(IsRailBlock()){
@@ -426,7 +426,7 @@ bool CRailWay::CheckRailBlock(CTrainGroup *group){
 }
 
 /*
- *	‘I‘ğ‚³‚ê‚Ä‚¢‚ê‚Î§ŒÀ‘¬“xİ’è
+ *	é¸æŠã•ã‚Œã¦ã„ã‚Œã°åˆ¶é™é€Ÿåº¦è¨­å®š
  */
 bool CRailWay::SetSpeedLimit(int sl){
 	if(m_WarpDummy || m_MultiTrackDummy) return false;
@@ -436,7 +436,7 @@ bool CRailWay::SetSpeedLimit(int sl){
 }
 
 /*
- *	ƒ}ƒbƒsƒ“ƒOÀ•WƒZƒbƒg
+ *	ãƒãƒƒãƒ”ãƒ³ã‚°åº§æ¨™ã‚»ãƒƒãƒˆ
  */
 void CRailWay::SetMapTemp(){
 	GetSegLen();
@@ -454,15 +454,15 @@ void CRailWay::SetMapTemp(){
 	}
 	if(m_LinePlugin){
 		m_LinePlugin->CopyMapTemp(m_LineMapV);
-		m_LinePlugin->AddMapTemp(m_SegLen); // –{“–‚Í‰Ëü‚ÌÜ‚êü‹——£‚ğŒvZ‚·‚é•K—v‚ª‚ ‚é‚ªc
+		m_LinePlugin->AddMapTemp(m_SegLen); // æœ¬å½“ã¯æ¶ç·šã®æŠ˜ã‚Œç·šè·é›¢ã‚’è¨ˆç®—ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ãŒâ€¦
 	}
 }
 
 /*
- *	ƒ}ƒbƒsƒ“ƒOÀ•WƒRƒs[
+ *	ãƒãƒƒãƒ”ãƒ³ã‚°åº§æ¨™ã‚³ãƒ”ãƒ¼
  */
 void CRailWay::CopyMapTemp(
-	int side	//	ƒTƒCƒh
+	int side	//	ã‚µã‚¤ãƒ‰
 ){
 	GetSegLen();
 	if(side){
@@ -506,16 +506,16 @@ void CRailWay::CopyMapTemp(
 }
 
 /*
- *	ƒ}ƒbƒsƒ“ƒOÀ•WƒRƒs[ (•¡ü‹´‹rE‰Ëü’ŒˆÊ’u)
+ *	ãƒãƒƒãƒ”ãƒ³ã‚°åº§æ¨™ã‚³ãƒ”ãƒ¼ (è¤‡ç·šæ©‹è„šãƒ»æ¶ç·šæŸ±ä½ç½®)
  */
 void CRailWay::CopyMapTempMulti(
-	int side,		//	ƒTƒCƒh
-	float *pipos,	//	‹´‹rˆÊ’u
-	float *pisum,	//	—İÏ‹——£
-	int *pinum,		//	‹´‹r”
-	float *popos,	//	‰Ëü’ŒˆÊ’u
-	float *posum,	//	—İÏ‹——£
-	int *ponum		//	‰Ëü’Œ”
+	int side,		//	ã‚µã‚¤ãƒ‰
+	float *pipos,	//	æ©‹è„šä½ç½®
+	float *pisum,	//	ç´¯ç©è·é›¢
+	int *pinum,		//	æ©‹è„šæ•°
+	float *popos,	//	æ¶ç·šæŸ±ä½ç½®
+	float *posum,	//	ç´¯ç©è·é›¢
+	int *ponum		//	æ¶ç·šæŸ±æ•°
 ){
 	GetSegLen();
 	if(side){
@@ -546,10 +546,10 @@ void CRailWay::CopyMapTempMulti(
 }
 
 /*
- *	‰Ëü’ŒƒŠƒ“ƒN‚Ìæ“¾
+ *	æ¶ç·šæŸ±ãƒªãƒ³ã‚¯ã®å–å¾—
  */
 CPoleLink CRailWay::GetPoleLink(
-	int side	//	ƒTƒCƒh
+	int side	//	ã‚µã‚¤ãƒ‰
 ){
 	GetSegLen();
 	if(side){
@@ -568,25 +568,25 @@ CPoleLink CRailWay::GetPoleLink(
 }
 
 /*
- *	‰Ëü’Œ‚ğƒŠƒXƒg‚É’Ç‰Á
+ *	æ¶ç·šæŸ±ã‚’ãƒªã‚¹ãƒˆã«è¿½åŠ 
  */
 void CRailWay::AddPole(
-	float ofs,		//	Œ»İˆÊ’u‚©‚ç‚ÌƒIƒtƒZƒbƒg
-	CPole *pole,	//	‰Ëü’Œ
-	int track,		//	‹O“¹”Ô†
-	bool multi		//	•¡ü—pƒŠƒ“ƒN
+	float ofs,		//	ç¾åœ¨ä½ç½®ã‹ã‚‰ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	CPole *pole,	//	æ¶ç·šæŸ±
+	int track,		//	è»Œé“ç•ªå·
+	bool multi		//	è¤‡ç·šç”¨ãƒªãƒ³ã‚¯
 ){
 	m_PoleList.push_back(CPolePos(m_PolePos+ofs, pole, track, multi));
 }
 
 /*
- *	‰Ëü’Œ‚ğƒŠƒXƒg‚É’Ç‰Á
+ *	æ¶ç·šæŸ±ã‚’ãƒªã‚¹ãƒˆã«è¿½åŠ 
  */
 void CRailWay::InsertPole(
-	float ofs,		//	’[‚©‚ç‚ÌƒIƒtƒZƒbƒg
-	CPole *pole,	//	‰Ëü’Œ
-	int track,		//	‹O“¹”Ô†
-	bool multi		//	•¡ü—pƒŠƒ“ƒN
+	float ofs,		//	ç«¯ã‹ã‚‰ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	CPole *pole,	//	æ¶ç·šæŸ±
+	int track,		//	è»Œé“ç•ªå·
+	bool multi		//	è¤‡ç·šç”¨ãƒªãƒ³ã‚¯
 ){
 	IPolePos ipo = m_PoleList.begin();
 	while(ipo!=m_PoleList.end() && ipo->m_Pos<ofs) ipo++;
@@ -594,10 +594,10 @@ void CRailWay::InsertPole(
 }
 
 /*
- *	‰Ëü’Œ‚ğƒŠƒXƒg‚©‚çíœ
+ *	æ¶ç·šæŸ±ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
  */
 void CRailWay::DeletePole(
-	CPole *pole	//	‰Ëü’Œ
+	CPole *pole	//	æ¶ç·šæŸ±
 ){
 	IPolePos ipo = m_PoleList.begin();
 	while(ipo!=m_PoleList.end()){
@@ -607,21 +607,21 @@ void CRailWay::DeletePole(
 }
 
 /*
- *	‹´‹r‚ğƒŠƒXƒg‚É’Ç‰Á
+ *	æ©‹è„šã‚’ãƒªã‚¹ãƒˆã«è¿½åŠ 
  */
 void CRailWay::AddPier(
-	float ofs,	//	Œ»İˆÊ’u‚©‚ç‚ÌƒIƒtƒZƒbƒg
-	CPier *pier	//	‰Ëü’Œ
+	float ofs,	//	ç¾åœ¨ä½ç½®ã‹ã‚‰ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	CPier *pier	//	æ¶ç·šæŸ±
 ){
 	m_PierList.push_back(CPierPos(m_PierPos+ofs, pier));
 }
 
 /*
- *	‹´‹r‚ğƒŠƒXƒg‚É’Ç‰Á
+ *	æ©‹è„šã‚’ãƒªã‚¹ãƒˆã«è¿½åŠ 
  */
 void CRailWay::InsertPier(
-	float ofs,	//	’[‚©‚ç‚ÌƒIƒtƒZƒbƒg
-	CPier *pier	//	‰Ëü’Œ
+	float ofs,	//	ç«¯ã‹ã‚‰ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	CPier *pier	//	æ¶ç·šæŸ±
 ){
 	IPierPos ipi = m_PierList.begin();
 	while(ipi!=m_PierList.end() && ipi->m_Pos<ofs) ipi++;
@@ -629,10 +629,10 @@ void CRailWay::InsertPier(
 }
 
 /*
- *	‹´‹r‚ğƒŠƒXƒg‚©‚çíœ
+ *	æ©‹è„šã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
  */
 void CRailWay::DeletePier(
-	CPier *pier	//	‰Ëü’Œ
+	CPier *pier	//	æ¶ç·šæŸ±
 ){
 	IPierPos ipi = m_PierList.begin();
 	while(ipi!=m_PierList.end()){
@@ -642,12 +642,12 @@ void CRailWay::DeletePier(
 }
 
 /*
- *	‹´‹rE‰ËüŒšİ
+ *	æ©‹è„šãƒ»æ¶ç·šå»ºè¨­
  */
 void CRailWay::BuildLine(
-	CPierPlugin *ipi,	//	‹´‹rƒvƒ‰ƒOƒCƒ“
-	CLinePlugin *lpi,	//	‰Ëüƒvƒ‰ƒOƒCƒ“
-	CPolePlugin *ppi	//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
+	CPierPlugin *ipi,	//	æ©‹è„šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CLinePlugin *lpi,	//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPolePlugin *ppi	//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	if(m_BuildLine) return;
 	if(m_PierPlugin = ipi) m_PierPos = m_PierPlugin->GetPierPos();
@@ -689,7 +689,7 @@ FOUND:;
 }
 
 /*
- *	ƒZƒOƒƒ“ƒg•\¦
+ *	ã‚»ã‚°ãƒ¡ãƒ³ãƒˆè¡¨ç¤º
  */
 void CRailWay::ShowSegment(){
 	int i;
@@ -701,12 +701,12 @@ void CRailWay::ShowSegment(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CRailWay::ScanInput(
-	int mode,		//	ƒ‚[ƒh
-	VEC3 &rect1,	//	—Ìˆæn“_
-	VEC3 &rect2		//	—ÌˆæI“_
+	int mode,		//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 &rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 &rect2		//	é ˜åŸŸçµ‚ç‚¹
 ){
 	if(m_MultiTrackDummy && !g_RailEditMode->IsModeActive()) return;
 	switch(mode){
@@ -737,12 +737,12 @@ void CRailWay::ScanInput(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN (ƒ[ƒv—p)
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯ (ãƒ¯ãƒ¼ãƒ—ç”¨)
  */
 void CRailWay::ScanInputWarp(
-	int mode,		//	ƒ‚[ƒh
-	VEC3 &rect1,	//	—Ìˆæn“_
-	VEC3 &rect2		//	—ÌˆæI“_
+	int mode,		//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 &rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 &rect2		//	é ˜åŸŸçµ‚ç‚¹
 ){
 	int i;
 	bool flag = false;
@@ -767,7 +767,7 @@ void CRailWay::ScanInputWarp(
 				else m_Selected = m_Selected<<1;
 			}
 			m_Selected &= 2;
-			return;	//	1 ‰ñ‚Å‚æ‚¢
+			return;	//	1 å›ã§ã‚ˆã„
 		case 4:
 			float dist = V3Len(&(rect1-sc));
 			if(dist<DETECT_2D_MAX && (ms_MinDist<0.0f || ms_MinDist>dist)){
@@ -805,11 +805,11 @@ public:
 };
 
 /*
- *	ƒgƒŒ[ƒX
+ *	ãƒˆãƒ¬ãƒ¼ã‚¹
  */
 void CRailWay::TraceRail(
-	int side,				//	•ûŒü
-	CRailTraceCurve *curve	//	ƒgƒŒ[ƒT
+	int side,				//	æ–¹å‘
+	CRailTraceCurve *curve	//	ãƒˆãƒ¬ãƒ¼ã‚µ
 ){
 	if(side) CRailWay_TraceRail_CTempTracer(m_SplitList.begin(), --m_SplitList.end(), curve, false);
 	else CRailWay_TraceRail_CTempTracer(m_SplitList.rbegin(), --m_SplitList.rend(), curve, true);
@@ -859,11 +859,11 @@ public:
 };
 
 /*
- *	Ú×ƒgƒŒ[ƒX
+ *	è©³ç´°ãƒˆãƒ¬ãƒ¼ã‚¹
  */
 void CRailWay::TraceRailSplit(
-	int side,				//	•ûŒü
-	CRailTraceCurve *curve	//	ƒgƒŒ[ƒT
+	int side,				//	æ–¹å‘
+	CRailTraceCurve *curve	//	ãƒˆãƒ¬ãƒ¼ã‚µ
 ){
 	if(side) CRailWay_TraceRailSplit_CTempTracerSplit(m_SplitList.begin(), --m_SplitList.end(), curve, false);
 	else CRailWay_TraceRailSplit_CTempTracerSplit(m_SplitList.rbegin(), --m_SplitList.rend(), curve, true);
@@ -887,27 +887,27 @@ public:
 };
 
 /*
- *	Å‰‚Ì•ªŠ„“_‚Ü‚Å‚Ì dir ƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+ *	æœ€åˆã®åˆ†å‰²ç‚¹ã¾ã§ã® dir ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹
  */
 VEC3 CRailWay::GetFirstDir(
-	int side	//	ƒTƒCƒh
+	int side	//	ã‚µã‚¤ãƒ‰
 ){
 	return side ? CRailWay_GetFirstDir_CSolver()(m_SplitList.rbegin(), --m_SplitList.rend())
 		: CRailWay_GetFirstDir_CSolver()(m_SplitList.begin(), --m_SplitList.end());
 }
 
 /*
- *	•Ò¬“P‹
+ *	ç·¨æˆæ’¤å»
  */
 void CRailWay::RemoveGroup(){
 	while(m_GroupEnd.size()) (*m_GroupEnd.begin())->m_Group->Remove();
 }
 
 /*
- *	ƒ[ƒv’[‚ÌƒV[ƒ“‚ğƒ`ƒFƒbƒN
+ *	ãƒ¯ãƒ¼ãƒ—ç«¯ã®ã‚·ãƒ¼ãƒ³ã‚’ãƒã‚§ãƒƒã‚¯
  */
 void CRailWay::CheckWarpEndScene(
-	CScene *scene	//	ƒV[ƒ“
+	CScene *scene	//	ã‚·ãƒ¼ãƒ³
 ){
 	int i, j;
 	m_Selected = 0;
@@ -920,11 +920,11 @@ void CRailWay::CheckWarpEndScene(
 }
 
 /*
- *	•Ò¬‚Ì’†‚©’²‚×‚é
+ *	ç·¨æˆã®ä¸­ã‹èª¿ã¹ã‚‹
  */
 bool CRailWay::IsInsideGroup(
-	int side,	//	•ûŒü
-	float ofs	//	ƒIƒtƒZƒbƒg
+	int side,	//	æ–¹å‘
+	float ofs	//	ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 ){
 	set<CTrainGroup *> inset, erset;
 	CTrainGroup *conuser[2];
@@ -959,18 +959,18 @@ bool CRailWay::IsInsideGroup(
 }
 
 /*
- *	Ôçqİ’u
+ *	è»Šè¼Œè¨­ç½®
  */
 bool CRailWay::SetTrain(
-	int side,				//	•ûŒü
-	float ofs,				//	ƒIƒtƒZƒbƒg
-	CGroupEndLocator *tail,	//	ÅŒã”öƒŒ[ƒ‹Ši”[æ
-	bool rev,				//	Œã‘Şƒtƒ‰ƒO
-	ITrainSetBuffer *icur,	//	Œ»İˆÊ’u
-	ITrainSetBuffer *iend,	//	I—¹ˆÊ’u
-	CTrainGroup *group,		//	•Ò¬
-	bool extend,			//	Šg’£ƒgƒŒ[ƒ‹
-	bool hittest			//	Õ“Ë”»’è
+	int side,				//	æ–¹å‘
+	float ofs,				//	ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	CGroupEndLocator *tail,	//	æœ€å¾Œå°¾ãƒ¬ãƒ¼ãƒ«æ ¼ç´å…ˆ
+	bool rev,				//	å¾Œé€€ãƒ•ãƒ©ã‚°
+	ITrainSetBuffer *icur,	//	ç¾åœ¨ä½ç½®
+	ITrainSetBuffer *iend,	//	çµ‚äº†ä½ç½®
+	CTrainGroup *group,		//	ç·¨æˆ
+	bool extend,			//	æ‹¡å¼µãƒˆãƒ¬ãƒ¼ãƒ«
+	bool hittest			//	è¡çªåˆ¤å®š
 ){
 	if(!CheckRailBlock(group)) return false;
 	CRailWay *ptr = this, *prev = NULL;
@@ -1041,15 +1041,15 @@ bool CRailWay::SetTrain(
 }
 
 /*
- *	Ôçqis
+ *	è»Šè¼Œé€²è¡Œ
  *
- *	–ß‚è’l (0: succeed, 1: railend, 2: hit train)
+ *	æˆ»ã‚Šå€¤ (0: succeed, 1: railend, 2: hit train)
  */
 int CRailWay::MarchTrain(
-	float *limit,			//	is‹——£
-	CGroupEndLocator *head,	//	I’[Ši”[æ
-	CTrainGroup *caller,	//	ŒÄ‚Ño‚µŒ³(—\–ñ‚Ì‚İ)
-	CTrainGroup *group		//	•Ò¬(•ÂÇƒ`ƒFƒbƒN—p)
+	float *limit,			//	é€²è¡Œè·é›¢
+	CGroupEndLocator *head,	//	çµ‚ç«¯æ ¼ç´å…ˆ
+	CTrainGroup *caller,	//	å‘¼ã³å‡ºã—å…ƒ(äºˆç´„æ™‚ã®ã¿)
+	CTrainGroup *group		//	ç·¨æˆ(é–‰å¡ãƒã‚§ãƒƒã‚¯ç”¨)
 ){
 	float ofs = head->m_Offset;
 	bool fin = false;
@@ -1133,7 +1133,7 @@ int CRailWay::MarchTrain(
 		head->m_Side = !next.m_Side;
 	}
 #if EXTEND_RAIL
-	if(prev){	//	‰„’·İ’u
+	if(prev){	//	å»¶é•·è¨­ç½®
 		head->m_SetRail = prev;
 		head->m_Offset = ofs+prev->GetSegLen()+*limit;
 		return 0;
@@ -1146,11 +1146,11 @@ int CRailWay::MarchTrain(
 }
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€‚ª‘±‚¢‚Ä‚¢‚é‚©‚Ç‚¤‚©’²‚×‚é
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ãŒç¶šã„ã¦ã„ã‚‹ã‹ã©ã†ã‹èª¿ã¹ã‚‹
  */
 bool CRailWay::CheckPlatformExtend(
-	int side,			//	•ûŒü
-	CPlatformInst *pf	//	ƒvƒ‰ƒbƒgƒtƒH[ƒ€
+	int side,			//	æ–¹å‘
+	CPlatformInst *pf	//	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ 
 ){
 	CRailWay *ptr = this;
 	while(ptr){
@@ -1173,7 +1173,7 @@ bool CRailWay::CheckPlatformExtend(
 }
 
 /*
- *	ó‘Ôæ“¾ (1, 2: approach, 4: stop)
+ *	çŠ¶æ…‹å–å¾— (1, 2: approach, 4: stop)
  */
 int CRailWay::GetPlatformState(){
 	int state = 0;
@@ -1191,7 +1191,7 @@ int CRailWay::GetPlatformState(){
 }
 
 /*
- *	“®‚­ƒŒ[ƒ‹‚Ìˆ—
+ *	å‹•ããƒ¬ãƒ¼ãƒ«ã®å‡¦ç†
  */
 void CRailWay::UpdateSplitList(){
 	if(!m_Parent) return;
@@ -1210,7 +1210,7 @@ void CRailWay::UpdateSplitList(){
 }
 
 /*
- *	’f–Ê‚ğƒ_ƒ“ƒv
+ *	æ–­é¢ã‚’ãƒ€ãƒ³ãƒ—
  */
 void CRailWay::Dump(){
 	if(!m_RailPlugin && !m_TiePlugin && !m_GirderPlugin) return;
@@ -1223,7 +1223,7 @@ void CRailWay::Dump(){
 }
 
 /*
- *	“™ŠÔŠuƒIƒuƒWƒFƒNƒg‚ğƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ç­‰é–“éš”ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CRailWay::Render(){
 #if 0
@@ -1259,7 +1259,7 @@ void CRailWay::Render(){
 }
 
 /*
- *	ƒ[ƒv‚Ì•`‰æ
+ *	ãƒ¯ãƒ¼ãƒ—ã®æç”»
  */
 void CRailWay::RenderWarp(){
 	int i;
@@ -1281,7 +1281,7 @@ void CRailWay::RenderWarp(){
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CRailWay::RestoreAddress(){
 	m_Link[0].RestoreAddress();
@@ -1304,10 +1304,10 @@ void CRailWay::RestoreAddress(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CRailWay::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee, *tmp;
 	if(!(str = BeginBlock(str, "RailWay"))){
@@ -1395,10 +1395,10 @@ char *CRailWay::Read(
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CRailWay::ReadWarp(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "Warp"))){
@@ -1419,10 +1419,10 @@ char *CRailWay::ReadWarp(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CRailWay::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\t\t\tRailWay{\n");
 	fprintf(df, "\t\t\t\tAddress = %p;\n", this);
@@ -1478,10 +1478,10 @@ void CRailWay::Save(
 }
 
 /*
- *	•Û‘¶ (ƒ[ƒv—p)
+ *	ä¿å­˜ (ãƒ¯ãƒ¼ãƒ—ç”¨)
  */
 void CRailWay::SaveWarp(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\tWarp{\n");
 	fprintf(df, "\t\tAddress = %p;\n", this);

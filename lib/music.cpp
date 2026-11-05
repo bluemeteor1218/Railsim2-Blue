@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -6,15 +6,15 @@
 #include "music.h"
 
 /*
- *	DirectMusic‚Ì‰Šú‰»
+ *	DirectMusicã®åˆæœŸåŒ–
  */
 BOOL InitDirectMusic(){
 	DebugHL();
 	Debug("InitDirectMusic\n");
 
-	//	ƒ[ƒ_‚Ìì¬
+	//	ãƒ­ãƒ¼ãƒ€ã®ä½œæˆ
 	FAILED_ASSERT(
-		"DirectMusicƒ[ƒ_[‚ªì¬‚Å‚«‚Ü‚¹‚ñ.",
+		"DirectMusicãƒ­ãƒ¼ãƒ€ãƒ¼ãŒä½œæˆã§ãã¾ã›ã‚“.",
 		CoCreateInstance(
 			CLSID_DirectMusicLoader, NULL, CLSCTX_INPROC,
 			IID_IDirectMusicLoader8, (void **)&svm.pLoader
@@ -23,7 +23,7 @@ BOOL InitDirectMusic(){
 }
 
 /*
- *	DirectMusic‚Ì‰ð•ú
+ *	DirectMusicã®è§£æ”¾
  */
 void FreeDirectMusic(){
 	DebugHL();
@@ -34,30 +34,30 @@ void FreeDirectMusic(){
 }
 
 /*
- *	‰¹Šyƒf[ƒ^‚Ìƒ[ƒh
+ *	éŸ³æ¥½ãƒ‡ãƒ¼ã‚¿ã®ãƒ­ãƒ¼ãƒ‰
  *
- *	strFile	: ƒtƒ@ƒCƒ‹–¼
+ *	strFile	: ãƒ•ã‚¡ã‚¤ãƒ«å
  */
 BOOL LoadMusic(char *strFile){
 	Debug("load(%s) ... ", strFile);
 
-	//	Šù‘¶‚È‚ç‰ð•ú
+	//	æ—¢å­˜ãªã‚‰è§£æ”¾
 	if(svm.pSeg) FreeMusic();
 
-	//	ƒJƒŒƒ“ƒgƒpƒX‚ðŽæ“¾‚µUNICODE‚É•ÏŠ·
+	//	ã‚«ãƒ¬ãƒ³ãƒˆãƒ‘ã‚¹ã‚’å–å¾—ã—UNICODEã«å¤‰æ›
 	char dir[MAX_PATH];
 	WCHAR tmp[MAX_PATH];
 
 	GetCurrentDirectory(MAX_PATH, dir);
 	MultiByteToWideChar(CP_ACP, 0, dir, -1, tmp, MAX_PATH);
 
-	//	ŒŸõƒfƒBƒŒƒNƒgƒŠ‚ðŽw’è
+	//	æ¤œç´¢ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æŒ‡å®š
 	svm.pLoader->SetSearchDirectory(GUID_DirectMusicAllTypes, tmp, FALSE);
 	MultiByteToWideChar(CP_ACP, 0, strFile, -1, tmp, MAX_PATH);
 
 	HRESULT hr;
 
-	//	ƒtƒ@ƒCƒ‹‚ðƒZƒOƒƒ“ƒg‚Éƒ[ƒh
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚»ã‚°ãƒ¡ãƒ³ãƒˆã«ãƒ­ãƒ¼ãƒ‰
 	hr = svm.pLoader->LoadObjectFromFile(
 			CLSID_DirectMusicSegment, IID_IDirectMusicSegment8, tmp, (void **)&svm.pSeg);
 
@@ -67,19 +67,19 @@ BOOL LoadMusic(char *strFile){
 	}
 	Debug("ok.\n");
 
-	//	ƒpƒtƒH[ƒ}ƒ“ƒX‚Ìì¬
+	//	ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹ã®ä½œæˆ
 	if(!CreatePerformance()) return FALSE;
 
-	//	ƒZƒOƒƒ“ƒg‚ðƒpƒtƒH[ƒ}ƒ“ƒX‚Éƒ[ƒh
+	//	ã‚»ã‚°ãƒ¡ãƒ³ãƒˆã‚’ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹ã«ãƒ­ãƒ¼ãƒ‰
 	svm.pSeg->Download(svm.pPerf);
 
 	return TRUE;
 }
 
 /*
- *	‰¹Šyƒf[ƒ^‚Ì‰ð•ú
+ *	éŸ³æ¥½ãƒ‡ãƒ¼ã‚¿ã®è§£æ”¾
  *
- *	n		: ƒ`ƒƒƒ“ƒlƒ‹
+ *	n		: ãƒãƒ£ãƒ³ãƒãƒ«
  */
 void FreeMusic(){
 	StopMusic();
@@ -90,25 +90,25 @@ void FreeMusic(){
 }
 
 /*
- *	ƒpƒtƒH[ƒ}ƒ“ƒX‚Ìì¬
+ *	ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹ã®ä½œæˆ
  */
 BOOL CreatePerformance(){
 	if(!svs.pDS) return FALSE;
-	//	ƒpƒtƒH[ƒ}ƒ“ƒX‚Ìì¬
+	//	ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹ã®ä½œæˆ
 	FAILED_ASSERT(
-		"ƒpƒtƒH[ƒ}ƒ“ƒX‚ªì¬‚Å‚«‚Ü‚¹‚ñ.",
+		"ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹ãŒä½œæˆã§ãã¾ã›ã‚“.",
 		CoCreateInstance(
 			CLSID_DirectMusicPerformance, NULL, CLSCTX_INPROC,
 			IID_IDirectMusicPerformance8, (void **)&svm.pPerf
 		));
-	//	DirectSound‚Ì‹ŒƒCƒ“ƒ^[ƒtƒFƒCƒX‚ðŽæ“¾
+	//	DirectSoundã®æ—§ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã‚’å–å¾—
 	IDirectSound *pDSound;
 
 	svs.pDS->QueryInterface(IID_IDirectSound, (void **)&pDSound);
 
-	//	DirectSound‚ÅƒpƒtƒH[ƒ}ƒ“ƒX‚ð‰Šú‰»
+	//	DirectSoundã§ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹ã‚’åˆæœŸåŒ–
 	FAILED_ASSERT(
-		"ƒpƒtƒH[ƒ}ƒ“ƒX‚ª‰Šú‰»‚Å‚«‚Ü‚¹‚ñ.",
+		"ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹ãŒåˆæœŸåŒ–ã§ãã¾ã›ã‚“.",
 		svm.pPerf->InitAudio(
 			NULL, &pDSound, NULL,
 			DMUS_APATH_DYNAMIC_STEREO, 64, DMUS_AUDIOF_ALL, NULL));
@@ -118,9 +118,9 @@ BOOL CreatePerformance(){
 }
 
 /*
- *	‰¹Šy‚ÌÄ¶
+ *	éŸ³æ¥½ã®å†ç”Ÿ
  *
- *	f		: ƒ‹[ƒvƒtƒ‰ƒOiTRUEƒ‹[ƒvONAFALSEOFFj
+ *	f		: ãƒ«ãƒ¼ãƒ—ãƒ•ãƒ©ã‚°ï¼ˆTRUEï¼ãƒ«ãƒ¼ãƒ—ONã€FALSEï¼OFFï¼‰
  */
 void PlayMusic(BOOL f){
 	if(!svm.pSeg || !svm.pPerf) return;
@@ -134,32 +134,32 @@ void PlayMusic(BOOL f){
 }
 
 /*
- *	‰¹Šy‚ÌˆêŽž’âŽ~
+ *	éŸ³æ¥½ã®ä¸€æ™‚åœæ­¢
  *
  */
 void PauseMusic(){
 	if(!svm.pSeg || !svm.pPerf) return;
 
 	svm.pPerf->Stop(NULL, NULL, 0, 0);
-	svm.pState->GetSeek(&svm.time);	//	’âŽ~ŽžŠÔ‚ðŽæ“¾
+	svm.pState->GetSeek(&svm.time);	//	åœæ­¢æ™‚é–“ã‚’å–å¾—
 
 	RELEASE(svm.pState);
 }
 
 /*
- *	‰¹Šy‚Ì’âŽ~
+ *	éŸ³æ¥½ã®åœæ­¢
  */
 void StopMusic(){
 	if(!svm.pSeg || !svm.pPerf) return;
 
 	svm.pPerf->Stop(NULL, NULL, 0, 0);
-	svm.time = 0;	//	“ªo‚µ‚ðs‚¤
+	svm.time = 0;	//	é ­å‡ºã—ã‚’è¡Œã†
 
 	RELEASE(svm.pState);
 }
 
 /*
- *	‰¹Šy‚ÌÄ¶ó‘Ô‚ðŽæ“¾
+ *	éŸ³æ¥½ã®å†ç”ŸçŠ¶æ…‹ã‚’å–å¾—
  */
 BOOL GetMusicState(){
 	if(svm.pSeg && svm.pPerf->IsPlaying(svm.pSeg, NULL)==S_OK)

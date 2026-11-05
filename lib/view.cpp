@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -6,88 +6,88 @@
 #include "graphic.h"
 #include "view.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern int g_DispWidth;
 extern int g_DispHeight;
 
 /*
- *	X Ž²Žü‚è‚Ì‰ñ“]
+ *	X è»¸å‘¨ã‚Šã®å›žè»¢
  *
- *	v	: ‰ñ“]Špiradj
+ *	v	: å›žè»¢è§’ï¼ˆradï¼‰
  *
- *	¦‰ñ“]‚Ì•ûŒüŽ²‚Ì{•ûŒü‚É¶ŽèeŽw‚ðŒü‚¯‚½Žž‚Ìl·‚µŽw‚Ì•ûŒü
+ *	â€»å›žè»¢ã®æ–¹å‘ï¼è»¸ã®ï¼‹æ–¹å‘ã«å·¦æ‰‹è¦ªæŒ‡ã‚’å‘ã‘ãŸæ™‚ã®äººå·®ã—æŒ‡ã®æ–¹å‘
  */
 void RotVX(float v){
 	VMTX_ROT(D3DXMatrixRotationX, -v);
 }
 
 /*
- *	Y Ž²Žü‚è‚Ì‰ñ“]
+ *	Y è»¸å‘¨ã‚Šã®å›žè»¢
  *
- *	v	: ‰ñ“]Špiradj
+ *	v	: å›žè»¢è§’ï¼ˆradï¼‰
  */
 void RotVY(float v){
 	VMTX_ROT(D3DXMatrixRotationY, -v);
 }
 
 /*
- *	‚yŽ²Žü‚è‚Ì‰ñ“]
+ *	ï¼ºè»¸å‘¨ã‚Šã®å›žè»¢
  *
- *	v	: ‰ñ“]Špiradj
+ *	v	: å›žè»¢è§’ï¼ˆradï¼‰
  */
 void RotVZ(float v){
 	VMTX_ROT(D3DXMatrixRotationZ, -v);
 }
 
 /*
- *	UpƒxƒNƒgƒ‹Žü‚è‚Ì‰ñ“]
+ *	Upãƒ™ã‚¯ãƒˆãƒ«å‘¨ã‚Šã®å›žè»¢
  *
- *	v	: ‰ñ“]Špiradj
+ *	v	: å›žè»¢è§’ï¼ˆradï¼‰
  */
 void RotVUp(float v){
 	VMTX_ROTA(D3DXVECTOR3(VMTX_21, VMTX_22, VMTX_23), v);
 }
 
 /*
- *	ˆÚ“®
+ *	ç§»å‹•
  *
- *	v	: ˆÚ“®ƒxƒNƒgƒ‹
+ *	v	: ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«
  */
 void MoveV(VEC3 v){
 	VMTX_MOVE(D3DXMatrixTranslation, -v);
 }
 
 /*
- *	ˆÚ“®iƒ[ƒ‹ƒhÀ•WŒnj
+ *	ç§»å‹•ï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»ï¼‰
  *
- *	v	: ˆÚ“®ƒxƒNƒgƒ‹
+ *	v	: ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«
  */
 void MoveVW(VEC3 v){
 	VMTX_MOVEW(D3DXMatrixTranslation, -v);
 }
 
 /*
- *	ˆÊ’uÝ’è
+ *	ä½ç½®è¨­å®š
  *
- *	v	: ˆÊ’uƒxƒNƒgƒ‹
+ *	v	: ä½ç½®ãƒ™ã‚¯ãƒˆãƒ«
  */
 void SetVPos(VEC3 v){
 	VMTX_MOVEW(D3DXMatrixTranslation, GetVPos()-v);
 }
 
 /*
- *	ˆÊ’uAŽp¨‚ÌÝ’è
+ *	ä½ç½®ã€å§¿å‹¢ã®è¨­å®š
  *
- *	posFˆÊ’u
- *	dirFŒü‚«
- *	up Fã•ûŒüƒxƒNƒgƒ‹
+ *	posï¼šä½ç½®
+ *	dirï¼šå‘ã
+ *	up ï¼šä¸Šæ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
  */
 void SetView(VEC3 pos, VEC3 dir, VEC3 up){
 	D3DXMatrixLookAtLH(&sv3.mtxView, &pos, &dir, &up);
 }
 
 /*
- *	ƒrƒ…[ƒ|[ƒgÝ’è
+ *	ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆè¨­å®š
  */
 void SetViewport(DWORD x, DWORD y, DWORD w, DWORD h, float znear, float zfar){
 	D3DVIEWPORT8 vp;
@@ -99,7 +99,7 @@ void SetViewport(DWORD x, DWORD y, DWORD w, DWORD h, float znear, float zfar){
 	vp.MaxZ = zfar;
 	sv3.pDev->SetViewport(&vp);
 
-	//ƒrƒ…[ƒ|[ƒgs—ñ‚Ìì¬(ƒ[ƒ‹ƒh¨ƒXƒNƒŠ[ƒ“À•W•ÏŠ·—p)
+	//ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆè¡Œåˆ—ã®ä½œæˆ(ãƒ¯ãƒ¼ãƒ«ãƒ‰â†’ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™å¤‰æ›ç”¨)
 	sv3.mtxVPort = MTX4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
 	sv3.mtxVPort._11 =  (w*0.5f);
 	sv3.mtxVPort._22 = -(h*0.5f);
@@ -108,9 +108,9 @@ void SetViewport(DWORD x, DWORD y, DWORD w, DWORD h, float znear, float zfar){
 }
 
 /*
- *	Œü‚«‚ÌÝ’è
+ *	å‘ãã®è¨­å®š
  *
- *	at	F’Ž‹‚·‚é“_
+ *	at	ï¼šæ³¨è¦–ã™ã‚‹ç‚¹
  */
 void LookAtV(VEC3 at){
 	VEC3 up(0, 1, 0);
@@ -119,9 +119,9 @@ void LookAtV(VEC3 at){
 }
 
 /*
- *	ƒ[ƒ‹ƒhÀ•W‚©‚çƒXƒNƒŠ[ƒ“À•W‚Ö‚Ì•ÏŠ·
+ *	ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‹ã‚‰ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã¸ã®å¤‰æ›
  *
- *	¦ƒJƒƒ‰‚æ‚èŒã‚ë‚É‚ ‚éê‡‚ÍZ’l‚ª-1
+ *	â€»ã‚«ãƒ¡ãƒ©ã‚ˆã‚Šå¾Œã‚ã«ã‚ã‚‹å ´åˆã¯Zå€¤ãŒ-1
  */
 VEC3 WorldToScreen(VEC3 pos){
 	VEC3 out;
@@ -138,9 +138,9 @@ VEC3 WorldToScreen(VEC3 pos){
 }
 
 /*
- *	ƒXƒNƒŠ[ƒ“À•W‚©‚çƒ[ƒ‹ƒhÀ•W‚Ö‚Ì•ÏŠ·
+ *	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã‹ã‚‰ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã¸ã®å¤‰æ›
  *
- *	¦pos.z‚Í0‚Å“n‚·‚±‚Æ
+ *	â€»pos.zã¯0ã§æ¸¡ã™ã“ã¨
  */
 VEC3 ScreenToWorld(VEC3 pos){
 	VEC3 v3;

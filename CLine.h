@@ -1,4 +1,4 @@
-#ifndef CLINE_H_INCLUDED
+ï»¿#ifndef CLINE_H_INCLUDED
 #define CLINE_H_INCLUDED
 
 class CPole;
@@ -8,13 +8,13 @@ class CLinePlugin;
 class CPolePlugin;
 
 /*
- *	‰Ëü’ŒƒŠƒ“ƒN
+ *	æ¶ç·šæŸ±ãƒªãƒ³ã‚¯
  */
 class CPoleLink{
 public:
-	int m_Side;		//	ƒTƒCƒh
-	int m_Track;	//	‹O“¹”Ô†
-	CPole *m_Link;	//	ƒŠƒ“ƒN
+	int m_Side;		//	ã‚µã‚¤ãƒ‰
+	int m_Track;	//	è»Œé“ç•ªå·
+	CPole *m_Link;	//	ãƒªãƒ³ã‚¯
 public:
 	CPoleLink(){ m_Side = m_Track = NULL; m_Link = NULL; }
 	CPoleLink(int, int, CPole *);
@@ -37,24 +37,24 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	‰Ëü’ŒƒCƒ“ƒXƒ^ƒ“ƒX
+ *	æ¶ç·šæŸ±ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CPole{
 	friend class CPoleLink;
 private:
-	static CPole **ms_Root;		//	Ú‘±ƒ‹[ƒg
-	static float ms_MinDist;	//	Å¬ŒŸo‹——£
-	static CPoleLink ms_Detect;	//	ŒŸoî•ñ
-	int m_Selected;				//	‘I‘ğƒtƒ‰ƒO
-	VEC3 m_Pos;					//	ˆÊ’u
-	VEC3 m_Right;				//	‰E
-	VEC3 m_Up;					//	ã
-	VEC3 m_Dir;					//	•ûŒü
-	VEC3 m_OrigDir;				//	‹Œ dir
-	CObject m_Object;			//	ƒIƒuƒWƒFƒNƒg
-	list<CLine *> m_LineList;	//	‰ËüƒŠƒXƒg
-	CPolePlugin *m_PolePlugin;	//	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
-	CPole *m_Next;				//	ƒŠƒXƒgŸ
+	static CPole **ms_Root;		//	æ¥ç¶šãƒ«ãƒ¼ãƒˆ
+	static float ms_MinDist;	//	æœ€å°æ¤œå‡ºè·é›¢
+	static CPoleLink ms_Detect;	//	æ¤œå‡ºæƒ…å ±
+	int m_Selected;				//	é¸æŠãƒ•ãƒ©ã‚°
+	VEC3 m_Pos;					//	ä½ç½®
+	VEC3 m_Right;				//	å³
+	VEC3 m_Up;					//	ä¸Š
+	VEC3 m_Dir;					//	æ–¹å‘
+	VEC3 m_OrigDir;				//	æ—§ dir
+	CObject m_Object;			//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	list<CLine *> m_LineList;	//	æ¶ç·šãƒªã‚¹ãƒˆ
+	CPolePlugin *m_PolePlugin;	//	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CPole *m_Next;				//	ãƒªã‚¹ãƒˆæ¬¡
 public:
 	static void SetRoot(CPole **r){ ms_Root = r; }
 	static void ResetDetect(){ ms_MinDist = -1.0f; }
@@ -82,20 +82,20 @@ public:
 };
 
 /*
- *	‰ËüƒCƒ“ƒXƒ^ƒ“ƒX
+ *	æ¶ç·šã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CLine{
 private:
-	static CLine **ms_Root;		//	Ú‘±ƒ‹[ƒg
-	static float ms_MinDist;	//	Å¬ŒŸo‹——£
-	static CLine *ms_Detect;	//	ŒŸoî•ñ
-	int m_Selected;				//	‘I‘ğƒtƒ‰ƒO
-	vector<float> m_LineMapV;	//	‰Ëüƒ}ƒbƒsƒ“ƒO V À•W
+	static CLine **ms_Root;		//	æ¥ç¶šãƒ«ãƒ¼ãƒˆ
+	static float ms_MinDist;	//	æœ€å°æ¤œå‡ºè·é›¢
+	static CLine *ms_Detect;	//	æ¤œå‡ºæƒ…å ±
+	int m_Selected;				//	é¸æŠãƒ•ãƒ©ã‚°
+	vector<float> m_LineMapV;	//	æ¶ç·šãƒãƒƒãƒ”ãƒ³ã‚° V åº§æ¨™
 	VEC3 m_Right;				//	right
 	VEC3 m_Dir;					//	dir
-	CPoleLink m_Link[2];		//	Ú‘±‰Ëü’Œ
-	CLinePlugin *m_LinePlugin;	//	‰Ëüƒvƒ‰ƒOƒCƒ“
-	CLine *m_Next;				//	ƒŠƒXƒgŸ
+	CPoleLink m_Link[2];		//	æ¥ç¶šæ¶ç·šæŸ±
+	CLinePlugin *m_LinePlugin;	//	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CLine *m_Next;				//	ãƒªã‚¹ãƒˆæ¬¡
 public:
 	static void SetRoot(CLine **r){ ms_Root = r; }
 	static void ResetDetect(){ ms_MinDist = -1.0f; }
@@ -118,70 +118,70 @@ public:
 	void Save(FILE *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CLine *>::iterator IPLine;
 
 /*
- *	‰Ëü’Œ‚ÉÚ‘±
+ *	æ¶ç·šæŸ±ã«æ¥ç¶š
  */
 inline void CPoleLink::Connect(
-	CLine *line	//	‰ËüƒCƒ“ƒXƒ^ƒ“ƒX
+	CLine *line	//	æ¶ç·šã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	m_Link->AddLine(line);
 }
 
 /*
- *	‰Ëü’Œ‚ÌÚ‘±‰ğœ
+ *	æ¶ç·šæŸ±ã®æ¥ç¶šè§£é™¤
  */
 inline void CPoleLink::Disconnect(
-	CLine *line	//	‰ËüƒCƒ“ƒXƒ^ƒ“ƒX
+	CLine *line	//	æ¶ç·šã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	m_Link->DeleteLine(line);
 }
 
 /*
- *	Ú‘±æÀ•W‚ğ‹‚ß‚é
+ *	æ¥ç¶šå…ˆåº§æ¨™ã‚’æ±‚ã‚ã‚‹
  */
 inline VEC3 CPoleLink::GetPos(){
 	return m_Link->GetJointPos(m_Track);
 }
 
 /*
- *	Ú‘±æÀ•W‚ğ‹‚ß‚é
+ *	æ¥ç¶šå…ˆåº§æ¨™ã‚’æ±‚ã‚ã‚‹
  */
 inline VEC3 CPoleLink::GetOrigPos(){
 	return m_Link->GetOrigPos();
 }
 
 /*
- *	Ú‘±æ right ƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+ *	æ¥ç¶šå…ˆ right ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹
  */
 inline VEC3 CPoleLink::GetRight(){
 	return m_Side ? -m_Link->m_Right : m_Link->m_Right;
 }
 
 /*
- *	Ú‘±æ up ƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+ *	æ¥ç¶šå…ˆ up ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹
  */
 inline VEC3 CPoleLink::GetUp(){
 	return m_Link->m_Up;
 }
 
 /*
- *	Ú‘±æ dir ƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+ *	æ¥ç¶šå…ˆ dir ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹
  */
 inline VEC3 CPoleLink::GetDir(){
 	return m_Side ? -m_Link->m_Dir : m_Link->m_Dir;
 }
 
 /*
- *	Ú‘±æ dir ƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+ *	æ¥ç¶šå…ˆ dir ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹
  */
 inline VEC3 CPoleLink::GetOrigDir(){
 	return m_Side ? -m_Link->m_OrigDir : m_Link->m_OrigDir;
 }
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern vector<CPoleLink> g_LastPole;
 extern vector<CPoleLink> g_FinishPole;
 

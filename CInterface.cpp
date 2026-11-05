@@ -1,15 +1,15 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CInterface.h"
 #include "CSkinPlugin.h"
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CInterface *CInterface::ms_Focus = NULL;
 CInterface *CInterface::ms_Drop = NULL;
 CInterface *CInterface::ms_TabHead = NULL;
 
 /*
  *	[static]
- *	‹¤’ÊƒL[“ü—Íˆ—
+ *	å…±é€šã‚­ãƒ¼å…¥åŠ›å‡¦ç†
  */
 void CInterface::ProcessKey(){
 	static int rep;
@@ -30,7 +30,7 @@ void CInterface::ProcessKey(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CInterface::CInterface(){
 	m_Parent = m_Brother = m_Child = m_Owner = NULL;
@@ -38,20 +38,20 @@ CInterface::CInterface(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CInterface::~CInterface(){
 	if(ms_Focus==this) ms_Focus = NULL;
 }
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CInterface::Init(
-	int x, int y,	//	À•W
-	int w, int h,	//	ƒTƒCƒY
-	char *t,		//	ƒeƒLƒXƒg
-	CInterface *p	//	e
+	int x, int y,	//	åº§æ¨™
+	int w, int h,	//	ã‚µã‚¤ã‚º
+	char *t,		//	ãƒ†ã‚­ã‚¹ãƒˆ
+	CInterface *p	//	è¦ª
 ){
 	m_PosX = x; m_PosY = y;
 	m_Width = w; m_Height = h;
@@ -62,10 +62,10 @@ void CInterface::Init(
 }
 
 /*
- *	Žq‚ÌÝ’è
+ *	å­ã®è¨­å®š
  */
 void CInterface::SetChild(
-	CInterface *child	//	Žq
+	CInterface *child	//	å­
 ){
 	if(child->m_Parent){
 		if(child->m_Parent==this) return;
@@ -77,20 +77,20 @@ void CInterface::SetChild(
 }
 
 /*
- *	ŒZ’í‚ÌÝ’è
+ *	å…„å¼Ÿã®è¨­å®š
  */
 void CInterface::SetBrother(
-	CInterface *bros	//	ŒZ’í
+	CInterface *bros	//	å…„å¼Ÿ
 ){
 	if(m_Brother) m_Brother->SetBrother(bros);
 	else m_Brother = bros;
 }
 
 /*
- *	Žq‚ðíœ
+ *	å­ã‚’å‰Šé™¤
  */
 void CInterface::RemoveChild(
-	CInterface *child	//	Žq
+	CInterface *child	//	å­
 ){
 	CInterface **adr = &m_Child;
 	while(*adr){
@@ -104,10 +104,10 @@ void CInterface::RemoveChild(
 }
 
 /*
- *	ƒ^ƒuƒŠƒ“ƒNŠm—§
+ *	ã‚¿ãƒ–ãƒªãƒ³ã‚¯ç¢ºç«‹
  */
 void CInterface::LinkTab(
-	bool tab	//	ƒ^ƒu‚ðŽg‚¤
+	bool tab	//	ã‚¿ãƒ–ã‚’ä½¿ã†
 ){
 	CInterface *ptr = m_Parent;
 	while(ptr){
@@ -129,7 +129,7 @@ void CInterface::LinkTab(
 }
 
 /*
- *	ƒ^ƒu‚ðŽó‚¯Žæ‚éƒAƒCƒeƒ€‚ð’T‚·
+ *	ã‚¿ãƒ–ã‚’å—ã‘å–ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŽ¢ã™
  */
 CInterface *CInterface::FindTabItem(){
 	if(m_Owner==this) return this;
@@ -143,10 +143,10 @@ CInterface *CInterface::FindTabItem(){
 }
 
 /*
- *	â‘ÎÀ•W‚ÌŽæ“¾
+ *	çµ¶å¯¾åº§æ¨™ã®å–å¾—
  */
 void CInterface::GetAbsPos(
-	int *x, int *y	//	À•W
+	int *x, int *y	//	åº§æ¨™
 ){
 	*x = m_PosX; *y = m_PosY;
 	CInterface *ptr = m_Parent;
@@ -157,7 +157,7 @@ void CInterface::GetAbsPos(
 }
 
 /*
- *	•\Ž¦ó‘Ô‚ÌŽæ“¾
+ *	è¡¨ç¤ºçŠ¶æ…‹ã®å–å¾—
  */
 bool CInterface::IsVisible(){
 	CInterface *ptr = this;
@@ -169,10 +169,10 @@ bool CInterface::IsVisible(){
 }
 
 /*
- *	Žw’èÀ•W‚ª”ÍˆÍ“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒç¯„å›²å†…ã‹èª¿ã¹ã‚‹
  */
 bool CInterface::IsInside(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	int px, py;
 	GetAbsPos(&px, &py);
@@ -180,7 +180,7 @@ bool CInterface::IsInside(
 }
 
 /*
- *	ƒtƒH[ƒJƒX˜g‚Ì•`‰æ
+ *	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹æž ã®æç”»
  */
 void CInterface::DrawFocusFrame(){
 	int px, py;
@@ -191,7 +191,7 @@ void CInterface::DrawFocusFrame(){
 }
 
 void CInterface::GiveFocus(
-	bool snd	//	‰¹Ä¶ƒtƒ‰ƒO
+	bool snd	//	éŸ³å†ç”Ÿãƒ•ãƒ©ã‚°
 ){
 	ms_Focus = m_Owner;
 	if(snd) g_Skin->MouseDown();
@@ -215,7 +215,7 @@ void CInterface::GiveFocus(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CInterface::ScanInput(){
 	if(m_Visible && m_Child && m_Child->ScanInput()) return true;
@@ -224,7 +224,7 @@ bool CInterface::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CInterface::Render(){
 	RenderBrother();

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "RailMap.h"
 #include "CSimpleDialog.h"
 #include "CScene.h"
@@ -15,27 +15,27 @@
 #include "CTrainGroupTemplate.h"
 #include "CSimulationMode.h"
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void PushUndoStack();
 void EnqueueMergeTrainControl(void *, void *, int, int);
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_IgnoreAcceleration;
 extern CGroupEndLocator g_HitTrainGroup;
 
-//	“à•”’è”
-const float CABIN_POS_MOVE = 0.005f;				//	‰^“]ÈˆÊ’u’²®‘¬“x
-const float CABIN_POS_MAX = 10.0f;					//	‰^“]ÈˆÊ’uÅ‘å•ÏˆÊ
-const float CABIN_DIR_MOVE = 0.005f;				//	‰^“]È‹“_•ûŒü’²®‘¬“x
-const float CABIN_DIR_MAX = 2.0f;					//	‰^“]È‹“_•ûŒüÅ‘å•ÏˆÊ
-const float SPEED_CONTROL_DELTA = 1.0f;				//	‘¬“xİ’è•
-const float FINAL_ACCELERATION = 0.5f;				//	ÅI‰Á‘¬“x—¦
-const float STOP_LIMIT_LINE = 1.0f;					//	’â~—]—T‹——£
-extern const float GROUP_PREVIEW_SPEED = 0.1f;		//	•Ò¬ƒvƒŒƒrƒ…[ˆÚ“®‘¬“x
-const double FRAME_PER_DAY = 24.0*60.0*60.0*30.0;	//	1 “ú“–‚½‚èƒtƒŒ[ƒ€”
+//	å†…éƒ¨å®šæ•°
+const float CABIN_POS_MOVE = 0.005f;				//	é‹è»¢å¸­ä½ç½®èª¿æ•´é€Ÿåº¦
+const float CABIN_POS_MAX = 10.0f;					//	é‹è»¢å¸­ä½ç½®æœ€å¤§å¤‰ä½
+const float CABIN_DIR_MOVE = 0.005f;				//	é‹è»¢å¸­è¦–ç‚¹æ–¹å‘èª¿æ•´é€Ÿåº¦
+const float CABIN_DIR_MAX = 2.0f;					//	é‹è»¢å¸­è¦–ç‚¹æ–¹å‘æœ€å¤§å¤‰ä½
+const float SPEED_CONTROL_DELTA = 1.0f;				//	é€Ÿåº¦è¨­å®šå¹…
+const float FINAL_ACCELERATION = 0.5f;				//	æœ€çµ‚åŠ é€Ÿåº¦ç‡
+const float STOP_LIMIT_LINE = 1.0f;					//	åœæ­¢ä½™è£•è·é›¢
+extern const float GROUP_PREVIEW_SPEED = 0.1f;		//	ç·¨æˆãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ç§»å‹•é€Ÿåº¦
+const double FRAME_PER_DAY = 24.0*60.0*60.0*30.0;	//	1 æ—¥å½“ãŸã‚Šãƒ•ãƒ¬ãƒ¼ãƒ æ•°
 
-//	“à•”ƒOƒ[ƒoƒ‹
-CTrain *g_CabinViewTrain = NULL;	//	‰^“]È“K—pÔçq
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+CTrain *g_CabinViewTrain = NULL;	//	é‹è»¢å¸­é©ç”¨è»Šè¼Œ
 bool g_UpdateTrainGroupList = false;
 
 void NetSyncSetTrain(
@@ -72,10 +72,10 @@ void NetSyncMergeTrain(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainGroup::CTrainGroup(
-	char *name	//	–¼Ì
+	char *name	//	åç§°
 ){
 	m_OldAdr = NULL;
 	m_Name = name;
@@ -107,7 +107,7 @@ CTrainGroup::CTrainGroup(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CTrainGroup::~CTrainGroup(){
 	DELETE_V(m_TrainList);
@@ -115,10 +115,10 @@ CTrainGroup::~CTrainGroup(){
 }
 
 /*
- *	ƒeƒ“ƒvƒŒ[ƒgì¬
+ *	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆä½œæˆ
  */
 void CTrainGroup::MakeTemplate(
-	CTrainGroupTemplate *tgt	//	ƒeƒ“ƒvƒŒ[ƒg
+	CTrainGroupTemplate *tgt	//	ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 ){
 	CTrain *ptr = m_TrainList;
 	while(ptr){
@@ -130,7 +130,7 @@ void CTrainGroup::MakeTemplate(
 }
 
 /*
- *	Ôçq”æ“¾
+ *	è»Šè¼Œæ•°å–å¾—
  */
 int CTrainGroup::GetTrainNum(){
 	CTrain *ptr = m_TrainList;
@@ -143,7 +143,7 @@ int CTrainGroup::GetTrainNum(){
 }
 
 /*
- *	Ôçq”•ÏXˆ—
+ *	è»Šè¼Œæ•°å¤‰æ›´æ™‚å‡¦ç†
  */
 void CTrainGroup::OnTrainNumChanged(){
 	if(m_ListElement) m_ListElement->SetString(1, FlashIn("%d", GetTrainNum()));
@@ -151,7 +151,7 @@ void CTrainGroup::OnTrainNumChanged(){
 }
 
 /*
- *	‡˜æ“¾
+ *	é †åºå–å¾—
  */
 vector<CTrain *> CTrainGroup::GetTrainByVector(){
 	vector<CTrain *> train_list;
@@ -164,7 +164,7 @@ vector<CTrain *> CTrainGroup::GetTrainByVector(){
 }
 
 /*
- *	•Ò¬‡˜•ÏX
+ *	ç·¨æˆé †åºå¤‰æ›´
  */
 void CTrainGroup::SetTrainByVector(vector<CTrain *> train_list){
 	int i;
@@ -175,7 +175,7 @@ void CTrainGroup::SetTrainByVector(vector<CTrain *> train_list){
 }
 
 /*
- *	«”\ŒvZ
+ *	æ€§èƒ½è¨ˆç®—
  */
 void CTrainGroup::CalcSpec(){
 	m_MaxVelocity = m_MaxAcceleration = m_MaxDeceleration = 0.0f;
@@ -198,7 +198,7 @@ void CTrainGroup::CalcSpec(){
 }
 
 /*
- *	‘¬“xİ’èŠm”F•C³
+ *	é€Ÿåº¦è¨­å®šç¢ºèªï¼†ä¿®æ­£
  */
 void CTrainGroup::CheckTargetSpeed(){
 	ValueArea(&m_TargetSpeed, -m_MaxVelocity, m_MaxVelocity);
@@ -206,7 +206,7 @@ void CTrainGroup::CheckTargetSpeed(){
 }
 
 /*
- *	‘¬“xî•ñ•\¦
+ *	é€Ÿåº¦æƒ…å ±è¡¨ç¤º
  */
 void CTrainGroup::PrintInfo(){
 //	g_StrTex->RenderLeft(TILE_QUAD, g_DispHeight-FONT_HEIGHT*3-TILE_QUAD,
@@ -222,10 +222,10 @@ void CTrainGroup::PrintInfo(){
 }
 
 /*
- *	‘¬“x‘€ì
+ *	é€Ÿåº¦æ“ä½œ
  */
 CModelInst *CTrainGroup::Control(
-	CTrain *src	//	ŒÄ‚Ño‚µŒ³
+	CTrain *src	//	å‘¼ã³å‡ºã—å…ƒ
 ){
 	if(!m_Enabled) return NULL;
 	if(CEditBox::IsActive()) return src;
@@ -321,7 +321,7 @@ CModelInst *CTrainGroup::Control(
 }
 
 /*
- *	§ŒÀ‘¬“xİ’è
+ *	åˆ¶é™é€Ÿåº¦è¨­å®š
  */
 void CTrainGroup::SetSpeedLimit(int sl){
 	if(sl<0 || g_ManualControl || g_IgnoreAcceleration) return;
@@ -329,7 +329,7 @@ void CTrainGroup::SetSpeedLimit(int sl){
 }
 
 /*
- *	§ŒÀ‘¬“x•t‚«ÀŒø
+ *	åˆ¶é™é€Ÿåº¦ä»˜ãå®ŸåŠ¹
  */
 float CTrainGroup::CalcSignedSpeedLimit(){
 	if(m_SpeedLimit<0) return m_EffectTargetSpeed;
@@ -339,10 +339,10 @@ float CTrainGroup::CalcSignedSpeedLimit(){
 }
 
 /*
- *	•Ò¬‹“_ŒvZ
+ *	ç·¨æˆè¦–ç‚¹è¨ˆç®—
  */
 bool CTrainGroup::CalcViewAxis(
-	CObject *obj	//	dir ƒxƒNƒgƒ‹
+	CObject *obj	//	dir ãƒ™ã‚¯ãƒˆãƒ«
 ){
 	int n = 0;
 	VEC3 front, tail;
@@ -398,7 +398,7 @@ bool CTrainGroup::CalcViewAxis(
 }
 
 /*
- *	‰^“]È‹“_İ’è
+ *	é‹è»¢å¸­è¦–ç‚¹è¨­å®š
  */
 void CTrainGroup::SetCabinView(){
 	POINT delta = g_Cursor.GetDelta();
@@ -431,11 +431,11 @@ void CTrainGroup::SetCabinView(){
 }
 
 /*
- *	Ôçq’Ç‰Á
+ *	è»Šè¼Œè¿½åŠ 
  */
 void CTrainGroup::AddTrain(
-	CTrainPlugin *tpi,	//	Ôçqƒvƒ‰ƒOƒCƒ“
-	bool rev			//	”½“]ƒtƒ‰ƒO
+	CTrainPlugin *tpi,	//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	bool rev			//	åè»¢ãƒ•ãƒ©ã‚°
 ){
 	if(m_Enabled){
 		EnqueueCommonDialog(new CSimpleDialog(lang(CannotAddWhileTrainSet), lang(Error)));
@@ -455,10 +455,10 @@ void CTrainGroup::AddTrain(
 }
 
 /*
- *	Ôçqíœ
+ *	è»Šè¼Œå‰Šé™¤
  */
 void CTrainGroup::DeleteTrain(
-	CTrain *tr	//	Ôçq
+	CTrain *tr	//	è»Šè¼Œ
 ){
 	if(m_Enabled){
 		EnqueueCommonDialog(new CSimpleDialog(lang(CannotDeleteWhileTrainSet), lang(Error)));
@@ -480,10 +480,10 @@ void CTrainGroup::DeleteTrain(
 }
 
 /*
- *	ÔçqƒŠƒXƒgì¬
+ *	è»Šè¼Œãƒªã‚¹ãƒˆä½œæˆ
  */
 void CTrainGroup::ListTrain(
-	CListView *lv	//	ƒŠƒXƒgƒrƒ…[
+	CListView *lv	//	ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
 ){
 	CTrain *ptr = m_TrainList;
 	lv->DeleteAllItems();
@@ -498,11 +498,11 @@ void CTrainGroup::ListTrain(
 }
 
 /*
- *	Ôçq•ÒW
+ *	è»Šè¼Œç·¨é›†
  */
 CTrain *CTrainGroup::EditTrain(
-	CListView *tlv,		//	ÔçqƒŠƒXƒgƒrƒ…[
-	CPluginTree *ttv	//	Ôçqƒvƒ‰ƒOƒCƒ“ƒcƒŠ[
+	CListView *tlv,		//	è»Šè¼Œãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	CPluginTree *ttv	//	è»Šè¼Œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ„ãƒªãƒ¼
 ){
 	if(!m_TrainList) return NULL;
 	CListElement *tle = tlv->GetFocusItem();
@@ -525,11 +525,11 @@ CTrain *CTrainGroup::EditTrain(
 }
 
 /*
- *	•Ò¬‹¤’ÊƒXƒCƒbƒ`‚Ìİ’è
+ *	ç·¨æˆå…±é€šã‚¹ã‚¤ãƒƒãƒã®è¨­å®š
  */
 void CTrainGroup::SetGroupCommonSwitch(
-	CModelSwitch *sw,	//	‘ÎÛƒXƒCƒbƒ` (ŒÅ’è‘¤)
-	int val				//	‘ÎÛ’l (ŒÅ’è‘¤)
+	CModelSwitch *sw,	//	å¯¾è±¡ã‚¹ã‚¤ãƒƒãƒ (å›ºå®šå´)
+	int val				//	å¯¾è±¡å€¤ (å›ºå®šå´)
 ){
 	CTrain *ptr = m_TrainList;
 	while(ptr){
@@ -539,7 +539,7 @@ void CTrainGroup::SetGroupCommonSwitch(
 }
 
 /*
- *	Ôçq“P‹
+ *	è»Šè¼Œæ’¤å»
  */
 void CTrainGroup::Remove(){
 	if(m_Enabled){
@@ -560,7 +560,7 @@ void CTrainGroup::Remove(){
 }
 
 /*
- *	Ô²ƒoƒbƒtƒ@€”õ
+ *	è»Šè»¸ãƒãƒƒãƒ•ã‚¡æº–å‚™
  */
 void CTrainGroup::SetSetBuffer(){
 	m_SetBuffer.clear();
@@ -570,7 +570,7 @@ void CTrainGroup::SetSetBuffer(){
 }
 
 /*
- *	ƒlƒbƒgƒ[ƒN§ŒäƒGƒ‰[‚ğƒ`ƒƒƒbƒg‚É“Š‚°‚é
+ *	ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯åˆ¶å¾¡ã‚¨ãƒ©ãƒ¼ã‚’ãƒãƒ£ãƒƒãƒˆã«æŠ•ã’ã‚‹
  */
 void CTrainGroup::SetError(const char *msg){
 	if(g_NetworkInitialized){
@@ -583,11 +583,11 @@ void CTrainGroup::SetError(const char *msg){
 }
 
 /*
- *	Ôçq”z’u (‰‰ñ)
+ *	è»Šè¼Œé…ç½® (åˆå›)
  */
 bool CTrainGroup::Set(
-	CRailLinkTemp *link,	//	”z’uæƒf[ƒ^
-	int flag				//	0: ”z’u‚Ì‚İ, 1: ©“®‘Oi, 2: ©“®Œãi, -1: ƒL[ƒ{[ƒhæ“¾
+	CRailLinkTemp *link,	//	é…ç½®å…ˆãƒ‡ãƒ¼ã‚¿
+	int flag				//	0: é…ç½®ã®ã¿, 1: è‡ªå‹•å‰é€², 2: è‡ªå‹•å¾Œé€², -1: ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å–å¾—
 ){
 	if(!m_TrainList){
 		SetError(lang(NoCarInserted));
@@ -636,11 +636,11 @@ bool CTrainGroup::Set(
 }
 
 /*
- *	Ôçq”z’u
+ *	è»Šè¼Œé…ç½®
  */
 bool CTrainGroup::Trail(
-	bool extend,	//	Šg’£ƒgƒŒ[ƒ‹
-	bool hittest	//	Õ“Ë”»’è
+	bool extend,	//	æ‹¡å¼µãƒˆãƒ¬ãƒ¼ãƒ«
+	bool hittest	//	è¡çªåˆ¤å®š
 ){
 	CTrain *train = m_TrainList;
 	while(train){
@@ -652,9 +652,9 @@ bool CTrainGroup::Trail(
 	if(m_Reverse){
 		ibegin = --m_SetBuffer.end();
 		iend = --m_SetBuffer.begin();
-		// –{—ˆ std::list ‚Ì --begin() ‚Í‹–‰Â‚³‚ê‚È‚¢‚ªAÀ¿“®‚­‚Ì‚Å‚Æ‚è‚ ‚¦‚¸‚±‚Ì‚Ü‚ÜB
-		// VC2010 ‚¾‚Æ“{‚ç‚ê‚é‚Ì‚Å /D "_HAS_ITERATOR_DEBUGGING=0" ‚µ‚Ä‚È‚ñ‚Æ‚©‰ñ”ğB
-		// ‚½‚¾‚µ libcpmtd.lib ‚Ì‘ã‚í‚è‚É libcpmt.lib ‚ğƒŠƒ“ƒN‚·‚é•K—v‚ª‚ ‚éB
+		// æœ¬æ¥ std::list ã® --begin() ã¯è¨±å¯ã•ã‚Œãªã„ãŒã€å®Ÿè³ªå‹•ãã®ã§ã¨ã‚Šã‚ãˆãšã“ã®ã¾ã¾ã€‚
+		// VC2010 ã ã¨æ€’ã‚‰ã‚Œã‚‹ã®ã§ /D "_HAS_ITERATOR_DEBUGGING=0" ã—ã¦ãªã‚“ã¨ã‹å›é¿ã€‚
+		// ãŸã ã— libcpmtd.lib ã®ä»£ã‚ã‚Šã« libcpmt.lib ã‚’ãƒªãƒ³ã‚¯ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
 	}else{
 		ibegin = m_SetBuffer.begin();
 		iend = m_SetBuffer.end();
@@ -681,7 +681,7 @@ bool CTrainGroup::Trail(
 }
 
 /*
- *	ƒ[ƒvˆÊ’u’Ê’m
+ *	ãƒ¯ãƒ¼ãƒ—ä½ç½®é€šçŸ¥
  */
 void CTrainGroup::NotifyWarp(){
 	CTrain *train = m_TrainList;
@@ -692,12 +692,12 @@ void CTrainGroup::NotifyWarp(){
 }
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€ˆÊ’u’Ê’m
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ä½ç½®é€šçŸ¥
  */
 void CTrainGroup::NotifyPlatform(
-	CPlatformInst *pf,	//	ƒvƒ‰ƒbƒgƒtƒH[ƒ€
-	float dist,			//	‹——£
-	bool pfrev			//	•ûŒü‹tƒtƒ‰ƒO
+	CPlatformInst *pf,	//	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ 
+	float dist,			//	è·é›¢
+	bool pfrev			//	æ–¹å‘é€†ãƒ•ãƒ©ã‚°
 ){
 	if(!pf->IsStoppable()) return;
 	m_NotifyFlag = true;
@@ -720,7 +720,7 @@ void CTrainGroup::NotifyPlatform(
 }
 
 /*
- *	ƒ|ƒCƒ“ƒgî•ñÁ‹
+ *	ãƒã‚¤ãƒ³ãƒˆæƒ…å ±æ¶ˆå»
  */
 void CTrainGroup::ClearPoint(){
 	ISPRailConnector ip = m_PointList.begin();
@@ -730,7 +730,7 @@ void CTrainGroup::ClearPoint(){
 }
 
 /*
- *	ƒV[ƒJÁ‹
+ *	ã‚·ãƒ¼ã‚«æ¶ˆå»
  */
 void CTrainGroup::ClearSeek(){
 	m_OldSeek = m_SeekList;
@@ -741,22 +741,22 @@ void CTrainGroup::ClearSeek(){
 }
 
 /*
- *	ƒV[ƒJ’Ç‰Á
+ *	ã‚·ãƒ¼ã‚«è¿½åŠ 
  *
- *	m_OldSeek ‚É“ü‚Á‚Ä‚¢‚ê‚Î true ‚ğ•Ô‚·
+ *	m_OldSeek ã«å…¥ã£ã¦ã„ã‚Œã° true ã‚’è¿”ã™
  */
 bool CTrainGroup::AddSeek(
-	CRailConnector *pcon	//	ƒ|ƒCƒ“ƒg
+	CRailConnector *pcon	//	ãƒã‚¤ãƒ³ãƒˆ
 ){
 	m_SeekList.insert(pcon);
 	return !!m_OldSeek.count(pcon);
 }
 
 /*
- *	˜AŒ‹ƒXƒCƒbƒ`‚Ìİ’è
+ *	é€£çµã‚¹ã‚¤ãƒƒãƒã®è¨­å®š
  */
 void CTrainGroup::SetConnectSwitch(
-	CTrain *train	//	ÔçqƒCƒ“ƒXƒ^ƒ“ƒX
+	CTrain *train	//	è»Šè¼Œã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	int mrev = m_Reverse==train->m_Reverse;
 	g_SystemSwitch[SYS_SW_FRONT].SetValue(!mrev);
@@ -781,12 +781,12 @@ void CTrainGroup::SetConnectSwitch(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CTrainGroup::ScanInput(
-	int mode,		//	ƒ‚[ƒh (0: link)
-	VEC3 &rect1,	//	—Ìˆæn“_
-	VEC3 &rect2		//	—ÌˆæI“_
+	int mode,		//	ãƒ¢ãƒ¼ãƒ‰ (0: link)
+	VEC3 &rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 &rect2		//	é ˜åŸŸçµ‚ç‚¹
 ){
 	if(!m_Enabled) return;
 	CGroupEndLocator &head = m_Location[m_Reverse];
@@ -799,7 +799,7 @@ void CTrainGroup::ScanInput(
 }
 
 /*
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CTrainGroup::Preview(){
 	g_SystemSwitch[SYS_SW_SERIAL].SetValue(m_Serial);
@@ -825,7 +825,7 @@ void CTrainGroup::Preview(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CTrainGroup::Render(){
 	if(!m_Enabled) return;
@@ -855,7 +855,7 @@ void CTrainGroup::Render(){
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“is
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€²è¡Œ
  */
 void CTrainGroup::Simulate(){
 	if(!m_Enabled) return;
@@ -911,7 +911,7 @@ void CTrainGroup::Simulate(){
 	if(hit || m_State || m_CurrentSpeed){
 		float signed_speed_limit = CalcSignedSpeedLimit();
 		float newspeed, tmpdccspeed;
-		//	Œ¸‘¬’â~E”­Ô‘Ò‚¿
+		//	æ¸›é€Ÿåœæ­¢ãƒ»ç™ºè»Šå¾…ã¡
 		if(hit){
 			if(hit==2) seekdist -= STOP_LIMIT_LINE;
 			if(m_State==1 && m_StopTarget<seekdist){
@@ -977,7 +977,7 @@ SUSPEND:
 		if(hit && !m_CurrentSpeed && signed_speed_limit) m_Reverse = m_EffectTargetSpeed<0.0f;
 	}else{
 NORMAL:
-		//	’èíó‘Ô
+		//	å®šå¸¸çŠ¶æ…‹
 		float signed_speed_limit = CalcSignedSpeedLimit();
 		if(g_IgnoreAcceleration){
 			m_CurrentSpeed = m_EffectTargetSpeed;
@@ -1015,7 +1015,7 @@ SKIP_ATS:
 }
 
 /*
- *	•Ò¬•¹‡
+ *	ç·¨æˆä½µåˆ
  */
 void CTrainGroup::MergeTrain(CTrainGroup *target, int my_side, int tgt_side){
 	//Dialog("my_side = %d\ntgt_side = %d", my_side, tgt_side);
@@ -1087,7 +1087,7 @@ void CTrainGroup::MergeTrain(CTrainGroup *target, int my_side, int tgt_side){
 }
 
 /*
- *	•Ò¬•ªŠ„
+ *	ç·¨æˆåˆ†å‰²
  */
 void CTrainGroup::SplitTrain(int split_pos){
 	if(split_pos<=0 || GetTrainNum()<=split_pos) return;
@@ -1167,7 +1167,7 @@ void CTrainGroup::SplitTrain(int split_pos){
 }
 
 /*
- *	İ’uó‘Ô•œŒ³
+ *	è¨­ç½®çŠ¶æ…‹å¾©å…ƒ
  */
 void CTrainGroup::RestoreSet(){
 	if(!m_Enabled) return;
@@ -1182,7 +1182,7 @@ void CTrainGroup::RestoreSet(){
 }
 
 /*
- *	ƒAƒhƒŒƒX•œŒ³
+ *	ã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å…ƒ
  */
 void CTrainGroup::RestoreAddress(){
 	m_Location[0].RestoreAddress();
@@ -1201,11 +1201,11 @@ void CTrainGroup::RestoreAddress(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CTrainGroup::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CTrainGroup ***root	//	Ši”[æ
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CTrainGroup ***root	//	æ ¼ç´å…ˆ
 ){
 	char *eee, *tmp;
 	if(!(str = BeginBlock(str, "TrainGroup"))){
@@ -1268,10 +1268,10 @@ char *CTrainGroup::Read(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CTrainGroup::Save(
-	FILE *df	//	ƒtƒ@ƒCƒ‹
+	FILE *df	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(df, "\tTrainGroup{\n");
 	fprintf(df, "\t\tAddress = %p;\n", this);

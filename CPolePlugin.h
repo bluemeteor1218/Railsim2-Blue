@@ -1,20 +1,20 @@
-#ifndef CPOLEPLUGIN_H_INCLUDED
+ï»¿#ifndef CPOLEPLUGIN_H_INCLUDED
 #define CPOLEPLUGIN_H_INCLUDED
 
 #include "CPlugin.h"
 
 /*
- *	‰Ëü’Œƒvƒ‰ƒOƒCƒ“
+ *	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CPolePlugin: public CPlugin{
 	friend class CPole;
 private:
-	static CObject ms_PreviewObject;	//	ƒvƒŒƒrƒ…[—pƒIƒuƒWƒFƒNƒg
-	int m_TrackNum;			//	‹O“¹”
-	float m_TrackInterval;	//	‹O“¹ŠÔŠu
-	float m_ModelScale;		//	ƒ‚ƒfƒ‹ƒXƒP[ƒ‹
-	string m_ModelFileName;	//	ƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹–¼
-	CMesh *m_Mesh;			//	ƒƒbƒVƒ…
+	static CObject ms_PreviewObject;	//	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	int m_TrackNum;			//	è»Œé“æ•°
+	float m_TrackInterval;	//	è»Œé“é–“éš”
+	float m_ModelScale;		//	ãƒ¢ãƒ‡ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
+	string m_ModelFileName;	//	ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
+	CMesh *m_Mesh;			//	ãƒ¡ãƒƒã‚·ãƒ¥
 public:
 	CPolePlugin(char *id): CPlugin(id){}
 	~CPolePlugin(){}
@@ -33,7 +33,7 @@ public:
 };
 
 /*
- *	‰Ëü’Œƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	æ¶ç·šæŸ±ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CPolePluginList: public CPluginList{
 private:
@@ -45,7 +45,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CPolePlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CPolePlugin *g_Pole;
 extern CPolePluginList *g_PolePluginList;
 

@@ -1,4 +1,4 @@
-#ifndef CTRAINGROUP_H_INCLUDED
+ï»¿#ifndef CTRAINGROUP_H_INCLUDED
 #define CTRAINGROUP_H_INCLUDED
 
 #include "CTrainSetBuffer.h"
@@ -17,48 +17,48 @@ class CPluginTree;
 class CTrainGroupTemplate;
 
 /*
- *	•Ò¬ƒCƒ“ƒXƒ^ƒ“ƒX
+ *	ç·¨æˆã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CTrainGroup{
 private:
-	void *m_OldAdr;						//	‹ŒƒAƒhƒŒƒX
-	int m_ControlState;					//	‘€ìó‘Ô
-	int m_Serial;						//	ƒVƒŠƒAƒ‹ƒiƒ“ƒo[
-	int m_State;						//	ó‘Ô
-	int m_DoorWait;						//	ƒhƒA‘Ò‚¿ƒJƒEƒ“ƒ^
-	float m_Length;						//	’·‚³
-	float m_MaxVelocity;				//	Å‚‘¬“x
-	float m_MaxAcceleration;			//	Å‚‰Á‘¬“x
-	float m_MaxDeceleration;			//	Å‚Œ¸‘¬“x
-	float m_DoorClosingTime;			//	ƒhƒA•Â‚ßŠ—vŠÔ
-	float m_TargetSpeed;				//	İ’è‘¬“x
-	float m_EffectTargetSpeed;			//	İ’è‘¬“x
-	float m_CurrentSpeed;				//	Œ»İ‘¬“x
-	float m_OldSpeed;					//	‹Œ‘¬“x
-	int m_SpeedLimit;					//	§ŒÀ‘¬“x
-	float m_StopTarget;					//	’â~–Ú•W‹——£
-	float m_PreviewOffset;				//	ƒvƒŒƒrƒ…[ƒIƒtƒZƒbƒg
-	double m_DepartureTime;				//	o”­
-	bool m_OpenDoor[2];					//	ƒhƒAŠJ
-	bool m_Reverse;						//	Œã‘Şƒ‚[ƒh
-	bool m_Enabled;						//	”z’uƒtƒ‰ƒO
-	bool m_NotifyFlag;					//	ƒvƒ‰ƒbƒgƒtƒH[ƒ€’Ê’mƒtƒ‰ƒO
-	int m_SplitPos;						//	•ªŠ„—\’èˆÊ’u
-	VEC3 m_CabinPos[2];					//	‰^“]ÈˆÊ’uƒIƒtƒZƒbƒg
-	VEC3 m_CabinDir[2];					//	‰^“]È‹“_•ûŒü
-	string m_Name;						//	•Ò¬–¼
-	CListElement *m_ListElement;		//	ƒŠƒXƒg—v‘f
-	list<CTrainSetBuffer> m_SetBuffer;	//	”z’uƒoƒbƒtƒ@
-	CGroupEndLocator m_Location[2];		//	I’[ˆÊ’u
-	CGroupEndLocator m_Seeker;			//	Œo˜H’Tõq
-	set<CRailConnector *> m_PointList;	//	’Ê‰ß’†ƒ|ƒCƒ“ƒgƒŠƒXƒg
-	set<CRailConnector *> m_SeekList;	//	’Tõ’†ƒ|ƒCƒ“ƒgƒŠƒXƒg
-	set<CRailConnector *> m_OldSeek;	//	‹Œ’Tõ’†ƒ|ƒCƒ“ƒgƒŠƒXƒg
-	CDiaElement m_DiaElement;			//	ƒ_ƒCƒ„—v‘f
-	CPlatformInst *m_Platform;			//	ƒvƒ‰ƒbƒgƒtƒH[ƒ€
-	CTrain *m_TrainList;				//	ÔçqƒŠƒXƒg
-	CTrain *m_SelectTrain;				//	‘I‘ğ’†Ôçq
-	CTrainGroup *m_Next;				//	Ÿ
+	void *m_OldAdr;						//	æ—§ã‚¢ãƒ‰ãƒ¬ã‚¹
+	int m_ControlState;					//	æ“ä½œçŠ¶æ…‹
+	int m_Serial;						//	ã‚·ãƒªã‚¢ãƒ«ãƒŠãƒ³ãƒãƒ¼
+	int m_State;						//	çŠ¶æ…‹
+	int m_DoorWait;						//	ãƒ‰ã‚¢å¾…ã¡ã‚«ã‚¦ãƒ³ã‚¿
+	float m_Length;						//	é•·ã•
+	float m_MaxVelocity;				//	æœ€é«˜é€Ÿåº¦
+	float m_MaxAcceleration;			//	æœ€é«˜åŠ é€Ÿåº¦
+	float m_MaxDeceleration;			//	æœ€é«˜æ¸›é€Ÿåº¦
+	float m_DoorClosingTime;			//	ãƒ‰ã‚¢é–‰ã‚æ‰€è¦æ™‚é–“
+	float m_TargetSpeed;				//	è¨­å®šé€Ÿåº¦
+	float m_EffectTargetSpeed;			//	è¨­å®šé€Ÿåº¦
+	float m_CurrentSpeed;				//	ç¾åœ¨é€Ÿåº¦
+	float m_OldSpeed;					//	æ—§é€Ÿåº¦
+	int m_SpeedLimit;					//	åˆ¶é™é€Ÿåº¦
+	float m_StopTarget;					//	åœæ­¢ç›®æ¨™è·é›¢
+	float m_PreviewOffset;				//	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	double m_DepartureTime;				//	å‡ºç™ºæ™‚åˆ»
+	bool m_OpenDoor[2];					//	ãƒ‰ã‚¢é–‹
+	bool m_Reverse;						//	å¾Œé€€ãƒ¢ãƒ¼ãƒ‰
+	bool m_Enabled;						//	é…ç½®ãƒ•ãƒ©ã‚°
+	bool m_NotifyFlag;					//	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ é€šçŸ¥ãƒ•ãƒ©ã‚°
+	int m_SplitPos;						//	åˆ†å‰²äºˆå®šä½ç½®
+	VEC3 m_CabinPos[2];					//	é‹è»¢å¸­ä½ç½®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	VEC3 m_CabinDir[2];					//	é‹è»¢å¸­è¦–ç‚¹æ–¹å‘
+	string m_Name;						//	ç·¨æˆå
+	CListElement *m_ListElement;		//	ãƒªã‚¹ãƒˆè¦ç´ 
+	list<CTrainSetBuffer> m_SetBuffer;	//	é…ç½®ãƒãƒƒãƒ•ã‚¡
+	CGroupEndLocator m_Location[2];		//	çµ‚ç«¯ä½ç½®
+	CGroupEndLocator m_Seeker;			//	çµŒè·¯æ¢ç´¢å­
+	set<CRailConnector *> m_PointList;	//	é€šéä¸­ãƒã‚¤ãƒ³ãƒˆãƒªã‚¹ãƒˆ
+	set<CRailConnector *> m_SeekList;	//	æ¢ç´¢ä¸­ãƒã‚¤ãƒ³ãƒˆãƒªã‚¹ãƒˆ
+	set<CRailConnector *> m_OldSeek;	//	æ—§æ¢ç´¢ä¸­ãƒã‚¤ãƒ³ãƒˆãƒªã‚¹ãƒˆ
+	CDiaElement m_DiaElement;			//	ãƒ€ã‚¤ãƒ¤è¦ç´ 
+	CPlatformInst *m_Platform;			//	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ 
+	CTrain *m_TrainList;				//	è»Šè¼Œãƒªã‚¹ãƒˆ
+	CTrain *m_SelectTrain;				//	é¸æŠä¸­è»Šè¼Œ
+	CTrainGroup *m_Next;				//	æ¬¡
 public:
 	CTrainGroup(char *);
 	~CTrainGroup();
@@ -122,7 +122,7 @@ public:
 	void Save(FILE *);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CTrainGroup *g_TrainGroup;
 
 CTrainGroup *GetTrainGroupBySerial(int);

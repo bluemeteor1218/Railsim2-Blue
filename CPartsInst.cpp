@@ -1,9 +1,9 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CPartsInst.h"
 
 /*
  *	[static]
- *	ƒtƒH[ƒJƒXƒ{ƒbƒNƒX•`‰æ
+ *	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ãƒœãƒƒã‚¯ã‚¹æç”»
  */
 void CPartsInst::DrawBox(){
 	BOX8 box = m_Object.GetBox();

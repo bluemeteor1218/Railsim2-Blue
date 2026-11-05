@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 class CHeightField{
 	CVertex m_vtx;
@@ -8,7 +8,7 @@ class CHeightField{
 	float *m_map;
 	BOOL m_fRender;
 
-	//	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^••ˆó
+	//	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿å°å°
 	CHeightField& operator = (const CHeightField&){return *this;}
 public:
 	CHeightField();

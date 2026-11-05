@@ -1,16 +1,16 @@
-#ifndef CCURSOR_H_INCLUDED
+ï»¿#ifndef CCURSOR_H_INCLUDED
 #define CCURSOR_H_INCLUDED
 
 /*
- *	ƒJ[ƒ\ƒ‹ƒNƒ‰ƒX
+ *	ã‚«ãƒ¼ã‚½ãƒ«ã‚¯ãƒ©ã‚¹
  */
 class CCursor{
 private:
-	int m_State;	//	ó‘Ô
-	int m_Resizing;	//	ƒŠƒTƒCƒY’†
-	float m_Alpha;	//	ƒAƒ‹ƒtƒ@’l
-	POINT m_Pos;	//	À•W
-	POINT m_Delta;	//	’†S‚©‚ç‚Ì·•ª
+	int m_State;	//	çŠ¶æ…‹
+	int m_Resizing;	//	ãƒªã‚µã‚¤ã‚ºä¸­
+	float m_Alpha;	//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤
+	POINT m_Pos;	//	åº§æ¨™
+	POINT m_Delta;	//	ä¸­å¿ƒã‹ã‚‰ã®å·®åˆ†
 public:
 	void Init();
 	void Clip();
@@ -28,7 +28,7 @@ public:
 	bool IsLock(){ return !!m_State; }
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CCursor g_Cursor;
 
 #endif

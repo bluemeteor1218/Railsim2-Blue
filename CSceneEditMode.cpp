@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSimpleDialog.h"
 #include "CScene.h"
 #include "CSaveFile.h"
@@ -8,17 +8,17 @@
 #include "CConfigMode.h"
 
 /*
- *	ƒŠƒl[ƒ€I—¹ˆ—
+ *	ãƒªãƒãƒ¼ãƒ çµ‚äº†å‡¦ç†
  */
 void CSceneListView::EndRename(
-	CListElement *item	//	ƒAƒCƒeƒ€
+	CListElement *item	//	ã‚¢ã‚¤ãƒ†ãƒ 
 ){
 	CScene *sc = (CScene *)item->GetData();
 	sc->SetName(item->GetString(0));
 }
 
 /*
- *	ƒ_ƒuƒ‹ƒNƒŠƒbƒN
+ *	ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯
  */
 void CSceneListView::DoubleClick(){
 	((CScene *)m_FocusItem->GetData())->Enter(false);
@@ -30,10 +30,10 @@ void CSceneListView::DoubleClick(){
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSceneEditMode::CSceneEditMode():
-	CModelPluginMode(lang(SurfacePlugin))	//	Šî–{ƒNƒ‰ƒX
+	CModelPluginMode(lang(SurfacePlugin))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_SelectScene = NULL;
 	int ww = TILE_UNIT*16, wh = TILE_UNIT*10;
@@ -60,18 +60,18 @@ CSceneEditMode::CSceneEditMode():
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CSceneEditMode::~CSceneEditMode(){
 	DELETE_V(m_SceneMenu);
 }
 
 /*
- *	ƒEƒBƒ“ƒhƒEƒŠƒTƒCƒY
+ *	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒªã‚µã‚¤ã‚º
  */
 void CSceneEditMode::WindowResized(
-	int w, int h,		//	V‹KƒTƒCƒY
-	CWindowCtrl *wnd	//	ƒEƒBƒhƒEƒRƒ“ƒgƒ[ƒ‹
+	int w, int h,		//	æ–°è¦ã‚µã‚¤ã‚º
+	CWindowCtrl *wnd	//	ã‚¦ã‚£ãƒ‰ã‚¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 ){
 	if(wnd==&m_SceneWindow){
 		m_SceneListView.SetSize(w-TILE_UNIT, h-TILE_UNIT*2);
@@ -84,17 +84,17 @@ void CSceneEditMode::WindowResized(
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CSceneEditMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	switch(type){
 	case CMD_PITVELEM:
 		class CSceneAdder: public CMenuCommand{
 		private:
-			CSurfacePlugin *m_SurfacePlugin;	//	ƒV[ƒ“
+			CSurfacePlugin *m_SurfacePlugin;	//	ã‚·ãƒ¼ãƒ³
 		public:
 			CSceneAdder(CSurfacePlugin *sp){ m_SurfacePlugin = sp; }
 			void Exec(){ g_SceneEditMode->AddScene(m_SurfacePlugin); }
@@ -115,15 +115,15 @@ CPopMenu *CSceneEditMode::Dispatch(
 	case CMD_SCENE: {
 		class CSceneSelector: public CMenuCommand{
 		private:
-			CScene *m_Scene;	//	ƒV[ƒ“
+			CScene *m_Scene;	//	ã‚·ãƒ¼ãƒ³
 		public:
 			CSceneSelector(CScene *sc){ m_Scene = sc; }
 			void Exec(){ m_Scene->Enter(false); CGameMode::SetNeutral(); }
 		};
 		class CSceneDeleter: public CMenuCommand{
 		private:
-			bool m_Confirm;		//	Šm”F
-			CScene *m_Scene;	//	ƒV[ƒ“
+			bool m_Confirm;		//	ç¢ºèª
+			CScene *m_Scene;	//	ã‚·ãƒ¼ãƒ³
 		public:
 			CSceneDeleter(bool c, CScene *sc){ m_Confirm = c; m_Scene = sc; }
 			void Exec(){
@@ -139,7 +139,7 @@ CPopMenu *CSceneEditMode::Dispatch(
 		};
 		class CSceneRenamer: public CMenuCommand{
 		private:
-			CScene *m_Scene;	//	ƒV[ƒ“
+			CScene *m_Scene;	//	ã‚·ãƒ¼ãƒ³
 		public:
 			CSceneRenamer(CScene *sc){ m_Scene = sc; }
 			void Exec(){ m_Scene->GetListElement()->BeginRename(); }
@@ -165,11 +165,11 @@ CPopMenu *CSceneEditMode::Dispatch(
 }
 
 /*
- *	ƒ_ƒuƒ‹ƒNƒŠƒbƒNˆ—
+ *	ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯å‡¦ç†
  */
 void CSceneEditMode::DoubleClick(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	switch(type){
 	case CMD_PITVELEM:
@@ -179,17 +179,17 @@ void CSceneEditMode::DoubleClick(
 }
 
 /*
- *	Œ»İ‚Ìƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“‚ğæ“¾
+ *	ç¾åœ¨ã®ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’å–å¾—
  */
 CModelPlugin *CSceneEditMode::GetModelPlugin(){
 	return g_Surface;
 }
 
 /*
- *	ƒV[ƒ“’Ç‰Á
+ *	ã‚·ãƒ¼ãƒ³è¿½åŠ 
  */
 void CSceneEditMode::AddScene(
-	CSurfacePlugin *spi	//	’nŒ`ƒvƒ‰ƒOƒCƒ“
+	CSurfacePlugin *spi	//	åœ°å½¢ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	if(g_NetworkInitialized){
 		g_Skin->Error();
@@ -204,10 +204,10 @@ void CSceneEditMode::AddScene(
 }
 
 /*
- *	ƒV[ƒ“íœ
+ *	ã‚·ãƒ¼ãƒ³å‰Šé™¤
  */
 void CSceneEditMode::DeleteScene(
-	CScene *sc	//	ƒV[ƒ“
+	CScene *sc	//	ã‚·ãƒ¼ãƒ³
 ){
 	if(g_NetworkInitialized){
 		g_Skin->Error();
@@ -218,14 +218,14 @@ void CSceneEditMode::DeleteScene(
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆå–å¾—
  */
 CPluginList *CSceneEditMode::GetPluginList(){
 	return g_SurfacePluginList;
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CSceneEditMode::EnterModelPlugin(){
 	ms_ModeLabel = lang(EditScene);
@@ -235,7 +235,7 @@ void CSceneEditMode::EnterModelPlugin(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 CModelInst *CSceneEditMode::ScanInputModelPlugin(){
 	if(g_RSPV) return NULL;
@@ -275,7 +275,7 @@ CModelInst *CSceneEditMode::ScanInputModelPlugin(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CSceneEditMode::RenderModelPlugin(){
 	if(CPlugin::IsPreview()){

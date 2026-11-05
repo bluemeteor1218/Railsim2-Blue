@@ -1,22 +1,22 @@
-#ifndef CLINEPLUGIN_H_INCLUDED
+ï»¿#ifndef CLINEPLUGIN_H_INCLUDED
 #define CLINEPLUGIN_H_INCLUDED
 
 #include "CProfilePlugin.h"
 
 /*
- *	‰Ëüƒvƒ‰ƒOƒCƒ“
+ *	æ¶ç·šãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CLinePlugin: public CProfilePlugin{
 	friend class CLine;
 	friend class CRailPlugin;
 	friend class CLineBuildCurve;
 private:
-	float m_TrolleyAlt;		//	‹O“¹–Ê|ƒgƒƒŠüŠÔ‚‚³
-	float m_Height;			//	ƒgƒƒŠü|x“_ŠÔ‚‚³
-	float m_MaxInterval;	//	‰Ëü’ŒŠÔŠu
-	float m_Offset;			//	ƒIƒtƒZƒbƒg
-	float m_MaxDeflection;	//	ƒpƒ“ƒ^ƒOƒ‰ƒt’†S‚©‚ç‚ÌÅ‘å•ÎˆÊ
-	float m_PolePos;		//	‰Ëü’ŒŠÔÏZ‹——£
+	float m_TrolleyAlt;		//	è»Œé“é¢ï¼ãƒˆãƒ­ãƒªç·šé–“é«˜ã•
+	float m_Height;			//	ãƒˆãƒ­ãƒªç·šï¼æ”¯æŒç‚¹é–“é«˜ã•
+	float m_MaxInterval;	//	æ¶ç·šæŸ±é–“éš”
+	float m_Offset;			//	ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	float m_MaxDeflection;	//	ãƒ‘ãƒ³ã‚¿ã‚°ãƒ©ãƒ•ä¸­å¿ƒã‹ã‚‰ã®æœ€å¤§åä½
+	float m_PolePos;		//	æ¶ç·šæŸ±é–“ç©ç®—è·é›¢
 public:
 	static void RenderPreview();
 	CLinePlugin(char *id): CProfilePlugin(id){}
@@ -34,7 +34,7 @@ public:
 };
 
 /*
- *	––Øƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CLinePluginList: public CProfilePluginList{
 private:
@@ -46,7 +46,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CLinePlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CLinePlugin *g_Line;
 extern CLinePluginList *g_LinePluginList;
 

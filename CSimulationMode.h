@@ -1,4 +1,4 @@
-#ifndef CSIMULATIONMODE_H_INCLUDED
+ï»¿#ifndef CSIMULATIONMODE_H_INCLUDED
 #define CSIMULATIONMODE_H_INCLUDED
 
 #include "CStaticCtrl.h"
@@ -11,26 +11,26 @@ const int TIME_SCALE_NUM = 10;
 const int SIM_SPEED_NUM = 5;
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“İ’èƒ‚[ƒh
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³è¨­å®šãƒ¢ãƒ¼ãƒ‰
  */
 class CSimulationMode: public CInterfaceMode{
 	friend class CSaveFile;
 private:
-	int m_OldSpeed;								//	ƒ|[ƒY‘O‚Ì‘¬“x
-	CWindowCtrl m_SimulationWindow;				//	‘‹
-	CGroupBox m_ScaleGroup;						//	ƒXƒP[ƒ‹ƒOƒ‹[ƒv
-	CRadioButton m_TimeScale[TIME_SCALE_NUM];	//	ŠÔ²ƒXƒP[ƒ‹
-	CGroupBox m_SpeedGroup;						//	‘¬“xƒOƒ‹[ƒv
-	CRadioButton m_SimSpeed[SIM_SPEED_NUM];		//	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“‘¬“x
-	CGroupBox m_TimeGroup;						//	ŠÔŒo‰ß
-	CStaticCtrl m_RotLabel;						//	’n‹…‚Ì©“]
-	CRadioButton m_EarthRotation[3];			//	©“]ƒ`ƒFƒbƒN
-	CStaticCtrl m_RevLabel;						//	’n‹…‚ÌŒö“]
-	CRadioButton m_EarthRevolution[5];			//	Œö“]ƒ`ƒFƒbƒN
-	CGroupBox m_MiscGroup;						//	ŠÔŒo‰ß
-	CCheckBox m_ManualControl;					//	ƒ}ƒjƒ…ƒAƒ‹‘€ì
-	CCheckBox m_IgnoreAcceleration;				//	‰ÁŒ¸‘¬“x‚ğ–³‹
-	CStaticCtrl m_NoteLabel;					//	’ˆÓ‘‚«
+	int m_OldSpeed;								//	ãƒãƒ¼ã‚ºå‰ã®é€Ÿåº¦
+	CWindowCtrl m_SimulationWindow;				//	çª“
+	CGroupBox m_ScaleGroup;						//	ã‚¹ã‚±ãƒ¼ãƒ«ã‚°ãƒ«ãƒ¼ãƒ—
+	CRadioButton m_TimeScale[TIME_SCALE_NUM];	//	æ™‚é–“è»¸ã‚¹ã‚±ãƒ¼ãƒ«
+	CGroupBox m_SpeedGroup;						//	é€Ÿåº¦ã‚°ãƒ«ãƒ¼ãƒ—
+	CRadioButton m_SimSpeed[SIM_SPEED_NUM];		//	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€Ÿåº¦
+	CGroupBox m_TimeGroup;						//	æ™‚é–“çµŒé
+	CStaticCtrl m_RotLabel;						//	åœ°çƒã®è‡ªè»¢
+	CRadioButton m_EarthRotation[3];			//	è‡ªè»¢ãƒã‚§ãƒƒã‚¯
+	CStaticCtrl m_RevLabel;						//	åœ°çƒã®å…¬è»¢
+	CRadioButton m_EarthRevolution[5];			//	å…¬è»¢ãƒã‚§ãƒƒã‚¯
+	CGroupBox m_MiscGroup;						//	æ™‚é–“çµŒé
+	CCheckBox m_ManualControl;					//	ãƒãƒ‹ãƒ¥ã‚¢ãƒ«æ“ä½œ
+	CCheckBox m_IgnoreAcceleration;				//	åŠ æ¸›é€Ÿåº¦ã‚’ç„¡è¦–
+	CStaticCtrl m_NoteLabel;					//	æ³¨æ„æ›¸ã
 public:
 	CSimulationMode();
 	~CSimulationMode(){}
@@ -48,7 +48,7 @@ public:
 	int GetIgnoreAcceleration(){ return m_IgnoreAcceleration.GetCheck(); }
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CSimulationMode *g_SimulationMode;
 
 #endif

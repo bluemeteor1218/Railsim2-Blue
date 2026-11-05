@@ -1,4 +1,4 @@
-#ifndef CRAILBUILDER_H_INCLUDED
+ï»¿#ifndef CRAILBUILDER_H_INCLUDED
 #define CRAILBUILDER_H_INCLUDED
 
 #include "CRailWay.h"
@@ -10,26 +10,26 @@ class CTiePlugin;
 class CGirderPlugin;
 
 /*
- *	ƒŒ[ƒ‹İ’uq
+ *	ãƒ¬ãƒ¼ãƒ«è¨­ç½®å­
  */
 class CRailBuilder{
 private:
-	static int ms_CurrentTrack;		//	Œ»İ‚Ìƒgƒ‰ƒbƒN
-	static int ms_TrackNum;			//	ü”
-	static float ms_TrackInterval;	//	üŠÔŠu
-	static float ms_TrackShift;		//	’†S‚©‚ç‚ÌƒVƒtƒg—Ê
-	static bool ms_LiftRailSurface;	//	ƒŒ[ƒ‹‚¿ã‚°
-	static VEC3 ms_BeginPosSum;		//	ŠJnˆÊ’u‘˜a
-	static VEC3 ms_BeginDirSum;		//	ŠJn•ûŒü‘˜a
-	static VEC3 ms_EndPosSum;		//	I—¹ˆÊ’u‘˜a
-	static VEC3 ms_EndDirSum;		//	I—¹•ûŒü‘˜a
-	bool m_HitFlag;					//	”»’èƒtƒ‰ƒO
-	VEC3 m_Pos;						//	À•W
-	VEC3 m_HitPos;					//	”»’èÀ•W
-	VEC3 m_HitNorm;					//	”»’è–@ü
-	vector<CRailLinkTemp> m_Link;	//	Ú‘±î•ñ
-	CRailBuilder *m_Prev;			//	‘O
-	CRailBuilder *m_Next;			//	Ÿ
+	static int ms_CurrentTrack;		//	ç¾åœ¨ã®ãƒˆãƒ©ãƒƒã‚¯
+	static int ms_TrackNum;			//	ç·šæ•°
+	static float ms_TrackInterval;	//	ç·šé–“éš”
+	static float ms_TrackShift;		//	ä¸­å¿ƒã‹ã‚‰ã®ã‚·ãƒ•ãƒˆé‡
+	static bool ms_LiftRailSurface;	//	ãƒ¬ãƒ¼ãƒ«æŒã¡ä¸Šã’
+	static VEC3 ms_BeginPosSum;		//	é–‹å§‹ä½ç½®ç·å’Œ
+	static VEC3 ms_BeginDirSum;		//	é–‹å§‹æ–¹å‘ç·å’Œ
+	static VEC3 ms_EndPosSum;		//	çµ‚äº†ä½ç½®ç·å’Œ
+	static VEC3 ms_EndDirSum;		//	çµ‚äº†æ–¹å‘ç·å’Œ
+	bool m_HitFlag;					//	åˆ¤å®šãƒ•ãƒ©ã‚°
+	VEC3 m_Pos;						//	åº§æ¨™
+	VEC3 m_HitPos;					//	åˆ¤å®šåº§æ¨™
+	VEC3 m_HitNorm;					//	åˆ¤å®šæ³•ç·š
+	vector<CRailLinkTemp> m_Link;	//	æ¥ç¶šæƒ…å ±
+	CRailBuilder *m_Prev;			//	å‰
+	CRailBuilder *m_Next;			//	æ¬¡
 public:
 	static void ResetDirSum();
 	static void SetTrack(int, int, float, bool);

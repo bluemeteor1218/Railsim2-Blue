@@ -1,13 +1,13 @@
-#include <time.h>
+ï»¿#include <time.h>
 #include <windows.h>
 
 LONGLONG g_HighTimerFreq = 0;
 double g_HighTimer_FromCountToMilliseconds = 0.0;
 
 /*
- *	‚•ª‰ğ”\ƒ^ƒCƒ}‚Ì‰Šú‰»
+ *	é«˜åˆ†è§£èƒ½ã‚¿ã‚¤ãƒã®åˆæœŸåŒ–
  *
- *	–ß‚è’l: CPU ‚ª‘Î‰‚µ‚Ä‚¢‚ê‚Î true ‚ğ•Ô‚·
+ *	æˆ»ã‚Šå€¤: CPU ãŒå¯¾å¿œã—ã¦ã„ã‚Œã° true ã‚’è¿”ã™
  */
 bool InitHighTimer(){
 	if(QueryPerformanceFrequency((LARGE_INTEGER *)(&g_HighTimerFreq))){
@@ -21,9 +21,9 @@ bool InitHighTimer(){
 }
 
 /*
- *	Œ»İ‚Ìæ“¾
+ *	ç¾åœ¨æ™‚åˆ»ã®å–å¾—
  *
- *	–ß‚è’l: “à•”ƒJƒEƒ“ƒg’l
+ *	æˆ»ã‚Šå€¤: å†…éƒ¨ã‚«ã‚¦ãƒ³ãƒˆå€¤
  */
 LONGLONG HighTimer(){
 	if(g_HighTimerFreq){
@@ -36,9 +36,9 @@ LONGLONG HighTimer(){
 }
 
 /*
- *	ƒ~ƒŠ•b‚É•ÏŠ·
+ *	ãƒŸãƒªç§’ã«å¤‰æ›
  *
- *	–ß‚è’l: ƒ~ƒŠ•b
+ *	æˆ»ã‚Šå€¤: ãƒŸãƒªç§’
  */
 double FromHighTimerCountToMs(LONGLONG t){
 	return t*g_HighTimer_FromCountToMilliseconds;

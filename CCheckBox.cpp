@@ -1,15 +1,15 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCheckBox.h"
 #include "CSkinPlugin.h"
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CCheckBox::Init(
-	int x, int y,	//	À•W
-	int w, int h,	//	ƒTƒCƒY
-	char *t,		//	ƒeƒLƒXƒg
-	CInterface *p	//	e
+	int x, int y,	//	åº§æ¨™
+	int w, int h,	//	ã‚µã‚¤ã‚º
+	char *t,		//	ãƒ†ã‚­ã‚¹ãƒˆ
+	CInterface *p	//	è¦ª
 ){
 	CInterface::Init(x, y, w, h, t, p);
 	m_State = 0;
@@ -18,7 +18,7 @@ void CCheckBox::Init(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CCheckBox::ScanInput(){
 	if(!m_Enabled){
@@ -66,7 +66,7 @@ bool CCheckBox::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CCheckBox::Render(){
 	CInterface::RenderBrother();

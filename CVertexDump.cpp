@@ -1,19 +1,19 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 
-//	“à•”’è”
-const int LINE_DUMP_MAX_MAX = 32767;	//	’¼üƒ_ƒ“ƒvÅ‘å’l‚ÌÅ‘å’l
-const int QUAD_DUMP_MAX_MAX = 10922;	//	lŠpŒ`ƒ_ƒ“ƒvÅ‘å’l‚ÌÅ‘å’l
+//	å†…éƒ¨å®šæ•°
+const int LINE_DUMP_MAX_MAX = 32767;	//	ç›´ç·šãƒ€ãƒ³ãƒ—æœ€å¤§å€¤ã®æœ€å¤§å€¤
+const int QUAD_DUMP_MAX_MAX = 10922;	//	å››è§’å½¢ãƒ€ãƒ³ãƒ—æœ€å¤§å€¤ã®æœ€å¤§å€¤
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_HidefCaptureFlag;
 extern int g_HidefQuality;
 extern MTX4 g_BoldLineMtx[8][8];
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLineDumpTL::CLineDumpTL(
-	int linenum	//	’¼ü”
+	int linenum	//	ç›´ç·šæ•°
 ){
 	m_LineNum = linenum;
 	if(m_LineNum>LINE_DUMP_MAX_MAX) m_LineNum = LINE_DUMP_MAX_MAX;
@@ -23,10 +23,10 @@ CLineDumpTL::CLineDumpTL(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLineDumpTL::CLineDumpTL(
-	CLineDumpTL *src	//	ˆø‚«Œp‚¬Œ³
+	CLineDumpTL *src	//	å¼•ãç¶™ãå…ƒ
 ){
 	m_LineNum = src->m_LineNum;
 	m_Count = src->m_Count;
@@ -35,7 +35,7 @@ CLineDumpTL::CLineDumpTL(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLineDumpTL::~CLineDumpTL(){
 	DELETE_A(m_Buffer);
@@ -43,7 +43,7 @@ CLineDumpTL::~CLineDumpTL(){
 }
 
 /*
- *	ƒoƒbƒtƒ@’Ç‰Á
+ *	ãƒãƒƒãƒ•ã‚¡è¿½åŠ 
  */
 void CLineDumpTL::Feed(){
 	m_Next = new CLineDumpTL(this);
@@ -52,11 +52,11 @@ void CLineDumpTL::Feed(){
 }
 
 /*
- *	ƒvƒŠƒ~ƒeƒBƒu’Ç‰Á
+ *	ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–è¿½åŠ 
  */
 void CLineDumpTL::Add(
-	VEC2 p1, D3DCOLOR c1,	//	’¸“_ 1
-	VEC2 p2, D3DCOLOR c2	//	’¸“_ 2
+	VEC2 p1, D3DCOLOR c1,	//	é ‚ç‚¹ 1
+	VEC2 p2, D3DCOLOR c2	//	é ‚ç‚¹ 2
 ){
 	if(m_Count==m_LineNum) Feed();
 	VTX_TL *buf = &m_Buffer[m_Count*2];
@@ -67,11 +67,11 @@ void CLineDumpTL::Add(
 }
 
 /*
- *	‘¦•`‰æ
+ *	å³æç”»
  */
 void CLineDumpTL::Preview(
-	VEC2 p1, D3DCOLOR c1,	//	’¸“_ 1
-	VEC2 p2, D3DCOLOR c2	//	’¸“_ 2
+	VEC2 p1, D3DCOLOR c1,	//	é ‚ç‚¹ 1
+	VEC2 p2, D3DCOLOR c2	//	é ‚ç‚¹ 2
 ){
 	VTX_TL prev[2], *buf = prev;
 	buf->x = p1.x; buf->y = p1.y; buf->z = 0.0f; buf->d = c1;
@@ -82,7 +82,7 @@ void CLineDumpTL::Preview(
 }
 
 /*
- *	ƒo[ƒeƒbƒNƒX€”õ
+ *	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹æº–å‚™
  */
 void CLineDumpTL::PrepareVertex(){
 	m_Vertex.Create(m_Buffer, FVF_TL, m_Count*2*sizeof(VTX_TL));
@@ -90,10 +90,10 @@ void CLineDumpTL::PrepareVertex(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CLineDumpTL::Render(
-	bool drawup	//	DrawPrimitiveUp ‚ğg—p
+	bool drawup	//	DrawPrimitiveUp ã‚’ä½¿ç”¨
 ){
 	devSetTexture(0, NULL);
 	if(m_Next) m_Next->Render(drawup);
@@ -109,10 +109,10 @@ void CLineDumpTL::Render(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLineDumpL::CLineDumpL(
-	int linenum	//	’¼ü”
+	int linenum	//	ç›´ç·šæ•°
 ){
 	m_LineNum = linenum;
 	if(m_LineNum>LINE_DUMP_MAX_MAX) m_LineNum = LINE_DUMP_MAX_MAX;
@@ -122,10 +122,10 @@ CLineDumpL::CLineDumpL(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLineDumpL::CLineDumpL(
-	CLineDumpL *src	//	ˆø‚«Œp‚¬Œ³
+	CLineDumpL *src	//	å¼•ãç¶™ãå…ƒ
 ){
 	m_LineNum = src->m_LineNum;
 	m_Count = src->m_Count;
@@ -134,7 +134,7 @@ CLineDumpL::CLineDumpL(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLineDumpL::~CLineDumpL(){
 	DELETE_A(m_Buffer);
@@ -142,7 +142,7 @@ CLineDumpL::~CLineDumpL(){
 }
 
 /*
- *	ƒoƒbƒtƒ@’Ç‰Á
+ *	ãƒãƒƒãƒ•ã‚¡è¿½åŠ 
  */
 void CLineDumpL::Feed(){
 	m_Next = new CLineDumpL(this);
@@ -151,11 +151,11 @@ void CLineDumpL::Feed(){
 }
 
 /*
- *	ƒvƒŠƒ~ƒeƒBƒu’Ç‰Á
+ *	ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–è¿½åŠ 
  */
 void CLineDumpL::Add(
-	VEC3 p1, D3DCOLOR c1,	//	’¸“_ 1
-	VEC3 p2, D3DCOLOR c2	//	’¸“_ 2
+	VEC3 p1, D3DCOLOR c1,	//	é ‚ç‚¹ 1
+	VEC3 p2, D3DCOLOR c2	//	é ‚ç‚¹ 2
 ){
 	if(m_Count==m_LineNum) Feed();
 	VTX_L *buf = &m_Buffer[m_Count*2];
@@ -166,11 +166,11 @@ void CLineDumpL::Add(
 }
 
 /*
- *	‘¦•`‰æ
+ *	å³æç”»
  */
 void CLineDumpL::Preview(
-	VEC3 p1, D3DCOLOR c1,	//	’¸“_ 1
-	VEC3 p2, D3DCOLOR c2	//	’¸“_ 2
+	VEC3 p1, D3DCOLOR c1,	//	é ‚ç‚¹ 1
+	VEC3 p2, D3DCOLOR c2	//	é ‚ç‚¹ 2
 ){
 	VTX_L prev[2], *buf = prev;
 	buf->x = p1.x; buf->y = p1.y; buf->z = p1.z; buf->d = c1;
@@ -181,7 +181,7 @@ void CLineDumpL::Preview(
 }
 
 /*
- *	ƒo[ƒeƒbƒNƒX€”õ
+ *	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹æº–å‚™
  */
 void CLineDumpL::PrepareVertex(){
 	m_Vertex.Create(m_Buffer, FVF_L, m_Count*2*sizeof(VTX_L));
@@ -189,10 +189,10 @@ void CLineDumpL::PrepareVertex(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CLineDumpL::Render(
-	bool drawup	//	DrawPrimitiveUp ‚ğg—p
+	bool drawup	//	DrawPrimitiveUp ã‚’ä½¿ç”¨
 ){
 	devSetTexture(0, NULL);
 	if(drawup){
@@ -208,10 +208,10 @@ void CLineDumpL::Render(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLineDumpN::CLineDumpN(
-	int linenum	//	’¼ü”
+	int linenum	//	ç›´ç·šæ•°
 ){
 	m_LineNum = linenum;
 	if(m_LineNum>LINE_DUMP_MAX_MAX) m_LineNum = LINE_DUMP_MAX_MAX;
@@ -221,10 +221,10 @@ CLineDumpN::CLineDumpN(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLineDumpN::CLineDumpN(
-	CLineDumpN *src	//	ˆø‚«Œp‚¬Œ³
+	CLineDumpN *src	//	å¼•ãç¶™ãå…ƒ
 ){
 	m_LineNum = src->m_LineNum;
 	m_Count = src->m_Count;
@@ -233,7 +233,7 @@ CLineDumpN::CLineDumpN(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLineDumpN::~CLineDumpN(){
 	DELETE_A(m_Buffer);
@@ -241,7 +241,7 @@ CLineDumpN::~CLineDumpN(){
 }
 
 /*
- *	ƒoƒbƒtƒ@’Ç‰Á
+ *	ãƒãƒƒãƒ•ã‚¡è¿½åŠ 
  */
 void CLineDumpN::Feed(){
 	m_Next = new CLineDumpN(this);
@@ -250,11 +250,11 @@ void CLineDumpN::Feed(){
 }
 
 /*
- *	ƒvƒŠƒ~ƒeƒBƒu’Ç‰Á
+ *	ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–è¿½åŠ 
  */
 void CLineDumpN::Add(
-	VEC3 p1, D3DCOLOR c1,	//	’¸“_ 1
-	VEC3 p2, D3DCOLOR c2	//	’¸“_ 2
+	VEC3 p1, D3DCOLOR c1,	//	é ‚ç‚¹ 1
+	VEC3 p2, D3DCOLOR c2	//	é ‚ç‚¹ 2
 ){
 	if(m_Count==m_LineNum) Feed();
 	VTX_N *buf = &m_Buffer[m_Count*2];
@@ -265,11 +265,11 @@ void CLineDumpN::Add(
 }
 
 /*
- *	‘¦•`‰æ
+ *	å³æç”»
  */
 void CLineDumpN::Preview(
-	VEC3 p1, D3DCOLOR c1,	//	’¸“_ 1
-	VEC3 p2, D3DCOLOR c2	//	’¸“_ 2
+	VEC3 p1, D3DCOLOR c1,	//	é ‚ç‚¹ 1
+	VEC3 p2, D3DCOLOR c2	//	é ‚ç‚¹ 2
 ){
 	VTX_N prev[2], *buf = prev;
 	buf->x = p1.x; buf->y = p1.y; buf->z = p1.z; buf->d = c1; buf->n = V3UP;
@@ -280,7 +280,7 @@ void CLineDumpN::Preview(
 }
 
 /*
- *	ƒo[ƒeƒbƒNƒX€”õ
+ *	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹æº–å‚™
  */
 void CLineDumpN::PrepareVertex(){
 	m_Vertex.Create(m_Buffer, FVF_N, m_Count*2*sizeof(VTX_N));
@@ -288,10 +288,10 @@ void CLineDumpN::PrepareVertex(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CLineDumpN::Render(
-	bool drawup	//	DrawPrimitiveUp ‚ğg—p
+	bool drawup	//	DrawPrimitiveUp ã‚’ä½¿ç”¨
 ){
 	devSetTexture(0, NULL);
 	if(g_HidefCaptureFlag){
@@ -323,10 +323,10 @@ void CLineDumpN::Render(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CQuadDumpN::CQuadDumpN(
-	int quadnum	//	lŠpŒ`”
+	int quadnum	//	å››è§’å½¢æ•°
 ){
 	m_QuadNum = quadnum;
 	if(m_QuadNum>QUAD_DUMP_MAX_MAX) m_QuadNum = QUAD_DUMP_MAX_MAX;
@@ -336,10 +336,10 @@ CQuadDumpN::CQuadDumpN(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CQuadDumpN::CQuadDumpN(
-	CQuadDumpN *src	//	ˆø‚«Œp‚¬Œ³
+	CQuadDumpN *src	//	å¼•ãç¶™ãå…ƒ
 ){
 	m_QuadNum = src->m_QuadNum;
 	m_Count = src->m_Count;
@@ -348,7 +348,7 @@ CQuadDumpN::CQuadDumpN(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CQuadDumpN::~CQuadDumpN(){
 	DELETE_A(m_Buffer);
@@ -356,7 +356,7 @@ CQuadDumpN::~CQuadDumpN(){
 }
 
 /*
- *	ƒoƒbƒtƒ@’Ç‰Á
+ *	ãƒãƒƒãƒ•ã‚¡è¿½åŠ 
  */
 void CQuadDumpN::Feed(){
 	m_Next = new CQuadDumpN(this);
@@ -365,13 +365,13 @@ void CQuadDumpN::Feed(){
 }
 
 /*
- *	ƒvƒŠƒ~ƒeƒBƒu’Ç‰Á
+ *	ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–è¿½åŠ 
  */
 void CQuadDumpN::Add(
-	VEC3 p1, VEC3 n1, D3DCOLOR c1,	//	’¸“_ 1
-	VEC3 p2, VEC3 n2, D3DCOLOR c2,	//	’¸“_ 2
-	VEC3 p3, VEC3 n3, D3DCOLOR c3,	//	’¸“_ 3
-	VEC3 p4, VEC3 n4, D3DCOLOR c4	//	’¸“_ 4
+	VEC3 p1, VEC3 n1, D3DCOLOR c1,	//	é ‚ç‚¹ 1
+	VEC3 p2, VEC3 n2, D3DCOLOR c2,	//	é ‚ç‚¹ 2
+	VEC3 p3, VEC3 n3, D3DCOLOR c3,	//	é ‚ç‚¹ 3
+	VEC3 p4, VEC3 n4, D3DCOLOR c4	//	é ‚ç‚¹ 4
 ){
 	if(m_Count==m_QuadNum) Feed();
 	VTX_N *buf = &m_Buffer[m_Count*6];
@@ -396,13 +396,13 @@ void CQuadDumpN::Add(
 }
 
 /*
- *	‘¦•`‰æ
+ *	å³æç”»
  */
 void CQuadDumpN::Preview(
-	VEC3 p1, VEC3 n1, D3DCOLOR c1,	//	’¸“_ 1
-	VEC3 p2, VEC3 n2, D3DCOLOR c2,	//	’¸“_ 2
-	VEC3 p3, VEC3 n3, D3DCOLOR c3,	//	’¸“_ 3
-	VEC3 p4, VEC3 n4, D3DCOLOR c4	//	’¸“_ 4
+	VEC3 p1, VEC3 n1, D3DCOLOR c1,	//	é ‚ç‚¹ 1
+	VEC3 p2, VEC3 n2, D3DCOLOR c2,	//	é ‚ç‚¹ 2
+	VEC3 p3, VEC3 n3, D3DCOLOR c3,	//	é ‚ç‚¹ 3
+	VEC3 p4, VEC3 n4, D3DCOLOR c4	//	é ‚ç‚¹ 4
 ){
 	VTX_N prev[6], *buf = prev;
 	buf->x = p1.x; buf->y = p1.y; buf->z = p1.z;
@@ -427,7 +427,7 @@ void CQuadDumpN::Preview(
 }
 
 /*
- *	ƒo[ƒeƒbƒNƒX€”õ
+ *	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹æº–å‚™
  */
 void CQuadDumpN::PrepareVertex(){
 	m_Vertex.Create(m_Buffer, FVF_N, m_Count*6*sizeof(VTX_N));
@@ -435,10 +435,10 @@ void CQuadDumpN::PrepareVertex(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CQuadDumpN::Render(
-	bool drawup	//	DrawPrimitiveUp ‚ğg—p
+	bool drawup	//	DrawPrimitiveUp ã‚’ä½¿ç”¨
 ){
 	devSetTexture(0, NULL);
 	if(drawup){
@@ -454,11 +454,11 @@ void CQuadDumpN::Render(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CQuadDumpNX::CQuadDumpNX(
-	int quadnum,	//	lŠpŒ`”
-	LPTEX8 tex		//	ƒeƒNƒXƒ`ƒƒ
+	int quadnum,	//	å››è§’å½¢æ•°
+	LPTEX8 tex		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£
 ){
 	m_QuadNum = quadnum;
 	if(m_QuadNum>QUAD_DUMP_MAX_MAX) m_QuadNum = QUAD_DUMP_MAX_MAX;
@@ -469,10 +469,10 @@ CQuadDumpNX::CQuadDumpNX(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CQuadDumpNX::CQuadDumpNX(
-	CQuadDumpNX *src	//	ˆø‚«Œp‚¬Œ³
+	CQuadDumpNX *src	//	å¼•ãç¶™ãå…ƒ
 ){
 	m_QuadNum = src->m_QuadNum;
 	m_Count = src->m_Count;
@@ -482,7 +482,7 @@ CQuadDumpNX::CQuadDumpNX(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CQuadDumpNX::~CQuadDumpNX(){
 	DELETE_A(m_Buffer);
@@ -490,7 +490,7 @@ CQuadDumpNX::~CQuadDumpNX(){
 }
 
 /*
- *	ƒoƒbƒtƒ@’Ç‰Á
+ *	ãƒãƒƒãƒ•ã‚¡è¿½åŠ 
  */
 void CQuadDumpNX::Feed(){
 	m_Next = new CQuadDumpNX(this);
@@ -499,13 +499,13 @@ void CQuadDumpNX::Feed(){
 }
 
 /*
- *	ƒvƒŠƒ~ƒeƒBƒu’Ç‰Á
+ *	ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–è¿½åŠ 
  */
 void CQuadDumpNX::Add(
-	VEC3 p1, VEC3 n1, D3DCOLOR c1, float u1, float v1,	//	’¸“_ 1
-	VEC3 p2, VEC3 n2, D3DCOLOR c2, float u2, float v2,	//	’¸“_ 2
-	VEC3 p3, VEC3 n3, D3DCOLOR c3, float u3, float v3,	//	’¸“_ 3
-	VEC3 p4, VEC3 n4, D3DCOLOR c4, float u4, float v4	//	’¸“_ 4
+	VEC3 p1, VEC3 n1, D3DCOLOR c1, float u1, float v1,	//	é ‚ç‚¹ 1
+	VEC3 p2, VEC3 n2, D3DCOLOR c2, float u2, float v2,	//	é ‚ç‚¹ 2
+	VEC3 p3, VEC3 n3, D3DCOLOR c3, float u3, float v3,	//	é ‚ç‚¹ 3
+	VEC3 p4, VEC3 n4, D3DCOLOR c4, float u4, float v4	//	é ‚ç‚¹ 4
 ){
 	if(m_Count==m_QuadNum) Feed();
 	VTX_NX *buf = &m_Buffer[m_Count*6];
@@ -530,13 +530,13 @@ void CQuadDumpNX::Add(
 }
 
 /*
- *	‘¦•`‰æ
+ *	å³æç”»
  */
 void CQuadDumpNX::Preview(
-	VEC3 p1, VEC3 n1, D3DCOLOR c1, float u1, float v1,	//	’¸“_ 1
-	VEC3 p2, VEC3 n2, D3DCOLOR c2, float u2, float v2,	//	’¸“_ 2
-	VEC3 p3, VEC3 n3, D3DCOLOR c3, float u3, float v3,	//	’¸“_ 3
-	VEC3 p4, VEC3 n4, D3DCOLOR c4, float u4, float v4	//	’¸“_ 4
+	VEC3 p1, VEC3 n1, D3DCOLOR c1, float u1, float v1,	//	é ‚ç‚¹ 1
+	VEC3 p2, VEC3 n2, D3DCOLOR c2, float u2, float v2,	//	é ‚ç‚¹ 2
+	VEC3 p3, VEC3 n3, D3DCOLOR c3, float u3, float v3,	//	é ‚ç‚¹ 3
+	VEC3 p4, VEC3 n4, D3DCOLOR c4, float u4, float v4	//	é ‚ç‚¹ 4
 ){
 	VTX_NX prev[6], *buf = prev;
 	buf->x = p1.x; buf->y = p1.y; buf->z = p1.z;
@@ -561,7 +561,7 @@ void CQuadDumpNX::Preview(
 }
 
 /*
- *	ƒo[ƒeƒbƒNƒX€”õ
+ *	ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹æº–å‚™
  */
 void CQuadDumpNX::PrepareVertex(){
 	m_Vertex.Create(m_Buffer, FVF_NX, m_Count*6*sizeof(VTX_NX));
@@ -569,10 +569,10 @@ void CQuadDumpNX::PrepareVertex(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CQuadDumpNX::Render(
-	bool drawup	//	DrawPrimitiveUp ‚ğg—p
+	bool drawup	//	DrawPrimitiveUp ã‚’ä½¿ç”¨
 ){
 	devSetTexture(0, m_Texture);
 	if(drawup){

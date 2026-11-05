@@ -1,37 +1,37 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailPlugin.h"
 #include "CPierPlugin.h"
 #include "CLinePlugin.h"
 #include "CLineSelectMode.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CLineSelectMode::CLineSelectMode():
-	C3DPluginMode(lang(LinePlugin))	//	Šî–{ƒNƒ‰ƒX
+	C3DPluginMode(lang(LinePlugin))	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_Camera = &ms_RailwayModeCamera;
 }
 
 /*
- *	ƒƒjƒ…[”­s
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç™ºè¡Œ
  */
 CPopMenu *CLineSelectMode::Dispatch(
-	CMDTYPE type,	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	DWORD data		//	ƒf[ƒ^
+	CMDTYPE type,	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	DWORD data		//	ãƒ‡ãƒ¼ã‚¿
 ){
 	return CPluginMode::Dispatch(type, data);
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgæ“¾
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆå–å¾—
  */
 CPluginList *CLineSelectMode::GetPluginList(){
 	return g_LinePluginList;
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CLineSelectMode::Enter3DPlugin(){
 	ms_ModeLabel = lang(SelectLine);
@@ -41,7 +41,7 @@ void CLineSelectMode::Enter3DPlugin(){
 }
 
 /*
- *	ƒ‚[ƒ_ƒ‹ˆ—
+ *	ãƒ¢ãƒ¼ãƒ€ãƒ«å‡¦ç†
  */
 void CLineSelectMode::ModalFunc3DPlugin(){
 	void ModalFuncRailwayPluginSet();
@@ -49,14 +49,14 @@ void CLineSelectMode::ModalFunc3DPlugin(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CLineSelectMode::ScanInput3DPlugin(){
 	ScanInputRailway();
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CLineSelectMode::Render3DPlugin(){
 	CRailPlugin::RenderPreview();

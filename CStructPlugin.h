@@ -1,15 +1,15 @@
-#ifndef CSTRUCTPLUGIN_H_INCLUDED
+ï»¿#ifndef CSTRUCTPLUGIN_H_INCLUDED
 #define CSTRUCTPLUGIN_H_INCLUDED
 
 #include "CTrainPlugin.h"
 
 /*
- *	{İƒvƒ‰ƒOƒCƒ“
+ *	æ–½è¨­ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CStructPlugin: public CModelPlugin{
 	friend class CStruct;
 protected:
-	list<CFreeObjectContainer> m_FreeObject;	//	ƒtƒŠ[ƒIƒuƒWƒFƒNƒg
+	list<CFreeObjectContainer> m_FreeObject;	//	ãƒ•ãƒªãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 public:
 	static void RenderPreview(VEC3, VEC3, VEC3);
 	CStructPlugin(char *id): CModelPlugin(id){}
@@ -34,7 +34,7 @@ public:
 };
 
 /*
- *	{İƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	æ–½è¨­ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CStructPluginList: public CModelPluginList{
 protected:
@@ -47,7 +47,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CStructPlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CStructPlugin *g_Struct;
 extern CStructPluginList *g_StructPluginList;
 

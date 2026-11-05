@@ -1,15 +1,15 @@
-#ifndef CCHECKBOX_H_INCLUDED
+ï»¿#ifndef CCHECKBOX_H_INCLUDED
 #define CCHECKBOX_H_INCLUDED
 
 #include "CInterface.h"
 
 /*
- *	ƒ`ƒFƒbƒNƒ{ƒbƒNƒX
+ *	ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹
  */
 class CCheckBox: public CInterface{
 private:
-	int m_State;	//	ó‘Ô
-	int m_Check;	//	ƒ`ƒFƒbƒNƒtƒ‰ƒO
+	int m_State;	//	çŠ¶æ…‹
+	int m_Check;	//	ãƒã‚§ãƒƒã‚¯ãƒ•ãƒ©ã‚°
 public:
 	void Init(int, int, int, int, char *, CInterface *);
 	void SetCheck(int chk){ m_Check = chk; }

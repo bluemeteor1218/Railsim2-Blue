@@ -1,4 +1,4 @@
-#ifndef NETWORK_H_INCLUDED
+ï»¿#ifndef NETWORK_H_INCLUDED
 #define NETWORK_H_INCLUDED
 
 class CListView;
@@ -9,7 +9,7 @@ enum RSNTransferState{
 	RSN_TRANS_FORCE_DWORD = 0x7fffffff,
 };
 
-//	ƒlƒbƒgƒ[ƒN§ŒäŠÖ”
+//	ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯åˆ¶å¾¡é–¢æ•°
 int RSNCreateSession(int, int, const char *);
 int RSNJoinSession(const char *, int, bool, const char *);
 void RSNDeleteMember(DPNID id);
@@ -29,7 +29,7 @@ inline bool CheckPortArea(int port){ return 0<=port && port<65536; }
 void ExceedNetworkSyncLimit(int);
 void ListNetworkMember(CListView *);
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_NetworkCloseRequest;
 extern bool g_NetworkInitialized;
 extern int g_NetworkSyncLimitReceived;

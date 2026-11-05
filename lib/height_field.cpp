@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -8,7 +8,7 @@
 #include "height_field.h"
 
 /*
- *	–Ê–@ü‚ÌŒvZ
+ *	é¢æ³•ç·šã®è¨ˆç®—
  */
 VEC3 CalcPlaneNormal(VEC3 v0, VEC3 v1, VEC3 v2){
 	VEC3 v3, v4, tmp, n;
@@ -21,7 +21,7 @@ VEC3 CalcPlaneNormal(VEC3 v0, VEC3 v1, VEC3 v2){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CHeightField::CHeightField(){
 	m_fRender = FALSE;
@@ -29,29 +29,29 @@ CHeightField::CHeightField(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CHeightField::~CHeightField(){
 	Free();
 }
 
 /*
- *	’nŒ`¶¬
+ *	åœ°å½¢ç”Ÿæˆ
  *
- *	strFile	: ‰š“Êî•ñƒeƒNƒXƒ`ƒƒ[iƒOƒŒƒCƒXƒP[ƒ‹j
- *	pos		: ˆÊ’ui’†Sj
- *	s		: ƒXƒP[ƒ‹
- *	h		: ‚‚³‚ÌÅ‘å’l
- *	c		: F
+ *	strFile	: å‡¹å‡¸æƒ…å ±ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ï¼ˆã‚°ãƒ¬ã‚¤ã‚¹ã‚±ãƒ¼ãƒ«ï¼‰
+ *	pos		: ä½ç½®ï¼ˆä¸­å¿ƒï¼‰
+ *	s		: ã‚¹ã‚±ãƒ¼ãƒ«
+ *	h		: é«˜ã•ã®æœ€å¤§å€¤
+ *	c		: è‰²
  *
- *	¦ˆê“x‚É¶¬iƒŒƒ“ƒ_ƒŠƒ“ƒOj‚Å‚«‚éƒ|ƒŠƒSƒ“‚Ì”‚ÍƒrƒfƒIƒJ[ƒh‚É‚æ‚è§ŒÀ
- *	‚³‚ê‚Ü‚·B‚»‚Ì‚½‚ßg—p‚·‚éƒeƒNƒXƒ`ƒƒ[‚Í64x64ˆÈ‰º‚É‚µ‚½•û‚ª–³“ï‚Å‚·B
- *	‘å‚«‚Èƒ}ƒbƒv‚ğì¬‚·‚éê‡‚ÍA‚¢‚­‚Â‚©‚É•ªŠ„‚µ‚Ä‰º‚³‚¢B
+ *	â€»ä¸€åº¦ã«ç”Ÿæˆï¼ˆãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ï¼‰ã§ãã‚‹ãƒãƒªã‚´ãƒ³ã®æ•°ã¯ãƒ“ãƒ‡ã‚ªã‚«ãƒ¼ãƒ‰ã«ã‚ˆã‚Šåˆ¶é™
+ *	ã•ã‚Œã¾ã™ã€‚ãã®ãŸã‚ä½¿ç”¨ã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã¯64x64ä»¥ä¸‹ã«ã—ãŸæ–¹ãŒç„¡é›£ã§ã™ã€‚
+ *	å¤§ããªãƒãƒƒãƒ—ã‚’ä½œæˆã™ã‚‹å ´åˆã¯ã€ã„ãã¤ã‹ã«åˆ†å‰²ã—ã¦ä¸‹ã•ã„ã€‚
  */
 BOOL CHeightField::Generate(LPCSTR strFile, VEC3 pos, float s, float h, D3DCOLOR c){
-	Free();	//	Šù‘¶‚È‚ç‰ğ•ú
+	Free();	//	æ—¢å­˜ãªã‚‰è§£æ”¾
 
-	//	ƒeƒNƒXƒ`ƒƒ[‚Ì“Ç‚İ
+	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã®èª­è¾¼ã¿
 	HRESULT hr;
 	LPTEX8 pBump;
 
@@ -61,17 +61,17 @@ BOOL CHeightField::Generate(LPCSTR strFile, VEC3 pos, float s, float h, D3DCOLOR
 		Debug("LOAD_TEXTURE_SYS:%s\n", strFile);
 		return FALSE;
 	}
-	//	ƒtƒH[ƒ}ƒbƒg‚ğæ“¾
+	//	ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’å–å¾—
 	D3DSURFACE_DESC desc;
 
 	pBump->GetLevelDesc(0, &desc);
 
-	//	’¸“_ƒe[ƒuƒ‹‚ğì¬
+	//	é ‚ç‚¹ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ
 	int w = desc.Width;
 	int d = desc.Height;
 	DWORD num = d*w*6;
 
-	//	“¯‚ÉƒŒƒ“ƒ_ƒŠƒ“ƒO‚Å‚«‚éƒvƒŠƒ~ƒeƒBƒu”i’¸“_^OŠpHj‚ğ’´‚¦‚Ä‚¢‚é
+	//	åŒæ™‚ã«ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã§ãã‚‹ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–æ•°ï¼ˆé ‚ç‚¹ï¼ä¸‰è§’ï¼Ÿï¼‰ã‚’è¶…ãˆã¦ã„ã‚‹
 	if(num>sv3.capsMaxPrim){
 		Debug("Over max primitive count.\n");
 		RELEASE(pBump);
@@ -80,33 +80,33 @@ BOOL CHeightField::Generate(LPCSTR strFile, VEC3 pos, float s, float h, D3DCOLOR
 
 	VTX_NX *vt = new VTX_NX[num]; 
 
-	//	ƒeƒNƒXƒ`ƒƒ[(LV0)‘S‘Ì‚ğ“Ç‚İê—p‚ÅƒƒbƒN
+	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼(LV0)å…¨ä½“ã‚’èª­è¾¼ã¿å°‚ç”¨ã§ãƒ­ãƒƒã‚¯
 	D3DLOCKED_RECT rect;
 
 	hr = pBump->LockRect(0, &rect, NULL, D3DLOCK_READONLY);
 
-	LPBYTE pSrc = (LPBYTE)rect.pBits;	//	ƒeƒNƒXƒ`ƒƒ‚Ìæ“ªƒAƒhƒŒƒX
-	int incSrc = rect.Pitch;	//	ƒeƒNƒXƒ`ƒƒ‚Pƒ‰ƒCƒ“•ª‚ÌƒoƒCƒg”
-	int incDst = w*6;			//	’¸“_ƒe[ƒuƒ‹‚Ì‚Pƒ‰ƒCƒ“•ª‚Ìƒf[ƒ^”
+	LPBYTE pSrc = (LPBYTE)rect.pBits;	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	int incSrc = rect.Pitch;	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ï¼‘ãƒ©ã‚¤ãƒ³åˆ†ã®ãƒã‚¤ãƒˆæ•°
+	int incDst = w*6;			//	é ‚ç‚¹ãƒ†ãƒ¼ãƒ–ãƒ«ã®ï¼‘ãƒ©ã‚¤ãƒ³åˆ†ã®ãƒ‡ãƒ¼ã‚¿æ•°
 
-	int x, z, L03, L11, L24, L55;	//	ƒsƒNƒZƒ‹À•W, ’¸“_‚Æ‘Î‰‚·‚é‹P“x
-	DWORD off;	//	’¸“_ƒIƒtƒZƒbƒg
-	VEC3 n1, n2;	//	–Ê–@ü
+	int x, z, L03, L11, L24, L55;	//	ãƒ”ã‚¯ã‚»ãƒ«åº§æ¨™, é ‚ç‚¹ã¨å¯¾å¿œã™ã‚‹è¼åº¦
+	DWORD off;	//	é ‚ç‚¹ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	VEC3 n1, n2;	//	é¢æ³•ç·š
 
-	pos.x -= w*s/2;	//	ƒtƒB[ƒ‹ƒh’†‰›‚ğŒ´“_‚É
+	pos.x -= w*s/2;	//	ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ä¸­å¤®ã‚’åŸç‚¹ã«
 	pos.z -= d*s/2;
 
-	//	‹P“x‚©‚ç‚‚³‚ğŒvZ
+	//	è¼åº¦ã‹ã‚‰é«˜ã•ã‚’è¨ˆç®—
 	for(z = 0; z<d; z++){
 		for(x = 0; x<w; x++){
-			//	‚q’l‚ğ‘ã•\‚µ‚Ä‹P“x‚Æ‚·‚é
+			//	ï¼²å€¤ã‚’ä»£è¡¨ã—ã¦è¼åº¦ã¨ã™ã‚‹
 			L03 = *(pSrc+x*4 +1);
 
 			if(z==d-1 && x==w-1){
 				L11 = L55 = L24 = L03;
 			}else if(z==d-1){
 				L11 = L03;
-				L55 = *(pSrc+(x+1)*4 +1);	//	ARGB’†‚ÌR‚ğw’è‚·‚é‚Ì‚Å+1
+				L55 = *(pSrc+(x+1)*4 +1);	//	ARGBä¸­ã®Rã‚’æŒ‡å®šã™ã‚‹ã®ã§+1
 				L24 = L55;
 			}else if(x==w-1){
 				L11 = *(pSrc+incSrc+x*4 +1);
@@ -118,9 +118,9 @@ BOOL CHeightField::Generate(LPCSTR strFile, VEC3 pos, float s, float h, D3DCOLOR
 				L24 = *(pSrc+incSrc+(x+1)*4 +1);
 			}
 
-			off = z*incDst+x*6;	//	ƒIƒtƒZƒbƒg’l‚ÌŒvZ
+			off = z*incDst+x*6;	//	ã‚ªãƒ•ã‚»ãƒƒãƒˆå€¤ã®è¨ˆç®—
 
-			//	’¸“_À•W‚ÌŒvZ
+			//	é ‚ç‚¹åº§æ¨™ã®è¨ˆç®—
 			vt[off].x = pos.x+x*s;
 			vt[off].z = pos.z+z*s;
 			vt[off].y = pos.y+h*L03/256;
@@ -148,7 +148,7 @@ BOOL CHeightField::Generate(LPCSTR strFile, VEC3 pos, float s, float h, D3DCOLOR
 			vt[off+5].y = pos.y+h*L55/256;
 			vt[off+5].u += (float)1/w;
 
-			//	–Ê–@ü‚ğŒvZ
+			//	é¢æ³•ç·šã‚’è¨ˆç®—
 			n1 = CalcPlaneNormal(
 				VEC3(vt[off ].x, vt[off ].y, vt[off ].z),
 				VEC3(vt[off+1].x, vt[off+1].y, vt[off+1].z),
@@ -158,17 +158,17 @@ BOOL CHeightField::Generate(LPCSTR strFile, VEC3 pos, float s, float h, D3DCOLOR
 				VEC3(vt[off+4].x, vt[off+4].y, vt[off+4].z),
 				VEC3(vt[off+5].x, vt[off+5].y, vt[off+5].z));
 
-			//	’¸“_‚É•ª”z
+			//	é ‚ç‚¹ã«åˆ†é…
 			vt[off ].n = vt[off+1].n = vt[off+2].n = n1;
 			vt[off+3].n = vt[off+4].n = vt[off+5].n = n2;
 		}
 		pSrc += incSrc;
 	}
-	//	ƒƒbƒN‰ğœ
+	//	ãƒ­ãƒƒã‚¯è§£é™¤
 	pBump->UnlockRect(0);
 	RELEASE(pBump);
 
-	//	–@ü‚Ì•âŠÔ
+	//	æ³•ç·šã®è£œé–“
 	int idx[6];
 	off = 0;
 
@@ -196,11 +196,11 @@ BOOL CHeightField::Generate(LPCSTR strFile, VEC3 pos, float s, float h, D3DCOLOR
 		}
 	}
 
-	//	’¸“_ƒoƒbƒtƒ@‚Ìì¬
+	//	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	m_vtx.Create(vt, FVF_NX, sizeof(VTX_NX)*num);
 	m_fRender = TRUE;
 
-	//	‚“xƒ}ƒbƒv‚Ì•Û‘¶
+	//	é«˜åº¦ãƒãƒƒãƒ—ã®ä¿å­˜
 	m_map = new float[d*w];
 
 	off = 0;
@@ -221,7 +221,7 @@ BOOL CHeightField::Generate(LPCSTR strFile, VEC3 pos, float s, float h, D3DCOLOR
 }
 
 /*
- *	‰ğ•ú
+ *	è§£æ”¾
  */
 void CHeightField::Free(){
 	if(m_map){
@@ -231,21 +231,21 @@ void CHeightField::Free(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  *
- *	¦–‘O‚ÉƒeƒNƒXƒ`ƒƒ[‚ğw’è‚µ‚Ä‚¨‚­‚±‚ÆB
+ *	â€»äº‹å‰ã«ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ã‚’æŒ‡å®šã—ã¦ãŠãã“ã¨ã€‚
  */
 void CHeightField::Render(){
 	if(m_fRender) m_vtx.RenderTL();
 }
 
 /*
- *	w’èˆÊ’u‚Ì‚“xiYÀ•Wj‚ğ•Ô‚·
+ *	æŒ‡å®šä½ç½®ã®é«˜åº¦ï¼ˆYåº§æ¨™ï¼‰ã‚’è¿”ã™
  */
 float CHeightField::GetHeight(float x, float z){
 	if(!m_map) return 0;
 
-	//	ƒtƒB[ƒ‹ƒh‚ÌÀ•WŒn‚É•ÏŠ·
+	//	ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®åº§æ¨™ç³»ã«å¤‰æ›
 	x = min(m_width-1, max(0, x/m_scale+m_width/2));
 	z = min(m_depth-1, max(0, z/m_scale+m_depth/2));
 
@@ -254,11 +254,11 @@ float CHeightField::GetHeight(float x, float z){
 	int ix1 = (ix0+1)&(m_width-1);
 	int iz1 = (iz0+1)&(m_depth-1);
 
-	//	–Êã‚Å‚ÌÀ•WŒn‚É•ÏŠ·
+	//	é¢ä¸Šã§ã®åº§æ¨™ç³»ã«å¤‰æ›
 	x -= ix0;
 	z -= iz0;
 
-	//	4“_‚Ì‚‚³‚ğæ“¾
+	//	4ç‚¹ã®é«˜ã•ã‚’å–å¾—
 	float h0 = m_map[iz0*m_width+ix0];
 	float h1 = m_map[iz0*m_width+ix1];
 	float h2 = m_map[iz1*m_width+ix0];

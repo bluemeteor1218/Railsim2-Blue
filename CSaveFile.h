@@ -1,4 +1,4 @@
-#ifndef CSAVEFILE_H_INCLUDED
+ï»¿#ifndef CSAVEFILE_H_INCLUDED
 #define CSAVEFILE_H_INCLUDED
 
 class MD5;
@@ -11,34 +11,34 @@ class CSurfacePlugin;
 class CPlatformInst;
 
 /*
- *	ƒZ[ƒuƒtƒ@ƒCƒ‹
+ *	ã‚»ãƒ¼ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«
  */
 class CSaveFile{
 	friend class CFileMode;
 private:
-	string m_FileName;			//	ƒtƒ@ƒCƒ‹–¼
-	string m_FileDate;			//	XV“ú
-	string m_FileNote;			//	”õl
-	float m_Version;		//	ƒo[ƒWƒ‡ƒ“
-	int m_Year;					//	”N
-	int m_Month;				//	Œ
-	int m_Day;					//	“ú
-	int m_Hour;					//	
-	int m_Minute;				//	•ª
-	int m_Second;				//	•b
-	int m_Frame;				//	ƒtƒŒ[ƒ€
-	int m_DayOfWeek;			//	—j“ú
-	int m_SumDays;				//	“ú”
-	int m_GroupNum;				//	•Ò¬”
-	int m_SceneNum;				//	ƒV[ƒ“”
-	VEC3 m_WindDir1;			//	•—•ûŒü•Ï‰»‘O
-	VEC3 m_WindDir2;			//	•—•ûŒü•Ï‰»Œã
-	int m_WindCount;			//	•—•ûŒüƒJƒEƒ“ƒ^
-	int m_WindTime;				//	•—•ûŒü•Ï‰»ŠÔ
-	CRailWay *m_WarpList;		//	ƒ[ƒv
-	CTrainGroup *m_GroupList;	//	•Ò¬
-	CScene *m_SceneList;		//	ƒV[ƒ“
-	int m_NetworkSyncCount;		//	ƒlƒbƒgƒ[ƒN“¯ŠúƒJƒEƒ“ƒ^
+	string m_FileName;			//	ãƒ•ã‚¡ã‚¤ãƒ«å
+	string m_FileDate;			//	æ›´æ–°æ—¥æ™‚
+	string m_FileNote;			//	å‚™è€ƒ
+	float m_Version;		//	ãƒãƒ¼ã‚¸ãƒ§ãƒ³
+	int m_Year;					//	å¹´
+	int m_Month;				//	æœˆ
+	int m_Day;					//	æ—¥
+	int m_Hour;					//	æ™‚
+	int m_Minute;				//	åˆ†
+	int m_Second;				//	ç§’
+	int m_Frame;				//	ãƒ•ãƒ¬ãƒ¼ãƒ 
+	int m_DayOfWeek;			//	æ›œæ—¥
+	int m_SumDays;				//	æ—¥æ•°
+	int m_GroupNum;				//	ç·¨æˆæ•°
+	int m_SceneNum;				//	ã‚·ãƒ¼ãƒ³æ•°
+	VEC3 m_WindDir1;			//	é¢¨æ–¹å‘å¤‰åŒ–å‰
+	VEC3 m_WindDir2;			//	é¢¨æ–¹å‘å¤‰åŒ–å¾Œ
+	int m_WindCount;			//	é¢¨æ–¹å‘ã‚«ã‚¦ãƒ³ã‚¿
+	int m_WindTime;				//	é¢¨æ–¹å‘å¤‰åŒ–æ™‚é–“
+	CRailWay *m_WarpList;		//	ãƒ¯ãƒ¼ãƒ—
+	CTrainGroup *m_GroupList;	//	ç·¨æˆ
+	CScene *m_SceneList;		//	ã‚·ãƒ¼ãƒ³
+	int m_NetworkSyncCount;		//	ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯åŒæœŸã‚«ã‚¦ãƒ³ã‚¿
 public:
 	CSaveFile(bool);
 	~CSaveFile();
@@ -84,12 +84,12 @@ public:
 	int Save(const char *, const char *, bool, bool);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CSaveFile *g_SaveFile;
 extern map<void *, void *> g_AddressMap;
 extern void *RegisterNewMapAddress(void *);
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void *ReplaceAdr(void *);
 
 #endif

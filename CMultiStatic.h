@@ -1,21 +1,21 @@
-#ifndef CMULTISTATIC_H_INCLUDED
+ï»¿#ifndef CMULTISTATIC_H_INCLUDED
 #define CMULTISTATIC_H_INCLUDED
 
 #include "CInterface.h"
 #include "CScrollBarV.h"
 
 /*
- *	ƒ}ƒ‹ƒ`ƒ‰ƒCƒ“ƒXƒ^ƒeƒBƒbƒNƒRƒ“ƒgƒ[ƒ‹
+ *	ãƒãƒ«ãƒãƒ©ã‚¤ãƒ³ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
  */
 class CMultiStatic: public CInterface{
 private:
-	int m_State;				//	ó‘Ô
-	int m_Lines;				//	•\¦‰Â”\s”
-	int m_LineHeight;			//	—ñ‚
-	int m_FocusIndex;			//	ƒtƒH[ƒJƒXˆÊ’u
-	int m_LineNum;				//	ƒf[ƒ^”
-	list<string> m_LineText;	//	s‚²‚Æ‚ÌƒeƒLƒXƒg
-	CScrollBarV m_ScrollV;		//	ƒXƒNƒ[ƒ‹ƒo[
+	int m_State;				//	çŠ¶æ…‹
+	int m_Lines;				//	è¡¨ç¤ºå¯èƒ½è¡Œæ•°
+	int m_LineHeight;			//	åˆ—é«˜
+	int m_FocusIndex;			//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ä½ç½®
+	int m_LineNum;				//	ãƒ‡ãƒ¼ã‚¿æ•°
+	list<string> m_LineText;	//	è¡Œã”ã¨ã®ãƒ†ã‚­ã‚¹ãƒˆ
+	CScrollBarV m_ScrollV;		//	ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼
 public:
 	void Init(int, int, int, int, CInterface *, int);
 	void SetSize(int, int);

@@ -1,4 +1,4 @@
-#ifndef CGAMEMODE_H_INCLUDED
+ï»¿#ifndef CGAMEMODE_H_INCLUDED
 #define CGAMEMODE_H_INCLUDED
 
 #include "CCursor.h"
@@ -8,19 +8,19 @@
 class CToggleIcon;
 
 /*
- *	ƒQ[ƒ€ƒ‚[ƒh
+ *	ã‚²ãƒ¼ãƒ ãƒ¢ãƒ¼ãƒ‰
  */
 class CGameMode{
 protected:
-	static int ms_TopPanelTime;					//	ãƒpƒlƒ‹•\¦ŠÔ
-	static int ms_RightPanelTime;				//	‰Eƒpƒlƒ‹•\¦ŠÔ
-	static float ms_TopPanelShow;				//	ãƒpƒlƒ‹•\¦“x
-	static float ms_RightPanelShow;				//	‰Eƒpƒlƒ‹•\¦“x
-	static float ms_WindDirTemp;				//	•——ÍŒv•Ï”
-	static string ms_ModeLabel;					//	ƒ‚[ƒhƒ‰ƒxƒ‹
-	static CGameMode *ms_ActiveMode;			//	Œ»İ‚Ìƒ‚[ƒh
-	static CToggleIcon *ms_MenuIcon[MODE_NUM];	//	ƒ‚[ƒhƒAƒCƒRƒ“
-	CInterface m_Interface;	//	“Š‡ƒCƒ“ƒ^[ƒtƒFƒCƒX
+	static int ms_TopPanelTime;					//	ä¸Šãƒ‘ãƒãƒ«è¡¨ç¤ºæ™‚é–“
+	static int ms_RightPanelTime;				//	å³ãƒ‘ãƒãƒ«è¡¨ç¤ºæ™‚é–“
+	static float ms_TopPanelShow;				//	ä¸Šãƒ‘ãƒãƒ«è¡¨ç¤ºåº¦
+	static float ms_RightPanelShow;				//	å³ãƒ‘ãƒãƒ«è¡¨ç¤ºåº¦
+	static float ms_WindDirTemp;				//	é¢¨åŠ›è¨ˆå¤‰æ•°
+	static string ms_ModeLabel;					//	ãƒ¢ãƒ¼ãƒ‰ãƒ©ãƒ™ãƒ«
+	static CGameMode *ms_ActiveMode;			//	ç¾åœ¨ã®ãƒ¢ãƒ¼ãƒ‰
+	static CToggleIcon *ms_MenuIcon[MODE_NUM];	//	ãƒ¢ãƒ¼ãƒ‰ã‚¢ã‚¤ã‚³ãƒ³
+	CInterface m_Interface;	//	çµ±æ‹¬ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 public:
 	static void WakeUp();
 	static void InitMenu();

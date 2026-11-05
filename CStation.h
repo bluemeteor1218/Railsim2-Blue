@@ -1,4 +1,4 @@
-#ifndef CSTATION_H_INCLUDED
+ï»¿#ifndef CSTATION_H_INCLUDED
 #define CSTATION_H_INCLUDED
 
 #include "CStruct.h"
@@ -9,15 +9,15 @@ class CStation;
 class CRailWay;
 
 /*
- *	ƒvƒ‰ƒbƒgƒtƒH[ƒ€ƒCƒ“ƒXƒ^ƒ“ƒX
+ *	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CPlatformInst{
 private:
-	float m_Length;					//	’·‚³
-	bool m_Stoppable;				//	’âÔ‰Â”\ /*CP932‘Î‰*/
-	bool m_OpenDoor[2];				//	ƒhƒAŠJ
-	CStation *m_Station;			//	‰w
-	list<CRailWay *> m_RailList;	//	ƒŒ[ƒ‹ƒŠƒXƒg
+	float m_Length;					//	é•·ã•
+	bool m_Stoppable;				//	åœè»Šå¯èƒ½ /*CP932å¯¾å¿œ*/
+	bool m_OpenDoor[2];				//	ãƒ‰ã‚¢é–‹
+	CStation *m_Station;			//	é§…
+	list<CRailWay *> m_RailList;	//	ãƒ¬ãƒ¼ãƒ«ãƒªã‚¹ãƒˆ
 public:
 	CPlatformInst(CStation *);
 	CPlatformInst(CStation *, bool, bool *);
@@ -38,20 +38,20 @@ public:
 	void Save(FILE *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CPlatformInst>::iterator IPlatformInst;
 
 /*
- *	{İƒCƒ“ƒXƒ^ƒ“ƒX
+ *	æ–½è¨­ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CStation: public CStruct{
 protected:
-	static CStation **ms_Root;					//	Ú‘±ƒ‹[ƒg
-	CDiaInst m_DiaInst;							//	ƒ_ƒCƒ„İ’è
-	list<CPlatformInst> m_PlatformList;			//	ƒvƒ‰ƒbƒgƒtƒH[ƒ€ƒŠƒXƒg
-	vector<CPlatformInst *> m_PlatformArray;	//	ƒvƒ‰ƒbƒgƒtƒH[ƒ€ƒŠƒXƒg
-	CStationPlugin *m_StationPlugin;			//	{İƒvƒ‰ƒOƒCƒ“
-	CStation *m_Next;							//	Ÿ
+	static CStation **ms_Root;					//	æ¥ç¶šãƒ«ãƒ¼ãƒˆ
+	CDiaInst m_DiaInst;							//	ãƒ€ã‚¤ãƒ¤è¨­å®š
+	list<CPlatformInst> m_PlatformList;			//	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ãƒªã‚¹ãƒˆ
+	vector<CPlatformInst *> m_PlatformArray;	//	ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ãƒªã‚¹ãƒˆ
+	CStationPlugin *m_StationPlugin;			//	æ–½è¨­ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CStation *m_Next;							//	æ¬¡
 public:
 	static void SetRoot(CStation **r){ ms_Root = r; }
 	CStation();
@@ -77,7 +77,7 @@ public:
 	void Save(FILE *);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CPlatformInst *g_PlatformInst;
 
 #endif

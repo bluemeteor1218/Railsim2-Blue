@@ -1,16 +1,16 @@
-#ifndef CRADIOBUTTON_H_INCLUDED
+ï»¿#ifndef CRADIOBUTTON_H_INCLUDED
 #define CRADIOBUTTON_H_INCLUDED
 
 #include "CInterface.h"
 
 /*
- *	ƒ‰ƒWƒIƒ{ƒ^ƒ“
+ *	ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³
  */
 class CRadioButton: public CInterface{
 private:
-	int m_State;	//	ó‘Ô
-	int m_Check;	//	ƒ`ƒFƒbƒNƒtƒ‰ƒO
-	CRadioButton *m_Prev, *m_Next;	//	ƒOƒ‹[ƒvƒŠƒ“ƒN
+	int m_State;	//	çŠ¶æ…‹
+	int m_Check;	//	ãƒã‚§ãƒƒã‚¯ãƒ•ãƒ©ã‚°
+	CRadioButton *m_Prev, *m_Next;	//	ã‚°ãƒ«ãƒ¼ãƒ—ãƒªãƒ³ã‚¯
 public:
 	void Init(int, int, int, int, char *, CInterface *, CRadioButton *);
 	void ClearGroupCheck();

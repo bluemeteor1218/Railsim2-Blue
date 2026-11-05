@@ -1,9 +1,9 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 struct SYSVALUE_F{
-	LPD3DXFONT	pFont;	//	ƒtƒHƒ“ƒgEƒCƒ“ƒ^[ƒtƒFƒCƒX
+	LPD3DXFONT	pFont;	//	ãƒ•ã‚©ãƒ³ãƒˆãƒ»ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 	int			size;	//	
-	D3DCOLOR	color;	//	ƒtƒHƒ“ƒg‚ÌF
+	D3DCOLOR	color;	//	ãƒ•ã‚©ãƒ³ãƒˆã®è‰²
 };
 extern SYSVALUE_F svf;
 
@@ -15,7 +15,7 @@ void Text(int x, int y, D3DCOLOR c, const char *str);
 void TextF(int x, int y, D3DCOLOR c, const char *str, ...);
 
 /*
- *	–^FPSƒQ[ƒ€ƒ`ƒbƒN‚ÈƒtƒHƒ“ƒg‚ğg—p
+ *	æŸFPSã‚²ãƒ¼ãƒ ãƒãƒƒã‚¯ãªãƒ•ã‚©ãƒ³ãƒˆã‚’ä½¿ç”¨
  */
 inline void UseHLFont(){
 	CreateFont(16, 0xffffee00, FW_BOLD);

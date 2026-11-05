@@ -1,26 +1,26 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
-#define MESH_W 20	//	ƒƒbƒVƒ…‚Ì•ªŠ„”
+#define MESH_W 20	//	ãƒ¡ãƒƒã‚·ãƒ¥ã®åˆ†å‰²æ•°
 #define MESH_H 20
 
 class CWaterMesh{
-	CVertex m_vtx;	//	’¸“_ƒoƒbƒtƒ@
-	VTX_LX m_vt[MESH_H*MESH_W*6];	//	’¸“_ƒe[ƒuƒ‹
+	CVertex m_vtx;	//	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+	VTX_LX m_vt[MESH_H*MESH_W*6];	//	é ‚ç‚¹ãƒ†ãƒ¼ãƒ–ãƒ«
 
-	VEC2 m_cuv[MESH_H+1][MESH_W+1];	//	UVƒIƒtƒZƒbƒg—Ê
-	VEC2 m_ouv[MESH_H+1][MESH_W+1];	//	‚PƒtƒŒ[ƒ€‘O‚ÌUVƒIƒtƒZƒbƒg—Ê
-	VEC2 m_vec[MESH_H+1][MESH_W+1];	//	UV•Ï‰»‘¬“x
+	VEC2 m_cuv[MESH_H+1][MESH_W+1];	//	UVã‚ªãƒ•ã‚»ãƒƒãƒˆé‡
+	VEC2 m_ouv[MESH_H+1][MESH_W+1];	//	ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®UVã‚ªãƒ•ã‚»ãƒƒãƒˆé‡
+	VEC2 m_vec[MESH_H+1][MESH_W+1];	//	UVå¤‰åŒ–é€Ÿåº¦
 
-	VEC3 m_pos;	//	ˆÊ’u
-	float m_w;		//	‰¡•
-	float m_h;		//	c•
-	float m_dw;		//	‚Pƒ}ƒX‚Ì‰¡•
-	float m_dh;		//	‚Pƒ}ƒX‚Ìc•
-	float m_speed;	//	UV•Ï‰»‘¬“x‚ÌæZ—Ê
-	float m_gain;	//	Œ¸Ši—˜“¾j—¦
-	D3DCOLOR m_color;	//	F
+	VEC3 m_pos;	//	ä½ç½®
+	float m_w;		//	æ¨ªå¹…
+	float m_h;		//	ç¸¦å¹…
+	float m_dw;		//	ï¼‘ãƒã‚¹ã®æ¨ªå¹…
+	float m_dh;		//	ï¼‘ãƒã‚¹ã®ç¸¦å¹…
+	float m_speed;	//	UVå¤‰åŒ–é€Ÿåº¦ã®ä¹—ç®—é‡
+	float m_gain;	//	æ¸›è¡°ï¼ˆåˆ©å¾—ï¼‰ç‡
+	D3DCOLOR m_color;	//	è‰²
 
-	//	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^••ˆó
+	//	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿å°å°
 	CWaterMesh& operator = (const CWaterMesh&){return *this;}
 public:
 	CWaterMesh();
@@ -30,27 +30,27 @@ public:
 	void Impact(float x, float y, float d);
 
 	/*
-	 *	F‚Ìİ’è
+	 *	è‰²ã®è¨­å®š
 	 */
 	void SetColor(D3DCOLOR c){m_color = c;}
 	/*
-	 *	F‚Ìæ“¾
+	 *	è‰²ã®å–å¾—
 	 */
 	D3DCOLOR GetColor(){return m_color;}
 	/*
-	 *	‘¬“x‚Ìİ’è
+	 *	é€Ÿåº¦ã®è¨­å®š
 	 */
 	void SetSpeed(float speed){m_speed = speed; if(m_speed<0) m_speed = 0;}
 	/*
-	 *	‘¬“x‚Ìæ“¾
+	 *	é€Ÿåº¦ã®å–å¾—
 	 */
 	float GetSpeed(){return m_speed;}
 	/*
-	 *	Œ¸Ši—˜“¾j—¦‚Ìİ’è
+	 *	æ¸›è¡°ï¼ˆåˆ©å¾—ï¼‰ç‡ã®è¨­å®š
 	 */
 	void SetGain(float b){m_gain = b;}
 	/*
-	 *	Œ¸Ši—˜“¾j—¦‚Ìæ“¾
+	 *	æ¸›è¡°ï¼ˆåˆ©å¾—ï¼‰ç‡ã®å–å¾—
 	 */
 	float GetGain(){return m_gain;}
 };

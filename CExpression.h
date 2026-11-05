@@ -1,11 +1,11 @@
-#ifndef CEXPRESSION_H_INCLUDED
+ï»¿#ifndef CEXPRESSION_H_INCLUDED
 #define CEXPRESSION_H_INCLUDED
 
 class CModelSwitch;
 class CModelPlugin;
 
 /*
- *	”®ƒNƒ‰ƒX
+ *	æ•°å¼ã‚¯ãƒ©ã‚¹
  */
 class CExpression{
 public:
@@ -18,11 +18,11 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	•Ï”QÆƒNƒ‰ƒX
+ *	å¤‰æ•°å‚ç…§ã‚¯ãƒ©ã‚¹
  */
 class CVariableReference: public CExpression{
 private:
-	CModelSwitch *m_Link;	//	ƒXƒCƒbƒ`
+	CModelSwitch *m_Link;	//	ã‚¹ã‚¤ãƒƒãƒ
 public:
 	CVariableReference(CModelSwitch *sw){ m_Link = sw; }
 	CExpression *Duplicate(){ return new CVariableReference(*this); }
@@ -30,11 +30,11 @@ public:
 };
 
 /*
- *	’è”ƒNƒ‰ƒX
+ *	å®šæ•°ã‚¯ãƒ©ã‚¹
  */
 class CConstInteger: public CExpression{
 private:
-	int m_Constant;	//	’l
+	int m_Constant;	//	å€¤
 public:
 	CConstInteger(int cons){ m_Constant = cons; }
 	CExpression *Duplicate(){ return new CConstInteger(*this); }
@@ -45,11 +45,11 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	’P€‰‰Zq
+ *	å˜é …æ¼”ç®—å­
  */
 class CMonomialOperator: public CExpression{
 protected:
-	CExpression *m_Child;	//	¶•Ó
+	CExpression *m_Child;	//	å·¦è¾º
 public:
 	CMonomialOperator(){ m_Child = NULL; }
 	CMonomialOperator(CExpression *child){ m_Child = child; }
@@ -63,12 +63,12 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“ñ€‰‰Zq
+ *	äºŒé …æ¼”ç®—å­
  */
 class CBinomialOperator: public CExpression{
 protected:
-	CExpression *m_Left;	//	¶•Ó
-	CExpression *m_Right;	//	‰E•Ó
+	CExpression *m_Left;	//	å·¦è¾º
+	CExpression *m_Right;	//	å³è¾º
 public:
 	CBinomialOperator(){ m_Left = m_Right = NULL; }
 	CBinomialOperator(CExpression *left, CExpression *right){
@@ -84,13 +84,13 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	O€‰‰Zq
+ *	ä¸‰é …æ¼”ç®—å­
  */
 class CTrinomialOperator: public CExpression{
 protected:
-	CExpression *m_Condition;	//	ğŒ®
-	CExpression *m_TrueExpr;	//	^®
-	CExpression *m_FalseExpr;	//	‹U®
+	CExpression *m_Condition;	//	æ¡ä»¶å¼
+	CExpression *m_TrueExpr;	//	çœŸå¼
+	CExpression *m_FalseExpr;	//	å½å¼
 public:
 	CTrinomialOperator(){ m_Condition = m_TrueExpr = m_FalseExpr = NULL; }
 	CTrinomialOperator(CExpression *cond, CExpression *te, CExpression *fe){
@@ -102,10 +102,10 @@ public:
 	virtual int CalcInt();
 };
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 char *Expression(char *, CExpression **);
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CModelPlugin *g_SwitchOwner;
 
 #endif

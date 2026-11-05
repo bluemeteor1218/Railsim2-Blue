@@ -1,43 +1,43 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCustomizerMover.h"
 #include "CCustomizerMisc.h"
 #include "CModelSwitch.h"
 
-//	static ƒƒ“ƒo
-//CNamedObject *CCustomizerBase::ms_CurrentObject;	//	Œ»İ‚ÌƒIƒuƒWƒFƒNƒg
+//	static ãƒ¡ãƒ³ãƒ
+//CNamedObject *CCustomizerBase::ms_CurrentObject;	//	ç¾åœ¨ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CCustomizerContainer::CCustomizerContainer(){
 	m_Customizer = NULL;
 }
 
 /*
- *	ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CCustomizerContainer::CCustomizerContainer(
-	const CCustomizerContainer &src	//	ƒRƒs[Œ³
+	const CCustomizerContainer &src	//	ã‚³ãƒ”ãƒ¼å…ƒ
 ){
 	m_Customizer = src.m_Customizer->Duplicate();
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CCustomizerContainer::~CCustomizerContainer(){
 	DELETE_V(m_Customizer);
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CCustomizerContainer::Read(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	char *tmp;
 	DELETE_V(m_Customizer);

@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -6,7 +6,7 @@
 #include "vertex.h"
 
 /*
- *	‚RŠpŒ`‚Ì–@üƒxƒNƒgƒ‹‚ðŒvŽZ
+ *	ï¼“è§’å½¢ã®æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
  */
 void CalcNormal(VEC3 t[3], VEC3 *n){
 	VEC3 u = t[1]-t[0];
@@ -18,11 +18,11 @@ void CalcNormal(VEC3 t[3], VEC3 *n){
 }
 
 /*
- *	VTX_LX‚É‹éŒ`î•ñƒgƒ‰ƒCƒAƒ“ƒOƒ‹ƒŠƒXƒg‚ÅƒZƒbƒg‚·‚é
+ *	VTX_LXã«çŸ©å½¢æƒ…å ±ãƒˆãƒ©ã‚¤ã‚¢ãƒ³ã‚°ãƒ«ãƒªã‚¹ãƒˆã§ã‚»ãƒƒãƒˆã™ã‚‹
  *
- *	vt		: ’¸“_ƒe[ƒuƒ‹‚ÌƒAƒhƒŒƒX
- *	x1, y1	: Žn“_
- *	x2, y2	: I“_
+ *	vt		: é ‚ç‚¹ãƒ†ãƒ¼ãƒ–ãƒ«ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+ *	x1, y1	: å§‹ç‚¹
+ *	x2, y2	: çµ‚ç‚¹
  */
 void SetRectTL_LX(VTX_LX *vt, int x1, int y1, int x2, int y2, int z, D3DCOLOR c){
 	SetVTX_LX(vt , x1, y1, z, c, 0, 1);
@@ -34,7 +34,7 @@ void SetRectTL_LX(VTX_LX *vt, int x1, int y1, int x2, int y2, int z, D3DCOLOR c)
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CVertex::CVertex(){
 	m_pVB = NULL;
@@ -44,23 +44,23 @@ CVertex::CVertex(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CVertex::~CVertex(){
 	Free();
 }
 
 /*
- *	’¸“_ƒoƒbƒtƒ@ì¬
+ *	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ä½œæˆ
  *
- *	pSrc	: ’¸“_‚ªŠi”[‚³‚ê‚½”z—ñ
- *	fvf		: ’¸“_ƒtƒH[ƒ}ƒbƒg
- *	size	: ”z—ñ‚ÌƒTƒCƒY
+ *	pSrc	: é ‚ç‚¹ãŒæ ¼ç´ã•ã‚ŒãŸé…åˆ—
+ *	fvf		: é ‚ç‚¹ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
+ *	size	: é…åˆ—ã®ã‚µã‚¤ã‚º
  */
 BOOL CVertex::Create(LPVOID pSrc, DWORD fvf, UINT size){
 	HRESULT hr;
 
-	Free();	//	Šù‘¶‚È‚çƒoƒbƒtƒ@‚ð‰ð•ú
+	Free();	//	æ—¢å­˜ãªã‚‰ãƒãƒƒãƒ•ã‚¡ã‚’è§£æ”¾
 	m_fvf = fvf;
 
 	switch(m_fvf){
@@ -75,12 +75,12 @@ BOOL CVertex::Create(LPVOID pSrc, DWORD fvf, UINT size){
 	default:		return FALSE;
 	}	//	D3DXGetFVFVertexSize()
 
-	//	ƒoƒbƒtƒ@‚Ìì¬
+	//	ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	hr = sv3.pDev->CreateVertexBuffer(
 		size, 0, fvf, D3DPOOL_MANAGED, &m_pVB);
 	if(FAILED(hr)) return FALSE;
 
-	//	ƒƒbƒN‚µ‚Ä‘ž‚Ý
+	//	ãƒ­ãƒƒã‚¯ã—ã¦æ›¸è¾¼ã¿
 	LPVOID pDst;
 
 	hr = m_pVB->Lock(0, size, (BYTE **)&pDst, 0);
@@ -94,40 +94,40 @@ BOOL CVertex::Create(LPVOID pSrc, DWORD fvf, UINT size){
 }
 
 /*
- *	’¸“_ƒoƒbƒtƒ@‰ð•ú
+ *	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡è§£æ”¾
  */
 void CVertex::Free(){
 	RELEASE(m_pVB);
 }
 
 /*
- *	’¸“_ƒoƒbƒtƒ@‚ðƒƒbƒN
+ *	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯
  *
- *	¦ƒƒbƒNŒã‚Í•K‚¸ƒAƒ“ƒƒbƒN‚·‚é‚±‚ÆB
+ *	â€»ãƒ­ãƒƒã‚¯å¾Œã¯å¿…ãšã‚¢ãƒ³ãƒ­ãƒƒã‚¯ã™ã‚‹ã“ã¨ã€‚
  */
 BOOL CVertex::Lock(LPVOID *ppBuf){
-	if(FAILED(m_pVB->Lock(0, 0/*‘S‘Ì*/, (BYTE **)ppBuf, 0)))
+	if(FAILED(m_pVB->Lock(0, 0/*å…¨ä½“*/, (BYTE **)ppBuf, 0)))
 		return FALSE;
 	else
 		return TRUE;
 }
 
 /*
- *	’¸“_ƒoƒbƒtƒ@‚ðƒAƒ“ƒƒbƒN
+ *	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¢ãƒ³ãƒ­ãƒƒã‚¯
  */
 void CVertex::Unlock(){
 	m_pVB->Unlock();
 }
 
 /*
- *	¦ˆÈ‰º‚Ìƒƒ\ƒbƒh‚Íƒ‰ƒCƒgAƒ}ƒeƒŠƒAƒ‹AƒeƒNƒXƒ`ƒƒAƒ[ƒ‹ƒhƒ}ƒgƒŠƒNƒX‚Ì
- *	‰e‹¿‚ðŽó‚¯‚Ü‚·B
+ *	â€»ä»¥ä¸‹ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ãƒ©ã‚¤ãƒˆã€ãƒžãƒ†ãƒªã‚¢ãƒ«ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£ã€ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒžãƒˆãƒªã‚¯ã‚¹ã®
+ *	å½±éŸ¿ã‚’å—ã‘ã¾ã™ã€‚
  *	
- *	ƒ‰ƒBƒeƒBƒ“ƒOÏ‚Ý’¸“_‚ðŽg—p‚·‚éê‡‚Íƒ‰ƒCƒeƒBƒ“ƒO‚ð–³Œø‚É‚µ‚Ä‚©‚çA
- *	ƒeƒNƒXƒ`ƒƒ‚È‚µ’¸“_‚ðŽg—p‚·‚éê‡‚ÍƒeƒNƒXƒ`ƒƒ‚ðNULL‚É‚µ‚Ä‚©‚çs‚Á‚Ä‚­‚¾‚³‚¢B
+ *	ãƒ©ã‚£ãƒ†ã‚£ãƒ³ã‚°æ¸ˆã¿é ‚ç‚¹ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆã¯ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’ç„¡åŠ¹ã«ã—ã¦ã‹ã‚‰ã€
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãªã—é ‚ç‚¹ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆã¯ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’NULLã«ã—ã¦ã‹ã‚‰è¡Œã£ã¦ãã ã•ã„ã€‚
  */
 /*
- *	ƒ|ƒCƒ“ƒgƒŠƒXƒg
+ *	ãƒã‚¤ãƒ³ãƒˆãƒªã‚¹ãƒˆ
  */
 void CVertex::RenderPL(){
 	sv3.pDev->SetStreamSource(0, m_pVB, m_stride);
@@ -136,7 +136,7 @@ void CVertex::RenderPL(){
 }
 
 /*
- *	ƒ‰ƒCƒ“ƒŠƒXƒg
+ *	ãƒ©ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 void CVertex::RenderLL(){
 	sv3.pDev->SetStreamSource(0, m_pVB, m_stride);
@@ -145,9 +145,9 @@ void CVertex::RenderLL(){
 }
 
 /*
- *	ƒ‰ƒCƒ“ƒXƒgƒŠƒbƒv
+ *	ãƒ©ã‚¤ãƒ³ã‚¹ãƒˆãƒªãƒƒãƒ—
  *
- *	count	: ü‚Ì”
+ *	count	: ç·šã®æ•°
  */
 void CVertex::RenderLS(UINT count){
 	sv3.pDev->SetStreamSource(0, m_pVB, m_stride);
@@ -156,7 +156,7 @@ void CVertex::RenderLS(UINT count){
 }
 
 /*
- *	ƒgƒ‰ƒCƒAƒ“ƒOƒ‹ƒŠƒXƒg
+ *	ãƒˆãƒ©ã‚¤ã‚¢ãƒ³ã‚°ãƒ«ãƒªã‚¹ãƒˆ
  */
 void CVertex::RenderTL(){
 	sv3.pDev->SetStreamSource(0, m_pVB, m_stride);
@@ -165,9 +165,9 @@ void CVertex::RenderTL(){
 }
 
 /*
- *	ƒgƒ‰ƒCƒAƒ“ƒOƒ‹ƒXƒgƒŠƒbƒv
+ *	ãƒˆãƒ©ã‚¤ã‚¢ãƒ³ã‚°ãƒ«ã‚¹ãƒˆãƒªãƒƒãƒ—
  *
- *	count	: 3ŠpŒ`‚Ì”
+ *	count	: 3è§’å½¢ã®æ•°
  */
 void CVertex::RenderTS(UINT count){
 	sv3.pDev->SetStreamSource(0, m_pVB, m_stride);
@@ -176,9 +176,9 @@ void CVertex::RenderTS(UINT count){
 }
 
 /*
- *	ƒgƒ‰ƒCƒAƒ“ƒOƒ‹ƒtƒ@ƒ“
+ *	ãƒˆãƒ©ã‚¤ã‚¢ãƒ³ã‚°ãƒ«ãƒ•ã‚¡ãƒ³
  *
- *	count	: 3ŠpŒ`‚Ì”
+ *	count	: 3è§’å½¢ã®æ•°
  */
 void CVertex::RenderTF(UINT count){
 	sv3.pDev->SetStreamSource(0, m_pVB, m_stride);
@@ -187,10 +187,10 @@ void CVertex::RenderTF(UINT count){
 }
 
 /*
- *	ƒ^ƒCƒvŽw’è
+ *	ã‚¿ã‚¤ãƒ—æŒ‡å®š
  *
- *	type	: ƒvƒŠƒ~ƒeƒBƒuƒ^ƒCƒv
- *	count	: 3ŠpŒ`‚Ì”
+ *	type	: ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ã‚¿ã‚¤ãƒ—
+ *	count	: 3è§’å½¢ã®æ•°
  */
 void CVertex::Render(PRIMTYPE type, UINT count){
 	sv3.pDev->SetStreamSource(0, m_pVB, m_stride);

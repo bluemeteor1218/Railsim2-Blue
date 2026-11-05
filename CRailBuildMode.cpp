@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CPopMenu.h"
 #include "CScene.h"
 #include "CRailPlanCurve.h"
@@ -15,14 +15,14 @@
 #include "CSurfacePlugin.h"
 #include "CRailBuildMode.h"
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const float CORNER_MIN_DIST;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 bool g_EnableCant;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailBuildMode::CRailBuildMode(){
 	m_Builder = m_LastPos = NULL;
@@ -30,7 +30,7 @@ CRailBuildMode::CRailBuildMode(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailBuildMode::~CRailBuildMode(){
 	DELETE_V(m_Builder);
@@ -38,26 +38,26 @@ CRailBuildMode::~CRailBuildMode(){
 }
 
 /*
- *	İ’è“Ç
+ *	è¨­å®šèª­è¾¼
  */
 char *CRailBuildMode::LoadArrowScenerySetting(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	if(!str) return NULL;
 	return LoadRailwaySetting(str);
 }
 
 /*
- *	İ’è•Û‘¶
+ *	è¨­å®šä¿å­˜
  */
 void CRailBuildMode::SaveArrowScenerySetting(
-	FILE *file	//	ƒtƒ@ƒCƒ‹
+	FILE *file	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	SaveRailwaySetting(file);
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CRailBuildMode::EnterArrowScenery(){
 	ms_ModeLabel = lang(BuildRail);
@@ -68,14 +68,14 @@ void CRailBuildMode::EnterArrowScenery(){
 }
 
 /*
- *	ƒ‚[ƒ_ƒ‹ˆ—
+ *	ãƒ¢ãƒ¼ãƒ€ãƒ«å‡¦ç†
  */
 void CRailBuildMode::ModalFuncArrowScenery(){
 	ModalFuncRailwayPluginSet();
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CRailBuildMode::ScanInputArrowScenery(){
 	ScanInputRailway();
@@ -267,7 +267,7 @@ POP:
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CRailBuildMode::RenderArrowScenery(){
 	if(ms_PhotoMode) return;
@@ -309,7 +309,7 @@ void CRailBuildMode::RenderArrowScenery(){
 }
 
 /*
- *	ƒrƒ‹ƒ_[ƒŠƒZƒbƒg
+ *	ãƒ“ãƒ«ãƒ€ãƒ¼ãƒªã‚»ãƒƒãƒˆ
  */
 void CRailBuildMode::ResetBuilder(){
 	DELETE_V(m_Builder);

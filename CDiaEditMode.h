@@ -1,4 +1,4 @@
-#ifndef CDIAEDITMODE_H_INCLUDED
+ï»¿#ifndef CDIAEDITMODE_H_INCLUDED
 #define CDIAEDITMODE_H_INCLUDED
 
 #include "CDiaDialog.h"
@@ -8,14 +8,14 @@ class CRailConnector;
 class CStation;
 
 /*
- *	ƒjƒ…[ƒgƒ‰ƒ‹ƒ‚[ƒh
+ *	ãƒ‹ãƒ¥ãƒ¼ãƒˆãƒ©ãƒ«ãƒ¢ãƒ¼ãƒ‰
  */
 class CDiaEditMode: public CCursorSceneryMode{
 private:
-	CRailConnector *m_EditConnector;	//	•ÒW’†‚Ìƒ|ƒCƒ“ƒg
-	CStation *m_EditStation;			//	•ÒW’†‚Ì‰wÉ
-	CPointDialog m_PointDialog;			//	ƒ|ƒCƒ“ƒgØ‘Öƒ_ƒCƒAƒƒO
-	CDiaDialog m_DiaDialog;				//	ƒ_ƒCƒ„İ’èƒ_ƒCƒAƒƒO
+	CRailConnector *m_EditConnector;	//	ç·¨é›†ä¸­ã®ãƒã‚¤ãƒ³ãƒˆ
+	CStation *m_EditStation;			//	ç·¨é›†ä¸­ã®é§…èˆ
+	CPointDialog m_PointDialog;			//	ãƒã‚¤ãƒ³ãƒˆåˆ‡æ›¿ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
+	CDiaDialog m_DiaDialog;				//	ãƒ€ã‚¤ãƒ¤è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 public:
 	CDiaEditMode();
 	~CDiaEditMode();
@@ -28,7 +28,7 @@ public:
 	//bool IsWindowDivisible(){ return true; }
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CDiaEditMode *g_DiaEditMode;
 
 #endif

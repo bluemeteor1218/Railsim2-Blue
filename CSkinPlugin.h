@@ -1,115 +1,115 @@
-#ifndef CSKINPLUGIN_H_INCLUDED
+ï»¿#ifndef CSKINPLUGIN_H_INCLUDED
 #define CSKINPLUGIN_H_INCLUDED
 
 #include "CWaveArray.h"
 #include "CPlugin.h"
 
 /*
- *	ƒXƒLƒ“ƒvƒ‰ƒOƒCƒ“
+ *	ã‚¹ã‚­ãƒ³ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CSkinPlugin: public CPlugin{
 public:
-	struct _CURSORDATA{		//	ƒJ[ƒ\ƒ‹İ’è
-		int m_Frame, m_Anim;		//	ƒAƒjƒ[ƒVƒ‡ƒ“ƒJƒEƒ“ƒ^
-		string m_TexFileName;		//	ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
-		int m_ImageSize[2];			//	‰æ‘œƒTƒCƒY
-		int m_Cursor2DSize[2];		//	ƒJ[ƒ\ƒ‹ƒTƒCƒY
-		int m_Cursor2DHotSpot[2];	//	ƒzƒbƒgƒXƒ|ƒbƒgÀ•W
-		int m_Cursor2DAnimNumber;	//	ƒAƒjƒ[ƒVƒ‡ƒ“–‡”
-		int *m_Cursor2DAnimFrame;	//	ƒAƒjƒƒtƒŒ[ƒ€’·
-		LPTEX8 m_CursorTexture;		//	ƒJ[ƒ\ƒ‹ƒeƒNƒXƒ`ƒƒ
+	struct _CURSORDATA{		//	ã‚«ãƒ¼ã‚½ãƒ«è¨­å®š
+		int m_Frame, m_Anim;		//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚«ã‚¦ãƒ³ã‚¿
+		string m_TexFileName;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
+		int m_ImageSize[2];			//	ç”»åƒã‚µã‚¤ã‚º
+		int m_Cursor2DSize[2];		//	ã‚«ãƒ¼ã‚½ãƒ«ã‚µã‚¤ã‚º
+		int m_Cursor2DHotSpot[2];	//	ãƒ›ãƒƒãƒˆã‚¹ãƒãƒƒãƒˆåº§æ¨™
+		int m_Cursor2DAnimNumber;	//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æšæ•°
+		int *m_Cursor2DAnimFrame;	//	ã‚¢ãƒ‹ãƒ¡ãƒ•ãƒ¬ãƒ¼ãƒ é•·
+		LPTEX8 m_CursorTexture;		//	ã‚«ãƒ¼ã‚½ãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£
 	public:
 		_CURSORDATA(){ m_Frame = m_Anim = 0; }
 		char *Read(char *, char *);
 		void LoadData();
 		void Render(POINT, float);
 	} m_NormalCursorData, m_ResizeCursorData[4];
-	struct _INTERFACEDATA{	//	ƒCƒ“ƒ^[ƒtƒFƒCƒXİ’è
-		string m_TexFileName;			//	ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
-		string m_FontName;				//	ƒtƒHƒ“ƒg–¼
-		HFONT m_hFont;					//	ƒtƒHƒ“ƒgƒnƒ“ƒhƒ‹
-		D3DCOLOR m_TitleBarFontColor;	//	ƒ^ƒCƒgƒ‹ƒo[ƒtƒHƒ“ƒgF
-		D3DCOLOR m_ButtonFontColor;		//	ƒ{ƒ^ƒ“ƒtƒHƒ“ƒgF
-		D3DCOLOR m_StaticFontColor;		//	ƒXƒ^ƒeƒBƒbƒNƒtƒHƒ“ƒgF
-		D3DCOLOR m_FocusFrameColor;		//	ƒtƒH[ƒJƒX˜gF
+	struct _INTERFACEDATA{	//	ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹è¨­å®š
+		string m_TexFileName;			//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
+		string m_FontName;				//	ãƒ•ã‚©ãƒ³ãƒˆå
+		HFONT m_hFont;					//	ãƒ•ã‚©ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ«
+		D3DCOLOR m_TitleBarFontColor;	//	ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_ButtonFontColor;		//	ãƒœã‚¿ãƒ³ãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_StaticFontColor;		//	ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_FocusFrameColor;		//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹æ è‰²
 	} m_InterfaceData;
-	struct _BACKGROUNDDATA{	//	”wŒiİ’è
-		string m_TexFileName;		//	ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
-		D3DCOLOR m_BackgroundColor;	//	”wŒiF
-		int m_ImageSize[2];			//	‰æ‘œƒTƒCƒY
+	struct _BACKGROUNDDATA{	//	èƒŒæ™¯è¨­å®š
+		string m_TexFileName;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
+		D3DCOLOR m_BackgroundColor;	//	èƒŒæ™¯è‰²
+		int m_ImageSize[2];			//	ç”»åƒã‚µã‚¤ã‚º
 	} m_BackgroundData;
-	struct _FRAMEDATA{	//	ƒtƒŒ[ƒ€İ’è
-		string m_FrameTexFileName;			//	ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
-		string m_IconTexFileName[MODE_NUM];	//	ƒAƒCƒRƒ“ƒtƒ@ƒCƒ‹–¼
-		D3DCOLOR m_LabelFontColor;			//	ƒ^ƒCƒgƒ‹ƒo[ƒtƒHƒ“ƒgF
-		D3DCOLOR m_InfoFontColor;			//	î•ñƒtƒHƒ“ƒgF
-		D3DCOLOR m_FloatFontColor;			//	ƒtƒ[ƒgƒtƒHƒ“ƒgF
+	struct _FRAMEDATA{	//	ãƒ•ãƒ¬ãƒ¼ãƒ è¨­å®š
+		string m_FrameTexFileName;			//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
+		string m_IconTexFileName[MODE_NUM];	//	ã‚¢ã‚¤ã‚³ãƒ³ãƒ•ã‚¡ã‚¤ãƒ«å
+		D3DCOLOR m_LabelFontColor;			//	ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_InfoFontColor;			//	æƒ…å ±ãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_FloatFontColor;			//	ãƒ•ãƒ­ãƒ¼ãƒˆãƒ•ã‚©ãƒ³ãƒˆè‰²
 	} m_FrameData;
-	struct _EDITCTRLDATA{	//	ƒGƒfƒBƒbƒgƒRƒ“ƒgƒ[ƒ‹İ’è
-		D3DCOLOR m_DefaultFontColor;		//	Šù’èƒtƒHƒ“ƒgF
-		D3DCOLOR m_EditBaseColor[4];		//	‹ô”—ñ”wŒiF
-		D3DCOLOR m_EditFontColor;			//	•ÒW’†ƒtƒHƒ“ƒgF
-		D3DCOLOR m_ConvertFontColor;		//	•ÏŠ·’†ƒtƒHƒ“ƒgF
-		D3DCOLOR m_ConvertClauseColor[2];	//	•ÏŠ·’†•¶ß‰ºüF
-		D3DCOLOR m_SelectedBaseColor[4];	//	‘I‘ğ’†”wŒiF
+	struct _EDITCTRLDATA{	//	ã‚¨ãƒ‡ã‚£ãƒƒãƒˆã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«è¨­å®š
+		D3DCOLOR m_DefaultFontColor;		//	æ—¢å®šãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_EditBaseColor[4];		//	å¶æ•°åˆ—èƒŒæ™¯è‰²
+		D3DCOLOR m_EditFontColor;			//	ç·¨é›†ä¸­ãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_ConvertFontColor;		//	å¤‰æ›ä¸­ãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_ConvertClauseColor[2];	//	å¤‰æ›ä¸­æ–‡ç¯€ä¸‹ç·šè‰²
+		D3DCOLOR m_SelectedBaseColor[4];	//	é¸æŠä¸­èƒŒæ™¯è‰²
 	} m_EditCtrlData;
-	struct _LISTVIEWDATA{	//	ƒŠƒXƒgƒ{ƒbƒNƒXİ’è
-		D3DCOLOR m_DefaultBaseColorOdd[4];	//	Šï”—ñ”wŒiF
-		D3DCOLOR m_DefaultBaseColorEven[4];	//	‹ô”—ñ”wŒiF
-		D3DCOLOR m_DefaultFontColor;		//	Šù’èƒtƒHƒ“ƒgF
-		D3DCOLOR m_SelectedBaseColor[4];	//	‘I‘ğ”wŒiF
-		D3DCOLOR m_SelectedFontColor;		//	‘I‘ğƒtƒHƒ“ƒgF
-		D3DCOLOR m_FocusFrameColor;			//	ƒtƒH[ƒJƒX˜gF
+	struct _LISTVIEWDATA{	//	ãƒªã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹è¨­å®š
+		D3DCOLOR m_DefaultBaseColorOdd[4];	//	å¥‡æ•°åˆ—èƒŒæ™¯è‰²
+		D3DCOLOR m_DefaultBaseColorEven[4];	//	å¶æ•°åˆ—èƒŒæ™¯è‰²
+		D3DCOLOR m_DefaultFontColor;		//	æ—¢å®šãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_SelectedBaseColor[4];	//	é¸æŠèƒŒæ™¯è‰²
+		D3DCOLOR m_SelectedFontColor;		//	é¸æŠãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_FocusFrameColor;			//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹æ è‰²
 	} m_ListViewData;
-	struct _PLUGINTREEDATA{	//	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒgİ’è
-		D3DCOLOR m_DefaultBaseColor[4];		//	Šù’è”wŒiF
-		D3DCOLOR m_DefaultFontColor;		//	Šù’èƒtƒHƒ“ƒgF
-		D3DCOLOR m_SelectedBaseColor[4];	//	‘I‘ğ”wŒiF
-		D3DCOLOR m_SelectedFontColor;		//	‘I‘ğƒtƒHƒ“ƒgF
-		D3DCOLOR m_FocusFrameColor;			//	ƒtƒH[ƒJƒX˜gF
+	struct _PLUGINTREEDATA{	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆè¨­å®š
+		D3DCOLOR m_DefaultBaseColor[4];		//	æ—¢å®šèƒŒæ™¯è‰²
+		D3DCOLOR m_DefaultFontColor;		//	æ—¢å®šãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_SelectedBaseColor[4];	//	é¸æŠèƒŒæ™¯è‰²
+		D3DCOLOR m_SelectedFontColor;		//	é¸æŠãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_FocusFrameColor;			//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹æ è‰²
 	} m_PluginTreeData;
-	struct _POPUPMENUDATA{	//	ƒ|ƒbƒvƒAƒbƒvƒƒjƒ…[İ’è
-		D3DCOLOR m_DefaultFontColor;		//	Šù’èƒtƒHƒ“ƒgF
-		D3DCOLOR m_DisabledFontColor;		//	–³ŒøƒtƒHƒ“ƒgF
-		D3DCOLOR m_DisabledShadowColor;		//	–³Œø‰A‰eF
-		D3DCOLOR m_SelectedBaseColor[4];	//	‘I‘ğ”wŒiF
-		D3DCOLOR m_SelectedFontColor;		//	‘I‘ğƒtƒHƒ“ƒgF
+	struct _POPUPMENUDATA{	//	ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¨­å®š
+		D3DCOLOR m_DefaultFontColor;		//	æ—¢å®šãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_DisabledFontColor;		//	ç„¡åŠ¹ãƒ•ã‚©ãƒ³ãƒˆè‰²
+		D3DCOLOR m_DisabledShadowColor;		//	ç„¡åŠ¹é™°å½±è‰²
+		D3DCOLOR m_SelectedBaseColor[4];	//	é¸æŠèƒŒæ™¯è‰²
+		D3DCOLOR m_SelectedFontColor;		//	é¸æŠãƒ•ã‚©ãƒ³ãƒˆè‰²
 	} m_PopupMenuData;
-	struct _MODELDATA{	//	Šeíƒ‚ƒfƒ‹İ’è
-		string m_ArrowModelFileName;		//	–îˆóƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹–¼
-		string m_LinkModelFileName;			//	Ú‘±“_ƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹–¼
-		string m_SegmentModelFileName;		//	ƒZƒOƒƒ“ƒgƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹–¼
-		string m_CompassModelFileName[2];	//	ƒRƒ“ƒpƒXƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹–¼
-		string m_WindDirModelFileName;		//	ƒRƒ“ƒpƒXƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹–¼
-		float m_ArrowModelScale;			//	–îˆóƒ‚ƒfƒ‹ƒXƒP[ƒ‹
-		float m_LinkModelScale;				//	Ú‘±“_ƒ‚ƒfƒ‹ƒXƒP[ƒ‹
-		float m_SegmentModelScale;			//	ƒZƒOƒƒ“ƒgƒ‚ƒfƒ‹ƒXƒP[ƒ‹
-		float m_CompassModelScale[2];		//	ƒRƒ“ƒpƒXƒ‚ƒfƒ‹ƒXƒP[ƒ‹
-		float m_WindDirModelScale;			//	ƒRƒ“ƒpƒXƒ‚ƒfƒ‹ƒXƒP[ƒ‹
+	struct _MODELDATA{	//	å„ç¨®ãƒ¢ãƒ‡ãƒ«è¨­å®š
+		string m_ArrowModelFileName;		//	çŸ¢å°ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
+		string m_LinkModelFileName;			//	æ¥ç¶šç‚¹ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
+		string m_SegmentModelFileName;		//	ã‚»ã‚°ãƒ¡ãƒ³ãƒˆãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
+		string m_CompassModelFileName[2];	//	ã‚³ãƒ³ãƒ‘ã‚¹ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
+		string m_WindDirModelFileName;		//	ã‚³ãƒ³ãƒ‘ã‚¹ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
+		float m_ArrowModelScale;			//	çŸ¢å°ãƒ¢ãƒ‡ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
+		float m_LinkModelScale;				//	æ¥ç¶šç‚¹ãƒ¢ãƒ‡ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
+		float m_SegmentModelScale;			//	ã‚»ã‚°ãƒ¡ãƒ³ãƒˆãƒ¢ãƒ‡ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
+		float m_CompassModelScale[2];		//	ã‚³ãƒ³ãƒ‘ã‚¹ãƒ¢ãƒ‡ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
+		float m_WindDirModelScale;			//	ã‚³ãƒ³ãƒ‘ã‚¹ãƒ¢ãƒ‡ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
 	} m_ModelData;
-	struct _SOUNDDATA{	//	ƒTƒEƒ“ƒhİ’è
-		string m_MouseDownWaveFileName;	//	ƒ}ƒEƒX‰Ÿ wav ƒtƒ@ƒCƒ‹–¼
-		string m_MouseUpWaveFileName;	//	ƒ}ƒEƒX—£ wav ƒtƒ@ƒCƒ‹–¼
-		string m_ErrorWaveFileName;		//	ƒGƒ‰[ wav ƒtƒ@ƒCƒ‹–¼
-		string m_ScreenShotWaveFileName;		//	ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgB‰e wav ƒtƒ@ƒCƒ‹–¼
-		string m_VideoStartWaveFileName;		//	ƒrƒfƒIB‰eŠJn wav ƒtƒ@ƒCƒ‹–¼
-		string m_VideoStopWaveFileName;		//	ƒrƒfƒIB‰e’â~ wav ƒtƒ@ƒCƒ‹–¼
+	struct _SOUNDDATA{	//	ã‚µã‚¦ãƒ³ãƒ‰è¨­å®š
+		string m_MouseDownWaveFileName;	//	ãƒã‚¦ã‚¹æŠ¼ wav ãƒ•ã‚¡ã‚¤ãƒ«å
+		string m_MouseUpWaveFileName;	//	ãƒã‚¦ã‚¹é›¢ wav ãƒ•ã‚¡ã‚¤ãƒ«å
+		string m_ErrorWaveFileName;		//	ã‚¨ãƒ©ãƒ¼ wav ãƒ•ã‚¡ã‚¤ãƒ«å
+		string m_ScreenShotWaveFileName;		//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆæ’®å½± wav ãƒ•ã‚¡ã‚¤ãƒ«å
+		string m_VideoStartWaveFileName;		//	ãƒ“ãƒ‡ã‚ªæ’®å½±é–‹å§‹ wav ãƒ•ã‚¡ã‚¤ãƒ«å
+		string m_VideoStopWaveFileName;		//	ãƒ“ãƒ‡ã‚ªæ’®å½±åœæ­¢ wav ãƒ•ã‚¡ã‚¤ãƒ«å
 	} m_SoundData;
-	LPTEX8 m_InterfaceTexture;		//	ƒCƒ“ƒ^[ƒtƒFƒCƒXƒeƒNƒXƒ`ƒƒ
-	LPTEX8 m_FrameTexture;			//	ƒtƒŒ[ƒ€ƒeƒNƒXƒ`ƒƒ
-	LPTEX8 m_IconTexture[MODE_NUM];	//	ƒAƒCƒRƒ“ƒeƒNƒXƒ`ƒƒ
-	LPTEX8 m_WallpaperTexture;		//	•Ç†ƒeƒNƒXƒ`ƒƒ
-	CMesh *m_ArrowMesh;				//	–îˆóƒƒbƒVƒ…
-	CMesh *m_LinkMesh;				//	Ú‘±“_ƒƒbƒVƒ…
-	CMesh *m_SegmentMesh;			//	ƒZƒOƒƒ“ƒgƒƒbƒVƒ…
-	CMesh *m_CompassMesh[2];		//	ƒRƒ“ƒpƒX
-	CMesh *m_WindDirMesh;			//	•—‘¬Œv
-	CWaveArray m_MouseDown;			//	ƒ}ƒEƒX’Ê‰ß
-	CWaveArray m_MouseUp;			//	ƒNƒŠƒbƒN
-	CWaveArray m_Error;				//	ƒGƒ‰[
-	CWaveArray m_ScreenShot;		//	ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgB‰e
-	CWaveArray m_VideoStart;		//	ƒrƒfƒIB‰eŠJn
-	CWaveArray m_VideoStop;			//	ƒrƒfƒIB‰e’â~
+	LPTEX8 m_InterfaceTexture;		//	ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	LPTEX8 m_FrameTexture;			//	ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	LPTEX8 m_IconTexture[MODE_NUM];	//	ã‚¢ã‚¤ã‚³ãƒ³ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	LPTEX8 m_WallpaperTexture;		//	å£ç´™ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	CMesh *m_ArrowMesh;				//	çŸ¢å°ãƒ¡ãƒƒã‚·ãƒ¥
+	CMesh *m_LinkMesh;				//	æ¥ç¶šç‚¹ãƒ¡ãƒƒã‚·ãƒ¥
+	CMesh *m_SegmentMesh;			//	ã‚»ã‚°ãƒ¡ãƒ³ãƒˆãƒ¡ãƒƒã‚·ãƒ¥
+	CMesh *m_CompassMesh[2];		//	ã‚³ãƒ³ãƒ‘ã‚¹
+	CMesh *m_WindDirMesh;			//	é¢¨é€Ÿè¨ˆ
+	CWaveArray m_MouseDown;			//	ãƒã‚¦ã‚¹é€šé
+	CWaveArray m_MouseUp;			//	ã‚¯ãƒªãƒƒã‚¯
+	CWaveArray m_Error;				//	ã‚¨ãƒ©ãƒ¼
+	CWaveArray m_ScreenShot;		//	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆæ’®å½±
+	CWaveArray m_VideoStart;		//	ãƒ“ãƒ‡ã‚ªæ’®å½±é–‹å§‹
+	CWaveArray m_VideoStop;			//	ãƒ“ãƒ‡ã‚ªæ’®å½±åœæ­¢
 public:
 	CSkinPlugin(char *);
 	~CSkinPlugin();
@@ -134,7 +134,7 @@ public:
 };
 
 /*
- *	ƒXƒLƒ“ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	ã‚¹ã‚­ãƒ³ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CSkinPluginList: public CPluginList{
 private:
@@ -146,7 +146,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CSkinPlugin);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CObject g_ArrowObject;
 extern CObject g_LinkObject;
 extern CObject g_SegmentObject;

@@ -1,36 +1,36 @@
-#ifndef CPIXELBIT_H_INCLUDED
+ï»¿#ifndef CPIXELBIT_H_INCLUDED
 #define CPIXELBIT_H_INCLUDED
 
 #include <windows.h>
 
-//#define ENABLE_SPECIFIC_STAMP	//	“ÁêƒXƒ^ƒ“ƒv‚ğg‚¤
-//#define ENABLE_RECT_BOUNDARY	//	—Ìˆæ§ŒÀ‚ğg‚¤
+//#define ENABLE_SPECIFIC_STAMP	//	ç‰¹æ®Šã‚¹ã‚¿ãƒ³ãƒ—ã‚’ä½¿ã†
+//#define ENABLE_RECT_BOUNDARY	//	é ˜åŸŸåˆ¶é™ã‚’ä½¿ã†
 
 /*
- *	DIB ƒrƒbƒgƒ}ƒbƒvŠÇ—ƒNƒ‰ƒX
+ *	DIB ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ç®¡ç†ã‚¯ãƒ©ã‚¹
  */
 class CPixelbit{
 private:
 	static HMODULE ms_hMSIMG32;
 	static BOOL (WINAPI *ms_TransBlt)(HDC, int, int, int, int, HDC, int, int, int, int, UINT);
-	int m_Width;			//	•
-	int m_Height;			//	‚‚³
+	int m_Width;			//	å¹…
+	int m_Height;			//	é«˜ã•
 #ifdef ENABLE_RECT_BOUNDARY
-	int m_BoundLeft;		//	•`‰æ§ŒÀ—Ìˆæ¶ X (“à)
-	int m_BoundTop;			//	•`‰æ§ŒÀ—Ìˆæã Y (“à)
-	int m_BoundRight;		//	•`‰æ§ŒÀ—Ìˆæ‰E X (ŠO)
-	int m_BoundBottom;		//	•`‰æ§ŒÀ—Ìˆæ‰º Y (ŠO)
+	int m_BoundLeft;		//	æç”»åˆ¶é™é ˜åŸŸå·¦ X (å†…)
+	int m_BoundTop;			//	æç”»åˆ¶é™é ˜åŸŸä¸Š Y (å†…)
+	int m_BoundRight;		//	æç”»åˆ¶é™é ˜åŸŸå³ X (å¤–)
+	int m_BoundBottom;		//	æç”»åˆ¶é™é ˜åŸŸä¸‹ Y (å¤–)
 #endif
-	DWORD m_BitsPerPixel;	//	ƒsƒNƒZƒ‹“–‚½‚èƒrƒbƒg”
-	DWORD m_BytesPerPixel;	//	ƒsƒNƒZƒ‹“–‚½‚èƒoƒCƒg”
-	DWORD m_BytesPerLine;	//	1s‚ ‚½‚èƒoƒCƒg”
-	DWORD m_DwordsPerLine;	//	1s‚ ‚½‚èDWORD”
-	DWORD m_ColorKey;		//	“§‰ßF
-	HBITMAP m_BmpHnd;		//	ƒrƒbƒgƒ}ƒbƒvƒnƒ“ƒhƒ‹
-	HBITMAP m_BmpHndOld;	//	ƒrƒbƒgƒ}ƒbƒvƒnƒ“ƒhƒ‹
-	HDC m_BmpHdc;			//	ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg
-	BITMAPINFO m_BmpInfo;	//	ƒrƒbƒgƒ}ƒbƒvƒwƒbƒ_
-	PDWORD m_PixelAdr;		//	‰æ‘œƒf[ƒ^‚ÌƒAƒhƒŒƒX
+	DWORD m_BitsPerPixel;	//	ãƒ”ã‚¯ã‚»ãƒ«å½“ãŸã‚Šãƒ“ãƒƒãƒˆæ•°
+	DWORD m_BytesPerPixel;	//	ãƒ”ã‚¯ã‚»ãƒ«å½“ãŸã‚Šãƒã‚¤ãƒˆæ•°
+	DWORD m_BytesPerLine;	//	1è¡Œã‚ãŸã‚Šãƒã‚¤ãƒˆæ•°
+	DWORD m_DwordsPerLine;	//	1è¡Œã‚ãŸã‚ŠDWORDæ•°
+	DWORD m_ColorKey;		//	é€éè‰²
+	HBITMAP m_BmpHnd;		//	ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ãƒãƒ³ãƒ‰ãƒ«
+	HBITMAP m_BmpHndOld;	//	ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ãƒãƒ³ãƒ‰ãƒ«
+	HDC m_BmpHdc;			//	ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
+	BITMAPINFO m_BmpInfo;	//	ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ãƒ˜ãƒƒãƒ€
+	PDWORD m_PixelAdr;		//	ç”»åƒãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 public:
 	static BOOL InitExtFunc();
 	static void FreeExtFunc();
@@ -145,55 +145,55 @@ public:
 	void Decode(char *);
 };
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 POINT MakePoint(int, int);
 RECT MakeRect(int, int, int, int);
 void RGBtoHSV(BYTE, BYTE, BYTE, int *, int *, int *);
 
 /*
- *	‹P“x’l‚ğk 0`255 ‚ÅŠÛ‚ß‚é
+ *	è¼åº¦å€¤ã‚’k 0ï½255 ã§ä¸¸ã‚ã‚‹
  */
 inline BYTE FixCV(int v){ return v<0 ? 0 : (v>255 ? 255 : v); }
 
 /*
- *	DWORD ‚É RGB ‚ğ‚Ü‚Æ‚ß‚é
+ *	DWORD ã« RGB ã‚’ã¾ã¨ã‚ã‚‹
  *
- *	–ß‚è’l: F
+ *	æˆ»ã‚Šå€¤: è‰²
  */
 inline DWORD MakePixel(
-	BYTE r, BYTE g, BYTE b	//	RGB F
+	BYTE r, BYTE g, BYTE b	//	RGB è‰²
 ){
 	return (r<<16)|(g<<8)|b;
 }
 
 /*
- *	DWORD ‚É RGB ‚ğ‚Ü‚Æ‚ß‚é
+ *	DWORD ã« RGB ã‚’ã¾ã¨ã‚ã‚‹
  *
- *	–ß‚è’l: F
+ *	æˆ»ã‚Šå€¤: è‰²
  */
 inline DWORD MakePixelA(
-	BYTE a, BYTE r, BYTE g, BYTE b	//	RGB F
+	BYTE a, BYTE r, BYTE g, BYTE b	//	RGB è‰²
 ){
 	return (a<<24)|(r<<16)|(g<<8)|b;
 }
 
 /*
- *	R ‚Æ B ‚ğ“ü‚ê‘Ö‚¦‚é
+ *	R ã¨ B ã‚’å…¥ã‚Œæ›¿ãˆã‚‹
  *
- *	–ß‚è’l: F
+ *	æˆ»ã‚Šå€¤: è‰²
  */
 inline DWORD RGBtoBGR(
-	DWORD c	//	F
+	DWORD c	//	è‰²
 ){
 	return (c&0xff00ff00)|((c&0x00ff0000)>>16)|((c&0x000000ff)<<16);
 }
 
 /*
- *	DWORD ‚ğ RGB ‚É•ª‰ğ
+ *	DWORD ã‚’ RGB ã«åˆ†è§£
  */
 inline void SplitColor(
-	DWORD c,				//	•ª‰ğ‚·‚éF
-	int *r, int *g, int *b	//	‘ã“üæ
+	DWORD c,				//	åˆ†è§£ã™ã‚‹è‰²
+	int *r, int *g, int *b	//	ä»£å…¥å…ˆ
 ){
 	*r = (c&0x00ff0000)>>16;
 	*g = (c&0x0000ff00)>>8;
@@ -201,11 +201,11 @@ inline void SplitColor(
 }
 
 /*
- *	DWORD ‚ğ ARGB ‚É•ª‰ğ
+ *	DWORD ã‚’ ARGB ã«åˆ†è§£
  */
 inline void SplitColorA(
-	DWORD c,						//	•ª‰ğ‚·‚éF
-	int *a, int *r, int *g, int *b	//	‘ã“üæ
+	DWORD c,						//	åˆ†è§£ã™ã‚‹è‰²
+	int *a, int *r, int *g, int *b	//	ä»£å…¥å…ˆ
 ){
 	*a = (c&0xff000000)>>24;
 	*r = (c&0x00ff0000)>>16;
@@ -214,18 +214,18 @@ inline void SplitColorA(
 }
 
 /*
- *	RGB ‚ğ Y ‚É•ÏŠ· (RGB “ü—Í)
+ *	RGB ã‚’ Y ã«å¤‰æ› (RGB å…¥åŠ›)
  *
- *	–ß‚è’l: Y ’l
+ *	æˆ»ã‚Šå€¤: Y å€¤
  */
 inline int BlackScale(BYTE r, BYTE g, BYTE b){
 	return (int)(r*0.298912f+g*0.586610f+b*0.114478f);
 }
 
 /*
- *	RGB ‚ğ Y ‚É•ÏŠ· (DWORD “ü—Í)
+ *	RGB ã‚’ Y ã«å¤‰æ› (DWORD å…¥åŠ›)
  *
- *	–ß‚è’l: Y ’l
+ *	æˆ»ã‚Šå€¤: Y å€¤
  */
 inline int BlackScale(DWORD c){
 	return (int)(((c&0x00ff0000)>>16)*0.298912f
@@ -233,9 +233,9 @@ inline int BlackScale(DWORD c){
 }
 
 /*
- *	RGB ‚ğ Y ‚É•ÏŠ·
+ *	RGB ã‚’ Y ã«å¤‰æ›
  *
- *	–ß‚è’l: Y ’l (Å‘å’l 256)
+ *	æˆ»ã‚Šå€¤: Y å€¤ (æœ€å¤§å€¤ 256)
  */
 inline int BlackScale256(DWORD c){
 	return (int)(((c&0x00ff0000)>>16)*0.300084f

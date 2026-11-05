@@ -1,16 +1,16 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRadioButton.h"
 #include "CSkinPlugin.h"
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CRadioButton::Init(
-	int x, int y,	//	À•W
-	int w, int h,	//	ƒTƒCƒY
-	char *t,		//	ƒeƒLƒXƒg
-	CInterface *p,	//	e
-	CRadioButton *l	//	‘OƒŠƒ“ƒN
+	int x, int y,	//	åº§æ¨™
+	int w, int h,	//	ã‚µã‚¤ã‚º
+	char *t,		//	ãƒ†ã‚­ã‚¹ãƒˆ
+	CInterface *p,	//	è¦ª
+	CRadioButton *l	//	å‰ãƒªãƒ³ã‚¯
 ){
 	CInterface::Init(x, y, w, h, t, p);
 	m_State = 0;
@@ -27,7 +27,7 @@ void CRadioButton::Init(
 }
 
 /*
- *	ƒ`ƒFƒbƒNƒNƒŠƒA
+ *	ãƒã‚§ãƒƒã‚¯ã‚¯ãƒªã‚¢
  */
 void CRadioButton::ClearGroupCheck(){
 	CRadioButton *ptr = this;
@@ -38,7 +38,7 @@ void CRadioButton::ClearGroupCheck(){
 }
 
 /*
- *	ƒ`ƒFƒbƒN”Ô†‚Ìæ“¾
+ *	ãƒã‚§ãƒƒã‚¯ç•ªå·ã®å–å¾—
  */
 int CRadioButton::GetNumber(){
 	CRadioButton *ptr = this;
@@ -52,7 +52,7 @@ int CRadioButton::GetNumber(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CRadioButton::ScanInput(){
 	if(!m_Enabled){
@@ -99,7 +99,7 @@ bool CRadioButton::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CRadioButton::Render(){
 	CInterface::RenderBrother();

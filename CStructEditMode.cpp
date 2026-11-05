@@ -1,24 +1,24 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CScene.h"
 #include "CStructEditMode.h"
 
-//	ŠO•”’è”
+//	å¤–éƒ¨å®šæ•°
 extern const int CSR_MOVE_TSD;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStructEditMode::CStructEditMode(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CStructEditMode::~CStructEditMode(){
 }
 
 /*
- *	ƒ‚[ƒh‚ð—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CStructEditMode::EnterCursorScenery(){
 	ms_ModeLabel = lang(EditStruct);
@@ -27,7 +27,7 @@ void CStructEditMode::EnterCursorScenery(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CStructEditMode::ScanInputCursorScenery(){
 	if(m_Interface.ScanInput()) return;
@@ -77,25 +77,25 @@ void CStructEditMode::ScanInputCursorScenery(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CStructEditMode::ScanInputStructEdit(
-	int mode,	//	ƒ‚[ƒh
-	VEC3 rect1,	//	—ÌˆæŽn“_
-	VEC3 rect2	//	—ÌˆæI“_
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2	//	é ˜åŸŸçµ‚ç‚¹
 ){
 	g_Scene->ScanInputStruct(mode, rect1, rect2, true);
 }
 
 /*
- *	“P‹Ž
+ *	æ’¤åŽ»
  */
 void CStructEditMode::Delete(){
 	g_Scene->DeleteStruct(NULL);
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CStructEditMode::RenderCursorScenery(){
 	if(ms_PhotoMode) return;

@@ -1,10 +1,10 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSkinPlugin.h"
 #include "CInterfaceMode.h"
 #include "CConfigMode.h"
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPluginTree::CPluginTree(){
 	m_PushedItem = m_FocusItem = NULL;
@@ -12,22 +12,22 @@ CPluginTree::CPluginTree(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPluginTree::~CPluginTree(){
 	DELETE_V(m_Root);
 }
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CPluginTree::Init(
-	int x, int y,			//	À•W
-	int w, int h,			//	ƒTƒCƒY
-	char *t,				//	ƒ‹[ƒg–¼
-	CInterface *p,			//	e
-	CPluginListView *lv,	//	•½tƒŠƒXƒgƒrƒ…[
-	CMenuCommander *cmd		//	ƒRƒ}ƒ“ƒ_
+	int x, int y,			//	åº§æ¨™
+	int w, int h,			//	ã‚µã‚¤ã‚º
+	char *t,				//	ãƒ«ãƒ¼ãƒˆå
+	CInterface *p,			//	è¦ª
+	CPluginListView *lv,	//	å¹³è¡¡ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	CMenuCommander *cmd		//	ã‚³ãƒãƒ³ãƒ€
 ){
 	CInterface::Init(x, y, w, h, t, p);
 	m_Rows = m_Height/TILE_UNIT;
@@ -39,10 +39,10 @@ void CPluginTree::Init(
 }
 
 /*
- *	ƒtƒH[ƒJƒXƒAƒCƒeƒ€‚Ìİ’è
+ *	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚¢ã‚¤ãƒ†ãƒ ã®è¨­å®š
  */
 void CPluginTree::SetFocusItem(
-	CTreeElement *f	//	ƒtƒH[ƒJƒXƒAƒCƒeƒ€
+	CTreeElement *f	//	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚¢ã‚¤ãƒ†ãƒ 
 ){
 	if(m_FocusItem && m_FocusItem->m_EditBox) m_FocusItem->EndRename(true);
 	m_PushedItem = m_FocusItem = f;
@@ -59,10 +59,10 @@ void CPluginTree::SetFocusItem(
 }
 
 /*
- *	ƒhƒƒbƒvæ‚Ìİ’è
+ *	ãƒ‰ãƒ­ãƒƒãƒ—å…ˆã®è¨­å®š
  */
 void CPluginTree::SetDropItem(
-	CTreeDirElement *d	//	ƒAƒCƒeƒ€
+	CTreeDirElement *d	//	ã‚¢ã‚¤ãƒ†ãƒ 
 ){
 	if(!ms_Drop || IsFocus()){
 		ms_Drop = this;
@@ -71,10 +71,10 @@ void CPluginTree::SetDropItem(
 }
 
 /*
- *	ƒvƒ‰ƒOƒCƒ“‚ğ‘I‘ğ
+ *	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’é¸æŠ
  */
 void CPluginTree::SelectPlugin(
-	CPlugin *t	//	ƒ^[ƒQƒbƒg
+	CPlugin *t	//	ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
 ){
 	CTreeFileElement *fe = m_Root->FindPlugin(t);
 	SetFocusItem(fe ? (CTreeElement *)fe : m_Root);
@@ -82,7 +82,7 @@ void CPluginTree::SelectPlugin(
 }
 
 /*
- *	ƒtƒH[ƒJƒXƒAƒCƒeƒ€‚ğ•\¦”ÍˆÍ“à‚É
+ *	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚¢ã‚¤ãƒ†ãƒ ã‚’è¡¨ç¤ºç¯„å›²å†…ã«
  */
 void CPluginTree::EnsureVisible(){
 	if(m_FocusItem){
@@ -101,7 +101,7 @@ void CPluginTree::EnsureVisible(){
 }
 
 /*
- *	ƒXƒNƒ[ƒ‹ƒo[‚ÌXV
+ *	ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã®æ›´æ–°
  */
 void CPluginTree::SetScroll(){
 	m_Rows = m_Height/TILE_UNIT;
@@ -111,29 +111,29 @@ void CPluginTree::SetScroll(){
 }
 
 /*
- *	ƒtƒH[ƒJƒX•t—^
+ *	ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ä»˜ä¸
  */
 void CPluginTree::GiveFocus(
-	bool snd	//	‰¹Ä¶ƒtƒ‰ƒO
+	bool snd	//	éŸ³å†ç”Ÿãƒ•ãƒ©ã‚°
 ){
 	m_Focused = true;
 	CInterface::GiveFocus(snd);
 }
 
 /*
- *	ƒhƒ‰ƒbƒOƒAƒCƒeƒ€•\¦
+ *	ãƒ‰ãƒ©ãƒƒã‚°ã‚¢ã‚¤ãƒ†ãƒ è¡¨ç¤º
  */
 void CPluginTree::RenderDragItem(){
 	if(m_FocusItem) m_FocusItem->RenderDragItem();
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CPluginTree::Load(
-	char *str,			//	‘ÎÛ•¶š—ñ
-	char *head,			//	ƒwƒbƒ_–¼
-	CPluginMode *pimode	//	ƒvƒ‰ƒOƒCƒ“ƒ‚[ƒh
+	char *str,			//	å¯¾è±¡æ–‡å­—åˆ—
+	char *head,			//	ãƒ˜ãƒƒãƒ€å
+	CPluginMode *pimode	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ¢ãƒ¼ãƒ‰
 ){
 	char *eee;
 	char *tmp_head = head;
@@ -145,11 +145,11 @@ char *CPluginTree::Load(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CPluginTree::Save(
-	FILE *file,	//	ƒtƒ@ƒCƒ‹
-	char *head	//	ƒwƒbƒ_–¼
+	FILE *file,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *head	//	ãƒ˜ãƒƒãƒ€å
 ){
 	fprintf(file, "%sPluginTree{\n", head);
 	m_Root->Save(file, "");
@@ -157,7 +157,7 @@ void CPluginTree::Save(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CPluginTree::ScanInput(){
 	int px, py;
@@ -235,7 +235,7 @@ bool CPluginTree::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CPluginTree::Render(){
 	CInterface::RenderBrother();

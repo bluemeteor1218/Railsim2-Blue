@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCamera.h"
 #include "CSaveFile.h"
 #include "CModelPlugin.h"
@@ -7,27 +7,27 @@
 #include "CSimulationMode.h"
 #include "CConfigMode.h"
 
-//	“à•”’è”
-const float AXIAL_INCLINATION = D3DXToRadian(23.44f);	//	’n²‚ÌŒX‚«
-const float DAYS_PER_YEAR = 365.2425f;					//	”N“–‚½‚è•½‹Ï“ú”
-const float REV_PER_DAY = 2.0f*D3DX_PI/DAYS_PER_YEAR;	//	1 “ú“–‚½‚èŒö“]Šp“x
-const float ROT_PER_DAY = 2.0f*D3DX_PI+REV_PER_DAY;		//	1 “ú“–‚½‚è©“]Šp“x
+//	å†…éƒ¨å®šæ•°
+const float AXIAL_INCLINATION = D3DXToRadian(23.44f);	//	åœ°è»¸ã®å‚¾ã
+const float DAYS_PER_YEAR = 365.2425f;					//	å¹´å½“ãŸã‚Šå¹³å‡æ—¥æ•°
+const float REV_PER_DAY = 2.0f*D3DX_PI/DAYS_PER_YEAR;	//	1 æ—¥å½“ãŸã‚Šå…¬è»¢è§’åº¦
+const float ROT_PER_DAY = 2.0f*D3DX_PI+REV_PER_DAY;		//	1 æ—¥å½“ãŸã‚Šè‡ªè»¢è§’åº¦
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern int g_AncientNightFlag;
 extern COffScreen g_HidefCapture;
 extern bool g_HidefCaptureFlag;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 float g_DayAlpha;
 float g_NightAlpha;
 D3DCOLOR g_NoLightColor;
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CLightSetting::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	if(!(str = BeginBlock(str, "Set"))) return NULL;
@@ -43,10 +43,10 @@ char *CLightSetting::Read(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CMoon::Read(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp, *eee;
 	if(!(str = BeginBlock(str, "Moon"))) return NULL;
@@ -63,7 +63,7 @@ char *CMoon::Read(
 }
 
 /*
- *	ƒf[ƒ^“Ç
+ *	ãƒ‡ãƒ¼ã‚¿èª­è¾¼
  */
 void CMoon::LoadData(){
 	m_MoonMesh = g_MeshList.Get(FALSE, (char *)m_MoonFile.c_str(), 0, 1);
@@ -71,13 +71,13 @@ void CMoon::LoadData(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CMoon::Render(
-	double abstime,	//	â‘ÎŠÔ
-	float latitude,	//	ˆÜ“x
-	VEC3 sdir,		//	‘¾—z‚Ì•ûŒü
-	float rot		//	’n‹…‚Ì©“]Šp“x
+	double abstime,	//	çµ¶å¯¾æ™‚é–“
+	float latitude,	//	ç·¯åº¦
+	VEC3 sdir,		//	å¤ªé™½ã®æ–¹å‘
+	float rot		//	åœ°çƒã®è‡ªè»¢è§’åº¦
 ){
 	float rev = NormAngle((abstime+m_InitialPhase)*m_RevolutionPerDay);
 	m_MoonObject.SetDir(-V3UP, V3DIR);
@@ -98,7 +98,7 @@ void CMoon::Render(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CEnvPlugin::Load(){
 	char *str = m_Script, *tmp, *eee;
@@ -173,7 +173,7 @@ bool CEnvPlugin::Load(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[İ’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CEnvPlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -184,10 +184,10 @@ void CEnvPlugin::SetPreview(){
 }
 
 /*
- *	ŠÂ‹«•`‰æ
+ *	ç’°å¢ƒæç”»
  */
 void CEnvPlugin::Render(
-	double abstime	//	â‘ÎŠÔ
+	double abstime	//	çµ¶å¯¾æ™‚é–“
 ){
 	LoadAndGet();
 	if(abstime<0.0) abstime = g_SaveFile->GetAbsTime();
@@ -197,13 +197,13 @@ void CEnvPlugin::Render(
 		abstime = 365*(rotmode%4)/4-10.0;
 		rottime += abstime-(int)rottime;
 	}
-	//	“~Š: 12/22 ‚æ‚Á‚Ä 1/1 ‚©‚ç 10 “ú•ª‚¸‚ç‚·
-	float rev = NormAngle((abstime+10.0)*REV_PER_DAY);	//	Œö“]Šp“x
+	//	å†¬è‡³: 12/22 ã‚ˆã£ã¦ 1/1 ã‹ã‚‰ 10 æ—¥åˆ†ãšã‚‰ã™
+	float rev = NormAngle((abstime+10.0)*REV_PER_DAY);	//	å…¬è»¢è§’åº¦
 	m_SunObject.SetDir(-V3UP, V3DIR);
 	m_SunObject.RotX(m_SunAxialInclination-m_Latitude);
 	m_SunObject.RotY(-rev);
-	VEC3 rotaxis;	//	©“]²
-	float rot;		//	©“]Šp“x
+	VEC3 rotaxis;	//	è‡ªè»¢è»¸
+	float rot;		//	è‡ªè»¢è§’åº¦
 	V3Norm(&rotaxis, &V3WorldToLocal(
 		&VEC3(0.0f, sin(m_Latitude), cos(m_Latitude)), &m_SunObject));
 	switch(g_SimulationMode->GetEarthRotation()){
@@ -266,7 +266,7 @@ void CEnvPlugin::Render(
 }
 
 /*
- *	ŠÂ‹«dã‚°
+ *	ç’°å¢ƒä»•ä¸Šã’
  */
 void CEnvPlugin::RenderAfter(){
 	VEC3 vp = GetVPos(), sd = m_SunObject.GetDir();

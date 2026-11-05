@@ -1,4 +1,4 @@
-#ifndef CSCENEEDITMODE_H_INCLUDED
+ï»¿#ifndef CSCENEEDITMODE_H_INCLUDED
 #define CSCENEEDITMODE_H_INCLUDED
 
 #include "C3DPluginMode.h"
@@ -7,7 +7,7 @@ class CSurfacePlugin;
 class CScene;
 
 /*
- *	ƒV[ƒ“ƒŠƒXƒgƒrƒ…[
+ *	ã‚·ãƒ¼ãƒ³ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
  */
 class CSceneListView: public CListView{
 private:
@@ -18,16 +18,16 @@ public:
 };
 
 /*
- *	ƒV[ƒ“•ÒWƒ‚[ƒh
+ *	ã‚·ãƒ¼ãƒ³ç·¨é›†ãƒ¢ãƒ¼ãƒ‰
  */
 class CSceneEditMode: public CModelPluginMode{
 private:
-	CPushButton m_AddButton;		//	Ôçq’Ç‰Áƒ{ƒ^ƒ“
-	CScene *m_SelectScene;			//	‘I‘ğ‚µ‚½ƒV[ƒ“
-	CCamera m_MyCamera;				//	ƒJƒƒ‰
-	CWindowCtrl m_SceneWindow;		//	ƒV[ƒ“‘‹
-	CSceneListView m_SceneListView;	//	ƒV[ƒ“ƒŠƒXƒg
-	CPopMenu *m_SceneMenu;			//	ƒV[ƒ“ƒƒjƒ…[
+	CPushButton m_AddButton;		//	è»Šè¼Œè¿½åŠ ãƒœã‚¿ãƒ³
+	CScene *m_SelectScene;			//	é¸æŠã—ãŸã‚·ãƒ¼ãƒ³
+	CCamera m_MyCamera;				//	ã‚«ãƒ¡ãƒ©
+	CWindowCtrl m_SceneWindow;		//	ã‚·ãƒ¼ãƒ³çª“
+	CSceneListView m_SceneListView;	//	ã‚·ãƒ¼ãƒ³ãƒªã‚¹ãƒˆ
+	CPopMenu *m_SceneMenu;			//	ã‚·ãƒ¼ãƒ³ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 public:
 	CSceneEditMode();
 	~CSceneEditMode();
@@ -44,7 +44,7 @@ public:
 	void RenderModelPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CSceneEditMode *g_SceneEditMode;
 
 #endif

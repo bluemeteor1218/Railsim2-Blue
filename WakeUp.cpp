@@ -1,19 +1,19 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 
 #ifdef _MSC_VER
-// ƒƒ‚ƒŠƒŠ[ƒNŒŸo
+// ãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯æ¤œå‡º
 #include <crtdbg.h>
 #endif // #ifdef _MSC_VER
 
 #include "HighTimer.h"
 #include "CGameMode.h"
 
-//	“à•”ƒOƒ[ƒoƒ‹
-char g_BaseDir[1024];			//	Šî€ƒfƒBƒŒƒNƒgƒŠ
-char *g_PluginViewArg = NULL;	//	ƒvƒ‰ƒOƒCƒ“ƒrƒ…[ƒA—pƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
+char g_BaseDir[1024];			//	åŸºæº–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+char *g_PluginViewArg = NULL;	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ“ãƒ¥ãƒ¼ã‚¢ç”¨ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³å¼•æ•°
 
 /*
- *	‰Šú‰»‚Ì‰Šú‰»
+ *	åˆæœŸåŒ–ã®åˆæœŸåŒ–
  */
 void WakeUp(){
 #ifdef _MSC_VER

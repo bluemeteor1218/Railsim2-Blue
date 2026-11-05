@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CSimpleDialog.h"
 #include "CSkinPlugin.h"
 #include "CScene.h"
@@ -7,12 +7,12 @@
 #include "CSceneryMode.h"
 #include "CConfigMode.h"
 
-//	“à•”’è”
-const int WW = 512, WH = 384;	//	‘‹ƒTƒCƒY
-const int RES_MODE_WIDTH[RES_MODE_NUM] = {640, 800, 1024, 1280};	//	‰ğ‘œ“x•
-const int RES_MODE_HEIGHT[RES_MODE_NUM] = {480, 600, 768, 960};		//	‰ğ‘œ“x‚
+//	å†…éƒ¨å®šæ•°
+const int WW = 512, WH = 384;	//	çª“ã‚µã‚¤ã‚º
+const int RES_MODE_WIDTH[RES_MODE_NUM] = {640, 800, 1024, 1280};	//	è§£åƒåº¦å¹…
+const int RES_MODE_HEIGHT[RES_MODE_NUM] = {480, 600, 768, 960};		//	è§£åƒåº¦é«˜
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern char *g_PluginViewArg;
 extern bool g_StencilEnabled;
 
@@ -29,20 +29,20 @@ extern string g_SelectedSurfaceID;
 extern string g_SelectedEnvID;
 extern string g_SelectedSkinID;
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern char *YESNO[2] = {"no", "yes"};
-char *g_ConfigBuffer = NULL;	//	ƒRƒ“ƒtƒBƒOƒtƒ@ƒCƒ‹ƒoƒbƒtƒ@
-char *g_ConfigScript = NULL;	//	ƒRƒ“ƒtƒBƒOƒtƒ@ƒCƒ‹‰ğÍˆÊ’u
-float g_ConfigVersion;			//	ƒRƒ“ƒtƒBƒOƒtƒ@ƒCƒ‹ƒo[ƒWƒ‡ƒ“
-bool g_FullScreen = true;		//	ƒtƒ‹ƒXƒNƒŠ[ƒ“
-bool g_RailMipMap = true;		//	ƒŒ[ƒ‹“™ƒ~ƒbƒvƒ}ƒbƒv
-bool g_TrainMipMap = false;		//	Ôçqƒ~ƒbƒvƒ}ƒbƒv
-bool g_StructMipMap = false;	//	{İ“™ƒ~ƒbƒvƒ}ƒbƒv
-bool g_SurfaceMipMap = true;	//	’nŒ`“™ƒ~ƒbƒvƒ}ƒbƒv
-bool g_NamedObjectMipMap;		//	–¼‘O•t‚«ƒIƒuƒWƒFƒNƒgƒ~ƒbƒvƒ}ƒbƒv
+char *g_ConfigBuffer = NULL;	//	ã‚³ãƒ³ãƒ•ã‚£ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒƒãƒ•ã‚¡
+char *g_ConfigScript = NULL;	//	ã‚³ãƒ³ãƒ•ã‚£ã‚°ãƒ•ã‚¡ã‚¤ãƒ«è§£æä½ç½®
+float g_ConfigVersion;			//	ã‚³ãƒ³ãƒ•ã‚£ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ¼ã‚¸ãƒ§ãƒ³
+bool g_FullScreen = true;		//	ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³
+bool g_RailMipMap = true;		//	ãƒ¬ãƒ¼ãƒ«ç­‰ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—
+bool g_TrainMipMap = false;		//	è»Šè¼ŒãƒŸãƒƒãƒ—ãƒãƒƒãƒ—
+bool g_StructMipMap = false;	//	æ–½è¨­ç­‰ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—
+bool g_SurfaceMipMap = true;	//	åœ°å½¢ç­‰ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—
+bool g_NamedObjectMipMap;		//	åå‰ä»˜ãã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒŸãƒƒãƒ—ãƒãƒƒãƒ—
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CConfigMode::CConfigMode(){
 	int i, half = WW/2-TILE_HALF*3, win = half-TILE_UNIT*2;
@@ -151,13 +151,13 @@ CConfigMode::CConfigMode(){
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CConfigMode::~CConfigMode(){
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CConfigMode::EnterInterface(){
 	ms_ModeLabel = lang(Configuration);
@@ -167,7 +167,7 @@ void CConfigMode::EnterInterface(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CConfigMode::ScanInputInterface(){
 	m_Interface.ScanInput();
@@ -179,7 +179,7 @@ void CConfigMode::ScanInputInterface(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 int CConfigMode::ScanInputWindowDiv(){
 	devSetTexture(0, NULL);
@@ -193,7 +193,7 @@ int CConfigMode::ScanInputWindowDiv(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CConfigMode::RenderInterface(){
 	int ix = g_DispWidth*60/100, iy = g_DispHeight;
@@ -202,7 +202,7 @@ void CConfigMode::RenderInterface(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CConfigMode::RenderWindowDiv(){
 	devSetTexture(0, NULL);
@@ -213,7 +213,7 @@ void CConfigMode::RenderWindowDiv(){
 }
 
 /*
- *	İ’è“Ç
+ *	è¨­å®šèª­è¾¼
  */
 bool CConfigMode::Load(){
 	int i;
@@ -386,7 +386,7 @@ SET:
 }
 
 /*
- *	İ’è•Û‘¶
+ *	è¨­å®šä¿å­˜
  */
 bool CConfigMode::Save(){
 	int tmp;
@@ -470,7 +470,7 @@ bool CConfigMode::Save(){
 }
 
 /*
- *	ƒeƒNƒXƒ`ƒƒƒtƒBƒ‹ƒ^İ’è
+ *	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚£ãƒ«ã‚¿è¨­å®š
  */
 void CConfigMode::SetTexFilter(){
 	if(m_LinearFilter.GetCheck()){
@@ -483,7 +483,7 @@ void CConfigMode::SetTexFilter(){
 }
 
 /*
- *	ƒXƒeƒŒƒIŠÔŠuæ“¾
+ *	ã‚¹ãƒ†ãƒ¬ã‚ªé–“éš”å–å¾—
  */
 float CConfigMode::GetStereoInterval(){
 	float interval = 0.0f;
@@ -494,7 +494,7 @@ float CConfigMode::GetStereoInterval(){
 }
 
 /*
- *	ƒn[ƒhƒEƒFƒAŒİŠ·«‚Ìƒ`ƒFƒbƒN
+ *	ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢äº’æ›æ€§ã®ãƒã‚§ãƒƒã‚¯
  */
 void CConfigMode::CheckHardware(){
 	int i;
@@ -513,7 +513,7 @@ void CConfigMode::CheckHardware(){
 }
 
 /*
- *	‰æ–Ê•ªŠ„ŠÖ˜A‰Šú‰»
+ *	ç”»é¢åˆ†å‰²é–¢é€£åˆæœŸåŒ–
  */
 void CConfigMode::FreeWindowDiv(){
 	m_RootWindow.Free();

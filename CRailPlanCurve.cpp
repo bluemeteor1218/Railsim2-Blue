@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "RailMap.h"
 #include "CCamera.h"
 #include "CRailPlanCurve.h"
@@ -7,17 +7,17 @@
 #include "CStringTexture.h"
 #include "CRailPlugin.h"
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 float CRailPlanCurve::ms_RadiusDrawPos;
 
 /*
- *	‹Èüˆ—
+ *	æ›²ç·šå‡¦ç†
  */
 void CRailPlanCurve::Curve(
-	VEC3 &pos1, VEC3 &dir1,	//	n“_
-	VEC3 &pos2, VEC3 &dir2,	//	I“_
-	bool comp2,				//	•âŠ®§Œä“_ƒtƒ‰ƒO
-	bool top				//	Ä‹Aƒgƒbƒv
+	VEC3 &pos1, VEC3 &dir1,	//	å§‹ç‚¹
+	VEC3 &pos2, VEC3 &dir2,	//	çµ‚ç‚¹
+	bool comp2,				//	è£œå®Œåˆ¶å¾¡ç‚¹ãƒ•ãƒ©ã‚°
+	bool top				//	å†å¸°ãƒˆãƒƒãƒ—
 ){
 	if(CalcSplit(pos1, dir1, pos2, dir2)){
 		m_Dump->Add(pos1, 0xc0ff00ff, pos2, 0xc0ff00ff);
@@ -75,14 +75,14 @@ void CRailPlanCurve::Curve(
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailBuildCurve::CRailBuildCurve(
-	CRailConnectorLink &begin,	//	ŠJnƒŠƒ“ƒN
-	CRailConnectorLink &end,	//	I—¹ƒŠƒ“ƒN
-	CRailPlugin *rpi,			//	ƒŒ[ƒ‹ƒvƒ‰ƒOƒCƒ“
-	CTiePlugin *tpi,			//	––Øƒvƒ‰ƒOƒCƒ“
-	CGirderPlugin *gpi			//	‹´Œ…ƒvƒ‰ƒOƒCƒ“
+	CRailConnectorLink &begin,	//	é–‹å§‹ãƒªãƒ³ã‚¯
+	CRailConnectorLink &end,	//	çµ‚äº†ãƒªãƒ³ã‚¯
+	CRailPlugin *rpi,			//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CTiePlugin *tpi,			//	æ•æœ¨ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CGirderPlugin *gpi			//	æ©‹æ¡ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	m_BeginLink = begin;
 	m_EndLink = end;
@@ -92,13 +92,13 @@ CRailBuildCurve::CRailBuildCurve(
 }
 
 /*
- *	‹Èüˆ—
+ *	æ›²ç·šå‡¦ç†
  */
 void CRailBuildCurve::Curve(
-	VEC3 &pos1, VEC3 &dir1,	//	n“_
-	VEC3 &pos2, VEC3 &dir2,	//	I“_
-	bool comp2,				//	•âŠ®§Œä“_ƒtƒ‰ƒO
-	bool top				//	Ä‹Aƒgƒbƒv
+	VEC3 &pos1, VEC3 &dir1,	//	å§‹ç‚¹
+	VEC3 &pos2, VEC3 &dir2,	//	çµ‚ç‚¹
+	bool comp2,				//	è£œå®Œåˆ¶å¾¡ç‚¹ãƒ•ãƒ©ã‚°
+	bool top				//	å†å¸°ãƒˆãƒƒãƒ—
 ){
 	CalcSplit(pos1, dir1, pos2, dir2);
 	if(!m_BeginLink.m_Link){

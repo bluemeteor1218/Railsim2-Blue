@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CRailPlugin.h"
 #include "CTiePlugin.h"
 #include "CGirderPlugin.h"
@@ -7,17 +7,17 @@
 #include "CSimulationMode.h"
 #include "CConfigMode.h"
 
-//	“à•”’è”
-extern const float RAIL_PREV_LEN = 100.0f;	//	ƒŒ[ƒ‹ƒvƒŒƒrƒ…[’·
-const int WHEEL_SOUND_MARGIN = 100;			//	ŽÔ—Ö‰¹‹ó”’ŽžŠÔ [ms]
+//	å†…éƒ¨å®šæ•°
+extern const float RAIL_PREV_LEN = 100.0f;	//	ãƒ¬ãƒ¼ãƒ«ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼é•·
+const int WHEEL_SOUND_MARGIN = 100;			//	è»Šè¼ªéŸ³ç©ºç™½æ™‚é–“ [ms]
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern float g_FrameDelta;
 extern bool g_EnableCant;
 
 /*
  *	[static]
- *	ƒvƒŒƒrƒ…[
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
  */
 void CRailPlugin::RenderPreview(){
 	if(!ms_PreviewState || !(g_Rail || g_Tie || g_Girder)) return;
@@ -95,25 +95,25 @@ void CRailPlugin::RenderPreview(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailPlugin::CRailPlugin(
-	char *id	//	ƒvƒ‰ƒOƒCƒ“ ID
+	char *id	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ ID
 ):
-	CProfilePlugin(id)	//	Šî–{ƒNƒ‰ƒX
+	CProfilePlugin(id)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_WheelSound = NULL;
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CRailPlugin::~CRailPlugin(){
 	DELETE_V(m_WheelSound);
 }
 
 /*
- *	ƒ[ƒh
+ *	ãƒ­ãƒ¼ãƒ‰
  */
 bool CRailPlugin::Load(){
 	char *str = m_Script, *tmp, *eee;
@@ -156,7 +156,7 @@ bool CRailPlugin::Load(){
 }
 
 /*
- *	ƒvƒŒƒrƒ…[Ý’è
+ *	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®š
  */
 void CRailPlugin::SetPreview(){
 	ms_PreviewState = true;
@@ -168,10 +168,10 @@ void CRailPlugin::SetPreview(){
 }
 
 /*
- *	ƒ_ƒ“ƒv‘Oˆ—
+ *	ãƒ€ãƒ³ãƒ—å‰å‡¦ç†
  */
 float CRailPlugin::CantFunc(
-	float radius	//	‹È—¦”¼Œa
+	float radius	//	æ›²çŽ‡åŠå¾„
 ){
 	if(!g_EnableCant) return 0.0f;
 	float tmp = m_CantRatio/radius;
@@ -179,12 +179,12 @@ float CRailPlugin::CantFunc(
 }
 
 /*
- *	ŽÔ—Ö‰¹Ä¶
+ *	è»Šè¼ªéŸ³å†ç”Ÿ
  */
 void CRailPlugin::PlayWheelSound(
-	float dist1,	//	‹——£ 1
-	float dist2,	//	‹——£ 2
-	VEC3 &pos		//	ˆÊ’u
+	float dist1,	//	è·é›¢ 1
+	float dist2,	//	è·é›¢ 2
+	VEC3 &pos		//	ä½ç½®
 ){
 	if(!m_WheelSound || !g_ConfigMode->GetRailSound()
 		|| g_SimulationMode->GetSimSpeed()>1) return;
@@ -199,11 +199,11 @@ void CRailPlugin::PlayWheelSound(
 }
 
 /*
- *	ƒ_ƒ“ƒv‘Oˆ—
+ *	ãƒ€ãƒ³ãƒ—å‰å‡¦ç†
  */
 void CRailPlugin::BeforeDump(
-	VEC3 &p1, VEC3 &r1, VEC3 &u1,	//	Žn“_ (³‹K‰»Ï)
-	VEC3 &p2, VEC3 &r2, VEC3 &u2	//	I“_ (³‹K‰»Ï)
+	VEC3 &p1, VEC3 &r1, VEC3 &u1,	//	å§‹ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &p2, VEC3 &r2, VEC3 &u2	//	çµ‚ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
 ){
 	float sft1 = 1.0f-sqrtf(r1.x*r1.x+r1.z*r1.z);
 	float sft2 = 1.0f-sqrtf(r2.x*r2.x+r2.z*r2.z);
@@ -217,13 +217,13 @@ void CRailPlugin::BeforeDump(
 }
 
 /*
- *	ƒ_ƒ“ƒvŒãˆ—
+ *	ãƒ€ãƒ³ãƒ—å¾Œå‡¦ç†
  */
 void CRailPlugin::AfterDump(
-	VEC3 &p1, VEC3 &u1,		//	Žn“_ (³‹K‰»Ï)
-	VEC3 &ip1, VEC3 &iu1,	//	”ñƒJƒ“ƒgŽn“_ (³‹K‰»Ï)
-	VEC3 &p2, VEC3 &u2,		//	I“_ (³‹K‰»Ï)
-	VEC3 &ip2, VEC3 &iu2	//	”ñƒJƒ“ƒgI“_ (³‹K‰»Ï)
+	VEC3 &p1, VEC3 &u1,		//	å§‹ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &ip1, VEC3 &iu1,	//	éžã‚«ãƒ³ãƒˆå§‹ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &p2, VEC3 &u2,		//	çµ‚ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 &ip2, VEC3 &iu2	//	éžã‚«ãƒ³ãƒˆçµ‚ç‚¹ (æ­£è¦åŒ–æ¸ˆ)
 ){
 	ip1 -= m_Height*iu1;
 	ip2 -= m_Height*iu2;
@@ -237,13 +237,13 @@ void CRailPlugin::AfterDump(
 }
 
 /*
- *	‹´‹rÝ’uˆÊ’uŒvŽZ
+ *	æ©‹è„šè¨­ç½®ä½ç½®è¨ˆç®—
  */
 void CRailPlugin::CalcPierPos(
-	VEC3 *pos,		//	ˆÊ’u
-	VEC3 *right,	//	right (³‹K‰»Ï)
-	VEC3 *up,		//	up (³‹K‰»Ï)
-	VEC3 *dir		//	dir (³‹K‰»Ï)
+	VEC3 *pos,		//	ä½ç½®
+	VEC3 *right,	//	right (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 *up,		//	up (æ­£è¦åŒ–æ¸ˆ)
+	VEC3 *dir		//	dir (æ­£è¦åŒ–æ¸ˆ)
 ){
 	if(m_FlattenCant){
 		right->y = 0.0f;

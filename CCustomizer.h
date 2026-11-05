@@ -1,21 +1,21 @@
-#ifndef CCUSTOMIZER_H_INCLUDED
+ï»¿#ifndef CCUSTOMIZER_H_INCLUDED
 #define CCUSTOMIZER_H_INCLUDED
 
 class CTextureAnimation;
 class CModelPlugin;
 
-//	ƒ^ƒCƒvƒtƒ‰ƒO
+//	ã‚¿ã‚¤ãƒ—ãƒ•ãƒ©ã‚°
 const int CSTM_MISCELLANEOUS = 0x0001;
 const int CSTM_MODELCHANGER = 0x0002;
 const int CSTM_MODELMOVER = 0x0004;
 
 /*
- *	ƒ€[ƒo[ó‘Ô•Ï”
+ *	ãƒ ãƒ¼ãƒãƒ¼çŠ¶æ…‹å¤‰æ•°
  */
 class CMoverState{
 private:
-	VEC3 m_Pos;	//	ˆÊ’u
-	VEC3 m_Dir;	//	•ûŒü
+	VEC3 m_Pos;	//	ä½ç½®
+	VEC3 m_Dir;	//	æ–¹å‘
 public:
 	CMoverState(){ Reset(); }
 	void Reset(){ m_Pos = V3ZERO; m_Dir = V3DIR; }
@@ -27,7 +27,7 @@ public:
 	void Save(FILE *, char *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CMoverState>::iterator IMoverState;
 typedef list<CMoverState *>::iterator IPMoverState;
 
@@ -35,11 +35,11 @@ typedef list<CMoverState *>::iterator IPMoverState;
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒJƒXƒ^ƒ}ƒCƒUŠî–{ƒNƒ‰ƒX
+ *	ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚¶åŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CCustomizerBase{
 protected:
-//	static CNamedObject *ms_CurrentObject;	//	Œ»İ‚ÌƒIƒuƒWƒFƒNƒg
+//	static CNamedObject *ms_CurrentObject;	//	ç¾åœ¨ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 public:
 //	static void SetObject(CNamedObject *obj){ ms_CurrentObject = obj; }
 	virtual ~CCustomizerBase(){}
@@ -53,15 +53,15 @@ public:
 	virtual void ApplyCustomizer(CMesh *){}
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CCustomizerBase *>::iterator IPCustomizerBase;
 
 /*
- *	ƒJƒXƒ^ƒ}ƒCƒUƒRƒ“ƒeƒi
+ *	ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚¶ã‚³ãƒ³ãƒ†ãƒŠ
  */
 class CCustomizerContainer{
 private:
-	CCustomizerBase *m_Customizer;	//	ƒJƒXƒ^ƒ}ƒCƒU
+	CCustomizerBase *m_Customizer;	//	ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚¶
 public:
 	CCustomizerContainer();
 	CCustomizerContainer(const CCustomizerContainer &);
@@ -75,7 +75,7 @@ public:
 	void Apply(CMesh *mesh){ m_Customizer->ApplyCustomizer(mesh); }
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CCustomizerContainer>::iterator ICustomizerContainer;
 
 #endif

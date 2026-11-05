@@ -1,4 +1,4 @@
-#ifndef CNAMEDOBJECT_H_INCLUDED
+ï»¿#ifndef CNAMEDOBJECT_H_INCLUDED
 #define CNAMEDOBJECT_H_INCLUDED
 
 #include "CModelSwitch.h"
@@ -8,9 +8,9 @@ class CModelInst;
 class CNamedObject;
 class CModelPlugin;
 
-const float SYMMETRIC_ROTATION_MAX = 0.45f;	//	Å‚‘ÎÌ‰ñ“]‘¬“x
+const float SYMMETRIC_ROTATION_MAX = 0.45f;	//	æœ€é«˜å¯¾ç§°å›è»¢é€Ÿåº¦
 
-//	ƒVƒXƒeƒ€ƒIƒuƒWƒFƒNƒg”Ô†
+//	ã‚·ã‚¹ãƒ†ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç•ªå·
 extern enum{
 	SYS_OBJ_WORLD = 0,
 	SYS_OBJ_LOCAL,
@@ -20,18 +20,18 @@ extern enum{
 } SYS_OBJ_ID;
 
 /*
- *	–¼‘O•t‚«ƒIƒuƒWƒFƒNƒgƒAƒtƒ^[ƒŒƒ“ƒ_ƒ‰
+ *	åå‰ä»˜ãã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚¢ãƒ•ã‚¿ãƒ¼ãƒ¬ãƒ³ãƒ€ãƒ©
  */
 class CNamedObjectAfterRenderer{
 private:
-	static CModelInst *ms_CurrentInst;		//	Œ»İ‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
-	static CModelPlugin *ms_CurrentPlugin;	//	Œ»İ‚Ìƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
-	int m_InstSwitch[INSTANCE_SWITCH_NUM];	//	ƒCƒ“ƒXƒ^ƒ“ƒXƒXƒCƒbƒ`
-	CModelInst *m_ModelInst;				//	Œ»İ‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
-	CModelPlugin *m_ModelPlugin;			//	Œ»İ‚Ìƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
-	CNamedObject *m_NamedObject;			//	–¼‘O•t‚«ƒIƒuƒWƒFƒNƒg
-	CPartsInst *m_PartsInst;				//	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒX
-	bool m_PartsInstCreation;				//	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒXì¬ƒtƒ‰ƒO
+	static CModelInst *ms_CurrentInst;		//	ç¾åœ¨ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+	static CModelPlugin *ms_CurrentPlugin;	//	ç¾åœ¨ã®ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	int m_InstSwitch[INSTANCE_SWITCH_NUM];	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚¹ã‚¤ãƒƒãƒ
+	CModelInst *m_ModelInst;				//	ç¾åœ¨ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+	CModelPlugin *m_ModelPlugin;			//	ç¾åœ¨ã®ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
+	CNamedObject *m_NamedObject;			//	åå‰ä»˜ãã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CPartsInst *m_PartsInst;				//	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+	bool m_PartsInstCreation;				//	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ä½œæˆãƒ•ãƒ©ã‚°
 public:
 	static void SetCurrentInst(CModelInst *inst){ ms_CurrentInst = inst; }
 	static void SetCurrentPlugin(CModelPlugin *mpi){ ms_CurrentPlugin = mpi; }
@@ -41,34 +41,34 @@ public:
 	void Render(int);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CNamedObjectAfterRenderer>::iterator INamedObjectAfterRenderer;
 
 /*
- *	–¼‘O•t‚«ƒIƒuƒWƒFƒNƒg
+ *	åå‰ä»˜ãã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
  */
 class CNamedObject{
 	friend class CNamedObjectAfterRenderer;
 protected:
-	static int ms_AfterMode;				//	ƒAƒtƒ^[ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ‚[ƒh
-	static int ms_AfterRender;				//	ƒAƒtƒ^[ƒŒƒ“ƒ_ƒŠƒ“ƒOƒtƒ‰ƒO
+	static int ms_AfterMode;				//	ã‚¢ãƒ•ã‚¿ãƒ¼ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰
+	static int ms_AfterRender;				//	ã‚¢ãƒ•ã‚¿ãƒ¼ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ•ãƒ©ã‚°
 											//	(1: noshadow, 2: transparent)
-	static bool ms_CastShadowDefault;		//	‰e•`‰æƒtƒ‰ƒOƒfƒtƒHƒ‹ƒg’l
-	static bool ms_SetMaterial;				//	ƒ}ƒeƒŠƒAƒ‹•ÏXƒtƒ‰ƒO
-	static bool ms_PartsInstValid;			//	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒXg—pƒtƒ‰ƒO
-	static IPartsInst ms_PartsInst;			//	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒX”½•œq
-	static list<CNamedObjectAfterRenderer> ms_AfterRenderList;	//	ƒAƒtƒ^[ƒŒƒ“ƒ_ƒ‰
-	static list<CNamedObjectAfterRenderer> ms_TransRenderList;	//	“§–¾ƒ|ƒŠƒŒƒ“ƒ_ƒ‰
-	float m_ModelScale;						//	ƒ‚ƒfƒ‹ƒXƒP[ƒ‹
-	bool m_Turn;							//	”½“]ƒtƒ‰ƒO
-	bool m_CastShadow;						//	‰eƒLƒƒƒXƒgƒtƒ‰ƒO
-	string m_ModelFileName;					//	ƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹–¼
-	string m_ObjectName;					//	ƒIƒuƒWƒFƒNƒg–¼
-	CMesh *m_Mesh;							//	ƒƒbƒVƒ…
-	CObject *m_LastObject;					//	ÅŒã‚Ég—p‚µ‚½ƒIƒuƒWƒFƒNƒg
-	CObject m_PreviewObject;				//	ƒvƒŒƒrƒ…[—pƒIƒuƒWƒFƒNƒg
-	list<CCustomizerBase *> m_OffList;		//	í“K—pƒJƒXƒ^ƒ}ƒCƒUƒGƒ“ƒgƒŠ
-	CCustomizerSwitchEntry m_Customizer;	//	ƒ‹[ƒgƒJƒXƒ^ƒ}ƒCƒU
+	static bool ms_CastShadowDefault;		//	å½±æç”»ãƒ•ãƒ©ã‚°ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤
+	static bool ms_SetMaterial;				//	ãƒãƒ†ãƒªã‚¢ãƒ«å¤‰æ›´ãƒ•ãƒ©ã‚°
+	static bool ms_PartsInstValid;			//	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ä½¿ç”¨ãƒ•ãƒ©ã‚°
+	static IPartsInst ms_PartsInst;			//	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åå¾©å­
+	static list<CNamedObjectAfterRenderer> ms_AfterRenderList;	//	ã‚¢ãƒ•ã‚¿ãƒ¼ãƒ¬ãƒ³ãƒ€ãƒ©
+	static list<CNamedObjectAfterRenderer> ms_TransRenderList;	//	é€æ˜ãƒãƒªãƒ¬ãƒ³ãƒ€ãƒ©
+	float m_ModelScale;						//	ãƒ¢ãƒ‡ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
+	bool m_Turn;							//	åè»¢ãƒ•ãƒ©ã‚°
+	bool m_CastShadow;						//	å½±ã‚­ãƒ£ã‚¹ãƒˆãƒ•ãƒ©ã‚°
+	string m_ModelFileName;					//	ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
+	string m_ObjectName;					//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
+	CMesh *m_Mesh;							//	ãƒ¡ãƒƒã‚·ãƒ¥
+	CObject *m_LastObject;					//	æœ€å¾Œã«ä½¿ç”¨ã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CObject m_PreviewObject;				//	ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	list<CCustomizerBase *> m_OffList;		//	å¸¸æ™‚é©ç”¨ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚¶ã‚¨ãƒ³ãƒˆãƒª
+	CCustomizerSwitchEntry m_Customizer;	//	ãƒ«ãƒ¼ãƒˆã‚«ã‚¹ã‚¿ãƒã‚¤ã‚¶
 public:
 	static void SetCastShadowDefault(bool s){ ms_CastShadowDefault = s; }
 	static void SetSetMaterial(bool s){ ms_SetMaterial = s; }
@@ -106,11 +106,11 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒIƒuƒWƒFƒNƒgƒWƒ‡ƒCƒ“ƒgŠî–{ƒNƒ‰ƒX
+ *	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚¸ãƒ§ã‚¤ãƒ³ãƒˆåŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CObjectJoint{
 public:
-	CNamedObject *m_Link;	//	Ú‘±æƒIƒuƒWƒFƒNƒg
+	CNamedObject *m_Link;	//	æ¥ç¶šå…ˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 public:
 	CObjectJoint(){ m_Link = NULL; }
 	char *Read(char *, CModelPlugin *);
@@ -121,17 +121,17 @@ public:
 };
 
 /*
- *	ƒIƒuƒWƒFƒNƒgƒWƒ‡ƒCƒ“ƒg pos, dir, up w’è
+ *	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚¸ãƒ§ã‚¤ãƒ³ãƒˆ pos, dir, up æŒ‡å®š
  */
 class CObjectJoint3D: public CObjectJoint{
 public:
-	bool m_FixCenter;			//	’†SC³ƒtƒ‰ƒO
-	VEC3 m_AttachCoord;			//	Ú‘±æƒ[ƒJƒ‹À•W
-	VEC3 m_LocalCoord;			//	Ú‘±Œ³ƒ[ƒJƒ‹À•W
-	VEC3 m_AttachDir;			//	Ú‘±æƒ[ƒJƒ‹ dir
-	VEC3 m_AttachUp;			//	Ú‘±æƒ[ƒJƒ‹ up
-	CNamedObject *m_DirLink;	//	dir Šî€ƒIƒuƒWƒFƒNƒg
-	CNamedObject *m_UpLink;		//	up Šî€ƒIƒuƒWƒFƒNƒg
+	bool m_FixCenter;			//	ä¸­å¿ƒä¿®æ­£ãƒ•ãƒ©ã‚°
+	VEC3 m_AttachCoord;			//	æ¥ç¶šå…ˆãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™
+	VEC3 m_LocalCoord;			//	æ¥ç¶šå…ƒãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™
+	VEC3 m_AttachDir;			//	æ¥ç¶šå…ˆãƒ­ãƒ¼ã‚«ãƒ« dir
+	VEC3 m_AttachUp;			//	æ¥ç¶šå…ˆãƒ­ãƒ¼ã‚«ãƒ« up
+	CNamedObject *m_DirLink;	//	dir åŸºæº–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CNamedObject *m_UpLink;		//	up åŸºæº–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 public:
 	CObjectJoint3D(){ m_DirLink = m_UpLink = NULL; }
 	char *Read(char *, CModelPlugin *);
@@ -158,7 +158,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒtƒŠ[ƒIƒuƒWƒFƒNƒgŠî–{ƒNƒ‰ƒX
+ *	ãƒ•ãƒªãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CFreeObjectBase{
 protected:
@@ -176,12 +176,12 @@ public:
 };
 
 /*
- *	ƒxƒNƒgƒ‹”z’u
+ *	ãƒ™ã‚¯ãƒˆãƒ«é…ç½®
  */
 class CFreeObject3D: public CNamedObject, public CFreeObjectBase{
 	friend class CTrainPlugin;
 private:
-	CObjectJoint3D m_Joint;	//	Ú‘±î•ñ
+	CObjectJoint3D m_Joint;	//	æ¥ç¶šæƒ…å ±
 public:
 	CFreeObject3D(){}
 	CFreeObject3D(char *, char *, float);
@@ -197,16 +197,16 @@ public:
 	void RenderFreeObject(){ Render(); }
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CFreeObject3D>::iterator IFreeObject3D;
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 void InitSystemObject();
 CNamedObject *FindSystemObject(const string &);
 CNamedObject *FindObjectHybrid(CModelPlugin *, const string &);
 void CheckObjectHybrid(char *, CModelPlugin *, const string &);
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern bool g_PreSimulationFlag;
 extern CNamedObject g_SystemObject[];
 

@@ -1,17 +1,17 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Capture.h"
 #include "CSkinPlugin.h"
 #include "CVideoMode.h"
 #include "CConfigMode.h"
 
-//	“à•”’è”
-const int WW = 512, WH = 384;	//	‘‹ƒTƒCƒY
+//	å†…éƒ¨å®šæ•°
+const int WW = 512, WH = 384;	//	çª“ã‚µã‚¤ã‚º
 
-//	“à•”ƒOƒ[ƒoƒ‹
+//	å†…éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 char *g_VideoStateString[2] = {lang(Paused), lang(Recording)};
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CVideoMode::CVideoMode(){
 	int wide = WW-TILE_UNIT*2, win = wide-TILE_UNIT*2;
@@ -78,10 +78,10 @@ CVideoMode::CVideoMode(){
 }
 
 /*
- *	İ’è“Ç
+ *	è¨­å®šèª­è¾¼
  */
 char *CVideoMode::LoadInterfaceSetting(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *eee;
 	int picturequality = 2;
@@ -100,10 +100,10 @@ char *CVideoMode::LoadInterfaceSetting(
 }
 
 /*
- *	İ’è•Û‘¶
+ *	è¨­å®šä¿å­˜
  */
 void CVideoMode::SaveInterfaceSetting(
-	FILE *file	//	ƒtƒ@ƒCƒ‹
+	FILE *file	//	ãƒ•ã‚¡ã‚¤ãƒ«
 ){
 	fprintf(file, "VideoMode{\n");
 	fprintf(file, "\tPictureQuality = %d;\n", m_Quality->GetNumber());
@@ -113,7 +113,7 @@ void CVideoMode::SaveInterfaceSetting(
 }
 
 /*
- *	ƒ‚[ƒh‚ğ—LŒø‰»
+ *	ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹åŒ–
  */
 void CVideoMode::EnterInterface(){
 	ms_ModeLabel = lang(Video);
@@ -122,7 +122,7 @@ void CVideoMode::EnterInterface(){
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 void CVideoMode::ScanInputInterface(){
 	m_Interface.ScanInput();
@@ -140,7 +140,7 @@ void CVideoMode::ScanInputInterface(){
 }
 
 /*
- *	B‰e‰æ¿æ“¾
+ *	æ’®å½±ç”»è³ªå–å¾—
  */
 int CVideoMode::GetPictureQuality(){
 	return 1<<m_Quality->GetNumber();

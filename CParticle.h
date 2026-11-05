@@ -1,4 +1,4 @@
-#ifndef CPARTICLE_H_INCLUDED
+ï»¿#ifndef CPARTICLE_H_INCLUDED
 #define CPARTICLE_H_INCLUDED
 
 class CNamedObject;
@@ -8,22 +8,22 @@ class CParticleState;
 class CScene;
 
 /*
- *	ƒp[ƒeƒBƒNƒ‹ƒCƒ“ƒXƒ^ƒ“ƒX
+ *	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
  */
 class CParticleInst{
 private:
-	float m_CameraDist;		//	ƒJƒƒ‰‚©‚ç‚Ì‹——£
-	CParticle *m_Emitter;	//	ƒGƒ~ƒbƒ^
-	VEC3 m_Pos;				//	À•W
-	VEC3 m_Dir;				//	‘¬“x
-	float m_InitRadius;		//	‰Šú”¼Œa
-	float m_FinRadius;		//	ÅI”¼Œa
-	float m_Alpha;			//	ƒAƒ‹ƒtƒ@
-	float m_Angle;			//	Šp“x
-	D3DCOLOR m_Color;		//	F
-	int m_Lifetime;			//	õ–½
-	int m_Timer;			//	Œo‰ßŠÔ
-	CScene *m_Scene;		//	ƒV[ƒ“
+	float m_CameraDist;		//	ã‚«ãƒ¡ãƒ©ã‹ã‚‰ã®è·é›¢
+	CParticle *m_Emitter;	//	ã‚¨ãƒŸãƒƒã‚¿
+	VEC3 m_Pos;				//	åº§æ¨™
+	VEC3 m_Dir;				//	é€Ÿåº¦
+	float m_InitRadius;		//	åˆæœŸåŠå¾„
+	float m_FinRadius;		//	æœ€çµ‚åŠå¾„
+	float m_Alpha;			//	ã‚¢ãƒ«ãƒ•ã‚¡
+	float m_Angle;			//	è§’åº¦
+	D3DCOLOR m_Color;		//	è‰²
+	int m_Lifetime;			//	å¯¿å‘½
+	int m_Timer;			//	çµŒéæ™‚é–“
+	CScene *m_Scene;		//	ã‚·ãƒ¼ãƒ³
 public:
 	CParticleInst(CParticle *, VEC3, VEC3, float, float, int, CScene *);
 	void CalcDist(){ m_CameraDist = V3Len(&(GetVPos()-m_Pos)); }
@@ -32,19 +32,19 @@ public:
 	bool Simulate();
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CParticleInst>::iterator IParticleInst;
 
 /*
- *	ƒp[ƒeƒBƒNƒ‹ƒGƒ~ƒbƒ^ó‘Ô
+ *	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚¨ãƒŸãƒƒã‚¿çŠ¶æ…‹
  */
 class CParticleState{
 	friend class CParticle;
 private:
-	bool m_ApplyFlag;		//	“K—pƒtƒ‰ƒO
-	float m_EmissionCredit;	//	•úoc‚èŒÂ”
-	float m_OldSpeed;		//	‘O‰ñ‘¬“x
-	VEC3 m_OldPos;			//	‘O‰ñŠî€À•W
+	bool m_ApplyFlag;		//	é©ç”¨ãƒ•ãƒ©ã‚°
+	float m_EmissionCredit;	//	æ”¾å‡ºæ®‹ã‚Šå€‹æ•°
+	float m_OldSpeed;		//	å‰å›é€Ÿåº¦
+	VEC3 m_OldPos;			//	å‰å›åŸºæº–åº§æ¨™
 public:
 	CParticleState(){ Reset(); }
 	void Reset(){ m_EmissionCredit = -1.0f; }
@@ -53,35 +53,35 @@ public:
 	void Save(FILE *, char *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CParticleState>::iterator IParticleState;
 
 /*
- *	ƒp[ƒeƒBƒNƒ‹ƒGƒ~ƒbƒ^
+ *	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚¨ãƒŸãƒƒã‚¿
  */
 class CParticle{
 	friend class CParticleInst;
 private:
-	static list<CParticleInst> ms_RenderList;	//	ƒŒƒ“ƒ_ƒŠƒ“ƒOƒŠƒXƒg
-	string m_TextureFileName;		//	ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
-	LPTEX8 m_Texture;				//	ƒeƒNƒXƒ`ƒƒ
-	CNamedObject *m_Link;			//	Ú‘±æƒIƒuƒWƒFƒNƒg
-	float m_MinQty, m_MaxQty;		//	Å¬EÅ‘å•úË—Ê
-	float m_VelocityRel;			//	‘¬“x”ä—á¬•ª
-	float m_AccelerationRel;		//	‰Á‘¬“x”ä—á¬•ª
-	float m_DecelerationRel;		//	Œ¸‘¬“x”ä—á¬•ª
-	float m_EmissionQuantity[3];	//	1 •b“–‚½‚è•úË—Ê
-	float m_Lifetime[2];			//	õ–½ [•b]
-	VEC3 m_SourceCoord;				//	ˆÊ’u
-	VEC3 m_Direction[2];			//	•ûŒü
-	float m_InitialRadius[2];		//	‰Šú”¼Œa
-	float m_FinalRadius[2];			//	ÅI”¼Œa
-	D3DCOLOR m_Color[2];			//	F
-	int m_BlendMode;				//	ƒuƒŒƒ“ƒhƒ‚[ƒh
-	float m_AirResistance;			//	‹ó‹C’ïR
-	float m_Gravity;				//	d—Í
-	float m_Turbulence;				//	—‹C—¬
-	CParticleState *m_LinkState;	//	ó‘Ô•Ï”
+	static list<CParticleInst> ms_RenderList;	//	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒªã‚¹ãƒˆ
+	string m_TextureFileName;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
+	LPTEX8 m_Texture;				//	ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	CNamedObject *m_Link;			//	æ¥ç¶šå…ˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	float m_MinQty, m_MaxQty;		//	æœ€å°ãƒ»æœ€å¤§æ”¾å°„é‡
+	float m_VelocityRel;			//	é€Ÿåº¦æ¯”ä¾‹æˆåˆ†
+	float m_AccelerationRel;		//	åŠ é€Ÿåº¦æ¯”ä¾‹æˆåˆ†
+	float m_DecelerationRel;		//	æ¸›é€Ÿåº¦æ¯”ä¾‹æˆåˆ†
+	float m_EmissionQuantity[3];	//	1 ç§’å½“ãŸã‚Šæ”¾å°„é‡
+	float m_Lifetime[2];			//	å¯¿å‘½ [ç§’]
+	VEC3 m_SourceCoord;				//	ä½ç½®
+	VEC3 m_Direction[2];			//	æ–¹å‘
+	float m_InitialRadius[2];		//	åˆæœŸåŠå¾„
+	float m_FinalRadius[2];			//	æœ€çµ‚åŠå¾„
+	D3DCOLOR m_Color[2];			//	è‰²
+	int m_BlendMode;				//	ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰
+	float m_AirResistance;			//	ç©ºæ°—æŠµæŠ—
+	float m_Gravity;				//	é‡åŠ›
+	float m_Turbulence;				//	ä¹±æ°—æµ
+	CParticleState *m_LinkState;	//	çŠ¶æ…‹å¤‰æ•°
 public:
 	static void InitRenderList();
 	static void RenderAll();
@@ -92,10 +92,10 @@ public:
 	void Register(CScene *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CParticle>::iterator IParticle;
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern VEC3 g_WindDir;
 extern VEC3 g_WindDirNorm;
 

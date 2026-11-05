@@ -1,10 +1,10 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 class CApp{
 	CMutex m_mutex;
 
 public:
-	void (*m_func)();	//	ƒ‹[ƒvŠÖ”
+	void (*m_func)();	//	ãƒ«ãƒ¼ãƒ—é–¢æ•°
 
 	~CApp();
 	BOOL Init(HINSTANCE hInst);
@@ -21,9 +21,9 @@ void CleanUp();
 void GetAppPath(char *path);
 
 /*
- *	ƒ‹[ƒvŠÖ”‚Ìİ’è
+ *	ãƒ«ãƒ¼ãƒ—é–¢æ•°ã®è¨­å®š
  *
- *	func	: ŠÖ”
+ *	func	: é–¢æ•°
  */
 inline void SetLoopFunc(void (*func)()){
 	theApp.m_func = func;

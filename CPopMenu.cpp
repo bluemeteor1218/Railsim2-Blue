@@ -1,17 +1,17 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CInterface.h"
 #include "CPopMenu.h"
 #include "CSkinPlugin.h"
 
-//	“à•”’è”
-const int MENU_RECT_MARGIN = 4;	//	‘I‘ğ•”—]”’
+//	å†…éƒ¨å®šæ•°
+const int MENU_RECT_MARGIN = 4;	//	é¸æŠéƒ¨ä½™ç™½
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 CPopMenu *CPopMenu::ms_ActiveMenu = NULL;
 
 /*
  *	[static]
- *	ƒƒjƒ…[ˆ—
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼å‡¦ç†
  */
 int CPopMenu::ScanInputAll(){
 	if(!ms_ActiveMenu) return 0;
@@ -27,7 +27,7 @@ int CPopMenu::ScanInputAll(){
 
 /*
  *	[static]
- *	ƒƒjƒ…[•\¦
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¡¨ç¤º
  */
 void CPopMenu::RenderAll(){
 	if(!ms_ActiveMenu) return;
@@ -35,11 +35,11 @@ void CPopMenu::RenderAll(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPopMenu::CPopMenu(
-	char *str,	//	•¶š—ñ
-	CPopMenu *p	//	e
+	char *str,	//	æ–‡å­—åˆ—
+	CPopMenu *p	//	è¦ª
 ){
 	m_ChildNum = 0;
 	m_Width = TILE_UNIT*3/2;
@@ -52,7 +52,7 @@ CPopMenu::CPopMenu(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CPopMenu::~CPopMenu(){
 	DELETE_V(m_Child);
@@ -61,10 +61,10 @@ CPopMenu::~CPopMenu(){
 }
 
 /*
- *	qƒƒjƒ…[‘}“ü
+ *	å­ãƒ¡ãƒ‹ãƒ¥ãƒ¼æŒ¿å…¥
  */
 void CPopMenu::InsertMenu(
-	CPopMenu *menu	//	ƒƒjƒ…[
+	CPopMenu *menu	//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 ){
 	CPopMenu **adr = &m_Child;
 	while(*adr) adr = &(*adr)->m_Brother;
@@ -77,19 +77,19 @@ void CPopMenu::InsertMenu(
 }
 
 /*
- *	w’èÀ•W‚ª”ÍˆÍ“à‚©’²‚×‚é
+ *	æŒ‡å®šåº§æ¨™ãŒç¯„å›²å†…ã‹èª¿ã¹ã‚‹
  */
 bool CPopMenu::IsInside(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	return m_PosX<=x && x<m_PosX+m_Width && m_PosY<=y && y<=m_PosY+m_Height;
 }
 
 /*
- *	w’èÀ•W‚É‘Î‰‚·‚é”Ô†‚ğæ“¾
+ *	æŒ‡å®šåº§æ¨™ã«å¯¾å¿œã™ã‚‹ç•ªå·ã‚’å–å¾—
  */
 int CPopMenu::HitTest(
-	int x, int y	//	À•W
+	int x, int y	//	åº§æ¨™
 ){
 	if(x<m_PosX+MENU_RECT_MARGIN || m_PosX+m_Width-MENU_RECT_MARGIN<=x
 		|| y<m_PosY+TILE_UNIT/2) return -1;
@@ -98,10 +98,10 @@ int CPopMenu::HitTest(
 }
 
 /*
- *	”Ô†‚©‚çƒƒjƒ…[æ“¾
+ *	ç•ªå·ã‹ã‚‰ãƒ¡ãƒ‹ãƒ¥ãƒ¼å–å¾—
  */
 CPopMenu *CPopMenu::GetMenu(
-	int index	//	”Ô†
+	int index	//	ç•ªå·
 ){
 	if(index<0 || m_ChildNum<=index) return NULL;
 	CPopMenu *ptr = m_Child;
@@ -110,12 +110,12 @@ CPopMenu *CPopMenu::GetMenu(
 }
 
 /*
- *	ƒƒjƒ…[ƒ|ƒbƒvƒAƒbƒv
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—
  */
 void CPopMenu::Popup(
-	int x, int y,		//	¶ãƒ|ƒbƒvƒAƒbƒvÀ•W
-	int tw, int th,		//	ŒÄ‚Ño‚µŒ³—ÌˆæƒTƒCƒY
-	int dir				//	ƒ|ƒbƒvƒAƒbƒv•ûŒü (0: ¶ã, 1: ‰Eã, 2: ¶‰º, 3: ‰E‰º)
+	int x, int y,		//	å·¦ä¸Šãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—åº§æ¨™
+	int tw, int th,		//	å‘¼ã³å‡ºã—å…ƒé ˜åŸŸã‚µã‚¤ã‚º
+	int dir				//	ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—æ–¹å‘ (0: å·¦ä¸Š, 1: å³ä¸Š, 2: å·¦ä¸‹, 3: å³ä¸‹)
 ){
 	CInterface::ms_Focus = NULL;
 	m_Pointed = NULL;
@@ -143,9 +143,9 @@ void CPopMenu::Popup(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  *
- *	–ß‚è’l: 0: none, >0: command, <0: inside
+ *	æˆ»ã‚Šå€¤: 0: none, >0: command, <0: inside
  */
 int CPopMenu::ScanInput(){
 	CPopMenu *ptr = m_Child;
@@ -183,7 +183,7 @@ int CPopMenu::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CPopMenu::Render(){
 	g_Skin->SetInterfaceTexture();

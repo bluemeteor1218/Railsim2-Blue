@@ -1,4 +1,4 @@
-#ifndef CPROFILEPLUGIN_H_INCLUDED
+ï»¿#ifndef CPROFILEPLUGIN_H_INCLUDED
 #define CPROFILEPLUGIN_H_INCLUDED
 
 #include "CPlugin.h"
@@ -8,7 +8,7 @@ class CQuadDumpNX;
 class CLineDumpN;
 
 /*
- *	ƒfƒtƒHƒ‹ƒg NULL ‚Å‰Šú‰»‚³‚ê‚éƒ|ƒCƒ“ƒ^
+ *	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ NULL ã§åˆæœŸåŒ–ã•ã‚Œã‚‹ãƒã‚¤ãƒ³ã‚¿
  */
 template< typename TYPE >
 class MapPtrValue {
@@ -23,20 +23,20 @@ public:
 };
 
 /*
- *	’f–Ê’¸“_ƒf[ƒ^
+ *	æ–­é¢é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿
  */
 class CProfileVertex{
 	friend class CProfileFace;
 	friend class CProfilePlugin;
 private:
-	bool m_IgnoreCant;		//	ƒJƒ“ƒg–³‹
-	bool m_ReadNormal;		//	–@ü“Çƒtƒ‰ƒO
-	bool m_ShadowDrawed;	//	‰e•`‰æƒtƒ‰ƒO
-	VEC2 m_Coord;			//	À•W
-	VEC2 m_Normal;			//	–@ü
-	VEC3 m_TransCoord[2];	//	ˆêÀ•W
-	D3DCOLOR m_Diffuse;		//	’¸“_F
-	float m_TexU;			//	ƒeƒNƒXƒ`ƒƒ U À•W
+	bool m_IgnoreCant;		//	ã‚«ãƒ³ãƒˆç„¡è¦–
+	bool m_ReadNormal;		//	æ³•ç·šèª­è¾¼ãƒ•ãƒ©ã‚°
+	bool m_ShadowDrawed;	//	å½±æç”»ãƒ•ãƒ©ã‚°
+	VEC2 m_Coord;			//	åº§æ¨™
+	VEC2 m_Normal;			//	æ³•ç·š
+	VEC3 m_TransCoord[2];	//	ä¸€æ™‚åº§æ¨™
+	D3DCOLOR m_Diffuse;		//	é ‚ç‚¹è‰²
+	float m_TexU;			//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ U åº§æ¨™
 public:
 	char *Read(char *, bool);
 	bool IsSame(CProfileVertex *rhs){
@@ -44,38 +44,38 @@ public:
 	}
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CProfileVertex>::iterator IProfileVertex;
 typedef list<CProfileVertex *>::iterator IPProfileVertex;
 
 /*
- *	’f–Ê•Óƒf[ƒ^
+ *	æ–­é¢è¾ºãƒ‡ãƒ¼ã‚¿
  */
 class CProfileFace{
 	friend class CProfilePlugin;
 private:
-	list<CProfileVertex> m_Vertex;	//	’¸“_
+	list<CProfileVertex> m_Vertex;	//	é ‚ç‚¹
 public:
 	char *Read(char *, bool);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CProfileFace>::iterator IProfileFace;
 
 /*
- *	’f–Êƒf[ƒ^
+ *	æ–­é¢ãƒ‡ãƒ¼ã‚¿
  */
 class CProfile{
 	friend class CProfilePlugin;
 private:
-	float m_TexMapVTemp;		//	ƒ}ƒbƒsƒ“ƒOˆÊ’u
-	float m_TexVPerMeter;		//	’·‚³“–‚½‚è V À•W
-	bool m_UseTexture;			//	ƒeƒNƒXƒ`ƒƒg—pƒtƒ‰ƒO
-	string m_TexFileName;		//	ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
-	LPTEX8 m_Texture;			//	ƒeƒNƒXƒ`ƒƒ
-	list<CProfileFace> m_Face;	//	’f–Ê
-	map<CScene *, MapPtrValue<CQuadDumpN> > m_DumpN;	//	ƒ_ƒ“ƒp (ƒeƒNƒXƒ`ƒƒ‚È‚µ)
-	map<CScene *, MapPtrValue<CQuadDumpNX> > m_DumpNX;	//	ƒ_ƒ“ƒp (ƒeƒNƒXƒ`ƒƒ‚ ‚è)
+	float m_TexMapVTemp;		//	ãƒãƒƒãƒ”ãƒ³ã‚°ä½ç½®
+	float m_TexVPerMeter;		//	é•·ã•å½“ãŸã‚Š V åº§æ¨™
+	bool m_UseTexture;			//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ä½¿ç”¨ãƒ•ãƒ©ã‚°
+	string m_TexFileName;		//	ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
+	LPTEX8 m_Texture;			//	ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	list<CProfileFace> m_Face;	//	æ–­é¢
+	map<CScene *, MapPtrValue<CQuadDumpN> > m_DumpN;	//	ãƒ€ãƒ³ãƒ‘ (ãƒ†ã‚¯ã‚¹ãƒãƒ£ãªã—)
+	map<CScene *, MapPtrValue<CQuadDumpNX> > m_DumpNX;	//	ãƒ€ãƒ³ãƒ‘ (ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚ã‚Š)
 public:
 	CProfile();
 	~CProfile();
@@ -85,52 +85,52 @@ public:
 	void PrepareDump();
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CProfile>::iterator IProfile;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒƒCƒ„ƒtƒŒ[ƒ€’¸“_ƒf[ƒ^
+ *	ãƒ¯ã‚¤ãƒ¤ãƒ•ãƒ¬ãƒ¼ãƒ é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿
  */
 class CWireframeVertex{
 	friend class CProfilePlugin;
 private:
-	bool m_IgnoreCant;	//	ƒJƒ“ƒg–³‹
-	VEC3 m_Coord;		//	À•W
-	D3DCOLOR m_Diffuse;	//	’¸“_F
+	bool m_IgnoreCant;	//	ã‚«ãƒ³ãƒˆç„¡è¦–
+	VEC3 m_Coord;		//	åº§æ¨™
+	D3DCOLOR m_Diffuse;	//	é ‚ç‚¹è‰²
 public:
 	char *Read(char *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CWireframeVertex>::iterator IWireframeVertex;
 
 /*
- *	ƒƒCƒ„ƒtƒŒ[ƒ€’¼üƒf[ƒ^
+ *	ãƒ¯ã‚¤ãƒ¤ãƒ•ãƒ¬ãƒ¼ãƒ ç›´ç·šãƒ‡ãƒ¼ã‚¿
  */
 class CWireframeLine{
 	friend class CProfilePlugin;
 private:
-	list<CWireframeVertex> m_Vertex;	//	’¸“_
+	list<CWireframeVertex> m_Vertex;	//	é ‚ç‚¹
 public:
 	char *Read(char *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CWireframeLine>::iterator IWireframeLine;
 
 /*
- *	ƒƒCƒ„ƒtƒŒ[ƒ€ƒf[ƒ^
+ *	ãƒ¯ã‚¤ãƒ¤ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿
  */
 class CWireframe{
 	friend class CProfilePlugin;
 private:
-	float m_MinInterval;			//	Å¬ŠÔŠu
-	float m_MaxInterval;			//	Å‘åŠÔŠu
-	list<CWireframeLine> m_Line;	//	’f–Ê
-	map<CScene *, MapPtrValue<CLineDumpN> > m_DumpN;	//	ƒ_ƒ“ƒp
+	float m_MinInterval;			//	æœ€å°é–“éš”
+	float m_MaxInterval;			//	æœ€å¤§é–“éš”
+	list<CWireframeLine> m_Line;	//	æ–­é¢
+	map<CScene *, MapPtrValue<CLineDumpN> > m_DumpN;	//	ãƒ€ãƒ³ãƒ‘
 public:
 	CWireframe();
 	~CWireframe();
@@ -143,47 +143,47 @@ public:
 	}
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CWireframe>::iterator IWireframe;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	“™ŠÔŠu”z’uƒf[ƒ^
+ *	ç­‰é–“éš”é…ç½®ãƒ‡ãƒ¼ã‚¿
  */
 class CInterval{
 	friend class CProfilePlugin;
 private:
-	bool m_IgnoreCant;		//	ƒJƒ“ƒg–³‹
-	float m_IntervalTemp;	//	Œ»İˆÊ’u
-	float m_Interval;		//	ŠÔŠu
-	float m_Offset;			//	ƒIƒtƒZƒbƒg
-	float m_ModelScale;		//	ƒ‚ƒfƒ‹ƒXƒP[ƒ‹
-	string m_ModelFileName;	//	ƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹–¼
-	CMesh *m_Mesh;			//	ƒƒbƒVƒ…
-	CObject m_Object;		//	ƒIƒuƒWƒFƒNƒg
+	bool m_IgnoreCant;		//	ã‚«ãƒ³ãƒˆç„¡è¦–
+	float m_IntervalTemp;	//	ç¾åœ¨ä½ç½®
+	float m_Interval;		//	é–“éš”
+	float m_Offset;			//	ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+	float m_ModelScale;		//	ãƒ¢ãƒ‡ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
+	string m_ModelFileName;	//	ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
+	CMesh *m_Mesh;			//	ãƒ¡ãƒƒã‚·ãƒ¥
+	CObject m_Object;		//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 public:
 	char *Read(char *);
 	void LoadModel();
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CInterval>::iterator IInterval;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	’f–Êƒvƒ‰ƒOƒCƒ“
+ *	æ–­é¢ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
  */
 class CProfilePlugin: public CPlugin{
 protected:
-	static vector<CProfileVertex *> ms_TempIndex;	//	ì‹Æ—pƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
-	list<CProfileVertex *> m_ProfileVertex;	//	’f–Ê’¸“_ƒŠƒXƒg
-	list<CProfile> m_Profile;				//	’f–Ê
-	list<CWireframe> m_Wireframe;			//	ƒƒCƒ„ƒtƒŒ[ƒ€
-	list<CInterval> m_Interval;				//	“™ŠÔŠu”z’u
+	static vector<CProfileVertex *> ms_TempIndex;	//	ä½œæ¥­ç”¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
+	list<CProfileVertex *> m_ProfileVertex;	//	æ–­é¢é ‚ç‚¹ãƒªã‚¹ãƒˆ
+	list<CProfile> m_Profile;				//	æ–­é¢
+	list<CWireframe> m_Wireframe;			//	ãƒ¯ã‚¤ãƒ¤ãƒ•ãƒ¬ãƒ¼ãƒ 
+	list<CInterval> m_Interval;				//	ç­‰é–“éš”é…ç½®
 public:
 	CProfilePlugin(char *id): CPlugin(id){}
 	virtual ~CProfilePlugin(){}
@@ -215,7 +215,7 @@ public:
 };
 
 /*
- *	’f–Êƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
+ *	æ–­é¢ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
  */
 class CProfilePluginList: public CPluginList{
 protected:
@@ -230,7 +230,7 @@ public:
 	CPLUGINLIST_CASTFUNC(CProfilePlugin);
 };
 
-//	ŠÖ”éŒ¾
+//	é–¢æ•°å®£è¨€
 char *ReadMapVector(char *, char *, vector<float> &);
 void SaveMapVector(FILE *, char *, vector<float> &);
 

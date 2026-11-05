@@ -1,4 +1,4 @@
-#ifndef CEFFECTOR_H_INCLUDED
+ï»¿#ifndef CEFFECTOR_H_INCLUDED
 #define CEFFECTOR_H_INCLUDED
 
 class CHeadlight;
@@ -8,13 +8,13 @@ class CModelPlugin;
 class CScene;
 class CRailWay;
 
-//	ƒ^ƒCƒvƒtƒ‰ƒO
+//	ã‚¿ã‚¤ãƒ—ãƒ•ãƒ©ã‚°
 const int EFCT_MISCELLANEOUS = 0x0001;
 const int EFCT_PARTICLEAPPLIER = 0x0002;
 const int EFCT_RAILCONNECTOR = 0x0004;
 
 /*
- *	ƒGƒtƒFƒNƒ^Šî–{ƒNƒ‰ƒX
+ *	ã‚¨ãƒ•ã‚§ã‚¯ã‚¿åŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CEffectorBase{
 protected:
@@ -27,11 +27,11 @@ public:
 };
 
 /*
- *	ƒGƒtƒFƒNƒ^ƒRƒ“ƒeƒi
+ *	ã‚¨ãƒ•ã‚§ã‚¯ã‚¿ã‚³ãƒ³ãƒ†ãƒŠ
  */
 class CEffectorContainer{
 private:
-	CEffectorBase *m_Effector;	//	ƒGƒtƒFƒNƒ^
+	CEffectorBase *m_Effector;	//	ã‚¨ãƒ•ã‚§ã‚¯ã‚¿
 public:
 	CEffectorContainer();
 	CEffectorContainer(const CEffectorContainer &);
@@ -42,18 +42,18 @@ public:
 	void Apply(CScene *scene){ m_Effector->ApplyEffector(scene); }
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CEffectorContainer>::iterator IEffectorContainer;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒwƒbƒhƒ‰ƒCƒg“K—pq
+ *	ãƒ˜ãƒƒãƒ‰ãƒ©ã‚¤ãƒˆé©ç”¨å­
  */
 class CHeadlightApplier: public CEffectorBase{
 private:
-	CHeadlight *m_Headlight;	//	ƒwƒbƒhƒ‰ƒCƒg
+	CHeadlight *m_Headlight;	//	ãƒ˜ãƒƒãƒ‰ãƒ©ã‚¤ãƒˆ
 public:
 	CHeadlightApplier(){ m_Headlight = NULL; }
 	CEffectorBase *Duplicate(){ return new CHeadlightApplier(*this); }
@@ -63,11 +63,11 @@ public:
 };
 
 /*
- *	ƒp[ƒeƒBƒNƒ‹“K—pq
+ *	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«é©ç”¨å­
  */
 class CParticleApplier: public CEffectorBase{
 private:
-	CParticle *m_Particle;	//	ƒp[ƒeƒBƒNƒ‹
+	CParticle *m_Particle;	//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«
 public:
 	CParticleApplier(){ m_Particle = NULL; }
 	CEffectorBase *Duplicate(){ return new CParticleApplier(*this); }
@@ -78,11 +78,11 @@ public:
 };
 
 /*
- *	ƒTƒEƒ“ƒh“K—pq
+ *	ã‚µã‚¦ãƒ³ãƒ‰é©ç”¨å­
  */
 class CSoundApplier: public CEffectorBase{
 private:
-	CSoundEffector *m_SoundEffector;	//	ƒTƒEƒ“ƒhƒGƒtƒFƒNƒ^
+	CSoundEffector *m_SoundEffector;	//	ã‚µã‚¦ãƒ³ãƒ‰ã‚¨ãƒ•ã‚§ã‚¯ã‚¿
 public:
 	CSoundApplier(){ m_SoundEffector = NULL; }
 	CEffectorBase *Duplicate(){ return new CSoundApplier(*this); }
@@ -94,12 +94,12 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒŒ[ƒ‹Ú‘±§ŒäŠî–{ƒNƒ‰ƒX
+ *	ãƒ¬ãƒ¼ãƒ«æ¥ç¶šåˆ¶å¾¡åŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CEffectorRailConnectorBase: public CEffectorBase{
 protected:
-	int m_RailEnd1;	//	Ú‘±æ1
-	int m_RailEnd2;	//	Ú‘±æ2
+	int m_RailEnd1;	//	æ¥ç¶šå…ˆ1
+	int m_RailEnd2;	//	æ¥ç¶šå…ˆ2
 	int m_PlatformID1;
 	int m_PlatformID2;
 	int m_PlatformEnd1;
@@ -114,11 +114,11 @@ public:
 };
 
 /*
- *	ƒŒ[ƒ‹Ú‘±§ŒäŠî–{ƒNƒ‰ƒX
+ *	ãƒ¬ãƒ¼ãƒ«æ¥ç¶šåˆ¶å¾¡åŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CEffectorRailDisconnectorBase: public CEffectorBase{
 protected:
-	int m_RailEnd;	//	Ú‘±æ1
+	int m_RailEnd;	//	æ¥ç¶šå…ˆ1
 	int m_PlatformID;
 	int m_PlatformEnd;
 public:
@@ -131,7 +131,7 @@ public:
 };
 
 /*
- *	ƒŒ[ƒ‹Ú‘±
+ *	ãƒ¬ãƒ¼ãƒ«æ¥ç¶š
  */
 class CEffectorRailConnector: public CEffectorRailConnectorBase{
 public:
@@ -141,7 +141,7 @@ public:
 };
 
 /*
- *	ƒŒ[ƒ‹•ªŠò
+ *	ãƒ¬ãƒ¼ãƒ«åˆ†å²
  */
 class CEffectorRailBrancher: public CEffectorRailConnectorBase{
 public:
@@ -151,7 +151,7 @@ public:
 };
 
 /*
- *	ƒŒ[ƒ‹Ú‘±‰ğœ
+ *	ãƒ¬ãƒ¼ãƒ«æ¥ç¶šè§£é™¤
  */
 class CEffectorRailDisconnector: public CEffectorRailDisconnectorBase{
 public:

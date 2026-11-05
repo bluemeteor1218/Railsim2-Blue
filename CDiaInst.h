@@ -1,4 +1,4 @@
-#ifndef CDIAINST_H_INCLUDED
+ï»¿#ifndef CDIAINST_H_INCLUDED
 #define CDIAINST_H_INCLUDED
 
 class CListElement;
@@ -6,13 +6,13 @@ class CListView;
 class CTrainGroup;
 
 /*
- *	ƒ_ƒCƒ„—v‘fŠî–{ƒNƒ‰ƒX
+ *	ãƒ€ã‚¤ãƒ¤è¦ç´ åŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CDiaElementBase{
 	friend class CDiaDialogBase;
 	friend class CDiaListBase;
 protected:
-	CListElement *m_ListElement;	//	ƒŠƒXƒg—v‘f
+	CListElement *m_ListElement;	//	ãƒªã‚¹ãƒˆè¦ç´ 
 public:
 	CDiaElementBase();
 	virtual ~CDiaElementBase(){}
@@ -23,18 +23,18 @@ public:
 	virtual void Save(FILE *, char *) = 0;
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef list<CDiaElementBase *>::iterator IPDiaElementBase;
 
 /*
- *	ƒ_ƒCƒ„ƒŠƒXƒgŠî–{ƒNƒ‰ƒX
+ *	ãƒ€ã‚¤ãƒ¤ãƒªã‚¹ãƒˆåŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CDiaListBase{
 	friend class CDiaDialogBase;
 	friend class CDiaInstBase;
 protected:
-	bool m_UseDefault;					//	ƒfƒtƒHƒ‹ƒgİ’è‚ğg—p
-	list<CDiaElementBase *> m_DiaList;	//	ƒ_ƒCƒ„ƒŠƒXƒg
+	bool m_UseDefault;					//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®šã‚’ä½¿ç”¨
+	list<CDiaElementBase *> m_DiaList;	//	ãƒ€ã‚¤ãƒ¤ãƒªã‚¹ãƒˆ
 public:
 	CDiaListBase();
 	virtual ~CDiaListBase(){}
@@ -51,17 +51,17 @@ public:
 	void Save(FILE *, char *, CTrainGroup *);
 };
 
-//	”½•œq
+//	åå¾©å­
 typedef map<CTrainGroup *, CDiaListBase *>::iterator IPDiaListBase;
 
 /*
- *	ƒ_ƒCƒ„ŠÖ˜AƒCƒ“ƒXƒ^ƒ“ƒXŠî–{ƒNƒ‰ƒX
+ *	ãƒ€ã‚¤ãƒ¤é–¢é€£ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŸºæœ¬ã‚¯ãƒ©ã‚¹
  */
 class CDiaInstBase{
 	friend class CDiaDialogBase;
 protected:
-	string m_Name;									//	–¼Ì
-	map<CTrainGroup *, CDiaListBase *> m_DiaMap;	//	ƒ_ƒCƒ„ƒ}ƒbƒv
+	string m_Name;									//	åç§°
+	map<CTrainGroup *, CDiaListBase *> m_DiaMap;	//	ãƒ€ã‚¤ãƒ¤ãƒãƒƒãƒ—
 public:
 	virtual ~CDiaInstBase();
 	bool IsInside(CTrainGroup *group){ return !!m_DiaMap.count(group); }
@@ -87,7 +87,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒ|ƒCƒ“ƒgØ‘Ö—v‘f
+ *	ãƒã‚¤ãƒ³ãƒˆåˆ‡æ›¿è¦ç´ 
  */
 class CPointElement: public CDiaElementBase{
 	friend class CPointDialog;
@@ -105,7 +105,7 @@ public:
 };
 
 /*
- *	ƒ|ƒCƒ“ƒgØ‘Ö—v‘fƒŠƒXƒg
+ *	ãƒã‚¤ãƒ³ãƒˆåˆ‡æ›¿è¦ç´ ãƒªã‚¹ãƒˆ
  */
 class CPointList: public CDiaListBase{
 private:
@@ -115,7 +115,7 @@ public:
 };
 
 /*
- *	ƒ|ƒCƒ“ƒgØ‘Öƒ}ƒbƒv
+ *	ãƒã‚¤ãƒ³ãƒˆåˆ‡æ›¿ãƒãƒƒãƒ—
  */
 class CPointInst: public CDiaInstBase{
 private:
@@ -129,19 +129,19 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- *	ƒ_ƒCƒ„İ’è—v‘f
+ *	ãƒ€ã‚¤ãƒ¤è¨­å®šè¦ç´ 
  */
 class CDiaElement: public CDiaElementBase{
 	friend class CDiaDialog;
 	friend class CTrainGroup;
 private:
-	int m_Action;	//	“®ì
-	int m_TimeType;	//	ŠÔİ’è
-	int m_Hour;		//	
-	int m_Minute;	//	•ª
-	int m_Second;	//	•b
-//	int m_Joint;	//	˜AŒ‹‚ğó‚¯“ü‚ê‚é
-	float m_Offset;	//	’âÔˆÊ’u
+	int m_Action;	//	å‹•ä½œ
+	int m_TimeType;	//	æ™‚é–“è¨­å®š
+	int m_Hour;		//	æ™‚
+	int m_Minute;	//	åˆ†
+	int m_Second;	//	ç§’
+//	int m_Joint;	//	é€£çµã‚’å—ã‘å…¥ã‚Œã‚‹
+	float m_Offset;	//	åœè»Šä½ç½®
 public:
 	CDiaElement();
 	string GetListCaption();
@@ -152,7 +152,7 @@ public:
 };
 
 /*
- *	ƒ_ƒCƒ„İ’è—v‘fƒŠƒXƒg
+ *	ãƒ€ã‚¤ãƒ¤è¨­å®šè¦ç´ ãƒªã‚¹ãƒˆ
  */
 class CDiaList: public CDiaListBase{
 private:
@@ -162,7 +162,7 @@ public:
 };
 
 /*
- *	ƒ_ƒCƒ„İ’èƒ}ƒbƒv
+ *	ãƒ€ã‚¤ãƒ¤è¨­å®šãƒãƒƒãƒ—
  */
 class CDiaInst: public CDiaInstBase{
 private:
@@ -172,7 +172,7 @@ public:
 	CDIAINSTBASE_CASTFUNC(CDiaElement, CDiaList);
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern char *g_DiaDefaultString[];
 
 #endif

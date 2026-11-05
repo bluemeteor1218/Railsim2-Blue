@@ -1,12 +1,12 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
-//	Œx—}§
-#pragma warn -rch	//	Às‚³‚ê‚È‚¢ƒR[ƒh
-#pragma warn -par	//	ƒpƒ‰ƒ[ƒ^ 'H' ‚Íˆê“x‚àg—p‚³‚ê‚Ä‚¢‚È‚¢
-#pragma warn -aus	//	¯•Êq‚É‘ã“ü‚³‚ê‚½’l‚Íg‚í‚ê‚Ä‚¢‚È‚¢
-#pragma warn -csu	//	•„†•t‚«’l‚Æ•„†‚È‚µ’l‚Ì”äŠr
+//	è­¦å‘ŠæŠ‘åˆ¶
+#pragma warn -rch	//	å®Ÿè¡Œã•ã‚Œãªã„ã‚³ãƒ¼ãƒ‰
+#pragma warn -par	//	ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ 'ï¼Ÿ' ã¯ä¸€åº¦ã‚‚ä½¿ç”¨ã•ã‚Œã¦ã„ãªã„
+#pragma warn -aus	//	è­˜åˆ¥å­ã«ä»£å…¥ã•ã‚ŒãŸå€¤ã¯ä½¿ã‚ã‚Œã¦ã„ãªã„
+#pragma warn -csu	//	ç¬¦å·ä»˜ãå€¤ã¨ç¬¦å·ãªã—å€¤ã®æ¯”è¼ƒ
 
-//	–¢’è‹`‚Ì‰ñ”ğ
+//	æœªå®šç¾©ã®å›é¿
 inline float sqrtf(float x){return (float)sqrt((double)x);}
 
 inline float atanf(float x){return (float)atan((double)x);}

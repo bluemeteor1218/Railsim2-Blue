@@ -1,16 +1,16 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CMiniButton.h"
 #include "CSkinPlugin.h"
 
 /*
- *	‰Šú‰»
+ *	åˆæœŸåŒ–
  */
 void CMiniButton::Init(
-	int x, int y,		//	À•W
-	int w, int h,		//	ƒTƒCƒY
-	CInterface *p,		//	e
-	float u, float v,	//	ƒeƒNƒXƒ`ƒƒÀ•W
-	bool m				//	ƒ‚[ƒh
+	int x, int y,		//	åº§æ¨™
+	int w, int h,		//	ã‚µã‚¤ã‚º
+	CInterface *p,		//	è¦ª
+	float u, float v,	//	ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
+	bool m				//	ãƒ¢ãƒ¼ãƒ‰
 ){
 	CInterface::Init(x, y, w, h, "", p);
 	m_State = m_Repeat = 0;
@@ -21,7 +21,7 @@ void CMiniButton::Init(
 }
 
 /*
- *	“ü—Íƒ`ƒFƒbƒN
+ *	å…¥åŠ›ãƒã‚§ãƒƒã‚¯
  */
 bool CMiniButton::ScanInput(){
 	if(!m_Visible) return ScanInputBrother();
@@ -62,7 +62,7 @@ bool CMiniButton::ScanInput(){
 }
 
 /*
- *	ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ *	ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
  */
 void CMiniButton::Render(){
 	CInterface::RenderBrother();

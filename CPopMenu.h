@@ -1,8 +1,8 @@
-#ifndef CPOPMENU_H_INCLUDED
+ï»¿#ifndef CPOPMENU_H_INCLUDED
 #define CPOPMENU_H_INCLUDED
 
 /*
- *	ƒƒjƒ…[ƒRƒ}ƒ“ƒhƒIƒuƒWƒFƒNƒg
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚³ãƒãƒ³ãƒ‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
  */
 class CMenuCommand{
 public:
@@ -11,22 +11,22 @@ public:
 };
 
 /*
- *	ƒ|ƒbƒvƒAƒbƒvƒƒjƒ…[
+ *	ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ãƒ¡ãƒ‹ãƒ¥ãƒ¼
  */
 class CPopMenu{
 private:
-	static CPopMenu *ms_ActiveMenu;	//	g—p’†‚Ìƒƒjƒ…[
-	int m_ChildNum;				//	q”
-	int m_PosX, m_PosY;			//	À•W
-	int m_Width, m_Height;		//	ƒƒjƒ…[ƒTƒCƒY
-	int m_Expand;				//	“WŠJ•ûŒü
-	bool m_Enabled;				//	—LŒøƒtƒ‰ƒO
-	string m_String;			//	•¶š—ñ
-	CMenuCommand *m_Command;	//	ƒRƒ}ƒ“ƒh
-	CPopMenu *m_Pointed;		//	ƒ|ƒCƒ“ƒg‚µ‚½ ID
-	CPopMenu *m_Parent;			//	e
-	CPopMenu *m_Brother;		//	ŒZ’í
-	CPopMenu *m_Child;			//	q
+	static CPopMenu *ms_ActiveMenu;	//	ä½¿ç”¨ä¸­ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	int m_ChildNum;				//	å­æ•°
+	int m_PosX, m_PosY;			//	åº§æ¨™
+	int m_Width, m_Height;		//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚µã‚¤ã‚º
+	int m_Expand;				//	å±•é–‹æ–¹å‘
+	bool m_Enabled;				//	æœ‰åŠ¹ãƒ•ãƒ©ã‚°
+	string m_String;			//	æ–‡å­—åˆ—
+	CMenuCommand *m_Command;	//	ã‚³ãƒãƒ³ãƒ‰
+	CPopMenu *m_Pointed;		//	ãƒã‚¤ãƒ³ãƒˆã—ãŸ ID
+	CPopMenu *m_Parent;			//	è¦ª
+	CPopMenu *m_Brother;		//	å…„å¼Ÿ
+	CPopMenu *m_Child;			//	å­
 public:
 	static int ScanInputAll();
 	static void RenderAll();
@@ -48,22 +48,22 @@ public:
 	void Render();
 };
 
-//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
+//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
 typedef enum{
-	CMD_NONE = 0,	//	•s–¾
-	CMD_PITVELEM,	//	ƒvƒ‰ƒOƒCƒ“ƒcƒŠ[
-	CMD_PILVELEM,	//	ƒvƒ‰ƒOƒCƒ“ƒŠƒXƒg
-	CMD_GROUP,		//	•Ò¬
-	CMD_TRAIN,		//	Ôçq
-	CMD_SCENE,		//	ƒV[ƒ“
-	CMD_GROUPTMP,	//	•Ò¬ƒeƒ“ƒvƒŒ[ƒg
-	CMD_ROUTINE,	//	ƒ_ƒCƒ„ƒ‹[ƒ`ƒ“
-	CMD_FILE,		//	ƒtƒ@ƒCƒ‹
-	CMD_NETWORK,	//	ƒlƒbƒgƒ[ƒN
+	CMD_NONE = 0,	//	ä¸æ˜
+	CMD_PITVELEM,	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ„ãƒªãƒ¼
+	CMD_PILVELEM,	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒªã‚¹ãƒˆ
+	CMD_GROUP,		//	ç·¨æˆ
+	CMD_TRAIN,		//	è»Šè¼Œ
+	CMD_SCENE,		//	ã‚·ãƒ¼ãƒ³
+	CMD_GROUPTMP,	//	ç·¨æˆãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
+	CMD_ROUTINE,	//	ãƒ€ã‚¤ãƒ¤ãƒ«ãƒ¼ãƒãƒ³
+	CMD_FILE,		//	ãƒ•ã‚¡ã‚¤ãƒ«
+	CMD_NETWORK,	//	ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯
 } CMDTYPE;
 
 /*
- *	ƒƒjƒ…[ƒRƒ}ƒ“ƒ_
+ *	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚³ãƒãƒ³ãƒ€
  */
 class CMenuCommander{
 public:

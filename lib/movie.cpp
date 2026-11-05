@@ -1,4 +1,4 @@
-//	Copyright (c) 2002 Midikyou
+ï»¿//	Copyright (c) 2002 Midikyou
 
 #include "headers.h"
 #include "debug.h"
@@ -7,28 +7,28 @@
 #include "movie.h"
 
 /*
- *	DirectShow‚Ì‰Šú‰»
+ *	DirectShowã®åˆæœŸåŒ–
  */
 BOOL InitDirectShow(){
 	DebugHL();
 	Debug("InitDirectShow\n");
 
-	//	ƒtƒBƒ‹ƒ^ƒOƒ‰ƒt\’z—pƒIƒuƒWƒFƒNƒg
+	//	ãƒ•ã‚£ãƒ«ã‚¿ã‚°ãƒ©ãƒ•æ§‹ç¯‰ç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	FAILED_ASSERT(
-		"ƒOƒ‰ƒtƒBƒbƒNƒtƒBƒ‹ƒ^‚ª‰Šú‰»‚Å‚«‚Ü‚¹‚ñ.",
+		"ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ãƒ•ã‚£ãƒ«ã‚¿ãŒåˆæœŸåŒ–ã§ãã¾ã›ã‚“.",
 		CoCreateInstance(
 			CLSID_FilterGraph, NULL, CLSCTX_INPROC_SERVER,
 			IID_IGraphBuilder, (void **)&svv.pGraph
 		));
-	//	ƒƒfƒBƒAÄ¶ƒRƒ“ƒgƒ[ƒ‹
+	//	ãƒ¡ãƒ‡ã‚£ã‚¢å†ç”Ÿã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 	FAILED_ASSERT(
-		"ƒƒfƒBƒAƒRƒ“ƒgƒ[ƒ‹‚ª‰Šú‰»‚Å‚«‚Ü‚¹‚ñ.",
+		"ãƒ¡ãƒ‡ã‚£ã‚¢ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒåˆæœŸåŒ–ã§ãã¾ã›ã‚“.",
 		svv.pGraph->QueryInterface(
 			IID_IMediaControl, (void **)&svv.pMCtrl
 		));
-	//	’Ê’mƒCƒxƒ“ƒg
+	//	é€šçŸ¥ã‚¤ãƒ™ãƒ³ãƒˆ
 	FAILED_ASSERT(
-		"ƒƒfƒBƒAƒCƒxƒ“ƒg‚ª‰Šú‰»‚Å‚«‚Ü‚¹‚ñ.",
+		"ãƒ¡ãƒ‡ã‚£ã‚¢ã‚¤ãƒ™ãƒ³ãƒˆãŒåˆæœŸåŒ–ã§ãã¾ã›ã‚“.",
 		svv.pGraph->QueryInterface(
 			IID_IMediaEventEx, (void **)&svv.pEvent
 		));
@@ -36,7 +36,7 @@ BOOL InitDirectShow(){
 }
 
 /*
- *	DirectShow‚Ì‰ð•ú
+ *	DirectShowã®è§£æ”¾
  */
 void FreeDirectShow(){
 	DebugHL();
@@ -49,16 +49,16 @@ void FreeDirectShow(){
 }
 
 /*
- *	ƒ€[ƒr[ƒCƒxƒ“ƒg‚É‘Î‚·‚éƒnƒ“ƒhƒ‰
+ *	ãƒ ãƒ¼ãƒ“ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆã«å¯¾ã™ã‚‹ãƒãƒ³ãƒ‰ãƒ©
  */
 void OnGrapNotify(){
-	if(!svv.pEvent) return;	//	ƒ€[ƒr[‹@”\–¢Žg—pŽž‚àŒÄ‚Î‚ê‚é‚½‚ßƒ`ƒFƒbƒN
+	if(!svv.pEvent) return;	//	ãƒ ãƒ¼ãƒ“ãƒ¼æ©Ÿèƒ½æœªä½¿ç”¨æ™‚ã‚‚å‘¼ã°ã‚Œã‚‹ãŸã‚ãƒã‚§ãƒƒã‚¯
 
 	long evCode, param1, param2;
 
-	//	‘SƒCƒxƒ“ƒg‚ðŽæ‚èo‚·
+	//	å…¨ã‚¤ãƒ™ãƒ³ãƒˆã‚’å–ã‚Šå‡ºã™
 	while(SUCCEEDED(svv.pEvent->GetEvent(&evCode, &param1, &param2, 0))){ 
-		//	ƒCƒxƒ“ƒg‚ÉŠÖ˜A‚·‚éƒŠƒ\[ƒX‚ð‰ð•ú‚·‚é
+		//	ã‚¤ãƒ™ãƒ³ãƒˆã«é–¢é€£ã™ã‚‹ãƒªã‚½ãƒ¼ã‚¹ã‚’è§£æ”¾ã™ã‚‹
 		svv.pEvent->FreeEventParams(evCode, param1, param2);
 
 		if((EC_COMPLETE==evCode) || (EC_USERABORT==evCode)){
@@ -69,11 +69,11 @@ void OnGrapNotify(){
 }
 
 /*
- *	ƒ€[ƒr[Ä¶
+ *	ãƒ ãƒ¼ãƒ“ãƒ¼å†ç”Ÿ
  *
- *	strFile	: ƒtƒ@ƒCƒ‹–¼
+ *	strFile	: ãƒ•ã‚¡ã‚¤ãƒ«å
  *
- *	¦Ä¶’†‚ÍƒV[ƒ“‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒO‚ðŽ~‚ß‚é‚±‚ÆB
+ *	â€»å†ç”Ÿä¸­ã¯ã‚·ãƒ¼ãƒ³ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚’æ­¢ã‚ã‚‹ã“ã¨ã€‚
  */
 BOOL PlayMovie(char *strFile){
 	Debug("play(%s) ... ", strFile);
@@ -107,7 +107,7 @@ BOOL PlayMovie(char *strFile){
 }
 
 /*
- *	ƒ€[ƒr[’âŽ~
+ *	ãƒ ãƒ¼ãƒ“ãƒ¼åœæ­¢
  */
 void StopMovie(){
 	svv.fPlay = FALSE;
@@ -116,17 +116,17 @@ void StopMovie(){
 }
 
 /*
- *	Ä¶ó‘Ô‚ÌŽæ“¾
+ *	å†ç”ŸçŠ¶æ…‹ã®å–å¾—
  */
 BOOL GetMovieState(){
 	return svv.fPlay;
 }
 
 /*
- *	ƒ€[ƒr[ƒŒƒCƒ„[‚ÌƒTƒCƒY‚ðƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚É‡‚í‚¹‚é
+ *	ãƒ ãƒ¼ãƒ“ãƒ¼ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚µã‚¤ã‚ºã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã«åˆã‚ã›ã‚‹
  */
 void AdjustMovieLayer(){
-	if(!svv.pVWin) return;	//	ƒ€[ƒr[‹@”\–¢Žg—pŽž‚àŒÄ‚Î‚ê‚é‚½‚ßƒ`ƒFƒbƒN
+	if(!svv.pVWin) return;	//	ãƒ ãƒ¼ãƒ“ãƒ¼æ©Ÿèƒ½æœªä½¿ç”¨æ™‚ã‚‚å‘¼ã°ã‚Œã‚‹ãŸã‚ãƒã‚§ãƒƒã‚¯
 
 	svv.pVWin->put_Owner((OAHWND)svw.hWnd);
 	svv.pVWin->put_WindowStyle(WS_CHILD|WS_CLIPSIBLINGS);

@@ -1,15 +1,15 @@
-#ifndef CSTATICCTRL_H_INCLUDED
+ï»¿#ifndef CSTATICCTRL_H_INCLUDED
 #define CSTATICCTRL_H_INCLUDED
 
 #include "CInterface.h"
 
 /*
- *	ƒXƒ^ƒeƒBƒbƒNƒRƒ“ƒgƒ[ƒ‹
+ *	ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
  */
 class CStaticCtrl: public CInterface{
 private:
-	int m_HorzPos;	//	…•½ˆÊ’u (0: left, 1: center, 2: right)
-	int m_VertPos;	//	‚’¼ˆÊ’u (0: top, 1: center, 2: bottom)
+	int m_HorzPos;	//	æ°´å¹³ä½ç½® (0: left, 1: center, 2: right)
+	int m_VertPos;	//	å‚ç›´ä½ç½® (0: top, 1: center, 2: bottom)
 public:
 	void Init(int, int, int, int, char *, CInterface *, int, int);
 	void Render();

@@ -1,11 +1,11 @@
-#ifndef CLINESELECTMODE_H_INCLUDED
+ï»¿#ifndef CLINESELECTMODE_H_INCLUDED
 #define CLINESELECTMODE_H_INCLUDED
 
 #include "C3DPluginMode.h"
 #include "CRailwayMode.h"
 
 /*
- *	‰Ëü‘I‘ğƒ‚[ƒh
+ *	æ¶ç·šé¸æŠãƒ¢ãƒ¼ãƒ‰
  */
 class CLineSelectMode: public C3DPluginMode, public CRailwayMode{
 private:
@@ -21,7 +21,7 @@ public:
 	void Render3DPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CLineSelectMode *g_LineSelectMode;
 
 #endif

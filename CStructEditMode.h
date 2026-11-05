@@ -1,16 +1,16 @@
-#ifndef CSTRUCTEDITMODE_H_INCLUDED
+ï»¿#ifndef CSTRUCTEDITMODE_H_INCLUDED
 #define CSTRUCTEDITMODE_H_INCLUDED
 
 #include "CSceneryMode.h"
 
 /*
- *	{İ•ÒWƒ‚[ƒh
+ *	æ–½è¨­ç·¨é›†ãƒ¢ãƒ¼ãƒ‰
  */
 class CStructEditMode: public CCursorSceneryMode{
 private:
-	int m_DragState;	//	”ÍˆÍ‘I‘ğó‘Ô
-	VEC3 m_DragBegin;	//	”ÍˆÍ‘I‘ğŠJnÀ•W
-	VEC3 m_DragEnd;		//	”ÍˆÍ‘I‘ğI—¹À•W
+	int m_DragState;	//	ç¯„å›²é¸æŠçŠ¶æ…‹
+	VEC3 m_DragBegin;	//	ç¯„å›²é¸æŠé–‹å§‹åº§æ¨™
+	VEC3 m_DragEnd;		//	ç¯„å›²é¸æŠçµ‚äº†åº§æ¨™
 public:
 	CStructEditMode();
 	~CStructEditMode();
@@ -22,7 +22,7 @@ public:
 	void RenderCursorScenery();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CStructEditMode *g_StructEditMode;
 
 #endif

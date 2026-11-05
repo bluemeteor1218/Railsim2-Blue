@@ -1,11 +1,11 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CCamera.h"
 #include "CTrainGroup.h"
 #include "CModelInst.h"
 #include "CModelPlugin.h"
 #include "CNeutralMode.h"
 
-//	static ƒƒ“ƒo
+//	static ãƒ¡ãƒ³ãƒ
 int CModelInst::ms_DetectMode;
 int CModelInst::ms_DetectTemp;
 float CModelInst::ms_MinDist;
@@ -30,12 +30,12 @@ void SetStaticSwitchOption(int switch_id, int switch_opt){
 
 /*
  *	[static]
- *	ƒIƒuƒWƒFƒNƒgŒŸoƒŠƒZƒbƒg
+ *	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæ¤œå‡ºãƒªã‚»ãƒƒãƒˆ
  */
 void CModelInst::ResetDetect(
-	int mode,	//	ƒ‚[ƒh
-	VEC3 rect1,	//	—Ìˆæn“_
-	VEC3 rect2	//	—ÌˆæI“_
+	int mode,	//	ãƒ¢ãƒ¼ãƒ‰
+	VEC3 rect1,	//	é ˜åŸŸå§‹ç‚¹
+	VEC3 rect2	//	é ˜åŸŸçµ‚ç‚¹
 ){
 	if(mode==2 || mode==3) V3MinMax(rect1, rect2, &rect1, &rect2);
 	ms_DetectMode = mode;
@@ -46,11 +46,11 @@ void CModelInst::ResetDetect(
 
 /*
  *	[static]
- *	ƒIƒuƒWƒFƒNƒgŒŸoƒ`ƒFƒbƒN
+ *	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæ¤œå‡ºãƒã‚§ãƒƒã‚¯
  */
 void CModelInst::CheckDetect(
-	CNamedObject *nobj,	//	ƒIƒuƒWƒFƒNƒg
-	CPartsInst *parts	//	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒX
+	CNamedObject *nobj,	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	CPartsInst *parts	//	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	CObject *obj = parts ? parts->GetObject() : nobj->GetObject();
 	VEC3 center = obj->GetCenter();
@@ -77,7 +77,7 @@ void CModelInst::CheckDetect(
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ (“Ç—p)
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ (èª­è¾¼ç”¨)
  */
 CModelInst::CModelInst(){
 	m_ModelPlugin = NULL;
@@ -86,10 +86,10 @@ CModelInst::CModelInst(){
 }
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CModelInst::CModelInst(
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	AttachPlugin(mpi);
 	m_Selected = 0;
@@ -97,17 +97,17 @@ CModelInst::CModelInst(
 }
 
 /*
- *	ƒfƒXƒgƒ‰ƒNƒ^
+ *	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CModelInst::~CModelInst(){
 	if(g_NeutralMode) g_NeutralMode->DeleteModelInst(this);
 }
 
 /*
- *	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“‚ÌƒAƒ^ƒbƒ`
+ *	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ã‚¢ã‚¿ãƒƒãƒ
  */
 void CModelInst::AttachPlugin(
-	CModelPlugin *mpi	//	ƒ‚ƒfƒ‹ƒvƒ‰ƒOƒCƒ“
+	CModelPlugin *mpi	//	ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 ){
 	m_ModelPlugin = mpi;
 	m_PartsInst.clear();
@@ -132,7 +132,7 @@ void CModelInst::AttachPlugin(
 }
 
 /*
- *	ƒXƒCƒbƒ`’lİ’è
+ *	ã‚¹ã‚¤ãƒƒãƒå€¤è¨­å®š
  */
 void CModelInst::SetSwitchOption(int index, int opt){
 	m_SwitchOption[index] = opt;
@@ -144,7 +144,7 @@ void CModelInst::SetSwitchOption(int index, int opt){
 }
 
 /*
- *	‰¹’â~
+ *	éŸ³åœæ­¢
  */
 void CModelInst::StopSound(){
 	ISoundState iss = m_SoundState.begin();
@@ -152,17 +152,17 @@ void CModelInst::StopSound(){
 }
 
 /*
- *	ƒ[ƒJƒ‹Œn‚ğƒZƒbƒg
+ *	ãƒ­ãƒ¼ã‚«ãƒ«ç³»ã‚’ã‚»ãƒƒãƒˆ
  */
 void CModelInst::SetLocalAxis(){
 	g_SystemObject[SYS_OBJ_LOCAL].SetPreviewPosture(m_Pos, m_Dir, m_Up);
 }
 
 /*
- *	p¨İ’è
+ *	å§¿å‹¢è¨­å®š
  */
 void CModelInst::FixPosture(
-	VEC3 pos,	//	ˆÊ’u
+	VEC3 pos,	//	ä½ç½®
 	VEC3 dir,	//	dir
 	VEC3 up		//	up
 ){
@@ -173,7 +173,7 @@ void CModelInst::FixPosture(
 }
 
 /*
- *	ó‘ÔƒŠƒZƒbƒg
+ *	çŠ¶æ…‹ãƒªã‚»ãƒƒãƒˆ
  */
 void CModelInst::ResetState(){
 	ITexAnimState itas = m_AnimationState.begin();
@@ -187,7 +187,7 @@ void CModelInst::ResetState(){
 }
 
 /*
- *	ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“is
+ *	ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é€²è¡Œ
  */
 void CModelInst::Simulate(){
 	ms_CurrentInst = this;
@@ -197,11 +197,11 @@ void CModelInst::Simulate(){
 }
 
 /*
- *	“Ç
+ *	èª­è¾¼
  */
 char *CModelInst::ReadModelInst(
-	char *str,	//	‘ÎÛ•¶š—ñ
-	bool pst	//	p¨î•ñ“Ç
+	char *str,	//	å¯¾è±¡æ–‡å­—åˆ—
+	bool pst	//	å§¿å‹¢æƒ…å ±èª­è¾¼
 ){
 	char *eee, *tmp;
 	int snum;
@@ -248,12 +248,12 @@ char *CModelInst::ReadModelInst(
 }
 
 /*
- *	•Û‘¶
+ *	ä¿å­˜
  */
 void CModelInst::SaveModelInst(
-	FILE *df,	//	ƒtƒ@ƒCƒ‹
-	char *ind,	//	ƒCƒ“ƒfƒ“ƒg
-	bool pst	//	p¨î•ñ•Û‘¶
+	FILE *df,	//	ãƒ•ã‚¡ã‚¤ãƒ«
+	char *ind,	//	ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
+	bool pst	//	å§¿å‹¢æƒ…å ±ä¿å­˜
 ){
 	int i;
 	fprintf(df, "%sSwitchNum = %d;\n", ind, m_SwitchOption.size());

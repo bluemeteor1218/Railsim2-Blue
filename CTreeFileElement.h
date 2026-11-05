@@ -1,17 +1,17 @@
-#ifndef CTREEFILEELEMENT_H_INCLUDED
+ï»¿#ifndef CTREEFILEELEMENT_H_INCLUDED
 #define CTREEFILEELEMENT_H_INCLUDED
 
 #include "CTreeElement.h"
 
 /*
- *	ƒcƒŠ[ƒtƒ@ƒCƒ‹—v‘f
+ *	ãƒ„ãƒªãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«è¦ç´ 
  */
 class CTreeFileElement: public CTreeElement{
 	friend class CPluginTree;
 	friend class CTreeElement;
 private:
-	CMDTYPE m_CommandType;	//	ƒRƒ}ƒ“ƒhƒ^ƒCƒv
-	CPlugin *m_Plugin;		//	ƒvƒ‰ƒOƒCƒ“
+	CMDTYPE m_CommandType;	//	ã‚³ãƒãƒ³ãƒ‰ã‚¿ã‚¤ãƒ—
+	CPlugin *m_Plugin;		//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³
 public:
 	CTreeFileElement(char *, CTreeDirElement *, CPluginTree *, CPlugin *);
 	~CTreeFileElement(){}

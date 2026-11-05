@@ -1,32 +1,32 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CListView.h"
 #include "CModelInst.h"
 #include "CTrainGroup.h"
 #include "CEnvPlugin.h"
 #include "CConfigMode.h"
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CHeadlight g_TempHeadlight;
 extern CParticle g_TempParticle;
 extern CSoundEffector g_TempSoundEffector;
 
 /*
- *	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  */
 CModelPlugin::CModelPlugin(
-	char *id	//	ƒvƒ‰ƒOƒCƒ“ ID
+	char *id	//	ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ ID
 ):
-	CPlugin(id)	//	Šî–{ƒNƒ‰ƒX
+	CPlugin(id)	//	åŸºæœ¬ã‚¯ãƒ©ã‚¹
 {
 	m_SelectSwitchID = 0;
 	m_PartsNum = 0;
 }
 
 /*
- *	ƒXƒCƒbƒ`“Ç
+ *	ã‚¹ã‚¤ãƒƒãƒèª­è¾¼
  */
 char *CModelPlugin::ReadModelSwitch(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	char *tmp;
 	while(true){
@@ -51,10 +51,10 @@ char *CModelPlugin::ReadModelSwitch(
 }
 
 /*
- *	ƒGƒtƒFƒNƒg“Ç
+ *	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆèª­è¾¼
  */
 char *CModelPlugin::ReadEffect(
-	char *str	//	‘ÎÛ•¶š—ñ
+	char *str	//	å¯¾è±¡æ–‡å­—åˆ—
 ){
 	g_TempHeadlight = CHeadlight();
 	g_TempParticle = CParticle();
@@ -64,7 +64,7 @@ char *CModelPlugin::ReadEffect(
 }
 
 /*
- *	ƒf[ƒ^“Ç‚İ‚İ
+ *	ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
  */
 void CModelPlugin::LoadData(){
 	ChDir();
@@ -74,10 +74,10 @@ void CModelPlugin::LoadData(){
 }
 
 /*
- *	ƒXƒCƒbƒ`ŒŸõ
+ *	ã‚¹ã‚¤ãƒƒãƒæ¤œç´¢
  */
 CModelSwitch *CModelPlugin::FindModelSwitch(
-	const string &name	//	ƒXƒCƒbƒ`–¼
+	const string &name	//	ã‚¹ã‚¤ãƒƒãƒå
 ){
 	CModelSwitch *ret;
 	IModelSwitch is = m_ModelSwitch.begin();
@@ -86,10 +86,10 @@ CModelSwitch *CModelPlugin::FindModelSwitch(
 }
 
 /*
- *	ƒXƒCƒbƒ`æ“¾
+ *	ã‚¹ã‚¤ãƒƒãƒå–å¾—
  */
 CModelSwitch *CModelPlugin::GetModelSwitch(
-	int index	//	”Ô†
+	int index	//	ç•ªå·
 ){
 	int i = 0;
 	IModelSwitch is = m_ModelSwitch.begin();
@@ -98,10 +98,10 @@ CModelSwitch *CModelPlugin::GetModelSwitch(
 }
 
 /*
- *	ƒAƒjƒ[ƒVƒ‡ƒ“ŒŸõ
+ *	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ¤œç´¢
  */
 CTextureAnimation *CModelPlugin::FindAnimation(
-	const string &name	//	ƒAƒjƒ[ƒVƒ‡ƒ“–¼
+	const string &name	//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å
 ){
 	CTextureAnimation *ret;
 	ITextureAnimation ia = m_Animation.begin();
@@ -110,12 +110,12 @@ CTextureAnimation *CModelPlugin::FindAnimation(
 }
 
 /*
- *	ƒXƒCƒbƒ`ƒŠƒXƒgì¬
+ *	ã‚¹ã‚¤ãƒƒãƒãƒªã‚¹ãƒˆä½œæˆ
  */
 void CModelPlugin::ListSwitch(
-	CListView *slv,		//	ƒXƒCƒbƒ`ƒŠƒXƒgƒrƒ…[
-	CListView *olv,		//	ƒIƒvƒVƒ‡ƒ“ƒŠƒXƒgƒrƒ…[
-	CModelInst *minst	//	ƒŠƒ“ƒNƒCƒ“ƒXƒ^ƒ“ƒX
+	CListView *slv,		//	ã‚¹ã‚¤ãƒƒãƒãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	CListView *olv,		//	ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	CModelInst *minst	//	ãƒªãƒ³ã‚¯ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	slv->DeleteAllItems();
 	olv->DeleteAllItems();
@@ -134,11 +134,11 @@ void CModelPlugin::ListSwitch(
 }
 
 /*
- *	ƒXƒCƒbƒ`•ÒW
+ *	ã‚¹ã‚¤ãƒƒãƒç·¨é›†
  */
 void CModelPlugin::EditSwitch(
-	CListView *slv,	//	ƒXƒCƒbƒ`ƒŠƒXƒgƒrƒ…[
-	CListView *olv	//	ƒIƒvƒVƒ‡ƒ“ƒŠƒXƒgƒrƒ…[
+	CListView *slv,	//	ã‚¹ã‚¤ãƒƒãƒãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
+	CListView *olv	//	ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
 ){
 	if(!m_ModelSwitch.size()) return;
 	if(m_LinkInst){
@@ -174,10 +174,10 @@ void CModelPlugin::EditSwitch(
 }
 
 /*
- *	ƒXƒCƒbƒ`İ’èƒZƒbƒg
+ *	ã‚¹ã‚¤ãƒƒãƒè¨­å®šã‚»ãƒƒãƒˆ
  */
 bool CModelPlugin::SetSwitch(
-	vector<int> &sopt	//	ƒXƒCƒbƒ`İ’è’l
+	vector<int> &sopt	//	ã‚¹ã‚¤ãƒƒãƒè¨­å®šå€¤
 ){
 	LoadAndGet();
 	IModelSwitch im = m_ModelSwitch.begin();
@@ -188,10 +188,10 @@ bool CModelPlugin::SetSwitch(
 }
 
 /*
- *	ƒXƒCƒbƒ`İ’èƒZƒbƒg
+ *	ã‚¹ã‚¤ãƒƒãƒè¨­å®šã‚»ãƒƒãƒˆ
  */
 void CModelPlugin::SetSwitch(
-	CModelInst *minst	//	ƒCƒ“ƒXƒ^ƒ“ƒX
+	CModelInst *minst	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	LoadAndGet();
 	CNamedObjectAfterRenderer::SetCurrentInst(minst);
@@ -203,10 +203,10 @@ void CModelPlugin::SetSwitch(
 }
 
 /*
- *	ƒXƒCƒbƒ`İ’èƒRƒs[
+ *	ã‚¹ã‚¤ãƒƒãƒè¨­å®šã‚³ãƒ”ãƒ¼
  */
 void CModelPlugin::CopySwitch(
-	vector<int> &sopt	//	ƒXƒCƒbƒ`İ’è’l
+	vector<int> &sopt	//	ã‚¹ã‚¤ãƒƒãƒè¨­å®šå€¤
 ){
 	sopt.resize(m_ModelSwitch.size());
 	vector<int>::iterator ptr = sopt.begin();
@@ -215,12 +215,12 @@ void CModelPlugin::CopySwitch(
 }
 
 /*
- *	•Ò¬‹¤’ÊƒXƒCƒbƒ`‚Ìƒ`ƒFƒbƒN
+ *	ç·¨æˆå…±é€šã‚¹ã‚¤ãƒƒãƒã®ãƒã‚§ãƒƒã‚¯
  */
 void CModelPlugin::CheckGroupCommonSwitch(
-	CModelInst *minst,	//	ƒCƒ“ƒXƒ^ƒ“ƒX (•ÏX‘¤)
-	CModelSwitch *sw,	//	‘ÎÛƒXƒCƒbƒ` (ŒÅ’è‘¤)
-	int val				//	‘ÎÛ’l (ŒÅ’è‘¤)
+	CModelInst *minst,	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ (å¤‰æ›´å´)
+	CModelSwitch *sw,	//	å¯¾è±¡ã‚¹ã‚¤ãƒƒãƒ (å›ºå®šå´)
+	int val				//	å¯¾è±¡å€¤ (å›ºå®šå´)
 ){
 	vector<int>::iterator ptr = minst->m_SwitchOption.begin();
 	IModelSwitch im = m_ModelSwitch.begin();
@@ -228,11 +228,11 @@ void CModelPlugin::CheckGroupCommonSwitch(
 }
 
 /*
- *	•Ò¬‹¤’ÊƒXƒCƒbƒ`‚Ìƒ`ƒFƒbƒN
+ *	ç·¨æˆå…±é€šã‚¹ã‚¤ãƒƒãƒã®ãƒã‚§ãƒƒã‚¯
  */
 void CModelPlugin::CheckGroupCommonSwitchAll(
-	CModelInst *minst1,	//	ƒCƒ“ƒXƒ^ƒ“ƒX (•ÏX‘¤)
-	CModelInst *minst2	//	ƒCƒ“ƒXƒ^ƒ“ƒX (ŒÅ’è‘¤)
+	CModelInst *minst1,	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ (å¤‰æ›´å´)
+	CModelInst *minst2	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ (å›ºå®šå´)
 ){
 	CModelPlugin *mpi = minst2->GetModelPlugin();
 	vector<int>::iterator ptr = minst2->m_SwitchOption.begin();
@@ -242,10 +242,10 @@ void CModelPlugin::CheckGroupCommonSwitchAll(
 }
 
 /*
- *	ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒXƒZƒbƒg
+ *	ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚»ãƒƒãƒˆ
  */
 void CModelPlugin::SetPartsInst(
-	CModelInst *minst	//	ƒCƒ“ƒXƒ^ƒ“ƒX
+	CModelInst *minst	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	if(minst){
 		if(minst->m_PartsInst.size()!=GetPartsNum()) minst->AttachPlugin(this);
@@ -256,10 +256,10 @@ void CModelPlugin::SetPartsInst(
 }
 
 /*
- *	ƒAƒjƒ[ƒVƒ‡ƒ“ó‘ÔƒZƒbƒg
+ *	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çŠ¶æ…‹ã‚»ãƒƒãƒˆ
  */
 void CModelPlugin::SetAnimation(
-	CModelInst *minst	//	ƒCƒ“ƒXƒ^ƒ“ƒX
+	CModelInst *minst	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	ITextureAnimation ia = m_Animation.begin();
 	if(minst){
@@ -272,10 +272,10 @@ void CModelPlugin::SetAnimation(
 }
 
 /*
- *	ƒ€[ƒo[ó‘ÔƒZƒbƒg
+ *	ãƒ ãƒ¼ãƒãƒ¼çŠ¶æ…‹ã‚»ãƒƒãƒˆ
  */
 void CModelPlugin::SetMoverState(
-	CModelInst *minst	//	ƒCƒ“ƒXƒ^ƒ“ƒX
+	CModelInst *minst	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	IPMoverState ipms = m_MoverState.begin();
 	if(minst){
@@ -288,10 +288,10 @@ void CModelPlugin::SetMoverState(
 }
 
 /*
- *	ƒTƒEƒ“ƒh‚Ìƒ[ƒh
+ *	ã‚µã‚¦ãƒ³ãƒ‰ã®ãƒ­ãƒ¼ãƒ‰
  */
 void CModelPlugin::LoadSoundWave(
-	CModelInst *minst	//	ƒCƒ“ƒXƒ^ƒ“ƒX
+	CModelInst *minst	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	ChDir();
 	if(minst){
@@ -304,10 +304,10 @@ void CModelPlugin::LoadSoundWave(
 }
 
 /*
- *	ƒGƒtƒFƒNƒg•`‰æ
+ *	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆæç”»
  */
 void CModelPlugin::SimulateEffect(
-	CModelInst *minst	//	ƒCƒ“ƒXƒ^ƒ“ƒX
+	CModelInst *minst	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 ){
 	if(minst){
 		if(minst->IsWarping()) return;

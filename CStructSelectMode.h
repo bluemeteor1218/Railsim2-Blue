@@ -1,4 +1,4 @@
-#ifndef CSTRUCTSELECTMODE_H_INCLUDED
+ï»¿#ifndef CSTRUCTSELECTMODE_H_INCLUDED
 #define CSTRUCTSELECTMODE_H_INCLUDED
 
 #include "C3DPluginMode.h"
@@ -7,7 +7,7 @@ class CStruct;
 class CStructPlugin;
 
 /*
- *	{İ‘I‘ğƒ‚[ƒh
+ *	æ–½è¨­é¸æŠãƒ¢ãƒ¼ãƒ‰
  */
 class CStructSelectMode: public CModelPluginMode{
 private:
@@ -23,7 +23,7 @@ public:
 	virtual void RenderModelPlugin();
 };
 
-//	ŠO•”ƒOƒ[ƒoƒ‹
+//	å¤–éƒ¨ã‚°ãƒ­ãƒ¼ãƒãƒ«
 extern CStructSelectMode *g_StructSelectMode;
 
 #endif
