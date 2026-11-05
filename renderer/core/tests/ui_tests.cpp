@@ -138,10 +138,44 @@ void TestMultiLineAndFallback()
     CHECK(Near(m.width, 28.0f));
     CHECK(Near(m.height, 20.0f));
 
-    // A non-ASCII byte falls back to '?' instead of crashing.
+    // A non-ASCII code point without a glyph falls back to '?' (one quad, not one per UTF-8 byte).
     rs2::SpriteBatch batch;
     rs2::LayoutText(table, "\xE3\x81\x82", 0, 0, 1.0f, {}, &batch);
-    CHECK(batch.Vertices().size() == 3 * 6);
+    CHECK(batch.Vertices().size() == 6);
+}
+
+void TestUtf8()
+{
+    rs2::GlyphTable table = MakeTable();
+    rs2::Glyph wide;
+    wide.valid = true;
+    wide.width = 12;
+    wide.height = 8;
+    wide.advance = 14;
+    table.Set(0x3042, wide); // U+3042 HIRAGANA A
+    CHECK(table.Has(0x3042));
+    CHECK(!table.Has(0x3044));
+
+    size_t i = 0;
+    const std::string text = "A\xE3\x81\x82\xF0\x9F\x98\x80z";
+    CHECK(rs2::DecodeUtf8(text, &i) == 'A');
+    CHECK(rs2::DecodeUtf8(text, &i) == 0x3042);
+    CHECK(rs2::DecodeUtf8(text, &i) == 0x1F600);
+    CHECK(rs2::DecodeUtf8(text, &i) == 'z');
+    CHECK(i == text.size());
+
+    // A truncated sequence must not read past the end.
+    i = 0;
+    const std::string cut = "\xE3\x81";
+    CHECK(rs2::DecodeUtf8(cut, &i) == 0xFFFD);
+    CHECK(i <= cut.size());
+
+    const rs2::TextMetrics m = rs2::LayoutText(table, "A\xE3\x81\x82", 0, 0, 1.0f, {}, nullptr);
+    CHECK(Near(m.width, 7 + 14));
+
+    std::set<char32_t> extra;
+    rs2::CollectExtraCodepoints("abc\xE3\x81\x82\xE3\x81\x82", &extra);
+    CHECK(extra.size() == 1 && *extra.begin() == 0x3042);
 }
 
 } // namespace
@@ -156,6 +190,7 @@ int main()
     TestFrame();
     TestTextLayout();
     TestMultiLineAndFallback();
+    TestUtf8();
     if (g_failures == 0) {
         std::printf("all ui tests passed\n");
     }

@@ -10,6 +10,7 @@
 #include <cwchar>
 #include <fstream>
 #include <iterator>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -36,6 +37,8 @@ constexpr float kUiHeight = 480.0f;
 constexpr float kUiFontSize = 14.0f;
 constexpr wchar_t kWindowClass[] = L"RailSim2D3D12Window";
 constexpr wchar_t kWindowTitle[] = L"RailSim2 - Direct3D 12 renderer";
+// UTF-8 escapes keep the source independent of the compiler's source charset: 日本語表示 (Japanese text).
+constexpr char kHudJapanese[] = "\xE6\x97\xA5\xE6\x9C\xAC\xE8\xAA\x9E\xE8\xA1\xA8\xE7\xA4\xBA OK";
 
 struct Mesh {
     ComPtr<ID3D12Resource> vertices;
@@ -651,20 +654,22 @@ private:
             return false;
         }
         ui_.SetTexture(0, whiteTexture_.Get());
+        EnsureGlyphs(kHudJapanese);
         return RebuildFont();
     }
 
     // Rasterizes the font at the physical pixel size of the current UI scale so glyphs stay 1:1 with the screen.
+    // Glyphs outside ASCII are added with EnsureGlyphs (called before a frame is recorded).
     bool RebuildFont()
     {
         const int pixelHeight =
             std::max(8, static_cast<int>(std::lround(kUiFontSize * MakeLayout().Scale())));
-        if (pixelHeight == fontPixelHeight_) {
+        if (pixelHeight == fontPixelHeight_ && !fontDirty_) {
             return true;
         }
         rs2::Image atlas;
         rs2::GlyphTable table;
-        if (!rs2::BuildFontAtlas(L"Segoe UI", pixelHeight, &atlas, &table)) {
+        if (!rs2::BuildFontAtlas(L"Yu Gothic UI", pixelHeight, fontChars_, &atlas, &table)) {
             return true; // keep the previous atlas
         }
         ComPtr<ID3D12Resource> texture;
@@ -675,7 +680,16 @@ private:
         glyphs_ = table;
         ui_.SetTexture(1, fontTexture_.Get());
         fontPixelHeight_ = pixelHeight;
+        fontDirty_ = false;
         return true;
+    }
+
+    // Registers the non-ASCII characters of `text`; the atlas is rebuilt on the next RebuildFont.
+    void EnsureGlyphs(const std::string& text)
+    {
+        const size_t before = fontChars_.size();
+        rs2::CollectExtraCodepoints(text, &fontChars_);
+        fontDirty_ = fontDirty_ || fontChars_.size() != before;
     }
 
     void DrawUi()
@@ -692,9 +706,9 @@ private:
             fpsWindowStart_ = now;
         }
 
-        char text[160];
-        std::snprintf(text, sizeof(text), "RailSim2  Direct3D 12\nFPS: %.0f\n%ux%u px   UI x%.2f", fps_, width_,
-                      height_, scale);
+        char text[200];
+        std::snprintf(text, sizeof(text), "RailSim2  Direct3D 12\nFPS: %.0f\n%ux%u px   UI x%.2f\n%s", fps_, width_,
+                      height_, scale, kHudJapanese);
 
         const float textScale = 1.0f / scale;
         const float margin = 8.0f;
@@ -885,6 +899,8 @@ private:
     rs2::UiRenderer ui_;
     rs2::SpriteBatch batch_;
     rs2::GlyphTable glyphs_;
+    std::set<char32_t> fontChars_;
+    bool fontDirty_ = false;
     ComPtr<ID3D12Resource> whiteTexture_;
     ComPtr<ID3D12Resource> fontTexture_;
     int fontPixelHeight_ = 0;

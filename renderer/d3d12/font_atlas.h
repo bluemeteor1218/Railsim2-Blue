@@ -9,6 +9,8 @@
 #include <cmath>
 #include <cstdint>
 #include <cstring>
+#include <set>
+#include <vector>
 
 #include "image_ops.h"
 #include "text_layout.h"
@@ -18,7 +20,8 @@ namespace rs2 {
 constexpr uint32_t kAtlasSize = 512;
 constexpr int kGlyphPadding = 1;
 
-inline bool BuildFontAtlas(const wchar_t* faceName, int pixelHeight, Image* atlas, GlyphTable* table)
+inline bool BuildFontAtlasSized(const wchar_t* faceName, int pixelHeight, const std::set<char32_t>& extraChars,
+                                uint32_t atlasSize, Image* atlas, GlyphTable* table)
 {
     pixelHeight = std::max(pixelHeight, 6);
 
@@ -31,8 +34,8 @@ inline bool BuildFontAtlas(const wchar_t* faceName, int pixelHeight, Image* atla
                              faceName);
     BITMAPINFO info{};
     info.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-    info.bmiHeader.biWidth = static_cast<LONG>(kAtlasSize);
-    info.bmiHeader.biHeight = -static_cast<LONG>(kAtlasSize); // top-down
+    info.bmiHeader.biWidth = static_cast<LONG>(atlasSize);
+    info.bmiHeader.biHeight = -static_cast<LONG>(atlasSize); // top-down
     info.bmiHeader.biPlanes = 1;
     info.bmiHeader.biBitCount = 32;
     info.bmiHeader.biCompression = BI_RGB;
@@ -50,7 +53,7 @@ inline bool BuildFontAtlas(const wchar_t* faceName, int pixelHeight, Image* atla
     SetBkMode(dc, TRANSPARENT);
     SetTextColor(dc, RGB(255, 255, 255));
     GdiFlush();
-    std::memset(bits, 0, static_cast<size_t>(kAtlasSize) * kAtlasSize * 4);
+    std::memset(bits, 0, static_cast<size_t>(atlasSize) * atlasSize * 4);
 
     TEXTMETRICW metrics{};
     GetTextMetricsW(dc, &metrics);
@@ -60,17 +63,26 @@ inline bool BuildFontAtlas(const wchar_t* faceName, int pixelHeight, Image* atla
     int penX = 0;
     int penY = 0;
     bool ok = true;
-    const float inv = 1.0f / static_cast<float>(kAtlasSize);
+    const float inv = 1.0f / static_cast<float>(atlasSize);
+    std::vector<char32_t> chars;
     for (char32_t ch = GlyphTable::kFirst; ch <= GlyphTable::kLast; ++ch) {
+        chars.push_back(ch);
+    }
+    for (const char32_t ch : extraChars) {
+        if (ch > GlyphTable::kLast && ch <= 0xFFFF) {
+            chars.push_back(ch);
+        }
+    }
+    for (const char32_t ch : chars) {
         int advance = 0;
         const wchar_t wide = static_cast<wchar_t>(ch);
         GetCharWidth32W(dc, wide, wide, &advance);
         const int cellWidth = advance + kGlyphPadding * 2;
-        if (penX + cellWidth > static_cast<int>(kAtlasSize)) {
+        if (penX + cellWidth > static_cast<int>(atlasSize)) {
             penX = 0;
             penY += cellHeight;
         }
-        if (penY + cellHeight > static_cast<int>(kAtlasSize)) {
+        if (penY + cellHeight > static_cast<int>(atlasSize)) {
             ok = false;
             break;
         }
@@ -91,10 +103,10 @@ inline bool BuildFontAtlas(const wchar_t* faceName, int pixelHeight, Image* atla
     GdiFlush();
 
     if (ok) {
-        atlas->width = atlas->height = kAtlasSize;
-        atlas->rgba.resize(static_cast<size_t>(kAtlasSize) * kAtlasSize * 4);
+        atlas->width = atlas->height = atlasSize;
+        atlas->rgba.resize(static_cast<size_t>(atlasSize) * atlasSize * 4);
         const uint8_t* src = static_cast<const uint8_t*>(bits);
-        for (size_t i = 0; i < static_cast<size_t>(kAtlasSize) * kAtlasSize; ++i) {
+        for (size_t i = 0; i < static_cast<size_t>(atlasSize) * atlasSize; ++i) {
             // Grayscale AA: the green channel is the coverage.
             atlas->rgba[i * 4 + 0] = 255;
             atlas->rgba[i * 4 + 1] = 255;
@@ -109,6 +121,19 @@ inline bool BuildFontAtlas(const wchar_t* faceName, int pixelHeight, Image* atla
     DeleteObject(bitmap);
     DeleteDC(dc);
     return ok;
+}
+
+// Rasterizes ASCII plus `extraChars` (BMP only). The atlas grows (512 -> 2048) until everything fits.
+inline bool BuildFontAtlas(const wchar_t* faceName, int pixelHeight, const std::set<char32_t>& extraChars,
+                           Image* atlas, GlyphTable* table)
+{
+    for (uint32_t size = 512; size <= 2048; size *= 2) {
+        *table = GlyphTable();
+        if (BuildFontAtlasSized(faceName, pixelHeight, extraChars, size, atlas, table)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 } // namespace rs2

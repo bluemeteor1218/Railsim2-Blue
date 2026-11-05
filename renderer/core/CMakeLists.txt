@@ -26,6 +26,13 @@ if(MSVC)
 endif()
 add_test(NAME x_mesh COMMAND railsim2_x_mesh_tests)
 
+add_executable(railsim2_dev_render_tests tests/dev_render_tests.cpp)
+target_link_libraries(railsim2_dev_render_tests PRIVATE railsim2_render_core)
+if(MSVC)
+  target_compile_options(railsim2_dev_render_tests PRIVATE /W4 /permissive-)
+endif()
+add_test(NAME dev_render COMMAND railsim2_dev_render_tests)
+
 add_executable(railsim2_ui_tests tests/ui_tests.cpp)
 target_link_libraries(railsim2_ui_tests PRIVATE railsim2_render_core)
 if(MSVC)
