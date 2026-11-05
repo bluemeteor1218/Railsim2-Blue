@@ -9,6 +9,7 @@
 #include <cwchar>
 #include <string>
 
+#include "constant_ring.h"
 #include "d3dx_math.h"
 #include "font_atlas.h"
 #include "pipeline.h"
@@ -437,6 +438,10 @@ private:
             MessageBoxA(window_, error.c_str(), "RailSim2 renderer error", MB_OK | MB_ICONERROR);
             return false;
         }
+        if (!constants_.Initialize(device_.Get())) {
+            MessageBoxA(window_, "Failed to create the constant ring", "RailSim2 renderer error", MB_OK | MB_ICONERROR);
+            return false;
+        }
         const uint8_t opaque[4] = {230, 120, 40, 255};
         const uint8_t glass[4] = {80, 160, 255, 110};
         if (!CreateCubeMesh(opaque, &opaqueCube_) || !CreateCubeMesh(glass, &glassCube_)) {
@@ -604,12 +609,7 @@ private:
         const D3DXMATRIX mvp = world * view * projection;
         std::memcpy(out->mvp, mvp.m, sizeof(out->mvp));
         std::memcpy(out->world, world.m, sizeof(out->world));
-        D3DXVECTOR3 light(-0.4f, -1.0f, 0.6f);
-        D3DXVec3Normalize(&light, &light);
-        out->lightDirection[0] = light.x;
-        out->lightDirection[1] = light.y;
-        out->lightDirection[2] = light.z;
-        out->lightDirection[3] = 0.0f;
+        out->material = state_.GetMaterial();
     }
 
     bool DrawMesh(const Mesh& mesh, const rs2::ObjectConstants& object)
@@ -620,9 +620,14 @@ private:
             MessageBoxA(window_, error.c_str(), "RailSim2 renderer error", MB_OK | MB_ICONERROR);
             return false;
         }
+        const D3D12_GPU_VIRTUAL_ADDRESS frameConstants = constants_.Upload(state_.Constants());
+        if (frameConstants == 0) {
+            MessageBoxA(window_, "Constant ring exhausted", "RailSim2 renderer error", MB_OK | MB_ICONERROR);
+            return false;
+        }
         commandList_->SetPipelineState(pso);
         commandList_->SetGraphicsRoot32BitConstants(0, sizeof(object) / 4, &object, 0);
-        commandList_->SetGraphicsRoot32BitConstants(1, sizeof(rs2::FrameConstants) / 4, &state_.Constants(), 0);
+        commandList_->SetGraphicsRootConstantBufferView(1, frameConstants);
         commandList_->IASetVertexBuffers(0, 1, &mesh.vertexView);
         commandList_->IASetIndexBuffer(&mesh.indexView);
         commandList_->DrawIndexedInstanced(mesh.indexCount, 1, 0, 0, 0);
@@ -641,26 +646,33 @@ private:
         commandList_->RSSetScissorRects(1, &scissor);
         commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
+        constants_.BeginFrame(frameIndex_);
         const float seconds = static_cast<float>(GetTickCount64() - startTime_) / 1000.0f;
         rs2::ObjectConstants object{};
 
-        // Opaque, lit cube with fog.
+        // Opaque, lit cube with fog: warm key light plus a cool fill light.
         state_ = rs2::RenderState();
         state_.SetLighting(true);
         state_.SetTextured(true);
-        state_.SetAmbient(0xFF404040u);
+        state_.SetAmbient(0xFF303030u);
+        state_.SetDirectionalLight(0, -0.4f, -1.0f, 0.6f, 0xFFFFF0E0u);
+        state_.SetDirectionalLight(1, 0.8f, 0.2f, -0.4f, 0xFF405070u);
         state_.SetLight(0, true);
+        state_.SetLight(1, true);
         state_.SetFog(true, 0xFF152033u, 3.0f, 9.0f);
         FillObjectConstants(seconds, 1.0f, &object);
         if (!DrawMesh(opaqueCube_, object)) {
             return false;
         }
 
-        // Translucent shell: alpha blend, no depth write, no culling, untextured.
+        // Translucent shell: alpha blend, no depth write, no culling, untextured, emissive tint.
         state_.SetTextured(false);
         state_.SetZWrite(false);
         state_.SetCulling(false);
         state_.BlendAlpha();
+        rs2::Material glassMaterial;
+        glassMaterial.emissive[2] = 0.15f;
+        state_.SetMaterial(glassMaterial);
         FillObjectConstants(seconds, 1.6f, &object);
         return DrawMesh(glassCube_, object);
     }
@@ -711,6 +723,7 @@ private:
     float fps_ = 0.0f;
     ComPtr<ID3D12Resource> depthBuffer_;
     rs2::PipelineCache pipelines_;
+    rs2::ConstantRing constants_;
     rs2::RenderState state_;
     Mesh opaqueCube_;
     Mesh glassCube_;

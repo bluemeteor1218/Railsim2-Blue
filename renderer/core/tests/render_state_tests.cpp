@@ -81,6 +81,25 @@ void TestLightsAndFog()
     CHECK(Near(s.Constants().fogStartEnd[0], 10.0f) && Near(s.Constants().fogStartEnd[1], 200.0f));
 }
 
+void TestDirectionalLightAndMaterial()
+{
+    rs2::RenderState s;
+    s.SetDirectionalLight(1, 0.0f, -3.0f, 4.0f, 0xFF00FF00u);
+    const rs2::DirectionalLight& l = s.Constants().lights[1];
+    CHECK(Near(l.direction[1], -0.6f) && Near(l.direction[2], 0.8f));
+    CHECK(Near(l.diffuse[1], 1.0f) && Near(l.diffuse[0], 0.0f));
+    s.SetDirectionalLight(9, 1, 0, 0, 0); // ignored
+    s.SetDirectionalLight(0, 0, 0, 0, 0); // zero direction must not produce NaN
+    CHECK(Near(s.Constants().lights[0].direction[0], 0.0f));
+
+    rs2::Material m;
+    m.diffuse[0] = 0.25f;
+    s.SetMaterial(m);
+    CHECK(Near(s.GetMaterial().diffuse[0], 0.25f));
+    s.ResetMaterial();
+    CHECK(Near(s.GetMaterial().diffuse[0], 1.0f));
+}
+
 void TestHashDistinguishesStates()
 {
     std::unordered_set<rs2::PipelineKey, rs2::PipelineKeyHasher> keys;
@@ -105,6 +124,7 @@ void TestHashDistinguishesStates()
 
 int main()
 {
+    TestDirectionalLightAndMaterial();
     TestDefaults();
     TestBlendPresets();
     TestColorAndAlpha();

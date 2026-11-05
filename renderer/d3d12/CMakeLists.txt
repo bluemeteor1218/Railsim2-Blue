@@ -1,6 +1,7 @@
 add_executable(railsim2_d3d12_renderer WIN32
     main.cpp
     pipeline.h
+    constant_ring.h
     texture.h
     font_atlas.h
     ui_renderer.h

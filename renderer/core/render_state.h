@@ -6,6 +6,7 @@
 //   * PipelineKey  - values that select a Direct3D 12 pipeline state object
 //   * FrameConstants - values uploaded to a constant buffer for HLSL
 
+#include <cmath>
 #include <cstddef>
 #include <cstdint>
 
@@ -65,14 +66,31 @@ struct PipelineKeyHasher {
 };
 
 // 16-byte aligned groups so the layout matches an HLSL cbuffer exactly.
+constexpr int kMaxLights = 4;
+
+// Directional light (the only kind the legacy renderer needs).
+struct DirectionalLight {
+    float direction[4] = {0, -1, 0, 0}; // world space, direction the light travels
+    float diffuse[4] = {1, 1, 1, 1};
+};
+
 struct FrameConstants {
     float ambient[4] = {0, 0, 0, 1};
     float fogColor[4] = {0, 0, 0, 1};
     float fogStartEnd[2] = {0.0f, 1.0f};
     float alphaRef = 0.0f; // 0..1
     uint32_t lightMask = 0; // bit n = light n enabled
+    DirectionalLight lights[kMaxLights];
 };
-static_assert(sizeof(FrameConstants) == 48, "FrameConstants must match the HLSL cbuffer layout");
+static_assert(sizeof(FrameConstants) == 176, "FrameConstants must match the HLSL cbuffer layout");
+
+// Mirrors D3DMATERIAL8 (specular is not supported yet). Diffuse multiplies the vertex color.
+struct Material {
+    float diffuse[4] = {1, 1, 1, 1};
+    float ambient[4] = {1, 1, 1, 1};
+    float emissive[4] = {0, 0, 0, 0};
+};
+static_assert(sizeof(Material) == 48, "Material is uploaded as 12 root constants");
 
 // Unpacks a legacy D3DCOLOR (0xAARRGGBB) into RGBA floats.
 inline void UnpackColor(uint32_t argb, float out[4])
@@ -128,6 +146,26 @@ public:
         constants_.lightMask = enable ? (constants_.lightMask | bit) : (constants_.lightMask & ~bit);
     }
 
+    // devSetLight's D3DLIGHT8 setup for directional lights. Direction is normalized here.
+    void SetDirectionalLight(int index, float dx, float dy, float dz, uint32_t diffuseArgb)
+    {
+        if (index < 0 || index >= kMaxLights) {
+            return;
+        }
+        const float length = std::sqrt(dx * dx + dy * dy + dz * dz);
+        const float inv = length > 0.0f ? 1.0f / length : 0.0f;
+        DirectionalLight& light = constants_.lights[index];
+        light.direction[0] = dx * inv;
+        light.direction[1] = dy * inv;
+        light.direction[2] = dz * inv;
+        light.direction[3] = 0.0f;
+        UnpackColor(diffuseArgb, light.diffuse);
+    }
+
+    const Material& GetMaterial() const { return material_; }
+    void SetMaterial(const Material& material) { material_ = material; }
+    void ResetMaterial() { material_ = Material(); }
+
     // Vertex and pixel fog both collapse to one linear pixel-shader fog.
     void SetFog(bool enable, uint32_t argb, float start, float end)
     {
@@ -142,6 +180,7 @@ public:
 private:
     PipelineKey pipeline_;
     FrameConstants constants_;
+    Material material_;
 };
 
 } // namespace rs2

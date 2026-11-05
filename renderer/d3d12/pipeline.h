@@ -14,13 +14,13 @@
 
 namespace rs2 {
 
-// Root constants: b0 = ObjectConstants, b1 = FrameConstants.
+// Root parameters: 0 = ObjectConstants (b0, root constants), 1 = FrameConstants (b1, root CBV), 2 = SRV table.
 struct ObjectConstants {
     float mvp[16];
     float world[16];
-    float lightDirection[4]; // world space, direction the light travels
+    Material material;
 };
-static_assert(sizeof(ObjectConstants) == 144, "ObjectConstants must match the HLSL cbuffer");
+static_assert(sizeof(ObjectConstants) == 176, "ObjectConstants must match the HLSL cbuffer");
 
 struct Vertex {
     float position[3];
@@ -36,7 +36,15 @@ cbuffer Object : register(b0)
 {
     row_major float4x4 mvp;
     row_major float4x4 world;
-    float4 lightDirection;
+    float4 matDiffuse;
+    float4 matAmbient;
+    float4 matEmissive;
+};
+
+struct Light
+{
+    float4 direction;
+    float4 diffuse;
 };
 
 cbuffer Frame : register(b1)
@@ -46,6 +54,7 @@ cbuffer Frame : register(b1)
     float2 fogStartEnd;
     float alphaRef;
     uint lightMask;
+    Light lights[4];
 };
 
 Texture2D baseTexture : register(t0);
@@ -76,8 +85,17 @@ VSOutput VSMain(VSInput input)
     output.color = input.color;
 #if LIGHTING
     float3 n = normalize(mul(float4(input.normal, 0.0f), world).xyz);
-    float diffuse = (lightMask & 1u) ? saturate(dot(n, -lightDirection.xyz)) : 0.0f;
-    output.color.rgb = input.color.rgb * saturate(ambient.rgb + diffuse);
+    float3 lit = matEmissive.rgb + ambient.rgb * matAmbient.rgb;
+    [unroll]
+    for (uint i = 0; i < 4; ++i)
+    {
+        if (lightMask & (1u << i))
+        {
+            lit += lights[i].diffuse.rgb * saturate(dot(n, -lights[i].direction.xyz));
+        }
+    }
+    output.color.rgb = saturate(input.color.rgb * matDiffuse.rgb * lit);
+    output.color.a = input.color.a * matDiffuse.a;
 #endif
     return output;
 }
@@ -131,9 +149,8 @@ public:
         parameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
         parameters[0].Constants.ShaderRegister = 0;
         parameters[0].Constants.Num32BitValues = sizeof(ObjectConstants) / 4;
-        parameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
-        parameters[1].Constants.ShaderRegister = 1;
-        parameters[1].Constants.Num32BitValues = sizeof(FrameConstants) / 4;
+        parameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+        parameters[1].Descriptor.ShaderRegister = 1;
         parameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
         parameters[2].DescriptorTable.NumDescriptorRanges = 1;
         parameters[2].DescriptorTable.pDescriptorRanges = &range;
