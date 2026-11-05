@@ -5,13 +5,18 @@
 
 #include <array>
 #include <cmath>
+#include <cstdio>
 #include <cwchar>
 #include <string>
 
 #include "d3dx_math.h"
+#include "font_atlas.h"
 #include "pipeline.h"
 #include "render_state.h"
+#include "text_layout.h"
 #include "texture.h"
+#include "ui_renderer.h"
+#include "viewport_layout.h"
 
 namespace {
 
@@ -19,6 +24,10 @@ using Microsoft::WRL::ComPtr;
 
 constexpr UINT kFrameCount = 2;
 constexpr DXGI_FORMAT kDepthFormat = DXGI_FORMAT_D32_FLOAT;
+// Legacy RailSim2 UI design size and base font size in virtual pixels.
+constexpr float kUiWidth = 640.0f;
+constexpr float kUiHeight = 480.0f;
+constexpr float kUiFontSize = 14.0f;
 constexpr wchar_t kWindowClass[] = L"RailSim2D3D12Window";
 constexpr wchar_t kWindowTitle[] = L"RailSim2 - Direct3D 12 renderer";
 
@@ -258,6 +267,7 @@ public:
         if (!DrawScene()) {
             return false;
         }
+        DrawUi();
 
         barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
         barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
@@ -306,7 +316,10 @@ public:
         }
         width_ = width;
         height_ = height;
-        return CreateRenderTargets();
+        if (!CreateRenderTargets()) {
+            return false;
+        }
+        return RebuildFont();
     }
 
 private:
@@ -432,7 +445,11 @@ private:
         if (!CreateSampleTexture()) {
             return false;
         }
+        if (!CreateUi()) {
+            return false;
+        }
         startTime_ = GetTickCount64();
+        fpsWindowStart_ = startTime_;
         return true;
     }
 
@@ -450,30 +467,11 @@ private:
         heapDescription.NumDescriptors = 1;
         heapDescription.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
         heapDescription.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-        HRESULT result = device_->CreateDescriptorHeap(&heapDescription, IID_PPV_ARGS(&srvHeap_));
+        const HRESULT result = device_->CreateDescriptorHeap(&heapDescription, IID_PPV_ARGS(&srvHeap_));
         if (FAILED(result)) {
             return ShowHResultError(window_, L"CreateDescriptorHeap (SRV)", result);
         }
-
-        result = commandAllocators_[0]->Reset();
-        if (SUCCEEDED(result)) {
-            result = commandList_->Reset(commandAllocators_[0].Get(), nullptr);
-        }
-        if (FAILED(result)) {
-            return ShowHResultError(window_, L"Reset command list (upload)", result);
-        }
-        ComPtr<ID3D12Resource> uploadHeap;
-        if (!rs2::CreateTextureFromMips(device_.Get(), commandList_.Get(), mips, &texture_, &uploadHeap)) {
-            commandList_->Close();
-            return ShowHResultError(window_, L"Create texture", E_FAIL);
-        }
-        result = commandList_->Close();
-        if (FAILED(result)) {
-            return ShowHResultError(window_, L"Close command list (upload)", result);
-        }
-        ID3D12CommandList* lists[] = {commandList_.Get()};
-        commandQueue_->ExecuteCommandLists(1, lists);
-        if (!WaitForGpu()) {
+        if (!UploadTexture(mips, &texture_)) {
             return false;
         }
 
@@ -484,6 +482,110 @@ private:
         view.Texture2D.MipLevels = static_cast<UINT>(mips.size());
         device_->CreateShaderResourceView(texture_.Get(), &view, srvHeap_->GetCPUDescriptorHandleForHeapStart());
         return true;
+    }
+
+    // Synchronous upload; only call while no frame is being recorded.
+    bool UploadTexture(const std::vector<rs2::Image>& mips, ComPtr<ID3D12Resource>* texture)
+    {
+        HRESULT result = commandAllocators_[0]->Reset();
+        if (SUCCEEDED(result)) {
+            result = commandList_->Reset(commandAllocators_[0].Get(), nullptr);
+        }
+        if (FAILED(result)) {
+            return ShowHResultError(window_, L"Reset command list (upload)", result);
+        }
+        ComPtr<ID3D12Resource> uploadHeap;
+        if (!rs2::CreateTextureFromMips(device_.Get(), commandList_.Get(), mips, texture, &uploadHeap)) {
+            commandList_->Close();
+            return ShowHResultError(window_, L"Create texture", E_FAIL);
+        }
+        result = commandList_->Close();
+        if (FAILED(result)) {
+            return ShowHResultError(window_, L"Close command list (upload)", result);
+        }
+        ID3D12CommandList* lists[] = {commandList_.Get()};
+        commandQueue_->ExecuteCommandLists(1, lists);
+        return WaitForGpu();
+    }
+
+    rs2::ViewportLayout MakeLayout() const
+    {
+        return rs2::ViewportLayout(kUiWidth, kUiHeight, static_cast<float>(width_), static_cast<float>(height_),
+                                   rs2::LayoutMode::FixedHeight);
+    }
+
+    bool CreateUi()
+    {
+        std::string error;
+        if (!ui_.Initialize(device_.Get(), DXGI_FORMAT_R8G8B8A8_UNORM, kDepthFormat, &error)) {
+            MessageBoxA(window_, error.c_str(), "RailSim2 renderer error", MB_OK | MB_ICONERROR);
+            return false;
+        }
+        rs2::Image white;
+        white.width = white.height = 1;
+        white.rgba = {255, 255, 255, 255};
+        if (!UploadTexture({white}, &whiteTexture_)) {
+            return false;
+        }
+        ui_.SetTexture(0, whiteTexture_.Get());
+        return RebuildFont();
+    }
+
+    // Rasterizes the font at the physical pixel size of the current UI scale so glyphs stay 1:1 with the screen.
+    bool RebuildFont()
+    {
+        const int pixelHeight =
+            std::max(8, static_cast<int>(std::lround(kUiFontSize * MakeLayout().Scale())));
+        if (pixelHeight == fontPixelHeight_) {
+            return true;
+        }
+        rs2::Image atlas;
+        rs2::GlyphTable table;
+        if (!rs2::BuildFontAtlas(L"Segoe UI", pixelHeight, &atlas, &table)) {
+            return true; // keep the previous atlas
+        }
+        ComPtr<ID3D12Resource> texture;
+        if (!UploadTexture({atlas}, &texture)) {
+            return false;
+        }
+        fontTexture_ = std::move(texture);
+        glyphs_ = table;
+        ui_.SetTexture(1, fontTexture_.Get());
+        fontPixelHeight_ = pixelHeight;
+        return true;
+    }
+
+    void DrawUi()
+    {
+        const rs2::ViewportLayout layout = MakeLayout();
+        const float scale = layout.Scale();
+        const auto snap = [scale](float v) { return std::round(v * scale) / scale; };
+
+        const ULONGLONG now = GetTickCount64();
+        ++framesSinceFpsUpdate_;
+        if (now - fpsWindowStart_ >= 500) {
+            fps_ = static_cast<float>(framesSinceFpsUpdate_) * 1000.0f / static_cast<float>(now - fpsWindowStart_);
+            framesSinceFpsUpdate_ = 0;
+            fpsWindowStart_ = now;
+        }
+
+        char text[160];
+        std::snprintf(text, sizeof(text), "RailSim2  Direct3D 12\nFPS: %.0f\n%ux%u px   UI x%.2f", fps_, width_,
+                      height_, scale);
+
+        const float textScale = 1.0f / scale;
+        const float margin = 8.0f;
+        const rs2::TextMetrics size = rs2::LayoutText(glyphs_, text, 0, 0, textScale, {}, nullptr);
+
+        batch_.Clear();
+        batch_.SetTexture(0);
+        const rs2::Rect panel{snap(margin), snap(margin), snap(size.width + 12.0f), snap(size.height + 8.0f)};
+        batch_.AddSolid(panel, {0, 0, 0, 150});
+        batch_.AddFrame(panel, 1.0f / scale, {120, 170, 255, 255});
+        batch_.SetTexture(1);
+        rs2::LayoutText(glyphs_, text, snap(panel.x + 6.0f), snap(panel.y + 4.0f), textScale, {255, 255, 255, 255},
+                        &batch_);
+        ui_.Draw(commandList_.Get(), frameIndex_, batch_, layout);
     }
 
     void FillObjectConstants(float seconds, float scale, rs2::ObjectConstants* out) const
@@ -598,6 +700,15 @@ private:
     ComPtr<ID3D12DescriptorHeap> dsvHeap_;
     ComPtr<ID3D12DescriptorHeap> srvHeap_;
     ComPtr<ID3D12Resource> texture_;
+    rs2::UiRenderer ui_;
+    rs2::SpriteBatch batch_;
+    rs2::GlyphTable glyphs_;
+    ComPtr<ID3D12Resource> whiteTexture_;
+    ComPtr<ID3D12Resource> fontTexture_;
+    int fontPixelHeight_ = 0;
+    ULONGLONG fpsWindowStart_ = 0;
+    UINT framesSinceFpsUpdate_ = 0;
+    float fps_ = 0.0f;
     ComPtr<ID3D12Resource> depthBuffer_;
     rs2::PipelineCache pipelines_;
     rs2::RenderState state_;

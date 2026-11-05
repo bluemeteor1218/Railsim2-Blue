@@ -41,3 +41,11 @@ ctest --test-dir out/build/windows-vs2022 -C Debug --output-on-failure
 
 If `cmake` is not on PATH (Build Tools only), call it from
 `C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin`.
+
+## レンダラー構成
+
+- renderer/core: D3D非依存のコア (RenderState, ViewportLayout, SpriteBatch, TextLayout, image_ops)。ctestで検証。
+- renderer/compat: D3DX数学互換レイヤー。
+- renderer/d3d12: D3D12実装 (pipeline, texture, font_atlas, ui_renderer, main)。
+- テスト: ctest --test-dir out\build\windows-vs2022 -C Debug --output-on-failure
+

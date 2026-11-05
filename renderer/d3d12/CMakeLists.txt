@@ -2,6 +2,8 @@ add_executable(railsim2_d3d12_renderer WIN32
     main.cpp
     pipeline.h
     texture.h
+    font_atlas.h
+    ui_renderer.h
 )
 
 target_compile_features(railsim2_d3d12_renderer PRIVATE cxx_std_17)
