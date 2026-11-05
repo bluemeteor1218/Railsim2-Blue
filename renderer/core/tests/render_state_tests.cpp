@@ -81,6 +81,31 @@ void TestLightsAndFog()
     CHECK(Near(s.Constants().fogStartEnd[0], 10.0f) && Near(s.Constants().fogStartEnd[1], 200.0f));
 }
 
+void TestVertexFormats()
+{
+    rs2::VertexFormat f{};
+    CHECK(rs2::FromFvf(rs2::kFvfXyz | rs2::kFvfNormal | rs2::kFvfDiffuse | rs2::kFvfTex1, &f));
+    CHECK(f == rs2::VertexFormat::NX);
+    CHECK(rs2::FromFvf(rs2::kFvfXyz | rs2::kFvfDiffuse, &f) && f == rs2::VertexFormat::L);
+    CHECK(!rs2::FromFvf(rs2::kFvfXyzRhw | rs2::kFvfDiffuse, &f)); // pre-transformed: UI path
+
+    // Strides must equal sizeof of the legacy VTX_* structs; offsets follow FVF order.
+    CHECK(rs2::GetLayout(rs2::VertexFormat::L).stride == 16);
+    CHECK(rs2::GetLayout(rs2::VertexFormat::LX).stride == 24);
+    CHECK(rs2::GetLayout(rs2::VertexFormat::LX2).stride == 32);
+    CHECK(rs2::GetLayout(rs2::VertexFormat::N).stride == 28);
+    CHECK(rs2::GetLayout(rs2::VertexFormat::NX).stride == sizeof(rs2::VtxNX));
+    CHECK(rs2::GetLayout(rs2::VertexFormat::NX2).stride == 44);
+    CHECK(rs2::GetLayout(rs2::VertexFormat::NX).colorOffset == offsetof(rs2::VtxNX, diffuse));
+    CHECK(rs2::GetLayout(rs2::VertexFormat::NX).texOffset == offsetof(rs2::VtxNX, uv));
+    CHECK(!rs2::GetLayout(rs2::VertexFormat::LX).hasNormal);
+
+    rs2::RenderState a, b;
+    b.SetVertexFormat(rs2::VertexFormat::LX);
+    CHECK(a.Pipeline() != b.Pipeline());
+    CHECK(a.Pipeline().Hash() != b.Pipeline().Hash());
+}
+
 void TestDirectionalLightAndMaterial()
 {
     rs2::RenderState s;
@@ -124,6 +149,7 @@ void TestHashDistinguishesStates()
 
 int main()
 {
+    TestVertexFormats();
     TestDirectionalLightAndMaterial();
     TestDefaults();
     TestBlendPresets();

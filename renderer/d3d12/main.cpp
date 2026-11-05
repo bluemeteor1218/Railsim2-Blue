@@ -41,8 +41,10 @@ struct Mesh {
 };
 
 // Unit cube with per-face normals. Front faces are clockwise (Direct3D, left-handed).
-void BuildCube(const uint8_t color[4], std::array<rs2::Vertex, 24>* vertices, std::array<uint16_t, 36>* indices)
+void BuildCube(const uint8_t color[4], std::array<rs2::VtxNX, 24>* vertices, std::array<uint16_t, 36>* indices)
 {
+    const uint32_t diffuse = (static_cast<uint32_t>(color[3]) << 24) | (static_cast<uint32_t>(color[0]) << 16) |
+                             (static_cast<uint32_t>(color[1]) << 8) | color[2];
     const float normals[6][3] = {{1, 0, 0}, {-1, 0, 0}, {0, 1, 0}, {0, -1, 0}, {0, 0, 1}, {0, 0, -1}};
     for (int face = 0; face < 6; ++face) {
         const D3DXVECTOR3 n(normals[face]);
@@ -52,7 +54,7 @@ void BuildCube(const uint8_t color[4], std::array<rs2::Vertex, 24>* vertices, st
         const float signs[4][2] = {{-1, -1}, {-1, 1}, {1, 1}, {1, -1}};
         for (int corner = 0; corner < 4; ++corner) {
             const D3DXVECTOR3 p = n + u * signs[corner][0] + v * signs[corner][1];
-            rs2::Vertex& out = (*vertices)[static_cast<size_t>(face * 4 + corner)];
+            rs2::VtxNX& out = (*vertices)[static_cast<size_t>(face * 4 + corner)];
             out.position[0] = p.x * 0.5f;
             out.position[1] = p.y * 0.5f;
             out.position[2] = p.z * 0.5f;
@@ -61,7 +63,7 @@ void BuildCube(const uint8_t color[4], std::array<rs2::Vertex, 24>* vertices, st
             out.normal[2] = n.z;
             out.uv[0] = signs[corner][0] * 0.5f + 0.5f;
             out.uv[1] = 0.5f - signs[corner][1] * 0.5f;
-            std::memcpy(out.color, color, 4);
+            out.diffuse = diffuse;
         }
         const uint16_t base = static_cast<uint16_t>(face * 4);
         const uint16_t quad[6] = {0, 1, 2, 0, 2, 3};
@@ -471,11 +473,29 @@ private:
 
     bool CreateCubeMesh(const uint8_t color[4], Mesh* mesh)
     {
-        std::array<rs2::Vertex, 24> vertices;
+        std::array<rs2::VtxNX, 24> vertices;
         std::array<uint16_t, 36> indices;
         BuildCube(color, &vertices, &indices);
-        return CreateMesh(vertices.data(), sizeof(vertices), sizeof(rs2::Vertex), indices.data(),
+        return CreateMesh(vertices.data(), sizeof(vertices), sizeof(rs2::VtxNX), indices.data(),
                           static_cast<UINT>(indices.size()), mesh);
+    }
+
+    // Unlit textured ground quad in the legacy FVF_LX layout (no normals), tiled 3x3.
+    bool CreateGroundMesh(Mesh* mesh)
+    {
+        struct VtxLX {
+            float position[3];
+            uint32_t diffuse;
+            float uv[2];
+        };
+        static_assert(sizeof(VtxLX) == 24, "VtxLX must match VTX_LX");
+        const float extent = 4.0f, y = -1.2f, tiles = 3.0f;
+        const VtxLX vertices[4] = {{{-extent, y, -extent}, 0xFFFFFFFFu, {0, tiles}},
+                                   {{-extent, y, extent}, 0xFFFFFFFFu, {0, 0}},
+                                   {{extent, y, extent}, 0xFFFFFFFFu, {tiles, 0}},
+                                   {{extent, y, -extent}, 0xFFFFFFFFu, {tiles, tiles}}};
+        const uint16_t indices[6] = {0, 1, 2, 0, 2, 3};
+        return CreateMesh(vertices, sizeof(vertices), sizeof(VtxLX), indices, 6, mesh);
     }
 
     bool CreateScene()
@@ -491,7 +511,8 @@ private:
         }
         const uint8_t opaque[4] = {230, 120, 40, 255};
         const uint8_t glass[4] = {80, 160, 255, 110};
-        if (!CreateCubeMesh(opaque, &opaqueCube_) || !CreateCubeMesh(glass, &glassCube_)) {
+        if (!CreateCubeMesh(opaque, &opaqueCube_) || !CreateCubeMesh(glass, &glassCube_) ||
+            !CreateGroundMesh(&ground_)) {
             return false;
         }
         if (!CreateSampleTexture()) {
@@ -640,12 +661,12 @@ private:
         ui_.Draw(commandList_.Get(), frameIndex_, batch_, layout);
     }
 
-    void FillObjectConstants(float seconds, float scale, rs2::ObjectConstants* out) const
+    void FillObjectConstants(float seconds, float scale, rs2::ObjectConstants* out, bool spin = true) const
     {
         D3DXMATRIX scaling, spinY, spinX, world, view, projection;
         D3DXMatrixScaling(&scaling, scale, scale, scale);
-        D3DXMatrixRotationY(&spinY, seconds);
-        D3DXMatrixRotationX(&spinX, seconds * 0.5f);
+        D3DXMatrixRotationY(&spinY, spin ? seconds : 0.0f);
+        D3DXMatrixRotationX(&spinX, spin ? seconds * 0.5f : 0.0f);
         world = scaling * spinY * spinX;
 
         const D3DXVECTOR3 eye(0.0f, 1.5f, -4.0f), at(0.0f, 0.0f, 0.0f), up(0.0f, 1.0f, 0.0f);
@@ -696,6 +717,17 @@ private:
         constants_.BeginFrame(frameIndex_);
         const float seconds = static_cast<float>(GetTickCount64() - startTime_) / 1000.0f;
         rs2::ObjectConstants object{};
+
+        // Ground: FVF_LX layout, unlit, textured, fogged. Drawn first (opaque).
+        state_ = rs2::RenderState();
+        state_.SetVertexFormat(rs2::VertexFormat::LX);
+        state_.SetTextured(true);
+        state_.SetCulling(false);
+        state_.SetFog(true, 0xFF152033u, 3.0f, 9.0f);
+        FillObjectConstants(seconds, 1.0f, &object, false);
+        if (!DrawMesh(ground_, object)) {
+            return false;
+        }
 
         // Opaque, lit cube with fog: warm key light plus a cool fill light.
         state_ = rs2::RenderState();
@@ -774,6 +806,7 @@ private:
     rs2::RenderState state_;
     Mesh opaqueCube_;
     Mesh glassCube_;
+    Mesh ground_;
     ULONGLONG startTime_ = 0;
     ComPtr<ID3D12GraphicsCommandList> commandList_;
     ComPtr<IDXGISwapChain3> swapChain_;

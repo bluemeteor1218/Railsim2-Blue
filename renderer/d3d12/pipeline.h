@@ -9,6 +9,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 #include "render_state.h"
 
@@ -21,14 +22,6 @@ struct ObjectConstants {
     Material material;
 };
 static_assert(sizeof(ObjectConstants) == 176, "ObjectConstants must match the HLSL cbuffer");
-
-struct Vertex {
-    float position[3];
-    float normal[3];
-    float uv[2];
-    uint8_t color[4]; // RGBA
-};
-static_assert(sizeof(Vertex) == 36, "Vertex must match the input layout");
 
 // Matrices are stored row-major and used as row vectors, like D3D8/D3DX.
 inline const char kSceneShader[] = R"hlsl(
@@ -63,8 +56,12 @@ SamplerState baseSampler : register(s0);
 struct VSInput
 {
     float3 position : POSITION;
+#if HAS_NORMAL
     float3 normal : NORMAL;
-    float2 uv : TEXCOORD;
+#endif
+#if HAS_UV
+    float2 uv : TEXCOORD0;
+#endif
     float4 color : COLOR;
 };
 
@@ -81,7 +78,11 @@ VSOutput VSMain(VSInput input)
     VSOutput output;
     output.position = mul(float4(input.position, 1.0f), mvp);
     output.viewDepth = output.position.w;
+#if HAS_UV
     output.uv = input.uv;
+#else
+    output.uv = float2(0.0f, 0.0f);
+#endif
     output.color = input.color;
 #if LIGHTING
     float3 n = normalize(mul(float4(input.normal, 0.0f), world).xyz);
@@ -202,18 +203,26 @@ public:
             return nullptr;
         }
 
-        static const D3D12_INPUT_ELEMENT_DESC layout[] = {
-            {"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
-            {"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
-            {"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
-            {"COLOR", 0, DXGI_FORMAT_R8G8B8A8_UNORM, 0, 32, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
-        };
+        // Elements follow the legacy FVF order; D3DCOLOR is BGRA in memory.
+        const VertexLayout vertexLayout = GetLayout(key.vertexFormat);
+        std::vector<D3D12_INPUT_ELEMENT_DESC> layout;
+        layout.push_back({"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0});
+        if (vertexLayout.hasNormal) {
+            layout.push_back({"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, vertexLayout.normalOffset,
+                              D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0});
+        }
+        layout.push_back({"COLOR", 0, DXGI_FORMAT_B8G8R8A8_UNORM, 0, vertexLayout.colorOffset,
+                          D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0});
+        for (UINT set = 0; set < vertexLayout.texCoordSets; ++set) {
+            layout.push_back({"TEXCOORD", set, DXGI_FORMAT_R32G32_FLOAT, 0, vertexLayout.texOffset + set * 8u,
+                              D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0});
+        }
 
         D3D12_GRAPHICS_PIPELINE_STATE_DESC desc{};
         desc.pRootSignature = rootSignature_.Get();
         desc.VS = {vs->GetBufferPointer(), vs->GetBufferSize()};
         desc.PS = {ps->GetBufferPointer(), ps->GetBufferSize()};
-        desc.InputLayout = {layout, static_cast<UINT>(sizeof(layout) / sizeof(layout[0]))};
+        desc.InputLayout = {layout.data(), static_cast<UINT>(layout.size())};
         desc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
         desc.NumRenderTargets = 1;
         desc.RTVFormats[0] = renderTargetFormat_;
@@ -265,11 +274,17 @@ private:
     bool Compile(const PipelineKey& key, const char* entry, const char* target,
                  Microsoft::WRL::ComPtr<ID3DBlob>* out, std::string* error)
     {
+        // Lighting needs normals and texturing needs UVs; formats without them fall back to flat/untextured.
+        const VertexLayout vertexLayout = GetLayout(key.vertexFormat);
+        const bool lighting = key.lighting && vertexLayout.hasNormal;
+        const bool textured = key.textured && vertexLayout.texCoordSets > 0;
         const D3D_SHADER_MACRO macros[] = {
-            {"LIGHTING", key.lighting ? "1" : "0"},
+            {"LIGHTING", lighting ? "1" : "0"},
             {"FOG", key.fog ? "1" : "0"},
             {"ALPHATEST", key.alphaTest ? "1" : "0"},
-            {"TEXTURED", key.textured ? "1" : "0"},
+            {"TEXTURED", textured ? "1" : "0"},
+            {"HAS_UV", vertexLayout.texCoordSets > 0 ? "1" : "0"},
+            {"HAS_NORMAL", vertexLayout.hasNormal ? "1" : "0"},
             {nullptr, nullptr},
         };
         Microsoft::WRL::ComPtr<ID3DBlob> errors;
