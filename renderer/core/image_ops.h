@@ -3,6 +3,7 @@
 // CPU-side image helpers that do not depend on any graphics API.
 
 #include <algorithm>
+#include <cmath>
 #include <cstdint>
 #include <vector>
 
@@ -58,6 +59,28 @@ inline Image MakeCheckerboard(uint32_t size, uint32_t cell)
     for (uint32_t y = 0; y < size; ++y) {
         for (uint32_t x = 0; x < size; ++x) {
             const uint8_t v = (((x / cell) + (y / cell)) & 1) ? 230 : 60;
+            uint8_t* p = &image.rgba[(static_cast<size_t>(y) * size + x) * 4];
+            p[0] = p[1] = p[2] = v;
+            p[3] = 255;
+        }
+    }
+    return image;
+}
+
+// Radial falloff (white at the center, black at the edge): a stand-in light map.
+inline Image MakeRadialGradient(uint32_t size)
+{
+    Image image;
+    image.width = image.height = size;
+    image.rgba.resize(static_cast<size_t>(size) * size * 4);
+    const float half = static_cast<float>(size) * 0.5f;
+    for (uint32_t y = 0; y < size; ++y) {
+        for (uint32_t x = 0; x < size; ++x) {
+            const float dx = (static_cast<float>(x) + 0.5f - half) / half;
+            const float dy = (static_cast<float>(y) + 0.5f - half) / half;
+            float t = 1.0f - std::sqrt(dx * dx + dy * dy);
+            t = t < 0.0f ? 0.0f : (t > 1.0f ? 1.0f : t);
+            const uint8_t v = static_cast<uint8_t>(255.0f * t + 0.5f);
             uint8_t* p = &image.rgba[(static_cast<size_t>(y) * size + x) * 4];
             p[0] = p[1] = p[2] = v;
             p[3] = 255;

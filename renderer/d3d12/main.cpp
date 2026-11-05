@@ -482,21 +482,24 @@ private:
     }
 
     // Unlit textured ground quad in the legacy FVF_LX layout (no normals), tiled 3x3.
+    // Ground in the legacy FVF_LX2 layout: tiled base texture (set 0) and one
+    // light map stretched over the whole quad (set 1).
     bool CreateGroundMesh(Mesh* mesh)
     {
-        struct VtxLX {
+        struct VtxLX2 {
             float position[3];
             uint32_t diffuse;
             float uv[2];
+            float uv2[2];
         };
-        static_assert(sizeof(VtxLX) == 24, "VtxLX must match VTX_LX");
+        static_assert(sizeof(VtxLX2) == 32, "VtxLX2 must match VTX_LX2");
         const float extent = 4.0f, y = -1.2f, tiles = 3.0f;
-        const VtxLX vertices[4] = {{{-extent, y, -extent}, 0xFFFFFFFFu, {0, tiles}},
-                                   {{-extent, y, extent}, 0xFFFFFFFFu, {0, 0}},
-                                   {{extent, y, extent}, 0xFFFFFFFFu, {tiles, 0}},
-                                   {{extent, y, -extent}, 0xFFFFFFFFu, {tiles, tiles}}};
+        const VtxLX2 vertices[4] = {{{-extent, y, -extent}, 0xFFFFFFFFu, {0, tiles}, {0, 1}},
+                                    {{-extent, y, extent}, 0xFFFFFFFFu, {0, 0}, {0, 0}},
+                                    {{extent, y, extent}, 0xFFFFFFFFu, {tiles, 0}, {1, 0}},
+                                    {{extent, y, -extent}, 0xFFFFFFFFu, {tiles, tiles}, {1, 1}}};
         const uint16_t indices[6] = {0, 1, 2, 0, 2, 3};
-        return CreateMesh(vertices, sizeof(vertices), sizeof(VtxLX), indices, 6, mesh);
+        return CreateMesh(vertices, sizeof(vertices), sizeof(VtxLX2), indices, 6, mesh);
     }
 
     bool CreateScene()
@@ -538,7 +541,7 @@ private:
         const std::vector<rs2::Image> mips = rs2::GenerateMipChain(image);
 
         D3D12_DESCRIPTOR_HEAP_DESC heapDescription{};
-        heapDescription.NumDescriptors = 1;
+        heapDescription.NumDescriptors = 2; // t0 = base texture, t1 = second stage (light map)
         heapDescription.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
         heapDescription.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
         const HRESULT result = device_->CreateDescriptorHeap(&heapDescription, IID_PPV_ARGS(&srvHeap_));
@@ -548,13 +551,24 @@ private:
         if (!UploadTexture(mips, &texture_)) {
             return false;
         }
+        const std::vector<rs2::Image> lightMips = rs2::GenerateMipChain(rs2::MakeRadialGradient(256));
+        if (!UploadTexture(lightMips, &lightMap_)) {
+            return false;
+        }
 
-        D3D12_SHADER_RESOURCE_VIEW_DESC view{};
-        view.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-        view.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-        view.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-        view.Texture2D.MipLevels = static_cast<UINT>(mips.size());
-        device_->CreateShaderResourceView(texture_.Get(), &view, srvHeap_->GetCPUDescriptorHandleForHeapStart());
+        const UINT increment = device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+        const auto createView = [&](ID3D12Resource* resource, size_t mipCount, UINT slot) {
+            D3D12_SHADER_RESOURCE_VIEW_DESC view{};
+            view.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+            view.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+            view.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+            view.Texture2D.MipLevels = static_cast<UINT>(mipCount);
+            D3D12_CPU_DESCRIPTOR_HANDLE handle = srvHeap_->GetCPUDescriptorHandleForHeapStart();
+            handle.ptr += static_cast<SIZE_T>(slot) * increment;
+            device_->CreateShaderResourceView(resource, &view, handle);
+        };
+        createView(texture_.Get(), mips.size(), 0);
+        createView(lightMap_.Get(), lightMips.size(), 1);
         return true;
     }
 
@@ -719,9 +733,10 @@ private:
         const float seconds = static_cast<float>(GetTickCount64() - startTime_) / 1000.0f;
         rs2::ObjectConstants object{};
 
-        // Ground: FVF_LX layout, unlit, textured, fogged. Drawn first (opaque).
+        // Ground: FVF_LX2 layout, unlit, base texture x light map (devTEX_LIGHTMAP), fogged.
         state_ = rs2::RenderState();
-        state_.SetVertexFormat(rs2::VertexFormat::LX);
+        state_.SetVertexFormat(rs2::VertexFormat::LX2);
+        state_.SetSecondTexture(rs2::SecondTexture::Modulate);
         state_.SetTextured(true);
         state_.SetCulling(false);
         state_.SetFog(true, 0xFF152033u, 3.0f, 9.0f);
@@ -792,6 +807,7 @@ private:
     ComPtr<ID3D12DescriptorHeap> dsvHeap_;
     ComPtr<ID3D12DescriptorHeap> srvHeap_;
     ComPtr<ID3D12Resource> texture_;
+    ComPtr<ID3D12Resource> lightMap_;
     rs2::UiRenderer ui_;
     rs2::SpriteBatch batch_;
     rs2::GlyphTable glyphs_;

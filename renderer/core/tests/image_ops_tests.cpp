@@ -27,6 +27,16 @@ rs2::Image Solid(uint32_t w, uint32_t h, uint8_t r, uint8_t g, uint8_t b, uint8_
     return image;
 }
 
+void TestRadialGradient()
+{
+    const rs2::Image g = rs2::MakeRadialGradient(64);
+    CHECK(g.width == 64 && g.rgba.size() == 64u * 64u * 4u);
+    const auto at = [&](uint32_t x, uint32_t y) { return g.rgba[(static_cast<size_t>(y) * 64 + x) * 4]; };
+    CHECK(at(32, 32) > 240);   // center is bright
+    CHECK(at(0, 0) == 0);      // corner is black
+    CHECK(at(32, 32) > at(48, 32) && at(48, 32) > at(62, 32)); // monotonic falloff
+}
+
 void TestChainSizes()
 {
     auto chain = rs2::GenerateMipChain(Solid(8, 4, 1, 2, 3, 4));
@@ -77,6 +87,7 @@ void TestCheckerboard()
 
 int main()
 {
+    TestRadialGradient();
     TestChainSizes();
     TestAveraging();
     TestInvalidInput();

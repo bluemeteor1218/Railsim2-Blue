@@ -51,6 +51,7 @@ cbuffer Frame : register(b1)
 };
 
 Texture2D baseTexture : register(t0);
+Texture2D secondTexture : register(t1);
 SamplerState baseSampler : register(s0);
 
 struct VSInput
@@ -59,10 +60,13 @@ struct VSInput
 #if HAS_NORMAL
     float3 normal : NORMAL;
 #endif
+    float4 color : COLOR;
 #if HAS_UV
     float2 uv : TEXCOORD0;
 #endif
-    float4 color : COLOR;
+#if HAS_UV2
+    float2 uv2 : TEXCOORD1;
+#endif
 };
 
 struct VSOutput
@@ -70,6 +74,7 @@ struct VSOutput
     float4 position : SV_POSITION;
     float4 color : COLOR;
     float2 uv : TEXCOORD1;
+    float2 uv2 : TEXCOORD2;
     float viewDepth : TEXCOORD0;
 };
 
@@ -82,6 +87,11 @@ VSOutput VSMain(VSInput input)
     output.uv = input.uv;
 #else
     output.uv = float2(0.0f, 0.0f);
+#endif
+#if HAS_UV2
+    output.uv2 = input.uv2;
+#else
+    output.uv2 = float2(0.0f, 0.0f);
 #endif
     output.color = input.color;
 #if LIGHTING
@@ -106,6 +116,14 @@ float4 PSMain(VSOutput input) : SV_TARGET
     float4 color = input.color;
 #if TEXTURED
     color *= baseTexture.Sample(baseSampler, input.uv);
+#endif
+#if SECOND_MODULATE
+    color.rgb *= secondTexture.Sample(baseSampler, input.uv2).rgb;
+#elif SECOND_ADDSMOOTH
+    {
+        float3 t1 = secondTexture.Sample(baseSampler, input.uv2).rgb;
+        color.rgb = color.rgb + t1 - color.rgb * t1;
+    }
 #endif
 #if ALPHATEST
     clip(color.a - alphaRef);
@@ -142,7 +160,7 @@ public:
 
         D3D12_DESCRIPTOR_RANGE range{};
         range.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-        range.NumDescriptors = 1;
+        range.NumDescriptors = 2;
         range.BaseShaderRegister = 0;
         range.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
@@ -278,12 +296,17 @@ private:
         const VertexLayout vertexLayout = GetLayout(key.vertexFormat);
         const bool lighting = key.lighting && vertexLayout.hasNormal;
         const bool textured = key.textured && vertexLayout.texCoordSets > 0;
+        const bool hasSecond = vertexLayout.texCoordSets >= 2;
+        const SecondTexture second = hasSecond ? key.secondTexture : SecondTexture::None;
         const D3D_SHADER_MACRO macros[] = {
             {"LIGHTING", lighting ? "1" : "0"},
             {"FOG", key.fog ? "1" : "0"},
             {"ALPHATEST", key.alphaTest ? "1" : "0"},
             {"TEXTURED", textured ? "1" : "0"},
             {"HAS_UV", vertexLayout.texCoordSets > 0 ? "1" : "0"},
+            {"HAS_UV2", hasSecond ? "1" : "0"},
+            {"SECOND_MODULATE", second == SecondTexture::Modulate ? "1" : "0"},
+            {"SECOND_ADDSMOOTH", second == SecondTexture::AddSmooth ? "1" : "0"},
             {"HAS_NORMAL", vertexLayout.hasNormal ? "1" : "0"},
             {nullptr, nullptr},
         };

@@ -104,6 +104,11 @@ void TestVertexFormats()
     b.SetVertexFormat(rs2::VertexFormat::LX);
     CHECK(a.Pipeline() != b.Pipeline());
     CHECK(a.Pipeline().Hash() != b.Pipeline().Hash());
+
+    rs2::RenderState c, d;
+    d.SetSecondTexture(rs2::SecondTexture::AddSmooth);
+    CHECK(c.Pipeline() != d.Pipeline());
+    CHECK(c.Pipeline().Hash() != d.Pipeline().Hash());
 }
 
 void TestDirectionalLightAndMaterial()
