@@ -16,6 +16,16 @@ if(MSVC)
 endif()
 add_test(NAME image_ops COMMAND railsim2_image_ops_tests)
 
+add_executable(railsim2_x_mesh_tests tests/x_mesh_tests.cpp)
+target_link_libraries(railsim2_x_mesh_tests PRIVATE railsim2_render_core)
+target_compile_definitions(railsim2_x_mesh_tests PRIVATE
+  RS2_TEST_X_FILE="${CMAKE_SOURCE_DIR}/Distribution/en/RailSim2/Pier/AmarubeSteel/Base.x"
+  RS2_TEST_DATA_DIR="${CMAKE_SOURCE_DIR}/Distribution")
+if(MSVC)
+  target_compile_options(railsim2_x_mesh_tests PRIVATE /W4 /permissive-)
+endif()
+add_test(NAME x_mesh COMMAND railsim2_x_mesh_tests)
+
 add_executable(railsim2_ui_tests tests/ui_tests.cpp)
 target_link_libraries(railsim2_ui_tests PRIVATE railsim2_render_core)
 if(MSVC)
