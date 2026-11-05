@@ -19,9 +19,10 @@ namespace rs2 {
 struct ObjectConstants {
     float mvp[16];
     float world[16];
+    float worldView[16];
     Material material;
 };
-static_assert(sizeof(ObjectConstants) == 176, "ObjectConstants must match the HLSL cbuffer");
+static_assert(sizeof(ObjectConstants) == 240,  "ObjectConstants must match the HLSL cbuffer");
 
 // Matrices are stored row-major and used as row vectors, like D3D8/D3DX.
 inline const char kSceneShader[] = R"hlsl(
@@ -29,6 +30,7 @@ cbuffer Object : register(b0)
 {
     row_major float4x4 mvp;
     row_major float4x4 world;
+    row_major float4x4 worldView;
     float4 matDiffuse;
     float4 matAmbient;
     float4 matEmissive;
@@ -88,7 +90,13 @@ VSOutput VSMain(VSInput input)
 #else
     output.uv = float2(0.0f, 0.0f);
 #endif
-#if HAS_UV2
+#if SECOND_ENVMAP
+    // Equivalent of D3DTSS_TCI_CAMERASPACENORMAL with a (0.5, -0.5) texture transform.
+    {
+        float3 viewNormal = normalize(mul(float4(input.normal, 0.0f), worldView).xyz);
+        output.uv2 = float2(viewNormal.x * 0.5f + 0.5f, viewNormal.y * -0.5f + 0.5f);
+    }
+#elif HAS_UV2
     output.uv2 = input.uv2;
 #else
     output.uv2 = float2(0.0f, 0.0f);
@@ -119,7 +127,7 @@ float4 PSMain(VSOutput input) : SV_TARGET
 #endif
 #if SECOND_MODULATE
     color.rgb *= secondTexture.Sample(baseSampler, input.uv2).rgb;
-#elif SECOND_ADDSMOOTH
+#elif SECOND_ADDSMOOTH || SECOND_ENVMAP
     {
         float3 t1 = secondTexture.Sample(baseSampler, input.uv2).rgb;
         color.rgb = color.rgb + t1 - color.rgb * t1;
@@ -297,7 +305,12 @@ private:
         const bool lighting = key.lighting && vertexLayout.hasNormal;
         const bool textured = key.textured && vertexLayout.texCoordSets > 0;
         const bool hasSecond = vertexLayout.texCoordSets >= 2;
-        const SecondTexture second = hasSecond ? key.secondTexture : SecondTexture::None;
+        // The environment map generates its own UVs from the normal, so it needs no second UV set.
+        const bool envMap = key.secondTexture == SecondTexture::EnvMap && vertexLayout.hasNormal;
+        const SecondTexture second = envMap ? SecondTexture::EnvMap
+                                            : (hasSecond && key.secondTexture != SecondTexture::EnvMap
+                                                   ? key.secondTexture
+                                                   : SecondTexture::None);
         const D3D_SHADER_MACRO macros[] = {
             {"LIGHTING", lighting ? "1" : "0"},
             {"FOG", key.fog ? "1" : "0"},
@@ -307,6 +320,7 @@ private:
             {"HAS_UV2", hasSecond ? "1" : "0"},
             {"SECOND_MODULATE", second == SecondTexture::Modulate ? "1" : "0"},
             {"SECOND_ADDSMOOTH", second == SecondTexture::AddSmooth ? "1" : "0"},
+            {"SECOND_ENVMAP", second == SecondTexture::EnvMap ? "1" : "0"},
             {"HAS_NORMAL", vertexLayout.hasNormal ? "1" : "0"},
             {nullptr, nullptr},
         };

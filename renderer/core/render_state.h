@@ -21,7 +21,7 @@ enum class CullMode : uint8_t { None, Back };
 // Stage 1 of the legacy fixed-function pipeline (texture coordinate set 1).
 //   Modulate  : devTEX_LIGHTMAP  (D3DTOP_MODULATE)   result = current * tex1
 //   AddSmooth : devTEX_ENVMAP    (D3DTOP_ADDSMOOTH)  result = current + tex1 - current * tex1
-enum class SecondTexture : uint8_t { None, Modulate, AddSmooth };
+enum class SecondTexture : uint8_t { None, Modulate, AddSmooth, EnvMap };
 
 // Mirrors the legacy devBLEND_* presets.
 struct BlendState {
