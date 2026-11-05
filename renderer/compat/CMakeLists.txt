@@ -1,0 +1,10 @@
+add_library(railsim2_d3dx_math INTERFACE)
+target_include_directories(railsim2_d3dx_math INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_features(railsim2_d3dx_math INTERFACE cxx_std_17)
+
+add_executable(railsim2_d3dx_math_tests tests/d3dx_math_tests.cpp)
+target_link_libraries(railsim2_d3dx_math_tests PRIVATE railsim2_d3dx_math)
+if(MSVC)
+  target_compile_options(railsim2_d3dx_math_tests PRIVATE /W4 /permissive-)
+endif()
+add_test(NAME d3dx_math COMMAND railsim2_d3dx_math_tests)

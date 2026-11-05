@@ -27,3 +27,17 @@ The first target opens a resizable window and clears it using Direct3D 12. It
 provides a place to validate the Windows SDK, DXGI swap chain, command queue,
 frame synchronization, and resize path before porting the existing renderer.
 It does not yet load RailSim2 assets or replace the existing application.
+
+## D3DX math compatibility layer
+
+`renderer/compat/d3dx_math.h` provides the D3DX8 vector, matrix, quaternion,
+plane and bounding-probe API on top of DirectXMath, so legacy code can drop
+`d3dx8.h` for math. Run its tests with:
+
+```powershell
+cmake --build out/build/windows-vs2022 --config Debug
+ctest --test-dir out/build/windows-vs2022 -C Debug --output-on-failure
+```
+
+If `cmake` is not on PATH (Build Tools only), call it from
+`C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin`.

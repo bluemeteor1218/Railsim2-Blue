@@ -6,4 +6,7 @@ if(NOT WIN32)
     message(FATAL_ERROR "The Direct3D 12 renderer requires Windows.")
 endif()
 
+enable_testing()
+
+add_subdirectory(renderer/compat)
 add_subdirectory(renderer/d3d12)
