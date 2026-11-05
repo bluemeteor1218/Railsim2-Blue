@@ -3,6 +3,7 @@
 #include <dxgi1_6.h>
 #include <wrl/client.h>
 
+#include <algorithm>
 #include <array>
 #include <cmath>
 #include <cstdio>
@@ -815,6 +816,79 @@ private:
 
 Renderer* g_renderer = nullptr;
 
+constexpr DWORD kWindowedStyle = WS_OVERLAPPEDWINDOW;
+
+void ToggleFullscreen(HWND window);
+
+// Resizes the window so the client area is exactly width x height physical pixels.
+// If that does not fit the monitor's work area (e.g. 1920x1080 on a 1080p display,
+// where the title bar cannot fit), switches to borderless fullscreen instead.
+void SetClientSize(HWND window, int width, int height)
+{
+    if ((GetWindowLongPtrW(window, GWL_STYLE) & WS_OVERLAPPEDWINDOW) == 0) {
+        ToggleFullscreen(window); // leave fullscreen first
+    }
+    RECT rect{0, 0, width, height};
+    AdjustWindowRectExForDpi(&rect, kWindowedStyle, FALSE, 0, GetDpiForWindow(window));
+    const int outerWidth = rect.right - rect.left;
+    const int outerHeight = rect.bottom - rect.top;
+
+    MONITORINFO monitor{sizeof(monitor)};
+    GetMonitorInfoW(MonitorFromWindow(window, MONITOR_DEFAULTTONEAREST), &monitor);
+    const RECT& area = monitor.rcWork;
+    const int monitorWidth = monitor.rcMonitor.right - monitor.rcMonitor.left;
+    const int monitorHeight = monitor.rcMonitor.bottom - monitor.rcMonitor.top;
+    if (outerWidth > area.right - area.left || outerHeight > area.bottom - area.top) {
+        if (width <= monitorWidth && height <= monitorHeight) {
+            ToggleFullscreen(window);
+        }
+        return;
+    }
+    RECT current{};
+    GetWindowRect(window, &current);
+    int x = current.left, y = current.top;
+    x = (std::max)(static_cast<int>(area.left), (std::min)(x, static_cast<int>(area.right) - outerWidth));
+    y = (std::max)(static_cast<int>(area.top), (std::min)(y, static_cast<int>(area.bottom) - outerHeight));
+    ShowWindow(window, SW_SHOWNORMAL);
+    SetWindowPos(window, nullptr, x, y, outerWidth, outerHeight, SWP_NOZORDER | SWP_NOACTIVATE);
+}
+
+void ToggleFullscreen(HWND window)
+{
+    static WINDOWPLACEMENT saved{sizeof(WINDOWPLACEMENT)};
+    const LONG_PTR style = GetWindowLongPtrW(window, GWL_STYLE);
+    if (style & WS_OVERLAPPEDWINDOW) {
+        MONITORINFO monitor{sizeof(monitor)};
+        GetWindowPlacement(window, &saved);
+        GetMonitorInfoW(MonitorFromWindow(window, MONITOR_DEFAULTTONEAREST), &monitor);
+        SetWindowLongPtrW(window, GWL_STYLE, style & ~static_cast<LONG_PTR>(WS_OVERLAPPEDWINDOW));
+        SetWindowPos(window, HWND_TOP, monitor.rcMonitor.left, monitor.rcMonitor.top,
+                     monitor.rcMonitor.right - monitor.rcMonitor.left,
+                     monitor.rcMonitor.bottom - monitor.rcMonitor.top, SWP_FRAMECHANGED | SWP_NOOWNERZORDER);
+    } else {
+        SetWindowLongPtrW(window, GWL_STYLE, style | WS_OVERLAPPEDWINDOW);
+        SetWindowPlacement(window, &saved);
+        SetWindowPos(window, nullptr, 0, 0, 0, 0,
+                     SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+    }
+}
+
+// Parses "--size WxH" from the command line; returns false when absent or invalid.
+bool ParseSizeArgument(PWSTR commandLine, int* width, int* height)
+{
+    const wchar_t* found = wcsstr(commandLine, L"--size");
+    if (found == nullptr) {
+        return false;
+    }
+    int w = 0, h = 0;
+    if (swscanf_s(found + 6, L" %dx%d", &w, &h) != 2 || w < 320 || h < 240 || w > 16384 || h > 16384) {
+        return false;
+    }
+    *width = w;
+    *height = h;
+    return true;
+}
+
 LRESULT CALLBACK WindowProcedure(HWND window, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message) {
@@ -851,6 +925,18 @@ LRESULT CALLBACK WindowProcedure(HWND window, UINT message, WPARAM wParam, LPARA
     }
     case WM_ERASEBKGND:
         return 1;
+    case WM_KEYDOWN:
+        // 1/2/3 = 640x480 / 1280x720 / 1920x1080 client size, F11 = borderless fullscreen.
+        if (wParam == VK_F11) {
+            ToggleFullscreen(window);
+        } else if (wParam == '1') {
+            SetClientSize(window, 640, 480);
+        } else if (wParam == '2') {
+            SetClientSize(window, 1280, 720);
+        } else if (wParam == '3') {
+            SetClientSize(window, 1920, 1080);
+        }
+        return 0;
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
@@ -861,7 +947,7 @@ LRESULT CALLBACK WindowProcedure(HWND window, UINT message, WPARAM wParam, LPARA
 
 } // namespace
 
-int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int showCommand)
+int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR commandLine, int showCommand)
 {
     if (!SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)) {
         ShowWin32Error(nullptr, L"SetProcessDpiAwarenessContext", GetLastError());
@@ -885,8 +971,10 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int showCommand)
         return 1;
     }
 
-    RECT windowRect{0, 0, 1280, 720};
-    if (!AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, FALSE)) {
+    int clientWidth = 1280, clientHeight = 720;
+    ParseSizeArgument(commandLine, &clientWidth, &clientHeight);
+    RECT windowRect{0, 0, clientWidth, clientHeight};
+    if (!AdjustWindowRect(&windowRect, kWindowedStyle, FALSE)) {
         ShowWin32Error(nullptr, L"AdjustWindowRect", GetLastError());
         return 1;
     }
@@ -910,6 +998,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int showCommand)
 
     ShowWindow(window, showCommand);
     UpdateWindow(window);
+    SetClientSize(window, clientWidth, clientHeight);
 
     MSG message{};
     while (true) {

@@ -49,3 +49,11 @@ If `cmake` is not on PATH (Build Tools only), call it from
 - renderer/d3d12: D3D12実装 (pipeline, texture, font_atlas, ui_renderer, main)。
 - テスト: ctest --test-dir out\build\windows-vs2022 -C Debug --output-on-failure
 
+
+## 画面サイズ
+
+- 起動オプション: railsim2_d3d12_renderer.exe --size 1920x1080 (既定は 1280x720)
+- キー: 1 = 640x480 / 2 = 1280x720 / 3 = 1920x1080 / F11 = ボーダーレス全画面切替
+- 要求サイズがモニターの作業領域に収まらない場合 (1080p画面での1920x1080など) は、自動でボーダーレス全画面になります。
+- ウィンドウを自由にリサイズしても、UIは高さ480基準で拡大されます。
+
