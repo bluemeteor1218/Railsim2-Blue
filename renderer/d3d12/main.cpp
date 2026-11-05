@@ -384,12 +384,10 @@ private:
         return true;
     }
 
-    // Static geometry lives in upload heaps for now; moving it to default
-    // heaps is part of the later resource-management work.
-    bool CreateUploadBuffer(const void* data, UINT64 size, ComPtr<ID3D12Resource>* out)
+    ComPtr<ID3D12Resource> CreateBuffer(D3D12_HEAP_TYPE type, UINT64 size, D3D12_RESOURCE_STATES state)
     {
         D3D12_HEAP_PROPERTIES heap{};
-        heap.Type = D3D12_HEAP_TYPE_UPLOAD;
+        heap.Type = type;
         D3D12_RESOURCE_DESC desc{};
         desc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
         desc.Width = size;
@@ -398,19 +396,76 @@ private:
         desc.MipLevels = 1;
         desc.SampleDesc.Count = 1;
         desc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-        HRESULT result = device_->CreateCommittedResource(&heap, D3D12_HEAP_FLAG_NONE, &desc,
-            D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(out->GetAddressOf()));
+        ComPtr<ID3D12Resource> buffer;
+        const HRESULT result =
+            device_->CreateCommittedResource(&heap, D3D12_HEAP_FLAG_NONE, &desc, state, nullptr, IID_PPV_ARGS(&buffer));
         if (FAILED(result)) {
-            return ShowHResultError(window_, L"CreateCommittedResource (buffer)", result);
+            ShowHResultError(window_, L"CreateCommittedResource (buffer)", result);
+            return nullptr;
         }
-        void* mapped = nullptr;
+        return buffer;
+    }
+
+    // Static geometry lives in default (GPU-local) heaps; staged through upload
+    // heaps with a synchronous copy. Only call while no frame is being recorded.
+    bool CreateMesh(const void* vertexData, UINT vertexBytes, UINT vertexStride, const uint16_t* indexData,
+                    UINT indexCount, Mesh* mesh)
+    {
+        const UINT indexBytes = indexCount * sizeof(uint16_t);
+        mesh->vertices = CreateBuffer(D3D12_HEAP_TYPE_DEFAULT, vertexBytes, D3D12_RESOURCE_STATE_COPY_DEST);
+        mesh->indices = CreateBuffer(D3D12_HEAP_TYPE_DEFAULT, indexBytes, D3D12_RESOURCE_STATE_COPY_DEST);
+        ComPtr<ID3D12Resource> vertexStage = CreateBuffer(D3D12_HEAP_TYPE_UPLOAD, vertexBytes, D3D12_RESOURCE_STATE_GENERIC_READ);
+        ComPtr<ID3D12Resource> indexStage = CreateBuffer(D3D12_HEAP_TYPE_UPLOAD, indexBytes, D3D12_RESOURCE_STATE_GENERIC_READ);
+        if (!mesh->vertices || !mesh->indices || !vertexStage || !indexStage) {
+            return false;
+        }
         const D3D12_RANGE noRead{0, 0};
-        result = (*out)->Map(0, &noRead, &mapped);
-        if (FAILED(result)) {
-            return ShowHResultError(window_, L"Map buffer", result);
+        void* mapped = nullptr;
+        if (FAILED(vertexStage->Map(0, &noRead, &mapped))) {
+            return ShowHResultError(window_, L"Map vertex staging", E_FAIL);
         }
-        std::memcpy(mapped, data, static_cast<size_t>(size));
-        (*out)->Unmap(0, nullptr);
+        std::memcpy(mapped, vertexData, vertexBytes);
+        vertexStage->Unmap(0, nullptr);
+        if (FAILED(indexStage->Map(0, &noRead, &mapped))) {
+            return ShowHResultError(window_, L"Map index staging", E_FAIL);
+        }
+        std::memcpy(mapped, indexData, indexBytes);
+        indexStage->Unmap(0, nullptr);
+
+        HRESULT result = commandAllocators_[0]->Reset();
+        if (SUCCEEDED(result)) {
+            result = commandList_->Reset(commandAllocators_[0].Get(), nullptr);
+        }
+        if (FAILED(result)) {
+            return ShowHResultError(window_, L"Reset command list (mesh upload)", result);
+        }
+        commandList_->CopyBufferRegion(mesh->vertices.Get(), 0, vertexStage.Get(), 0, vertexBytes);
+        commandList_->CopyBufferRegion(mesh->indices.Get(), 0, indexStage.Get(), 0, indexBytes);
+        D3D12_RESOURCE_BARRIER barriers[2]{};
+        const struct { ID3D12Resource* resource; D3D12_RESOURCE_STATES after; } transitions[2] = {
+            {mesh->vertices.Get(), D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER},
+            {mesh->indices.Get(), D3D12_RESOURCE_STATE_INDEX_BUFFER}};
+        for (int i = 0; i < 2; ++i) {
+            barriers[i].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+            barriers[i].Transition.pResource = transitions[i].resource;
+            barriers[i].Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+            barriers[i].Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;
+            barriers[i].Transition.StateAfter = transitions[i].after;
+        }
+        commandList_->ResourceBarrier(2, barriers);
+        result = commandList_->Close();
+        if (FAILED(result)) {
+            return ShowHResultError(window_, L"Close command list (mesh upload)", result);
+        }
+        ID3D12CommandList* lists[] = {commandList_.Get()};
+        commandQueue_->ExecuteCommandLists(1, lists);
+        if (!WaitForGpu()) {
+            return false;
+        }
+
+        mesh->vertexView = {mesh->vertices->GetGPUVirtualAddress(), vertexBytes, vertexStride};
+        mesh->indexView = {mesh->indices->GetGPUVirtualAddress(), indexBytes, DXGI_FORMAT_R16_UINT};
+        mesh->indexCount = indexCount;
         return true;
     }
 
@@ -419,16 +474,8 @@ private:
         std::array<rs2::Vertex, 24> vertices;
         std::array<uint16_t, 36> indices;
         BuildCube(color, &vertices, &indices);
-        if (!CreateUploadBuffer(vertices.data(), sizeof(vertices), &mesh->vertices) ||
-            !CreateUploadBuffer(indices.data(), sizeof(indices), &mesh->indices)) {
-            return false;
-        }
-        mesh->vertexView = {mesh->vertices->GetGPUVirtualAddress(), static_cast<UINT>(sizeof(vertices)),
-                            static_cast<UINT>(sizeof(rs2::Vertex))};
-        mesh->indexView = {mesh->indices->GetGPUVirtualAddress(), static_cast<UINT>(sizeof(indices)),
-                           DXGI_FORMAT_R16_UINT};
-        mesh->indexCount = static_cast<UINT>(indices.size());
-        return true;
+        return CreateMesh(vertices.data(), sizeof(vertices), sizeof(rs2::Vertex), indices.data(),
+                          static_cast<UINT>(indices.size()), mesh);
     }
 
     bool CreateScene()
