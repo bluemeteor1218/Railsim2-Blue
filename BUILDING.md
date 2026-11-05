@@ -1,4 +1,4 @@
-# Modern Windows renderer
+﻿# Modern Windows renderer
 
 The Direct3D 12 renderer is an independent starter target. The original
 Visual Studio 2010 / Direct3D 8 application remains unchanged while rendering
@@ -63,4 +63,4 @@ If `cmake` is not on PATH (Build Tools only), call it from
 - Build: `cmake --build out\build\windows-vs2022 --config Release --target railsim2_legacy`
 - Run from the exe directory with the data folders from `Distribution\jp\RailSim2` (junction each subfolder and copy `Language.txt` next to the exe).
 - `RS2_NULL_BACKEND=1` runs without rendering; `RS2_D3D12_DEBUG=1` enables the D3D12 debug layer; shader/PSO errors go to `d3d12_backend.log`.
-- Fullscreen requests are emulated with a borderless window. Debug builds hit an STL iterator assertion in legacy code (`cannot decrement begin list iterator`); use Release for now.
+- Fullscreen requests are emulated with a borderless window. The legacy target builds with `_ITERATOR_DEBUG_LEVEL=0` because legacy code decrements `std::list::begin()`.

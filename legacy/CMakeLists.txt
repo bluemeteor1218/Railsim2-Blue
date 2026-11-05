@@ -10,7 +10,7 @@ target_include_directories(railsim2_legacy PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/shim
     ${PROJECT_SOURCE_DIR}/lib
     ${PROJECT_SOURCE_DIR})
-target_compile_definitions(railsim2_legacy PRIVATE WIN32 _WINDOWS _CRT_SECURE_NO_WARNINGS)
+target_compile_definitions(railsim2_legacy PRIVATE WIN32 _WINDOWS _CRT_SECURE_NO_WARNINGS _ITERATOR_DEBUG_LEVEL=0)
 target_compile_options(railsim2_legacy PRIVATE /EHsc /permissive /Zc:strictStrings- /source-charset:utf-8 /execution-charset:.932 /W1 /MP)
 set_target_properties(railsim2_legacy PROPERTIES CXX_STANDARD 14 CXX_STANDARD_REQUIRED ON)
 set_source_files_properties(${PROJECT_SOURCE_DIR}/RailSim2.rc PROPERTIES COMPILE_FLAGS "/I${CMAKE_CURRENT_SOURCE_DIR}/shim")
