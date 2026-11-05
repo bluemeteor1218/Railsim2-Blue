@@ -1,0 +1,370 @@
+body{
+	margin: 40px 0px 40px 0px;
+	background-color: #ffffff;
+	overflow: auto;
+}
+a{
+	text-decoration: none;
+}
+a img{
+	border-style: solid;
+	border-width: 2px;
+}
+a:link{
+	color: #ff0000;
+}
+a:link img{
+	border-color: #ff0000;
+}
+a:visited{
+	color: #c04040;
+}
+a:visited img{
+	border-color: #800000;
+}
+a:active, a:hover{
+	background-color: #ff0000;
+	color: #ffffff;
+	text-decoration: underline;
+}
+a:active img, a:hover img{
+	border-color: #ffffff;
+}
+span.charm{
+	color: #8000ff;
+	font-weight: bold;
+}
+span.appeal{
+	background-color: #0000ff;
+	color: #ffffff;
+}
+span.source{
+	font-family: ‚l‚r –¾’©;
+}
+span.keyword{
+	color: #0000ff;
+}
+span.comment{
+	color: #008000;
+}
+span.nochange{
+	color: #ffffff;
+}
+span.ctrl{
+	color: #8000ff;
+	font-weight: bold;
+}
+span.sub{
+	color: #8000ff;
+	font-size: 10px;
+	vertical-align: bottom;
+}
+span.sup{
+	color: #8000ff;
+	font-size: 10px;
+	vertical-align: top;
+}
+span.nonterm{
+	font-style: italic;
+	white-space: nowrap;
+	color: #ff0000;
+}
+a.nonterm{
+	font-style: italic;
+	white-space: nowrap;
+}
+p, pre{
+	margin: 0px;
+	border-style: none solid solid solid;
+	border-width: 0px 1px 1px 5px;
+	border-color: #ff8000;
+	padding: 10px;
+	color: #404040;
+	text-align: justify;
+	text-justify: distribute;
+	line-height: 20px;
+	font-size: 14px;
+}
+p.joint, pre.joint, pre.ind_j, p.argname, p.argexp{
+	border-style: none solid none solid;
+	border-width: 0px 1px 0px 5px;
+	padding: 10px 10px 0px 10px;
+}
+p.joint_t, p.argexp_t{
+	border-style: none solid none solid;
+	border-width: 0px 1px 0px 5px;
+}
+pre.ind_j{
+	padding: 0px 10px 0px 40px;
+}
+pre.prototype, p.argname{
+	font-family: ‚l‚r –¾’©;
+}
+p.argexp{
+	padding: 0px 10px 0px 40px;
+}
+p.argexp_t, p.argexp_f{
+	padding: 0px 10px 10px 40px;
+}
+p.open{
+	width: 100%;
+	border: none;
+	padding: 5px 0px 5px 0px;
+	text-align: center;
+}
+p.silent{
+	margin: 0px;
+	width: 100%;
+	border: none;
+	padding: 0px;
+	color: #808080;
+	text-align: center;
+	line-height: 20px;
+	font-size: 12px;
+}
+p.center{
+	text-align: center;
+}
+p.right{
+	text-align: right;
+}
+p span.head{
+	padding: 0px 10px 0px 10px;
+	color: #ff8000;
+	font-weight: bold;
+}
+div{
+	border-style: none;
+	border-width: 0px;
+}
+div.centerbox{
+	width: 100%;
+}
+div.topbox{
+	margin: 0px auto 0px auto;
+	width: 750px;
+	padding: 0px;
+	background-image: url(menu.png);
+	background-repeat: repeat-y;
+	background-position: left top;
+}
+div.menubox{
+	float: left;
+	margin: 0px;
+	width: 150px;
+	padding: 0px;
+}
+div.guidebox p{
+	padding: 0px 10px 0px 10px;
+	text-align: center;
+	border: none;
+}
+div.menubox p{
+	line-height: 16px;
+}
+div.mainbox{
+	float: right;
+	margin: 0px;
+	width: 590px;
+	padding: 0px;
+}
+div.contbox{
+	clear: both;
+	margin: 0px;
+	padding: 5px 0px 5px 0px;
+}
+div.footbox{
+	clear: both;
+	margin: 0px;
+	padding: 5px 0px 5px 0px;
+}
+div.ssbox{
+	float: right;
+	width: 230px;
+}
+div.introbox{
+	float: left;
+	width: 350px;
+}
+form{
+	margin: 0px;
+	padding: 0px;
+	color: #404040;
+	text-align: justify;
+	text-justify: distribute;
+	line-height: 20px;
+	font-size: 14px;
+}
+img{
+	margin: 0px;
+	padding: 0px;
+}
+img.sspre{
+	width: 160px;
+	height: 120px;
+}
+img.ssmini{
+	width: 100px;
+	height: 75px;
+}
+img.ssintro{
+	width: 200px;
+	height: 150px;
+}
+img.sslarge{
+	width: 320px;
+	height: 240px;
+}
+ul{
+	margin: 0px 0px 0px 10px;
+	padding: 0px;
+	list-style-type: square;
+	color: #404040;
+	text-align: justify;
+	text-justify: distribute;
+	text-indent: 0px;
+	line-height: 20px;
+	font-size: 14px;
+}
+ul.second{
+	margin: 0px 0px 0px 28px;
+}
+ul.top{
+	margin: 0px;
+	border-style: none solid solid solid;
+	border-width: 0px 1px 1px 5px;
+	border-color: #ff8000;
+	padding: 10px;
+	list-style-type: none;
+}
+li{
+	padding: 0px;
+	text-align: justify;
+	text-justify: distribute;
+	text-indent: 0px;
+	line-height: 20px;
+	font-size: 14px;
+}
+li.sub{
+	display: inline;
+	list-style-type: none;
+	line-height: 0px;
+}
+table{
+	margin: 0px;
+	width: 100%;
+	border-style: none solid solid solid;
+	border-width: 0px 1px 1px 5px;
+	border-color: #ff8000;
+	border-collapse: collapse;
+}
+table.noborder{
+	border: none;
+}
+th, td{
+	margin: 0px;
+	padding: 5px;
+	border: solid 1px #ff8000;
+	color: #404040;
+	text-align: justify;
+	text-justify: distribute;
+	line-height: 20px;
+	font-size: 14px;
+}
+table.dirbox td{
+	border-style: none solid none solid;
+	padding: 0px 10px 0px 10px;
+	line-height: 16px;
+}
+table.dirbox tr.dirtop td{ padding-top: 10px; }
+table.dirbox tr.dirbottom td{ padding-bottom: 10px; }
+th.nowrap, td.nowrap{
+	white-space: nowrap;
+}
+th{
+	text-align: center;
+	font-weight: bold;
+}
+td.full{
+	width: 100%;
+}
+td.right{
+	text-align: right;
+}
+td.center{
+	text-align: center;
+}
+td.top{
+	vertical-align: top;
+}
+table.noborder td{
+	border: none;
+}
+h1{
+	margin: 0px;
+	border: none;
+	color: #ff8000;
+	white-space: nowrap;
+	text-align: center;
+	line-height: 30px;
+	font-size: 30px;
+	font-weight: normal;
+}
+h2{
+	margin: 0px;
+	border-style: solid solid none solid;
+	border-width: 5px 1px 0px 25px;
+	border-color: #ff8000;
+	padding: 4px 0px 0px 10px;
+	color: #ff8000;
+	white-space: nowrap;
+	text-align: left;
+	vertical-align: bottom;
+	line-height: 16px;
+	font-size: 16px;
+	font-weight: bold;
+}
+h1.nonterm{
+	font-style: italic;
+}
+table.noborder{
+	border: none;
+}
+div.cb_changed p{
+	border-color: #008000;
+}
+div.cb_changed h2{
+	border-color: #008000;
+	color: #008000;
+}
+div.cb_clang p{
+	border-color: #0000ff;
+}
+div.cb_clang h2{
+	border-color: #0000ff;
+	color: #0000ff;
+}
+div.cb_clang table, div.cb_clang th, div.cb_clang td{
+	border-color: #0000ff;
+}
+div.cb_src pre{
+	border-color: #000000;
+	background-color: #c0c0c0;
+	color: #000000;
+	line-height: 16px;
+	font-family: ‚l‚r –¾’©;
+}
+div.cb_src h2{
+	border-color: #000000;
+	background-color: #c0c0c0;
+	color: #000000;
+}
+div.cb_src pre.nonterm{
+	border-style: none solid none solid;
+	padding: 10px 10px 5px 10px;
+	color: #ff0000;
+	font-style: italic;
+}
+div.cb_src pre.ind{
+	padding: 0px 10px 10px 40px;
+}

@@ -1,0 +1,127 @@
+/*
+ *	RailSim II Girder Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Girder;
+	PluginName = "デフォルトJR標準軌用PC複線橋桁";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "標準軌複線用のコンクリート橋桁です。";
+}
+
+GirderInfo{
+	Height = 0.4;
+	TrackNum = 2;
+	TrackInterval = 5.0;
+	FlattenCant = yes;
+}
+
+/*
+ *	断面定義
+ */
+Profile{
+	Material{
+		UseTexture = yes;
+		TexFileName = "..\Default_JRN_SinglePC\Concrete.png";
+		TexVPerMeter = 1.0;
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-5.4, 0.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (5.4, 0.0);
+			TexU = 10.8;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (5.4, 0.0);
+			TexU = 0.8;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (5.4, 1.0);
+			TexU = 1.8;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (5.4, 1.0);
+			TexU = 0.8;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (5.6, 1.0);
+			TexU = 1.0;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (5.6, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (5.6, -0.4);
+			TexU = 1.4;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (5.6, -0.4);
+			TexU = 0.4;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-5.6, -0.4);
+			TexU = 10.6;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-5.6, -0.4);
+			TexU = 0.6;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-5.6, 1.0);
+			TexU = 2.0;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-5.6, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-5.4, 1.0);
+			TexU = 0.2;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-5.4, 1.0);
+			TexU = 0.2;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-5.4, 0.0);
+			TexU = 1.2;
+		}
+	}
+}

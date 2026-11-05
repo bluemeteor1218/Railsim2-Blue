@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>wireframe-vertex</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">wireframe-vertex</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">wireframe-vertex</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>ラインを構成する頂点を定義します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">wireframe-vertex ::=</pre>
+<pre class="ind">Vertex{
+    <span class="ctrl">(</span> IgnoreCant = <a class="nonterm" href="pi_sym_yes_no.html">yes-no</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    Coord = <a class="nonterm" href="pi_sym_vector_3d.html">vector-3d</a>;
+    <span class="ctrl">(</span> Diffuse = <a class="nonterm" href="pi_sym_color.html">color</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+}</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">IgnoreCant</p>
+<p class="argexp">カントの影響を無視するかどうか指定します。バラストの底辺など、カントの影響を無視すべき頂点で <span class="source">yes</span> を指定します。デフォルト値は <span class="source">no</span> です。</p>
+<p class="argname">Diffuse</p>
+<p class="argexp">頂点におけるラインの色を指定します。デフォルト値は <span class="source">#ff000000</span> です。</p>
+<p>ワイヤフレームは主に架線の表現に使用します。<a class="nonterm" href="pi_sym_profile.html">profile</a> における断面定義では、頂点の指定に 2 次元ベクトルを使用しましたが、ワイヤフレームでは 3 次元ベクトルを使用します。このうち x, y 成分は <a class="nonterm" href="pi_sym_profile.html">profile</a> の場合と同じく断面の平面座標で、z 成分はワイヤフレームの始点から終点までを 0.0～1.0 で正規化した座標値として指定します。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_wireframe_line.html">wireframe-line</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>架線プラグイン</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1>架線プラグイン</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <span class="appeal">架線</span><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>架線プラグインは、電化路線の架線を表現するために使用されます。</p>
+</div>
+<div class="contbox cb_src">
+<h2>定義ファイル (Line2.txt) 文法</h2>
+<pre class="nonterm">line-plugin ::=</pre>
+<pre class="ind"><a class="nonterm" href="pi_sym_plugin_header.html">plugin-header</a>
+LineInfo{
+    TrolleyAlt = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    Height = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    MaxInterval = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    <span class="ctrl">(</span> Offset = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    MaxDeflection = <a class="nonterm" href="pi_sym_float.html">float</a>;
+}
+<a class="nonterm" href="pi_sym_profile_list.html">profile-list</a></pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">TrolleyAlt</p>
+<p class="argexp">レール表面に対するトロリ線の高さを指定します。</p>
+<p class="argname">Height</p>
+<p class="argexp">トロリ線に対する架線柱支持部の高さを指定します。</p>
+<p class="argname">MaxInterval</p>
+<p class="argexp">架線柱の最大間隔を指定します。</p>
+<p class="argname">Offset</p>
+<p class="argexp">レールの端点に対し架線の設置開始位置をずらしたい場合に、その距離を指定します。デフォルト値は 0.0 です。</p>
+<p class="argname">MaxDeflection</p>
+<p class="argexp">線路の中心に対する架線のずれの最大距離を指定します。この値とカーブの曲率半径等に応じて架線柱による支持間隔を自動的に調節しますが、実際のずれの範囲は必ずしも正確でない可能性があります。</p>
+<p><a href="pi_rail.html">レール</a>や<a href="pi_tie.html">枕木</a>は線路の曲線に応じて区間が分割されるのに対し、架線は隣接する架線柱の間を直線で結びます。</p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_pier.html">＜PrevSec</a> | <a href="plugin.html">▲ChTop</a> | <a href="#pagetop">▲PageTop</a> | <a href="pi_pole.html">NextSec＞</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

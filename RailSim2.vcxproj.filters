@@ -1,0 +1,1099 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{aaa7a173-4f2e-47a3-b15c-7661ed920d8a}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source">
+      <UniqueIdentifier>{fee228f9-f612-48b4-bfd3-ff00c4fa99e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Misc Class Source">
+      <UniqueIdentifier>{ae1d91eb-ea6f-4b2f-9a29-1ae77d06e468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Interface Class Source">
+      <UniqueIdentifier>{3e738a59-2e63-46a7-bcc0-05ebfc0175b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Mode Class Source">
+      <UniqueIdentifier>{6d466584-7f04-4205-b4f4-a03bd376117a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Mode Class Source\RailwayMode Class Source">
+      <UniqueIdentifier>{133326ca-9000-4c0f-8a4a-73dcc8aa3d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Mode Class Source\TrainMode Class Source">
+      <UniqueIdentifier>{551ce2ab-32e2-4876-a924-e8330a54dba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Mode Class Source\StationMode Class Source">
+      <UniqueIdentifier>{1f56f2f5-bb57-4c7a-b55d-3ac16d3e9c10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Mode Class Source\StructMode Class Source">
+      <UniqueIdentifier>{b5ca979e-ae9d-4d44-a224-c6dbb92d36bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Mode Class Source\SceneMode Class Source">
+      <UniqueIdentifier>{8997d920-dbf2-4b29-b311-ef4fd9945096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Mode Class Source\SystemMode Class Source">
+      <UniqueIdentifier>{ed783636-e4a5-4182-a0cf-6a55e414a281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Mode Class Source\MiscMode Class Source">
+      <UniqueIdentifier>{700a4fa0-4818-4c66-b103-eb396eafd19d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Plugin Class Source">
+      <UniqueIdentifier>{6f89ff45-a3a9-4e2a-971a-c88aaf23c3f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source">
+      <UniqueIdentifier>{0adb3740-03d4-48f5-855c-dfd172114773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Plugin Class Source\PluginSet Class Source">
+      <UniqueIdentifier>{0f009123-fee6-4e16-9a63-32a01d2ed9f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Plugin Class Source\RailwayPlugin Class Source">
+      <UniqueIdentifier>{adc4aa18-4928-46e2-a90d-6b9b8c515db6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Plugin Class Source\ModelPlugin Class Source">
+      <UniqueIdentifier>{2e706c49-7fd1-4ee4-bc8a-bfbc9bc4cbf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Plugin Class Source\Misc Plugin Class Source">
+      <UniqueIdentifier>{49c3131f-69b7-4f03-8a1f-583d0a3ef66b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Instance Class Source">
+      <UniqueIdentifier>{d3d69e79-6c44-40cc-b43d-23ad5c894515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Instance Class Source\RailwayInst Class Source">
+      <UniqueIdentifier>{0df25af5-e642-48db-9663-4ca4675d4142}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Instance Class Source\ModelInst Class Source">
+      <UniqueIdentifier>{8df0afff-35b0-459b-9df4-e906147a75db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Instance Class Source\Misc Instance Class Source">
+      <UniqueIdentifier>{e8664c0a-4405-4349-a9fb-412cef5b9925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\RailCurve Class Source">
+      <UniqueIdentifier>{f9b65267-3910-4c92-9dc9-c4b20a9516e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RS2 Source\Misc Source">
+      <UniqueIdentifier>{08ee7c7d-ea09-438a-bf2f-5da983dcb290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UDX Source">
+      <UniqueIdentifier>{e882eba4-6de0-4791-8bcd-5f0f1b1cb48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{d669eb45-4beb-4fc5-82b9-2ee62239cedb}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header">
+      <UniqueIdentifier>{67ea2d3b-e95f-4109-a9bd-c7e56e1b5333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Misc Class Header">
+      <UniqueIdentifier>{46c15e68-3b43-49ab-a5bf-0f668f2fa850}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Interface Class Header">
+      <UniqueIdentifier>{ad6f29f7-441d-40e8-84ad-17df814cedd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Mode Class Header">
+      <UniqueIdentifier>{57b8aca9-ee37-4251-bea1-6d6ceb58add5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Mode Class Header\RailwayMode Class Header">
+      <UniqueIdentifier>{40be9cfb-4246-42ec-ba82-c1b775a2e522}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Mode Class Header\TrainMode Class Header">
+      <UniqueIdentifier>{890fe0cd-da77-4a07-8a11-925553fa854a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Mode Class Header\StationMode Class Header">
+      <UniqueIdentifier>{2ff791a1-ceaa-4ee6-a35b-2a4f31da5cb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Mode Class Header\StructMode Class Header">
+      <UniqueIdentifier>{91cf8b7f-91bb-49b7-bc46-240bd87d43f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Mode Class Header\SceneMode Class Header">
+      <UniqueIdentifier>{5ebf7e66-31a1-40e9-b0a2-ac1c091278a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Mode Class Header\SystemMode Class Header">
+      <UniqueIdentifier>{3917a946-6940-43e1-8d61-beeed01bd3b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Mode Class Header\MiscMode Class Header">
+      <UniqueIdentifier>{97ab796d-1cf3-46ad-a857-591e0fdedd00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Plugin Class Header">
+      <UniqueIdentifier>{345018e7-0cf8-4922-b0b1-582e53428ff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header">
+      <UniqueIdentifier>{8f1e55d1-cc1a-4208-9874-88baf365f4a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Plugin Class Header\PluginSet Class Header">
+      <UniqueIdentifier>{6bb6ef93-ac48-45f2-95f0-928282494fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Plugin Class Header\RailwayPlugin Class Header">
+      <UniqueIdentifier>{b777aba7-7686-422e-bbf3-24ac1f66fc69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Plugin Class Header\ModelPlugin Class Header">
+      <UniqueIdentifier>{bb4e42e6-ed2a-4f19-a218-338b7020b029}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Plugin Class Header\Misc Plugin Class Header">
+      <UniqueIdentifier>{ddf35715-9ef6-4a61-bd94-20c964d750e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Instance Class Header">
+      <UniqueIdentifier>{e7391701-4fcf-446d-a6d3-fb5b33b9dd09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Instance Class Header\RailwayInst Class Header">
+      <UniqueIdentifier>{5ce53629-d2fa-4d80-9614-f95c18aac136}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Instance Class Header\ModelInst Class Header">
+      <UniqueIdentifier>{0ec39a8c-45e5-4e82-bbe0-b240cae245fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Instance Class Header\Misc Instance Class Header">
+      <UniqueIdentifier>{24c959bb-c6b6-4229-bf96-999c48d273d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\RailCurve Class Header">
+      <UniqueIdentifier>{cc8f9f60-087a-4bde-903f-2d9f8ec59dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RS2 Header\Misc Header">
+      <UniqueIdentifier>{a21e6715-b51c-42c5-984c-0bc0fc4348dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UDX Header">
+      <UniqueIdentifier>{094abbe9-0b8f-452b-a603-8aa82eaf4384}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{e5ba9de1-3f4f-428f-a302-3fedfd2a97f0}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>Source Files\RS2 Source\Misc Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CCursor.cpp">
+      <Filter>Source Files\RS2 Source\Misc Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPixelbit.cpp">
+      <Filter>Source Files\RS2 Source\Misc Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPixelbitStamp.cpp">
+      <Filter>Source Files\RS2 Source\Misc Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CShadowVolume.cpp">
+      <Filter>Source Files\RS2 Source\Misc Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStringTexture.cpp">
+      <Filter>Source Files\RS2 Source\Misc Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CVertexDump.cpp">
+      <Filter>Source Files\RS2 Source\Misc Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CWaveArray.cpp">
+      <Filter>Source Files\RS2 Source\Misc Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CCheckBox.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CDiaDialog.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CDragContainer.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CEditCtrl.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CGroupBox.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CInterface.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CListView.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CMiniButton.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CMultiStatic.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPluginTree.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPopMenu.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPushButton.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRadioButton.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CScrollBarV.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CSimpleDialog.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStaticCtrl.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CToggleIcon.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTreeDirElement.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTreeElement.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTreeFileElement.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CWindowCtrl.cpp">
+      <Filter>Source Files\RS2 Source\Interface Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CGirderSelectMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\RailwayMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CLineSelectMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\RailwayMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPierSelectMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\RailwayMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPoleSelectMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\RailwayMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailBuildMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\RailwayMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailEditMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\RailwayMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailSelectMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\RailwayMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailwayMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\RailwayMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTieSelectMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\RailwayMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CDiaEditMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\TrainMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTrainEditMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\TrainMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTrainSetMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\TrainMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTrainViewMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\TrainMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStationBuildMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\StationMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStationEditMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\StationMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStationSelectMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\StationMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStructBuildMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\StructMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStructEditMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\StructMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStructSelectMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\StructMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnvEditMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\SceneMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneEditMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\SceneMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CSimulationMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\SceneMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CConfigMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\SystemMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CExitMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\SystemMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CFileMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\SystemMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkinSelectMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\SystemMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CVideoMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\SystemMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C3DPluginMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\MiscMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\MiscMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CInterfaceMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\MiscMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CNeutralMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\MiscMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneryMode.cpp">
+      <Filter>Source Files\RS2 Source\Mode Class Source\MiscMode Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CCustomizer.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CCustomizerMisc.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CCustomizerMover.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CEffector.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CExpression.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CLensFlare.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CModelSwitch.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CNamedObject.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CParticle.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundEffector.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextureAnimation.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginParts Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailwayPluginSet.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginSet Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTrainGroupTemplate.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\PluginSet Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CGirderPlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\RailwayPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CLinePlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\RailwayPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPierPlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\RailwayPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPolePlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\RailwayPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CProfilePlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\RailwayPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailPlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\RailwayPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTiePlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\RailwayPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CModelPlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\ModelPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStationPlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\ModelPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStructPlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\ModelPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CSurfacePlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\ModelPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTrainPlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\ModelPlugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnvPlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\Misc Plugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\Misc Plugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkinPlugin.cpp">
+      <Filter>Source Files\RS2 Source\Plugin Class Source\Misc Plugin Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CLine.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\RailwayInst Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPier.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\RailwayInst Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailConnector.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\RailwayInst Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailWay.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\RailwayInst Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CModelInst.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\ModelInst Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartsInst.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\ModelInst Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\ModelInst Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStation.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\ModelInst Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CStruct.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\ModelInst Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTrain.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\ModelInst Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CDiaInst.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\Misc Instance Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailBuilder.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\Misc Instance Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CSaveFile.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\Misc Instance Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTrainGroup.cpp">
+      <Filter>Source Files\RS2 Source\Instance Class Source\Misc Instance Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CLineBuildCurve.cpp">
+      <Filter>Source Files\RS2 Source\RailCurve Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailCurve.cpp">
+      <Filter>Source Files\RS2 Source\RailCurve Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailDetectCurve.cpp">
+      <Filter>Source Files\RS2 Source\RailCurve Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailDumpCurve.cpp">
+      <Filter>Source Files\RS2 Source\RailCurve Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailPlanCurve.cpp">
+      <Filter>Source Files\RS2 Source\RailCurve Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CRailSplitCurve.cpp">
+      <Filter>Source Files\RS2 Source\RailCurve Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CTrainSetCurve.cpp">
+      <Filter>Source Files\RS2 Source\RailCurve Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Capture.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicCover.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="HighTimer.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Language.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="md5.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Network.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="RailMap.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="RailSim2.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Script.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemCover.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="WakeUp.cpp">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\anim.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\comm.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\debug.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\draw.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\editbox.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\effect.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\font.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\graphic.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\input.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\light.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\main.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\mesh.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\object.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\offscreen.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\sound.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\texture.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\vertex.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\view.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\view_ctrl.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\wave.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\wave_stream.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\window.cpp">
+      <Filter>Source Files\UDX Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CJobTimer.cpp">
+      <Filter>Source Files\RS2 Source\Misc Class Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CWindowDivInfo.cpp">
+      <Filter>Source Files\RS2 Source\Misc Class Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RailSim2.rc">
+      <Filter>Source Files\RS2 Source\Misc Source</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CCamera.h">
+      <Filter>Header Files\RS2 Header\Misc Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCameraFocus.h">
+      <Filter>Header Files\RS2 Header\Misc Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCursor.h">
+      <Filter>Header Files\RS2 Header\Misc Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPixelbit.h">
+      <Filter>Header Files\RS2 Header\Misc Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CShadowVolume.h">
+      <Filter>Header Files\RS2 Header\Misc Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStringTexture.h">
+      <Filter>Header Files\RS2 Header\Misc Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CVertexDump.h">
+      <Filter>Header Files\RS2 Header\Misc Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CWaveArray.h">
+      <Filter>Header Files\RS2 Header\Misc Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCheckBox.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CDiaDialog.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CDragContainer.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CEditCtrl.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CGroupBox.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CInterface.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CListView.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CMiniButton.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CMultiStatic.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPluginTree.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPopMenu.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPushButton.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRadioButton.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CScrollBarV.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CSimpleDialog.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStaticCtrl.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CToggleIcon.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTrainListView.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTreeDirElement.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTreeElement.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTreeFileElement.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CWindowCtrl.h">
+      <Filter>Header Files\RS2 Header\Interface Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CGirderSelectMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\RailwayMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CLineSelectMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\RailwayMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPierSelectMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\RailwayMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPoleSelectMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\RailwayMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailBuildMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\RailwayMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailEditMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\RailwayMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailSelectMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\RailwayMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailwayMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\RailwayMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTieSelectMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\RailwayMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CDiaEditMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\TrainMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTrainEditMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\TrainMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTrainSetMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\TrainMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTrainViewMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\TrainMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStationBuildMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\StationMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStationEditMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\StationMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStationSelectMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\StationMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStructBuildMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\StructMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStructEditMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\StructMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStructSelectMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\StructMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnvEditMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\SceneMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneEditMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\SceneMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CSimulationMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\SceneMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CConfigMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\SystemMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CExitMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\SystemMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CFileMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\SystemMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkinSelectMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\SystemMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CVideoMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\SystemMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="C3DPluginMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\MiscMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\MiscMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CInterfaceMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\MiscMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CNeutralMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\MiscMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneryMode.h">
+      <Filter>Header Files\RS2 Header\Mode Class Header\MiscMode Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCustomizer.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCustomizerMisc.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCustomizerMover.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CEffector.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CExpression.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CLensFlare.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CModelSwitch.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CNamedObject.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CParticle.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CSoundEffector.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextureAnimation.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginParts Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailwayPluginSet.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginSet Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTrainGroupTemplate.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\PluginSet Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CGirderPlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\RailwayPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CLinePlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\RailwayPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPierPlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\RailwayPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPolePlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\RailwayPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CProfilePlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\RailwayPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailPlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\RailwayPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTiePlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\RailwayPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CModelPlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\ModelPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStationPlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\ModelPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStructPlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\ModelPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CSurfacePlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\ModelPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTrainPlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\ModelPlugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnvPlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\Misc Plugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\Misc Plugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkinPlugin.h">
+      <Filter>Header Files\RS2 Header\Plugin Class Header\Misc Plugin Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CLine.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\RailwayInst Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPier.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\RailwayInst Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailConnector.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\RailwayInst Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailLink.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\RailwayInst Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailWay.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\RailwayInst Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CModelInst.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\ModelInst Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartsInst.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\ModelInst Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\ModelInst Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStation.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\ModelInst Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CStruct.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\ModelInst Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTrain.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\ModelInst Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CDiaInst.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\Misc Instance Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailBuilder.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\Misc Instance Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CSaveFile.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\Misc Instance Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTrainGroup.h">
+      <Filter>Header Files\RS2 Header\Instance Class Header\Misc Instance Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CLineBuildCurve.h">
+      <Filter>Header Files\RS2 Header\RailCurve Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailCurve.h">
+      <Filter>Header Files\RS2 Header\RailCurve Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailDetectCurve.h">
+      <Filter>Header Files\RS2 Header\RailCurve Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailDumpCurve.h">
+      <Filter>Header Files\RS2 Header\RailCurve Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailPlanCurve.h">
+      <Filter>Header Files\RS2 Header\RailCurve Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailSplitCurve.h">
+      <Filter>Header Files\RS2 Header\RailCurve Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRailTraceCurve.h">
+      <Filter>Header Files\RS2 Header\RailCurve Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTrainSetBuffer.h">
+      <Filter>Header Files\RS2 Header\RailCurve Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTrainSetCurve.h">
+      <Filter>Header Files\RS2 Header\RailCurve Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Capture.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Const.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicCover.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="HighTimer.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Language.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="LanguageID.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="md5.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Network.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="RailMap.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="RSPV.H">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemCover.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ValueArea.h">
+      <Filter>Header Files\RS2 Header\Misc Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\anim.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\app.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\bcc.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\comm.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\debug.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\draw.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\editbox.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\effect.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\font.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\frame.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\graphic.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\headers.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\input.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\libraries.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\light.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\mesh.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\mutex.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\object.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\offscreen.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\render.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\sound.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\sysvalue.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\texture.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\udx.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\vertex.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\view.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\view_ctrl.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\wave.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\wave_stream.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\window.h">
+      <Filter>Header Files\UDX Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CJobTimer.h">
+      <Filter>Header Files\RS2 Header\Misc Class Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CWindowDivInfo.h">
+      <Filter>Header Files\RS2 Header\Misc Class Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\Opening.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\RailSim2.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

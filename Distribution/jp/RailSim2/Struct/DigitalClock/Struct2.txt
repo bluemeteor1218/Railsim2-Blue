@@ -1,0 +1,171 @@
+/*
+ *	RailSim II Struct Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Struct;
+	PluginName = "デジタル時計";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "日付月デジタル時計です。";
+}
+
+StructInfo{
+}
+
+DefineAnimation "コロン点滅"{
+	Frame = "Panel#b.png", 15;
+	ShiftTexture = 0.0, 0.0;
+	Frame = "Panel#b.png", 15;
+	ShiftTexture = 0.125, 0.0;
+}
+
+PrimaryAssembly{
+	Object3D "Main"{
+		ModelFileName = "Model.x";
+		ModelScale = 1.0;
+		Transparent = 1, 2;
+		NoShadow = 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16;
+		AlphaZeroTest = 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16;
+		SetAnimation = 14, "コロン点滅";
+
+		//	10 の位は、年数を 10 で割ったものをさらに 10 で割った余り
+		ApplySwitch ("_YEAR"/10)%10{
+		Case 0: ShiftTexture = 3, 0.0, 0.0;
+		Case 1: ShiftTexture = 3, 0.125, 0.0;
+		Case 2: ShiftTexture = 3, 0.25, 0.0;
+		Case 3: ShiftTexture = 3, 0.375, 0.0;
+		Case 4: ShiftTexture = 3, 0.5, 0.0;
+		Case 5: ShiftTexture = 3, 0.625, 0.0;
+		Case 6: ShiftTexture = 3, 0.75, 0.0;
+		Case 7: ShiftTexture = 3, 0.875, 0.0;
+		Case 8: ShiftTexture = 3, 0.0, 0.25;
+		Case 9: ShiftTexture = 3, 0.125, 0.25;
+		}
+		//	1 の位は、年数を 10 で割った余り
+		ApplySwitch "_YEAR"%10{
+		Case 0: ShiftTexture = 4, 0.0, 0.0;
+		Case 1: ShiftTexture = 4, 0.125, 0.0;
+		Case 2: ShiftTexture = 4, 0.25, 0.0;
+		Case 3: ShiftTexture = 4, 0.375, 0.0;
+		Case 4: ShiftTexture = 4, 0.5, 0.0;
+		Case 5: ShiftTexture = 4, 0.625, 0.0;
+		Case 6: ShiftTexture = 4, 0.75, 0.0;
+		Case 7: ShiftTexture = 4, 0.875, 0.0;
+		Case 8: ShiftTexture = 4, 0.0, 0.25;
+		Case 9: ShiftTexture = 4, 0.125, 0.25;
+		}
+		//	以下同様
+		ApplySwitch ("_MONTH"/10)%10{
+		Case 0: ShiftTexture = 6, 0.0, 0.0;
+		Case 1: ShiftTexture = 6, 0.125, 0.0;
+		Case 2: ShiftTexture = 6, 0.25, 0.0;
+		Case 3: ShiftTexture = 6, 0.375, 0.0;
+		Case 4: ShiftTexture = 6, 0.5, 0.0;
+		Case 5: ShiftTexture = 6, 0.625, 0.0;
+		Case 6: ShiftTexture = 6, 0.75, 0.0;
+		Case 7: ShiftTexture = 6, 0.875, 0.0;
+		Case 8: ShiftTexture = 6, 0.0, 0.25;
+		Case 9: ShiftTexture = 6, 0.125, 0.25;
+		}
+		ApplySwitch "_MONTH"%10{
+		Case 0: ShiftTexture = 7, 0.0, 0.0;
+		Case 1: ShiftTexture = 7, 0.125, 0.0;
+		Case 2: ShiftTexture = 7, 0.25, 0.0;
+		Case 3: ShiftTexture = 7, 0.375, 0.0;
+		Case 4: ShiftTexture = 7, 0.5, 0.0;
+		Case 5: ShiftTexture = 7, 0.625, 0.0;
+		Case 6: ShiftTexture = 7, 0.75, 0.0;
+		Case 7: ShiftTexture = 7, 0.875, 0.0;
+		Case 8: ShiftTexture = 7, 0.0, 0.25;
+		Case 9: ShiftTexture = 7, 0.125, 0.25;
+		}
+		ApplySwitch ("_DAY"/10)%10{
+		Case 0: ShiftTexture = 9, 0.0, 0.0;
+		Case 1: ShiftTexture = 9, 0.125, 0.0;
+		Case 2: ShiftTexture = 9, 0.25, 0.0;
+		Case 3: ShiftTexture = 9, 0.375, 0.0;
+		Case 4: ShiftTexture = 9, 0.5, 0.0;
+		Case 5: ShiftTexture = 9, 0.625, 0.0;
+		Case 6: ShiftTexture = 9, 0.75, 0.0;
+		Case 7: ShiftTexture = 9, 0.875, 0.0;
+		Case 8: ShiftTexture = 9, 0.0, 0.25;
+		Case 9: ShiftTexture = 9, 0.125, 0.25;
+		}
+		ApplySwitch "_DAY"%10{
+		Case 0: ShiftTexture = 10, 0.0, 0.0;
+		Case 1: ShiftTexture = 10, 0.125, 0.0;
+		Case 2: ShiftTexture = 10, 0.25, 0.0;
+		Case 3: ShiftTexture = 10, 0.375, 0.0;
+		Case 4: ShiftTexture = 10, 0.5, 0.0;
+		Case 5: ShiftTexture = 10, 0.625, 0.0;
+		Case 6: ShiftTexture = 10, 0.75, 0.0;
+		Case 7: ShiftTexture = 10, 0.875, 0.0;
+		Case 8: ShiftTexture = 10, 0.0, 0.25;
+		Case 9: ShiftTexture = 10, 0.125, 0.25;
+		}
+		ApplySwitch "_DAYOFWEEK"{
+		Case 0: ShiftTexture = 11, 0.0, 0.0;
+		Case 1: ShiftTexture = 11, 0.25, 0.0;
+		Case 2: ShiftTexture = 11, 0.5, 0.0;
+		Case 3: ShiftTexture = 11, 0.75, 0.0;
+		Case 4: ShiftTexture = 11, 0.0, 0.25;
+		Case 5: ShiftTexture = 11, 0.25, 0.25;
+		Case 6: ShiftTexture = 11, 0.5, 0.25;
+		}
+		ApplySwitch ("_HOUR"/10)%10{
+		Case 0: ShiftTexture = 12, 0.0, 0.0;
+		Case 1: ShiftTexture = 12, 0.125, 0.0;
+		Case 2: ShiftTexture = 12, 0.25, 0.0;
+		Case 3: ShiftTexture = 12, 0.375, 0.0;
+		Case 4: ShiftTexture = 12, 0.5, 0.0;
+		Case 5: ShiftTexture = 12, 0.625, 0.0;
+		Case 6: ShiftTexture = 12, 0.75, 0.0;
+		Case 7: ShiftTexture = 12, 0.875, 0.0;
+		Case 8: ShiftTexture = 12, 0.0, 0.25;
+		Case 9: ShiftTexture = 12, 0.125, 0.25;
+		}
+		ApplySwitch "_HOUR"%10{
+		Case 0: ShiftTexture = 13, 0.0, 0.0;
+		Case 1: ShiftTexture = 13, 0.125, 0.0;
+		Case 2: ShiftTexture = 13, 0.25, 0.0;
+		Case 3: ShiftTexture = 13, 0.375, 0.0;
+		Case 4: ShiftTexture = 13, 0.5, 0.0;
+		Case 5: ShiftTexture = 13, 0.625, 0.0;
+		Case 6: ShiftTexture = 13, 0.75, 0.0;
+		Case 7: ShiftTexture = 13, 0.875, 0.0;
+		Case 8: ShiftTexture = 13, 0.0, 0.25;
+		Case 9: ShiftTexture = 13, 0.125, 0.25;
+		}
+		ApplySwitch ("_MINUTE"/10)%10{
+		Case 0: ShiftTexture = 15, 0.0, 0.0;
+		Case 1: ShiftTexture = 15, 0.125, 0.0;
+		Case 2: ShiftTexture = 15, 0.25, 0.0;
+		Case 3: ShiftTexture = 15, 0.375, 0.0;
+		Case 4: ShiftTexture = 15, 0.5, 0.0;
+		Case 5: ShiftTexture = 15, 0.625, 0.0;
+		Case 6: ShiftTexture = 15, 0.75, 0.0;
+		Case 7: ShiftTexture = 15, 0.875, 0.0;
+		Case 8: ShiftTexture = 15, 0.0, 0.25;
+		Case 9: ShiftTexture = 15, 0.125, 0.25;
+		}
+		ApplySwitch "_MINUTE"%10{
+		Case 0: ShiftTexture = 16, 0.0, 0.0;
+		Case 1: ShiftTexture = 16, 0.125, 0.0;
+		Case 2: ShiftTexture = 16, 0.25, 0.0;
+		Case 3: ShiftTexture = 16, 0.375, 0.0;
+		Case 4: ShiftTexture = 16, 0.5, 0.0;
+		Case 5: ShiftTexture = 16, 0.625, 0.0;
+		Case 6: ShiftTexture = 16, 0.75, 0.0;
+		Case 7: ShiftTexture = 16, 0.875, 0.0;
+		Case 8: ShiftTexture = 16, 0.0, 0.25;
+		Case 9: ShiftTexture = 16, 0.125, 0.25;
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 0.0, 0.0);
+		}
+	}
+}
+

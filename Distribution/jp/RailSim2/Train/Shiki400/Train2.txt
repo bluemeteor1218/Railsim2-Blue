@@ -1,0 +1,329 @@
+/*
+ *	RailSim II Train Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Train;
+	PluginName = "シキ400";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\Aizentranza01\Icon.png";
+	Description = "240 [t] の積載能力と特殊な構造を持つ大物車です。";
+}
+
+TrainInfo{
+	FrontLimit = 20.7;
+	TailLimit = -20.7;
+	MaxVelocity = 0.0;
+	MaxAcceleration = 0.0;
+	MaxDeceleration = 4.0;
+}
+
+PrimaryAssembly{
+	Axle "Wheel1"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (20.0, 0.4);
+	}
+	Axle "Wheel2"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (18.8, 0.4);
+	}
+	Axle "Wheel3"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (17.6, 0.4);
+	}
+	Axle "Wheel4"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (16.4, 0.4);
+	}
+	Axle "Wheel5"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (14.8, 0.4);
+	}
+	Axle "Wheel6"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (13.6, 0.4);
+	}
+	Axle "Wheel7"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (12.4, 0.4);
+	}
+	Axle "Wheel8"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (11.2, 0.4);
+	}
+	Axle "Wheel9"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (9.6, 0.4);
+	}
+	Axle "Wheel10"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (8.4, 0.4);
+	}
+	Axle "Wheel11"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (7.2, 0.4);
+	}
+	Axle "Wheel12"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (6.0, 0.4);
+	}
+	Axle "Wheel13"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-6.0, 0.4);
+	}
+	Axle "Wheel14"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-7.2, 0.4);
+	}
+	Axle "Wheel15"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-8.4, 0.4);
+	}
+	Axle "Wheel16"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-9.6, 0.4);
+	}
+	Axle "Wheel17"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-11.2, 0.4);
+	}
+	Axle "Wheel18"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-12.4, 0.4);
+	}
+	Axle "Wheel19"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-13.6, 0.4);
+	}
+	Axle "Wheel20"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-14.8, 0.4);
+	}
+	Axle "Wheel21"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-16.4, 0.4);
+	}
+	Axle "Wheel22"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-17.6, 0.4);
+	}
+	Axle "Wheel23"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-18.8, 0.4);
+	}
+	Axle "Wheel24"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-20.0, 0.4);
+	}
+	Body "Bogie11"{
+		ModelFileName = "Bogie1j.x";
+		ModelScale = 1.0;
+		JointZY "Wheel1"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (1.8, 0.0);
+		}
+		JointZY "Wheel4"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-1.8, 0.0);
+		}
+	}
+	Body "Bogie12"{
+		ModelFileName = "Bogie1.x";
+		ModelScale = 1.0;
+		JointZY "Wheel5"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (1.8, 0.0);
+		}
+		JointZY "Wheel8"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-1.8, 0.0);
+		}
+	}
+	Body "Bogie13"{
+		ModelFileName = "Bogie1.x";
+		ModelScale = 1.0;
+		JointZY "Wheel9"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (1.8, 0.0);
+		}
+		JointZY "Wheel12"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-1.8, 0.0);
+		}
+	}
+	Body "Bogie14"{
+		ModelFileName = "Bogie1.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		JointZY "Wheel13"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-1.8, 0.0);
+		}
+		JointZY "Wheel16"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (1.8, 0.0);
+		}
+	}
+	Body "Bogie15"{
+		ModelFileName = "Bogie1.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		JointZY "Wheel17"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-1.8, 0.0);
+		}
+		JointZY "Wheel20"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (1.8, 0.0);
+		}
+	}
+	Body "Bogie16"{
+		ModelFileName = "Bogie1j.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		JointZY "Wheel21"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-1.8, 0.0);
+		}
+		JointZY "Wheel24"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (1.8, 0.0);
+		}
+	}
+	Body "Bogie21"{
+		ModelFileName = "Bogie2.x";
+		ModelScale = 1.0;
+		JointZY "Bogie11"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (2.6, 0.0);
+		}
+		JointZY "Bogie12"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (-2.6, 0.0);
+		}
+	}
+	Body "Bogie22"{
+		ModelFileName = "Bogie2.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		JointZY "Bogie15"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (-2.6, 0.0);
+		}
+		JointZY "Bogie16"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (2.6, 0.0);
+		}
+	}
+	Body "Bogie31"{
+		ModelFileName = "Bogie3.x";
+		ModelScale = 1.0;
+		JointZY "Bogie21"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (2.6, 0.0);
+		}
+		JointZY "Bogie13"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (-5.2, -0.6);
+		}
+	}
+	Body "Bogie32"{
+		ModelFileName = "Bogie3.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		JointZY "Bogie14"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (-5.2, -0.6);
+		}
+		JointZY "Bogie22"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (2.6, 0.0);
+		}
+	}
+	Body "Body"{
+		ModelFileName = "Body.x";
+		ModelScale = 1.0;
+		JointZY "Bogie31"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (13.0, 2.2);
+		}
+		JointZY "Bogie32"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (-13.0, 2.2);
+		}
+	}
+}

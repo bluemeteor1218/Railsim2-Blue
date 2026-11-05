@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>axle-object</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">axle-object</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">axle-object</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p><a href="pi_train.html">車輌プラグイン</a>の車軸を定義します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">axle-object ::=</pre>
+<pre class="ind">Axle <a class="nonterm" href="pi_sym_string.html">string</a>{
+    <a class="nonterm" href="pi_sym_named_object_info.html">named-object-info</a>
+    Diameter = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    Symmetric = <a class="nonterm" href="pi_sym_integer.html">integer</a>;
+    Coord = <a class="nonterm" href="pi_sym_vector_3d.html">vector-2d</a>;
+    <span class="ctrl">(</span> WheelSound = <a class="nonterm" href="pi_sym_yes_no.html">yes-no</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+}</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">Axle</p>
+<p class="argexp">直後にオブジェクト名を書きます。このオブジェクト名は、車軸に車輌本体などを乗せるために参照されます。</p>
+<p class="argname">Diameter</p>
+<p class="argexp">この軸の車輪の直径を指定します。ここで指定した直径と車輌の速度に応じて、車輪が回転します。直径を 0.0 に設定した場合、車輪は回転しなくなります。</p>
+<p class="argname">Symmetric</p>
+<p class="argexp">車輪オブジェクトの対称性を指定します。例えば、車輪が対称な 8 角形で表現されている場合は <span class="source">Symmetric = 8;</span> と指定します。この指定により、車輪が高速回転した場合にも逆回転して見えることがないように見かけ上の臨界速度が調整されます。対称性がない場合は 1 を指定します。</p>
+<p class="argname">Coord</p>
+<p class="argexp">軸の位置を車輌のローカル ZY 座標系で指定します。Z 軸は車輌の前方向、Y 軸は車輌の上方向になります。y 座標値はレールとの接触面を 0.0 とし、通常は車輪の半径を考慮して直径の 1/2 の値を指定します。</p>
+<p class="argname">WheelSound</p>
+<p class="argexp">車輪がレールの継ぎ目を通過する際に、<a href="pi_rail.html">レールプラグイン</a>で指定された効果音を鳴らすかどうかを設定します。デフォルト値は <span class="source">yes</span> です。</p>
+<p>車軸は車輌とレールとの接触位置を定義します。リニアモーターカーのように車輪がない車輌を定義する場合にも、見えない車軸が必要です。このような場合、<a class="nonterm" href="pi_sym_named_object_info.html">named-object-info</a> の指定で *.x ファイルの指定を空白 <span class="source">""</span> にします。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_train.html">train-plugin</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

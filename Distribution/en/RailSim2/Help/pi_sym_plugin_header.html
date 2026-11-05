@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>plugin-header</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">plugin-header</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">plugin-header</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>プラグインのヘッダ情報を定義します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">pulgin-header ::=</pre>
+<pre class="ind">PluginHeader{
+    RailSimVersion = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    PluginType = <a class="nonterm" href="pi_sym_identifier.html">identifier</a>;
+    PluginName = <a class="nonterm" href="pi_sym_string.html">string</a>;
+    PluginAuthor = <a class="nonterm" href="pi_sym_string.html">string</a>;
+    <span class="ctrl">(</span> IconTexture = <a class="nonterm" href="pi_sym_filename.html">filename</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> IconRect = <a class="nonterm" href="pi_sym_float.html">float</a>, <a class="nonterm" href="pi_sym_float.html">float</a>, <a class="nonterm" href="pi_sym_float.html">float</a>, <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> Description = <a class="nonterm" href="pi_sym_string.html">float</a>; <span class="ctrl">)</span><span class="sup">*</span>
+}</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">RailSimVersion</p>
+<p class="argexp">そのプラグインが対応する RailSim のバージョンを指定します。通常、そのプラグインが作成された時点での RailSim の最新バージョンを指定します。例えば、Version 2.00 の場合は <span class="source">RailSimVersion = 2.00;</span> と書きます。</p>
+<p class="argname">PluginType</p>
+<p class="argexp">プラグインタイプを指定します。プラグインタイプは<a href="pluginclass.png">プラグインクラスの図</a>に ( ) で示された英単語です。大文字と小文字は区別されます。</p>
+<p class="argname">PluginName</p>
+<p class="argexp">プラグイン名を指定します。</p>
+<p class="argname">PluginAuthor</p>
+<p class="argexp">プラグインの作者名を指定します。</p>
+<p class="argname">IconTexture</p>
+<p class="argexp">ツリービューで使用されるプラグインのアイコン画像ファイルを指定します。画像ファイルは BMP や PNG 等 DirectX がサポートする画像フォーマットである必要があります。Windows 用アイコンファイル (*.ico) は使用できません。省略した場合は<a href="pi_skin.html">スキン</a>で定義されたデフォルトアイコンが使用されます。アンチエイリアスはかかりませんので、16*16 ちょうどの画像を使用すると最も綺麗に表示されます。</p>
+<p class="argname">IconRect</p>
+<p class="argexp">通常は <span class="source">IconTexture</span> で指定された画像全体をアイコンとして使用しますが、テクスチャファイルの余った部分をアイコンに使いたい場合などに、アイコンとして使用する領域の左上 UV 座標と UV サイズを指定します。ピクセル単位ではないので注意してください。</p>
+<p class="argname">Description</p>
+<p class="argexp_f">プラグイン選択時に表示される説明文を入力します。長い文字列は自動的に折り返されますが、<span class="source">Description</span> を複数指定すればその間は強制的に改行されます。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_rail.html">rail-plugin</a> / <a class="nonterm" href="pi_tie.html">tie-plugin</a> / <a class="nonterm" href="pi_girder.html">girder-plugin</a> / <a class="nonterm" href="pi_pier.html">pier-plugin</a> / <a class="nonterm" href="pi_line.html">line-plugin</a> / <a class="nonterm" href="pi_pole.html">pole-plugin</a> / <a class="nonterm" href="pi_train.html">train-plugin</a> / <a class="nonterm" href="pi_station.html">station-plugin</a> / <a class="nonterm" href="pi_struct.html">struct-plugin</a> / <a class="nonterm" href="pi_surface.html">surface-plugin</a> / <a class="nonterm" href="pi_env.html">env-plugin</a> / <a class="nonterm" href="pi_skin.html">skin-plugin</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

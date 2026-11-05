@@ -1,0 +1,131 @@
+/*
+ *	RailSim II Rail Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Rail;
+	PluginName = "デフォルトJR標準軌";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "新幹線や多くの私鉄で使われている、世界標準軌間のレールです。";
+}
+
+/*
+ *	参考: 60kg レール
+ *	軌間: 1435[mm]
+ *	レール底部最大幅: 145[mm]
+ *	レール頭部最大幅: 65[mm]
+ *	レール高さ: 174[mm]
+ */
+RailInfo{
+	Gauge = 1.435;
+	Height = 0.174;
+	SurfaceAlt = 0.4;
+	CantRatio = 180.0;
+	MaxCant = 7.0;
+}
+
+SoundInfo{
+	WheelSoundFile = "..\Default_JR_Narrow\Wheel.wav";
+	JointInterval = 200.0;
+}
+
+/*
+ *	側面ポリゴン定義
+ */
+Profile{
+	Material{
+		UseTexture = yes;
+		TexFileName = "..\Default_JR_Narrow\Side.png";
+		TexVPerMeter = 1.0;
+	}
+	//	左側
+	Face{
+		Vertex{
+			Coord = (-0.8225, -0.174);
+			Normal = (-1.0, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (-0.7825, 0.0);
+			Normal = (-1.0, 0.0);
+			TexU = 1.0;
+		}
+	}
+	Face{
+		Vertex{
+			Coord = (-0.7175, 0.0);
+			Normal = (1.0, 0.0);
+			TexU = 1.0;
+		}
+		Vertex{
+			Coord = (-0.6775, -0.174);
+			Normal = (1.0, 1.0);
+			TexU = 0.0;
+		}
+	}
+	//	右側
+	Face{
+		Vertex{
+			Coord = (0.6775, -0.174);
+			Normal = (-1.0, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (0.7175, 0.0);
+			Normal = (-1.0, 0.0);
+			TexU = 1.0;
+		}
+	}
+	Face{
+		Vertex{
+			Coord = (0.7825, 0.0);
+			Normal = (1.0, 0.0);
+			TexU = 1.0;
+		}
+		Vertex{
+			Coord = (0.8225, -0.174);
+			Normal = (1.0, 1.0);
+			TexU = 0.0;
+		}
+	}
+}
+
+/*
+ *	上面ポリゴン定義
+ */
+Profile{
+	Material{
+		UseTexture = yes;
+		TexFileName = "..\Default_JR_Narrow\Top.png";
+		TexVPerMeter = 1.0;
+	}
+	//	左側
+	Face{
+		Vertex{
+			Coord = (-0.7825, 0.0);
+			Normal = (-0.5, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (-0.7175, 0.0);
+			Normal = (0.5, 1.0);
+			TexU = 1.0;
+		}
+	}
+	//	右側
+	Face{
+		Vertex{
+			Coord = (0.7175, 0.0);
+			Normal = (-0.5, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (0.7825, 0.0);
+			Normal = (0.5, 1.0);
+			TexU = 1.0;
+		}
+	}
+}

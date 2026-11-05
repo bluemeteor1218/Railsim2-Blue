@@ -1,0 +1,87 @@
+/*
+ *	RailSim II Station Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Station;
+	PluginName = "島式中型駅舎02";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "通過線付きの一般的な郊外島式駅舎です。20 メートル級車両 12 両が停車できます。";
+}
+
+StationInfo{
+}
+
+Platform{
+	//	線路各種プラグインの設定
+	OpenDoor = yes, no;
+	GirderPlugin = "";
+	PierPlugin = "";
+	PolePlugin = "";
+	Coord = (-4.5, 0.0, -115.0);
+	Coord = (-4.5, 0.0, 135.0);
+}
+
+Platform{
+	Stoppable = no;	//	通過ライン
+	//	省略した場合前回と同じものを使用
+	Coord = (-0.5, 0.0, -115.0);
+	Coord = (-0.5, 0.0, 135.0);
+}
+
+Platform{
+	OpenDoor = no, yes;
+	Coord = (3.5, 0.0, -115.0);
+	Coord = (3.5, 0.0, 135.0);
+}
+
+Platform{
+	OpenDoor = yes, no;
+	Coord = (11.5, 0.0, -115.0);
+	Coord = (11.5, 0.0, 135.0);
+}
+
+DefineSwitch "架線柱"{
+	Entry = "40m間隔シンプルカテナリ用";
+	Entry = "60m間隔コンパウンドカテナリ用";
+	Entry = "なし";
+}
+
+DefineAnimation "Escalator"{
+	SlideUVFrame = "Escalator.png", 0.0, 0.0, 0.0, 0.0625, 16, 1;
+}
+
+PrimaryAssembly{
+	Object3D "Main"{
+		ModelFileName = "Model.x";
+		ModelScale = 1.0;
+		NoShadow = 0, 1, 4, 5, 6, 7;
+		NoReceiveShadow = 12, 13;
+		Transparent = 2, 3;
+		ChangeAlpha = 4, NightAlpha;
+		ChangeAlpha = 5, NightAlpha;
+		ChangeAlpha = 6, NightAlpha;
+		ChangeAlpha = 7, 1.0;
+		SetAnimation = 14, "Escalator";
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 0.0, 0.0);
+			AttachDir = (0.0, 0.0, 1.0);
+		}
+	}
+	Object3D "Pole"{
+		ModelFileName = "";
+		ModelScale = 1.0;
+		ApplySwitch "架線柱"{
+		Case 0:
+			ChangeModel = "Pole1.x", 1.0;
+		Case 1:
+			ChangeModel = "Pole2.x", 1.0;
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 6.09, 0.0);
+		}
+	}
+}

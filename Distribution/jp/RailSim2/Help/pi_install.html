@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>プラグインのインストール</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1>プラグインのインストール</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <span class="appeal">インストール</span><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>プラグインのインストール</h2>
+<p class="joint">プラグインは種類に応じて適切なディレクトリにインストールする必要があります。個々のプラグインには、定義ファイルと呼ばれる、プラグインに関する情報を記述したファイルがあり、この定義ファイルのファイル名はプラグインの種類によって決められています。</p>
+<p class="joint">ひとつのプラグインは、少なくとも定義ファイルとそれを格納するディレクトリからなります。プラグインを構成するその他のファイルもプラグインディレクトリに入っている可能性があります。また、プラグインによっては複数のプラグインで使用されるファイルを別のディレクトリに分けている場合もあり、このような場合は、それらのディレクトリも適切な場所にインストールする必要があります。</p>
+<p class="joint_t">以下に定義ファイルのファイル名とプラグインの種類及びそれに対応したインストール先のディレクトリ名を示します。なお、RailSim I 用のプラグインは '2' が付かないファイル名の定義ファイルを持っていますが、これらも同じようにインストールして使用することができます (ただしレール、枕木、橋脚は RailSim I 用プラグインを使用できません)。</p>
+<table>
+<tr><th>インストール先<br>ディレクトリ名</th><th>定義ファイル名</th><th>プラグインの種類</th></tr>
+<tr><td>Rail</td><td>Rail2.txt</td><td>レールプラグイン</td></tr>
+<tr><td>Tie</td><td>Tie2.txt</td><td>枕木プラグイン</td></tr>
+<tr><td>Girder</td><td>Girder2.txt</td><td>橋桁プラグイン</td></tr>
+<tr><td>Pier</td><td>Pier2.txt</td><td>橋脚プラグイン</td></tr>
+<tr><td>Line</td><td>Line2.txt</td><td>架線プラグイン</td></tr>
+<tr><td>Pole</td><td>Pole2.txt</td><td>架線柱プラグイン</td></tr>
+<tr><td>Train</td><td>Train2.txt</td><td>車輌プラグイン</td></tr>
+<tr><td>Station</td><td>Station2.txt</td><td>駅舎プラグイン</td></tr>
+<tr><td>Struct</td><td>Struct2.txt</td><td>施設プラグイン</td></tr>
+<tr><td>Surface</td><td>Surface2.txt</td><td>地形プラグイン</td></tr>
+<tr><td>Env</td><td>Env2.txt</td><td>環境プラグイン</td></tr>
+<tr><td>Skin</td><td>Skin2.txt</td><td>スキンプラグイン</td></tr>
+</table>
+</div>
+<div class="contbox">
+<h2>プラグイン ID</h2>
+<p>プラグインは定義ファイルによって個別の名称を設定されていますが、これはあくまで便宜上のものであり、内部的にはプラグイン ID と呼ばれる識別子により区別されます。プラグイン ID は、プラグインの定義ファイルが格納されているディレクトリの名前になります。プラグイン ID はファイルシステムにより物理的に重複が許されないため、識別子として最適です。プラグインを作成する際は、プラグイン ID が他と重複しないように注意する必要があります。</p>
+</div>
+<div class="contbox">
+<h2>正しいインストール例</h2>
+<p>プラグインは、その種類に応じて正しいディレクトリに格納してください。例えば、hoge というプラグイン ID を持つ車輌プラグインをインストールする場合、以下のようなファイル構成が正しい例になります。</p>
+<table class="dirbox">
+<tr class="dirtop">
+<td>&lt;RailSim2&gt;</td>
+<td>RailSim II のディレクトリです。</td>
+</tr>
+<tr>
+<td>├ &lt;Train&gt;</td>
+<td>車輌プラグインの格納ディレクトリです。</td>
+</tr>
+<tr>
+<td>│└ hoge</td>
+<td>個別のプラグインのディレクトリです。</td>
+</tr>
+<tr>
+<td>│<span style="color: #ffffff;">│</span>└ Train2.txt</td>
+<td>プラグインの定義ファイルです。</td>
+</tr>
+<tr class="dirbottom">
+<td>└ RailSim2.exe</td>
+<td>ゲーム本体です。</td>
+</tr>
+</table>
+</div>
+<div class="contbox">
+<h2>誤ったインストール例</h2>
+<p>上の例では、Train ディレクトリのひとつ下の階層の hoge というサブディレクトリに定義ファイル Train2.txt が存在しなければなりません。以下の例では、定義ファイルが Train ディレクトリの 2 階層下にあるので誤りです。</p>
+<table class="dirbox">
+<tr class="dirtop">
+<td>&lt;RailSim2&gt;</td>
+<td>RailSim II のディレクトリです。</td>
+</tr>
+<tr>
+<td>├ &lt;Train&gt;</td>
+<td>車輌プラグインの格納ディレクトリです。</td>
+</tr>
+<tr>
+<td>│└ moge</td>
+<td>？？？</td>
+</tr>
+<tr>
+<td>│<span style="color: #ffffff;">│</span>└ hoge</td>
+<td>？？？</td>
+</tr>
+<tr>
+<td>│<span style="color: #ffffff;">││</span>└ Train2.txt</td>
+<td>プラグインの定義ファイルです。</td>
+</tr>
+<tr class="dirbottom">
+<td>└ RailSim2.exe</td>
+<td>ゲーム本体です。</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="plugin.html">＜PrevSec</a> | <a href="plugin.html">▲ChTop</a> | <a href="#pagetop">▲PageTop</a> | <a href="pi_making.html">NextSec＞</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

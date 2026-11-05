@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>文法の読み方</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1>文法の読み方</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <span class="appeal">文法の読み方</span><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>凡例</h2>
+<p class="joint">定義ファイルの文法解説には以下のような記号、演算子を使用します。</p>
+<p class="argname"><span class="nonterm">::=</span></p>
+<p class="argexp">生成規則を表します。左辺の記号が右辺の規則により展開されます。並んで複数の規則が記述されている場合には、いずれかを適用します。</p>
+<p class="argname"><span class="nonterm">non-terminal-symbol</span></p>
+<p class="argexp">斜体は非終端記号です。リンク先を参照し、生成規則を適用します。<p class="argname">terminal-symbol</p>
+<p class="argexp">黒字は終端記号です。そのまま書きます。</p>
+<p class="argname">symbol<span class="sup">N</span></p>
+<p class="argexp">指定された規則を N 回適用します。</p>
+<p class="argname">symbol<span class="sup">N+</span></p>
+<p class="argexp">指定された規則を N 回以上適用します。</p>
+<p class="argname">symbol<span class="sup">*</span></p>
+<p class="argexp">指定された規則を 0 回以上適用します。</p>
+<p class="argname">symbol<span class="sub">opt</span></p>
+<p class="argexp">指定された規則は省略可能です。</p>
+<p class="argname">symbol<span class="sub">cond</span></p>
+<p class="argexp">指定された規則を条件により適用します。詳細は解説を参照してください。</p>
+<p class="argname">letterA<span class="ctrl">～</span>letterB</p>
+<p class="argexp">指定された文字 letterA から letterB までの間で任意の文字を選択します。</p>
+<p class="argname"><span class="ctrl">(</span> ... <span class="ctrl">)</span></p>
+<p class="argexp">括弧内の演算子を優先的に評価します。</p>
+<p class="argname">symbol1 <span class="ctrl">|</span> symbol2 <span class="ctrl">|</span> ...</p>
+<p class="argexp_f">区切られた規則のうちいずれかを適用します。</p>
+</div>
+<div class="contbox">
+<h2>空白の扱い</h2>
+<p>定義ファイルにおいて、半角・全角スペース、改行 (CR, LF, CR+LF) およびタブは空白とみなされ、単語や記号の間に自由に挿入することができます。例えば、<span class="source">Turn = yes ;</span> と書くのも <span class="source">Turn=yes;</span> と書くのも同じ意味になります。しかし、見易さのために　<span class="source">=</span> の前後や <span class="source">,</span> の後には半角スペースを入れることを推奨します。また、中括弧 <span class="source">{ }</span> で囲まれた部分は、入れ子のレベルに応じて行頭にタブを加える「インデント」を行うと飛躍的に定義が読みやすくなります。</p>
+</div>
+<div class="contbox">
+<h2>コメント</h2>
+<p>定義ファイルにおいて、<span class="source">/*</span> と <span class="source">*/</span> に囲まれた部分、および各行の <span class="source">//</span> 以降はコメントとみなされ、解釈されません。定義ファイルの記述に説明や注釈を書き込みたい場合や、一時的に記述を無効にしたい場合に使用します。</p>
+</div>
+<div class="contbox">
+<h2>単位系について</h2>
+<p>定義において距離を指定する場合、特に断りがない限りメートル [m] 単位で指定します。速度は特に指定がない限り時速 [km/h]、角度は 360°分法 [deg] で指定します。</p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_making.html">＜PrevSec</a> | <a href="plugin.html">▲ChTop</a> | <a href="#pagetop">▲PageTop</a> | <a href="pi_profile.html">NextSec＞</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

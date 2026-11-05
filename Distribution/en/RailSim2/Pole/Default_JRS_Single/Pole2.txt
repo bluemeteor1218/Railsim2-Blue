@@ -1,0 +1,22 @@
+/*
+ *	RailSim II Pole Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Pole;
+	PluginName = "Default JR-standard single";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "Normal pole for single track standard gauge. Compound catenary is recommended.";
+}
+
+PoleInfo{
+	TrackNum = 1;
+}
+
+Model{
+	ModelFileName = "Model.x";
+	ModelScale = 1.0;
+}

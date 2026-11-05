@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>customizer-switch-applier</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">customizer-switch-applier</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">customizer-switch-applier</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p><a href="pi_sym_customizer.html">カスタマイザ</a>を条件付で適用します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">customizer-switch-applier ::=</pre>
+<pre class="ind_j">ApplySwitch <a class="nonterm" href="pi_sym_expression.html">expression</a>{
+<span class="ctrl">(</span> Case <a class="nonterm" href="pi_sym_integer.html">integer</a> <span class="ctrl">(</span>, <a class="nonterm" href="pi_sym_integer.html">integer</a> <span class="ctrl">)</span><span class="sup">*</span> : <a class="nonterm" href="pi_sym_customizer.html">customizer</a><span class="sup">*</span> <span class="ctrl">)</span><span class="sup">*</span>
+<span class="ctrl">(</span> Default: <a class="nonterm" href="pi_sym_customizer.html">customizer</a><span class="sup">*</span> <span class="ctrl">)</span><span class="sub">opt</span>
+}</pre>
+<pre class="nonterm">customizer-switch-applier ::=</pre>
+<pre class="ind">If <a class="nonterm" href="pi_sym_expression.html">expression</a>{
+    <a class="nonterm" href="pi_sym_customizer.html">customizer</a><span class="sup">*</span>
+} <span class="ctrl">(</span> Else {
+    <a class="nonterm" href="pi_sym_customizer.html">customizer</a><span class="sup">*</span>
+} <span class="ctrl">)</span><span class="sub">opt</span></pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">ApplySwitch</p>
+<p class="argexp">直後に条件評価のための式を指定します。式の値が <span class="source">Case</span> に続いて指定された 1 個以上の値のうちのいずれかに一致する場合、<span class="source">:</span> に続いて指定された<a href="pi_sym_customizer.html">カスタマイザ</a>を適用します。最後に <span class="source">Default</span> で始まる文を記述すると、他の <span class="source">Case</span> に一致しなかった場合にこの部分が処理されます。C 言語の switch～case ステートメントに類似していますが、break 文のようなものを指定しなくても連続した <span class="source">Case</span> の内容が続けて適用されることはありません。スイッチ番号は線形にスキャンされ、番号の対応する <span class="source">Case</span> が複数あればすべて処理されます。</p>
+<p class="argname">If</p>
+<p class="argexp">直後に条件評価のための式を指定します。式の値が 0 以外ならば、続く <span class="source">{ }</span> に囲まれたブロックのカスタマイザを適用します。式の値が 0 ならば、<span class="source">Else</span> 以下を指定した場合のみ、<span class="source">Else</span> に続くブロックのカスタマイザを適用します。<span class="source">ApplySwitch</span> は主に直接スイッチの値を参照して評価を行うために使用しますが、<span class="source">If</span> は主に数値の比較結果等を評価するために使用します。<span class="source">If</span>、<span class="source">Else</span> 等のキーワードは大文字で始まることと、中括弧 <span class="source">{ }</span> は必須であることに注意します。</p>
+<p>目的に応じて 2 種類の構文を使用できます。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_customizer.html">customizer</a> / <a class="nonterm" href="pi_sym_model_switch.html">model-switch</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,301 @@
+/*
+ *	RailSim II Struct Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Struct;
+	PluginName = "Development elevation (T block)";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "Test of complicated delayed animation.";
+}
+
+StructInfo{
+}
+
+DefineSwitch "State"{
+	Entry = "Expand";
+	Entry = "Built";
+}
+
+PrimaryAssembly{
+	//	dummy for action
+	Object3D "a"{
+		ModelFileName = "";
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 0.1, 0.0);
+		}
+	}
+	Object3D "b"{
+		ModelFileName = "";
+		ApplySwitch "State"{
+		Case 1:
+			StaticRotation{
+				RotationAxis = (-1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 4.0;
+				AnimationTime = 2.0;
+				PostAnimationDelay = 0.0;
+			}
+		}
+		Joint3D "a"{
+			AttachCoord = (-1.5, 0.0, 0.0);
+			AttachDir = (-1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "c"{
+		ModelFileName = "";
+		ApplySwitch "State"{
+		Case 1:
+			StaticRotation{
+				RotationAxis = (-1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 4.0;
+				AnimationTime = 2.0;
+				PostAnimationDelay = 0.0;
+			}
+		}
+		Joint3D "a"{
+			AttachCoord = (-0.5, 0.0, 1.0);
+			AttachDir = (-1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "d"{
+		ModelFileName = "";
+		ApplySwitch "State"{
+		Case 1:
+			StaticRotation{
+				RotationAxis = (-1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 4.0;
+				AnimationTime = 2.0;
+				PostAnimationDelay = 0.0;
+			}
+		}
+		Joint3D "a"{
+			AttachCoord = (-1.0, 0.0, -0.5);
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+	Object3D "e"{
+		ModelFileName = "";
+		ApplySwitch "State"{
+		Case 1:
+			StaticRotation{
+				RotationAxis = (-1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 4.0;
+				AnimationTime = 2.0;
+				PostAnimationDelay = 0.0;
+			}
+		}
+		Joint3D "a"{
+			AttachCoord = (0.0, 0.0, 1.5);
+			AttachDir = (0.0, 0.0, 1.0);
+		}
+	}
+	Object3D "f"{
+		ModelFileName = "";
+		ApplySwitch "State"{
+		Case 1:
+			StaticRotation{
+				RotationAxis = (-1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 4.0;
+				AnimationTime = 2.0;
+				PostAnimationDelay = 0.0;
+			}
+		}
+		Joint3D "a"{
+			AttachCoord = (0.0, 0.0, -1.5);
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+	Object3D "g"{
+		ModelFileName = "";
+		ApplySwitch "State"{
+		Case 1:
+			StaticRotation{
+				RotationAxis = (-1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 4.0;
+				AnimationTime = 2.0;
+				PostAnimationDelay = 0.0;
+			}
+		}
+		Joint3D "a"{
+			AttachCoord = (0.5, 0.0, 0.0);
+			AttachDir = (1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "h"{
+		ModelFileName = "";
+		ApplySwitch "State"{
+		Case 1:
+			StaticRotation{
+				RotationAxis = (-1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 2.0;
+				AnimationTime = 2.0;
+				PostAnimationDelay = 2.0;
+			}
+		}
+		Joint3D "g"{
+			AttachCoord = (0.0, 0.0, 1.0);
+			AttachDir = (0.0, 0.0, 1.0);
+		}
+	}
+	Object3D "i"{
+		ModelFileName = "";
+		ApplySwitch "State"{
+		Case 1:
+			StaticRotation{
+				RotationAxis = (-1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 0.0;
+				AnimationTime = 2.0;
+				PostAnimationDelay = 4.0;
+			}
+		}
+		Joint3D "h"{
+			AttachCoord = (-0.5, 0.0, 1.5);
+			AttachDir = (-1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "j"{
+		ModelFileName = "";
+		ApplySwitch "State"{
+		Case 1:
+			StaticRotation{
+				RotationAxis = (-1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 0.0;
+				AnimationTime = 2.0;
+				PostAnimationDelay = 4.0;
+			}
+		}
+		Joint3D "h"{
+			AttachCoord = (1.0, 0.0, 1.0);
+			AttachDir = (0.0, 0.0, 1.0);
+		}
+	}
+	//	tiles
+	Object3D "a0"{
+		ModelFileName = "Plate.x";
+		Joint3D "a"{
+			AttachCoord = (0.0, 0.0, 0.0);
+		}
+	}
+	Object3D "a1"{
+		ModelFileName = "Plate.x";
+		Joint3D "a"{
+			AttachCoord = (-1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "a2"{
+		ModelFileName = "Plate.x";
+		Joint3D "a"{
+			AttachCoord = (0.0, 0.0, 1.0);
+		}
+	}
+	Object3D "a3"{
+		ModelFileName = "Plate.x";
+		Joint3D "a"{
+			AttachCoord = (0.0, 0.0, -1.0);
+		}
+	}
+	Object3D "b0"{
+		ModelFileName = "Plate.x";
+		Joint3D "b"{
+			AttachCoord = (0.0, 0.0, 0.5);
+		}
+	}
+	Object3D "c0"{
+		ModelFileName = "Plate.x";
+		Joint3D "c"{
+			AttachCoord = (0.0, 0.0, 0.5);
+		}
+	}
+	Object3D "d0"{
+		ModelFileName = "Plate.x";
+		Joint3D "d"{
+			AttachCoord = (0.0, 0.0, 0.5);
+			AttachDir = (1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "e0"{
+		ModelFileName = "Plate.x";
+		Joint3D "e"{
+			AttachCoord = (0.0, 0.0, 0.5);
+			AttachDir = (1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "f0"{
+		ModelFileName = "Plate.x";
+		Joint3D "f"{
+			AttachCoord = (0.0, 0.0, 0.5);
+			AttachDir = (1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "g0"{
+		ModelFileName = "Plate.x";
+		Joint3D "g"{
+			AttachCoord = (0.0, 0.0, 0.5);
+		}
+	}
+	Object3D "g1"{
+		ModelFileName = "Plate.x";
+		Joint3D "g"{
+			AttachCoord = (-1.0, 0.0, 0.5);
+		}
+	}
+	Object3D "g2"{
+		ModelFileName = "Plate.x";
+		Joint3D "g"{
+			AttachCoord = (1.0, 0.0, 0.5);
+		}
+	}
+	Object3D "h0"{
+		ModelFileName = "Plate.x";
+		Joint3D "h"{
+			AttachCoord = (0.0, 0.0, 0.5);
+			AttachDir = (1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "h1"{
+		ModelFileName = "Plate.x";
+		Joint3D "h"{
+			AttachCoord = (-1.0, 0.0, 0.5);
+			AttachDir = (1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "h2"{
+		ModelFileName = "Plate.x";
+		Joint3D "h"{
+			AttachCoord = (1.0, 0.0, 0.5);
+			AttachDir = (1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "h3"{
+		ModelFileName = "Plate.x";
+		Joint3D "h"{
+			AttachCoord = (0.0, 0.0, 1.5);
+			AttachDir = (1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "i0"{
+		ModelFileName = "Plate.x";
+		Joint3D "i"{
+			AttachCoord = (0.0, 0.0, 0.5);
+			AttachDir = (1.0, 0.0, 0.0);
+		}
+	}
+	Object3D "j0"{
+		ModelFileName = "Plate.x";
+		Joint3D "j"{
+			AttachCoord = (0.0, 0.0, 0.5);
+		}
+	}
+}

@@ -1,0 +1,53 @@
+/*
+ *	RailSim II Station Plugin
+ *	Copyright (c) 2010 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.13;
+	PluginType = Station;
+	PluginName = "Point Test";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "A sample implementation of a point by a station plugin.";
+}
+
+StationInfo{
+}
+
+Platform{
+	Stoppable = no;
+	GirderPlugin = "";
+	PierPlugin = "";
+	PolePlugin = "";
+	Coord = (0.0, 0.0, -15.0);
+	Coord = (0.0, 0.0, -10.0);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (0.0, 0.0, -10.0);
+	Coord = (0.0, 0.0, 15.0);
+}
+
+Platform{
+	Stoppable = no;
+	EnableCant = no;
+	Coord = (0.0, 0.0, -10.0);
+	Coord = (0.0, 0.0, -5.0);
+	Coord = (4.0, 0.0, 5.0);
+	Coord = (4.0, 0.0, 15.0);
+}
+
+PrimaryAssembly{
+	Object3D "RotationPlate"{
+		ModelFileName = "..\TurntableTest\RotationPlate.x";
+		ModelScale = 1.0;
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, -0.15, 0.0);
+			AttachDir = (0.0, 0.0, 1.0);
+		}
+	}
+	BranchRail = 1, 2;
+	BranchRail = 1, 4;
+}

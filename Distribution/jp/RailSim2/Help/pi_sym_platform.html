@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>platform</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">platform</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">platform</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p><a href="pi_station.html">駅舎プラグイン</a>にプラットフォームを定義します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">platform ::=</pre>
+<pre class="ind">
+Platform{
+    <span class="ctrl">(</span> TrackNum = <a class="nonterm" href="pi_sym_integer.html">integer</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> TrackInterval = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">cond</span>
+    <span class="ctrl">(</span> Stoppable = <a class="nonterm" href="pi_sym_yes_no.html">yes-no</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> OpenDoor = <a class="nonterm" href="pi_sym_yes_no.html">yes-no</a>, <a class="nonterm" href="pi_sym_yes_no.html">yes-no</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> RailPlugin = <a class="nonterm" href="pi_sym_string.html">string</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> TiePlugin = <a class="nonterm" href="pi_sym_string.html">string</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> GirderPlugin = <a class="nonterm" href="pi_sym_string.html">string</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> PierPlugin = <a class="nonterm" href="pi_sym_string.html">string</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> LinePlugin = <a class="nonterm" href="pi_sym_string.html">string</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> PolePlugin = <a class="nonterm" href="pi_sym_string.html">string</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> LiftRailSurface = <a class="nonterm" href="pi_sym_yes_no.html">yes-no</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> EnableCant = <a class="nonterm" href="pi_sym_yes_no.html">yes-no</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> ParentObject = <a class="nonterm" href="pi_sym_string.html">string</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> Coord = <a class="nonterm" href="pi_sym_vector_3d.html">vector-3d</a>; <span class="ctrl">)</span><span class="sup">2+</span>
+}</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">TrackNum</p>
+<p class="argexp">複線用のプラグインを用いて 2 本以上のプラットフォームを同時に設置したい場合に指定します。デフォルト値は 1 です。</p>
+<p class="argname">TrackInterval</p>
+<p class="argexp"><span class="source">TrackNum</span> で 2 以上の値を指定した場合に記述します。2 線以上同時に設置する場合の、線路の間隔を指定します。</p>
+<p class="argname">Stoppable</p>
+<p class="argexp">このプラットフォームに列車が停車可能かどうかを指定します。<span class="source">no</span> を指定した場合、ダイヤ設定にかかわらず、列車はこのプラットフォームに停車せず通過します。デフォルト値は <span class="source">yes</span> です。</p>
+<p class="argname">OpenDoor</p>
+<p class="argexp">列車がこのプラットフォームに停車した場合、どちら側のドアを開けるか指定します。2 個の値は、それぞれ <span class="source">Coord</span> で指定する最初の座標を始点、最後の座標を終点として、始点から終点を見た場合の左側、右側のドアを開けるかどうかに対応します。列車が入ってきた方向が基準ではないので注意してください。省略した場合いずれも <span class="source">no</span> になります。</p>
+<p class="argname">RailPlugin</p>
+<p class="argexp">プラットフォームの設置に使用するレールプラグインを指定します。省略した場合は、直前に指定されたものと同じレールプラグインか、それがなければそのとき選択されているレールプラグインが使用されます。<span class="source">RailPlugin = "";</span> のように空白を指定すると、レールプラグインを使用しないことになります。省略するのと空白を指定するのでは動作が異なるので注意してください。省略した場合や空白を指定した場合等の動作は以下同様になります。</p>
+<p class="argname">TiePlugin</p>
+<p class="argexp">プラットフォームの設置に使用する枕木プラグインを指定します。</p>
+<p class="argname">GirderPlugin</p>
+<p class="argexp">プラットフォームの設置に使用する橋桁プラグインを指定します。</p>
+<p class="argname">PierPlugin</p>
+<p class="argexp">プラットフォームの設置に使用する橋脚プラグインを指定します。</p>
+<p class="argname">LinePlugin</p>
+<p class="argexp">プラットフォームの設置に使用する架線プラグインを指定します。</p>
+<p class="argname">PolePlugin</p>
+<p class="argexp">プラットフォームの設置に使用する架線柱プラグインを指定します。</p>
+<p class="argname">LiftRailSurface</p>
+<p class="argexp">以下で指定する座標に対し、<a href="pi_rail.html">レールプラグイン</a>の <span class="source">SurfaceAlt</span> で指定されたレール表面の高度分を加えるかどうか設定します。レールプラグインが選択されていない場合は<a href="pi_tie.html">枕木プラグイン</a>と<a href="pi_girder.html">橋桁プラグイン</a>の <span class="source">Height</span> で指定された高さを加算した値にが使用されます。デフォルト値は <span class="source">yes</span> です。</p>
+<p class="argname">EnableCant</p>
+<p class="argexp">カーブしたプラットフォームを設置する場合に、カントを有効にするかどうか指定します。デフォルト値は <span class="source">yes</span> です。</p>
+<p class="argname">ParentObject</p>
+<p class="argexp">転車台などにおいて、プラットフォームをオブジェクトに連動して動かしたい場合、連動させるオブジェクト名を指定します。</p>
+<p class="argname">Coord</p>
+<p class="argexp">プラットフォームを設置するための制御点の座標を、駅舎のローカル座標系で 2 個以上指定します。線路設置モードでマウスにより設置するのと同じ感覚です。3 点以上指定するとカーブを設置できます。</p>
+<p>プラットフォームには、駅舎プラグイン内で定義された順番に 0 から番号が振られます。複線でプラットフォームを設置した場合も、トラックごとに別の番号が割り当てられます。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_station.html">station-plugin</a> / <a class="nonterm" href="pi_sym_rail_connector.html">rail-connector</a> / <a class="nonterm" href="pi_sym_rail_brancher.html">rail-brancher</a> / <a class="nonterm" href="pi_sym_rail_disconnector.html">rail-disconnector</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

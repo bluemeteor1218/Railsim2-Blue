@@ -1,0 +1,131 @@
+/*
+ *	RailSim II Rail Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Rail;
+	PluginName = "Default JR-narrow";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "Popular narrow gauge in Japan.";
+}
+
+/*
+ *	参考: 50kg N レール
+ *	軌間: 1067[mm]
+ *	レール底部最大幅: 127[mm]
+ *	レール頭部最大幅: 65[mm]
+ *	レール高さ: 153[mm]
+ */
+RailInfo{
+	Gauge = 1.067;
+	Height = 0.153;
+	SurfaceAlt = 0.4;
+	CantRatio = 170.0;
+	MaxCant = 5.6;
+}
+
+SoundInfo{
+	WheelSoundFile = "Wheel.wav";
+	JointInterval = 100.0;
+}
+
+/*
+ *	側面ポリゴン定義
+ */
+Profile{
+	Material{
+		UseTexture = yes;
+		TexFileName = "Side.png";
+		TexVPerMeter = 1.0;
+	}
+	//	左側
+	Face{
+		Vertex{
+			Coord = (-0.6295, -0.153);
+			Normal = (-1.0, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (-0.5985, 0.0);
+			Normal = (-1.0, 0.0);
+			TexU = 1.0;
+		}
+	}
+	Face{
+		Vertex{
+			Coord = (-0.5335, 0.0);
+			Normal = (1.0, 0.0);
+			TexU = 1.0;
+		}
+		Vertex{
+			Coord = (-0.5025, -0.153);
+			Normal = (1.0, 1.0);
+			TexU = 0.0;
+		}
+	}
+	//	右側
+	Face{
+		Vertex{
+			Coord = (0.5025, -0.153);
+			Normal = (-1.0, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (0.5335, 0.0);
+			Normal = (-1.0, 0.0);
+			TexU = 1.0;
+		}
+	}
+	Face{
+		Vertex{
+			Coord = (0.5985, 0.0);
+			Normal = (1.0, 0.0);
+			TexU = 1.0;
+		}
+		Vertex{
+			Coord = (0.6295, -0.153);
+			Normal = (1.0, 1.0);
+			TexU = 0.0;
+		}
+	}
+}
+
+/*
+ *	上面ポリゴン定義
+ */
+Profile{
+	Material{
+		UseTexture = yes;
+		TexFileName = "Top.png";
+		TexVPerMeter = 1.0;
+	}
+	//	左側
+	Face{
+		Vertex{
+			Coord = (-0.5985, 0.0);
+			Normal = (-0.5, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (-0.5335, 0.0);
+			Normal = (0.5, 1.0);
+			TexU = 1.0;
+		}
+	}
+	//	右側
+	Face{
+		Vertex{
+			Coord = (0.5335, 0.0);
+			Normal = (-0.5, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (0.5985, 0.0);
+			Normal = (0.5, 1.0);
+			TexU = 1.0;
+		}
+	}
+}

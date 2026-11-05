@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>架線柱プラグイン</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1>架線柱プラグイン</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <span class="appeal">架線柱</span><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>架線柱プラグインは、架線を支持する架線柱を表現するために使用されます。</p>
+</div>
+<div class="contbox cb_src">
+<h2>定義ファイル (Pole2.txt) 文法</h2>
+<pre class="nonterm">pole-plugin ::=</pre>
+<pre class="ind"><a class="nonterm" href="pi_sym_plugin_header.html">plugin-header</a>
+PoleInfo{
+    <span class="ctrl">(</span> TrackNum = <a class="nonterm" href="pi_sym_integer.html">integer</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> TrackInterval = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">cond</span>
+}
+Model{
+    ModelFileName = <a class="nonterm" href="pi_sym_filename.html">filename</a>;
+    <span class="ctrl">(</span> ModelScale = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+}</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">TrackNum</p>
+<p class="argexp">ひとつの架線柱オブジェクトで何本の線路をカバーするか指定します。デフォルト値は 1 です。</p>
+<p class="argname">TrackInterval</p>
+<p class="argexp"><span class="source">TrackNum</span> で 2 以上の値を指定した場合に記述します。2 線以上をカバーする架線柱において、線路の間隔を指定します。</p>
+<p class="argname">ModelFileName</p>
+<p class="argexp">使用する *.x ファイルを指定します。</p>
+<p class="argname">ModelScale</p>
+<p class="argexp">*.x ファイルのスケールを指定します。デフォルト値は 1.0 です。</p>
+<p>モデルデータ (*.x ファイル) は、Z 軸が線路方向となるようにしておきます。単線用架線柱においては、架線の支持位置 (トロリ線ではなく吊架線) が原点となるようにモデルを調整してください。複線以上の場合は、X 軸上で支持点が左右均等に分配されます。</p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_line.html">＜PrevSec</a> | <a href="plugin.html">▲ChTop</a> | <a href="#pagetop">▲PageTop</a> | <a href="pi_model.html">NextSec＞</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

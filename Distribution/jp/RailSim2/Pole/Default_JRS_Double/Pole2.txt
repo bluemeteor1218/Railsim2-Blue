@@ -1,0 +1,23 @@
+/*
+ *	RailSim II Pole Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Pole;
+	PluginName = "デフォルトJR標準軌用複線架線柱";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "標準軌複線用の一般的な架線柱です。";
+}
+
+PoleInfo{
+	TrackNum = 2;
+	TrackInterval = 5.0;
+}
+
+Model{
+	ModelFileName = "Model.x";
+	ModelScale = 1.0;
+}

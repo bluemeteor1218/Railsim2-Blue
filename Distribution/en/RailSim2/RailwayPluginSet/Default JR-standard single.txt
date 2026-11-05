@@ -1,0 +1,25 @@
+DatafileHeader{
+	RailSimVersion = 2.00;
+	DatafileType = RailwayPluginSet;
+}
+
+RailwayPluginSet{
+	SettingName = "Default JR-standard single";
+	RailPlugin = "Default_JR_Standard";
+	RailCheck = yes;
+	TiePlugin = "Default_JRS_BallastPC";
+	TieCheck = yes;
+	GirderPlugin = "Default_JRS_SinglePC";
+	GirderCheck = no;
+	PierPlugin = "Default_SinglePC";
+	PierCheck = yes;
+	LinePlugin = "Default_CompoundCatenary";
+	LineCheck = yes;
+	PolePlugin = "Default_JRS_Single";
+	PoleCheck = yes;
+	EnableCant = yes;
+	LiftRailSurface = yes;
+	MultiTrack = no;
+	TrackNum = 2;
+	TrackInterval = 5.000000;
+}

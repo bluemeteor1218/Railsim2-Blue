@@ -1,0 +1,46 @@
+/*
+ *	RailSim II Pier Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Pier;
+	PluginName = "餘部橋梁風橋脚";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "鉄骨で組まれた橋脚です。";
+}
+
+PierInfo{
+	Interval = 20.0;
+	BuildMinAlt = 1.0;
+	TaperX = 0.1;
+	TaperY = 0.0;
+	TaperZ = 0.1;
+}
+
+Joint{
+	ModelFileName = "";
+	JointToHeadLocal = (0.0, 0.0, 0.0);
+}
+
+Head{
+	ModelFileName = "";
+	HeadToPierLocal = (0.0, 0.0, 0.0);
+}
+
+Base{
+	ModelFileName = "Base.x";
+	ModelScale = 1.0;
+	BaseToPierLocal = (0.0, 0.4, 0.0);
+}
+
+/*
+ *	筋交
+ */
+Interval{
+	ModelFileName = "Frame.x";
+	ModelScale = 1.0;
+	Interval = 6.0;
+}

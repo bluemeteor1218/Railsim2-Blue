@@ -1,0 +1,46 @@
+/*
+ *	RailSim II Pier Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Pier;
+	PluginName = "Amarube steel bridge";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "";
+}
+
+PierInfo{
+	Interval = 20.0;
+	BuildMinAlt = 1.0;
+	TaperX = 0.1;
+	TaperY = 0.0;
+	TaperZ = 0.1;
+}
+
+Joint{
+	ModelFileName = "";
+	JointToHeadLocal = (0.0, 0.0, 0.0);
+}
+
+Head{
+	ModelFileName = "";
+	HeadToPierLocal = (0.0, 0.0, 0.0);
+}
+
+Base{
+	ModelFileName = "Base.x";
+	ModelScale = 1.0;
+	BaseToPierLocal = (0.0, 0.4, 0.0);
+}
+
+/*
+ *	‹ØŒð
+ */
+Interval{
+	ModelFileName = "Frame.x";
+	ModelScale = 1.0;
+	Interval = 6.0;
+}

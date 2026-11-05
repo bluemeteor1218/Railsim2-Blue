@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>color</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">color</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">color</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>16 進数で色を指定します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">color ::=</pre>
+<pre class="ind">#<span class="ctrl">(</span><a class="nonterm" href="pi_sym_hexadecimal.html">hexadecimal</a><span class="ctrl">)</span><span class="sup">8</span></pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="joint_t">16 進数 8 桁で色の指定を行います。HTML における色指定とほぼ同じですが、#AARRGGBB とアルファ値も同時に指定する点が異なります。アルファ値は色の不透明度で、00 で透明、ff で不透明となります。その他の色も同様に 16 進数 2 桁、つまり 0～255 までの数値で指定します。以下に色のサンプルを示します。</p>
+<table>
+<tr>
+<td style="background-color: #000000; color: #ffffff; text-align: center;">#FF000000</td>
+<td style="background-color: #404040; color: #ffffff; text-align: center;">#FF404040</td>
+<td style="background-color: #808080; color: #000000; text-align: center;">#FF808080</td>
+<td style="background-color: #c0c0c0; color: #000000; text-align: center;">#FFC0C0C0</td>
+<td style="background-color: #ffffff; color: #000000; text-align: center;">#FFFFFFFF</td>
+</tr>
+<tr>
+<td style="background-color: #800000; color: #00ffff; text-align: center;">#FF800000</td>
+<td style="background-color: #ff0080; color: #00ffff; text-align: center;">#FFFF0080</td>
+<td style="background-color: #ff0000; color: #00ffff; text-align: center;">#FFFF0000</td>
+<td style="background-color: #ff8000; color: #00ffff; text-align: center;">#FFFF8000</td>
+<td style="background-color: #ffc0c0; color: #000000; text-align: center;">#FFFFC0C0</td>
+</tr>
+<tr>
+<td style="background-color: #808000; color: #0000ff; text-align: center;">#FF800000</td>
+<td style="background-color: #ffc000; color: #0000ff; text-align: center;">#FFFFC000</td>
+<td style="background-color: #ffff00; color: #0000ff; text-align: center;">#FFFFFF00</td>
+<td style="background-color: #c0ff00; color: #0000ff; text-align: center;">#FFC0FF00</td>
+<td style="background-color: #ffffc0; color: #000000; text-align: center;">#FFFFFFC0</td>
+</tr>
+<tr>
+<td style="background-color: #008000; color: #ff00ff; text-align: center;">#FF008000</td>
+<td style="background-color: #80ff00; color: #ff00ff; text-align: center;">#FF80FF00</td>
+<td style="background-color: #00ff00; color: #ff00ff; text-align: center;">#FF00FF00</td>
+<td style="background-color: #00ff80; color: #ff00ff; text-align: center;">#FF00FF80</td>
+<td style="background-color: #c0ffc0; color: #000000; text-align: center;">#FFC0FFC0</td>
+</tr>
+<tr>
+<td style="background-color: #008080; color: #ff0000; text-align: center;">#FF008000</td>
+<td style="background-color: #00ffc0; color: #ff0000; text-align: center;">#FF00FFC0</td>
+<td style="background-color: #00ffff; color: #ff0000; text-align: center;">#FF00FFFF</td>
+<td style="background-color: #00c0ff; color: #ff0000; text-align: center;">#FF00C0FF</td>
+<td style="background-color: #c0ffff; color: #000000; text-align: center;">#FFC0FFFF</td>
+</tr>
+<tr>
+<td style="background-color: #000080; color: #ffff00; text-align: center;">#FF000080</td>
+<td style="background-color: #0080ff; color: #ffff00; text-align: center;">#FF0080FF</td>
+<td style="background-color: #0000ff; color: #ffff00; text-align: center;">#FF0000FF</td>
+<td style="background-color: #8000ff; color: #ffff00; text-align: center;">#FF8000FF</td>
+<td style="background-color: #c0c0ff; color: #000000; text-align: center;">#FFC0C0FF</td>
+</tr>
+<tr>
+<td style="background-color: #800080; color: #00ff00; text-align: center;">#FF000080</td>
+<td style="background-color: #c000ff; color: #00ff00; text-align: center;">#FFC000FF</td>
+<td style="background-color: #ff00ff; color: #00ff00; text-align: center;">#FFFF00FF</td>
+<td style="background-color: #ff00c0; color: #00ff00; text-align: center;">#FFFF00C0</td>
+<td style="background-color: #ffc0ff; color: #000000; text-align: center;">#FFFFC0FF</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

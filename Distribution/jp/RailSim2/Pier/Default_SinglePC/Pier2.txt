@@ -1,0 +1,95 @@
+/*
+ *	RailSim II Pier Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Pier;
+	PluginName = "デフォルトPC単線橋脚";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "単線用のシンプルなコンクリ橋脚です。";
+}
+
+PierInfo{
+	Interval = 20.0;
+	BuildMinAlt = 1.0;
+}
+
+Joint{
+	ModelFileName = "Joint.x";
+	ModelScale = 1.0;
+	JointToHeadLocal = (0.0, -0.2, 0.0);
+}
+
+Head{
+	ModelFileName = "Head.x";
+	ModelScale = 1.0;
+	HeadToPierLocal = (0.0, -0.4, 0.0);
+}
+
+Base{
+	ModelFileName = "Base.x";
+	ModelScale = 1.0;
+	BaseToPierLocal = (0.0, 0.2, 0.0);
+}
+
+/*
+ *	断面定義
+ */
+Profile{
+	Material{
+		UseTexture = yes;
+		TexFileName = "Concrete.png";
+		TexVPerMeter = 2.5;
+	}
+	Face{
+		Vertex{
+			Coord = (-0.8, -0.8);
+			Normal = (-1.0, -0.1);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (-0.8, 0.8);
+			Normal = (-1.0, 0.1);
+			TexU = 4.0;
+		}
+	}
+	Face{
+		Vertex{
+			Coord = (-0.8, 0.8);
+			Normal = (-0.1, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (0.8, 0.8);
+			Normal = (0.1, 1.0);
+			TexU = 4.0;
+		}
+	}
+	Face{
+		Vertex{
+			Coord = (0.8, 0.8);
+			Normal = (1.0, 0.1);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (0.8, -0.8);
+			Normal = (1.0, -0.1);
+			TexU = 4.0;
+		}
+	}
+	Face{
+		Vertex{
+			Coord = (0.8, -0.8);
+			Normal = (0.1, -1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			Coord = (-0.8, -0.8);
+			Normal = (-0.1, -1.0);
+			TexU = 4.0;
+		}
+	}
+}

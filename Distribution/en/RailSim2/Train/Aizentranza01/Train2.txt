@@ -1,0 +1,607 @@
+/*
+ *	RailSim II Train Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Train;
+	PluginName = "Aizentranza front car";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\Aizentranza01\Icon.png";
+	Description = "Fast car with tilting system.";
+}
+
+TrainInfo{
+	FrontLimit = 10.3;	//	前方連結位置 Z 座標
+	TailLimit = -10.3;	//	後方連結位置 Z 座標
+	MaxVelocity = 130.0;	//	最高速度
+	MaxAcceleration = 3.0;	//	最高加速度
+	MaxDeceleration = 4.0;	//	最高減速度
+	TiltSpeed = 0.1;	//	振り子反応速度
+	DoorClosingTime = 1.5;	//	ドア閉め所要時間
+}
+
+DefineSwitch "Body"{
+	Entry = "water blue";
+	Entry = "grape purple";
+	Entry = "stainless";
+}
+
+DefineSwitch "Directions"{
+	GroupCommon = "Aizentranza directions";
+	Entry = "Rapid, for Osaka";
+	Entry = "Local, for Kyoto";
+	Entry = "Out of service";
+}
+
+DefineSwitch "Consist number"{
+	GroupCommon = "Aizentranza consist number";
+	Entry = "Normal";
+	Entry = "Logo";
+}
+
+DefineSwitch "Pantograph"{
+	Entry = "None";
+	Entry = "Folded";
+	Entry = "Expand";
+}
+
+DefineSwitch "Lights"{
+	GroupCommon = "Aizentranza lights";
+	Entry = "On";
+	Entry = "Off";
+}
+
+DefineAnimation "Logo"{
+	TiledUVFrame = "AnimTest.png", 0.25, 0.25, 0.25, 0.25, 16, 2;
+}
+
+PrimaryAssembly{
+	Axle "Wheel1"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (8.4, 0.4);
+	}
+	Axle "Wheel2"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (6.6, 0.4);
+	}
+	Axle "Wheel3"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-6.6, 0.4);
+	}
+	Axle "Wheel4"{
+		ModelFileName = "Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-8.4, 0.4);
+	}
+	Body "Bogie1"{
+		ModelFileName = "Bogie.x";
+		ModelScale = 1.0;
+		JointZY "Wheel1"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (0.9, 0.0);
+		}
+		JointZY "Wheel2"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-0.9, 0.0);
+		}
+	}
+	Body "Bogie2"{
+		ModelFileName = "Bogie.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		JointZY "Wheel3"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-0.9, 0.0);
+		}
+		JointZY "Wheel4"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (0.9, 0.0);
+		}
+	}
+	Body "MainBody"{
+		ModelFileName = "Body.x";
+		ModelScale = 1.0;
+		NoShadow = 4, 5, 6, 7, 8, 9, 10;
+		NoReceiveShadow = 12;
+		ApplySwitch "Directions"{
+		Case 2:	//	回送のとき室内灯 OFF
+			ChangeAlpha = 7, 0.0;
+			ChangeAlpha = 8, 0.0;
+		Default:	//	回送以外のとき室内灯 ON
+			ChangeAlpha = 7, NightAlpha;
+			ChangeAlpha = 8, NightAlpha;
+		}
+		ApplySwitch "Body"{
+		Case 1:
+			ChangeTexture = 2, "Face2.png";
+			ChangeTexture = 3, "Body2.png";
+		Case 2:
+			ChangeTexture = 2, "Face3.png";
+			ChangeTexture = 3, "Body3.png";
+			EnvMap = 2, 3;
+			ChangeMaterial{
+				MaterialID = 2, 3;
+				Specular = 1.0, 1.0, 1.0;
+				Power = 15.0;
+			}
+		}
+		ApplySwitch "Directions"{
+		Case 1:
+			ChangeTexture = 4, "Side2.png";
+			ChangeTexture = 5, "Head2.png";
+		Case 2:
+			ChangeTexture = 4, "Side3.png";
+			ChangeTexture = 5, "Head3.png";
+		}
+		ApplySwitch "Consist number"{
+		Case 1:
+			SetAnimation = 6, "Logo";
+		}
+		//	ライトスイッチ、かつ連結なし
+		If !"Lights" && !"_CONNECT1"{
+			//	進行方向を判定
+			If "_FRONT"{
+				ChangeAlpha = 10, 1.0;
+			}Else{
+				ChangeAlpha = 9, 1.0;
+			}
+		}
+		JointZY "Bogie1"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (7.5, 1.0);
+		}
+		JointZY "Bogie2"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (-7.5, 1.0);
+		}
+		Tilt{
+			TiltRatio = 0.5;	//	振り子係数 (大きいほどよく振ります)
+			MaxAngle = 6.0;	//	振り子最大角度
+			BaseAlt = 2.3;	//	振り子回転基準 Y 座標
+		}
+	}
+	//	ドア
+	Object3D "DoorLL"{
+		ModelFileName = "DoorLeft.x";
+		ModelScale = 1.0;
+		NoShadow = 1;
+		NoReceiveShadow = 2;
+		ApplySwitch "Directions"{
+		Case 2: ChangeAlpha = 1, 0.0;
+		Default: ChangeAlpha = 1, NightAlpha;
+		}
+		ApplySwitch "Body"{
+		Case 1:
+			ChangeTexture = 0, "Body2.png";
+		Case 2:
+			ChangeTexture = 0, "Body3.png";
+			EnvMap = 0;
+			ChangeMaterial{
+				MaterialID = 0;
+				Specular = 1.0, 1.0, 1.0;
+				Power = 15.0;
+			}
+		}
+		If "_DOOR1"{
+			StaticMove{
+				Displacement = (0.03, 0.0, 0.0);
+				AnimationTime = 0.5;
+				PostAnimationDelay = 1.0;
+			}
+			StaticMove{
+				Displacement = (0.0, 0.0, 0.78);
+				PreAnimationDelay = 0.5;
+				AnimationTime = 1.0;
+			}
+		}
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.0, 0.0);
+		}
+	}
+	Object3D "DoorLR"{
+		ModelFileName = "DoorRight.x";
+		ModelScale = 1.0;
+		NoShadow = 1;
+		NoReceiveShadow = 2;
+		ApplySwitch "Directions"{
+		Case 2: ChangeAlpha = 1, 0.0;
+		Default: ChangeAlpha = 1, NightAlpha;
+		}
+		ApplySwitch "Body"{
+		Case 1:
+			ChangeTexture = 0, "Body2.png";
+		Case 2:
+			ChangeTexture = 0, "Body3.png";
+			EnvMap = 0;
+			ChangeMaterial{
+				MaterialID = 0;
+				Specular = 1.0, 1.0, 1.0;
+				Power = 15.0;
+			}
+		}
+		If "_DOOR1"{
+			StaticMove{
+				Displacement = (0.03, 0.0, 0.0);
+				AnimationTime = 0.5;
+				PostAnimationDelay = 1.0;
+			}
+			StaticMove{
+				Displacement = (0.0, 0.0, -0.78);
+				PreAnimationDelay = 0.5;
+				AnimationTime = 1.0;
+			}
+		}
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.0, 0.0);
+		}
+	}
+	Object3D "DoorRL"{
+		ModelFileName = "DoorLeft.x";
+		ModelScale = 1.0;
+		NoShadow = 1;
+		NoReceiveShadow = 2;
+		ApplySwitch "Directions"{
+		Case 2: ChangeAlpha = 1, 0.0;
+		Default: ChangeAlpha = 1, NightAlpha;
+		}
+		ApplySwitch "Body"{
+		Case 1:
+			ChangeTexture = 0, "Body2.png";
+		Case 2:
+			ChangeTexture = 0, "Body3.png";
+			EnvMap = 0;
+			ChangeMaterial{
+				MaterialID = 0;
+				Specular = 1.0, 1.0, 1.0;
+				Power = 15.0;
+			}
+		}
+		If "_DOOR2"{
+			StaticMove{
+				Displacement = (0.03, 0.0, 0.0);
+				AnimationTime = 0.5;
+				PostAnimationDelay = 1.0;
+			}
+			StaticMove{
+				Displacement = (0.0, 0.0, 0.78);
+				PreAnimationDelay = 0.5;
+				AnimationTime = 1.0;
+			}
+		}
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.0, 0.0);
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+	Object3D "DoorRR"{
+		ModelFileName = "DoorRight.x";
+		ModelScale = 1.0;
+		NoShadow = 1;
+		NoReceiveShadow = 2;
+		ApplySwitch "Directions"{
+		Case 2: ChangeAlpha = 1, 0.0;
+		Default: ChangeAlpha = 1, NightAlpha;
+		}
+		ApplySwitch "Body"{
+		Case 1:
+			ChangeTexture = 0, "Body2.png";
+		Case 2:
+			ChangeTexture = 0, "Body3.png";
+			EnvMap = 0;
+			ChangeMaterial{
+				MaterialID = 0;
+				Specular = 1.0, 1.0, 1.0;
+				Power = 15.0;
+			}
+		}
+		If "_DOOR2"{
+			StaticMove{
+				Displacement = (0.03, 0.0, 0.0);
+				AnimationTime = 0.5;
+				PostAnimationDelay = 1.0;
+			}
+			StaticMove{
+				Displacement = (0.0, 0.0, -0.78);
+				PreAnimationDelay = 0.5;
+				AnimationTime = 1.0;
+			}
+		}
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.0, 0.0);
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+	//	ヨーダンパー
+	PistonZY{
+		Link "YawDamper11"{
+			ModelFileName = "YawDamper1.x";
+			ModelScale = 1.0;
+			JointZYX "Bogie1"{
+				AttachX = -1.1;
+				AttachCoord = (0.0, 0.05);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (-0.8, 0.0);
+		}
+		Link "YawDamper12"{
+			ModelFileName = "YawDamper2.x";
+			ModelScale = 1.0;
+			JointZYX "MainBody"{
+				AttachX = -1.1;
+				AttachCoord = (6.7, 0.45);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.8, 0.0);
+		}
+	}
+	PistonZY{
+		Link "YawDamper21"{
+			ModelFileName = "YawDamper1.x";
+			ModelScale = 1.0;
+			JointZYX "Bogie1"{
+				AttachX = 1.1;
+				AttachCoord = (0.0, 0.05);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (-0.8, 0.0);
+		}
+		Link "YawDamper22"{
+			ModelFileName = "YawDamper2.x";
+			ModelScale = 1.0;
+			JointZYX "MainBody"{
+				AttachX = 1.1;
+				AttachCoord = (6.7, 0.45);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.8, 0.0);
+		}
+	}
+	PistonZY{
+		Link "YawDamper31"{
+			ModelFileName = "YawDamper1.x";
+			ModelScale = 1.0;
+			Turn = yes;
+			JointZYX "Bogie2"{
+				AttachX = 1.1;
+				AttachCoord = (0.0, 0.05);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (-0.8, 0.0);
+		}
+		Link "YawDamper32"{
+			ModelFileName = "YawDamper2.x";
+			ModelScale = 1.0;
+			Turn = yes;
+			JointZYX "MainBody"{
+				AttachX = -1.1;
+				AttachCoord = (-6.7, 0.45);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.8, 0.0);
+		}
+	}
+	PistonZY{
+		Link "YawDamper41"{
+			ModelFileName = "YawDamper1.x";
+			ModelScale = 1.0;
+			Turn = yes;
+			JointZYX "Bogie2"{
+				AttachX = -1.1;
+				AttachCoord = (0.0, 0.05);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (-0.8, 0.0);
+		}
+		Link "YawDamper42"{
+			ModelFileName = "YawDamper2.x";
+			ModelScale = 1.0;
+			Turn = yes;
+			JointZYX "MainBody"{
+				AttachX = 1.1;
+				AttachCoord = (-6.7, 0.45);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.8, 0.0);
+		}
+	}
+	//	連結器
+	Object3D "Connector1"{
+		ModelFileName = "ConnectorNormal.x";
+		ModelScale = 1.0;
+		If !"_CONNECT1"{
+			ChangeModel = "ConnectorCovered.x", 1.0;
+		}
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.85, 9.7);
+			LocalCoord = (0.0, 0.0, -0.3);
+			DirLink = "Bogie1";
+		}
+	}
+	Object3D "Connector2"{
+		ModelFileName = "ConnectorNormal.x";
+		ModelScale = 1.0;
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.85, -9.7);
+			LocalCoord = (0.0, 0.0, -0.3);
+			DirLink = "Bogie2";
+		}
+	}
+	//	幌
+	Object3D "Hood"{
+		ModelFileName = "Hood.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 2.2, -10.0);
+			DirLink = "Bogie2";
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+	//	パンタグラフ
+	Object3D "Pantograph0"{
+		ModelFileName = "Pantograph0.x";
+		ModelScale = 1.0;
+		ApplySwitch "Pantograph"{
+		Case 0:
+			ChangeModel = "", 1.0;
+		}
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 3.7, 6.0);
+			UpLink = "Bogie1";
+		}
+	}
+	Object3D "Pantograph1"{
+		ModelFileName = "Pantograph1.x";
+		ModelScale = 1.0;
+		ApplySwitch "Pantograph"{
+		Case 0:
+			ChangeModel = "", 1.0;
+		Case 1:
+			StaticRotation{
+				RotationAxis = (1.0, 0.0, 0.0);
+				RotationAngle = 27.03;
+				AnimationTime = 5.0;
+			}
+		}
+		Joint3D "Pantograph0"{
+			AttachCoord = (0.0, 0.3, 0.0);
+		}
+	}
+	Object3D "Pantograph2"{
+		ModelFileName = "Pantograph2.x";
+		ModelScale = 1.0;
+		ApplySwitch "Pantograph"{
+		Case 0:
+			ChangeModel = "", 1.0;
+		Case 1:
+			StaticRotation{
+				RotationAxis = (1.0, 0.0, 0.0);
+				RotationAngle = -44.36;
+				AnimationTime = 5.0;
+			}
+		}
+		Joint3D "Pantograph1"{
+			AttachCoord = (0.0, 0.5, 0.98);
+		}
+	}
+	Object3D "Pantograph3"{
+		ModelFileName = "Pantograph3.x";
+		ModelScale = 1.0;
+		ApplySwitch "Pantograph"{
+		Case 0:
+			ChangeModel = "", 1.0;
+		}
+		Joint3D "Pantograph2"{
+			AttachCoord = (0.0, 0.495, -1.298);
+			DirLink = "Pantograph0";
+			UpLink = "Pantograph0";
+		}
+	}
+	//	ライトスイッチ、かつ連結なし
+	If !"Lights" && !"_CONNECT1"{
+		//	進行方向を判定
+		If "_FRONT"{
+			//	テールランプ
+			Headlight{
+				AttachObject = "MainBody";
+				SourceCoord = (-0.6, 1.6, 10.0);
+				Direction = (0.0, 0.0, 1.0);
+				MaxDistance = 5.0;
+				LensFlare{
+					StartAngle = 25.0;
+					Circle{
+						Distance = 0.0;
+						Radius = 0.15;
+						InnerColor = #ffff0000;
+						OuterColor = #00000000;
+					}
+					Circle{
+						Distance = 0.1;
+						Radius = 0.4;
+						InnerColor = #00000000;
+						OuterColor = #20ff0000;
+					}
+				}
+			}
+			Headlight{
+				AttachObject = "MainBody";
+				SourceCoord = (0.6, 1.6, 10.0);
+				Direction = (0.0, 0.0, 1.0);
+				MaxDistance = 5.0;
+			}
+		}Else{
+			//	ヘッドライト
+			Headlight{
+				AttachObject = "MainBody";
+				SourceCoord = (-0.8, 1.65, 9.97);
+				Direction = (0.0, 0.0, 1.0);
+				MaxDistance = 10.0;
+				LensFlare{
+					StartAngle = 25.0;
+					Circle{
+						Distance = 0.0;
+						Radius = 0.3;
+						InnerColor = #ffffff80;
+						OuterColor = #00000000;
+					}
+					Circle{
+						Distance = 0.05;
+						Radius = 0.3;
+						InnerColor = #00000000;
+						OuterColor = #40ffff80;
+					}
+					Circle{
+						Distance = 0.1;
+						Radius = 0.6;
+						InnerColor = #00000000;
+						OuterColor = #30ffffc0;
+					}
+					Circle{
+						Distance = 0.15;
+						Radius = 0.9;
+						InnerColor = #00000000;
+						OuterColor = #20ffffff;
+					}
+				}
+			}
+			Headlight{
+				AttachObject = "MainBody";
+				SourceCoord = (-1.04, 1.65, 9.93);
+				Direction = (0.0, 0.0, 1.0);
+				MaxDistance = 10.0;
+				//	LensFlare ブロック省略の場合は直前の定義をコピーします
+			}
+			Headlight{
+				AttachObject = "MainBody";
+				SourceCoord = (0.8, 1.65, 9.97);
+				Direction = (0.0, 0.0, 1.0);
+				MaxDistance = 10.0;
+			}
+			Headlight{
+				AttachObject = "MainBody";
+				SourceCoord = (1.04, 1.65, 9.93);
+				Direction = (0.0, 0.0, 1.0);
+				MaxDistance = 10.0;
+			}
+		}
+	}
+	FrontCabin{
+		Joint3D "MainBody"{
+			AttachCoord = (-0.6, 2.5, 9.0);
+			DirLink = "Bogie1";
+		}
+	}
+}

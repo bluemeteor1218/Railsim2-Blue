@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName />
+    <SccLocalPath />
+    <ProjectGuid>{9C8E1D39-1481-18D9-2BF2-0AF10B107E1A}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>RailSim2\</OutDir>
+    <IntDir>Release_vc2010\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>RailSim2_Release_vc2010</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>RailSim2\</OutDir>
+    <IntDir>Debug_vc2010\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <TargetName>RailSim2_Debug_vc2010</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release_vc2010\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Release_vc2010\RailSim2.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Release_vc2010\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release_vc2010\</ProgramDataBaseFileName>
+      <AdditionalIncludeDirectories>%DX8SDK_ROOT%\\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DisableSpecificWarnings>4244;4996;4018;</DisableSpecificWarnings>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Release_vc2010\RailSim2.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0411</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release_vc2010\RailSim2.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>RailSim2\RailSim2_Release_vc2010.exe</OutputFile>
+      <AdditionalDependencies>libcpmt.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%DX8SDK_ROOT%\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/nodefaultlib:libci %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug_vc2010\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Debug_vc2010\RailSim2.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Debug_vc2010\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug_vc2010\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <AdditionalIncludeDirectories>%DX8SDK_ROOT%\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/D "_HAS_ITERATOR_DEBUGGING=0" %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4244;4996;4018;</DisableSpecificWarnings>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Debug_vc2010\RailSim2.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0411</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug_vc2010\RailSim2.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>.\RailSim2\RailSim2_Debug_vc2010.exe</OutputFile>
+      <AdditionalDependencies>libcpmt.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%DX8SDK_ROOT%\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libci</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CCursor.cpp" />
+    <ClCompile Include="CJobTimer.cpp" />
+    <ClCompile Include="CPixelbit.cpp" />
+    <ClCompile Include="CPixelbitStamp.cpp" />
+    <ClCompile Include="CShadowVolume.cpp" />
+    <ClCompile Include="CStringTexture.cpp" />
+    <ClCompile Include="CVertexDump.cpp" />
+    <ClCompile Include="CWaveArray.cpp" />
+    <ClCompile Include="CCheckBox.cpp" />
+    <ClCompile Include="CDiaDialog.cpp" />
+    <ClCompile Include="CDragContainer.cpp" />
+    <ClCompile Include="CEditCtrl.cpp" />
+    <ClCompile Include="CGroupBox.cpp" />
+    <ClCompile Include="CInterface.cpp" />
+    <ClCompile Include="CListView.cpp" />
+    <ClCompile Include="CMiniButton.cpp" />
+    <ClCompile Include="CMultiStatic.cpp" />
+    <ClCompile Include="CPluginTree.cpp" />
+    <ClCompile Include="CPopMenu.cpp" />
+    <ClCompile Include="CPushButton.cpp" />
+    <ClCompile Include="CRadioButton.cpp" />
+    <ClCompile Include="CScrollBarV.cpp" />
+    <ClCompile Include="CSimpleDialog.cpp" />
+    <ClCompile Include="CStaticCtrl.cpp" />
+    <ClCompile Include="CToggleIcon.cpp" />
+    <ClCompile Include="CTreeDirElement.cpp" />
+    <ClCompile Include="CTreeElement.cpp" />
+    <ClCompile Include="CTreeFileElement.cpp" />
+    <ClCompile Include="CWindowCtrl.cpp" />
+    <ClCompile Include="CGirderSelectMode.cpp" />
+    <ClCompile Include="CLineSelectMode.cpp" />
+    <ClCompile Include="CPierSelectMode.cpp" />
+    <ClCompile Include="CPoleSelectMode.cpp" />
+    <ClCompile Include="CRailBuildMode.cpp" />
+    <ClCompile Include="CRailEditMode.cpp" />
+    <ClCompile Include="CRailSelectMode.cpp" />
+    <ClCompile Include="CRailwayMode.cpp" />
+    <ClCompile Include="CTieSelectMode.cpp" />
+    <ClCompile Include="CDiaEditMode.cpp" />
+    <ClCompile Include="CTrainEditMode.cpp" />
+    <ClCompile Include="CTrainSetMode.cpp" />
+    <ClCompile Include="CTrainViewMode.cpp" />
+    <ClCompile Include="CStationBuildMode.cpp" />
+    <ClCompile Include="CStationEditMode.cpp" />
+    <ClCompile Include="CStationSelectMode.cpp" />
+    <ClCompile Include="CStructBuildMode.cpp" />
+    <ClCompile Include="CStructEditMode.cpp" />
+    <ClCompile Include="CStructSelectMode.cpp" />
+    <ClCompile Include="CEnvEditMode.cpp" />
+    <ClCompile Include="CSceneEditMode.cpp" />
+    <ClCompile Include="CSimulationMode.cpp" />
+    <ClCompile Include="CConfigMode.cpp" />
+    <ClCompile Include="CExitMode.cpp" />
+    <ClCompile Include="CFileMode.cpp" />
+    <ClCompile Include="CSkinSelectMode.cpp" />
+    <ClCompile Include="CVideoMode.cpp" />
+    <ClCompile Include="C3DPluginMode.cpp" />
+    <ClCompile Include="CGameMode.cpp" />
+    <ClCompile Include="CInterfaceMode.cpp" />
+    <ClCompile Include="CNeutralMode.cpp" />
+    <ClCompile Include="CSceneryMode.cpp" />
+    <ClCompile Include="CCustomizer.cpp" />
+    <ClCompile Include="CCustomizerMisc.cpp" />
+    <ClCompile Include="CCustomizerMover.cpp" />
+    <ClCompile Include="CEffector.cpp" />
+    <ClCompile Include="CExpression.cpp" />
+    <ClCompile Include="CLensFlare.cpp" />
+    <ClCompile Include="CModelSwitch.cpp" />
+    <ClCompile Include="CNamedObject.cpp" />
+    <ClCompile Include="CParticle.cpp" />
+    <ClCompile Include="CSoundEffector.cpp" />
+    <ClCompile Include="CTextureAnimation.cpp" />
+    <ClCompile Include="CRailwayPluginSet.cpp" />
+    <ClCompile Include="CTrainGroupTemplate.cpp" />
+    <ClCompile Include="CGirderPlugin.cpp" />
+    <ClCompile Include="CLinePlugin.cpp" />
+    <ClCompile Include="CPierPlugin.cpp" />
+    <ClCompile Include="CPolePlugin.cpp" />
+    <ClCompile Include="CProfilePlugin.cpp" />
+    <ClCompile Include="CRailPlugin.cpp" />
+    <ClCompile Include="CTiePlugin.cpp" />
+    <ClCompile Include="CModelPlugin.cpp" />
+    <ClCompile Include="CStationPlugin.cpp" />
+    <ClCompile Include="CStructPlugin.cpp" />
+    <ClCompile Include="CSurfacePlugin.cpp" />
+    <ClCompile Include="CTrainPlugin.cpp" />
+    <ClCompile Include="CEnvPlugin.cpp" />
+    <ClCompile Include="CPlugin.cpp" />
+    <ClCompile Include="CSkinPlugin.cpp" />
+    <ClCompile Include="CLine.cpp" />
+    <ClCompile Include="CPier.cpp" />
+    <ClCompile Include="CRailConnector.cpp" />
+    <ClCompile Include="CRailWay.cpp" />
+    <ClCompile Include="CModelInst.cpp" />
+    <ClCompile Include="CPartsInst.cpp" />
+    <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CStation.cpp" />
+    <ClCompile Include="CStruct.cpp" />
+    <ClCompile Include="CTrain.cpp" />
+    <ClCompile Include="CDiaInst.cpp" />
+    <ClCompile Include="CRailBuilder.cpp" />
+    <ClCompile Include="CSaveFile.cpp" />
+    <ClCompile Include="CTrainGroup.cpp" />
+    <ClCompile Include="CLineBuildCurve.cpp" />
+    <ClCompile Include="CRailCurve.cpp" />
+    <ClCompile Include="CRailDetectCurve.cpp" />
+    <ClCompile Include="CRailDumpCurve.cpp" />
+    <ClCompile Include="CRailPlanCurve.cpp" />
+    <ClCompile Include="CRailSplitCurve.cpp" />
+    <ClCompile Include="CTrainSetCurve.cpp" />
+    <ClCompile Include="Capture.cpp" />
+    <ClCompile Include="CWindowDivInfo.cpp" />
+    <ClCompile Include="GraphicCover.cpp" />
+    <ClCompile Include="HighTimer.cpp" />
+    <ClCompile Include="Language.cpp" />
+    <ClCompile Include="md5.cpp" />
+    <ClCompile Include="Network.cpp" />
+    <ClCompile Include="RailMap.cpp" />
+    <ClCompile Include="RailSim2.cpp" />
+    <ClCompile Include="Script.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="SystemCover.cpp" />
+    <ClCompile Include="WakeUp.cpp" />
+    <ClCompile Include="lib\anim.cpp" />
+    <ClCompile Include="lib\comm.cpp" />
+    <ClCompile Include="lib\debug.cpp" />
+    <ClCompile Include="lib\draw.cpp" />
+    <ClCompile Include="lib\editbox.cpp" />
+    <ClCompile Include="lib\effect.cpp" />
+    <ClCompile Include="lib\font.cpp" />
+    <ClCompile Include="lib\graphic.cpp" />
+    <ClCompile Include="lib\input.cpp" />
+    <ClCompile Include="lib\light.cpp" />
+    <ClCompile Include="lib\main.cpp" />
+    <ClCompile Include="lib\mesh.cpp" />
+    <ClCompile Include="lib\object.cpp" />
+    <ClCompile Include="lib\offscreen.cpp" />
+    <ClCompile Include="lib\sound.cpp" />
+    <ClCompile Include="lib\texture.cpp" />
+    <ClCompile Include="lib\vertex.cpp" />
+    <ClCompile Include="lib\view.cpp" />
+    <ClCompile Include="lib\view_ctrl.cpp" />
+    <ClCompile Include="lib\wave.cpp" />
+    <ClCompile Include="lib\wave_stream.cpp" />
+    <ClCompile Include="lib\window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RailSim2.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CCameraFocus.h" />
+    <ClInclude Include="CCursor.h" />
+    <ClInclude Include="CJobTimer.h" />
+    <ClInclude Include="CPixelbit.h" />
+    <ClInclude Include="CShadowVolume.h" />
+    <ClInclude Include="CStringTexture.h" />
+    <ClInclude Include="CVertexDump.h" />
+    <ClInclude Include="CWaveArray.h" />
+    <ClInclude Include="CCheckBox.h" />
+    <ClInclude Include="CDiaDialog.h" />
+    <ClInclude Include="CDragContainer.h" />
+    <ClInclude Include="CEditCtrl.h" />
+    <ClInclude Include="CGroupBox.h" />
+    <ClInclude Include="CInterface.h" />
+    <ClInclude Include="CListView.h" />
+    <ClInclude Include="CMiniButton.h" />
+    <ClInclude Include="CMultiStatic.h" />
+    <ClInclude Include="CPluginTree.h" />
+    <ClInclude Include="CPopMenu.h" />
+    <ClInclude Include="CPushButton.h" />
+    <ClInclude Include="CRadioButton.h" />
+    <ClInclude Include="CScrollBarV.h" />
+    <ClInclude Include="CSimpleDialog.h" />
+    <ClInclude Include="CStaticCtrl.h" />
+    <ClInclude Include="CToggleIcon.h" />
+    <ClInclude Include="CTrainListView.h" />
+    <ClInclude Include="CTreeDirElement.h" />
+    <ClInclude Include="CTreeElement.h" />
+    <ClInclude Include="CTreeFileElement.h" />
+    <ClInclude Include="CWindowCtrl.h" />
+    <ClInclude Include="CGirderSelectMode.h" />
+    <ClInclude Include="CLineSelectMode.h" />
+    <ClInclude Include="CPierSelectMode.h" />
+    <ClInclude Include="CPoleSelectMode.h" />
+    <ClInclude Include="CRailBuildMode.h" />
+    <ClInclude Include="CRailEditMode.h" />
+    <ClInclude Include="CRailSelectMode.h" />
+    <ClInclude Include="CRailwayMode.h" />
+    <ClInclude Include="CTieSelectMode.h" />
+    <ClInclude Include="CDiaEditMode.h" />
+    <ClInclude Include="CTrainEditMode.h" />
+    <ClInclude Include="CTrainSetMode.h" />
+    <ClInclude Include="CTrainViewMode.h" />
+    <ClInclude Include="CStationBuildMode.h" />
+    <ClInclude Include="CStationEditMode.h" />
+    <ClInclude Include="CStationSelectMode.h" />
+    <ClInclude Include="CStructBuildMode.h" />
+    <ClInclude Include="CStructEditMode.h" />
+    <ClInclude Include="CStructSelectMode.h" />
+    <ClInclude Include="CEnvEditMode.h" />
+    <ClInclude Include="CSceneEditMode.h" />
+    <ClInclude Include="CSimulationMode.h" />
+    <ClInclude Include="CConfigMode.h" />
+    <ClInclude Include="CExitMode.h" />
+    <ClInclude Include="CFileMode.h" />
+    <ClInclude Include="CSkinSelectMode.h" />
+    <ClInclude Include="CVideoMode.h" />
+    <ClInclude Include="C3DPluginMode.h" />
+    <ClInclude Include="CGameMode.h" />
+    <ClInclude Include="CInterfaceMode.h" />
+    <ClInclude Include="CNeutralMode.h" />
+    <ClInclude Include="CSceneryMode.h" />
+    <ClInclude Include="CCustomizer.h" />
+    <ClInclude Include="CCustomizerMisc.h" />
+    <ClInclude Include="CCustomizerMover.h" />
+    <ClInclude Include="CEffector.h" />
+    <ClInclude Include="CExpression.h" />
+    <ClInclude Include="CLensFlare.h" />
+    <ClInclude Include="CModelSwitch.h" />
+    <ClInclude Include="CNamedObject.h" />
+    <ClInclude Include="CParticle.h" />
+    <ClInclude Include="CSoundEffector.h" />
+    <ClInclude Include="CTextureAnimation.h" />
+    <ClInclude Include="CRailwayPluginSet.h" />
+    <ClInclude Include="CTrainGroupTemplate.h" />
+    <ClInclude Include="CGirderPlugin.h" />
+    <ClInclude Include="CLinePlugin.h" />
+    <ClInclude Include="CPierPlugin.h" />
+    <ClInclude Include="CPolePlugin.h" />
+    <ClInclude Include="CProfilePlugin.h" />
+    <ClInclude Include="CRailPlugin.h" />
+    <ClInclude Include="CTiePlugin.h" />
+    <ClInclude Include="CModelPlugin.h" />
+    <ClInclude Include="CStationPlugin.h" />
+    <ClInclude Include="CStructPlugin.h" />
+    <ClInclude Include="CSurfacePlugin.h" />
+    <ClInclude Include="CTrainPlugin.h" />
+    <ClInclude Include="CEnvPlugin.h" />
+    <ClInclude Include="CPlugin.h" />
+    <ClInclude Include="CSkinPlugin.h" />
+    <ClInclude Include="CLine.h" />
+    <ClInclude Include="CPier.h" />
+    <ClInclude Include="CRailConnector.h" />
+    <ClInclude Include="CRailLink.h" />
+    <ClInclude Include="CRailWay.h" />
+    <ClInclude Include="CModelInst.h" />
+    <ClInclude Include="CPartsInst.h" />
+    <ClInclude Include="CScene.h" />
+    <ClInclude Include="CStation.h" />
+    <ClInclude Include="CStruct.h" />
+    <ClInclude Include="CTrain.h" />
+    <ClInclude Include="CDiaInst.h" />
+    <ClInclude Include="CRailBuilder.h" />
+    <ClInclude Include="CSaveFile.h" />
+    <ClInclude Include="CTrainGroup.h" />
+    <ClInclude Include="CLineBuildCurve.h" />
+    <ClInclude Include="CRailCurve.h" />
+    <ClInclude Include="CRailDetectCurve.h" />
+    <ClInclude Include="CRailDumpCurve.h" />
+    <ClInclude Include="CRailPlanCurve.h" />
+    <ClInclude Include="CRailSplitCurve.h" />
+    <ClInclude Include="CRailTraceCurve.h" />
+    <ClInclude Include="CTrainSetBuffer.h" />
+    <ClInclude Include="CTrainSetCurve.h" />
+    <ClInclude Include="Capture.h" />
+    <ClInclude Include="Const.h" />
+    <ClInclude Include="CWindowDivInfo.h" />
+    <ClInclude Include="GraphicCover.h" />
+    <ClInclude Include="HighTimer.h" />
+    <ClInclude Include="Language.h" />
+    <ClInclude Include="LanguageID.h" />
+    <ClInclude Include="Macro.h" />
+    <ClInclude Include="md5.h" />
+    <ClInclude Include="Network.h" />
+    <ClInclude Include="RailMap.h" />
+    <ClInclude Include="RSPV.H" />
+    <ClInclude Include="Script.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SystemCover.h" />
+    <ClInclude Include="ValueArea.h" />
+    <ClInclude Include="lib\anim.h" />
+    <ClInclude Include="lib\app.h" />
+    <ClInclude Include="lib\bcc.h" />
+    <ClInclude Include="lib\comm.h" />
+    <ClInclude Include="lib\debug.h" />
+    <ClInclude Include="lib\draw.h" />
+    <ClInclude Include="lib\editbox.h" />
+    <ClInclude Include="lib\effect.h" />
+    <ClInclude Include="lib\font.h" />
+    <ClInclude Include="lib\frame.h" />
+    <ClInclude Include="lib\graphic.h" />
+    <ClInclude Include="lib\headers.h" />
+    <ClInclude Include="lib\input.h" />
+    <ClInclude Include="lib\libraries.h" />
+    <ClInclude Include="lib\light.h" />
+    <ClInclude Include="lib\mesh.h" />
+    <ClInclude Include="lib\mutex.h" />
+    <ClInclude Include="lib\object.h" />
+    <ClInclude Include="lib\offscreen.h" />
+    <ClInclude Include="lib\render.h" />
+    <ClInclude Include="lib\sound.h" />
+    <ClInclude Include="lib\sysvalue.h" />
+    <ClInclude Include="lib\texture.h" />
+    <ClInclude Include="lib\udx.h" />
+    <ClInclude Include="lib\vertex.h" />
+    <ClInclude Include="lib\view.h" />
+    <ClInclude Include="lib\view_ctrl.h" />
+    <ClInclude Include="lib\wave.h" />
+    <ClInclude Include="lib\wave_stream.h" />
+    <ClInclude Include="lib\window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\Opening.bmp" />
+    <CustomBuild Include="res\RailSim2.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

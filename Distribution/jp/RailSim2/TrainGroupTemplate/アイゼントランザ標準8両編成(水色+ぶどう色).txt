@@ -1,0 +1,55 @@
+DatafileHeader{
+	RailSimVersion = 2.00;
+	DatafileType = TrainGroupTemplate;
+}
+
+TrainGroupTemplate{
+	TrainTemplate{
+		TrainPlugin = "Aizentranza01";
+		Reverse = no;
+		SwitchNum = 5;
+		SwitchOption = 0, 0, 0, 2, 0;
+	}
+	TrainTemplate{
+		TrainPlugin = "Aizentranza02";
+		Reverse = no;
+		SwitchNum = 3;
+		SwitchOption = 0, 0, 0;
+	}
+	TrainTemplate{
+		TrainPlugin = "Aizentranza02";
+		Reverse = no;
+		SwitchNum = 3;
+		SwitchOption = 0, 0, 0;
+	}
+	TrainTemplate{
+		TrainPlugin = "Aizentranza01";
+		Reverse = yes;
+		SwitchNum = 5;
+		SwitchOption = 0, 0, 0, 0, 0;
+	}
+	TrainTemplate{
+		TrainPlugin = "Aizentranza01";
+		Reverse = no;
+		SwitchNum = 5;
+		SwitchOption = 1, 0, 0, 0, 0;
+	}
+	TrainTemplate{
+		TrainPlugin = "Aizentranza02";
+		Reverse = no;
+		SwitchNum = 3;
+		SwitchOption = 1, 0, 2;
+	}
+	TrainTemplate{
+		TrainPlugin = "Aizentranza02";
+		Reverse = no;
+		SwitchNum = 3;
+		SwitchOption = 1, 0, 0;
+	}
+	TrainTemplate{
+		TrainPlugin = "Aizentranza01";
+		Reverse = yes;
+		SwitchNum = 5;
+		SwitchOption = 1, 0, 0, 0, 0;
+	}
+}

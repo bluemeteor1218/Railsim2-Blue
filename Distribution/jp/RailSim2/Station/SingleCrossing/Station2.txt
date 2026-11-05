@@ -1,0 +1,151 @@
+/*
+ *	RailSim II Station Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Station;
+	PluginName = "単線踏切";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "単線用の普通の踏切です。";
+}
+
+StationInfo{
+}
+
+Platform{
+	Stoppable = no;
+	LiftRailSurface = no;
+	Coord = (0.0, 0.4, -10.0);
+	Coord = (0.0, 0.4, 10.0);
+}
+
+DefineSwitch "軌間"{
+	Entry = "1067mm 狭軌";
+	Entry = "1435mm 標準軌";
+}
+
+DefineAnimation "Blink1"{
+	Frame = "Signal.png", 15;
+	ShiftTexture = 0.0, 0.0;
+	Frame = "Signal.png", 15;
+	ShiftTexture = 0.0, 0.5;
+}
+
+DefineAnimation "Blink2"{
+	Frame = "Signal.png", 15;
+	ShiftTexture = 0.0, 0.5;
+	Frame = "Signal.png", 15;
+	ShiftTexture = 0.0, 0.0;
+}
+
+PrimaryAssembly{
+	Object3D "Main"{
+		ModelFileName = "";
+		ModelScale = 1.0;
+		ApplySwitch "軌間"{
+		Case 0: ChangeModel = "Road_N.x", 1.0;
+		Case 1: ChangeModel = "Road_S.x", 1.0;
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 0.0, 0.0);
+		}
+	}
+	Object3D "Signal1"{
+		ModelFileName = "Signal.x";
+		ModelScale = 1.0;
+		NoShadow = 0, 1, 2;
+		If "_APPROACH1"|"_APPROACH2"{
+			ChangeAlpha = 0, 1.0;
+			ChangeAlpha = 1, 1.0;
+			ChangeAlpha = 2, 1.0;
+			SetAnimation = 0, "Blink1";
+			SetAnimation = 1, "Blink2";
+		}
+		If "_APPROACH1"{
+			If "_APPROACH2"{
+				ShiftTexture = 2, 0.5, 0.5;
+			}Else{
+				ShiftTexture = 2, 0.5, 0.0;
+			}
+		}Else{
+			If "_APPROACH2"{
+				ShiftTexture = 2, 0.0, 0.5;
+			}Else{
+				ShiftTexture = 2, 0.0, 0.0;
+			}
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (-2.3, 0.0, 2.5);
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+	Object3D "Pole1"{
+		ModelFileName = "Pole.x";
+		ModelScale = 1.0;
+		If "_APPROACH1"|"_APPROACH2"{
+			StaticRotation{
+				RotationAxis = (1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 1.0;
+				AnimationTime = 4.0;
+			}
+		}
+		Joint3D "Signal1"{
+			AttachCoord = (-0.3, 1.2, 0.1);
+		}
+	}
+	Object3D "Signal2"{
+		ModelFileName = "Signal.x";
+		ModelScale = 1.0;
+		NoShadow = 0, 1, 2;
+		If "_APPROACH1"|"_APPROACH2"{
+			ChangeAlpha = 0, 1.0;
+			ChangeAlpha = 1, 1.0;
+			ChangeAlpha = 2, 1.0;
+			SetAnimation = 0, "Blink1";
+			SetAnimation = 1, "Blink2";
+		}
+		If "_APPROACH1"{
+			If "_APPROACH2"{
+				ShiftTexture = 2, 0.5, 0.5;
+			}Else{
+				ShiftTexture = 2, 0.0, 0.5;
+			}
+		}Else{
+			If "_APPROACH2"{
+				ShiftTexture = 2, 0.5, 0.0;
+			}Else{
+				ShiftTexture = 2, 0.0, 0.0;
+			}
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (2.3, 0.0, -2.5);
+			AttachDir = (0.0, 0.0, 1.0);
+		}
+	}
+	Object3D "Pole2"{
+		ModelFileName = "Pole.x";
+		ModelScale = 1.0;
+		If "_APPROACH1"|"_APPROACH2"{
+			StaticRotation{
+				RotationAxis = (1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 1.0;
+				AnimationTime = 4.0;
+			}
+		}
+		Joint3D "Signal2"{
+			AttachCoord = (-0.3, 1.2, 0.1);
+		}
+	}
+	If "_APPROACH1"|"_APPROACH2"{
+		SoundEffect{
+			WaveFileName = "Signal.wav";
+			AttachObject = "Main";
+			SourceCoord = (0.0, 0.0, 0.0);
+		}
+	}
+}

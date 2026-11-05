@@ -1,0 +1,122 @@
+/*
+ *	RailSim II Girder Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Girder;
+	PluginName = "Default JR-narrow single PC girder";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "Normal concrete girder for single track narrow gauge.";
+}
+
+GirderInfo{
+	Height = 0.4;
+	FlattenCant = yes;
+}
+
+Profile{
+	Material{
+		UseTexture = yes;
+		TexFileName = "Concrete.png";
+		TexVPerMeter = 1.0;
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-2.4, 0.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (2.4, 0.0);
+			TexU = 4.8;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (2.4, 0.0);
+			TexU = 0.8;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (2.4, 1.0);
+			TexU = 1.8;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (2.4, 1.0);
+			TexU = 0.8;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (2.6, 1.0);
+			TexU = 1.0;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (2.6, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (2.6, -0.4);
+			TexU = 1.4;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (2.6, -0.4);
+			TexU = 0.4;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-2.6, -0.4);
+			TexU = 5.6;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-2.6, -0.4);
+			TexU = 0.6;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-2.6, 1.0);
+			TexU = 2.0;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-2.6, 1.0);
+			TexU = 0.0;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-2.4, 1.0);
+			TexU = 0.2;
+		}
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-2.4, 1.0);
+			TexU = 0.2;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-2.4, 0.0);
+			TexU = 1.2;
+		}
+	}
+}

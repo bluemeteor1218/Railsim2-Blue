@@ -1,0 +1,226 @@
+/*
+ *	RailSim II Line Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Line;
+	PluginName = "デフォルトシンプルカテナリ";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "最も一般的な架線です。";
+}
+
+LineInfo{
+	TrolleyAlt = 5.09;		//	軌道面－トロリ線間高さ
+	Height = 0.6;			//	トロリ線－支持点間高さ
+	MaxInterval = 40.0;		//	架線柱間隔
+	MaxDeflection = 0.5;	//	パンタグラフ中心からの最大偏位
+}
+
+/*
+ *	形状定義
+ *	20m～
+ */
+Wireframe{
+	MinInterval = 20.0;
+	//	トロリ線
+	Line{
+		Vertex{
+			Coord = (0.0, 0.0, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.0, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	吊架線
+	Line{
+		Vertex{
+			Coord = (0.0, 0.6, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.45, 0.1);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.35, 0.3);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.35, 0.7);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.45, 0.9);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.6, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	ハンガ
+	Line{
+		Vertex{
+			Coord = (0.0, 0.0, 0.1);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.45, 0.1);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			Coord = (0.0, 0.0, 0.3);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.35, 0.3);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			Coord = (0.0, 0.0, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			Coord = (0.0, 0.0, 0.7);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.35, 0.7);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			Coord = (0.0, 0.0, 0.9);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.45, 0.9);
+			Diffuse = #ff404040;
+		}
+	}
+}
+
+/*
+ *	形状定義
+ *	10m～20m
+ */
+Wireframe{
+	MinInterval = 10.0;
+	MaxInterval = 20.0;
+	//	トロリ線
+	Line{
+		Vertex{
+			Coord = (0.0, 0.0, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.0, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	吊架線
+	Line{
+		Vertex{
+			Coord = (0.0, 0.6, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.35, 0.25);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.35, 0.75);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.6, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	ハンガ
+	Line{
+		Vertex{
+			Coord = (0.0, 0.0, 0.25);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.35, 0.25);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			Coord = (0.0, 0.0, 0.75);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.35, 0.75);
+			Diffuse = #ff404040;
+		}
+	}
+}
+
+/*
+ *	形状定義
+ *	～10m
+ */
+Wireframe{
+	MaxInterval = 10.0;
+	//	トロリ線
+	Line{
+		Vertex{
+			Coord = (0.0, 0.0, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.0, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	吊架線
+	Line{
+		Vertex{
+			Coord = (0.0, 0.6, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.6, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	ハンガ
+	Line{
+		Vertex{
+			Coord = (0.0, 0.0, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			Coord = (0.0, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+	}
+}

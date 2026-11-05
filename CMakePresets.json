@@ -1,0 +1,33 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "windows-vs2022",
+      "displayName": "Windows x64 - Visual Studio 2022",
+      "description": "Configure the standalone Direct3D 12 renderer with the Windows SDK.",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/out/build/${presetName}"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows-vs2022-debug",
+      "displayName": "Build Direct3D 12 renderer (Debug)",
+      "configurePreset": "windows-vs2022",
+      "configuration": "Debug",
+      "targets": [
+        "railsim2_d3d12_renderer"
+      ]
+    },
+    {
+      "name": "windows-vs2022-release",
+      "displayName": "Build Direct3D 12 renderer (Release)",
+      "configurePreset": "windows-vs2022",
+      "configuration": "Release",
+      "targets": [
+        "railsim2_d3d12_renderer"
+      ]
+    }
+  ]
+}

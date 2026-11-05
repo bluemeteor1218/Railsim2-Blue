@@ -1,0 +1,53 @@
+/*
+ *	RailSim II Tie Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Tie;
+	PluginName = "デフォルトJR標準軌用バラスト付きPC枕木";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "標準軌用。普通のバラストと普通のコンクリ枕木です。";
+}
+
+TieInfo{
+	Height = 0.3;
+	FlattenCant = yes;
+}
+
+/*
+ *	断面定義
+ */
+Profile{
+	Material{
+		UseTexture = yes;
+		TexFileName = "..\Default_JRN_BallastPC\Ballast.png";
+		TexVPerMeter = 0.226;
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-2.75, -0.3);
+			Normal = (-0.5, 1.0);
+			TexU = 1.029;
+		}
+		Vertex{
+			Coord = (-1.656, 0.0);
+			Normal = (-0.1, 1.0);
+			TexU = 0.84;
+		}
+		Vertex{
+			Coord = (1.656, 0.0);
+			Normal = (0.1, 1.0);
+			TexU = 0.16;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (2.75, -0.3);
+			Normal = (0.5, 1.0);
+			TexU = -0.029;
+		}
+	}
+}

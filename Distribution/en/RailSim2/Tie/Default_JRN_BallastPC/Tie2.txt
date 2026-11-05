@@ -1,0 +1,53 @@
+/*
+ *	RailSim II Tie Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Tie;
+	PluginName = "Default JR-narrow ballast PC";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "Normal concrete tie with ballast for narrow gauge.";
+}
+
+TieInfo{
+	Height = 0.3;
+	FlattenCant = yes;
+}
+
+/*
+ *	’f–Ê’è‹`
+ */
+Profile{
+	Material{
+		UseTexture = yes;
+		TexFileName = "Ballast.png";
+		TexVPerMeter = 0.3;
+	}
+	Face{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-2.25, -0.3);
+			Normal = (-0.5, 1.0);
+			TexU = 1.115;
+		}
+		Vertex{
+			Coord = (-1.25, 0.0);
+			Normal = (-0.1, 1.0);
+			TexU = 0.84;
+		}
+		Vertex{
+			Coord = (1.25, 0.0);
+			Normal = (0.1, 1.0);
+			TexU = 0.16;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (2.25, -0.3);
+			Normal = (0.5, 1.0);
+			TexU = -0.115;
+		}
+	}
+}

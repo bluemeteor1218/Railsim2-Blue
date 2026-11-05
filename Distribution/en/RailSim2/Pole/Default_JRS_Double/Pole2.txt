@@ -1,0 +1,23 @@
+/*
+ *	RailSim II Pole Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Pole;
+	PluginName = "Default JR-standard double";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "Normal pole for double track standard gauge.";
+}
+
+PoleInfo{
+	TrackNum = 2;
+	TrackInterval = 5.0;
+}
+
+Model{
+	ModelFileName = "Model.x";
+	ModelScale = 1.0;
+}

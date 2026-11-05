@@ -1,0 +1,28 @@
+/*
+ *	RailSim II Struct Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Struct;
+	PluginName = "Ship";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "Simple ship.";
+}
+
+StructInfo{
+}
+
+PrimaryAssembly{
+	Object3D "Main"{
+		ModelFileName = "Model.x";
+		ModelScale = 0.1;
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 0.0, 0.0);
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+}
+

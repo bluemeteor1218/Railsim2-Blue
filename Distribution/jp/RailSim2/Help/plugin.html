@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>プラグイン</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1>プラグイン</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><span class="appeal">プラグイン</span><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>プラグインの種類</h2>
+<p class="joint">RailSim II は、プラグインと呼ばれる追加データにより、走らせる車輌やレイアウトに設置する建物などを増やしていくことが可能です。プラグインには様々な種類 (クラス) があり、部分的に共通する要素を持つ複数のプラグインクラスは抽象プラグインクラスという概念によりまとめられます。以下にプラグインクラスの継承関係図を示します。</p>
+<p class="joint center"><img src="pluginclass.png" alt="プラグインクラス"></p>
+<p>抽象プラグインクラスは、実際にそのクラスのプラグインが存在するものではなく、複数のプラグインクラスに共通する機能を統括する役割を果たします。プラグインを作成する際には、この継承関係をよく理解し、作ろうとするプラグインのクラスがどのような位置付けにあるかを知っておく必要があります。</p>
+</div>
+<div class="contbox">
+<h2>RailSim I プラグインの互換性</h2>
+<p>旧バージョン RailSim I (Version 1.xx シリーズ) のプラグインは、車輌・駅舎・施設・地形については RailSim II でも同種プラグインとして使用することができます。その他の RailSim I プラグインは使用できません。</p>
+</div>
+<div class="contbox">
+<h2>ディレクトリ構成</h2>
+<p>参考に、プラグインのディレクトリ構成を以下に示しておきます。</p>
+<table class="dirbox">
+<tr class="dirtop">
+<td>&lt;RailSim2&gt;</td>
+<td>RailSim II がインストールされているディレクトリです (名称任意)。</td>
+</tr>
+<tr>
+<td>├ &lt;Env&gt;</td>
+<td>環境プラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Girder&gt;</td>
+<td>橋桁プラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Help&gt;</td>
+<td>リファレンスマニュアルの内容が入っています。</td>
+</tr>
+<tr>
+<td>├ &lt;Layout&gt;</td>
+<td>レイアウトデータが保存されます。</td>
+</tr>
+<tr>
+<td>├ &lt;Line&gt;</td>
+<td>架線プラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Picture&gt;</td>
+<td>スクリーンショットが格納されます。</td>
+</tr>
+<tr>
+<td>├ &lt;Pier&gt;</td>
+<td>橋脚プラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Pole&gt;</td>
+<td>架線柱プラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Rail&gt;</td>
+<td>レールプラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Skin&gt;</td>
+<td>スキンプラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Station&gt;</td>
+<td>駅舎プラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Struct&gt;</td>
+<td>施設プラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Surface&gt;</td>
+<td>地形プラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Tie&gt;</td>
+<td>枕木プラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Train&gt;</td>
+<td>車輌プラグインを格納します。</td>
+</tr>
+<tr>
+<td>├ &lt;Undo&gt;</td>
+<td>アンドゥ操作の一時データが保存されます。</td>
+</tr>
+<tr>
+<td>├ &lt;Video&gt;</td>
+<td>ビデオ撮影機能で撮影された連番 BMP が格納されます。</td>
+</tr>
+<tr>
+<td>├ Config.txt</td>
+<td>オプション設定ファイルです。</td>
+</tr>
+<tr>
+<td>├ index.html</td>
+<td>リファレンスのトップページです。</td>
+</tr>
+<tr class="dirbottom">
+<td>└ RailSim2.exe</td>
+<td>ゲーム本体です。</td>
+</tr>
+</table>
+</div>
+<div class="contbox">
+<h2>章目次</h2>
+<p class="joint_t">初めての方はまず最初の 3 項目をご覧ください。</p>
+<table>
+<tr><td class="nowrap"><a href="pi_install.html">インストール</a></td><td>プラグインをインストールする方法を説明します。</td></tr>
+<tr><td class="nowrap"><a href="pi_making.html">作成方法</a></td><td>プラグインを作成する上での基本事項を説明します。</td></tr>
+<tr><td class="nowrap"><a href="pi_grammar.html">文法の読み方</a></td><td>定義ファイルの文法を読むために記号等の説明を行います。</td></tr>
+<tr><td class="nowrap"><a href="pi_profile.html">プロファイル</a></td><td>レール・枕木・橋桁・橋脚・架線の 5 種類を含む。プロファイルプラグインは、連続な断面構造を持ったプラグインを統括する抽象プラグインクラスです。</td></tr>
+<tr><td class="nowrap">+ <a href="pi_rail.html">レール</a></td><td>レールプラグインは、線路のレールを表現するために使用されます。</td></tr>
+<tr><td class="nowrap">+ <a href="pi_tie.html">枕木</a></td><td>枕木プラグインは、線路の枕木やバラストなどの連続構成物を表現するために使用されます。</td></tr>
+<tr><td class="nowrap">+ <a href="pi_girder.html">橋桁</a></td><td>橋桁プラグインは、高架線路の土台や壁面などの連続構成物を表現するために使用されます。</td></tr>
+<tr><td class="nowrap">+ <a href="pi_pier.html">橋脚</a></td><td>橋脚プラグインは、高架線路の橋脚を表現するために使用されます。</td></tr>
+<tr><td class="nowrap">+ <a href="pi_line.html">架線</a></td><td>架線プラグインは、電化路線の架線を表現するために使用されます。</td></tr>
+<tr><td class="nowrap"><a href="pi_pole.html">架線柱</a></td><td>架線柱プラグインは、架線を支持する架線柱を表現するために使用されます。</td></tr>
+<tr><td class="nowrap"><a href="pi_model.html">モデル</a></td><td>車輌・駅舎・施設・地形の 4 種類を含む。複数の三次元モデルを組み合わせ、動的で複雑な動作を設定できるプラグインを統括する抽象プラグインクラスです。</td></tr>
+<tr><td class="nowrap">+ <a href="pi_train.html">車輌</a></td><td>車輌プラグインは、レール上を走る鉄道車輌を表現するために使用されます。</td></tr>
+<tr><td class="nowrap">+ <a href="pi_station.html">駅舎</a></td><td>駅舎プラグインは、列車が停車するためのホームを持った駅舎として使用されます。</td></tr>
+<tr><td class="nowrap">+ <a href="pi_struct.html">施設</a></td><td>施設プラグインは、その他の建物、構造物などを表現するために使用されます。</td></tr>
+<tr><td class="nowrap">+ <a href="pi_surface.html">地形</a></td><td>地形プラグインは、レイアウトの土台となる地形を表現するために使用されます。</td></tr>
+<tr><td class="nowrap"><a href="pi_env.html">環境</a></td><td>環境プラグインは、シーンの背景や天体の動きなどを表現するために使用されます。</td></tr>
+<tr><td class="nowrap"><a href="pi_skin.html">スキン</a></td><td>スキンプラグインは、ユーザーインターフェイスの外見を設定するために使用されます。</td></tr>
+<tr><td class="nowrap"><a href="pi_index.html">索引</a></td><td>定義ファイルの文法で用いられている識別子の索引です。</td></tr>
+</table>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="operation.html">＜PrevCh</a> | <a href="../index.html">▲Index</a> | <a href="#pagetop">▲PageTop</a> | <a href="thanks.html">NextCh＞</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

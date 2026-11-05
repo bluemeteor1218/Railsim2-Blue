@@ -1,0 +1,171 @@
+/*
+ *	RailSim II Station Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Station;
+	PluginName = "Double crossing";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "Simple crossing for double track";
+}
+
+StationInfo{
+}
+
+Platform{
+	TrackNum = 2;
+	TrackInterval = 4.0;
+	Stoppable = no;
+	LiftRailSurface = no;
+	Coord = (0.0, 0.4, -10.0);
+	Coord = (0.0, 0.4, 10.0);
+}
+
+DefineSwitch "Gauge"{
+	Entry = "1067mm narrow";
+	Entry = "1435mm standard";
+}
+
+DefineAnimation "Blink1"{
+	Frame = "..\SingleCrossing\Signal.png", 15;
+	ShiftTexture = 0.0, 0.0;
+	Frame = "..\SingleCrossing\Signal.png", 15;
+	ShiftTexture = 0.0, 0.5;
+}
+
+DefineAnimation "Blink2"{
+	Frame = "..\SingleCrossing\Signal.png", 15;
+	ShiftTexture = 0.0, 0.5;
+	Frame = "..\SingleCrossing\Signal.png", 15;
+	ShiftTexture = 0.0, 0.0;
+}
+
+PrimaryAssembly{
+	Object3D "Main"{
+		ModelFileName = "";
+		ModelScale = 1.0;
+		ApplySwitch "Gauge"{
+		Case 0: ChangeModel = "Road_N.x", 1.0;
+		Case 1: ChangeModel = "Road_S.x", 1.0;
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 0.0, 0.0);
+		}
+	}
+	Object3D "Signal1"{
+		ModelFileName = "..\SingleCrossing\Signal.x";
+		ModelScale = 1.0;
+		NoShadow = 0, 1, 2;
+		If "_APPROACH1"|"_APPROACH2"{
+			ChangeAlpha = 0, 1.0;
+			ChangeAlpha = 1, 1.0;
+			ChangeAlpha = 2, 1.0;
+			SetAnimation = 0, "Blink1";
+			SetAnimation = 1, "Blink2";
+		}
+		If "_APPROACH1"{
+			If "_APPROACH2"{
+				ShiftTexture = 2, 0.5, 0.5;
+			}Else{
+				ShiftTexture = 2, 0.5, 0.0;
+			}
+		}Else{
+			If "_APPROACH2"{
+				ShiftTexture = 2, 0.0, 0.5;
+			}Else{
+				ShiftTexture = 2, 0.0, 0.0;
+			}
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (-4.3, 0.0, 4.5);
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+	Object3D "Pole11"{
+		ModelFileName = "..\SingleCrossing\Pole.x";
+		ModelScale = 1.0;
+		If "_APPROACH1"|"_APPROACH2"{
+			StaticRotation{
+				RotationAxis = (1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 1.0;
+				AnimationTime = 4.0;
+			}
+		}
+		Joint3D "Signal1"{
+			AttachCoord = (-0.3, 1.2, 0.1);
+		}
+	}
+	Object3D "Pole12"{
+		ModelFileName = "Pole2.x";
+		ModelScale = 1.0;
+		Joint3D "Pole11"{
+			AttachCoord = (-0.05, 4.4, 0.0);
+			DirLink = "Signal1";
+			UpLink = "Signal1";
+		}
+	}
+	Object3D "Signal2"{
+		ModelFileName = "..\SingleCrossing\Signal.x";
+		ModelScale = 1.0;
+		NoShadow = 0, 1, 2;
+		If "_APPROACH1"|"_APPROACH2"{
+			ChangeAlpha = 0, 1.0;
+			ChangeAlpha = 1, 1.0;
+			ChangeAlpha = 2, 1.0;
+			SetAnimation = 0, "Blink1";
+			SetAnimation = 1, "Blink2";
+		}
+		If "_APPROACH1"{
+			If "_APPROACH2"{
+				ShiftTexture = 2, 0.5, 0.5;
+			}Else{
+				ShiftTexture = 2, 0.0, 0.5;
+			}
+		}Else{
+			If "_APPROACH2"{
+				ShiftTexture = 2, 0.5, 0.0;
+			}Else{
+				ShiftTexture = 2, 0.0, 0.0;
+			}
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (4.3, 0.0, -4.5);
+			AttachDir = (0.0, 0.0, 1.0);
+		}
+	}
+	Object3D "Pole21"{
+		ModelFileName = "..\SingleCrossing\Pole.x";
+		ModelScale = 1.0;
+		If "_APPROACH1"|"_APPROACH2"{
+			StaticRotation{
+				RotationAxis = (1.0, 0.0, 0.0);
+				RotationAngle = 90.0;
+				PreAnimationDelay = 1.0;
+				AnimationTime = 4.0;
+			}
+		}
+		Joint3D "Signal2"{
+			AttachCoord = (-0.3, 1.2, 0.1);
+		}
+	}
+	Object3D "Pole22"{
+		ModelFileName = "Pole2.x";
+		ModelScale = 1.0;
+		Joint3D "Pole21"{
+			AttachCoord = (-0.05, 4.4, 0.0);
+			DirLink = "Signal2";
+			UpLink = "Signal2";
+		}
+	}
+	If "_APPROACH1"|"_APPROACH2"{
+		SoundEffect{
+			WaveFileName = "..\SingleCrossing\Signal.wav";
+			AttachObject = "Main";
+			SourceCoord = (0.0, 0.0, 0.0);
+		}
+	}
+}

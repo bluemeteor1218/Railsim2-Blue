@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>alpha-changer</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">alpha-changer</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">alpha-changer</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>指定された材質番号のアルファ値を変更します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">alpha-changer ::=</pre>
+<pre class="ind">ChangeAlpha = <a class="nonterm" href="pi_sym_integer.html">integer</a>, <span class="ctrl">(</span> <a class="nonterm" href="pi_sym_float.html">float</a> <span class="ctrl">|</span> DayAlpha <span class="ctrl">|</span> NightAlpha <span class="ctrl">)</span>;</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">ChangeAlpha</p>
+<p class="argexp">アルファ値を変更する材質番号と、変更後のアルファ値を指定します。変更後のアルファ値には定数のほか、昼間 1.0 となり夕方から夜にかけて徐々に 0.0 となる <span class="source">DayAlpha</span>、その逆で夜間 1.0 となり昼にかけて徐々に 0.0 となる <span class="source">NightAlpha</span> という変数を使用することもできます。なお、<span class="source">DayAlpha + NightAlpha = 1.0</span> という関係があります。</p>
+<p>材質番号は、*.x ファイルに定義されている材質を 0 から数えたものです。例えば、3 個目の材質は 2 番になります。1 から数えるのではないので気をつけてください。*.x ファイルから読み込まれたポリゴンは、*.x ファイル内で定義されているアルファ値の大きい順に描画されます。ここでアルファ値を変更しても描画順は変化しないので気をつけてください。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_customizer.html">customizer</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

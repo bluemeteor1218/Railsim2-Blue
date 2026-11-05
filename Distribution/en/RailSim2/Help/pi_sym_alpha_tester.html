@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>alpha-tester</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">alpha-tester</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">alpha-tester</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>透過テクスチャに対してα (アルファ) テストを有効にします。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">alpha-tester ::=</pre>
+<pre class="ind">AlphaZeroTest = <a class="nonterm" href="pi_sym_integer.html">integer</a> <span class="ctrl">(</span>, <a class="nonterm" href="pi_sym_integer.html">integer</a> <span class="ctrl">)</span><span class="sup">*</span> ;</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">AlphaZeroTest</p>
+<p class="argexp">αテストを設定する材質番号を指定します。指定された材質は、テクスチャのα値が 0 であると描画されません。</p>
+<p>材質番号は、*.x ファイルに定義されている材質を 0 から数えたものです。例えば、3 個目の材質は 2 番になります。1 から数えるのではないので気をつけてください。通常はα値が 0 であっても Z バッファに値が書き込まれてしまうため、後ろのポリゴンを隠してしまうことがありますが、αテストを行えばこのような問題を回避することができます。αテストを指定した材質のテクスチャに関しては、透明領域からの染み出しを防止するためテクスチャフィルタが無効になります。なお、影の描画はテクスチャの透過を考慮しませんので、多くの場合透過テクスチャを用いた材質には<a href="pi_sym_shadow_inhibitor.html">影の抑制</a>を設定すべきです。</p>
+</div>
+<div class="contbox">
+<h2>テクスチャのカラーキー指定</h2>
+<p>テクスチャの透過を指定するには、PNG などのαチャネルを用いる方法と、画像内の特定の色を透過色 (カラーキー) に指定する方法があります。このうち、RailSim II で後者の透過色を指定する方法を用いるには、ファイル名の末尾で透過色を指定します。例えば、#ffff00ff という色を "hoge.bmp" という画像の透過色に指定したい場合、"hoge#ffff00ff.bmp" というファイル名に変更します。透過色を指定する方法は、半透明が指定できない、テクスチャフィルタを用いる際に透過部分の色が非透過部分に染み出す等の問題がありますが、複雑な形状をポリゴン数を増やさずに表現する等の目的には適しています。透過色を指定することはその画素のα値を 0 にすることと同じであるため、<span class="source">AlphaZeroTest</span> の指定は、このいずれの方法にも使うことができます。なお、完全な黒 #ff000000 と完全な白 #ffffffff については、ファイル名の指定において #b、#w と省略することができます。例えば、"hoge#ff000000.bmp" とする代わりに "hoge#b.bmp" とするとができます。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_customizer.html">customizer</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

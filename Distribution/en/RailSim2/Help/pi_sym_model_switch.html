@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>model-switch</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">model-switch</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">model-switch</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>プラグインの外観設定などに利用できる選択肢を定義します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">model-switch ::=</pre>
+<pre class="ind">DefineSwitch <a class="nonterm" href="pi_sym_string.html">string</a>{
+    <span class="ctrl">(</span> GroupCommon = <a class="nonterm" href="pi_sym_string.html">string</a>; <span class="ctrl">)</span><span class="sub">opt cond</span>
+    <span class="ctrl">(</span> Entry = <a class="nonterm" href="pi_sym_string.html">string</a>; <span class="ctrl">)</span><span class="sup">1+</span>
+}</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">DefineSwitch</p>
+<p class="argexp">直後にスイッチ名を指定します。スイッチ名は、ひとつのプラグイン内で固有のものでなければなりません。スイッチ名には予約されているものもあります。詳しくは下記をご覧ください。</p>
+<p class="argname">GroupCommon</p>
+<p class="argexp"><a href="pi_train.html">車輌プラグイン</a>でのみ有効です。ここで指定した識別子が一致するスイッチは、同じ編成の中で共通の値を持ちます。例えば方向幕など、編成の各車輌で共通になるオプションを一括して設定できるようにするために指定します。識別子が同じであれば、異なる車輌プラグインの間でもスイッチの値が共通になります。このとき、スイッチの選択肢の数や意味は、複数の車輌プラグインの間で統一されていなければならないので気をつけてください。</p>
+<p class="argname">Entry</p>
+<p class="argexp">スイッチの選択肢を列挙します。初期選択肢は最初に定義されたものになります。</p>
+<p>スイッチの選択肢には番号が割り振られ、この番号はスイッチを実際に適用する際に使用されます。番号は選択肢を定義した順番に 0, 1, 2, ... となります。<span class="charm">1 からではなく 0 から始まるので注意してください。</span>例えば、選択肢を 5 個設定した場合には、5 個目の選択肢に対応する番号は 4 となります。</p>
+</div>
+<div class="contbox">
+<h2>システムスイッチ</h2>
+<p class="joint"><a href="pi_model.html">モデルプラグイン</a>ごとに作成できるユーザー定義スイッチのほかに、システム側で用意される特殊なスイッチがあります。各システムスイッチの機能を以下に示します。</p>
+<p class="argname">"_FRONT"</p>
+<p class="argexp">車輌プラグインでのみ有効です。車輌の前方 (Z 軸正方向) が進行方向と一致していれば 0、それ以外は 1 となります。</p>
+<p class="argname">"_CONNECT1"</p>
+<p class="argexp">車輌プラグインでのみ有効です。車輌の前方に別の車輌が連結されていれば 1、それ以外は 0 となります。</p>
+<p class="argname">"_CONNECT2"</p>
+<p class="argexp">同じく、車輌の後方に別の車輌が連結されていれば 1、それ以外は 0 となります。</p>
+<p class="argname">"_DOOR1"</p>
+<p class="argexp">車輌プラグインでのみ有効です。車輌の Z 軸正方向を前方とし、列車がホームに停車して左側のドアを開くことを示します。そのとき左側のドアを開くべきなら 1、そうでなければ 0 となります。このスイッチと <a class="nonterm" href="pi_sym_static_mover.html">static-mover</a> 等のカスタマイザを使用してドア開閉のアニメーションを作ることができます。</p>
+<p class="argname">"_DOOR2"</p>
+<p class="argexp">同じく、右側のドアを開くべきなら 1、そうでなければ 0 となります。</p>
+<p class="argname">"_SERIAL"</p>
+<p class="argexp">車輌プラグインと<a href="pi_surface.html">地形プラグイン</a>でのみ有効です。車輌プラグインの場合はその車輌が属する編成の番号、地形プラグインの場合はその地形が使われているシーンの番号がセットされます。番号は 1 からではなく 0 から数えられます。</p>
+<p class="argname">"_CAMDIST"</p>
+<p class="argexp">視野角 45°における、視点からユニットまでの距離に相当する値がメートル単位でセットされます。小数点以下は四捨五入されます。この値は、オブジェクトがある程度視点から離れた場合に、簡単なモデルに切り替えることで軽量化を図るために使用できます。視野角が x = 45°の場合は視点からの距離そのものになりますが、視野角が狭くなるほど tan(x/2) に比例して値は小さくなり、画面上の見かけの大きさにほぼ比例する値となります。距離の基準となる座標はプラグイン内の個々のオブジェクトではなく、例えば施設の場合は施設を設置した座標というように、ユニットごとに共通の値となります。</p>
+<p class="argname">"_VELOCITY"</p>
+<p class="argexp">車輌プラグインでのみ有効です。そのときの車輌の速度がセットされます。単位は [km/h] です。値は進行方向に関わらず正となります。小数点以下は四捨五入されます。</p>
+<p class="argname">"_ACCEL"</p>
+<p class="argexp">車輌プラグインでのみ有効です。そのときの車輌の加減速度がセットされます。単位は [m/h/s] です。値は加速時は正、減速時は負となります。小数点以下は四捨五入されます。</p>
+<p class="argname">"_CABINVIEW"</p>
+<p class="argexp">車輌プラグインでのみ有効です。その車輌で運転席視点モードが有効になっているとき 1 がセットされます。それ以外は 0 になります。運転台を表現する場合等に使用します。</p>
+<p class="argname">"_APPROACH1"</p>
+<p class="argexp"><a href="pi_station.html">駅舎プラグイン</a>でのみ有効です。<a href="pi_sym_platform.html">プラットフォーム</a>に、プラットフォームが定義された方向と同じ方向に列車が停車・通過・接近している場合に、プラットフォーム番号に対応するビットが 1 になります。<span class="source">Stoppable</span> で停車できないように設定されたプラットフォームにも対応します。スイッチは 32 ビットなので、32 本のプラットフォームまでしか調べられません。例えば、5 番目のプラットフォームに定義と同じ方向に列車が接近しているかどうかを調べるには、<span class="source">("_APPROACH1"&gt;&gt;4)&amp;1</span> とします。列車が「接近している」の定義は、その列車の減速度でその位置・速度から停車できる最小範囲にプラットフォームが入っていること、になります。このスイッチは、停車できないプラットフォームを使って踏切を作る場合などに利用できます。</p>
+<p class="argname">"_APPROACH2"</p>
+<p class="argexp">上と同様に、プラットフォームが定義された方向と逆の方向に列車が停車・通過・接近している場合に、プラットフォーム番号に対応するビットが 1 になります。例えば、7 番目のプラットフォームにいずれかの方向から列車が接近しているかどうかを調べるには、<span class="source">(("_APPROACH1"|"_APPROACH2")&gt;&gt;6)&1</span> とします。</p>
+<p class="argname">"_STOPPING"</p>
+<p class="argexp">上と同じく、プラットフォームに列車が停車しているかどうかが設定されます。停車と見なされるのはドアを開き始めるタイミングからドアを閉じ始めるタイミングまでですので、プラットフォーム側にもドアを設けたい場合に使用できます。ただし、この場合編成の車輌数やドア間隔などの調整が重要です。このスイッチのビットが 1 ならば、<span class="source">"_APPROACH1", "_APPROACH2"</span> のいずれかのうち対応するビットも必ず 1 になります。</p>
+<p class="argname">"_NIGHT"</p>
+<p class="argexp">現在の時刻が昼なら 0、夜なら 1 になります。</p>
+<p class="argname">"_WEATHER"</p>
+<p class="argexp">現在の天気を示すスイッチとなる予定です (未実装)。</p>
+<p class="argname">"_SEASON"</p>
+<p class="argexp">現在の季節が春 (3～5 月) なら 0、夏 (6～8 月) なら 1、秋 (9～11 月) なら 2、冬 (12～2 月) なら 3 になります。なお、<a href="pi_env.html">環境プラグイン</a>の設定により緯度が負に設定されている場合、つまり南半球では季節が逆転します。</p>
+<p class="argname">"_SHADOW"</p>
+<p class="argexp">システムのオプション設定で影が ON になっていれば 1、それ以外は 0 となります。プラグイン側のテクスチャの影の表現を、システムによる影が OFF の場合のみ有効にしたい場合などに使用します。</p>
+<p class="argname">"_ENVMAP"</p>
+<p class="argexp">システムのオプション設定で環境マッピングが ON になっていれば 1、それ以外は 0 となります。プラグイン側のテクスチャの反射の表現を、システムによる環境マッピングが OFF の場合のみ有効にしたい場合などに使用します。</p>
+<p class="argname">"_YEAR"</p>
+<p class="argexp">ゲーム内の年がセットされます。</p>
+<p class="argname">"_MONTH"</p>
+<p class="argexp">ゲーム内の月がセットされます。</p>
+<p class="argname">"_DAY"</p>
+<p class="argexp">ゲーム内の日がセットされます。</p>
+<p class="argname">"_DAYOFWEEK"</p>
+<p class="argexp">ゲーム内の曜日がセットされます。日、月、火…が 0、1、2…に対応します。</p>
+<p class="argname">"_HOUR"</p>
+<p class="argexp">ゲーム内の時がセットされます。</p>
+<p class="argname">"_MINUTE"</p>
+<p class="argexp">ゲーム内の分がセットされます。</p>
+<p class="argname">"_SECOND"</p>
+<p class="argexp_f">ゲーム内の秒がセットされます。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_model_option.html">model-option</a> / <a class="nonterm" href="pi_sym_customizer_switch_applier.html">customizer-switch-applier</a> / <a class="nonterm" href="pi_sym_effector_switch_applier.html">effector-switch-applier</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

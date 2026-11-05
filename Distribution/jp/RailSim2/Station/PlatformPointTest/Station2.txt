@@ -1,0 +1,53 @@
+/*
+ *	RailSim II Station Plugin
+ *	Copyright (c) 2010 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.13;
+	PluginType = Station;
+	PluginName = "分岐テスト";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "駅舎プラグインによる分岐の記述サンプルです。";
+}
+
+StationInfo{
+}
+
+Platform{
+	Stoppable = no;
+	GirderPlugin = "";
+	PierPlugin = "";
+	PolePlugin = "";
+	Coord = (0.0, 0.0, -15.0);
+	Coord = (0.0, 0.0, -10.0);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (0.0, 0.0, -10.0);
+	Coord = (0.0, 0.0, 15.0);
+}
+
+Platform{
+	Stoppable = no;
+	EnableCant = no;
+	Coord = (0.0, 0.0, -10.0);
+	Coord = (0.0, 0.0, -5.0);
+	Coord = (4.0, 0.0, 5.0);
+	Coord = (4.0, 0.0, 15.0);
+}
+
+PrimaryAssembly{
+	Object3D "RotationPlate"{
+		ModelFileName = "..\TurntableTest\RotationPlate.x";
+		ModelScale = 1.0;
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, -0.15, 0.0);
+			AttachDir = (0.0, 0.0, 1.0);
+		}
+	}
+	BranchRail = 1, 2;
+	BranchRail = 1, 4;
+}

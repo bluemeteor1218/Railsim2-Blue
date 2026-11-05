@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>プラグインの作成方法</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1>プラグインの作成方法</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <span class="appeal">作成方法</span><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>プラグインの作成方法</h2>
+<p>プラグインを作成するために最低限必要な作業は、<a href="pi_install.html">プラグインのインストール方法</a>に従って、作成したいプラグインの種類に対応するディレクトリに新しいプラグインのサブディレクトリを作成し、そのディレクトリの中に定義ファイルを作成することです。これに加え、3D モデルの作成 (モデリング) や画像の作成といった作業が必要になります。</p>
+</div>
+<div class="contbox">
+<h2>画像フォーマットについて</h2>
+<p>画像の作成は mspaint から PhotoShop まで、様々なグラフィックツールがありますので、好みのツールを使ってください。ただし、最終的には DirectX がサポートするフォーマットの画像ファイルに変換する必要があります。主な形式としては、BMP / JPG / PNG / GIF 等が利用可能です。画像フォーマットとしては、アルファチャネルを利用できて可逆圧縮である PNG がおすすめです。BMP は圧縮を展開する手間がありませんので読み込みが高速になりますが、ハードディスク容量を若干多めに消費します。しかし、メモリ上に読み込まれれば結局最終的には画像データが展開されるので、圧縮率の高い形式を使用してもメモリの節約にはなりません。GIF は静止画として利用可能ですが、アニメーション GIF としては使えないので、あえて PNG より GIF を選ぶ理由はないでしょう。それぞれの画像フォーマットの特徴を考慮して最適な形式を選ぶのが好ましいですが、よく分からない場合はとりあえず BMP か PNG でいいと思います。</p>
+</div>
+<div class="contbox">
+<h2>モデリング</h2>
+<p>モデリングは物体の三次元形状を作成する作業です。これまで RailSim I をやっていたという方以外では、モデリングをやったことがあるという方はあまり多くはないと思います。しかし、少し練習すればプロ級とまでは行かずともそれほど難しいものではないので、ぜひ挑戦していただきたいと思います。作成したモデルを RailSim II で使用するためには、最終的に DirectX がサポートする .x 形式のデータに変換する必要があります。特に普段利用しているモデリングツールがないという方は、この .x 形式をサポートする Metasequoia というツールを使ってみてはいかがでしょうか。開発者の私自身はポリゴン職人というツールを愛用していますが、.x 形式をサポートしないので DXF 形式を経由して Metasequoia でテクスチャマッピング等を行っています。</p>
+</div>
+<div class="contbox">
+<h2>レンダリングの基本ルール</h2>
+<p class="joint">ひとつのモデル (.x ファイル) は、次の基本ルールによりレンダリングされます。ただし、定義ファイルにより様々な制御は可能です。まず、レンダリングは材質ごとに行われます。このとき、α値の大きい材質から順番にレンダリングされていきます。これは、手前にある透明なポリゴンが先に描画されてしまうことで、後ろの不透明ポリゴンが見えなくなってしまうことを防止するための措置です。定義ファイルの機能によりα値が変更された場合にも、.x ファイルで元々設定されていたα値の順で描画されます。このことはマルチパスでテクスチャを描画する際に重要ですので覚えておいてください。</p>
+<p class="joint">次に、RailSim I からの名残として、RailSim II 専用の<a href="pi_model.html">モデルプラグイン</a>以外では、α値が 0.5 のポリゴンが夜間に発光し、α値が 0.0 のポリゴンは夜間にα値 1.0 で描画されます。これはあくまで旧形式のプラグインの互換性を保つためのものですので、あまり意識する必要はないでしょう。</p>
+<p>RailSim I ではスペキュラー (鏡面反射光) が使われていませんでしたが、RailSim II ではこれが有効になりましたので注意してください。</p>
+</div>
+<div class="contbox">
+<h2>相対パス参照について</h2>
+<p class="joint">RailSim II では、プラグインが使用するモデルやテクスチャ等のファイルを定義ファイルからの相対パスとして参照することができます。これにより、複数のプラグインが使用するデータはひとつだけあれば相対パス参照により共有することができます。また、相対パス参照により共有されたファイルは、メモリ上にひとつしか読み込まれないのでメモリの節約にもなります。たとえば、A というディレクトリから "hoge.png" と参照されたファイルと、B というディレクトリから "..\A\hoge.png" と参照されたファイルは物理的に同じものと見なされます。</p>
+<p>このように便利な相対パス参照ですが、あるプラグインがあるファイルを相対パス参照するということは、そのプラグインの作者は参照したファイルを自分の作品の一部であると宣言することに他なりません。他人の作品をコピーや改造して配布することには当然許可が必要ですが、(厳密な法律論はともかくとして) 相対パス参照もこれに準ずるものと考え、他人の作品を相対パス参照する場合は必ず許可を取るようにしましょう。なお、RailSim II に添付されている、作者が おかづ となっているプラグインのデータについては、いずれも連絡無しで相対パス参照していただいてかまいません。</p>
+</div>
+<div class="contbox">
+<h2>影の対応について</h2>
+<p>RailSim II では、シャドウボリュームという手法により影をレンダリングしています。発光面等に対しては、影の影響を受けないようにするための特殊な指定が必要です (<a class="nonterm" href="pi_sym_shadow_inhibitor.html">shadow-inhibitor</a> 等)。影が OFF の状態ではプラグインが正常に表示されても、影を表示すると思い通りに表示されない可能性もあります。プラグイン作成時には、必ず影を ON にした状態でのテストも行うようにしてください。</p>
+</div>
+<div class="contbox">
+<h2>添付プラグインの紹介</h2>
+<p class="joint">RailSim II のプラグイン作りを早くマスターするためのポイントは、添付されているプラグインをよく研究することです。添付プラグインは、モデリングやテクスチャの質こそ高くありませんが、RailSim II のサポートする多くの機能を網羅しており、皆様がプラグインを作成される上で参考にしていただけるものと思います。ここでは一部を紹介します。</p>
+<p class="joint"><span class="head">[Train] Aizentranza01 / Aizentranza02</span><br>ごく普通の電車です。普通の車輌プラグインを作る際に参考になると思います。Aizentranza01 は先頭車両、Aizentranza02 は中間車輌です。特徴としては、車輪・台車分離、振り子機能、ヨーダンパーの動作、パンタグラフの動作、駅停車時のドア開閉、スイッチによる車体色の切替、先頭車両の連結器カバー自動切替、進行方向によるヘッドライト・テールランプ切替、室内照明の夜間発光、回送時の室内照明 OFF、テクスチャアニメーションなどが挙げられます。Aizentranza02 はほとんど Aizentranza01 と同じデータを共有しているため、相対パスにより Aizentranza01 のファイルを参照しています。</p>
+<p class="joint"><span class="head">[Train] Freitranza01 / Freitranza02</span><br>2C2 シンプルな蒸気機関車です。Freitranza01 は本体、Freitranza02 は炭水車 (テンダ) です。シンプルといっても、蒸気機関車の複雑なロッド構造を再現するのは簡単ではありません。(ロッドの動作する) 蒸気機関車の製作はある程度 RailSim II のプラグイン製作に慣れてからにすべきでしょう。特徴としては、蒸気機関車の特徴であるロッドの動作、煙の表現があります。一方、炭水車の Freitranza02 は 4 軸 2 台車のごく一般的な構造として、Aizentranza よりシンプルなので参考になるかもしれません。</p>
+<p class="joint"><span class="head">[Train] Shiki400</span><br>24 軸、特殊構造の大物車です。複雑な構造も作成できるというサンプルです。</p>
+<p class="joint"><span class="head">[Station] MM02</span><br>列車が停車する、普通の駅舎プラグインのサンプルです。アニメーションによりエレベータが動きます。中央の通過線は列車が停車できないように設定されています。駅舎内の配電設備は、架線柱プラグインを使用せずに架線だけを張っておき、架線柱を駅舎プラグインの一部として表現しています。駅構内は架線柱も特別な寸法となるため、このような作り方が最適であると思われます。</p>
+<p class="joint"><span class="head">[Station] SingleCrossing / DoubleCrossing</span><br>単線と複線の普通の踏み切りです。列車が接近すると遮断機が動作します。複線用踏切の方は、遮断機が折れ曲がるタイプのものになっています。列車が接近している方向に応じて、矢印のランプが点灯します。</p>
+<p class="joint"><span class="head">[Struct] Ship</span><br>何も手を加えず、ただオブジェクトを置くだけの最もシンプルな施設プラグインのサンプルです。</p>
+<p class="joint"><span class="head">[Struct] WindPlant</span><br>風車機能を使用した風力発電所のサンプルです。</p>
+<p class="joint"><span class="head">[Struct] DigitalClock</span><br>システムスイッチによりゲーム内の時刻を取得し、数式処理により桁を分けてデジタル時計を表示しています。</p>
+<p class="joint"><span class="head">[Struct] Tenkai_T</span><br>T 字型のブロックを展開するアニメーションを作ったサンプルです。</p>
+<p><span class="head">[Struct] Fence</span><br>αテストによりテクスチャの透過を行うサンプルです。</p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_install.html">＜PrevSec</a> | <a href="plugin.html">▲ChTop</a> | <a href="#pagetop">▲PageTop</a> | <a href="pi_grammar.html">NextSec＞</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

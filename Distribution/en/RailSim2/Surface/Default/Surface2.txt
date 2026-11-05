@@ -1,0 +1,34 @@
+/*
+ *	RailSim II Surface Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Surface;
+	PluginName = "Default";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "Grass field. Changes color along season.";
+}
+
+SurfaceInfo{
+	SizeX = 800.0;
+	SizeZ = 800.0;
+}
+
+PrimaryAssembly{
+	Object3D "MainSurface"{
+		ModelFileName = "Field.x";
+		ModelScale = 400.0;
+		ApplySwitch "_SEASON"{
+		Case 0: ChangeTexture = 0, "Spring.png";
+		Case 1: ChangeTexture = 0, "Summer.png";
+		Case 2: ChangeTexture = 0, "Autumn.png";
+		Case 3: ChangeTexture = 0, "Winter.png";
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 0.0, 0.0);
+		}
+	}
+}

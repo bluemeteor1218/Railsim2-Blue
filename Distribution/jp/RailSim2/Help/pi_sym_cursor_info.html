@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>cursor-info</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">cursor-info</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">cursor-info</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>スキンのカーソルに関する情報を定義します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">cursor-info ::=</pre>
+<pre class="ind">TexFileName = <a class="nonterm" href="pi_sym_filename.html">filename</a>;
+ImageSize = <a class="nonterm" href="pi_sym_integer.html">integer</a>, <a class="nonterm" href="pi_sym_integer.html">integer</a>;
+<span class="ctrl">(</span> Cursor2DSize = <a class="nonterm" href="pi_sym_integer.html">integer</a>, <a class="nonterm" href="pi_sym_integer.html">integer</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+Cursor2DHotSpot = <a class="nonterm" href="pi_sym_integer.html">integer</a>, <a class="nonterm" href="pi_sym_integer.html">integer</a>;
+<span class="ctrl">(</span> Cursor2DAnimNumber = <a class="nonterm" href="pi_sym_integer.html">integer</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+<span class="ctrl">(</span> Cursor2DAnimFrame = <a class="nonterm" href="pi_sym_integer.html">integer</a> <span class="ctrl">(</span>, <a class="nonterm" href="pi_sym_integer.html">integer</a> <span class="ctrl">)</span><span class="sup">*</span> ; <span class="ctrl">)</span><span class="sub">opt</span></pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">TexFileName</p>
+<p class="argexp">カーソルに使用するテクスチャファイル名を指定します。</p>
+<p class="argname">ImageSize</p>
+<p class="argexp">画像のサイズをピクセル単位で指定します。</p>
+<p class="argname">Cursor2DSize</p>
+<p class="argexp">カーソルのサイズを指定します。デフォルト値は <span class="source">ImageSize</span> です。</p>
+<p class="argname">Cursor2DHotSpot</p>
+<p class="argexp">カーソル内のホットスポット (クリック位置) の座標を指定します。</p>
+<p class="argname">Cursor2DAnimNumber</p>
+<p class="argexp">アニメーションカーソルのコマ数を指定します。画像には、左上から右方向へ順番にアニメーションのコマが並べられている必要があります。右端へ到達すると下の段へ折り返して並べることができます。デフォルト値は 1 です。</p>
+<p class="argname">Cursor2DAnimFrame</p>
+<p class="argexp_f">アニメーションの各コマを表示するフレーム数を指定します。1 フレームは標準で 1/30 秒になります。<span class="source">Cursor2DAnimNumber</span> の数だけ指定することもできますが、省略すると最後の値で残りを補完します。デフォルト値は各 1 です。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_skin_cursor_info.html">skin-cursor-info</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

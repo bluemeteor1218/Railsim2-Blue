@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>expression</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">expression</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">expression</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>条件分岐の評価に用いる数式です。</p>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p>基本的には、<a class="nonterm" href="pi_sym_model_switch.html">model-switch</a> で定義したスイッチ名を書けばその設定値を参照します。高度な条件分岐を行いたい場合には、複数のスイッチや定数を用いて四則演算や比較などを行うこともできます。演算はすべて整数で行われ、定数は整数のみ使用できます。</p>
+</div>
+<div class="contbox">
+<h2>演算子</h2>
+<p class="joint_t">数式には以下の演算子を使用することができます。同じ優先順位の二項演算子は左から右へ結合されます。動作は基本的に C 言語と同じです。</p>
+<table>
+<tr><td>順位</td><td>記号</td><td>名称</td><td>意味</td></tr>
+<tr><td>1</td><td><span class="source">( )</span></td><td>括弧</td><td>括弧内の演算子を優先的して評価する。</td></tr>
+<tr><td rowspan="4">2</td><td><span class="source">+</span></td><td>単項プラス</td><td>右辺をそのまま返す。</td></tr>
+<tr><td><span class="source">-</span></td><td>単項マイナス</td><td>右辺の符号を反転する。</td></tr>
+<tr><td><span class="source">!</span></td><td>否定</td><td>右辺が 0 なら 1、それ以外は 0 を返す。</td></tr>
+<tr><td><span class="source">~</span></td><td>1 の補数</td><td>各ビットを反転した値を返す。</td></tr>
+<tr><td rowspan="3">3</td><td><span class="source">*</span></td><td>乗算</td><td>左辺と右辺の積を返す。</td></tr>
+<tr><td><span class="source">/</span></td><td>除算</td><td>左辺を右辺で割った値を返す。右辺が 0 の場合は 0 を返す。</td></tr>
+<tr><td><span class="source">%</span></td><td>剰余</td><td>左辺を右辺で割った余りを返す。右辺が 0 の場合は 0 を返す。</td></tr>
+<tr><td rowspan="2">4</td><td><span class="source">+</span></td><td>加算</td><td>左辺と右辺の和を返す。</td></tr>
+<tr><td><span class="source">-</span></td><td>減算</td><td>左辺から右辺を引いたを返す。</td></tr>
+<tr><td rowspan="2">5</td><td><span class="source">&lt;&lt;</span></td><td>左シフト</td><td>左辺を右辺ビット左へシフトする。</td></tr>
+<tr><td><span class="source">&gt;&gt;</span></td><td>右シフト</td><td>左辺を右辺ビット右へシフトする。</td></tr>
+<tr><td rowspan="4">6</td><td><span class="source">&lt;</span></td><td>小なり</td><td>左辺が右辺より小さければ 1、それ以外は 0 を返す。</td></tr>
+<tr><td><span class="source">&gt;</span></td><td>大なり</td><td>左辺が右辺より大きければ 1、それ以外は 0 を返す。</td></tr>
+<tr><td><span class="source">&lt;=</span></td><td>以下</td><td>左辺が右辺以下ならば 1、それ以外は 0 を返す。</td></tr>
+<tr><td><span class="source">&gt;=</span></td><td>以上</td><td>左辺が右辺以上ならば 1、それ以外は 0 を返す。</td></tr>
+<tr><td rowspan="2">7</td><td><span class="source">==</span></td><td>等値</td><td>左辺と右辺が等しければ 1、それ以外は 0 を返す。</td></tr>
+<tr><td><span class="source">!=</span></td><td>不等値</td><td>左辺と右辺が異なれば 1、それ以外は 0 を返す。</td></tr>
+<tr><td>8</td><td><span class="source">&</span></td><td>ビット AND</td><td>左辺と右辺のビットごとの積を返す。</td></tr>
+<tr><td>9</td><td><span class="source">^</span></td><td>ビット XOR</td><td>左辺と右辺のビットごとの排他和を返す。</td></tr>
+<tr><td>10</td><td><span class="source">|</span></td><td>ビット OR</td><td>左辺と右辺のビットごとの和を返す。</td></tr>
+<tr><td>11</td><td><span class="source">&&</span></td><td>論理 AND</td><td>左辺と右辺がいずれも 1 なら 1、それ以外は 0 を返す。</td></tr>
+<tr><td>12</td><td><span class="source">||</span></td><td>論理 OR</td><td>左辺と右辺がいずれも 0 なら 0、それ以外は 1 を返す。</td></tr>
+<tr><td>13</td><td><span class="source">? :</span></td><td>条件</td><td>第 1 項が 0 以外ならば第 2 項、0 ならば第 3 項を返す。</td></tr>
+</table>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_customizer_switch_applier.html">customizer-switch-applier</a> / <a class="nonterm" href="pi_sym_effector_switch_applier.html">effector-switch-applier</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

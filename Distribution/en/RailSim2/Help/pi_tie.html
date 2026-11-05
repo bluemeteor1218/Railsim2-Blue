@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>枕木プラグイン</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1>枕木プラグイン</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <span class="appeal">枕木</span><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>枕木プラグインは、線路の枕木やバラストなどの連続構成物を表現するために使用されます。</p>
+</div>
+<div class="contbox cb_src">
+<h2>定義ファイル (Tie2.txt) 文法</h2>
+<pre class="nonterm">tie-plugin ::=</pre>
+<pre class="ind"><a class="nonterm" href="pi_sym_plugin_header.html">plugin-header</a>
+TieInfo{
+    Height = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    <span class="ctrl">(</span> FlattenCant = <a class="nonterm" href="pi_sym_yes_no.html">yes-no</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+}
+<a class="nonterm" href="pi_sym_profile_list.html">profile-list</a></pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">Height</p>
+<p class="argexp">枕木の高さを指定します。</p>
+<p class="argname">FlattenCant</p>
+<p class="argexp">枕木より下のレイヤにカントの影響を伝えないかどうかを設定します。<span class="source">yes</span> を指定するとカントの影響は除去され、橋桁、橋脚には勾配のみが影響するようになります。デフォルト値は <span class="source">no</span> です。</p>
+<p><a class="nonterm" href="pi_sym_profile.html">profile</a> による断面定義では、断面を XY 平面とする 2 次元座標で形状指定を行いますが、このうち縦方向にあたる y 座標については、レールの底面に対応する位置を 0.0 として指定を行ってください。つまり、ほとんどの場合 y 座標は負値になります。また、<a class="nonterm" href="pi_sym_interval.html">interval</a> により枕木を等間隔配置する場合も、レールの底面に対応する y 座標が 0.0 となるように *.x ファイルの調整を行ってください。</p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_rail.html">＜PrevSec</a> | <a href="plugin.html">▲ChTop</a> | <a href="#pagetop">▲PageTop</a> | <a href="pi_girder.html">NextSec＞</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

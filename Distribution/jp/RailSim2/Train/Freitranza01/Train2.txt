@@ -1,0 +1,562 @@
+/*
+ *	RailSim II Train Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Train;
+	PluginName = "フライトランザ本体";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\Aizentranza01\Icon.png";
+	Description = "2C2 という軸配置を持つ汎用蒸気機関車です。";
+}
+
+TrainInfo{
+	FrontLimit = 6.0;
+	TailLimit = -5.3;
+	MaxVelocity = 90.0;
+	MaxAcceleration = 1.5;
+	MaxDeceleration = 4.0;
+}
+
+DefineSwitch "照明"{
+	Entry = "入";
+	Entry = "切";
+}
+
+DefineSwitch "煙"{
+	Entry = "入";
+	Entry = "切";
+}
+
+PrimaryAssembly{
+	Axle "LeadingWheel1"{
+		ModelFileName = "LeadingWheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (5.2, 0.4);
+	}
+	Axle "LeadingWheel2"{
+		ModelFileName = "LeadingWheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (3.2, 0.4);
+	}
+	Axle "DrivingWheel1"{
+		ModelFileName = "DrivingWheel2.x";
+		ModelScale = 1.0;
+		Diameter = 1.6;
+		Symmetric = 1;
+		Coord = (1.8, 0.8);
+	}
+	Axle "DrivingWheel2"{
+		ModelFileName = "DrivingWheel1.x";
+		ModelScale = 1.0;
+		Diameter = 1.6;
+		Symmetric = 1;
+		Coord = (0.0, 0.8);
+	}
+	Axle "DrivingWheel3"{
+		ModelFileName = "DrivingWheel2.x";
+		ModelScale = 1.0;
+		Diameter = 1.6;
+		Symmetric = 1;
+		Coord = (-1.8, 0.8);
+	}
+	Axle "TrailingWheel1"{
+		ModelFileName = "TrailingWheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-3.4, 0.4);
+	}
+	Axle "TrailingWheel2"{
+		ModelFileName = "TrailingWheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-4.6, 0.4);
+	}
+	Body "LeadingBogie"{
+		ModelFileName = "LeadingBogie.x";
+		ModelScale = 1.0;
+		JointZY "LeadingWheel1"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (1.0, 0.0);
+		}
+		JointZY "LeadingWheel2"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-1.0, 0.0);
+		}
+	}
+	Body "MainBody"{
+		ModelFileName = "Body.x";
+		ModelScale = 1.0;
+		Transparent = 3;
+		If "照明"{
+			ChangeMaterial{
+				MaterialID = 4;
+				Diffuse = 0.5, 0.5, 0.5, 1.0;
+				Ambient = 0.5, 0.5, 0.5;
+				Emissive = 0.0, 0.0, 0.0;
+			}
+			ChangeMaterial{
+				MaterialID = 5;
+				Diffuse = 0.5, 0.5, 0.0, 1.0;
+				Ambient = 0.5, 0.5, 0.0;
+				Emissive = 0.0, 0.0, 0.0;
+			}
+		}Else{
+			NoReceiveShadow = 4, 5;
+		}
+		JointZY "DrivingWheel1"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (1.8, 0.8);
+		}
+		JointZY "DrivingWheel3"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-1.8, 0.8);
+		}
+	}
+	Body "TrailingBogie"{
+		ModelFileName = "TrailingBogie.x";
+		ModelScale = 1.0;
+		JointZY "TrailingWheel1"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (0.6, 0.0);
+		}
+		JointZY "TrailingWheel2"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-0.6, 0.0);
+		}
+	}
+	//	ロッド右側
+	ObjectZY "Rod1R"{
+		ModelFileName = "Rod1.x";
+		ModelScale = 1.0;
+		JointZYX "DrivingWheel1"{
+			AttachX = 0.65;
+			AttachCoord = (0.0, -0.33);
+			LocalCoord = (1.8, 0.0);
+		}
+		JointZYX "DrivingWheel3"{
+			AttachX = 0.65;
+			AttachCoord = (0.0, -0.33);
+			LocalCoord = (-1.8, 0.0);
+		}
+	}
+	TriangleZY{
+		Link "Rod2R"{
+			ModelFileName = "Rod2.x";
+			ModelScale = 1.0;
+			JointZYX "DrivingWheel2"{
+				AttachX = 0.825;
+				AttachCoord = (0.279, 0.0);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (1.346, 0.0);
+		}
+		Link "Rod4R"{
+			ModelFileName = "Rod4.x";
+			ModelScale = 1.0;
+			JointZYX "MainBody"{
+				AttachX = 0.825;
+				AttachCoord = (1.473, 1.6);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, -0.737);
+		}
+	}
+	CrankZY{
+		Link "Rod5R"{
+			ModelFileName = "Rod5.x";
+			ModelScale = 1.0;
+			JointZYX "Rod4R"{
+				AttachX = 0.0;
+				AttachCoord = (0.113, -0.255);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (1.371, 0.0);
+		}
+		Slide "Dummy1R"{
+			ModelFileName = "";
+			JointZYX "MainBody"{
+				AttachX = 0.825;
+				AttachCoord = (0.0, 1.6);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (1.0, 0.0);
+		}
+	}
+	ObjectZY "Rod7R"{
+		ModelFileName = "Rod7.x";
+		ModelScale = 1.0;
+		FixPosition = 0.0;
+		JointZYX "MainBody"{
+			AttachX = 0.825;
+			AttachCoord = (1.244, 1.702);
+			LocalCoord = (0.0, 0.0);
+		}
+		JointZYX "Rod5R"{
+			AttachX = 0.0;
+			AttachCoord = (-0.254, 0.0);
+			LocalCoord = (0.0, -0.432);
+		}
+	}
+	CrankZY{
+		Link "Rod3R"{
+			ModelFileName = "Rod3.x";
+			ModelScale = 1.0;
+			JointZYX "DrivingWheel2"{
+				AttachX = 0.725;
+				AttachCoord = (0.0, -0.33);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (2.387, 0.0);
+		}
+		Slide "Rod8R"{
+			ModelFileName = "Rod8R.x";
+			ModelScale = 1.0;
+			JointZYX "MainBody"{
+				AttachX = 0.725;
+				AttachCoord = (0.0, 0.8);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (1.0, 0.0);
+		}
+	}
+	TriangleZY{
+		Link "Rod9R"{
+			ModelFileName = "Rod9.x";
+			ModelScale = 1.0;
+			JointZYX "Rod8R"{
+				AttachX = 0.1;
+				AttachCoord = (0.0, -0.457);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.533, 0.0);
+		}
+		Link "Rod6R"{
+			ModelFileName = "Rod6.x";
+			ModelScale = 1.0;
+			JointZYX "Rod5R"{
+				AttachX = 0.0;
+				AttachCoord = (1.371, 0.0);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, -1.194);
+		}
+	}
+	CrankZY{
+		Link "Dummy2R"{
+			ModelFileName = "";
+			JointZYX "Rod6R"{
+				AttachX = 0.0;
+				AttachCoord = (0.0, -0.127);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, 0.0);
+		}
+		Slide "Rod10R"{
+			ModelFileName = "Rod10.x";
+			ModelScale = 1.0;
+			JointZYX "MainBody"{
+				AttachX = 0.825;
+				AttachCoord = (0.0, 1.473);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (1.0, 0.0);
+		}
+	}
+	//	ロッド左側
+	ObjectZY "Rod1L"{
+		ModelFileName = "Rod1.x";
+		ModelScale = 1.0;
+		JointZYX "DrivingWheel1"{
+			AttachX = -0.65;
+			AttachCoord = (0.33, 0.0);
+			LocalCoord = (1.8, 0.0);
+		}
+		JointZYX "DrivingWheel3"{
+			AttachX = -0.65;
+			AttachCoord = (0.33, 0.0);
+			LocalCoord = (-1.8, 0.0);
+		}
+	}
+	TriangleZY{
+		Link "Rod2L"{
+			ModelFileName = "Rod2.x";
+			ModelScale = 1.0;
+			JointZYX "DrivingWheel2"{
+				AttachX = -0.825;
+				AttachCoord = (0.0, 0.279);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (1.346, 0.0);
+		}
+		Link "Rod4L"{
+			ModelFileName = "Rod4.x";
+			ModelScale = 1.0;
+			JointZYX "MainBody"{
+				AttachX = -0.825;
+				AttachCoord = (1.473, 1.6);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, -0.737);
+		}
+	}
+	CrankZY{
+		Link "Rod5L"{
+			ModelFileName = "Rod5.x";
+			ModelScale = 1.0;
+			JointZYX "Rod4L"{
+				AttachX = 0.0;
+				AttachCoord = (0.113, -0.255);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (1.371, 0.0);
+		}
+		Slide "Dummy1L"{
+			ModelFileName = "";
+			JointZYX "MainBody"{
+				AttachX = -0.825;
+				AttachCoord = (0.0, 1.6);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (1.0, 0.0);
+		}
+	}
+	ObjectZY "Rod7L"{
+		ModelFileName = "Rod7.x";
+		ModelScale = 1.0;
+		FixPosition = 0.0;
+		JointZYX "MainBody"{
+			AttachX = -0.825;
+			AttachCoord = (1.244, 1.702);
+			LocalCoord = (0.0, 0.0);
+		}
+		JointZYX "Rod5L"{
+			AttachX = 0.0;
+			AttachCoord = (-0.254, 0.0);
+			LocalCoord = (0.0, -0.432);
+		}
+	}
+	CrankZY{
+		Link "Rod3L"{
+			ModelFileName = "Rod3.x";
+			ModelScale = 1.0;
+			JointZYX "DrivingWheel2"{
+				AttachX = -0.725;
+				AttachCoord = (0.33, 0.0);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (2.387, 0.0);
+		}
+		Slide "Rod8L"{
+			ModelFileName = "Rod8L.x";
+			ModelScale = 1.0;
+			JointZYX "MainBody"{
+				AttachX = -0.725;
+				AttachCoord = (0.0, 0.8);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (1.0, 0.0);
+		}
+	}
+	TriangleZY{
+		Link "Rod9L"{
+			ModelFileName = "Rod9.x";
+			ModelScale = 1.0;
+			JointZYX "Rod8L"{
+				AttachX = -0.1;
+				AttachCoord = (0.0, -0.457);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.533, 0.0);
+		}
+		Link "Rod6L"{
+			ModelFileName = "Rod6.x";
+			ModelScale = 1.0;
+			JointZYX "Rod5L"{
+				AttachX = 0.0;
+				AttachCoord = (1.371, 0.0);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, -1.194);
+		}
+	}
+	CrankZY{
+		Link "Dummy2L"{
+			ModelFileName = "";
+			JointZYX "Rod6L"{
+				AttachX = 0.0;
+				AttachCoord = (0.0, -0.127);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, 0.0);
+		}
+		Slide "Rod10L"{
+			ModelFileName = "Rod10.x";
+			ModelScale = 1.0;
+			JointZYX "MainBody"{
+				AttachX = -0.825;
+				AttachCoord = (0.0, 1.473);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (1.0, 0.0);
+		}
+	}
+	//	連結器
+	ObjectZY "Connector1"{
+		ModelFileName = "Connector.x";
+		ModelScale = 1.0;
+		FixPosition = 0.0;
+		JointZYX "MainBody"{
+			AttachCoord = (5.7, 0.85);
+			LocalCoord = (0.0, 0.0);
+		}
+		JointZYX "LeadingBogie"{
+			AttachCoord = (100.0, 0.45);
+			LocalCoord = (100.0, 0.0);
+		}
+	}
+	If !"照明"{
+		//	ヘッドライト
+		Headlight{
+			AttachObject = "MainBody";
+			SourceCoord = (-0.1, 3.50, 5.3);
+			Direction = (0.0, 0.0, 1.0);
+			MaxDistance = 10.0;
+			LensFlare{
+				StartAngle = 25.0;
+				Circle{
+					Distance = 0.0;
+					Radius = 0.45;
+					InnerColor = #ffffffc0;
+					OuterColor = #00000000;
+				}
+				Circle{
+					Distance = 0.05;
+					Radius = 0.45;
+					InnerColor = #00000000;
+					OuterColor = #40ffffc0;
+				}
+				Circle{
+					Distance = 0.1;
+					Radius = 0.9;
+					InnerColor = #00000000;
+					OuterColor = #30ffffe0;
+				}
+				Circle{
+					Distance = 0.15;
+					Radius = 1.35;
+					InnerColor = #00000000;
+					OuterColor = #20ffffff;
+				}
+			}
+		}
+		Headlight{
+			AttachObject = "MainBody";
+			SourceCoord = (0.3, 3.85, 5.1);
+			Direction = (0.0, 0.0, 1.0);
+			MaxDistance = 15.0;
+			LensFlare{
+				StartAngle = 15.0;
+				Circle{
+					Distance = 0.0;
+					Radius = 0.30;
+					InnerColor = #ffffff00;
+					OuterColor = #00000000;
+				}
+				Circle{
+					Distance = 0.075;
+					Radius = 0.30;
+					InnerColor = #00000000;
+					OuterColor = #40ffff00;
+				}
+				Circle{
+					Distance = 0.15;
+					Radius = 0.6;
+					InnerColor = #00000000;
+					OuterColor = #30ffff20;
+				}
+				Circle{
+					Distance = 0.225;
+					Radius = 0.9;
+					InnerColor = #00000000;
+					OuterColor = #20ffff40;
+				}
+			}
+		}
+	}
+	If !"煙"{
+		Particle{
+			TextureFileName = "Smoke.png";
+			AttachObject = "MainBody";
+			SourceCoord = (0.0, 4.2, 4.2);
+			MinQty = 4.0;
+			MaxQty = 100.0;
+			VelocityRel = 0.4;
+			AccelerationRel = 5.0;
+			Lifetime = 3.0, 4.0;
+			Direction = (-0.6, 3.0, -0.6), (0.6, 6.0, 0.6);
+			InitialRadius = 0.4, 0.5;
+			FinalRadius = 4.0, 5.0;
+			Color = #ff303030, #ff505050;
+			BlendMode = Alpha;
+			AirResistance = 0.7;
+			Gravity = 0.0;
+			Turbulence = 3.0;
+		}
+		Particle{
+			TextureFileName = "Smoke.png";
+			AttachObject = "MainBody";
+			SourceCoord = (0.7, 0.3, 4.7);
+			MinQty = 2.0;
+			MaxQty = 100.0;
+			VelocityRel = 0.4;
+			AccelerationRel = 5.0;
+			Lifetime = 1.5, 2.0;
+			Direction = (3.2, 0.0, -0.4), (4.0, -0.4, 0.4);
+			InitialRadius = 0.3, 0.4;
+			FinalRadius = 1.5, 2.0;
+			Color = #ffe0e0e0, #ffffffff;
+			BlendMode = Alpha;
+			AirResistance = 0.7;
+			Gravity = 0.0;
+			Turbulence = 1.0;
+		}
+		Particle{
+			TextureFileName = "Smoke.png";
+			AttachObject = "MainBody";
+			SourceCoord = (-0.7, 0.3, 4.7);
+			MinQty = 2.0;
+			MaxQty = 100.0;
+			VelocityRel = 0.4;
+			AccelerationRel = 5.0;
+			Lifetime = 1.5, 2.0;
+			Direction = (-3.2, 0.4, -0.4), (-4.0, -0.4, 0.4);
+			InitialRadius = 0.3, 0.4;
+			FinalRadius = 1.5, 2.0;
+			Color = #ffe0e0e0, #ffffffff;
+			BlendMode = Alpha;
+			AirResistance = 0.7;
+			Gravity = 0.0;
+			Turbulence = 1.0;
+		}
+	}
+	FrontCabin{
+		Joint3D "MainBody"{
+			AttachCoord = (-1.2, 3.0, -3.6);
+		}
+	}
+	TailCabin{
+		Joint3D "MainBody"{
+			AttachCoord = (1.2, 3.0, -3.6);
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+}

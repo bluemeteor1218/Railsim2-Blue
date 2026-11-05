@@ -1,0 +1,470 @@
+/*
+ *	RailSim II Line Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Line;
+	PluginName = "Default simple catenary";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "";
+}
+
+LineInfo{
+	TrolleyAlt = 5.09;		//	rail surface to trolley
+	Height = 0.6;			//	trolley to hanger
+	MaxInterval = 40.0;		//	pole interval
+	MaxDeflection = 0.5;	//	from center of pantograph
+}
+
+/*
+ *	形状定義
+ *	20m～
+ */
+Wireframe{
+	MinInterval = 20.0;
+	//	トロリ線
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	吊架線
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.6, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.45, 0.1);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.35, 0.3);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.35, 0.7);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.45, 0.9);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.6, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.6, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.45, 0.1);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.35, 0.3);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.35, 0.7);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.45, 0.9);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.6, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	ハンガ
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 0.1);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.45, 0.1);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 0.3);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.35, 0.3);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 0.7);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.35, 0.7);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 0.9);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.45, 0.9);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 0.1);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.45, 0.1);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 0.3);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.35, 0.3);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 0.7);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.35, 0.7);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 0.9);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.45, 0.9);
+			Diffuse = #ff404040;
+		}
+	}
+}
+
+/*
+ *	形状定義
+ *	10m～20m
+ */
+Wireframe{
+	MinInterval = 10.0;
+	MaxInterval = 20.0;
+	//	トロリ線
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	吊架線
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.6, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.35, 0.25);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.35, 0.75);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.6, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.6, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.35, 0.25);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.35, 0.75);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.6, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	ハンガ
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 0.25);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.35, 0.25);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 0.75);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.35, 0.75);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 0.25);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.35, 0.25);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 0.75);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.35, 0.75);
+			Diffuse = #ff404040;
+		}
+	}
+}
+
+/*
+ *	形状定義
+ *	～10.0;
+ */
+Wireframe{
+	MaxInterval = 10.0;
+	//	トロリ線
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	吊架線
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.6, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.6, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.6, 0.0);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.6, 1.0);
+			Diffuse = #ff404040;
+		}
+	}
+	//	ハンガ
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.0, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (-0.05, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+	}
+	Line{
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.0, 0.5);
+			Diffuse = #ff404040;
+		}
+		Vertex{
+			IgnoreCant = yes;
+			Coord = (0.05, 0.3, 0.5);
+			Diffuse = #ff404040;
+		}
+	}
+}

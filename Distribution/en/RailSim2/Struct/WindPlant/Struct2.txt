@@ -1,0 +1,58 @@
+/*
+ *	RailSim II Struct Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Struct;
+	PluginName = "Wind plant";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "Change prop direction automatically.";
+}
+
+StructInfo{
+}
+
+DefineSwitch "Track wind direction"{
+	Entry = "Enabled";
+	Entry = "Disabled";
+}
+
+PrimaryAssembly{
+	Object3D "Tower"{
+		ModelFileName = "Tower.x";
+		ModelScale = 1.0;
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 0.0, 0.0);
+		}
+	}
+	Object3D "Generator"{
+		ModelFileName = "Generator.x";
+		ModelScale = 1.0;
+		ApplySwitch "Track wind direction"{
+		Case 0:
+			TrackWind{
+				TrackSpeed = -0.4;
+				FixAxis = (0.0, 1.0, 0.0);
+			}
+		}
+		Joint3D "Tower"{
+			AttachCoord = (0.0, 44.0, 0.0);
+		}
+	}
+	Object3D "Blade"{
+		ModelFileName = "Blade.x";
+		ModelScale = 1.0;
+		Windmill{
+			Directional = yes;
+			RotationAxis = (0.0, 0.0, 1.0);
+			RotationSpeed = -0.1;	//	[rps/(m/s)]
+			Symmetric = 3;
+		}
+		Joint3D "Generator"{
+			AttachCoord = (0.0, 0.0, 1.0);
+		}
+	}
+}

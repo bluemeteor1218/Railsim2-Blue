@@ -1,0 +1,117 @@
+/*
+ *	RailSim II Train Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Train;
+	PluginName = "Freitranza tender";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\Aizentranza01\Icon.png";
+	Description = "Tender for Freitranza.";
+}
+
+TrainInfo{
+	FrontLimit = 2.8;
+	TailLimit = -2.8;
+	MaxVelocity = 0.0;
+	MaxAcceleration = 0.0;
+	MaxDeceleration = 4.0;
+}
+
+PrimaryAssembly{
+	Axle "TenderWheel1"{
+		ModelFileName = "..\Freitranza01\TrailingWheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (2.1, 0.4);
+	}
+	Axle "TenderWheel2"{
+		ModelFileName = "..\Freitranza01\TrailingWheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (0.9, 0.4);
+	}
+	Axle "TenderWheel3"{
+		ModelFileName = "..\Freitranza01\TrailingWheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-0.9, 0.4);
+	}
+	Axle "TenderWheel4"{
+		ModelFileName = "..\Freitranza01\TrailingWheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-2.1, 0.4);
+	}
+	Body "TenderBogie1"{
+		ModelFileName = "TenderBogie.x";
+		ModelScale = 1.0;
+		JointZY "TenderWheel1"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (0.6, 0.0);
+		}
+		JointZY "TenderWheel2"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-0.6, 0.0);
+		}
+	}
+	Body "TenderBogie2"{
+		ModelFileName = "TenderBogie.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		JointZY "TenderWheel3"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-0.6, 0.0);
+		}
+		JointZY "TenderWheel4"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (0.6, 0.0);
+		}
+	}
+	Body "TenderBody"{
+		ModelFileName = "TenderBody.x";
+		ModelScale = 1.0;
+		JointZY "TenderBogie1"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (1.5, 1.0);
+		}
+		JointZY "TenderBogie2"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (-1.5, 1.0);
+		}
+	}
+	//	˜AŒ‹Ší
+	ObjectZY "Connector1"{
+		ModelFileName = "..\Freitranza01\Connector.x";
+		ModelScale = 1.0;
+		FixPosition = 0.0;
+		JointZYX "TenderBody"{
+			AttachCoord = (2.4, 0.85);
+			LocalCoord = (-0.1, 0.0);
+		}
+		JointZYX "TenderBogie1"{
+			AttachCoord = (100.0, 0.45);
+			LocalCoord = (100.0, 0.0);
+		}
+	}
+	ObjectZY "Connector2"{
+		ModelFileName = "..\Freitranza01\Connector.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		FixPosition = 0.0;
+		JointZYX "TenderBody"{
+			AttachCoord = (-2.4, 0.85);
+			LocalCoord = (-0.1, 0.0);
+		}
+		JointZYX "TenderBogie2"{
+			AttachCoord = (100.0, 0.45);
+			LocalCoord = (100.0, 0.0);
+		}
+	}
+}

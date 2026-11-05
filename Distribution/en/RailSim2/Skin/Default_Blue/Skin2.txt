@@ -1,0 +1,128 @@
+/*
+ *	RailSim II Default Skin Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Skin;
+	PluginName = "waterblueglass";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "RailSim II image skin";
+}
+
+NormalCursor{
+	TexFileName = "NormalCursor.png";
+	ImageSize = 128, 128;
+	Cursor2DSize = 32, 32;
+	Cursor2DHotSpot = 1, 1;
+	Cursor2DAnimNumber = 16;
+	Cursor2DAnimFrame = 1;
+}
+
+ResizeCursor1{
+	TexFileName = "ResizeCursor1.png";
+	ImageSize = 32, 32;
+	Cursor2DHotSpot = 15, 15;
+}
+
+ResizeCursor2{
+	TexFileName = "ResizeCursor2.png";
+	ImageSize = 32, 32;
+	Cursor2DHotSpot = 15, 15;
+}
+
+ResizeCursor3{
+	TexFileName = "ResizeCursor3.png";
+	ImageSize = 32, 32;
+	Cursor2DHotSpot = 15, 15;
+}
+
+ResizeCursor4{
+	TexFileName = "ResizeCursor4.png";
+	ImageSize = 32, 32;
+	Cursor2DHotSpot = 15, 15;
+}
+
+Interface{
+	TexFileName = "Interface.png";
+	FontName = "MS UI Gothic";
+	TitleBarFontColor = #ffffffff;
+	ButtonFontColor = #ff406080;
+	StaticFontColor = #ff406080;
+	FocusFrameColor = #ff000000;
+}
+
+Background{
+	UseWallpaper = yes;
+	TexFileName = "Wallpaper.png";
+	ImageSize = 128, 128;
+	//BackgroundColor = #ff000000;
+}
+
+Frame{
+	FrameTexFileName = "Frame.png";
+	IconTexFileName =
+		"RailMenu.png", "TrainMenu.png", "StationMenu.png",
+		"StructMenu.png", "SceneMenu.png", "SystemMenu.png";
+	LabelFontColor = #ff406080;
+	InfoFontColor = #ff406080;
+	FloatFontColor = #ffffffff;
+}
+
+EditCtrl{
+	DefaultFontColor = #ff406080;
+	EditBaseColor = #80000000, #80000000, #c0000000, #c0000000;
+	EditFontColor = #ffffffff;
+	ConvertFontColor = #ff00ffff;
+	ConvertClauseColor = #ffffff00, #ffff0000;
+	SelectedBaseColor = #ff0080ff, #ff0080ff, #ff0000ff, #ff0000ff;
+}
+
+ListView{
+	DefaultBaseColorOdd = #ffffffff;
+	DefaultBaseColorEven = #ffe0e0e0;
+	DefaultFontColor = #ff000000;
+	SelectedBaseColor = #806060ff, #806060ff, #804040ff, #804040ff;
+	SelectedFontColor = #ffffffff;
+	FocusFrameColor = #80000000;
+}
+
+PluginTree{
+	DefaultBaseColor = #80000000;
+	DefaultFontColor = #ffffffff;
+	SelectedBaseColor = #c08080ff, #c06060c0, #c06060c0, #c08080ff;
+	SelectedFontColor = #ffffffff;
+	FocusFrameColor = #80ffffff;
+}
+
+PopupMenu{
+	DefaultFontColor = #ff203040;
+	DisabledFontColor = #ff808080;
+	DisabledShadowColor = #ffffffff;
+	SelectedBaseColor = #804040ff, #804040ff, #802020ff, #802020ff;
+	SelectedFontColor = #ffffffff;
+}
+
+Model{
+	ArrowModelFileName = "Arrow.x";
+	ArrowModelScale = 1.0;
+	LinkModelFileName = "Link.x";
+	LinkModelScale = 1.0;
+	SegmentModelFileName = "Segment.x";
+	SegmentModelScale = 1.0;
+	CompassModelFileName = "Compass1.x", "Compass2.x";
+	CompassModelScale = 1.0, 1.0;
+	WindDirModelFileName = "WindDir.x";
+	WindDirModelScale = 0.5;
+}
+
+Sound{
+	MouseDownWaveFileName = "MouseDown.wav";
+	MouseUpWaveFileName = "MouseUp.wav";
+	ErrorWaveFileName = "Error.wav";
+	ScreenShotWaveFileName = "ScreenShot.wav";
+	VideoStartWaveFileName = "VideoStart.wav";
+	VideoStopWaveFileName = "VideoStop.wav";
+}

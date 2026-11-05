@@ -1,0 +1,42 @@
+/*
+ *	RailSim II Struct Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Struct;
+	PluginName = "フェンス";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "αテストによる透過処理のテストです。";
+}
+
+StructInfo{
+}
+
+DefineSwitch "texture"{
+	Entry = "AlphaChannel";
+	Entry = "ColorKeyWhite";
+	Entry = "ColorKeyBlack";
+}
+
+PrimaryAssembly{
+	Object3D "Main"{
+		ModelFileName = "Fence.x";
+		ModelScale = 1.0;
+		NoCastShadow = 0;
+		AlphaZeroTest = 0;
+		ApplySwitch "texture"{
+		Case 1:
+			ChangeTexture = 0, "FenceTrans#w.png";
+		Case 2:
+			ChangeTexture = 0, "FenceTrans#b.png";
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 0.0, 0.0);
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+}
+

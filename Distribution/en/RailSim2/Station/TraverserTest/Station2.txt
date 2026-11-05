@@ -1,0 +1,135 @@
+/*
+ *	RailSim II Station Plugin
+ *	Copyright (c) 2010 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.13;
+	PluginType = Station;
+	PluginName = "Traverser Test";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "A sample implementation of a traverser.";
+}
+
+StationInfo{
+}
+
+Platform{
+	Stoppable = no;
+	GirderPlugin = "";
+	PierPlugin = "";
+	PolePlugin = "";
+	Coord = (-6.0, 0.0, -20.0);
+	Coord = (-6.0, 0.0, -15.0);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (-6.0, 0.0, 15.0);
+	Coord = (-6.0, 0.0, 20.0);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (-2.0, 0.0, -20.0);
+	Coord = (-2.0, 0.0, -15.0);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (-2.0, 0.0, 15.0);
+	Coord = (-2.0, 0.0, 20.0);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (2.0, 0.0, -20.0);
+	Coord = (2.0, 0.0, -15.0);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (2.0, 0.0, 15.0);
+	Coord = (2.0, 0.0, 20.0);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (6.0, 0.0, -20.0);
+	Coord = (6.0, 0.0, -15.0);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (6.0, 0.0, 15.0);
+	Coord = (6.0, 0.0, 20.0);
+}
+
+//	sliding rail
+Platform{
+	TiePlugin = "";
+	ParentObject = "SlidePlate";
+	Coord = (0.0, 0.0, -15.0);
+	Coord = (0.0, 0.0, 15.0);
+}
+
+DefineSwitch "Slide"{
+	Entry = "No.1";
+	Entry = "No.2";
+	Entry = "No.3";
+	Entry = "No.4";
+}
+
+DefineSwitch "Through"{
+	Entry = "Enabled";
+	Entry = "Disabled";
+}
+
+PrimaryAssembly{
+	Object3D "SlidePlate"{
+		ModelFileName = "..\TurntableTest\RotationPlate.x";
+		ModelScale = 1.0;
+		ApplySwitch "Slide"{
+		Case 1:
+			StaticMove{
+				Displacement = (4.0, 0.0, 0.0);
+				AnimationTime = 5.0;
+			}
+		Case 2:
+			StaticMove{
+				Displacement = (8.0, 0.0, 0.0);
+				AnimationTime = 5.0;
+			}
+		Case 3:
+			StaticMove{
+				Displacement = (12.0, 0.0, 0.0);
+				AnimationTime = 5.0;
+			}
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (-6.0, 0.0, 0.0);
+			AttachDir = (0.0, 0.0, 1.0);
+		}
+	}
+	ApplySwitch "Through"{
+	Case 0:
+		ApplySwitch "Slide"{
+		Case 0:
+			ConnectRail = 16, 1;
+			ConnectRail = 17, 2;
+		Case 1:
+			ConnectRail = 16, 5;
+			ConnectRail = 17, 6;
+		Case 2:
+			ConnectRail = 16, 9;
+			ConnectRail = 17, 10;
+		Case 3:
+			ConnectRail = 16, 13;
+			ConnectRail = 17, 14;
+		}
+	Case 1:
+		DisconnectRail = 16;
+		DisconnectRail = 17;
+	}
+}

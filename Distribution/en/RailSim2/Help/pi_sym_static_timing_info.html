@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>static-timing-info</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">static-timing-info</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">static-timing-info</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>静的な動作カスタマイザのタイミング情報を定義します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">static-timing-info ::=</pre>
+<pre class="ind">
+<span class="ctrl">(</span> PreAnimationDelay = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+<span class="ctrl">(</span> AnimationTime = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+<span class="ctrl">(</span> PostAnimationDelay = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+<span class="ctrl">(</span> PreReverseDelay = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+<span class="ctrl">(</span> ReverseTime = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+<span class="ctrl">(</span> PostReverseDelay = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">PreAnimationDelay</p>
+<p class="argexp"><a href="pi_sym_model_switch.html">スイッチ</a>によりこのカスタマイザが有効になってから、実際に動作を始めるまでの遅延時間を秒単位で指定します。デフォルト値は 0.0 です。</p>
+<p class="argname">AnimationTime</p>
+<p class="argexp">実際の動作に要する時間を秒単位で指定します。0.0 を指定すると一瞬で適用されます。デフォルト値は 0.0 です。</p>
+<p class="argname">PostAnimationDelay</p>
+<p class="argexp"><span class="source">PreReverseDelay</span> に対応する遅延時間です。他のアニメーションと同期を取るために使用します。デフォルト値は 0.0 です。</p>
+<p class="argname">PreReverseDelay</p>
+<p class="argexp">カスタマイザが無効になり、元の状態に戻るための逆動作を始めるまでの遅延時間を秒単位で指定します。デフォルト値は <span class="source">PostAnimationDelay</span> の値です。</p>
+<p class="argname">ReverseTime</p>
+<p class="argexp">カスタマイザが無効になり、元の状態に戻るまでに要する時間を秒単位で指定します。デフォルト値は <span class="source">AnimationTime</span> の値です。</p>
+<p class="argname">PostReverseDelay</p>
+<p class="argexp"><span class="source">PreAnimationDelay</span> に対応する遅延時間です。他のアニメーションと同期を取るために使用します。デフォルト値は <span class="source">PreAnimationDelay</span> の値です。</p>
+<p class="joint">よく分からない場合、とりあえず <span class="source">AnimationTime</span> だけを指定すればいいでしょう。逆方向の動作も考慮しつつ他のアニメーションとの同期が外れないようにするためには、上 3 つの値の合計と下 3 つの値の合計を同期する他のアニメーションと共通にし、さらに個々のカスタマイザ内で上 3 つの値の比と下 3 つの値の比を等しくする必要があります。それぞれの値の対応関係は下図のようになります。</p>
+<p class="center"><img src="timingsync.png" alt="アニメーションの同期"></p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_static_rotator.html">static-rotator</a> / <a class="nonterm" href="pi_sym_static_mover.html">static-mover</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

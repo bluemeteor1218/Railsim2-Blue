@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>車輌プラグイン</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1>車輌プラグイン</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <span class="appeal">車輌</span><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>車輌プラグインは、レール上を走る鉄道車輌を表現するために使用されます。</p>
+</div>
+<div class="contbox cb_src">
+<h2>定義ファイル (Train2.txt) 文法</h2>
+<pre class="nonterm">train-plugin ::=</pre>
+<pre class="ind"><a class="nonterm" href="pi_sym_plugin_header.html">plugin-header</a>
+TrainInfo{
+    FrontLimit = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    TailLimit = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    MaxVelocity = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    MaxAcceleration = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    MaxDeceleration = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    <span class="ctrl">(</span> TiltSpeed = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> DoorClosingTime = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+}
+<a class="nonterm" href="pi_sym_model_option.html">model-option</a>
+PrimaryAssembly{
+    <a class="nonterm" href="pi_sym_axle_object.html">axle-object</a><span class="sup">1+</span>
+    <a class="nonterm" href="pi_sym_body_object.html">body-object</a><span class="sup">*</span>
+    <a class="nonterm" href="pi_sym_train_free_object.html">train-free-object</a><span class="sup">*</span>
+    <a class="nonterm" href="pi_sym_effector.html">effector</a><span class="sup">*</span>
+    <span class="ctrl">(</span> FrontCabin{ <a class="nonterm" href="pi_sym_object_joint_3d.html">object-joint-3d</a> } <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> TailCabin{ <a class="nonterm" href="pi_sym_object_joint_3d.html">object-joint-3d</a> } <span class="ctrl">)</span><span class="sub">opt</span>
+}</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">FrontLimit</p>
+<p class="argexp">車輌の前方連結位置を指定します。車輌の前方がローカル座標系 Z 軸正方向に対応します。</p>
+<p class="argname">TailLimit</p>
+<p class="argexp">車輌の後部連結位置を指定します。この値は <span class="source">FrontLimit</span> で指定した値より小さくなければなりません。</p>
+<p class="argname">MaxVelocity</p>
+<p class="argexp">車輌の最高速度を [km/h] で指定します。ここで指定する速度や加速度等の物理値は、いずれも規定値の 30FPS でゲームが動作した場合に、ゲーム内のメートル座標系とゲーム外の実時間軸に関して見かけ上そのスペックが得られるようになっているもので、ゲーム内のいわゆるシミュレーション時間軸に関しての加速度等を指示するものではありませんので注意してください。</p>
+<p class="argname">MaxAcceleration</p>
+<p class="argexp">車輌の最大加速度を [(km/h)/s] で指定します。(参考) RS1 用車両プラグインについては、3.0 としています。</p>
+<p class="argname">MaxDeceleration</p>
+<p class="argexp">車輌の最大減速度を [(km/h)/s] で指定します。(参考) RS1 用車両プラグインについては、4.0 としています。</p>
+<p class="argname">TiltSpeed</p>
+<p class="argexp">車輌が振り子機能を使用する場合、振り子の反応速度を指定します。この値は 0.0～1.0 間で指定し、大きい値を指定するほど高速<p class="argname">DoorClosingTime</p>
+<p class="argexp">車両のドアを閉めるのに要する時間を秒単位で指定します。<span class="source">_DOOR1</span>、<span class="source">_DOOR2</span> 等の<a href="pi_sym_model_switch.html">スイッチ</a>と、<a class="nonterm" href="pi_sym_static_mover.html">static-mover</a> 等のカスタマイザを使用してドア開閉のアニメーションを実装した場合に指定します。</p>
+<p class="argname">FrontCabin</p>
+<p class="argexp">前方の運転席の視点位置を指定します。運転席モードで使用されます。省略した場合は車輌前方の適当な位置が指定されます。</p>
+<p class="argname">TailCabin</p>
+<p class="argexp">後方の運転席の視点位置を指定します。</p>
+<p>車輌は車軸 <a class="nonterm" href="pi_sym_axle_object.html">axle-object</a> を介してレール上に設置されます。最低 1 個の車軸定義が必要です。</p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_model.html">＜PrevSec</a> | <a href="plugin.html">▲ChTop</a> | <a href="#pagetop">▲PageTop</a> | <a href="pi_station.html">NextSec＞</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

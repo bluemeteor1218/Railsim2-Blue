@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>particle-applier</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">particle-applier</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">particle-applier</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>煙や噴水などのパーティクル (粒子) エフェクトを定義します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">particle-applier ::=</pre>
+<pre class="ind">Particle{
+    TextureFileName = <a class="nonterm" href="pi_sym_filename.html">filename</a>;
+    AttachObject = <a class="nonterm" href="pi_sym_string.html">string</a>;
+    SourceCoord = <a class="nonterm" href="pi_sym_vector_3d.html">vector-3d</a>;
+    MinQty = <a class="nonterm" href="pi_sym_float.html">float</a>;
+    <span class="ctrl">(</span> MaxQty = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> VelocityRel = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> AccelerationRel = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> DecelerationRel = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    Lifetime = <a class="nonterm" href="pi_sym_float.html">float</a>, <a class="nonterm" href="pi_sym_float.html">float</a>;
+    Direction = <a class="nonterm" href="pi_sym_vector_3d.html">vector-3d</a>, <a class="nonterm" href="pi_sym_vector_3d.html">vector-3d</a>;
+    InitialRadius = <a class="nonterm" href="pi_sym_float.html">float</a>, <a class="nonterm" href="pi_sym_float.html">float</a>;
+    FinalRadius = <a class="nonterm" href="pi_sym_float.html">float</a>, <a class="nonterm" href="pi_sym_float.html">float</a>;
+    Color = <a class="nonterm" href="pi_sym_color.html">color</a>, <a class="nonterm" href="pi_sym_color.html">color</a>;
+    BlendMode = <span class="ctrl">(</span> Alpha <span class="ctrl">|</span> Add <span class="ctrl">)</span>;
+    <span class="ctrl">(</span> AirResistance = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> Gravity = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+    <span class="ctrl">(</span> Turbulence = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+}</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">TextureFileName</p>
+<p class="argexp">パーティクルの表現に使用するテクスチャファイルを指定します。</p>
+<p class="argname">AttachObject</p>
+<p class="argexp">固定先のオブジェクト名を指定します。オブジェクト名は <a class="nonterm" href="pi_sym_object_3d.html">object-3d</a> や <a class="nonterm" href="pi_sym_body_object.html">body-object</a> で定義されたものです。</p>
+<p class="argname">SourceCoord</p>
+<p class="argexp">固定先オブジェクトのローカル座標で、パーティクルの生成位置を指定します。</p>
+<p class="argname">MinQty</p>
+<p class="argexp">単位時間当たりのパーティクル最小発生数 [個/s] を指定します。</p>
+<p class="argname">MaxQty</p>
+<p class="argexp">単位時間当たりのパーティクル最大発生数 [個/s] を指定します。以下の各種比例成分を指定した場合に、単位時間当たりの発生個数の上限を設定します。デフォルト値は <span class="source">MinQty</span> です。</p>
+<p class="argname">VelocityRel</p>
+<p class="argexp">単位時間当たりのパーティクル発生数の、発生源の移動速度に比例した成分 [(個/s)/(km/h)] を指定します。デフォルト値は 0.0 です。</p>
+<p class="argname">AccelerationRel</p>
+<p class="argexp">単位時間当たりのパーティクル発生数の、発生源の加速度に比例した成分 [(個/s)/(km/h/s)] を指定します。加速度は常に正または 0 で、減速中の加速度は 0.0 となります。蒸気機関車の煙の量等を制御するのに使用します。デフォルト値は 0.0 です。</p>
+<p class="argname">DecelerationRel</p>
+<p class="argexp">単位時間当たりのパーティクル発生数の、発生源の減速度に比例した成分 [(個/s)/(km/h/s)] を指定します。減速度は常に正または 0 で、加速中の減速度は 0.0 となります。ブレーキの火花等を制御するのに使用します。デフォルト値は 0.0 です。</p>
+<p class="argname">Lifetime</p>
+<p class="argexp">パーティクルの寿命の最大値と最小値を秒単位で指定します。寿命はパーティクルごとに最小値と最大値の間でランダムに決定されます。</p>
+<p class="argname">Direction</p>
+<p class="argexp">パーティクルの初期速度ベクトルの最小値と最大値を設置先オブジェクトのローカル座標系で指定します。</p>
+<p class="argname">InitialRadius</p>
+<p class="argexp">パーティクルの初期サイズの最小値と最大値を指定します。</p>
+<p class="argname">FinalRadius</p>
+<p class="argexp">パーティクルの最終サイズの最小値と最大値を指定します。</p>
+<p class="argname">Color</p>
+<p class="argexp">パーティクルの色の変化範囲を指定します。パーティクルの色はここで指定した 2 色の間でランダムに決定されます。この機能を使えば、白いテクスチャ画像だけを用意しておけば、同じ形ならこのパラメタを変えるだけでどんな色のパーティクルも表現できます。</p>
+<p class="argname">BlendMode</p>
+<p class="argexp">テクスチャ画像の描画モードを指定します。<span class="source">Alpha</span> の場合は半透明合成、<span class="source">Add</span> の場合は加算合成になります。加算合成は火花など発光粒子を表現するために使用します。</p>
+<p class="argname">AirResistance</p>
+<p class="argexp">空気抵抗を 0.0～1.0 の間で指定します。この値は 1 秒間に粒子の速度が何倍になるかを表します。空気抵抗が大きいほど、速度の減衰具合や風の影響を受けやすくなります。デフォルト値は 0.0 です。</p>
+<p class="argname">Gravity</p>
+<p class="argexp">実効重力加速度を [m/s^2] で指定します。デフォルト値は 0.0 です。</p>
+<p class="argname">Turbulence</p>
+<p class="argexp">乱気流の影響を指定します。この数値が大きいほど、速度ベクトルがランダムに変化します。デフォルト値は 0.0 です。</p>
+<p>パーティクルを使えば様々な表現が可能になります。蒸気機関車の煙はもちろん、パンタグラフの火花や噴水、ラッセル車の掃き出す雪などが表現できるものと思われます。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_effector.html">effector</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

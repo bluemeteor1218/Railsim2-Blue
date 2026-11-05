@@ -1,0 +1,217 @@
+/*
+ *	RailSim II Struct Plugin
+ *	Copyright (c) 2013 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Struct;
+	PluginName = "エンジン模型";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "車輌プラグイン以外でクランク等の機構を使用したサンプルです。";
+}
+
+StructInfo{
+}
+
+DefineSwitch "回転"{
+	Entry = "OFF";
+	Entry = "ON";
+}
+
+PrimaryAssembly{
+	Object3D "Frame"{
+		ModelFileName = "Frame.x";
+		ModelScale = 1.0;
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 1.5, 0.0);
+			AttachDir = (0.0, 0.0, 1.0);
+		}
+	}
+	Object3D "Crossplane"{
+		ModelFileName = "Crossplane.x";
+		ModelScale = 1.0;
+		If "回転"{
+			DynamicRotation{
+				RotationAxis = (1.0, 0.0, 0.0);
+				RotationSpeed = 1.0;
+				Acceleration = 1.0;
+				Deceleration = 1.0;
+			}
+		}
+		Joint3D "Frame"{
+			AttachCoord = (0.0, 0.0, 0.0);
+			AttachDir = (0.0, 0.0, 1.0);
+		}
+	}
+	CrankZY{
+		Link "Crank1"{
+			ModelFileName = "Crank.x";
+			ModelScale = 1.0;
+			JointZYX "Crossplane"{
+				AttachX = 2.525;
+				AttachCoord = (0.0, -0.8);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, 2.3);
+		}
+		Slide "Piston1"{
+			ModelFileName = "Piston.x";
+			JointZYX "Frame"{
+				AttachX = 2.525;
+				AttachCoord = (1.5, 1.5);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (1.0, 1.0);
+		}
+	}
+	CrankZY{
+		Link "Crank2"{
+			ModelFileName = "Crank.x";
+			ModelScale = 1.0;
+			JointZYX "Crossplane"{
+				AttachX = 2.275;
+				AttachCoord = (0.0, -0.8);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, 2.3);
+		}
+		Slide "Piston2"{
+			ModelFileName = "Piston.x";
+			JointZYX "Frame"{
+				AttachX = 2.275;
+				AttachCoord = (-1.5, 1.5);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (-1.0, 1.0);
+		}
+	}
+	CrankZY{
+		Link "Crank3"{
+			ModelFileName = "Crank.x";
+			ModelScale = 1.0;
+			JointZYX "Crossplane"{
+				AttachX = 0.925;
+				AttachCoord = (0.8, 0.0);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, 2.3);
+		}
+		Slide "Piston3"{
+			ModelFileName = "Piston.x";
+			JointZYX "Frame"{
+				AttachX = 0.925;
+				AttachCoord = (1.5, 1.5);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (1.0, 1.0);
+		}
+	}
+	CrankZY{
+		Link "Crank4"{
+			ModelFileName = "Crank.x";
+			ModelScale = 1.0;
+			JointZYX "Crossplane"{
+				AttachX = 0.675;
+				AttachCoord = (0.8, 0.0);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, 2.3);
+		}
+		Slide "Piston4"{
+			ModelFileName = "Piston.x";
+			JointZYX "Frame"{
+				AttachX = 0.675;
+				AttachCoord = (-1.5, 1.5);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (-1.0, 1.0);
+		}
+	}
+	CrankZY{
+		Link "Crank5"{
+			ModelFileName = "Crank.x";
+			ModelScale = 1.0;
+			JointZYX "Crossplane"{
+				AttachX = -0.675;
+				AttachCoord = (-0.8, 0.0);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, 2.3);
+		}
+		Slide "Piston5"{
+			ModelFileName = "Piston.x";
+			JointZYX "Frame"{
+				AttachX = -0.675;
+				AttachCoord = (1.5, 1.5);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (1.0, 1.0);
+		}
+	}
+	CrankZY{
+		Link "Crank6"{
+			ModelFileName = "Crank.x";
+			ModelScale = 1.0;
+			JointZYX "Crossplane"{
+				AttachX = -0.925;
+				AttachCoord = (-0.8, 0.0);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, 2.3);
+		}
+		Slide "Piston6"{
+			ModelFileName = "Piston.x";
+			JointZYX "Frame"{
+				AttachX = -0.925;
+				AttachCoord = (-1.5, 1.5);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (-1.0, 1.0);
+		}
+	}
+	CrankZY{
+		Link "Crank7"{
+			ModelFileName = "Crank.x";
+			ModelScale = 1.0;
+			JointZYX "Crossplane"{
+				AttachX = -2.275;
+				AttachCoord = (0.0, 0.8);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, 2.3);
+		}
+		Slide "Piston7"{
+			ModelFileName = "Piston.x";
+			JointZYX "Frame"{
+				AttachX = -2.275;
+				AttachCoord = (1.5, 1.5);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (1.0, 1.0);
+		}
+	}
+	CrankZY{
+		Link "Crank8"{
+			ModelFileName = "Crank.x";
+			ModelScale = 1.0;
+			JointZYX "Crossplane"{
+				AttachX = -2.525;
+				AttachCoord = (0.0, 0.8);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.0, 2.3);
+		}
+		Slide "Piston8"{
+			ModelFileName = "Piston.x";
+			JointZYX "Frame"{
+				AttachX = -2.525;
+				AttachCoord = (-1.5, 1.5);
+				LocalCoord = (0.0, 0.0);
+			}
+			Direction = (-1.0, 1.0);
+		}
+	}
+}
+

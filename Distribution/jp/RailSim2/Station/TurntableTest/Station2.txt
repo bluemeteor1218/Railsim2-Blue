@@ -1,0 +1,156 @@
+/*
+ *	RailSim II Station Plugin
+ *	Copyright (c) 2010 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.13;
+	PluginType = Station;
+	PluginName = "転車台テスト";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "転車台 (ターンテーブル) の記述サンプルです。";
+}
+
+StationInfo{
+}
+
+Platform{
+	Stoppable = no;
+	GirderPlugin = "";
+	PierPlugin = "";
+	PolePlugin = "";
+	Coord = (15.000000, 0.0, 0.000000);
+	Coord = (20.000000, 0.0, 0.000000);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (7.500000, 0.0, -12.990381);
+	Coord = (10.000000, 0.0, -17.320508);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (-7.500000, 0.0, -12.990381);
+	Coord = (-10.000000, 0.0, -17.320508);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (-15.000000, 0.0, 0.000000);
+	Coord = (-20.000000, 0.0, 0.000000);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (-7.500000, 0.0, 12.990381);
+	Coord = (-10.000000, 0.0, 17.320508);
+}
+
+Platform{
+	Stoppable = no;
+	Coord = (7.500000, 0.0, 12.990381);
+	Coord = (10.000000, 0.0, 17.320508);
+}
+
+//	回転レール
+Platform{
+	TiePlugin = "";
+	ParentObject = "RotationPlate";
+	Coord = (0.0, 0.0, -15.0);
+	Coord = (0.0, 0.0, 15.0);
+}
+
+DefineSwitch "回転"{
+	Entry = "1番-4番 / 0°";
+	Entry = "2番-5番 / 60°";
+	Entry = "3番-6番 / 120°";
+	Entry = "4番-1番 / 180°";
+	Entry = "5番-2番 / 240°";
+	Entry = "6番-3番 / 300°";
+	Entry = "1番-4番 / 360°";
+}
+
+DefineSwitch "進入許可"{
+	Entry = "有効";
+	Entry = "無効";
+}
+
+PrimaryAssembly{
+	Object3D "RotationPlate"{
+		ModelFileName = "RotationPlate.x";
+		ModelScale = 1.0;
+		ApplySwitch "回転"{
+		Case 1:
+			StaticRotation{
+				RotationAxis = (0.0, 1.0, 0.0);
+				RotationAngle = 60.0;
+				AnimationTime = 5.0;
+			}
+		Case 2:
+			StaticRotation{
+				RotationAxis = (0.0, 1.0, 0.0);
+				RotationAngle = 120.0;
+				AnimationTime = 5.0;
+			}
+		Case 3:
+			StaticRotation{
+				RotationAxis = (0.0, 1.0, 0.0);
+				RotationAngle = 180.0;
+				AnimationTime = 5.0;
+			}
+		Case 4:
+			StaticRotation{
+				RotationAxis = (0.0, 1.0, 0.0);
+				RotationAngle = 240.0;
+				AnimationTime = 5.0;
+			}
+		Case 5:
+			StaticRotation{
+				RotationAxis = (0.0, 1.0, 0.0);
+				RotationAngle = 300.0;
+				AnimationTime = 5.0;
+			}
+		Case 6:
+			StaticRotation{
+				RotationAxis = (0.0, 1.0, 0.0);
+				RotationAngle = 360.0;
+				AnimationTime = 5.0;
+			}
+		}
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 0.0, 0.0);
+			AttachDir = (1.0, 0.0, 0.0);
+		}
+	}
+	ApplySwitch "進入許可"{
+	Case 0:
+		ApplySwitch "回転"{
+		Case 0:
+			ConnectRail = 13, 0;
+			ConnectRail = 12, 6;
+		Case 1:
+			ConnectRail = 13, 2;
+			ConnectRail = 12, 8;
+		Case 2:
+			ConnectRail = 13, 4;
+			ConnectRail = 12, 10;
+		Case 3:
+			ConnectRail = 13, 6;
+			ConnectRail = 12, 0;
+		Case 4:
+			ConnectRail = 13, 8;
+			ConnectRail = 12, 2;
+		Case 5:
+			ConnectRail = 13, 10;
+			ConnectRail = 12, 4;
+		Case 6:
+			ConnectRail = 13, 0;
+			ConnectRail = 12, 6;
+		}
+	Case 1:
+		DisconnectRail = 13;
+		DisconnectRail = 12;
+	}
+}

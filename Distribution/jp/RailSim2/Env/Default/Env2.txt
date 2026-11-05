@@ -1,0 +1,110 @@
+/*
+ *	RailSim II Environment Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Env;
+	PluginName = "デフォルト";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "山に囲まれた盆地風の環境です。";
+}
+
+EnvInfo{
+	Latitude = 35.5;	//	緯度
+	EnvMapTexFileName = "EnvMap.png";
+}
+
+Landscape{
+	ModelFileName = "Landscape.x";
+	ModelScale = 1.0;
+}
+
+Sun{
+	ModelFileName = "Sun.x";
+	ModelScale = 1.0;
+	AxialInclination = 23.44;
+	LensFlare{
+		StartAngle = 25.0;
+		Twinkle = 0.5;
+		Inclination = 0.25;
+		Circle{
+			Distance = 0.2;
+			Radius = 2.0;
+			InnerColor = #00000000;
+			OuterColor = #e0804000;
+		}
+		Hexagon{
+			Distance = 0.4;
+			Radius = 2.5;
+			InnerColor = #00000000;
+			OuterColor = #e0806000;
+		}
+		Circle{
+			Distance = 0.6;
+			Radius = 1.5;
+			InnerColor = #00000000;
+			OuterColor = #e0001060;
+		}
+		Circle{
+			Distance = 0.8;
+			Radius = 3.0;
+			InnerColor = #00000000;
+			OuterColor = #e0006020;
+		}
+		Circle{
+			Distance = 1.0;
+			Radius = 1.0;
+			InnerColor = #e0008040;
+			OuterColor = #00000000;
+		}
+		Circle{
+			Distance = 1.2;
+			Radius = 4.0;
+			InnerColor = #00000000;
+			OuterColor = #e0002000;
+		}
+	}
+	Whiteout{
+		StartAngle = 25.0;
+		Color = #80ffffff;
+	}
+	Lighting{
+		NightThreshold = 0.0;
+		ShadowColor = #80000000;
+		Set{
+			SunAlt = -0.25;
+			Directional = #ff000000;
+			Ambient = #ff202020;
+			SkyColor = #ff000000;
+		}
+		Set{
+			SunAlt = 0.0;
+			Directional = #ffff6040;
+			Ambient = #ff606060;
+			SkyColor = #ffc06040;
+		}
+		Set{
+			SunAlt = 0.125;
+			Directional = #ffffc0c0;
+			Ambient = #ff808080;
+			SkyColor = #ffc0c0c0;
+		}
+		Set{
+			SunAlt = 0.25;
+			Directional = #ffffffff;
+			Ambient = #ff808080;
+			SkyColor = #ffc0e0ff;
+		}
+	}
+}
+
+Moon{
+	ModelFileName = "Moon.x";
+	ModelScale = 0.3;
+	AxialInclination = 6.67;
+	RevolutionPeriod = 27.3;
+	InitialPhase = 0.0;
+}

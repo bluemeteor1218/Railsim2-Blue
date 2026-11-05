@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>crank-zy</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">crank-zy</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">crank-zy</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p><a href="pi_train.html">車輌プラグイン</a>において、任意の 1 点と任意の直線を基準としたクランク構造を定義します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">crank-zy ::=</pre>
+<pre class="ind">CrankZY{
+    <a class="nonterm" href="pi_sym_triangle_link_zy.html">triangle-link-zy</a>
+    <a class="nonterm" href="pi_sym_crank_slide_zy.html">crank-slide-zy</a>
+}</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="joint">蒸気機関車のロッド等に使用します。2 つの辺がそれぞれ個別のオブジェクトになります。構造としては、下図のように <a class="nonterm" href="pi_sym_crank_slide_zy.html">crank-slide-zy</a> によりピストン部分を定義し、<a class="nonterm" href="pi_sym_triangle_link_zy.html">triangle-link-zy</a> 部分が、<a class="nonterm" href="pi_sym_object_joint_zyx.html">object-joint-zyx</a> により指定される固定点を中心とする円上でピストンの動作線と交わる点を結ぶ形になります。<span class="source">Direction</span> を逆にすると交点を切り替えることができます。</p>
+<p class="center"><img src="crankzy.png" alt="クランク構造"></p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_train_free_object.html">train-free-object</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

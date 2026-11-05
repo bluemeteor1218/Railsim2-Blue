@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>object-joint-3d</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">object-joint-3d</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">object-joint-3d</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p><a class="nonterm" href="pi_sym_object_3d.html">object-3d</a> などの固定位置を指定します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">object-joint-3d ::=</pre>
+<pre class="ind">Joint3D <a class="nonterm" href="pi_sym_string.html">string</a>{
+    AttachCoord = <a class="nonterm" href="pi_sym_vector_3d.html">vector-3d</a>;
+    LocalCoord = <a class="nonterm" href="pi_sym_vector_3d.html">vector-3d</a>;
+    <span class="ctrl">(</span> DirLink = <a class="nonterm" href="pi_sym_string.html">string</a> <span class="ctrl">)</span><span class="sub">opt</span>;
+    <span class="ctrl">(</span> AttachDir = <a class="nonterm" href="pi_sym_vector_3d.html">vector-3d</a> <span class="ctrl">)</span><span class="sub">opt</span>;
+    <span class="ctrl">(</span> UpLink = <a class="nonterm" href="pi_sym_string.html">string</a> <span class="ctrl">)</span><span class="sub">opt</span>;
+    <span class="ctrl">(</span> AttachUp = <a class="nonterm" href="pi_sym_vector_3d.html">vector-3d</a> <span class="ctrl">)</span><span class="sub">opt</span>;
+}</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">JointZY</p>
+<p class="argexp">直後に固定先のオブジェクト名を指定します。オブジェクト名は <a class="nonterm" href="pi_sym_axle_object.html">axle-object</a> や <a class="nonterm" href="pi_sym_body_object.html">body-object</a> で定義されたものです。</p>
+<p class="argname">AttachCoord</p>
+<p class="argexp">固定先オブジェクトのローカル座標で、固定位置を指定します。</p>
+<p class="argname">LocalCoord</p>
+<p class="argexp">上で指定した固定位置に対応する、現在定義中のオブジェクトのローカル ZY 座標を指定します。</p>
+<p class="argname">DirLink</p>
+<p class="argexp">方向ベクトルの基準となるオブジェクト名を指定します。省略した場合は、位置の基準オブジェクトが使用されます。</p>
+<p class="argname">AttachDir</p>
+<p class="argexp">オブジェクトの方向ベクトルを、方向ベクトルの基準オブジェクトのローカル座標系で指定します。省略した場合は Z 軸正方向になります。</p>
+<p class="argname">UpLink</p>
+<p class="argexp">アップベクトルの基準となるオブジェクト名を指定します。省略した場合は、位置の基準オブジェクトが使用されます。</p>
+<p class="argname">AttachUp</p>
+<p class="argexp_f">オブジェクトのアップベクトルを、アップベクトルの基準オブジェクトのローカル座標系で指定します。省略した場合は Y 軸正方向になります。</p>
+</div>
+<div class="contbox">
+<h2>システムオブジェクト</h2>
+<p class="joint">位置や方向ベクトルの基準として指定するオブジェクトは、そのプラグインの中で既に定義されているオブジェクトの他、以下に示すシステムオブジェクトが使用できます。</p>
+<p class="argname">_WORLD</p>
+<p class="argexp">そのシーンにおけるワールド座標系です。通常地形の中心を原点とし、Z 軸正方向を北、Y 軸正方向を鉛直方向にとります。</p>
+<p class="argname">_LOCAL</p>
+<p class="argexp"><a href="pi_struct.html">施設プラグイン</a>や<a href="pi_station.html">駅舎プラグイン</a>においては、プラグインが設置された位置と方向を基準とする座標系で、最初のオブジェクトを設置するための一般的な基準となります。<a href="pi_surface.html">地形プラグイン</a>においてはワールド座標系と一致します。<a href="pi_train.html">車輌プラグイン</a>においては、一番前の車軸と一番後ろの車軸の中間位置を基準とする座標系になりますが、あまり使用することはないと思われます。</p>
+<p class="argname">_CAMERA</p>
+<p class="argexp">カメラの座標系に一致します。ビルボードなどを実現できるようになります。ただし、現バージョンではこの設定によりリンクされるカメラ座標系は実際のレンダリングより1フレーム遅延します。</p>
+<p class="argname">_LIGHT</p>
+<p class="argexp_f">平行光源の座標系に一致します。方向のみ有効です。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_object_3d.html">object-3d</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

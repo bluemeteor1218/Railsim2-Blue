@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>named-object-info</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">named-object-info</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">named-object-info</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p><a href="pi_model.html">モデルプラグイン</a>で使用される *.x ファイル単位のオブジェクトを定義します。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">named-object-info ::=</pre>
+<pre class="ind">
+ModelFileName = <a class="nonterm" href="pi_sym_filename.html">filename</a>;
+<span class="ctrl">(</span> ModelScale = <a class="nonterm" href="pi_sym_float.html">float</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+<span class="ctrl">(</span> Turn = <a class="nonterm" href="pi_sym_yes_no.html">yes-no</a>; <span class="ctrl">)</span><span class="sub">opt cond</span>
+<span class="ctrl">(</span> CastShadow = <a class="nonterm" href="pi_sym_yes_no.html">yes-no</a>; <span class="ctrl">)</span><span class="sub">opt</span>
+<a class="nonterm" href="pi_sym_customizer.html">customizer</a><span class="sup">*</span></pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">ModelFileName</p>
+<p class="argexp">オブジェクトの *.x ファイルを指定します。</p>
+<p class="argname">ModelScale</p>
+<p class="argexp">*.x ファイルを使用する際のスケールを設定します。デフォルト値は 1.0 です。</p>
+<p class="argname">Turn</p>
+<p class="argexp"><a href="pi_train.html">車輌プラグイン</a>内の <a class="nonterm" href="pi_sym_object_3d.html">object-3d</a> 以外のフィールドでのみ有効です。車輌プラグインでは、車輌の側面にあたるローカル座標系の ZY 平面を基準として各種オブジェクトの配置を行います。このため、オブジェクトの 2 点指定では上下 (*.x ファイルの Y 軸) が確定しません。オブジェクトの配置において上下が逆転してしまった場合はこの指定を切り替えてください。デフォルト値は <span class="source">no</span> です。</p>
+<p class="argname">CastShadow</p>
+<p class="argexp">オブジェクトが影を落とすかどうかを指定します。デフォルト値は<a href="pi_surface.html">地形プラグイン</a>では <span class="source">no</span>、他のプラグインでは <span class="source">yes</span> となります。材質単位で影の制御を行ったり、陰の影響を受けないようにするためには <a class="nonterm" href="pi_sym_shadow_inhibitor.html">shadow-inhibitor</a> カスタマイザを使用してください。</p>
+<p>これはプラグインの動作や外見の制御において非常に重要なフィールドです。特に、<a class="nonterm" href="pi_sym_customizer.html">customizer</a> の指定が核となります。</p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_sym_object_3d.html">object-3d</a> / <a class="nonterm" href="pi_sym_axle_object.html">axle-object</a> / <a class="nonterm" href="pi_sym_body_object.html">body-object</a> / <a class="nonterm" href="pi_sym_object_zy.html">object-zy</a> / <a class="nonterm" href="pi_sym_triangle_link_zy.html">triangle-link-zy</a> / <a class="nonterm" href="pi_sym_crank_slide_zy.html">crank-slide-zy</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

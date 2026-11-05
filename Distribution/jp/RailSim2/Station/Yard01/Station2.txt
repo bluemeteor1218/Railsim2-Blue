@@ -1,0 +1,33 @@
+/*
+ *	RailSim II Station Plugin
+ *	Copyright (c) 2006 インターネット停留所
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Station;
+	PluginName = "操車場(260m)";
+	PluginAuthor = "おかづ";
+	IconTexture = "..\..\Train\Aizentranza01\Icon.png";
+	Description = "車庫などに使用します。20 メートル級車両 12 両が停車できます。";
+}
+
+StationInfo{
+}
+
+Platform{
+	//	線路各種プラグインの設定
+	OpenDoor = no, no;
+	Coord = (0.0, 0.0, -130.0);
+	Coord = (0.0, 0.0, 130.0);
+}
+
+PrimaryAssembly{
+	Object3D "Main"{
+		ModelFileName = "Model.x";
+		ModelScale = 1.0;
+		Joint3D "_LOCAL"{
+			AttachCoord = (0.0, 0.0, 0.0);
+		}
+	}
+}

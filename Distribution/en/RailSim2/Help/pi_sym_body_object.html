@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<title>body-object</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="SHORTCUT ICON" href="interi.ico">
+</head>
+<body>
+<a name="pagetop">
+<div class="centerbox" align="center">
+<div class="topbox">
+<div class="contbox">
+<h1 class="nonterm">body-object</h1>
+</div>
+<div class="menubox">
+<div class="contbox">
+<h2>コンテンツ</h2>
+<p class="joint"><a href="../index.html">トップページ</a></p>
+<p class="joint"><a href="introduction.html">はじめに</a></p>
+<p class="joint"><a href="operation.html">操作方法</a></p>
+<p class="joint"><a href="plugin.html">プラグイン</a><br>+ <a href="pi_install.html">インストール</a><br>+ <a href="pi_making.html">作成方法</a><br>+ <a href="pi_grammar.html">文法の読み方</a><br>+ <a href="pi_profile.html">プロファイル</a><br>　+ <a href="pi_rail.html">レール</a><br>　+ <a href="pi_tie.html">枕木</a><br>　+ <a href="pi_girder.html">橋桁</a><br>　+ <a href="pi_pier.html">橋脚</a><br>　+ <a href="pi_line.html">架線</a><br>+ <a href="pi_pole.html">架線柱</a><br>+ <a href="pi_model.html">モデル</a><br>　+ <a href="pi_train.html">車輌</a><br>　+ <a href="pi_station.html">駅舎</a><br>　+ <a href="pi_struct.html">施設</a><br>　+ <a href="pi_surface.html">地形</a><br>+ <a href="pi_env.html">環境</a><br>+ <a href="pi_skin.html">スキン</a><br>+ <a href="pi_index.html">索引</a><br>　+ <span class="appeal">body-object</span></p>
+<p class="joint"><a href="thanks.html">謝辞</a></p>
+<p class="joint"><a href="support.html">サポート</a></p>
+<p class="joint"><a href="faq.html">よくある質問</a></p>
+<p><a href="history.html">更新履歴</a></p>
+</div>
+</div>
+<div class="mainbox">
+<div class="contbox">
+<h2>概要</h2>
+<p>車輌の台車や本体を構成する基本的なオブジェクトです。</p>
+</div>
+<div class="contbox cb_src">
+<h2>生成規則</h2>
+<pre class="nonterm">body-object ::=</pre>
+<pre class="ind">Body <a class="nonterm" href="pi_sym_string.html">string</a>{
+    <a class="nonterm" href="pi_sym_named_object_info.html">named-object-info</a>
+    <a class="nonterm" href="pi_sym_object_joint_zy.html">object-joint-zy</a>
+    <a class="nonterm" href="pi_sym_object_joint_zy.html">object-joint-zy</a>
+    <a class="nonterm" href="pi_sym_body_tilt_info.html">body-tilt-info</a>
+}</pre>
+</div>
+<div class="contbox">
+<h2>解説</h2>
+<p class="argname">Body</p>
+<p class="argexp">直後にオブジェクト名を書きます。このオブジェクト名は、台車に斜体を乗せたり、車体にパンタグラフ等を固定するために参照されます。</p>
+<p class="joint">車輌の構造は、既に定義されている車軸や台車などのオブジェクトに新たなオブジェクトの 2 点を固定していくことで定義されます。例えば、一般的な車輌の場合は下図のようにまず <a class="nonterm" href="pi_sym_axle_object.html">axle-object</a> により 4 つの車軸を定義し、前後それぞれ 2 軸に <span class="nonterm">body-object</span> を使用して台車を固定し、さらに前後の台車に車体を固定するという構造になります。台車 2 個と車体本体で、合計 3 個の <span class="nonterm">body-object</span> が必要となることがわかります。</p>
+<p class="center"><img src="standardtrain.png" alt="標準的な車輌の構造"></p>
+</div>
+<div class="contbox">
+<h2>参照</h2>
+<p><a class="nonterm" href="pi_train.html">train-plugin</a></p>
+</div>
+</div>
+<div class="footbox">
+<p class="silent"><a href="pi_index.html">▲SecTop</a> | <a href="#pagetop">▲PageTop</a><br>Copyright (c) 2003-2009 インターネット停留所</p>
+</div>
+</div>
+</div>
+</body>
+</html>

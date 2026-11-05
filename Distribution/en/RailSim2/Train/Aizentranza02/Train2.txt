@@ -1,0 +1,485 @@
+/*
+ *	RailSim II Train Plugin
+ *	Copyright (c) 2006 Intaanetto Teiryuujo
+ */
+
+PluginHeader{
+	RailSimVersion = 2.00;
+	PluginType = Train;
+	PluginName = "Aizentranza middle car";
+	PluginAuthor = "Okadu";
+	IconTexture = "..\Aizentranza01\Icon.png";
+	Description = "Middle car of Aizentranza.";
+}
+
+TrainInfo{
+	FrontLimit = 10.3;
+	TailLimit = -10.3;
+	MaxVelocity = 130.0;
+	MaxAcceleration = 3.0;
+	MaxDeceleration = 4.0;
+	TiltSpeed = 0.1;
+	DoorClosingTime = 1.5;
+}
+
+DefineSwitch "Body"{
+	Entry = "water blue";
+	Entry = "grape purple";
+	Entry = "stainless";
+}
+
+DefineSwitch "Directions"{
+	GroupCommon = "Aizentranza directions";
+	Entry = "Rapid, for Osaka";
+	Entry = "Local, for Kyoto";
+	Entry = "Out of service";
+}
+
+DefineSwitch "Pantograph"{
+	Entry = "None";
+	Entry = "Folded";
+	Entry = "Expand";
+}
+
+PrimaryAssembly{
+	Axle "Wheel1"{
+		ModelFileName = "..\Aizentranza01\Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (8.4, 0.4);
+	}
+	Axle "Wheel2"{
+		ModelFileName = "..\Aizentranza01\Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (6.6, 0.4);
+	}
+	Axle "Wheel3"{
+		ModelFileName = "..\Aizentranza01\Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-6.6, 0.4);
+	}
+	Axle "Wheel4"{
+		ModelFileName = "..\Aizentranza01\Wheel.x";
+		ModelScale = 1.0;
+		Diameter = 0.8;
+		Symmetric = 8;
+		Coord = (-8.4, 0.4);
+	}
+	Body "Bogie1"{
+		ModelFileName = "..\Aizentranza01\Bogie.x";
+		ModelScale = 1.0;
+		JointZY "Wheel1"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (0.9, 0.0);
+		}
+		JointZY "Wheel2"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-0.9, 0.0);
+		}
+	}
+	Body "Bogie2"{
+		ModelFileName = "..\Aizentranza01\Bogie.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		JointZY "Wheel3"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (-0.9, 0.0);
+		}
+		JointZY "Wheel4"{
+			AttachCoord = (0.0, 0.0);
+			LocalCoord = (0.9, 0.0);
+		}
+	}
+	Body "MainBody"{
+		ModelFileName = "Body.x";
+		ModelScale = 1.0;
+		NoShadow = 4, 5;
+		NoReceiveShadow = 7;
+		ApplySwitch "Directions"{
+		Case 2:	//	回送のとき室内灯 OFF
+			ChangeAlpha = 5, 0.0;
+		Default:	//	回送以外のとき室内灯 ON
+			ChangeAlpha = 5, NightAlpha;
+		}
+		ApplySwitch "Body"{
+		Case 1:
+			ChangeTexture = 2, "..\Aizentranza01\Face2.png";
+			ChangeTexture = 3, "..\Aizentranza01\Body2.png";
+		Case 2:
+			ChangeTexture = 2, "..\Aizentranza01\Face3.png";
+			ChangeTexture = 3, "..\Aizentranza01\Body3.png";
+			EnvMap = 2, 3;
+			ChangeMaterial{
+				MaterialID = 2, 3;
+				Specular = 1.0, 1.0, 1.0;
+				Power = 10.0;
+			}
+		}
+		ApplySwitch "Directions"{
+		Case 1:
+			ChangeTexture = 4, "..\Aizentranza01\Side2.png";
+		Case 2:
+			ChangeTexture = 4, "..\Aizentranza01\Side3.png";
+		}
+		JointZY "Bogie1"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (7.5, 1.0);
+		}
+		JointZY "Bogie2"{
+			AttachCoord = (0.0, 0.6);
+			LocalCoord = (-7.5, 1.0);
+		}
+		Tilt{
+			TiltRatio = 0.5;
+			MaxAngle = 6.0;
+			BaseAlt = 2.3;
+		}
+	}
+	//	ドア
+	Object3D "DoorLL"{
+		ModelFileName = "..\Aizentranza01\DoorLeft.x";
+		ModelScale = 1.0;
+		NoShadow = 1;
+		NoReceiveShadow = 2;
+		ApplySwitch "Directions"{
+		Case 2: ChangeAlpha = 1, 0.0;
+		Default: ChangeAlpha = 1, NightAlpha;
+		}
+		ApplySwitch "Body"{
+		Case 1:
+			ChangeTexture = 0, "..\Aizentranza01\Body2.png";
+		Case 2:
+			ChangeTexture = 0, "..\Aizentranza01\Body3.png";
+			EnvMap = 0;
+			ChangeMaterial{
+				MaterialID = 0;
+				Specular = 1.0, 1.0, 1.0;
+				Power = 15.0;
+			}
+		}
+		If "_DOOR1"{
+			StaticMove{
+				Displacement = (0.03, 0.0, 0.0);
+				AnimationTime = 0.5;
+				PostAnimationDelay = 1.0;
+			}
+			StaticMove{
+				Displacement = (0.0, 0.0, 0.78);
+				PreAnimationDelay = 0.5;
+				AnimationTime = 1.0;
+			}
+		}
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.0, 0.0);
+		}
+	}
+	Object3D "DoorLR"{
+		ModelFileName = "..\Aizentranza01\DoorRight.x";
+		ModelScale = 1.0;
+		NoShadow = 1;
+		NoReceiveShadow = 2;
+		ApplySwitch "Directions"{
+		Case 2: ChangeAlpha = 1, 0.0;
+		Default: ChangeAlpha = 1, NightAlpha;
+		}
+		ApplySwitch "Body"{
+		Case 1:
+			ChangeTexture = 0, "..\Aizentranza01\Body2.png";
+		Case 2:
+			ChangeTexture = 0, "..\Aizentranza01\Body3.png";
+			EnvMap = 0;
+			ChangeMaterial{
+				MaterialID = 0;
+				Specular = 1.0, 1.0, 1.0;
+				Power = 15.0;
+			}
+		}
+		If "_DOOR1"{
+			StaticMove{
+				Displacement = (0.03, 0.0, 0.0);
+				AnimationTime = 0.5;
+				PostAnimationDelay = 1.0;
+			}
+			StaticMove{
+				Displacement = (0.0, 0.0, -0.78);
+				PreAnimationDelay = 0.5;
+				AnimationTime = 1.0;
+			}
+		}
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.0, 0.0);
+		}
+	}
+	Object3D "DoorRL"{
+		ModelFileName = "..\Aizentranza01\DoorLeft.x";
+		ModelScale = 1.0;
+		NoShadow = 1;
+		NoReceiveShadow = 2;
+		ApplySwitch "Directions"{
+		Case 2: ChangeAlpha = 1, 0.0;
+		Default: ChangeAlpha = 1, NightAlpha;
+		}
+		ApplySwitch "Body"{
+		Case 1:
+			ChangeTexture = 0, "..\Aizentranza01\Body2.png";
+		Case 2:
+			ChangeTexture = 0, "..\Aizentranza01\Body3.png";
+			EnvMap = 0;
+			ChangeMaterial{
+				MaterialID = 0;
+				Specular = 1.0, 1.0, 1.0;
+				Power = 15.0;
+			}
+		}
+		If "_DOOR2"{
+			StaticMove{
+				Displacement = (0.03, 0.0, 0.0);
+				AnimationTime = 0.5;
+				PostAnimationDelay = 1.0;
+			}
+			StaticMove{
+				Displacement = (0.0, 0.0, 0.78);
+				PreAnimationDelay = 0.5;
+				AnimationTime = 1.0;
+			}
+		}
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.0, 0.0);
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+	Object3D "DoorRR"{
+		ModelFileName = "..\Aizentranza01\DoorRight.x";
+		ModelScale = 1.0;
+		NoShadow = 1;
+		NoReceiveShadow = 2;
+		ApplySwitch "Directions"{
+		Case 2: ChangeAlpha = 1, 0.0;
+		Default: ChangeAlpha = 1, NightAlpha;
+		}
+		ApplySwitch "Body"{
+		Case 1:
+			ChangeTexture = 0, "..\Aizentranza01\Body2.png";
+		Case 2:
+			ChangeTexture = 0, "..\Aizentranza01\Body3.png";
+			EnvMap = 0;
+			ChangeMaterial{
+				MaterialID = 0;
+				Specular = 1.0, 1.0, 1.0;
+				Power = 15.0;
+			}
+		}
+		If "_DOOR2"{
+			StaticMove{
+				Displacement = (0.03, 0.0, 0.0);
+				AnimationTime = 0.5;
+				PostAnimationDelay = 1.0;
+			}
+			StaticMove{
+				Displacement = (0.0, 0.0, -0.78);
+				PreAnimationDelay = 0.5;
+				AnimationTime = 1.0;
+			}
+		}
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.0, 0.0);
+			AttachDir = (0.0, 0.0, -1.0);
+		}
+	}
+	//	ヨーダンパー
+	PistonZY{
+		Link "YawDamper11"{
+			ModelFileName = "..\Aizentranza01\YawDamper1.x";
+			ModelScale = 1.0;
+			JointZYX "Bogie1"{
+				AttachX = -1.1;
+				AttachCoord = (0.0, 0.05);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (-0.8, 0.0);
+		}
+		Link "YawDamper12"{
+			ModelFileName = "..\Aizentranza01\YawDamper2.x";
+			ModelScale = 1.0;
+			JointZYX "MainBody"{
+				AttachX = -1.1;
+				AttachCoord = (6.7, 0.45);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.8, 0.0);
+		}
+	}
+	PistonZY{
+		Link "YawDamper21"{
+			ModelFileName = "..\Aizentranza01\YawDamper1.x";
+			ModelScale = 1.0;
+			JointZYX "Bogie1"{
+				AttachX = 1.1;
+				AttachCoord = (0.0, 0.05);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (-0.8, 0.0);
+		}
+		Link "YawDamper22"{
+			ModelFileName = "..\Aizentranza01\YawDamper2.x";
+			ModelScale = 1.0;
+			JointZYX "MainBody"{
+				AttachX = 1.1;
+				AttachCoord = (6.7, 0.45);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.8, 0.0);
+		}
+	}
+	PistonZY{
+		Link "YawDamper31"{
+			ModelFileName = "..\Aizentranza01\YawDamper1.x";
+			ModelScale = 1.0;
+			Turn = yes;
+			JointZYX "Bogie2"{
+				AttachX = 1.1;
+				AttachCoord = (0.0, 0.05);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (-0.8, 0.0);
+		}
+		Link "YawDamper32"{
+			ModelFileName = "..\Aizentranza01\YawDamper2.x";
+			ModelScale = 1.0;
+			Turn = yes;
+			JointZYX "MainBody"{
+				AttachX = -1.1;
+				AttachCoord = (-6.7, 0.45);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.8, 0.0);
+		}
+	}
+	PistonZY{
+		Link "YawDamper41"{
+			ModelFileName = "..\Aizentranza01\YawDamper1.x";
+			ModelScale = 1.0;
+			Turn = yes;
+			JointZYX "Bogie2"{
+				AttachX = -1.1;
+				AttachCoord = (0.0, 0.05);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (-0.8, 0.0);
+		}
+		Link "YawDamper42"{
+			ModelFileName = "..\Aizentranza01\YawDamper2.x";
+			ModelScale = 1.0;
+			Turn = yes;
+			JointZYX "MainBody"{
+				AttachX = 1.1;
+				AttachCoord = (-6.7, 0.45);
+				LocalCoord = (0.0, 0.0);
+			}
+			LinkCoord = (0.8, 0.0);
+		}
+	}
+	//	連結器
+	Object3D "Connector1"{
+		ModelFileName = "..\Aizentranza01\ConnectorNormal.x";
+		ModelScale = 1.0;
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.85, 9.7);
+			LocalCoord = (0.0, 0.0, -0.3);
+			DirLink = "Bogie1";
+		}
+	}
+	Object3D "Connector2"{
+		ModelFileName = "..\Aizentranza01\ConnectorNormal.x";
+		ModelScale = 1.0;
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 0.85, -9.7);
+			LocalCoord = (0.0, 0.0, -0.3);
+			DirLink = "Bogie2";
+		}
+	}
+	//	幌
+	Object3D "Hood1"{
+		ModelFileName = "..\Aizentranza01\Hood.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 2.2, 10.0);
+			DirLink = "Bogie1";
+		}
+	}
+	Object3D "Hood2"{
+		ModelFileName = "..\Aizentranza01\Hood.x";
+		ModelScale = 1.0;
+		Turn = yes;
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 2.2, -10.0);
+			DirLink = "Bogie2";
+		}
+	}
+	//	パンタグラフ
+	Object3D "Pantograph0"{
+		ModelFileName = "..\Aizentranza01\Pantograph0.x";
+		ModelScale = 1.0;
+		ApplySwitch "Pantograph"{
+		Case 0:
+			ChangeModel = "", 1.0;
+		}
+		Joint3D "MainBody"{
+			AttachCoord = (0.0, 3.7, 6.0);
+			UpLink = "Bogie1";
+		}
+	}
+	Object3D "Pantograph1"{
+		ModelFileName = "..\Aizentranza01\Pantograph1.x";
+		ModelScale = 1.0;
+		ApplySwitch "Pantograph"{
+		Case 0:
+			ChangeModel = "", 1.0;
+		Case 1:
+			StaticRotation{
+				RotationAxis = (1.0, 0.0, 0.0);
+				RotationAngle = 27.03;
+				AnimationTime = 5.0;
+			}
+		}
+		Joint3D "Pantograph0"{
+			AttachCoord = (0.0, 0.3, 0.0);
+		}
+	}
+	Object3D "Pantograph2"{
+		ModelFileName = "..\Aizentranza01\Pantograph2.x";
+		ModelScale = 1.0;
+		ApplySwitch "Pantograph"{
+		Case 0:
+			ChangeModel = "", 1.0;
+		Case 1:
+			StaticRotation{
+				RotationAxis = (1.0, 0.0, 0.0);
+				RotationAngle = -44.36;
+				AnimationTime = 5.0;
+			}
+		}
+		Joint3D "Pantograph1"{
+			AttachCoord = (0.0, 0.5, 0.98);
+		}
+	}
+	Object3D "Pantograph3"{
+		ModelFileName = "..\Aizentranza01\Pantograph3.x";
+		ModelScale = 1.0;
+		ApplySwitch "Pantograph"{
+		Case 0:
+			ChangeModel = "", 1.0;
+		}
+		Joint3D "Pantograph2"{
+			AttachCoord = (0.0, 0.495, -1.298);
+			DirLink = "Pantograph0";
+			UpLink = "Pantograph0";
+		}
+	}
+}

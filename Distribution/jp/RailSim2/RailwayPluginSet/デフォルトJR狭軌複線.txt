@@ -1,0 +1,25 @@
+DatafileHeader{
+	RailSimVersion = 2.00;
+	DatafileType = RailwayPluginSet;
+}
+
+RailwayPluginSet{
+	SettingName = "デフォルトJR狭軌複線";
+	RailPlugin = "Default_JR_Narrow";
+	RailCheck = yes;
+	TiePlugin = "Default_JRN_BallastPC";
+	TieCheck = yes;
+	GirderPlugin = "Default_JRN_DoublePC";
+	GirderCheck = no;
+	PierPlugin = "Default_DoublePC";
+	PierCheck = yes;
+	LinePlugin = "Default_SimpleCatenary";
+	LineCheck = yes;
+	PolePlugin = "Default_JRN_Double";
+	PoleCheck = yes;
+	EnableCant = yes;
+	LiftRailSurface = yes;
+	MultiTrack = yes;
+	TrackNum = 2;
+	TrackInterval = 4.000000;
+}
