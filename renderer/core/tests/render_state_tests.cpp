@@ -94,9 +94,11 @@ void TestHashDistinguishesStates()
     keys.insert(s.Pipeline());
     s.SetFog(true, 0, 0, 1);
     keys.insert(s.Pipeline());
-    CHECK(keys.size() == 5);
+    s.SetTextured(true);
     keys.insert(s.Pipeline());
-    CHECK(keys.size() == 5);
+    CHECK(keys.size() == 6);
+    keys.insert(s.Pipeline());
+    CHECK(keys.size() == 6);
 }
 
 } // namespace

@@ -25,9 +25,10 @@ static_assert(sizeof(ObjectConstants) == 144, "ObjectConstants must match the HL
 struct Vertex {
     float position[3];
     float normal[3];
+    float uv[2];
     uint8_t color[4]; // RGBA
 };
-static_assert(sizeof(Vertex) == 28, "Vertex must match the input layout");
+static_assert(sizeof(Vertex) == 36, "Vertex must match the input layout");
 
 // Matrices are stored row-major and used as row vectors, like D3D8/D3DX.
 inline const char kSceneShader[] = R"hlsl(
@@ -47,10 +48,14 @@ cbuffer Frame : register(b1)
     uint lightMask;
 };
 
+Texture2D baseTexture : register(t0);
+SamplerState baseSampler : register(s0);
+
 struct VSInput
 {
     float3 position : POSITION;
     float3 normal : NORMAL;
+    float2 uv : TEXCOORD;
     float4 color : COLOR;
 };
 
@@ -58,6 +63,7 @@ struct VSOutput
 {
     float4 position : SV_POSITION;
     float4 color : COLOR;
+    float2 uv : TEXCOORD1;
     float viewDepth : TEXCOORD0;
 };
 
@@ -66,6 +72,7 @@ VSOutput VSMain(VSInput input)
     VSOutput output;
     output.position = mul(float4(input.position, 1.0f), mvp);
     output.viewDepth = output.position.w;
+    output.uv = input.uv;
     output.color = input.color;
 #if LIGHTING
     float3 n = normalize(mul(float4(input.normal, 0.0f), world).xyz);
@@ -78,6 +85,9 @@ VSOutput VSMain(VSInput input)
 float4 PSMain(VSOutput input) : SV_TARGET
 {
     float4 color = input.color;
+#if TEXTURED
+    color *= baseTexture.Sample(baseSampler, input.uv);
+#endif
 #if ALPHATEST
     clip(color.a - alphaRef);
 #endif
@@ -111,17 +121,39 @@ public:
         renderTargetFormat_ = renderTargetFormat;
         depthFormat_ = depthFormat;
 
-        D3D12_ROOT_PARAMETER parameters[2]{};
+        D3D12_DESCRIPTOR_RANGE range{};
+        range.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+        range.NumDescriptors = 1;
+        range.BaseShaderRegister = 0;
+        range.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+        D3D12_ROOT_PARAMETER parameters[3]{};
         parameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
         parameters[0].Constants.ShaderRegister = 0;
         parameters[0].Constants.Num32BitValues = sizeof(ObjectConstants) / 4;
         parameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
         parameters[1].Constants.ShaderRegister = 1;
         parameters[1].Constants.Num32BitValues = sizeof(FrameConstants) / 4;
+        parameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+        parameters[2].DescriptorTable.NumDescriptorRanges = 1;
+        parameters[2].DescriptorTable.pDescriptorRanges = &range;
+        parameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+
+        // Trilinear + 16x anisotropic: the main sharpness win over the D3D8 point/bilinear default.
+        D3D12_STATIC_SAMPLER_DESC sampler{};
+        sampler.Filter = D3D12_FILTER_ANISOTROPIC;
+        sampler.AddressU = sampler.AddressV = sampler.AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+        sampler.MaxAnisotropy = 16;
+        sampler.ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;
+        sampler.MaxLOD = D3D12_FLOAT32_MAX;
+        sampler.ShaderRegister = 0;
+        sampler.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 
         D3D12_ROOT_SIGNATURE_DESC description{};
-        description.NumParameters = 2;
+        description.NumParameters = 3;
         description.pParameters = parameters;
+        description.NumStaticSamplers = 1;
+        description.pStaticSamplers = &sampler;
         description.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
         Microsoft::WRL::ComPtr<ID3DBlob> blob;
@@ -156,7 +188,8 @@ public:
         static const D3D12_INPUT_ELEMENT_DESC layout[] = {
             {"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
             {"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
-            {"COLOR", 0, DXGI_FORMAT_R8G8B8A8_UNORM, 0, 24, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
+            {"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
+            {"COLOR", 0, DXGI_FORMAT_R8G8B8A8_UNORM, 0, 32, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
         };
 
         D3D12_GRAPHICS_PIPELINE_STATE_DESC desc{};
@@ -219,6 +252,7 @@ private:
             {"LIGHTING", key.lighting ? "1" : "0"},
             {"FOG", key.fog ? "1" : "0"},
             {"ALPHATEST", key.alphaTest ? "1" : "0"},
+            {"TEXTURED", key.textured ? "1" : "0"},
             {nullptr, nullptr},
         };
         Microsoft::WRL::ComPtr<ID3DBlob> errors;

@@ -11,6 +11,7 @@
 #include "d3dx_math.h"
 #include "pipeline.h"
 #include "render_state.h"
+#include "texture.h"
 
 namespace {
 
@@ -48,6 +49,8 @@ void BuildCube(const uint8_t color[4], std::array<rs2::Vertex, 24>* vertices, st
             out.normal[0] = n.x;
             out.normal[1] = n.y;
             out.normal[2] = n.z;
+            out.uv[0] = signs[corner][0] * 0.5f + 0.5f;
+            out.uv[1] = 0.5f - signs[corner][1] * 0.5f;
             std::memcpy(out.color, color, 4);
         }
         const uint16_t base = static_cast<uint16_t>(face * 4);
@@ -74,6 +77,27 @@ bool ShowWin32Error(HWND owner, const wchar_t* operation, DWORD error)
         static_cast<unsigned long>(error));
     MessageBoxW(owner, message, L"RailSim2 renderer error", MB_OK | MB_ICONERROR);
     return false;
+}
+
+// Looks for the shipped sample texture in the Distribution folder above the executable.
+std::wstring FindSampleTexture()
+{
+    wchar_t module[MAX_PATH]{};
+    GetModuleFileNameW(nullptr, module, MAX_PATH);
+    std::wstring directory(module);
+    for (int depth = 0; depth < 10; ++depth) {
+        const size_t slash = directory.find_last_of(L'\\');
+        if (slash == std::wstring::npos) {
+            break;
+        }
+        directory.resize(slash);
+        const std::wstring candidate =
+            directory + L"\\Distribution\\en\\RailSim2\\Girder\\Default_JRN_SinglePC\\Concrete.png";
+        if (GetFileAttributesW(candidate.c_str()) != INVALID_FILE_ATTRIBUTES) {
+            return candidate;
+        }
+    }
+    return std::wstring();
 }
 
 class Renderer {
@@ -405,7 +429,60 @@ private:
         if (!CreateCubeMesh(opaque, &opaqueCube_) || !CreateCubeMesh(glass, &glassCube_)) {
             return false;
         }
+        if (!CreateSampleTexture()) {
+            return false;
+        }
         startTime_ = GetTickCount64();
+        return true;
+    }
+
+    // Loads the shipped PNG (checkerboard fallback), builds mips and uploads it synchronously.
+    bool CreateSampleTexture()
+    {
+        rs2::Image image;
+        const std::wstring path = FindSampleTexture();
+        if (path.empty() || !rs2::LoadImageWic(path.c_str(), &image)) {
+            image = rs2::MakeCheckerboard(256, 32);
+        }
+        const std::vector<rs2::Image> mips = rs2::GenerateMipChain(image);
+
+        D3D12_DESCRIPTOR_HEAP_DESC heapDescription{};
+        heapDescription.NumDescriptors = 1;
+        heapDescription.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+        heapDescription.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+        HRESULT result = device_->CreateDescriptorHeap(&heapDescription, IID_PPV_ARGS(&srvHeap_));
+        if (FAILED(result)) {
+            return ShowHResultError(window_, L"CreateDescriptorHeap (SRV)", result);
+        }
+
+        result = commandAllocators_[0]->Reset();
+        if (SUCCEEDED(result)) {
+            result = commandList_->Reset(commandAllocators_[0].Get(), nullptr);
+        }
+        if (FAILED(result)) {
+            return ShowHResultError(window_, L"Reset command list (upload)", result);
+        }
+        ComPtr<ID3D12Resource> uploadHeap;
+        if (!rs2::CreateTextureFromMips(device_.Get(), commandList_.Get(), mips, &texture_, &uploadHeap)) {
+            commandList_->Close();
+            return ShowHResultError(window_, L"Create texture", E_FAIL);
+        }
+        result = commandList_->Close();
+        if (FAILED(result)) {
+            return ShowHResultError(window_, L"Close command list (upload)", result);
+        }
+        ID3D12CommandList* lists[] = {commandList_.Get()};
+        commandQueue_->ExecuteCommandLists(1, lists);
+        if (!WaitForGpu()) {
+            return false;
+        }
+
+        D3D12_SHADER_RESOURCE_VIEW_DESC view{};
+        view.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+        view.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+        view.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+        view.Texture2D.MipLevels = static_cast<UINT>(mips.size());
+        device_->CreateShaderResourceView(texture_.Get(), &view, srvHeap_->GetCPUDescriptorHandleForHeapStart());
         return true;
     }
 
@@ -455,6 +532,9 @@ private:
         const D3D12_VIEWPORT viewport{0.0f, 0.0f, static_cast<float>(width_), static_cast<float>(height_), 0.0f, 1.0f};
         const D3D12_RECT scissor{0, 0, static_cast<LONG>(width_), static_cast<LONG>(height_)};
         commandList_->SetGraphicsRootSignature(pipelines_.RootSignature());
+        ID3D12DescriptorHeap* heaps[] = {srvHeap_.Get()};
+        commandList_->SetDescriptorHeaps(1, heaps);
+        commandList_->SetGraphicsRootDescriptorTable(2, srvHeap_->GetGPUDescriptorHandleForHeapStart());
         commandList_->RSSetViewports(1, &viewport);
         commandList_->RSSetScissorRects(1, &scissor);
         commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -465,6 +545,7 @@ private:
         // Opaque, lit cube with fog.
         state_ = rs2::RenderState();
         state_.SetLighting(true);
+        state_.SetTextured(true);
         state_.SetAmbient(0xFF404040u);
         state_.SetLight(0, true);
         state_.SetFog(true, 0xFF152033u, 3.0f, 9.0f);
@@ -473,7 +554,8 @@ private:
             return false;
         }
 
-        // Translucent shell: alpha blend, no depth write, no culling.
+        // Translucent shell: alpha blend, no depth write, no culling, untextured.
+        state_.SetTextured(false);
         state_.SetZWrite(false);
         state_.SetCulling(false);
         state_.BlendAlpha();
@@ -514,6 +596,8 @@ private:
     ComPtr<ID3D12CommandQueue> commandQueue_;
     ComPtr<ID3D12DescriptorHeap> rtvHeap_;
     ComPtr<ID3D12DescriptorHeap> dsvHeap_;
+    ComPtr<ID3D12DescriptorHeap> srvHeap_;
+    ComPtr<ID3D12Resource> texture_;
     ComPtr<ID3D12Resource> depthBuffer_;
     rs2::PipelineCache pipelines_;
     rs2::RenderState state_;
@@ -577,6 +661,11 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int showCommand)
 {
     if (!SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)) {
         ShowWin32Error(nullptr, L"SetProcessDpiAwarenessContext", GetLastError());
+        return 1;
+    }
+
+    if (FAILED(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED))) {
+        ShowWin32Error(nullptr, L"CoInitializeEx", GetLastError());
         return 1;
     }
 

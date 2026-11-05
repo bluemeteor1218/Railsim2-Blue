@@ -34,11 +34,13 @@ struct PipelineKey {
     bool alphaTest = false;
     bool lighting = false;
     bool fog = false;
+    bool textured = false;
 
     bool operator==(const PipelineKey& o) const
     {
         return blend == o.blend && cull == o.cull && depthFunc == o.depthFunc && depthRead == o.depthRead &&
-               depthWrite == o.depthWrite && alphaTest == o.alphaTest && lighting == o.lighting && fog == o.fog;
+               depthWrite == o.depthWrite && alphaTest == o.alphaTest && lighting == o.lighting && fog == o.fog &&
+               textured == o.textured;
     }
     bool operator!=(const PipelineKey& o) const { return !(*this == o); }
 
@@ -49,7 +51,7 @@ struct PipelineKey {
             static_cast<uint8_t>(blend.enable), static_cast<uint8_t>(blend.src), static_cast<uint8_t>(blend.dst),
             static_cast<uint8_t>(cull), static_cast<uint8_t>(depthFunc), static_cast<uint8_t>(depthRead),
             static_cast<uint8_t>(depthWrite), static_cast<uint8_t>(alphaTest), static_cast<uint8_t>(lighting),
-            static_cast<uint8_t>(fog)};
+            static_cast<uint8_t>(fog), static_cast<uint8_t>(textured)};
         uint64_t h = 1469598103934665603ull;
         for (uint8_t b : bytes) {
             h = (h ^ b) * 1099511628211ull;
@@ -103,6 +105,7 @@ public:
     void SetZRead(bool enable) { pipeline_.depthRead = enable; }
     void SetZWrite(bool enable) { pipeline_.depthWrite = enable; }
     void SetLighting(bool enable) { pipeline_.lighting = enable; }
+    void SetTextured(bool enable) { pipeline_.textured = enable; }
     bool GetLighting() const { return pipeline_.lighting; }
     bool GetZRead() const { return pipeline_.depthRead; }
     bool GetZWrite() const { return pipeline_.depthWrite; }
