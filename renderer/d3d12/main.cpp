@@ -8,7 +8,10 @@
 #include <cmath>
 #include <cstdio>
 #include <cwchar>
+#include <fstream>
+#include <iterator>
 #include <string>
+#include <vector>
 
 #include "constant_ring.h"
 #include "d3dx_math.h"
@@ -19,6 +22,7 @@
 #include "texture.h"
 #include "ui_renderer.h"
 #include "viewport_layout.h"
+#include "x_mesh.h"
 
 namespace {
 
@@ -39,6 +43,8 @@ struct Mesh {
     D3D12_VERTEX_BUFFER_VIEW vertexView{};
     D3D12_INDEX_BUFFER_VIEW indexView{};
     UINT indexCount = 0;
+    std::vector<rs2::XSubset> subsets;
+    std::vector<rs2::XMaterial> materials;
 };
 
 // Unit cube with per-face normals. Front faces are clockwise (Direct3D, left-handed).
@@ -92,8 +98,8 @@ bool ShowWin32Error(HWND owner, const wchar_t* operation, DWORD error)
     return false;
 }
 
-// Looks for the shipped sample texture in the Distribution folder above the executable.
-std::wstring FindSampleTexture()
+// Looks for a shipped data file in the Distribution folder above the executable.
+std::wstring FindDistributionFile(const wchar_t* relativePath)
 {
     wchar_t module[MAX_PATH]{};
     GetModuleFileNameW(nullptr, module, MAX_PATH);
@@ -104,13 +110,17 @@ std::wstring FindSampleTexture()
             break;
         }
         directory.resize(slash);
-        const std::wstring candidate =
-            directory + L"\\Distribution\\en\\RailSim2\\Girder\\Default_JRN_SinglePC\\Concrete.png";
+        const std::wstring candidate = directory + L"\\Distribution\\en\\RailSim2\\" + relativePath;
         if (GetFileAttributesW(candidate.c_str()) != INVALID_FILE_ATTRIBUTES) {
             return candidate;
         }
     }
     return std::wstring();
+}
+
+std::wstring FindSampleTexture()
+{
+    return FindDistributionFile(L"Girder\\Default_JRN_SinglePC\\Concrete.png");
 }
 
 class Renderer {
@@ -411,10 +421,10 @@ private:
 
     // Static geometry lives in default (GPU-local) heaps; staged through upload
     // heaps with a synchronous copy. Only call while no frame is being recorded.
-    bool CreateMesh(const void* vertexData, UINT vertexBytes, UINT vertexStride, const uint16_t* indexData,
-                    UINT indexCount, Mesh* mesh)
+    bool CreateMesh(const void* vertexData, UINT vertexBytes, UINT vertexStride, const void* indexData,
+                    UINT indexCount, DXGI_FORMAT indexFormat, Mesh* mesh)
     {
-        const UINT indexBytes = indexCount * sizeof(uint16_t);
+        const UINT indexBytes = indexCount * (indexFormat == DXGI_FORMAT_R32_UINT ? 4u : 2u);
         mesh->vertices = CreateBuffer(D3D12_HEAP_TYPE_DEFAULT, vertexBytes, D3D12_RESOURCE_STATE_COPY_DEST);
         mesh->indices = CreateBuffer(D3D12_HEAP_TYPE_DEFAULT, indexBytes, D3D12_RESOURCE_STATE_COPY_DEST);
         ComPtr<ID3D12Resource> vertexStage = CreateBuffer(D3D12_HEAP_TYPE_UPLOAD, vertexBytes, D3D12_RESOURCE_STATE_GENERIC_READ);
@@ -467,7 +477,7 @@ private:
         }
 
         mesh->vertexView = {mesh->vertices->GetGPUVirtualAddress(), vertexBytes, vertexStride};
-        mesh->indexView = {mesh->indices->GetGPUVirtualAddress(), indexBytes, DXGI_FORMAT_R16_UINT};
+        mesh->indexView = {mesh->indices->GetGPUVirtualAddress(), indexBytes, indexFormat};
         mesh->indexCount = indexCount;
         return true;
     }
@@ -478,7 +488,30 @@ private:
         std::array<uint16_t, 36> indices;
         BuildCube(color, &vertices, &indices);
         return CreateMesh(vertices.data(), sizeof(vertices), sizeof(rs2::VtxNX), indices.data(),
-                          static_cast<UINT>(indices.size()), mesh);
+                          static_cast<UINT>(indices.size()), DXGI_FORMAT_R16_UINT, mesh);
+    }
+
+    // Loads a text .x file (D3DXLoadMeshFromX replacement) into a lit VtxNX mesh with material subsets.
+    bool CreateXMesh(const wchar_t* relativePath, Mesh* mesh)
+    {
+        const std::wstring path = FindDistributionFile(relativePath);
+        std::ifstream file(path, std::ios::binary);
+        if (path.empty() || !file) {
+            return false;
+        }
+        const std::string text((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+        rs2::XMesh x;
+        if (!rs2::ParseXMesh(text, &x)) {
+            return false;
+        }
+        if (!CreateMesh(x.vertices.data(), static_cast<UINT>(x.vertices.size() * sizeof(rs2::VtxNX)),
+                        sizeof(rs2::VtxNX), x.indices.data(), static_cast<UINT>(x.indices.size()),
+                        DXGI_FORMAT_R32_UINT, mesh)) {
+            return false;
+        }
+        mesh->subsets = x.subsets;
+        mesh->materials = x.materials;
+        return true;
     }
 
     // Unlit textured ground quad in the legacy FVF_LX layout (no normals), tiled 3x3.
@@ -499,7 +532,7 @@ private:
                                     {{extent, y, extent}, 0xFFFFFFFFu, {tiles, 0}, {1, 0}},
                                     {{extent, y, -extent}, 0xFFFFFFFFu, {tiles, tiles}, {1, 1}}};
         const uint16_t indices[6] = {0, 1, 2, 0, 2, 3};
-        return CreateMesh(vertices, sizeof(vertices), sizeof(VtxLX2), indices, 6, mesh);
+        return CreateMesh(vertices, sizeof(vertices), sizeof(VtxLX2), indices, 6, DXGI_FORMAT_R16_UINT, mesh);
     }
 
     bool CreateScene()
@@ -519,6 +552,8 @@ private:
             !CreateGroundMesh(&ground_)) {
             return false;
         }
+        // The pier is optional demo content; the scene still runs without the data folder.
+        hasPier_ = CreateXMesh(L"Pier\\AmarubeSteel\\Base.x", &pier_);
         if (!CreateSampleTexture()) {
             return false;
         }
@@ -676,13 +711,15 @@ private:
         ui_.Draw(commandList_.Get(), frameIndex_, batch_, layout);
     }
 
-    void FillObjectConstants(float seconds, float scale, rs2::ObjectConstants* out, bool spin = true) const
+    void FillObjectConstants(float seconds, float scale, rs2::ObjectConstants* out, bool spin = true,
+                             float offsetX = 0.0f, float offsetY = 0.0f) const
     {
-        D3DXMATRIX scaling, spinY, spinX, world, view, projection;
+        D3DXMATRIX scaling, spinY, spinX, move, world, view, projection;
         D3DXMatrixScaling(&scaling, scale, scale, scale);
         D3DXMatrixRotationY(&spinY, spin ? seconds : 0.0f);
         D3DXMatrixRotationX(&spinX, spin ? seconds * 0.5f : 0.0f);
-        world = scaling * spinY * spinX;
+        D3DXMatrixTranslation(&move, offsetX, offsetY, 0.0f);
+        world = scaling * spinY * spinX * move;
 
         const D3DXVECTOR3 eye(0.0f, 1.5f, -4.0f), at(0.0f, 0.0f, 0.0f), up(0.0f, 1.0f, 0.0f);
         D3DXMatrixLookAtLH(&view, &eye, &at, &up);
@@ -698,6 +735,11 @@ private:
     }
 
     bool DrawMesh(const Mesh& mesh, const rs2::ObjectConstants& object)
+    {
+        return DrawMeshRange(mesh, object, 0, mesh.indexCount);
+    }
+
+    bool DrawMeshRange(const Mesh& mesh, const rs2::ObjectConstants& object, UINT startIndex, UINT indexCount)
     {
         std::string error;
         ID3D12PipelineState* pso = pipelines_.Get(state_.Pipeline(), &error);
@@ -715,7 +757,7 @@ private:
         commandList_->SetGraphicsRootConstantBufferView(1, frameConstants);
         commandList_->IASetVertexBuffers(0, 1, &mesh.vertexView);
         commandList_->IASetIndexBuffer(&mesh.indexView);
-        commandList_->DrawIndexedInstanced(mesh.indexCount, 1, 0, 0, 0);
+        commandList_->DrawIndexedInstanced(indexCount, 1, startIndex, 0, 0);
         return true;
     }
 
@@ -767,6 +809,27 @@ private:
         FillObjectConstants(seconds, 1.0f, &object);
         if (!DrawMesh(opaqueCube_, object)) {
             return false;
+        }
+
+        // Pier loaded from a shipped .x file: one draw per material subset, colored by its material.
+        if (hasPier_) {
+            state_.SetTextured(false);
+            state_.SetSecondTexture(rs2::SecondTexture::None);
+            state_.SetCulling(false);
+            for (const rs2::XSubset& subset : pier_.subsets) {
+                const rs2::XMaterial& source = pier_.materials[subset.material];
+                rs2::Material material;
+                std::copy(std::begin(source.diffuse), std::end(source.diffuse), material.diffuse);
+                std::copy(std::begin(source.diffuse), std::end(source.diffuse), material.ambient);
+                std::copy(std::begin(source.emissive), std::end(source.emissive), material.emissive);
+                std::copy(std::begin(source.specular), std::end(source.specular), material.specular);
+                material.specular[3] = source.power > 0.0f ? source.power : 1.0f;
+                state_.SetMaterial(material);
+                FillObjectConstants(seconds, 0.35f, &object, false, -2.2f, -1.0f);
+                if (!DrawMeshRange(pier_, object, subset.indexStart, subset.indexCount)) {
+                    return false;
+                }
+            }
         }
 
         // Translucent shell: alpha blend, no depth write, no culling, untextured, emissive tint.
@@ -835,6 +898,8 @@ private:
     Mesh opaqueCube_;
     Mesh glassCube_;
     Mesh ground_;
+    Mesh pier_;
+    bool hasPier_ = false;
     ULONGLONG startTime_ = 0;
     ComPtr<ID3D12GraphicsCommandList> commandList_;
     ComPtr<IDXGISwapChain3> swapChain_;
