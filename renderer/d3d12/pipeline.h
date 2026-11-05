@@ -18,22 +18,23 @@ namespace rs2 {
 // Root parameters: 0 = ObjectConstants (b0, root constants), 1 = FrameConstants (b1, root CBV), 2 = SRV table.
 struct ObjectConstants {
     float mvp[16];
-    float world[16];
-    float worldView[16];
+    float world[12];     // 3x3 rotation part, stored as three float4 rows (used for normals only)
+    float worldView[12];
     Material material;
 };
-static_assert(sizeof(ObjectConstants) == 240,  "ObjectConstants must match the HLSL cbuffer");
+static_assert(sizeof(ObjectConstants) == 224, "ObjectConstants must match the HLSL cbuffer");
 
 // Matrices are stored row-major and used as row vectors, like D3D8/D3DX.
 inline const char kSceneShader[] = R"hlsl(
 cbuffer Object : register(b0)
 {
     row_major float4x4 mvp;
-    row_major float4x4 world;
-    row_major float4x4 worldView;
+    row_major float3x4 world;
+    row_major float3x4 worldView;
     float4 matDiffuse;
     float4 matAmbient;
     float4 matEmissive;
+    float4 matSpecular;
 };
 
 struct Light
@@ -50,6 +51,7 @@ cbuffer Frame : register(b1)
     float alphaRef;
     uint lightMask;
     Light lights[4];
+    float4 viewDir;
 };
 
 Texture2D baseTexture : register(t0);
@@ -74,7 +76,8 @@ struct VSInput
 struct VSOutput
 {
     float4 position : SV_POSITION;
-    float4 color : COLOR;
+    INTERP float4 color : COLOR;
+    INTERP float3 spec : TEXCOORD3;
     float2 uv : TEXCOORD1;
     float2 uv2 : TEXCOORD2;
     float viewDepth : TEXCOORD0;
@@ -93,7 +96,7 @@ VSOutput VSMain(VSInput input)
 #if SECOND_ENVMAP
     // Equivalent of D3DTSS_TCI_CAMERASPACENORMAL with a (0.5, -0.5) texture transform.
     {
-        float3 viewNormal = normalize(mul(float4(input.normal, 0.0f), worldView).xyz);
+        float3 viewNormal = normalize(mul(input.normal, (float3x3)worldView));
         output.uv2 = float2(viewNormal.x * 0.5f + 0.5f, viewNormal.y * -0.5f + 0.5f);
     }
 #elif HAS_UV2
@@ -102,17 +105,28 @@ VSOutput VSMain(VSInput input)
     output.uv2 = float2(0.0f, 0.0f);
 #endif
     output.color = input.color;
+    output.spec = float3(0.0f, 0.0f, 0.0f);
 #if LIGHTING
-    float3 n = normalize(mul(float4(input.normal, 0.0f), world).xyz);
+    float3 n = normalize(mul(input.normal, (float3x3)world));
     float3 lit = matEmissive.rgb + ambient.rgb * matAmbient.rgb;
     [unroll]
     for (uint i = 0; i < 4; ++i)
     {
         if (lightMask & (1u << i))
         {
-            lit += lights[i].diffuse.rgb * saturate(dot(n, -lights[i].direction.xyz));
+            float3 toLight = -lights[i].direction.xyz;
+            float ndl = saturate(dot(n, toLight));
+            lit += lights[i].diffuse.rgb * ndl;
+#if SPECULAR
+            if (ndl > 0.0f)
+            {
+                float3 h = normalize(toLight - viewDir.xyz);
+                output.spec += lights[i].diffuse.rgb * matSpecular.rgb * pow(saturate(dot(n, h)), matSpecular.w);
+            }
+#endif
         }
     }
+    output.spec = saturate(output.spec);
     output.color.rgb = saturate(input.color.rgb * matDiffuse.rgb * lit);
     output.color.a = input.color.a * matDiffuse.a;
 #endif
@@ -132,6 +146,9 @@ float4 PSMain(VSOutput input) : SV_TARGET
         float3 t1 = secondTexture.Sample(baseSampler, input.uv2).rgb;
         color.rgb = color.rgb + t1 - color.rgb * t1;
     }
+#endif
+#if SPECULAR
+    color.rgb = saturate(color.rgb + input.spec);
 #endif
 #if ALPHATEST
     clip(color.a - alphaRef);
@@ -313,6 +330,8 @@ private:
                                                    : SecondTexture::None);
         const D3D_SHADER_MACRO macros[] = {
             {"LIGHTING", lighting ? "1" : "0"},
+            {"SPECULAR", lighting && key.specular ? "1" : "0"},
+            {"INTERP", key.flatShading ? "nointerpolation" : ""},
             {"FOG", key.fog ? "1" : "0"},
             {"ALPHATEST", key.alphaTest ? "1" : "0"},
             {"TEXTURED", textured ? "1" : "0"},

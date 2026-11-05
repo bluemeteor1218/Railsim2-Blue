@@ -691,8 +691,8 @@ private:
 
         const D3DXMATRIX mvp = world * view * projection;
         std::memcpy(out->mvp, mvp.m, sizeof(out->mvp));
+        D3DXMATRIX worldView = world * view;
         std::memcpy(out->world, world.m, sizeof(out->world));
-        const D3DXMATRIX worldView = world * view;
         std::memcpy(out->worldView, worldView.m, sizeof(out->worldView));
         out->material = state_.GetMaterial();
     }
@@ -752,6 +752,12 @@ private:
         state_.SetLighting(true);
         state_.SetTextured(true);
         state_.SetSecondTexture(rs2::SecondTexture::EnvMap);
+        state_.SetSpecular(true);
+        state_.SetViewDirection(0.0f, -1.5f, 4.0f);
+        rs2::Material shiny;
+        shiny.specular[0] = shiny.specular[1] = shiny.specular[2] = 0.9f;
+        shiny.specular[3] = 24.0f;
+        state_.SetMaterial(shiny);
         state_.SetAmbient(0xFF303030u);
         state_.SetDirectionalLight(0, -0.4f, -1.0f, 0.6f, 0xFFFFF0E0u);
         state_.SetDirectionalLight(1, 0.8f, 0.2f, -0.4f, 0xFF405070u);
@@ -766,6 +772,7 @@ private:
         // Translucent shell: alpha blend, no depth write, no culling, untextured, emissive tint.
         state_.SetTextured(false);
         state_.SetSecondTexture(rs2::SecondTexture::None);
+        state_.SetSpecular(false);
         state_.SetZWrite(false);
         state_.SetCulling(false);
         state_.BlendAlpha();

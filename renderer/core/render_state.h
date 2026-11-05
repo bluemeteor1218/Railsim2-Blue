@@ -45,12 +45,15 @@ struct PipelineKey {
     bool textured = false;
     VertexFormat vertexFormat = VertexFormat::NX;
     SecondTexture secondTexture = SecondTexture::None;
+    bool specular = false;
+    bool flatShading = false;
 
     bool operator==(const PipelineKey& o) const
     {
         return blend == o.blend && cull == o.cull && depthFunc == o.depthFunc && depthRead == o.depthRead &&
                depthWrite == o.depthWrite && alphaTest == o.alphaTest && lighting == o.lighting && fog == o.fog &&
-               textured == o.textured && vertexFormat == o.vertexFormat && secondTexture == o.secondTexture;
+               textured == o.textured && vertexFormat == o.vertexFormat && secondTexture == o.secondTexture &&
+               specular == o.specular && flatShading == o.flatShading;
     }
     bool operator!=(const PipelineKey& o) const { return !(*this == o); }
 
@@ -62,7 +65,7 @@ struct PipelineKey {
             static_cast<uint8_t>(cull), static_cast<uint8_t>(depthFunc), static_cast<uint8_t>(depthRead),
             static_cast<uint8_t>(depthWrite), static_cast<uint8_t>(alphaTest), static_cast<uint8_t>(lighting),
             static_cast<uint8_t>(fog), static_cast<uint8_t>(textured), static_cast<uint8_t>(vertexFormat),
-            static_cast<uint8_t>(secondTexture)};
+            static_cast<uint8_t>(secondTexture), static_cast<uint8_t>(specular), static_cast<uint8_t>(flatShading)};
         uint64_t h = 1469598103934665603ull;
         for (uint8_t b : bytes) {
             h = (h ^ b) * 1099511628211ull;
@@ -91,16 +94,18 @@ struct FrameConstants {
     float alphaRef = 0.0f; // 0..1
     uint32_t lightMask = 0; // bit n = light n enabled
     DirectionalLight lights[kMaxLights];
+    float viewDirection[4] = {0, 0, 1, 0}; // world-space camera forward (infinite-viewer specular)
 };
-static_assert(sizeof(FrameConstants) == 176, "FrameConstants must match the HLSL cbuffer layout");
+static_assert(sizeof(FrameConstants) == 192, "FrameConstants must match the HLSL cbuffer layout");
 
-// Mirrors D3DMATERIAL8 (specular is not supported yet). Diffuse multiplies the vertex color.
+// Mirrors D3DMATERIAL8. Diffuse multiplies the vertex color; specular.w is the power.
 struct Material {
     float diffuse[4] = {1, 1, 1, 1};
     float ambient[4] = {1, 1, 1, 1};
     float emissive[4] = {0, 0, 0, 0};
+    float specular[4] = {0, 0, 0, 16};
 };
-static_assert(sizeof(Material) == 48, "Material is uploaded as 12 root constants");
+static_assert(sizeof(Material) == 64, "Material is uploaded as 16 root constants");
 
 // Unpacks a legacy D3DCOLOR (0xAARRGGBB) into RGBA floats.
 inline void UnpackColor(uint32_t argb, float out[4])
@@ -136,6 +141,16 @@ public:
     void SetTextured(bool enable) { pipeline_.textured = enable; }
     void SetVertexFormat(VertexFormat format) { pipeline_.vertexFormat = format; }
     void SetSecondTexture(SecondTexture mode) { pipeline_.secondTexture = mode; }
+    void SetSpecular(bool enable) { pipeline_.specular = enable; }
+    void SetShadingFlat(bool enable) { pipeline_.flatShading = enable; }
+    void SetViewDirection(float x, float y, float z)
+    {
+        const float length = std::sqrt(x * x + y * y + z * z);
+        const float inv = length > 0.0f ? 1.0f / length : 0.0f;
+        constants_.viewDirection[0] = x * inv;
+        constants_.viewDirection[1] = y * inv;
+        constants_.viewDirection[2] = z * inv;
+    }
     bool GetLighting() const { return pipeline_.lighting; }
     bool GetZRead() const { return pipeline_.depthRead; }
     bool GetZWrite() const { return pipeline_.depthWrite; }
