@@ -1,0 +1,10 @@
+add_library(railsim2_render_core INTERFACE)
+target_include_directories(railsim2_render_core INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_features(railsim2_render_core INTERFACE cxx_std_17)
+
+add_executable(railsim2_render_state_tests tests/render_state_tests.cpp)
+target_link_libraries(railsim2_render_state_tests PRIVATE railsim2_render_core)
+if(MSVC)
+  target_compile_options(railsim2_render_state_tests PRIVATE /W4 /permissive-)
+endif()
+add_test(NAME render_state COMMAND railsim2_render_state_tests)

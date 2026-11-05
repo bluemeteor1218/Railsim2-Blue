@@ -9,4 +9,5 @@ endif()
 enable_testing()
 
 add_subdirectory(renderer/compat)
+add_subdirectory(renderer/core)
 add_subdirectory(renderer/d3d12)
