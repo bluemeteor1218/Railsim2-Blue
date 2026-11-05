@@ -8,6 +8,17 @@ namespace gfx {
 
 Backend* g_backend = nullptr;
 
+uint64_t NextId()
+{
+    static LONG64 counter = 0;
+    return (uint64_t)InterlockedIncrement64(&counter);
+}
+
+void NotifyGeometryDestroyed(uint64_t id)
+{
+    if (g_backend) g_backend->OnGeometryDestroyed(id);
+}
+
 Surface8::~Surface8()
 {
     if (tex) tex->Release();
@@ -188,7 +199,7 @@ public:
         st.world = Identity();
         st.view = Identity();
         st.proj = Identity();
-        st.tex0 = Identity();
+        for (auto& m : st.texMat) m = Identity();
         st.rs[D3DRS_ZENABLE] = 1;
         st.rs[D3DRS_ZWRITEENABLE] = 1;
         st.rs[D3DRS_SHADEMODE] = D3DSHADE_GOURAUD;
@@ -375,9 +386,11 @@ public:
         switch (type) {
         case D3DTS_VIEW: st.view = *m; break;
         case D3DTS_PROJECTION: st.proj = *m; break;
-        case D3DTS_TEXTURE0: st.tex0 = *m; break;
+        
         case D3DTS_WORLD: st.world = *m; break;
-        default: break;
+        default:
+            if ((int)type >= D3DTS_TEXTURE0 && (int)type < D3DTS_TEXTURE0 + 4) st.texMat[(int)type - D3DTS_TEXTURE0] = *m;
+            break;
         }
         return D3D_OK;
     }
@@ -455,13 +468,24 @@ public:
     HRESULT STDMETHODCALLTYPE DrawPrimitive(D3DPRIMITIVETYPE type, UINT start, UINT count) override
     {
         if (!stream) return D3DERR_INVALIDCALL;
-        g_backend->Draw(st, type, stream->data.data() + (size_t)start * streamStride, VertexCount(type, count),
-                        streamStride, nullptr, 0);
+        Geometry g;
+        g.vertices = stream->data.data() + (size_t)start * streamStride;
+        g.vertexCount = VertexCount(type, count);
+        g.stride = streamStride;
+        g.vbId = stream->id;
+        g.vbVersion = stream->version;
+        g.vbBase = stream->data.data();
+        g.vbBytes = stream->data.size();
+        g_backend->Draw(st, type, g);
         return D3D_OK;
     }
     HRESULT STDMETHODCALLTYPE DrawPrimitiveUP(D3DPRIMITIVETYPE type, UINT count, const void* data, UINT stride) override
     {
-        g_backend->Draw(st, type, data, VertexCount(type, count), stride, nullptr, 0);
+        Geometry g;
+        g.vertices = data;
+        g.vertexCount = VertexCount(type, count);
+        g.stride = stride;
+        g_backend->Draw(st, type, g);
         return D3D_OK;
     }
 };
@@ -517,6 +541,13 @@ public:
             d->pp.BackBufferHeight = rc.bottom - rc.top;
         }
         *p = d->pp;
+        if (!d->pp.Windowed) {
+            // Fullscreen is emulated with a borderless window.
+            SetWindowLongA(window, GWL_STYLE, WS_POPUP | WS_VISIBLE);
+            SetWindowPos(window, HWND_TOP, 0, 0, (int)d->pp.BackBufferWidth, (int)d->pp.BackBufferHeight,
+                         SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+            UpdateWindow(window);
+        }
         delete g_backend;
         g_backend = getenv("RS2_NULL_BACKEND") ? CreateNullBackend() : CreateD3D12Backend();
         if (!g_backend->Init(window, d->pp)) {
@@ -548,13 +579,12 @@ private:
 
 } // namespace
 
-HRESULT DrawIndexed(IDirect3DDevice8* dev, DWORD fvf, const void* verts, UINT vertexCount, const uint16_t* indices,
-                    UINT indexCount)
+HRESULT DrawIndexed(IDirect3DDevice8* dev, DWORD fvf, const Geometry& g)
 {
     auto* d = static_cast<Device8*>(dev);
     const DWORD saved = d->st.fvf;
     d->st.fvf = fvf;
-    g_backend->Draw(d->st, D3DPT_TRIANGLELIST, verts, vertexCount, FvfStride(fvf), indices, indexCount);
+    g_backend->Draw(d->st, D3DPT_TRIANGLELIST, g);
     d->st.fvf = saved;
     return D3D_OK;
 }

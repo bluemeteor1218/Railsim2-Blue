@@ -304,7 +304,7 @@ void CTrainGroupTemplate::SetPreview(){
  *	テンプレートリスト読込
  */
 void LoadTrainGroupTemplateList(){
-	long filelist;
+	intptr_t filelist;
 	_finddata_t data;
 	if(chdir(g_BaseDir) || chdir(TGT_DIRNAME)) return;
 	if((filelist = _findfirst("*.txt", &data))>=0){

@@ -229,7 +229,7 @@ void CRailwayPluginSet::Apply(){
  *	設定リスト読込
  */
 void LoadRailwayPluginSetList(){
-	long filelist;
+	intptr_t filelist;
 	_finddata_t data;
 	if(chdir(g_BaseDir) || chdir(RPS_DIRNAME)) return;
 	if((filelist = _findfirst("*.txt", &data))>=0){

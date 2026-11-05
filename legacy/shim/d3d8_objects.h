@@ -30,6 +30,8 @@ struct RefCounted : I {
 
 struct Tex8;
 
+uint64_t NextId();
+
 // Surfaces are all 32-bit BGRA (A8R8G8B8) in system memory.
 struct Surface8 : RefCounted<IDirect3DSurface8> {
     enum Kind { Image, BackBuffer, DepthStencil, TextureLevel } kind = Image;
@@ -66,7 +68,14 @@ struct Tex8 : RefCounted<IDirect3DTexture8> {
     HRESULT STDMETHODCALLTYPE UnlockRect(UINT level) override;
 };
 
+struct Backend;
+extern Backend* g_backend;
+void NotifyGeometryDestroyed(uint64_t id);
+
 struct VB8 : RefCounted<IDirect3DVertexBuffer8> {
+    uint64_t id = NextId();
+    uint32_t version = 1;
+    ~VB8() override { NotifyGeometryDestroyed(id); }
     std::vector<uint8_t> data;
     DWORD fvf = 0;
     HRESULT STDMETHODCALLTYPE Lock(UINT offset, UINT size, BYTE** out, DWORD) override
@@ -79,6 +88,9 @@ struct VB8 : RefCounted<IDirect3DVertexBuffer8> {
 };
 
 struct IB8 : RefCounted<IDirect3DIndexBuffer8> {
+    uint64_t id = NextId();
+    uint32_t version = 1;
+    ~IB8() override { NotifyGeometryDestroyed(id); }
     std::vector<uint8_t> data;
     HRESULT STDMETHODCALLTYPE Lock(UINT offset, UINT size, BYTE** out, DWORD) override
     {
@@ -100,7 +112,7 @@ struct IB8 : RefCounted<IDirect3DIndexBuffer8> {
 
 // Snapshot of the fixed-function pipeline handed to the backend with each draw.
 struct State {
-    D3DXMATRIX world, view, proj, tex0;
+    D3DXMATRIX world, view, proj, texMat[4];
     D3DVIEWPORT8 viewport{};
     D3DMATERIAL8 material{};
     D3DLIGHT8 lights[8]{};
@@ -113,6 +125,22 @@ struct State {
     Surface8* depthStencil = nullptr;
 };
 
+// Vertex/index data for one draw. A non-zero id marks CPU data that is immutable while its version is unchanged,
+// so the backend may keep it on the GPU; id == 0 means transient data.
+struct Geometry {
+    const void* vertices = nullptr; // first vertex to draw
+    UINT vertexCount = 0;
+    UINT stride = 0;
+    uint64_t vbId = 0;
+    uint32_t vbVersion = 0;
+    const void* vbBase = nullptr; // start of the whole cached buffer
+    size_t vbBytes = 0;
+    const uint16_t* indices = nullptr;
+    UINT indexCount = 0;
+    uint64_t ibId = 0;
+    uint32_t ibVersion = 0;
+};
+
 class Backend {
 public:
     virtual ~Backend() = default;
@@ -121,17 +149,15 @@ public:
     virtual void BeginScene() = 0;
     virtual void EndScene() = 0;
     virtual void Clear(const State& s, DWORD flags, D3DCOLOR color, float z, DWORD stencil) = 0;
-    // `vertices` points at vertexCount vertices of `stride` bytes; indices is null for non-indexed draws.
-    virtual void Draw(const State& s, D3DPRIMITIVETYPE type, const void* vertices, UINT vertexCount, UINT stride,
-                      const uint16_t* indices, UINT indexCount) = 0;
+    virtual void Draw(const State& s, D3DPRIMITIVETYPE type, const Geometry& g) = 0;
     virtual void Present() = 0;
     virtual void ReadSurface(Surface8* surface, uint32_t* out) = 0; // render target / backbuffer readback
     virtual void OnTextureDestroyed(Tex8* tex) = 0;
+    virtual void OnGeometryDestroyed(uint64_t id) = 0;
 };
 
 extern Backend* g_backend;
-HRESULT DrawIndexed(IDirect3DDevice8* dev, DWORD fvf, const void* verts, UINT vertexCount, const uint16_t* indices,
-                    UINT indexCount);
+HRESULT DrawIndexed(IDirect3DDevice8* dev, DWORD fvf, const Geometry& g);
 UINT FvfVertexSize(DWORD fvf);
 IDirect3D8* CreateD3D8();
 Backend* CreateNullBackend();

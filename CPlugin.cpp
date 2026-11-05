@@ -216,7 +216,7 @@ CPluginList::~CPluginList(){
  *	定義ファイルのロード
  */
 bool CPluginList::List(){
-	long filelist;
+	intptr_t filelist;
 	_finddata_t data;
 	CPlugin **adr = &m_List;
 	if(chdir(g_BaseDir) || chdir(DirName())) return false;

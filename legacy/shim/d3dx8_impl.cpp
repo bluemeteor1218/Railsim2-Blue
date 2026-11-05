@@ -1,4 +1,4 @@
-#include <wincodec.h>
+﻿#include <wincodec.h>
 #include <shlwapi.h>
 
 #include <algorithm>
@@ -129,7 +129,15 @@ struct Mesh8 : RefCounted<ID3DXMesh> {
     std::vector<uint8_t> vertices;
     std::vector<uint16_t> indices;
     std::vector<DWORD> attributes; // per face
-    std::map<DWORD, std::vector<uint16_t>> subsetCache;
+    uint64_t id = NextId();
+    uint32_t version = 1;
+    struct Subset { std::vector<uint16_t> indices; uint64_t id = NextId(); };
+    std::map<DWORD, Subset> subsetCache;
+    ~Mesh8() override
+    {
+        NotifyGeometryDestroyed(id);
+        for (auto& s : subsetCache) NotifyGeometryDestroyed(s.second.id);
+    }
 
     explicit Mesh8(IDirect3DDevice8* d) : device(d) {}
     DWORD STDMETHODCALLTYPE GetNumFaces() override { return (DWORD)indices.size() / 3; }
@@ -144,23 +152,34 @@ struct Mesh8 : RefCounted<ID3DXMesh> {
         *out = v;
         return D3D_OK;
     }
-    HRESULT STDMETHODCALLTYPE LockVertexBuffer(DWORD, BYTE** d) override { *d = vertices.data(); return D3D_OK; }
+    HRESULT STDMETHODCALLTYPE LockVertexBuffer(DWORD f, BYTE** d) override { if (!(f & D3DLOCK_READONLY)) version++; *d = vertices.data(); return D3D_OK; }
     HRESULT STDMETHODCALLTYPE UnlockVertexBuffer() override { return D3D_OK; }
-    HRESULT STDMETHODCALLTYPE LockIndexBuffer(DWORD, BYTE** d) override { *d = (BYTE*)indices.data(); return D3D_OK; }
+    HRESULT STDMETHODCALLTYPE LockIndexBuffer(DWORD f, BYTE** d) override { if (!(f & D3DLOCK_READONLY)) { version++; subsetCache.clear(); } *d = (BYTE*)indices.data(); return D3D_OK; }
     HRESULT STDMETHODCALLTYPE UnlockIndexBuffer() override { return D3D_OK; }
-    HRESULT STDMETHODCALLTYPE LockAttributeBuffer(DWORD, DWORD** d) override { *d = attributes.data(); return D3D_OK; }
-    HRESULT STDMETHODCALLTYPE UnlockAttributeBuffer() override { subsetCache.clear(); return D3D_OK; }
+    HRESULT STDMETHODCALLTYPE LockAttributeBuffer(DWORD f, DWORD** d) override { if (!(f & D3DLOCK_READONLY)) subsetCache.clear(); *d = attributes.data(); return D3D_OK; }
+    HRESULT STDMETHODCALLTYPE UnlockAttributeBuffer() override { return D3D_OK; }
     HRESULT STDMETHODCALLTYPE DrawSubset(DWORD attr) override
     {
         auto it = subsetCache.find(attr);
         if (it == subsetCache.end()) {
-            std::vector<uint16_t> idx;
+            Subset s;
             for (size_t f = 0; f < attributes.size(); ++f)
-                if (attributes[f] == attr) idx.insert(idx.end(), &indices[f * 3], &indices[f * 3] + 3);
-            it = subsetCache.emplace(attr, std::move(idx)).first;
+                if (attributes[f] == attr) s.indices.insert(s.indices.end(), &indices[f * 3], &indices[f * 3] + 3);
+            it = subsetCache.emplace(attr, std::move(s)).first;
         }
-        if (it->second.empty()) return D3D_OK;
-        return DrawIndexed(device, fvf, vertices.data(), GetNumVertices(), it->second.data(), (UINT)it->second.size());
+        if (it->second.indices.empty()) return D3D_OK;
+        Geometry g;
+        g.vertices = g.vbBase = vertices.data();
+        g.vertexCount = GetNumVertices();
+        g.stride = stride;
+        g.vbId = id;
+        g.vbVersion = version;
+        g.vbBytes = vertices.size();
+        g.indices = it->second.indices.data();
+        g.indexCount = (UINT)it->second.indices.size();
+        g.ibId = it->second.id;
+        g.ibVersion = version;
+        return DrawIndexed(device, fvf, g);
     }
     HRESULT STDMETHODCALLTYPE Optimize(DWORD, const DWORD*, DWORD* adjOut, DWORD* faceRemap, ID3DXBuffer** vertRemap,
                                        ID3DXMesh** out) override

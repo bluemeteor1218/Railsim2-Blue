@@ -657,7 +657,7 @@ SAVEAS:
  *	ファイルリスト作成
  */
 void CFileMode::ListFile(){
-	long filelist;
+	intptr_t filelist;
 	_finddata_t data;
 	m_FileListView.DeleteAllItems();
 	m_LayoutInfoList.clear();
