@@ -10,6 +10,7 @@
 #include <cwchar>
 #include <fstream>
 #include <iterator>
+#include <map>
 #include <set>
 #include <string>
 #include <vector>
@@ -48,6 +49,7 @@ struct Mesh {
     UINT indexCount = 0;
     std::vector<rs2::XSubset> subsets;
     std::vector<rs2::XMaterial> materials;
+    std::vector<int> materialTexture; // index into the descriptor-heap texture pairs, -1 = untextured
 };
 
 // Unit cube with per-face normals. Front faces are clockwise (Direct3D, left-handed).
@@ -514,7 +516,68 @@ private:
         }
         mesh->subsets = x.subsets;
         mesh->materials = x.materials;
+        mesh->materialTexture.assign(x.materials.size(), -1);
+        const std::wstring directory = path.substr(0, path.find_last_of(L"\\/") + 1);
+        for (size_t i = 0; i < x.materials.size(); ++i) {
+            if (!x.materials[i].texture.empty()) {
+                mesh->materialTexture[i] = LoadMeshTexture(directory + Widen(x.materials[i].texture));
+            }
+        }
         return true;
+    }
+
+    static std::wstring Widen(const std::string& text)
+    {
+        const int length = MultiByteToWideChar(CP_ACP, 0, text.c_str(), -1, nullptr, 0);
+        std::wstring wide(static_cast<size_t>(std::max(length, 1)) - 1, L'\0');
+        if (length > 1) {
+            MultiByteToWideChar(CP_ACP, 0, text.c_str(), -1, wide.data(), length);
+        }
+        return wide;
+    }
+
+    // Loads a material texture into a free descriptor pair (t0 = texture, t1 = light map); -1 on failure.
+    int LoadMeshTexture(const std::wstring& path)
+    {
+        const auto cached = meshTextureByPath_.find(path);
+        if (cached != meshTextureByPath_.end()) {
+            return cached->second;
+        }
+        int slot = -1;
+        rs2::Image image;
+        if (meshTextures_.size() < kMaxMeshTextures && rs2::LoadImageWic(path.c_str(), &image)) {
+            const std::vector<rs2::Image> mips = rs2::GenerateMipChain(image);
+            ComPtr<ID3D12Resource> texture;
+            if (UploadTexture(mips, &texture)) {
+                slot = static_cast<int>(meshTextures_.size());
+                const UINT base = 2 + 2 * static_cast<UINT>(slot);
+                CreateTextureView(texture.Get(), mips.size(), base);
+                CreateTextureView(lightMap_.Get(), lightMapMipCount_, base + 1);
+                meshTextures_.push_back(std::move(texture));
+            }
+        }
+        meshTextureByPath_[path] = slot;
+        return slot;
+    }
+
+    void CreateTextureView(ID3D12Resource* resource, size_t mipCount, UINT slot)
+    {
+        D3D12_SHADER_RESOURCE_VIEW_DESC view{};
+        view.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+        view.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+        view.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+        view.Texture2D.MipLevels = static_cast<UINT>(mipCount);
+        D3D12_CPU_DESCRIPTOR_HANDLE handle = srvHeap_->GetCPUDescriptorHandleForHeapStart();
+        handle.ptr += static_cast<SIZE_T>(slot) * device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+        device_->CreateShaderResourceView(resource, &view, handle);
+    }
+
+    void BindTexturePair(UINT pair)
+    {
+        D3D12_GPU_DESCRIPTOR_HANDLE handle = srvHeap_->GetGPUDescriptorHandleForHeapStart();
+        handle.ptr += static_cast<UINT64>(pair) * 2 *
+                      device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+        commandList_->SetGraphicsRootDescriptorTable(2, handle);
     }
 
     // Unlit textured ground quad in the legacy FVF_LX layout (no normals), tiled 3x3.
@@ -555,11 +618,11 @@ private:
             !CreateGroundMesh(&ground_)) {
             return false;
         }
-        // The pier is optional demo content; the scene still runs without the data folder.
-        hasPier_ = CreateXMesh(L"Pier\\AmarubeSteel\\Base.x", &pier_);
         if (!CreateSampleTexture()) {
             return false;
         }
+        // The pier is optional demo content; the scene still runs without the data folder.
+        hasPier_ = CreateXMesh(L"Pier\\AmarubeSteel\\Base.x", &pier_);
         if (!CreateUi()) {
             return false;
         }
@@ -579,7 +642,9 @@ private:
         const std::vector<rs2::Image> mips = rs2::GenerateMipChain(image);
 
         D3D12_DESCRIPTOR_HEAP_DESC heapDescription{};
-        heapDescription.NumDescriptors = 2; // t0 = base texture, t1 = second stage (light map)
+        // Pairs of (t0 = base texture, t1 = second stage light map); pair 0 is the sample texture,
+        // the following pairs hold mesh material textures.
+        heapDescription.NumDescriptors = 2 + 2 * kMaxMeshTextures;
         heapDescription.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
         heapDescription.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
         const HRESULT result = device_->CreateDescriptorHeap(&heapDescription, IID_PPV_ARGS(&srvHeap_));
@@ -594,19 +659,9 @@ private:
             return false;
         }
 
-        const UINT increment = device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-        const auto createView = [&](ID3D12Resource* resource, size_t mipCount, UINT slot) {
-            D3D12_SHADER_RESOURCE_VIEW_DESC view{};
-            view.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-            view.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-            view.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-            view.Texture2D.MipLevels = static_cast<UINT>(mipCount);
-            D3D12_CPU_DESCRIPTOR_HANDLE handle = srvHeap_->GetCPUDescriptorHandleForHeapStart();
-            handle.ptr += static_cast<SIZE_T>(slot) * increment;
-            device_->CreateShaderResourceView(resource, &view, handle);
-        };
-        createView(texture_.Get(), mips.size(), 0);
-        createView(lightMap_.Get(), lightMips.size(), 1);
+        lightMapMipCount_ = lightMips.size();
+        CreateTextureView(texture_.Get(), mips.size(), 0);
+        CreateTextureView(lightMap_.Get(), lightMapMipCount_, 1);
         return true;
     }
 
@@ -827,11 +882,13 @@ private:
 
         // Pier loaded from a shipped .x file: one draw per material subset, colored by its material.
         if (hasPier_) {
-            state_.SetTextured(false);
             state_.SetSecondTexture(rs2::SecondTexture::None);
             state_.SetCulling(false);
             for (const rs2::XSubset& subset : pier_.subsets) {
                 const rs2::XMaterial& source = pier_.materials[subset.material];
+                const int textureSlot = pier_.materialTexture[subset.material];
+                state_.SetTextured(textureSlot >= 0);
+                BindTexturePair(textureSlot >= 0 ? static_cast<UINT>(textureSlot) + 1 : 0);
                 rs2::Material material;
                 std::copy(std::begin(source.diffuse), std::end(source.diffuse), material.diffuse);
                 std::copy(std::begin(source.diffuse), std::end(source.diffuse), material.ambient);
@@ -845,6 +902,8 @@ private:
                 }
             }
         }
+
+        BindTexturePair(0);
 
         // Translucent shell: alpha blend, no depth write, no culling, untextured, emissive tint.
         state_.SetTextured(false);
@@ -894,6 +953,10 @@ private:
     ComPtr<ID3D12DescriptorHeap> rtvHeap_;
     ComPtr<ID3D12DescriptorHeap> dsvHeap_;
     ComPtr<ID3D12DescriptorHeap> srvHeap_;
+    static constexpr UINT kMaxMeshTextures = 32;
+    std::vector<ComPtr<ID3D12Resource>> meshTextures_;
+    std::map<std::wstring, int> meshTextureByPath_;
+    size_t lightMapMipCount_ = 1;
     ComPtr<ID3D12Resource> texture_;
     ComPtr<ID3D12Resource> lightMap_;
     rs2::UiRenderer ui_;
